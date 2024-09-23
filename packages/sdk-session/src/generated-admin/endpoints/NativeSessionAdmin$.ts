@@ -6,14 +6,14 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { NativeSessionPagingResponse } from '../../generated-definitions/NativeSessionPagingResponse.js'
 
 export class NativeSessionAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * List of native sessions.
    */
@@ -21,8 +21,8 @@ export class NativeSessionAdmin$ {
     limit?: number
     offset?: number
     order?: string | null
-  }): Promise<IResponse<NativeSessionPagingResponse>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  }): Promise<Response<NativeSessionPagingResponse>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/session/v1/admin/namespaces/{namespace}/native-sessions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 

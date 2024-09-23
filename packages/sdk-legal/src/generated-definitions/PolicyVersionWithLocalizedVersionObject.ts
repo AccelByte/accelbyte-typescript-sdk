@@ -7,16 +7,16 @@ import { z } from 'zod'
 import { LocalizedPolicyVersionObject } from './LocalizedPolicyVersionObject.js'
 
 export const PolicyVersionWithLocalizedVersionObject = z.object({
-  id: z.string(),
   createdAt: z.string().nullish(),
-  updatedAt: z.string().nullish(),
-  displayVersion: z.string(),
   description: z.string().nullish(),
-  status: z.string().nullish(),
-  publishedDate: z.string().nullish(),
-  localizedPolicyVersions: z.array(LocalizedPolicyVersionObject).nullish(),
+  displayVersion: z.string(),
+  id: z.string(),
   isCommitted: z.boolean(),
-  isInEffect: z.boolean()
+  isInEffect: z.boolean(),
+  localizedPolicyVersions: z.array(LocalizedPolicyVersionObject).nullish(),
+  publishedDate: z.string().nullish(),
+  status: z.string().nullish(),
+  updatedAt: z.string().nullish()
 })
 
 export interface PolicyVersionWithLocalizedVersionObject extends z.TypeOf<typeof PolicyVersionWithLocalizedVersionObject> {}

@@ -7,23 +7,26 @@
  * AUTO GENERATED
  */
 
-import { ConfigAdminApi } from './generated-admin/ConfigAdminApi.js'
+import { author, name, version } from '../package.json'
 import { AdminAdminApi } from './generated-admin/AdminAdminApi.js'
+import { ConfigAdminApi } from './generated-admin/ConfigAdminApi.js'
+import { FriendsAdminApi } from './generated-admin/FriendsAdminApi.js'
+import { LobbyOperationsAdminApi } from './generated-admin/LobbyOperationsAdminApi.js'
+import { NotificationAdminApi } from './generated-admin/NotificationAdminApi.js'
+import { PartyAdminApi } from './generated-admin/PartyAdminApi.js'
 import { PlayerAdminApi } from './generated-admin/PlayerAdminApi.js'
 import { ProfanityAdminApi } from './generated-admin/ProfanityAdminApi.js'
-import { NotificationAdminApi } from './generated-admin/NotificationAdminApi.js'
-import { FriendsAdminApi } from './generated-admin/FriendsAdminApi.js'
-import { PartyAdminApi } from './generated-admin/PartyAdminApi.js'
 import { ThirdPartyAdminApi } from './generated-admin/ThirdPartyAdminApi.js'
-import { LobbyOperationsAdminApi } from './generated-admin/LobbyOperationsAdminApi.js'
-import { LobbyOperationsApi } from './generated-public/LobbyOperationsApi.js'
-import { FriendsApi } from './generated-public/FriendsApi.js'
-import { NotificationApi } from './generated-public/NotificationApi.js'
-import { BlocksApi } from './generated-public/BlocksApi.js'
 import { AdminApi } from './generated-public/AdminApi.js'
-import { PlayerApi } from './generated-public/PlayerApi.js'
+import { BlocksApi } from './generated-public/BlocksApi.js'
+import { FriendsApi } from './generated-public/FriendsApi.js'
+import { LobbyOperationsApi } from './generated-public/LobbyOperationsApi.js'
+import { NotificationApi } from './generated-public/NotificationApi.js'
 import { PartyApi } from './generated-public/PartyApi.js'
+import { PlayerApi } from './generated-public/PlayerApi.js'
 import { PresenceApi } from './generated-public/PresenceApi.js'
+
+console.log(`${name}@${version}`)
 
 const apis = {
   ConfigAdminApi,
@@ -42,7 +45,13 @@ const apis = {
   AdminApi,
   PlayerApi,
   PartyApi,
-  PresenceApi
+  PresenceApi,
+  version: () =>
+    console.log({
+      version,
+      name,
+      author
+    })
 }
 
 export const Lobby = apis

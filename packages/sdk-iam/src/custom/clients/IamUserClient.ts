@@ -3,24 +3,25 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { ReadyPlayerMe } from '../models/ReadyPlayerMe.js'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam, Validate } from '@accelbyte/sdk'
+import { AxiosRequestConfig } from 'axios'
 import { Users$ } from '../../generated-public/endpoints/Users$'
+import { ReadyPlayerMe } from '../models/ReadyPlayerMe.js'
 
 /**
  * @deprecated, this is original *Api class
  */
 export class IamUserClient {
-  conf: SDKRequestConfig
+  conf: AxiosRequestConfig
   namespace: string
 
   /**
    * @internal
    */
-  constructor(sdk: AccelbyteSDK, args?: ApiArgs) {
-    const { config, namespace } = sdk.assembly()
-    this.conf = ApiUtils.mergedConfigs(config, args)
-    this.namespace = args?.namespace ? args?.namespace : namespace
+  constructor(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
+    const { coreConfig, axiosInstance } = sdk.assembly()
+    this.conf = ApiUtils.mergeAxiosConfigs(axiosInstance.defaults as AxiosRequestConfig, args?.axiosConfig?.request)
+    this.namespace = args?.coreConfig?.namespace ? args?.coreConfig?.namespace : coreConfig.namespace
   }
 
   /**
@@ -29,7 +30,7 @@ export class IamUserClient {
    * get currently logged-in user
    */
   getCurrentUser = () => {
-    return this.newInstance().getUsersMe()
+    return this.newInstance().getUsersMe_v3()
   }
 
   /**

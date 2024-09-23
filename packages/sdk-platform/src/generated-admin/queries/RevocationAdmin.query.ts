@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { RevocationAdminApi } from '../RevocationAdminApi.js'
 
 import { RevocationConfigInfo } from '../../generated-definitions/RevocationConfigInfo.js'
@@ -20,21 +20,34 @@ import { RevocationRequest } from '../../generated-definitions/RevocationRequest
 import { RevocationResult } from '../../generated-definitions/RevocationResult.js'
 
 export enum Key_RevocationAdmin {
-  RevocationConfig = 'RevocationAdmin.RevocationConfig',
-  RevocationHistory = 'RevocationAdmin.RevocationHistory',
-  Revocation_ByUserId = 'RevocationAdmin.Revocation_ByUserId'
+  RevocationConfig = 'Platform.RevocationAdmin.RevocationConfig',
+  RevocationHistory = 'Platform.RevocationAdmin.RevocationHistory',
+  Revocation_ByUserId = 'Platform.RevocationAdmin.Revocation_ByUserId'
 }
 
-export const useAdmDeleteRevocationConfigMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs>, 'mutationKey'>,
+/**
+ * Delete revocation config.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_RevocationAdmin.RevocationConfig, input]
+ * }
+ * ```
+ */
+export const useRevocationAdminApi_DeleteRevocationConfigMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs> => {
-  //
-  const mutationFn = async (input: ApiArgs) => {
-    const data = await RevocationAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteRevocationConfig()
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam> => {
+  const mutationFn = async (input: SdkSetConfigParam) => {
+    const response = await RevocationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteRevocationConfig()
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -44,17 +57,27 @@ export const useAdmDeleteRevocationConfigMutation = (
   })
 }
 
-export const useAdmRevocationConfig = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Get revocation configuration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Revocation config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_RevocationAdmin.RevocationConfig, input]
+ * }
+ * ```
+ */
+export const useRevocationAdminApi_GetRevocationConfig = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<RevocationConfigInfo, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: RevocationConfigInfo) => void
+  callback?: (data: AxiosResponse<RevocationConfigInfo>) => void
 ): UseQueryResult<RevocationConfigInfo, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmRevocationConfig>[1]) => async () => {
-    const data = await RevocationAdminApi(sdk, { namespace: input.namespace }).getRevocationConfig()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useRevocationAdminApi_GetRevocationConfig>[1]) => async () => {
+    const response = await RevocationAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getRevocationConfig()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<RevocationConfigInfo, AxiosError<ApiError>>({
@@ -64,16 +87,31 @@ export const useAdmRevocationConfig = (
   })
 }
 
-export const useAdmUpdateRevocationConfigMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<RevocationConfigInfo, AxiosError<ApiError>, ApiArgs & { data: RevocationConfigUpdate }>, 'mutationKey'>,
+/**
+ * Update revocation configuration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Revocation config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_RevocationAdmin.RevocationConfig, input]
+ * }
+ * ```
+ */
+export const useRevocationAdminApi_UpdateRevocationConfigMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<RevocationConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: RevocationConfigUpdate }>,
+    'mutationKey'
+  >,
   callback?: (data: RevocationConfigInfo) => void
-): UseMutationResult<RevocationConfigInfo, AxiosError<ApiError>, ApiArgs & { data: RevocationConfigUpdate }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: RevocationConfigUpdate }) => {
-    const data = await RevocationAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateRevocationConfig(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<RevocationConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: RevocationConfigUpdate }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: RevocationConfigUpdate }) => {
+    const response = await RevocationAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateRevocationConfig(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -83,9 +121,20 @@ export const useAdmUpdateRevocationConfigMutation = (
   })
 }
 
-export const useAdmRevocationHistory = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * Query revocation histories in a namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: query revocation history&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_RevocationAdmin.RevocationHistory, input]
+ * }
+ * ```
+ */
+export const useRevocationAdminApi_GetRevocationHistory = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     queryParams?: {
       endTime?: string | null
       limit?: number
@@ -98,13 +147,14 @@ export const useAdmRevocationHistory = (
     }
   },
   options?: Omit<UseQueryOptions<RevocationHistoryPagingSlicedResult, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: RevocationHistoryPagingSlicedResult) => void
+  callback?: (data: AxiosResponse<RevocationHistoryPagingSlicedResult>) => void
 ): UseQueryResult<RevocationHistoryPagingSlicedResult, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmRevocationHistory>[1]) => async () => {
-    const data = await RevocationAdminApi(sdk, { namespace: input.namespace }).getRevocationHistory(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useRevocationAdminApi_GetRevocationHistory>[1]) => async () => {
+    const response = await RevocationAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getRevocationHistory(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<RevocationHistoryPagingSlicedResult, AxiosError<ApiError>>({
@@ -114,22 +164,32 @@ export const useAdmRevocationHistory = (
   })
 }
 
-export const useAdmUpdateRevocation_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Do revocation.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: revocation results&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_RevocationAdmin.Revocation_ByUserId, input]
+ * }
+ * ```
+ */
+export const useRevocationAdminApi_UpdateRevocation_ByUserIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<RevocationResult, AxiosError<ApiError>, ApiArgs & { userId: string; data: RevocationRequest }>,
+    UseMutationOptions<RevocationResult, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: RevocationRequest }>,
     'mutationKey'
   >,
   callback?: (data: RevocationResult) => void
-): UseMutationResult<RevocationResult, AxiosError<ApiError>, ApiArgs & { userId: string; data: RevocationRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string; data: RevocationRequest }) => {
-    const data = await RevocationAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateRevocation_ByUserId(
-      input.userId,
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<RevocationResult, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: RevocationRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; data: RevocationRequest }) => {
+    const response = await RevocationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateRevocation_ByUserId(input.userId, input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

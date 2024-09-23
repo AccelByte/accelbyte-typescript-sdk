@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { ProfanityAdminApi } from '../ProfanityAdminApi.js'
 
 import { Dictionary } from '../../generated-definitions/Dictionary.js'
@@ -23,17 +23,28 @@ import { DictionaryQueryResult } from '../../generated-definitions/DictionaryQue
 import { DictionaryUpdateRequest } from '../../generated-definitions/DictionaryUpdateRequest.js'
 
 export enum Key_ProfanityAdmin {
-  ProfanityDictionary = 'ProfanityAdmin.ProfanityDictionary',
-  ProfanityDictionary_ById = 'ProfanityAdmin.ProfanityDictionary_ById',
-  ProfanityDictionaryBulk = 'ProfanityAdmin.ProfanityDictionaryBulk',
-  ProfanityDictionaryGroup = 'ProfanityAdmin.ProfanityDictionaryGroup',
-  ProfanityDictionaryExport = 'ProfanityAdmin.ProfanityDictionaryExport',
-  ProfanityDictionaryImport = 'ProfanityAdmin.ProfanityDictionaryImport'
+  ProfanityDictionary = 'Chat.ProfanityAdmin.ProfanityDictionary',
+  ProfanityDictionary_ById = 'Chat.ProfanityAdmin.ProfanityDictionary_ById',
+  ProfanityDictionaryBulk = 'Chat.ProfanityAdmin.ProfanityDictionaryBulk',
+  ProfanityDictionaryGroup = 'Chat.ProfanityAdmin.ProfanityDictionaryGroup',
+  ProfanityDictionaryExport = 'Chat.ProfanityAdmin.ProfanityDictionaryExport',
+  ProfanityDictionaryImport = 'Chat.ProfanityAdmin.ProfanityDictionaryImport'
 }
 
-export const useAdmProfanityDictionary = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * Query all profanity words.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ProfanityAdmin.ProfanityDictionary, input]
+ * }
+ * ```
+ */
+export const useProfanityAdminApi_GetProfanityDictionary = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     queryParams?: {
       filterMask?: string | null
       includeChildren?: boolean | null
@@ -45,13 +56,14 @@ export const useAdmProfanityDictionary = (
     }
   },
   options?: Omit<UseQueryOptions<DictionaryQueryResult, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: DictionaryQueryResult) => void
+  callback?: (data: AxiosResponse<DictionaryQueryResult>) => void
 ): UseQueryResult<DictionaryQueryResult, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmProfanityDictionary>[1]) => async () => {
-    const data = await ProfanityAdminApi(sdk, { namespace: input.namespace }).getProfanityDictionary(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useProfanityAdminApi_GetProfanityDictionary>[1]) => async () => {
+    const response = await ProfanityAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getProfanityDictionary(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<DictionaryQueryResult, AxiosError<ApiError>>({
@@ -61,16 +73,32 @@ export const useAdmProfanityDictionary = (
   })
 }
 
-export const useAdmCreateProfanityDictionaryMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<Dictionary, AxiosError<ApiError>, ApiArgs & { data: DictionaryInsertRequest }>, 'mutationKey'>,
+/**
+ * Insert new word for profanity censor
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ProfanityAdmin.ProfanityDictionary, input]
+ * }
+ * ```
+ */
+export const useProfanityAdminApi_CreateProfanityDictionaryMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<Dictionary, AxiosError<ApiError>, SdkSetConfigParam & { data: DictionaryInsertRequest }>,
+    'mutationKey'
+  >,
   callback?: (data: Dictionary) => void
-): UseMutationResult<Dictionary, AxiosError<ApiError>, ApiArgs & { data: DictionaryInsertRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: DictionaryInsertRequest }) => {
-    const data = await ProfanityAdminApi(sdk, { namespace: input.namespace, config: input.config }).createProfanityDictionary(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<Dictionary, AxiosError<ApiError>, SdkSetConfigParam & { data: DictionaryInsertRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: DictionaryInsertRequest }) => {
+    const response = await ProfanityAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).createProfanityDictionary(input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -80,16 +108,29 @@ export const useAdmCreateProfanityDictionaryMutation = (
   })
 }
 
-export const useAdmDeleteProfanityDictionary_ByIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { id: string }>, 'mutationKey'>,
+/**
+ * Delete profanity words.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ProfanityAdmin.ProfanityDictionary_ById, input]
+ * }
+ * ```
+ */
+export const useProfanityAdminApi_DeleteProfanityDictionary_ByIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { id: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { id: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { id: string }) => {
-    const data = await ProfanityAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteProfanityDictionary_ById(input.id)
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { id: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { id: string }) => {
+    const response = await ProfanityAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteProfanityDictionary_ById(input.id)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -99,22 +140,32 @@ export const useAdmDeleteProfanityDictionary_ByIdMutation = (
   })
 }
 
-export const useAdmUpdateProfanityDictionary_ByIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Update profanity word
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ProfanityAdmin.ProfanityDictionary_ById, input]
+ * }
+ * ```
+ */
+export const useProfanityAdminApi_UpdateProfanityDictionary_ByIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<Dictionary, AxiosError<ApiError>, ApiArgs & { id: string; data: DictionaryUpdateRequest }>,
+    UseMutationOptions<Dictionary, AxiosError<ApiError>, SdkSetConfigParam & { id: string; data: DictionaryUpdateRequest }>,
     'mutationKey'
   >,
   callback?: (data: Dictionary) => void
-): UseMutationResult<Dictionary, AxiosError<ApiError>, ApiArgs & { id: string; data: DictionaryUpdateRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { id: string; data: DictionaryUpdateRequest }) => {
-    const data = await ProfanityAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateProfanityDictionary_ById(
-      input.id,
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<Dictionary, AxiosError<ApiError>, SdkSetConfigParam & { id: string; data: DictionaryUpdateRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { id: string; data: DictionaryUpdateRequest }) => {
+    const response = await ProfanityAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateProfanityDictionary_ById(input.id, input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -124,18 +175,32 @@ export const useAdmUpdateProfanityDictionary_ByIdMutation = (
   })
 }
 
-export const useAdmCreateProfanityDictionaryBulkMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<Dictionary, AxiosError<ApiError>, ApiArgs & { data: DictionaryInsertBulkRequest }>, 'mutationKey'>,
+/**
+ * Bulk insert new word for profanity censor
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ProfanityAdmin.ProfanityDictionaryBulk, input]
+ * }
+ * ```
+ */
+export const useProfanityAdminApi_CreateProfanityDictionaryBulkMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<Dictionary, AxiosError<ApiError>, SdkSetConfigParam & { data: DictionaryInsertBulkRequest }>,
+    'mutationKey'
+  >,
   callback?: (data: Dictionary) => void
-): UseMutationResult<Dictionary, AxiosError<ApiError>, ApiArgs & { data: DictionaryInsertBulkRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: DictionaryInsertBulkRequest }) => {
-    const data = await ProfanityAdminApi(sdk, { namespace: input.namespace, config: input.config }).createProfanityDictionaryBulk(
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<Dictionary, AxiosError<ApiError>, SdkSetConfigParam & { data: DictionaryInsertBulkRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: DictionaryInsertBulkRequest }) => {
+    const response = await ProfanityAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).createProfanityDictionaryBulk(input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -145,17 +210,30 @@ export const useAdmCreateProfanityDictionaryBulkMutation = (
   })
 }
 
-export const useAdmProfanityDictionaryGroup = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams?: { limit?: number; offset?: number } },
+/**
+ * Get profanity words group.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ProfanityAdmin.ProfanityDictionaryGroup, input]
+ * }
+ * ```
+ */
+export const useProfanityAdminApi_GetProfanityDictionaryGroup = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams?: { limit?: number; offset?: number } },
   options?: Omit<UseQueryOptions<DictionaryGroupArray, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: DictionaryGroupArray) => void
+  callback?: (data: AxiosResponse<DictionaryGroupArray>) => void
 ): UseQueryResult<DictionaryGroupArray, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmProfanityDictionaryGroup>[1]) => async () => {
-    const data = await ProfanityAdminApi(sdk, { namespace: input.namespace }).getProfanityDictionaryGroup(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useProfanityAdminApi_GetProfanityDictionaryGroup>[1]) => async () => {
+    const response = await ProfanityAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getProfanityDictionaryGroup(input.queryParams)
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<DictionaryGroupArray, AxiosError<ApiError>>({
@@ -165,17 +243,30 @@ export const useAdmProfanityDictionaryGroup = (
   })
 }
 
-export const useAdmProfanityDictionaryExport = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Export profanity words
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ProfanityAdmin.ProfanityDictionaryExport, input]
+ * }
+ * ```
+ */
+export const useProfanityAdminApi_GetProfanityDictionaryExport = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<DictionaryExport, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: DictionaryExport) => void
+  callback?: (data: AxiosResponse<DictionaryExport>) => void
 ): UseQueryResult<DictionaryExport, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmProfanityDictionaryExport>[1]) => async () => {
-    const data = await ProfanityAdminApi(sdk, { namespace: input.namespace }).getProfanityDictionaryExport()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useProfanityAdminApi_GetProfanityDictionaryExport>[1]) => async () => {
+    const response = await ProfanityAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getProfanityDictionaryExport()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<DictionaryExport, AxiosError<ApiError>>({
@@ -185,13 +276,27 @@ export const useAdmProfanityDictionaryExport = (
   })
 }
 
-export const useAdmCreateProfanityDictionaryImportMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Import profanity words
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ProfanityAdmin.ProfanityDictionaryImport, input]
+ * }
+ * ```
+ */
+export const useProfanityAdminApi_CreateProfanityDictionaryImportMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
     UseMutationOptions<
       DictionaryImportResult,
       AxiosError<ApiError>,
-      ApiArgs & { data: { file: File }; queryParams?: { action?: 'FULLREPLACE' | 'LEAVEOUT' | 'REPLACE'; showResult?: boolean | null } }
+      SdkSetConfigParam & {
+        data: { file: File }
+        queryParams?: { action?: 'FULLREPLACE' | 'LEAVEOUT' | 'REPLACE'; showResult?: boolean | null }
+      }
     >,
     'mutationKey'
   >,
@@ -199,21 +304,23 @@ export const useAdmCreateProfanityDictionaryImportMutation = (
 ): UseMutationResult<
   DictionaryImportResult,
   AxiosError<ApiError>,
-  ApiArgs & { data: { file: File }; queryParams?: { action?: 'FULLREPLACE' | 'LEAVEOUT' | 'REPLACE'; showResult?: boolean | null } }
+  SdkSetConfigParam & {
+    data: { file: File }
+    queryParams?: { action?: 'FULLREPLACE' | 'LEAVEOUT' | 'REPLACE'; showResult?: boolean | null }
+  }
 > => {
-  //
   const mutationFn = async (
-    input: ApiArgs & {
+    input: SdkSetConfigParam & {
       data: { file: File }
       queryParams?: { action?: 'FULLREPLACE' | 'LEAVEOUT' | 'REPLACE'; showResult?: boolean | null }
     }
   ) => {
-    const data = await ProfanityAdminApi(sdk, { namespace: input.namespace, config: input.config }).createProfanityDictionaryImport(
-      input.data,
-      input.queryParams
-    )
-    callback && callback(data)
-    return data
+    const response = await ProfanityAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).createProfanityDictionaryImport(input.data, input.queryParams)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

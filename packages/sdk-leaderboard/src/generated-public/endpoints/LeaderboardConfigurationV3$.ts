@@ -6,24 +6,24 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { GetAllLeaderboardConfigsPublicRespV3 } from '../../generated-definitions/GetAllLeaderboardConfigsPublicRespV3.js'
 import { GetLeaderboardConfigPublicRespV3 } from '../../generated-definitions/GetLeaderboardConfigPublicRespV3.js'
 
 export class LeaderboardConfigurationV3$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * &lt;p&gt;This endpoint return all leaderboard configurations&lt;/p&gt;
    */
-  getLeaderboards(queryParams?: {
+  getLeaderboards_v3(queryParams?: {
     isDeleted?: boolean | null
     limit?: number
     offset?: number
-  }): Promise<IResponse<GetAllLeaderboardConfigsPublicRespV3>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  }): Promise<Response<GetAllLeaderboardConfigsPublicRespV3>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/leaderboard/v3/public/namespaces/{namespace}/leaderboards'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -34,12 +34,11 @@ export class LeaderboardConfigurationV3$ {
       'GetAllLeaderboardConfigsPublicRespV3'
     )
   }
-
   /**
    * &lt;p&gt;This endpoint returns a leaderboard configuration&lt;/p&gt;
    */
-  getLeaderboard_ByLeaderboardCode(leaderboardCode: string): Promise<IResponse<GetLeaderboardConfigPublicRespV3>> {
-    const params = {} as SDKRequestConfig
+  getLeaderboard_ByLeaderboardCode_v3(leaderboardCode: string): Promise<Response<GetLeaderboardConfigPublicRespV3>> {
+    const params = {} as AxiosRequestConfig
     const url = '/leaderboard/v3/public/namespaces/{namespace}/leaderboards/{leaderboardCode}'
       .replace('{namespace}', this.namespace)
       .replace('{leaderboardCode}', leaderboardCode)

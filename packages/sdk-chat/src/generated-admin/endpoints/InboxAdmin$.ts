@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { AddInboxCategoryRequest } from '../../generated-definitions/AddInboxCategoryRequest.js'
 import { AddInboxCategoryResponse } from '../../generated-definitions/AddInboxCategoryResponse.js'
@@ -27,19 +27,18 @@ import { UpdateInboxMessageRequest } from '../../generated-definitions/UpdateInb
 
 export class InboxAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Get inbox stats
    */
-  getInboxStats(queryParams?: { messageId?: string[] }): Promise<IResponse<GetInboxStatsResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  getInboxStats(queryParams?: { messageId?: string[] }): Promise<Response<GetInboxStatsResponse>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/stats'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GetInboxStatsResponse, 'GetInboxStatsResponse')
   }
-
   /**
    * Get inbox messages
    */
@@ -54,8 +53,8 @@ export class InboxAdmin$ {
     startCreatedAt?: number
     status?: 'DRAFT' | 'SENT' | 'UNSENT'
     transient?: boolean | null
-  }): Promise<IResponse<GetInboxMessagesResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  }): Promise<Response<GetInboxMessagesResponse>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/messages'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -66,12 +65,11 @@ export class InboxAdmin$ {
       'GetInboxMessagesResponse'
     )
   }
-
   /**
    * Save inbox message
    */
-  createInboxMessage(data: SaveInboxMessageRequest): Promise<IResponse<SaveInboxMessageResponse>> {
-    const params = {} as SDKRequestConfig
+  createInboxMessage(data: SaveInboxMessageRequest): Promise<Response<SaveInboxMessageResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/messages'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
@@ -82,12 +80,11 @@ export class InboxAdmin$ {
       'SaveInboxMessageResponse'
     )
   }
-
   /**
    * Get inbox categories
    */
-  getInboxCategories(): Promise<IResponse<GetInboxCategoriesResponseItemArray>> {
-    const params = {} as SDKRequestConfig
+  getInboxCategories(): Promise<Response<GetInboxCategoriesResponseItemArray>> {
+    const params = {} as AxiosRequestConfig
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/categories'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -98,12 +95,11 @@ export class InboxAdmin$ {
       'GetInboxCategoriesResponseItemArray'
     )
   }
-
   /**
    * Add inbox category.
    */
-  createInboxCategory(data: AddInboxCategoryRequest): Promise<IResponse<AddInboxCategoryResponse>> {
-    const params = {} as SDKRequestConfig
+  createInboxCategory(data: AddInboxCategoryRequest): Promise<Response<AddInboxCategoryResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/categories'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
@@ -114,12 +110,11 @@ export class InboxAdmin$ {
       'AddInboxCategoryResponse'
     )
   }
-
   /**
    * Delete inbox message
    */
-  deleteInboxMessage_ByMessageId(messageId: string, queryParams?: { force?: boolean | null }): Promise<IResponse<unknown>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  deleteInboxMessage_ByMessageId(messageId: string, queryParams?: { force?: boolean | null }): Promise<Response<unknown>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/message/{messageId}'
       .replace('{namespace}', this.namespace)
       .replace('{messageId}', messageId)
@@ -127,12 +122,11 @@ export class InboxAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Update inbox message
    */
-  patchInboxMessage_ByMessageId(messageId: string, data: UpdateInboxMessageRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  patchInboxMessage_ByMessageId(messageId: string, data: UpdateInboxMessageRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/messages/{messageId}'
       .replace('{namespace}', this.namespace)
       .replace('{messageId}', messageId)
@@ -140,12 +134,11 @@ export class InboxAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Delete inbox category
    */
-  deleteInboxCategory_ByCategory(category: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteInboxCategory_ByCategory(category: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/categories/{category}'
       .replace('{namespace}', this.namespace)
       .replace('{category}', category)
@@ -153,12 +146,11 @@ export class InboxAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Update inbox category
    */
-  patchInboxCategory_ByCategory(category: string, data: UpdateInboxCategoryRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  patchInboxCategory_ByCategory(category: string, data: UpdateInboxCategoryRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/categories/{category}'
       .replace('{namespace}', this.namespace)
       .replace('{category}', category)
@@ -166,15 +158,14 @@ export class InboxAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Get inbox users
    */
   getUsersInbox_ByInbox(
     inbox: string,
     queryParams?: { limit?: number; offset?: number; status?: 'READ' | 'UNREAD'; userId?: string | null }
-  ): Promise<IResponse<GetInboxUsersResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  ): Promise<Response<GetInboxUsersResponse>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/messages/{inbox}/users'
       .replace('{namespace}', this.namespace)
       .replace('{inbox}', inbox)
@@ -182,12 +173,11 @@ export class InboxAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GetInboxUsersResponse, 'GetInboxUsersResponse')
   }
-
   /**
    * Unsend inbox message
    */
-  createUnsendInbox_ByInbox(inbox: string, data: UnsendInboxMessageRequest): Promise<IResponse<UnsendInboxMessageResponse>> {
-    const params = {} as SDKRequestConfig
+  updateUnsendInbox_ByInbox(inbox: string, data: UnsendInboxMessageRequest): Promise<Response<UnsendInboxMessageResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/messages/{inbox}/unsend'
       .replace('{namespace}', this.namespace)
       .replace('{inbox}', inbox)
@@ -200,12 +190,11 @@ export class InboxAdmin$ {
       'UnsendInboxMessageResponse'
     )
   }
-
   /**
    * Send inbox message
    */
-  createSendInbox_ByMessageId(messageId: string, data: SendInboxMessageRequest): Promise<IResponse<SendInboxMessageResponse>> {
-    const params = {} as SDKRequestConfig
+  updateSendInbox_ByMessageId(messageId: string, data: SendInboxMessageRequest): Promise<Response<SendInboxMessageResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/messages/{messageId}/send'
       .replace('{namespace}', this.namespace)
       .replace('{messageId}', messageId)
@@ -218,12 +207,11 @@ export class InboxAdmin$ {
       'SendInboxMessageResponse'
     )
   }
-
   /**
    * Get category schema.
    */
-  getSchemaJsonInbox_ByCategory(category: string): Promise<IResponse<JsonSchemaType>> {
-    const params = {} as SDKRequestConfig
+  getSchemaJsonInbox_ByCategory(category: string): Promise<Response<JsonSchemaType>> {
+    const params = {} as AxiosRequestConfig
     const url = '/chat/v1/admin/inbox/namespaces/{namespace}/categories/{category}/schema.json'
       .replace('{namespace}', this.namespace)
       .replace('{category}', category)

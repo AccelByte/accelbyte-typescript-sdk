@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { DataDeletionAdminApi } from '../DataDeletionAdminApi.js'
 
 import { DeletionData } from '../../generated-definitions/DeletionData.js'
@@ -18,24 +18,36 @@ import { ListDeletionDataResponse } from '../../generated-definitions/ListDeleti
 import { RequestDeleteResponse } from '../../generated-definitions/RequestDeleteResponse.js'
 
 export enum Key_DataDeletionAdmin {
-  Deletions = 'DataDeletionAdmin.Deletions',
-  Deletion_ByUserId = 'DataDeletionAdmin.Deletion_ByUserId',
-  Deletions_ByUserId = 'DataDeletionAdmin.Deletions_ByUserId'
+  Deletions = 'Gdpr.DataDeletionAdmin.Deletions',
+  Deletion_ByUserId = 'Gdpr.DataDeletionAdmin.Deletion_ByUserId',
+  Deletions_ByUserId = 'Gdpr.DataDeletionAdmin.Deletions_ByUserId'
 }
 
-export const useAdmDeletions = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * Retrieve all user&#39;s account deletion requests in specified date Scope: account
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_DataDeletionAdmin.Deletions, input]
+ * }
+ * ```
+ */
+export const useDataDeletionAdminApi_GetDeletions = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     queryParams?: { after?: string | null; before?: string | null; limit?: number; offset?: number; requestDate?: string | null }
   },
   options?: Omit<UseQueryOptions<ListDeletionDataResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: ListDeletionDataResponse) => void
+  callback?: (data: AxiosResponse<ListDeletionDataResponse>) => void
 ): UseQueryResult<ListDeletionDataResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmDeletions>[1]) => async () => {
-    const data = await DataDeletionAdminApi(sdk, { namespace: input.namespace }).getDeletions(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useDataDeletionAdminApi_GetDeletions>[1]) => async () => {
+    const response = await DataDeletionAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getDeletions(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<ListDeletionDataResponse, AxiosError<ApiError>>({
@@ -45,16 +57,29 @@ export const useAdmDeletions = (
   })
 }
 
-export const useAdmDeleteDeletion_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }>, 'mutationKey'>,
+/**
+ * Cancel user&#39;s account deletion request Scope: account
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_DataDeletionAdmin.Deletion_ByUserId, input]
+ * }
+ * ```
+ */
+export const useDataDeletionAdminApi_DeleteDeletion_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string }) => {
-    const data = await DataDeletionAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteDeletion_ByUserId(input.userId)
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string }) => {
+    const response = await DataDeletionAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteDeletion_ByUserId(input.userId)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -64,17 +89,30 @@ export const useAdmDeleteDeletion_ByUserIdMutation = (
   })
 }
 
-export const useAdmDeletions_ByUserId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { userId: string },
+/**
+ * Retrieve specific user&#39;s account deletion request Scope: account
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_DataDeletionAdmin.Deletions_ByUserId, input]
+ * }
+ * ```
+ */
+export const useDataDeletionAdminApi_GetDeletions_ByUserId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { userId: string },
   options?: Omit<UseQueryOptions<DeletionData, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: DeletionData) => void
+  callback?: (data: AxiosResponse<DeletionData>) => void
 ): UseQueryResult<DeletionData, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmDeletions_ByUserId>[1]) => async () => {
-    const data = await DataDeletionAdminApi(sdk, { namespace: input.namespace }).getDeletions_ByUserId(input.userId)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useDataDeletionAdminApi_GetDeletions_ByUserId>[1]) => async () => {
+    const response = await DataDeletionAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getDeletions_ByUserId(input.userId)
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<DeletionData, AxiosError<ApiError>>({
@@ -84,16 +122,29 @@ export const useAdmDeletions_ByUserId = (
   })
 }
 
-export const useAdmCreateDeletion_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<RequestDeleteResponse, AxiosError<ApiError>, ApiArgs & { userId: string }>, 'mutationKey'>,
+/**
+ * Submit user&#39;s account deletion request. Scope: account
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_DataDeletionAdmin.Deletion_ByUserId, input]
+ * }
+ * ```
+ */
+export const useDataDeletionAdminApi_CreateDeletion_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<RequestDeleteResponse, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }>, 'mutationKey'>,
   callback?: (data: RequestDeleteResponse) => void
-): UseMutationResult<RequestDeleteResponse, AxiosError<ApiError>, ApiArgs & { userId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string }) => {
-    const data = await DataDeletionAdminApi(sdk, { namespace: input.namespace, config: input.config }).createDeletion_ByUserId(input.userId)
-    callback && callback(data)
-    return data
+): UseMutationResult<RequestDeleteResponse, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string }) => {
+    const response = await DataDeletionAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).createDeletion_ByUserId(input.userId)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

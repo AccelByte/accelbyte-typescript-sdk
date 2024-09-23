@@ -6,19 +6,19 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 
 export class AnonymizationAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * This API will anonymize agreement record for specified user.
    */
-  deleteAnonymizationAgreement_ByUserId(userId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteAnonymizationAgreement_ByUserId(userId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/agreement/admin/users/{userId}/anonymization/agreements'.replace('{userId}', userId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 

@@ -7,27 +7,39 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
 import { AxiosError } from 'axios'
 // @ts-ignore
 import { useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
 import { TtlConfigAdminApi } from '../TtlConfigAdminApi.js'
 
 export enum Key_TtlConfigAdmin {
-  Ttl_ByKey = 'TtlConfigAdmin.Ttl_ByKey',
-  Ttl_ByKey_ByNS = 'TtlConfigAdmin.Ttl_ByKey_ByNS'
+  Ttl_ByKey = 'Cloudsave.TtlConfigAdmin.Ttl_ByKey',
+  Ttl_ByKey_ByNS = 'Cloudsave.TtlConfigAdmin.Ttl_ByKey_ByNS'
 }
 
-export const useAdmDeleteTtl_ByKeyMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { key: string }>, 'mutationKey'>,
+/**
+ * ## Description This endpoints will delete the ttl config of the game record
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_TtlConfigAdmin.Ttl_ByKey, input]
+ * }
+ * ```
+ */
+export const useTtlConfigAdminApi_DeleteTtl_ByKeyMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { key: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { key: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { key: string }) => {
-    const data = await TtlConfigAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteTtl_ByKey(input.key)
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { key: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { key: string }) => {
+    const response = await TtlConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteTtl_ByKey(
+      input.key
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -37,16 +49,28 @@ export const useAdmDeleteTtl_ByKeyMutation = (
   })
 }
 
-export const useAdmDeleteTtl_ByKey_ByNSMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { key: string }>, 'mutationKey'>,
+/**
+ * ## Description This endpoints will delete the ttl config of the game binary record
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_TtlConfigAdmin.Ttl_ByKey_ByNS, input]
+ * }
+ * ```
+ */
+export const useTtlConfigAdminApi_DeleteTtl_ByKey_ByNSMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { key: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { key: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { key: string }) => {
-    const data = await TtlConfigAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteTtl_ByKey_ByNS(input.key)
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { key: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { key: string }) => {
+    const response = await TtlConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteTtl_ByKey_ByNS(
+      input.key
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

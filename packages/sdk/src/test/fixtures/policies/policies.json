@@ -1,0 +1,222 @@
+[
+  {
+    "id": "70f318c8-499e-4321-b671-70f9c932833c",
+    "createdAt": "2022-10-12T05:52:30.420Z",
+    "updatedAt": "2022-10-12T05:52:30.420Z",
+    "basePolicyId": "e08f8d79-770a-4435-9ed4-3290ccce86a8",
+    "policyName": "Mercury Test Legal at US",
+    "policyType": "Legal Document",
+    "namespace": "sdk",
+    "countryCode": "US",
+    "baseUrls": ["https://resources.accelbyte.io/"],
+    "shouldNotifyOnUpdate": false,
+    "policyVersions": [
+      {
+        "id": "2fbf5e6e-409a-45ba-8b12-938dd37ef1fa",
+        "createdAt": "2022-10-12T05:54:52.477Z",
+        "updatedAt": "2022-10-12T05:54:52.477Z",
+        "displayVersion": "Version1.0.0",
+        "description": "",
+        "status": "ACTIVE",
+        "localizedPolicyVersions": [
+          {
+            "id": "95d9364c-f81c-4b4f-8fcd-79462e34012c",
+            "createdAt": "2022-10-12T05:56:24.674Z",
+            "updatedAt": "2022-10-12T05:56:24.674Z",
+            "localeCode": "en-US",
+            "contentType": "text/markdown",
+            "attachmentLocation": "https://resources.accelbyte.io/legal-attachments/test/Mercury-Test-Legal/US/Version1.0.0/en-US/3c15d71e61d64d01bda0b0e5dfe1682d",
+            "attachmentChecksum": "2ba2cbae7bcfd85d07185af614a05038",
+            "attachmentVersionIdentifier": "",
+            "description": "",
+            "status": "ACTIVE",
+            "isDefaultSelection": true
+          }
+        ],
+        "isCommitted": true,
+        "isInEffect": true
+      }
+    ],
+    "description": "Try the feature",
+    "tags": ["test"],
+    "isMandatory": false,
+    "isDefaultOpted": false,
+    "isDefaultSelection": false
+  },
+  {
+    "id": "1686d634-2dba-4336-a37d-7a63cc759826",
+    "createdAt": "2022-10-12T08:50:53.315Z",
+    "updatedAt": "2022-10-12T08:50:53.315Z",
+    "basePolicyId": "616803bf-6de6-45d1-8893-92093c70d0a6",
+    "policyName": "Mercury Test Marketing Preference",
+    "policyType": "Marketing Preference",
+    "namespace": "sdk",
+    "countryCode": "US",
+    "baseUrls": ["https://resources.accelbyte.io/"],
+    "shouldNotifyOnUpdate": false,
+    "policyVersions": [
+      {
+        "id": "d9b8e3c3-73a5-4a08-a29d-65e94321c764",
+        "createdAt": "2022-10-12T09:14:36.437Z",
+        "updatedAt": "2022-10-12T09:14:36.437Z",
+        "displayVersion": "V1.0.0",
+        "description": "",
+        "status": "ACTIVE",
+        "localizedPolicyVersions": [
+          {
+            "id": "2e996caf-026d-4f7e-9649-64a2aa472508",
+            "createdAt": "2022-10-12T09:16:08.998Z",
+            "updatedAt": "2022-10-12T09:16:08.998Z",
+            "localeCode": "en",
+            "contentType": "text/markdown",
+            "attachmentLocation": "https://resources.accelbyte.io/legal-attachments/test/Mercury-Test-Marketing-Preference/US/V1.0.0/en/0856786a3c9c4e65b644c41ef6ba1823",
+            "attachmentChecksum": "c680853f98f785bcad1578763e4c46e5",
+            "attachmentVersionIdentifier": "",
+            "description": "",
+            "status": "ACTIVE",
+            "isDefaultSelection": true
+          }
+        ],
+        "isCommitted": true,
+        "isInEffect": true
+      }
+    ],
+    "description": "for test",
+    "tags": ["test"],
+    "isMandatory": false,
+    "isDefaultOpted": false,
+    "isDefaultSelection": true
+  },
+  {
+    "id": "0f6b66c0-bf55-4bae-b17d-a655d90db479",
+    "createdAt": "2022-06-15T09:37:57.199Z",
+    "updatedAt": "2022-06-15T09:37:57.199Z",
+    "basePolicyId": "9207c696-0ae1-4a81-bd5d-246b138347db",
+    "policyName": "SDK Test Policy",
+    "policyType": "Legal Document",
+    "namespace": "sdktest",
+    "countryCode": "US",
+    "baseUrls": ["https://resources.accelbyte.io/"],
+    "shouldNotifyOnUpdate": false,
+    "policyVersions": [
+      {
+        "id": "d867e070-6e3e-4182-a2a5-078aeb99e35c",
+        "createdAt": "2022-06-15T09:38:09.671Z",
+        "updatedAt": "2022-06-15T09:38:09.671Z",
+        "displayVersion": "1.0",
+        "description": "",
+        "status": "ACTIVE",
+        "localizedPolicyVersions": [
+          {
+            "id": "c9b95734-2d72-41d2-b601-a9d95fd198ba",
+            "createdAt": "2022-06-15T09:38:48.019Z",
+            "updatedAt": "2022-06-15T09:38:48.019Z",
+            "localeCode": "en",
+            "contentType": "text/markdown",
+            "attachmentLocation": "https://resources.accelbyte.io/legal-attachments/sdktest/SDK-Test-Policy/US/1.0/en/a18a752d715345828f7cae708c208469",
+            "attachmentChecksum": "82267253bf86d175b8b484b4215e2420",
+            "attachmentVersionIdentifier": "",
+            "description": "",
+            "status": "ACTIVE",
+            "isDefaultSelection": true
+          }
+        ],
+        "isCommitted": true,
+        "isInEffect": true
+      }
+    ],
+    "description": "",
+    "tags": ["tag1", "tag2"],
+    "isMandatory": false,
+    "isDefaultOpted": false,
+    "isDefaultSelection": false
+  },
+  {
+    "id": "53adbfe1-de26-44c9-a7fa-b94db440800d",
+    "createdAt": "2022-11-15T02:21:09.384Z",
+    "updatedAt": "2022-11-15T02:21:09.384Z",
+    "basePolicyId": "d613c630-429b-4fba-b0f1-7949ebe9ed53",
+    "policyName": "Hello world",
+    "policyType": "Legal Document",
+    "namespace": "sdk",
+    "countryCode": "US",
+    "baseUrls": ["https://resources.accelbyte.io/"],
+    "shouldNotifyOnUpdate": false,
+    "policyVersions": [
+      {
+        "id": "0f748c1e-ecca-4b06-b305-d8d189c86b3f",
+        "createdAt": "2022-11-15T02:21:16.042Z",
+        "updatedAt": "2022-11-15T02:21:16.042Z",
+        "displayVersion": "0.0.1",
+        "description": "",
+        "status": "ACTIVE",
+        "localizedPolicyVersions": [
+          {
+            "id": "63e9aa1e-a528-41c4-8373-3cb798e14ed1",
+            "createdAt": "2022-11-15T02:21:39.905Z",
+            "updatedAt": "2022-11-15T02:21:39.905Z",
+            "localeCode": "en",
+            "contentType": "text/markdown",
+            "attachmentLocation": "https://resources.accelbyte.io/legal-attachments/test/Hello-world/US/0.0.1/en/bc96ac8b8a5f4794a484fd6f5f93577c",
+            "attachmentChecksum": "cbbcd9492b8dca83ee35b55be2190159",
+            "attachmentVersionIdentifier": "",
+            "description": "",
+            "status": "ACTIVE",
+            "isDefaultSelection": true
+          }
+        ],
+        "isCommitted": true,
+        "isInEffect": true
+      }
+    ],
+    "description": "hehe",
+    "tags": [],
+    "isMandatory": true,
+    "isDefaultOpted": false,
+    "isDefaultSelection": false
+  },
+  {
+    "id": "2e0e1337-bc94-40e7-8442-609b9349a3df",
+    "createdAt": "2022-04-27T09:17:25.924Z",
+    "updatedAt": "2022-04-27T09:17:25.924Z",
+    "basePolicyId": "a188288e-f0c0-45c6-a171-d2ca3a584a51",
+    "policyName": "TestLegalOnboarding",
+    "policyType": "Legal Document",
+    "namespace": "HP00",
+    "countryCode": "US",
+    "baseUrls": ["https://resources.accelbyte.io/"],
+    "shouldNotifyOnUpdate": false,
+    "policyVersions": [
+      {
+        "id": "6b0645b6-b94e-43cc-abc6-e04776e11630",
+        "createdAt": "2022-04-27T09:17:38.899Z",
+        "updatedAt": "2022-04-27T09:17:38.899Z",
+        "displayVersion": "0.0.1",
+        "description": "",
+        "status": "ACTIVE",
+        "localizedPolicyVersions": [
+          {
+            "id": "02b6f483-f6df-4999-b99d-52defc919069",
+            "createdAt": "2022-04-27T09:18:37.676Z",
+            "updatedAt": "2022-04-27T09:18:37.676Z",
+            "localeCode": "en-US",
+            "contentType": "text/markdown",
+            "attachmentLocation": "https://resources.accelbyte.io/legal-attachments/HP00/TestLegalOnboarding/US/0.0.1/en-US/c2fd3f7ffa574a4ebc8ea9c3549cf9b3",
+            "attachmentChecksum": "0fabd251a0401457231347a67f695c17",
+            "attachmentVersionIdentifier": "",
+            "description": "",
+            "status": "ACTIVE",
+            "isDefaultSelection": true
+          }
+        ],
+        "isCommitted": true,
+        "isInEffect": true
+      }
+    ],
+    "description": "Just testing purposes",
+    "tags": [],
+    "isMandatory": true,
+    "isDefaultOpted": false,
+    "isDefaultSelection": false
+  }
+]

@@ -7,7 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
 import { AxiosError } from 'axios'
 // @ts-ignore
 import { useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
@@ -16,26 +16,36 @@ import { PoliciesWithNamespaceAdminApi } from '../PoliciesWithNamespaceAdminApi.
 import { UpdatePolicyRequest } from '../../generated-definitions/UpdatePolicyRequest.js'
 
 export enum Key_PoliciesWithNamespaceAdmin {
-  Policy_ByPolicyId = 'PoliciesWithNamespaceAdmin.Policy_ByPolicyId',
-  Default_ByPolicyId = 'PoliciesWithNamespaceAdmin.Default_ByPolicyId'
+  Policy_ByPolicyId = 'Legal.PoliciesWithNamespaceAdmin.Policy_ByPolicyId',
+  Default_ByPolicyId = 'Legal.PoliciesWithNamespaceAdmin.Default_ByPolicyId'
 }
 
-export const useAdmPatchPolicy_ByPolicyIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Update country-specific policy.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PoliciesWithNamespaceAdmin.Policy_ByPolicyId, input]
+ * }
+ * ```
+ */
+export const usePoliciesWithNamespaceAdminApi_PatchPolicy_ByPolicyIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { policyId: string; data: UpdatePolicyRequest }>,
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { policyId: string; data: UpdatePolicyRequest }>,
     'mutationKey'
   >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { policyId: string; data: UpdatePolicyRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { policyId: string; data: UpdatePolicyRequest }) => {
-    const data = await PoliciesWithNamespaceAdminApi(sdk, { namespace: input.namespace, config: input.config }).patchPolicy_ByPolicyId(
-      input.policyId,
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { policyId: string; data: UpdatePolicyRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { policyId: string; data: UpdatePolicyRequest }) => {
+    const response = await PoliciesWithNamespaceAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).patchPolicy_ByPolicyId(input.policyId, input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -45,18 +55,29 @@ export const useAdmPatchPolicy_ByPolicyIdMutation = (
   })
 }
 
-export const useAdmPatchDefault_ByPolicyIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { policyId: string }>, 'mutationKey'>,
+/**
+ * Update a policy to be the default.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PoliciesWithNamespaceAdmin.Default_ByPolicyId, input]
+ * }
+ * ```
+ */
+export const usePoliciesWithNamespaceAdminApi_PatchDefault_ByPolicyIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { policyId: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { policyId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { policyId: string }) => {
-    const data = await PoliciesWithNamespaceAdminApi(sdk, { namespace: input.namespace, config: input.config }).patchDefault_ByPolicyId(
-      input.policyId
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { policyId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { policyId: string }) => {
+    const response = await PoliciesWithNamespaceAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).patchDefault_ByPolicyId(input.policyId)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

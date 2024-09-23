@@ -7,32 +7,41 @@
  * AUTO GENERATED
  */
 
-import { AdminTagsAdminApi } from './generated-admin/AdminTagsAdminApi.js'
-import { AdminItemTypesAdminApi } from './generated-admin/AdminItemTypesAdminApi.js'
-import { AdminInventoriesAdminApi } from './generated-admin/AdminInventoriesAdminApi.js'
-import { AdminChainingOperationsAdminApi } from './generated-admin/AdminChainingOperationsAdminApi.js'
-import { AdminItemsAdminApi } from './generated-admin/AdminItemsAdminApi.js'
-import { AdminInventoryConfigurationsAdminApi } from './generated-admin/AdminInventoryConfigurationsAdminApi.js'
-import { AdminIntegrationConfigurationsAdminApi } from './generated-admin/AdminIntegrationConfigurationsAdminApi.js'
-import { PublicTagsApi } from './generated-public/PublicTagsApi.js'
-import { PublicItemTypesApi } from './generated-public/PublicItemTypesApi.js'
+import { author, name, version } from '../package.json'
+import { ChainingOperationsAdminApi } from './generated-admin/ChainingOperationsAdminApi.js'
+import { IntegrationConfigurationsAdminApi } from './generated-admin/IntegrationConfigurationsAdminApi.js'
+import { InventoriesAdminApi } from './generated-admin/InventoriesAdminApi.js'
+import { InventoryConfigurationsAdminApi } from './generated-admin/InventoryConfigurationsAdminApi.js'
+import { ItemsAdminApi } from './generated-admin/ItemsAdminApi.js'
+import { ItemTypesAdminApi } from './generated-admin/ItemTypesAdminApi.js'
+import { TagsAdminApi } from './generated-admin/TagsAdminApi.js'
 import { PublicInventoriesApi } from './generated-public/PublicInventoriesApi.js'
 import { PublicInventoryConfigurationsApi } from './generated-public/PublicInventoryConfigurationsApi.js'
 import { PublicItemsApi } from './generated-public/PublicItemsApi.js'
+import { PublicItemTypesApi } from './generated-public/PublicItemTypesApi.js'
+import { PublicTagsApi } from './generated-public/PublicTagsApi.js'
+
+console.log(`${name}@${version}`)
 
 const apis = {
-  AdminTagsAdminApi,
-  AdminItemTypesAdminApi,
-  AdminInventoriesAdminApi,
-  AdminChainingOperationsAdminApi,
-  AdminItemsAdminApi,
-  AdminInventoryConfigurationsAdminApi,
-  AdminIntegrationConfigurationsAdminApi,
+  TagsAdminApi,
+  ItemTypesAdminApi,
+  InventoriesAdminApi,
+  ChainingOperationsAdminApi,
+  ItemsAdminApi,
+  InventoryConfigurationsAdminApi,
+  IntegrationConfigurationsAdminApi,
   PublicTagsApi,
   PublicItemTypesApi,
   PublicInventoriesApi,
   PublicInventoryConfigurationsApi,
-  PublicItemsApi
+  PublicItemsApi,
+  version: () =>
+    console.log({
+      version,
+      name,
+      author
+    })
 }
 
 export const Inventory = apis

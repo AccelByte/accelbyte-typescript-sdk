@@ -6,6 +6,6 @@
 import { z } from 'zod'
 import { Server } from './Server.js'
 
-export const Session = z.object({ Server, id: z.string(), namespace: z.string(), provider: z.string(), region: z.string() })
+export const Session = z.object({ Server: Server, id: z.string(), namespace: z.string(), provider: z.string(), region: z.string() })
 
 export interface Session extends z.TypeOf<typeof Session> {}

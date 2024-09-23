@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { ClientCreateRequest } from '../../generated-definitions/ClientCreateRequest.js'
 import { ClientCreationResponse } from '../../generated-definitions/ClientCreationResponse.js'
@@ -19,26 +19,25 @@ import { ClientUpdateSecretRequest } from '../../generated-definitions/ClientUpd
 
 export class Clients$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients [GET]_**
    */
-  getClients_DEPRECATED(): Promise<IResponse<ClientResponseArray>> {
-    const params = {} as SDKRequestConfig
+  getClients(): Promise<Response<ClientResponseArray>> {
+    const params = {} as AxiosRequestConfig
     const url = '/iam/clients'
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ClientResponseArray, 'ClientResponseArray')
   }
-
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients [POST]_**
    */
-  createClient_DEPRECATED(data: ClientCreateRequest): Promise<IResponse<ClientCreationResponse>> {
-    const params = {} as SDKRequestConfig
+  createClient(data: ClientCreateRequest): Promise<Response<ClientCreationResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/iam/clients'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
@@ -49,73 +48,67 @@ export class Clients$ {
       'ClientCreationResponse'
     )
   }
-
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients/{clientId} [DELETE]_**
    */
-  deleteClient_ByClientId_DEPRECATED(clientId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteClient_ByClientId(clientId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/iam/clients/{clientId}'.replace('{clientId}', clientId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients/{clientId} [GET]_**
    */
-  getClient_ByClientId_DEPRECATED(clientId: string): Promise<IResponse<ClientResponse>> {
-    const params = {} as SDKRequestConfig
+  getClient_ByClientId(clientId: string): Promise<Response<ClientResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/iam/clients/{clientId}'.replace('{clientId}', clientId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ClientResponse, 'ClientResponse')
   }
-
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients/{clientId} [PATCH]_**
    */
-  updateClient_ByClientId_DEPRECATED(clientId: string, data: ClientUpdateRequest): Promise<IResponse<ClientResponse>> {
-    const params = {} as SDKRequestConfig
+  updateClient_ByClientId(clientId: string, data: ClientUpdateRequest): Promise<Response<ClientResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/iam/clients/{clientId}'.replace('{clientId}', clientId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ClientResponse, 'ClientResponse')
   }
-
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/{clientId}/secret [PUT]_**
    */
-  updateSecret_ByClientId_DEPRECATED(clientId: string, data: ClientUpdateSecretRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  updateSecret_ByClientId(clientId: string, data: ClientUpdateSecretRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/iam/clients/{clientId}/secret'.replace('{clientId}', clientId)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients [GET]_**
    */
-  getClients_ByNS_DEPRECATED(): Promise<IResponse<ClientResponseArray>> {
-    const params = {} as SDKRequestConfig
+  getClients_ByNS(): Promise<Response<ClientResponseArray>> {
+    const params = {} as AxiosRequestConfig
     const url = '/iam/namespaces/{namespace}/clients'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ClientResponseArray, 'ClientResponseArray')
   }
-
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/v3/admin/namespaces/{namespace}/clients [POST]_**
    */
-  createClient_ByNS_DEPRECATED(data: ClientCreateRequest): Promise<IResponse<ClientCreationResponse>> {
-    const params = {} as SDKRequestConfig
+  createClient_ByNS(data: ClientCreateRequest): Promise<Response<ClientCreationResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/iam/namespaces/{namespace}/clients'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
@@ -126,41 +119,34 @@ export class Clients$ {
       'ClientCreationResponse'
     )
   }
-
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _iam/v3/admin/namespaces/{namespace}/clients/{clientId}/permissions [PUT]_**
    */
-  createClientpermission_ByClientId_DEPRECATED(clientId: string, data: ClientPermissions): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  updateClientpermission_ByClientId(clientId: string, data: ClientPermissions): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/iam/clients/{clientId}/clientpermissions'.replace('{clientId}', clientId)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients/{clientId} [DELETE]_**
    */
-  deleteClient_ByClientId_ByNS_DEPRECATED(clientId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteClient_ByClientId_ByNS(clientId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/iam/namespaces/{namespace}/clients/{clientId}'.replace('{namespace}', this.namespace).replace('{clientId}', clientId)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients/{clientId}/permissions/{resource}/{action} [DELETE]_**
    */
-  deleteClientpermission_ByClientId_ByResource_ByAction_DEPRECATED(
-    clientId: string,
-    resource: string,
-    action: number
-  ): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteClientpermission_ByClientId_ByResource_ByAction(clientId: string, resource: string, action: number): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/iam/clients/{clientId}/clientpermissions/{resource}/{action}'
       .replace('{clientId}', clientId)
       .replace('{resource}', resource)
@@ -169,17 +155,12 @@ export class Clients$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * @deprecated
    * ## The endpoint is going to be deprecated **Endpoint migration guide** - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/clients/{clientId}/permissions [POST]_**
    */
-  createClientpermission_ByClientId_ByResource_ByAction_DEPRECATED(
-    clientId: string,
-    resource: string,
-    action: number
-  ): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  updateClientpermission_ByClientId_ByResource_ByAction(clientId: string, resource: string, action: number): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/iam/clients/{clientId}/clientpermissions/{resource}/{action}'
       .replace('{clientId}', clientId)
       .replace('{resource}', resource)

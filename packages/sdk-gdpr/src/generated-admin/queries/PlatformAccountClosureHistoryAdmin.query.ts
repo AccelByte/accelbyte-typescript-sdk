@@ -7,8 +7,8 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
 import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { PlatformAccountClosureHistoryAdminApi } from '../PlatformAccountClosureHistoryAdminApi.js'
@@ -16,23 +16,36 @@ import { PlatformAccountClosureHistoryAdminApi } from '../PlatformAccountClosure
 import { UserPlatformAccountClosureHistoriesResponse } from '../../generated-definitions/UserPlatformAccountClosureHistoriesResponse.js'
 
 export enum Key_PlatformAccountClosureHistoryAdmin {
-  UsersPlatformsClosureHistories = 'PlatformAccountClosureHistoryAdmin.UsersPlatformsClosureHistories'
+  UsersPlatformsClosureHistories = 'Gdpr.PlatformAccountClosureHistoryAdmin.UsersPlatformsClosureHistories'
 }
 
-export const useAdmUsersPlatformsClosureHistories = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams?: { limit?: number; offset?: number; platform?: string | null; userId?: string | null } },
+/**
+ * Get user&#39;s platform account closure histories. Scope: account ------ Supported platforms: * psn
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PlatformAccountClosureHistoryAdmin.UsersPlatformsClosureHistories, input]
+ * }
+ * ```
+ */
+export const usePlatformAccountClosureHistoryAdminApi_GetUsersPlatformsClosureHistories = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams?: { limit?: number; offset?: number; platform?: string | null; userId?: string | null } },
   options?: Omit<UseQueryOptions<UserPlatformAccountClosureHistoriesResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: UserPlatformAccountClosureHistoriesResponse) => void
+  callback?: (data: AxiosResponse<UserPlatformAccountClosureHistoriesResponse>) => void
 ): UseQueryResult<UserPlatformAccountClosureHistoriesResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmUsersPlatformsClosureHistories>[1]) => async () => {
-    const data = await PlatformAccountClosureHistoryAdminApi(sdk, { namespace: input.namespace }).getUsersPlatformsClosureHistories(
-      input.queryParams
-    )
-    callback && callback(data)
-    return data
-  }
+  const queryFn =
+    (sdk: AccelByteSDK, input: Parameters<typeof usePlatformAccountClosureHistoryAdminApi_GetUsersPlatformsClosureHistories>[1]) =>
+    async () => {
+      const response = await PlatformAccountClosureHistoryAdminApi(sdk, {
+        coreConfig: input.coreConfig,
+        axiosConfig: input.axiosConfig
+      }).getUsersPlatformsClosureHistories(input.queryParams)
+      callback && callback(response)
+      return response.data
+    }
 
   return useQuery<UserPlatformAccountClosureHistoriesResponse, AxiosError<ApiError>>({
     queryKey: [Key_PlatformAccountClosureHistoryAdmin.UsersPlatformsClosureHistories, input],

@@ -8,32 +8,55 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { OrderSyncResult } from '../generated-definitions/OrderSyncResult.js'
 import { OrderDedicatedAdmin$ } from './endpoints/OrderDedicatedAdmin$.js'
 
-export function OrderDedicatedAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function OrderDedicatedAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Sync orders. If response contains nextEvaluatedKey, please use it as query param in the next call to fetch the next batch, a batch has 1000 elements or less.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: sync orders&lt;/li&gt;&lt;/ul&gt;
-   */
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
+  }
+
   async function getOrders(queryParams: {
     end: string | null
     start: string | null
     nextEvaluatedKey?: string | null
-  }): Promise<OrderSyncResult> {
-    const $ = new OrderDedicatedAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  }): Promise<AxiosResponse<OrderSyncResult>> {
+    const $ = new OrderDedicatedAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getOrders(queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt;Sync orders. If response contains nextEvaluatedKey, please use it as query param in the next call to fetch the next batch, a batch has 1000 elements or less.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: sync orders&lt;/li&gt;&lt;/ul&gt;
+     */
     getOrders
   }
 }

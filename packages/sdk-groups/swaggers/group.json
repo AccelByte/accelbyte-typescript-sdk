@@ -16,26 +16,6 @@
     "url": "https://development.accelbyte.io/group/apidocs"
   },
   "securityDefinitions": {
-    "HasPermission": {
-      "authorizationUrl": "https://dummy.oauth.net/auth",
-      "flow": "accessCode",
-      "scopes": {
-        "GROUP [DELETE]": "GROUP [DELETE]",
-        "GROUP [READ]": "GROUP [READ]",
-        "GROUP [UPDATE]": "GROUP [UPDATE]",
-        "GROUP:INVITE [CREATE]": "GROUP:INVITE [CREATE]",
-        "GROUP:INVITE [DELETE]": "GROUP:INVITE [DELETE]"
-      },
-      "tokenUrl": "https://dumy.oauth.net/token",
-      "type": "oauth2"
-    },
-    "HasScope": {
-      "authorizationUrl": "https://dummy.oauth.net/auth",
-      "flow": "accessCode",
-      "scopes": {},
-      "tokenUrl": "https://dumy.oauth.net/token",
-      "type": "oauth2"
-    },
     "authorization": {
       "in": "header",
       "name": "Authorization",
@@ -1813,7 +1793,6 @@
         },
         "security": [
           {
-            "HasPermission": ["GROUP [DELETE]"],
             "authorization": []
           }
         ],
@@ -1986,7 +1965,6 @@
         },
         "security": [
           {
-            "HasPermission": ["GROUP [UPDATE]"],
             "authorization": []
           }
         ],
@@ -2078,7 +2056,6 @@
         },
         "security": [
           {
-            "HasPermission": ["GROUP [UPDATE]"],
             "authorization": []
           }
         ],
@@ -2172,7 +2149,6 @@
         },
         "security": [
           {
-            "HasPermission": ["GROUP [UPDATE]"],
             "authorization": []
           }
         ],
@@ -2885,7 +2861,6 @@
         },
         "security": [
           {
-            "HasPermission": ["GROUP [UPDATE]"],
             "authorization": []
           }
         ],
@@ -2984,7 +2959,6 @@
         },
         "security": [
           {
-            "HasPermission": ["GROUP [UPDATE]"],
             "authorization": []
           }
         ],
@@ -3582,7 +3556,6 @@
         },
         "security": [
           {
-            "HasPermission": ["GROUP:INVITE [CREATE]"],
             "authorization": []
           }
         ],
@@ -4349,7 +4322,6 @@
         },
         "security": [
           {
-            "HasPermission": ["GROUP [DELETE]"],
             "authorization": []
           }
         ],
@@ -4441,7 +4413,6 @@
         },
         "security": [
           {
-            "HasPermission": ["GROUP [UPDATE]"],
             "authorization": []
           }
         ],
@@ -4533,7 +4504,6 @@
         },
         "security": [
           {
-            "HasPermission": ["GROUP [UPDATE]"],
             "authorization": []
           }
         ],
@@ -4627,7 +4597,6 @@
         },
         "security": [
           {
-            "HasPermission": ["GROUP [UPDATE]"],
             "authorization": []
           }
         ],
@@ -5329,7 +5298,6 @@
         },
         "security": [
           {
-            "HasPermission": ["GROUP [UPDATE]"],
             "authorization": []
           }
         ],
@@ -5428,7 +5396,6 @@
         },
         "security": [
           {
-            "HasPermission": ["GROUP [UPDATE]"],
             "authorization": []
           }
         ],
@@ -5976,7 +5943,6 @@
         },
         "security": [
           {
-            "HasPermission": ["GROUP:INVITE [CREATE]"],
             "authorization": []
           }
         ],
@@ -6070,7 +6036,6 @@
         },
         "security": [
           {
-            "HasPermission": ["GROUP:INVITE [DELETE]"],
             "authorization": []
           }
         ],
@@ -6441,7 +6406,6 @@
         },
         "security": [
           {
-            "HasPermission": ["GROUP [READ]"],
             "authorization": []
           }
         ],

@@ -7,29 +7,39 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
 import { AxiosError } from 'axios'
 // @ts-ignore
 import { useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
 import { AnonymizationAdminApi } from '../AnonymizationAdminApi.js'
 
 export enum Key_AnonymizationAdmin {
-  AnonymizationAgreement_ByUserId = 'AnonymizationAdmin.AnonymizationAgreement_ByUserId'
+  AnonymizationAgreement_ByUserId = 'Legal.AnonymizationAdmin.AnonymizationAgreement_ByUserId'
 }
 
-export const useAdmDeleteAnonymizationAgreement_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }>, 'mutationKey'>,
+/**
+ * This API will anonymize agreement record for specified user.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AnonymizationAdmin.AnonymizationAgreement_ByUserId, input]
+ * }
+ * ```
+ */
+export const useAnonymizationAdminApi_DeleteAnonymizationAgreement_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string }) => {
-    const data = await AnonymizationAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string }) => {
+    const response = await AnonymizationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).deleteAnonymizationAgreement_ByUserId(input.userId)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

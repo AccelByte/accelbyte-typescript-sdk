@@ -7,36 +7,47 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
 import { AxiosError } from 'axios'
 // @ts-ignore
 import { useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
 import { AnonymizationAdminApi } from '../AnonymizationAdminApi.js'
 
 export enum Key_AnonymizationAdmin {
-  AnonymizationOrder_ByUserId = 'AnonymizationAdmin.AnonymizationOrder_ByUserId',
-  AnonymizationPayment_ByUserId = 'AnonymizationAdmin.AnonymizationPayment_ByUserId',
-  AnonymizationWallet_ByUserId = 'AnonymizationAdmin.AnonymizationWallet_ByUserId',
-  AnonymizationCampaign_ByUserId = 'AnonymizationAdmin.AnonymizationCampaign_ByUserId',
-  AnonymizationRevocation_ByUserId = 'AnonymizationAdmin.AnonymizationRevocation_ByUserId',
-  AnonymizationFulfillment_ByUserId = 'AnonymizationAdmin.AnonymizationFulfillment_ByUserId',
-  AnonymizationEntitlement_ByUserId = 'AnonymizationAdmin.AnonymizationEntitlement_ByUserId',
-  AnonymizationIntegration_ByUserId = 'AnonymizationAdmin.AnonymizationIntegration_ByUserId',
-  AnonymizationSubscription_ByUserId = 'AnonymizationAdmin.AnonymizationSubscription_ByUserId'
+  AnonymizationOrder_ByUserId = 'Platform.AnonymizationAdmin.AnonymizationOrder_ByUserId',
+  AnonymizationPayment_ByUserId = 'Platform.AnonymizationAdmin.AnonymizationPayment_ByUserId',
+  AnonymizationWallet_ByUserId = 'Platform.AnonymizationAdmin.AnonymizationWallet_ByUserId',
+  AnonymizationCampaign_ByUserId = 'Platform.AnonymizationAdmin.AnonymizationCampaign_ByUserId',
+  AnonymizationRevocation_ByUserId = 'Platform.AnonymizationAdmin.AnonymizationRevocation_ByUserId',
+  AnonymizationFulfillment_ByUserId = 'Platform.AnonymizationAdmin.AnonymizationFulfillment_ByUserId',
+  AnonymizationEntitlement_ByUserId = 'Platform.AnonymizationAdmin.AnonymizationEntitlement_ByUserId',
+  AnonymizationIntegration_ByUserId = 'Platform.AnonymizationAdmin.AnonymizationIntegration_ByUserId',
+  AnonymizationSubscription_ByUserId = 'Platform.AnonymizationAdmin.AnonymizationSubscription_ByUserId'
 }
 
-export const useAdmDeleteAnonymizationOrder_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }>, 'mutationKey'>,
+/**
+ * Anonymize order. At current it will only anonymize order, order history.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AnonymizationAdmin.AnonymizationOrder_ByUserId, input]
+ * }
+ * ```
+ */
+export const useAnonymizationAdminApi_DeleteAnonymizationOrder_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string }) => {
-    const data = await AnonymizationAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteAnonymizationOrder_ByUserId(
-      input.userId
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string }) => {
+    const response = await AnonymizationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteAnonymizationOrder_ByUserId(input.userId)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -46,18 +57,29 @@ export const useAdmDeleteAnonymizationOrder_ByUserIdMutation = (
   })
 }
 
-export const useAdmDeleteAnonymizationPayment_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }>, 'mutationKey'>,
+/**
+ * Anonymize payment. At current it will only anonymize payment order, payment order history.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AnonymizationAdmin.AnonymizationPayment_ByUserId, input]
+ * }
+ * ```
+ */
+export const useAnonymizationAdminApi_DeleteAnonymizationPayment_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string }) => {
-    const data = await AnonymizationAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteAnonymizationPayment_ByUserId(
-      input.userId
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string }) => {
+    const response = await AnonymizationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteAnonymizationPayment_ByUserId(input.userId)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -67,18 +89,29 @@ export const useAdmDeleteAnonymizationPayment_ByUserIdMutation = (
   })
 }
 
-export const useAdmDeleteAnonymizationWallet_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }>, 'mutationKey'>,
+/**
+ * Anonymize wallet. At current it will only anonymize wallet, wallet transaction.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AnonymizationAdmin.AnonymizationWallet_ByUserId, input]
+ * }
+ * ```
+ */
+export const useAnonymizationAdminApi_DeleteAnonymizationWallet_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string }) => {
-    const data = await AnonymizationAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteAnonymizationWallet_ByUserId(
-      input.userId
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string }) => {
+    const response = await AnonymizationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteAnonymizationWallet_ByUserId(input.userId)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -88,19 +121,29 @@ export const useAdmDeleteAnonymizationWallet_ByUserIdMutation = (
   })
 }
 
-export const useAdmDeleteAnonymizationCampaign_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }>, 'mutationKey'>,
+/**
+ * Anonymize campaign. At current it will only anonymize redeem history.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AnonymizationAdmin.AnonymizationCampaign_ByUserId, input]
+ * }
+ * ```
+ */
+export const useAnonymizationAdminApi_DeleteAnonymizationCampaign_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string }) => {
-    const data = await AnonymizationAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string }) => {
+    const response = await AnonymizationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).deleteAnonymizationCampaign_ByUserId(input.userId)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -110,19 +153,29 @@ export const useAdmDeleteAnonymizationCampaign_ByUserIdMutation = (
   })
 }
 
-export const useAdmDeleteAnonymizationRevocation_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }>, 'mutationKey'>,
+/**
+ * Anonymize revocation. At current it will only anonymize revocation history.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AnonymizationAdmin.AnonymizationRevocation_ByUserId, input]
+ * }
+ * ```
+ */
+export const useAnonymizationAdminApi_DeleteAnonymizationRevocation_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string }) => {
-    const data = await AnonymizationAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string }) => {
+    const response = await AnonymizationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).deleteAnonymizationRevocation_ByUserId(input.userId)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -132,19 +185,29 @@ export const useAdmDeleteAnonymizationRevocation_ByUserIdMutation = (
   })
 }
 
-export const useAdmDeleteAnonymizationFulfillment_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }>, 'mutationKey'>,
+/**
+ * Anonymize fulfillment. At current it will only anonymize fulfillment history.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AnonymizationAdmin.AnonymizationFulfillment_ByUserId, input]
+ * }
+ * ```
+ */
+export const useAnonymizationAdminApi_DeleteAnonymizationFulfillment_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string }) => {
-    const data = await AnonymizationAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string }) => {
+    const response = await AnonymizationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).deleteAnonymizationFulfillment_ByUserId(input.userId)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -154,19 +217,29 @@ export const useAdmDeleteAnonymizationFulfillment_ByUserIdMutation = (
   })
 }
 
-export const useAdmDeleteAnonymizationEntitlement_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }>, 'mutationKey'>,
+/**
+ * Anonymize entitlement. At current it will only anonymize entitlement, entitlement history.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AnonymizationAdmin.AnonymizationEntitlement_ByUserId, input]
+ * }
+ * ```
+ */
+export const useAnonymizationAdminApi_DeleteAnonymizationEntitlement_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string }) => {
-    const data = await AnonymizationAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string }) => {
+    const response = await AnonymizationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).deleteAnonymizationEntitlement_ByUserId(input.userId)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -176,19 +249,29 @@ export const useAdmDeleteAnonymizationEntitlement_ByUserIdMutation = (
   })
 }
 
-export const useAdmDeleteAnonymizationIntegration_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }>, 'mutationKey'>,
+/**
+ * Anonymize integrations. At current it will only anonymize iap histories.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AnonymizationAdmin.AnonymizationIntegration_ByUserId, input]
+ * }
+ * ```
+ */
+export const useAnonymizationAdminApi_DeleteAnonymizationIntegration_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string }) => {
-    const data = await AnonymizationAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string }) => {
+    const response = await AnonymizationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).deleteAnonymizationIntegration_ByUserId(input.userId)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -198,19 +281,29 @@ export const useAdmDeleteAnonymizationIntegration_ByUserIdMutation = (
   })
 }
 
-export const useAdmDeleteAnonymizationSubscription_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }>, 'mutationKey'>,
+/**
+ * Anonymize subscription. At current it will anonymize subscription, billing history and subscription activity.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AnonymizationAdmin.AnonymizationSubscription_ByUserId, input]
+ * }
+ * ```
+ */
+export const useAnonymizationAdminApi_DeleteAnonymizationSubscription_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string }) => {
-    const data = await AnonymizationAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string }) => {
+    const response = await AnonymizationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).deleteAnonymizationSubscription_ByUserId(input.userId)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

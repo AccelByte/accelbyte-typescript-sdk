@@ -7,28 +7,41 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { ModerationAdminApi } from '../ModerationAdminApi.js'
 
 import { ChatSnapshots } from '../../generated-definitions/ChatSnapshots.js'
 
 export enum Key_ModerationAdmin {
-  Snapshot_ByChatId = 'ModerationAdmin.Snapshot_ByChatId'
+  Snapshot_ByChatId = 'Chat.ModerationAdmin.Snapshot_ByChatId'
 }
 
-export const useAdmDeleteSnapshot_ByChatIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { chatId: string }>, 'mutationKey'>,
+/**
+ * Delete the chat snapshot
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ModerationAdmin.Snapshot_ByChatId, input]
+ * }
+ * ```
+ */
+export const useModerationAdminApi_DeleteSnapshot_ByChatIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { chatId: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { chatId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { chatId: string }) => {
-    const data = await ModerationAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteSnapshot_ByChatId(input.chatId)
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { chatId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { chatId: string }) => {
+    const response = await ModerationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteSnapshot_ByChatId(input.chatId)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -38,17 +51,29 @@ export const useAdmDeleteSnapshot_ByChatIdMutation = (
   })
 }
 
-export const useAdmSnapshot_ByChatId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { chatId: string },
+/**
+ * Get the chat snapshot
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ModerationAdmin.Snapshot_ByChatId, input]
+ * }
+ * ```
+ */
+export const useModerationAdminApi_GetSnapshot_ByChatId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { chatId: string },
   options?: Omit<UseQueryOptions<ChatSnapshots, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: ChatSnapshots) => void
+  callback?: (data: AxiosResponse<ChatSnapshots>) => void
 ): UseQueryResult<ChatSnapshots, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmSnapshot_ByChatId>[1]) => async () => {
-    const data = await ModerationAdminApi(sdk, { namespace: input.namespace }).getSnapshot_ByChatId(input.chatId)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useModerationAdminApi_GetSnapshot_ByChatId>[1]) => async () => {
+    const response = await ModerationAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getSnapshot_ByChatId(
+      input.chatId
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<ChatSnapshots, AxiosError<ApiError>>({

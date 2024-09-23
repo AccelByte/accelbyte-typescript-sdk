@@ -6,13 +6,14 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { PublicReasonListResponse } from '../../generated-definitions/PublicReasonListResponse.js'
 import { ReasonGroupListResponse } from '../../generated-definitions/ReasonGroupListResponse.js'
 
 export class PublicReasons$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
 
   getReasons(queryParams?: {
@@ -20,8 +21,8 @@ export class PublicReasons$ {
     limit?: number
     offset?: number
     title?: string | null
-  }): Promise<IResponse<PublicReasonListResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  }): Promise<Response<PublicReasonListResponse>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/reporting/v1/public/namespaces/{namespace}/reasons'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -32,12 +33,11 @@ export class PublicReasons$ {
       'PublicReasonListResponse'
     )
   }
-
   /**
    * Return list of reason groups ID and title under given namespace.
    */
-  getReasonGroups(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<ReasonGroupListResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  getReasonGroups(queryParams?: { limit?: number; offset?: number }): Promise<Response<ReasonGroupListResponse>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/reporting/v1/public/namespaces/{namespace}/reasonGroups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 

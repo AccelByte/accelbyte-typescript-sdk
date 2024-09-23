@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { BulkStatCycleRequest } from '../../generated-definitions/BulkStatCycleRequest.js'
 import { BulkStatCycleResult } from '../../generated-definitions/BulkStatCycleResult.js'
 import { StatCycleInfo } from '../../generated-definitions/StatCycleInfo.js'
@@ -15,8 +15,8 @@ import { StatCyclePagingSlicedResult } from '../../generated-definitions/StatCyc
 
 export class StatCycleConfiguration$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * List stat cycles by pagination.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: stat cycles&lt;/li&gt;&lt;/ul&gt;
    */
@@ -27,8 +27,8 @@ export class StatCycleConfiguration$ {
     offset?: number
     sortBy?: string | null
     status?: 'ACTIVE' | 'INIT' | 'STOPPED'
-  }): Promise<IResponse<StatCyclePagingSlicedResult>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  }): Promise<Response<StatCyclePagingSlicedResult>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/social/v1/public/namespaces/{namespace}/statCycles'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -39,23 +39,21 @@ export class StatCycleConfiguration$ {
       'StatCyclePagingSlicedResult'
     )
   }
-
   /**
    * Bulk get stat cycle.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of stat cycles&lt;/li&gt;&lt;/ul&gt;
    */
-  createStatCycleBulk(data: BulkStatCycleRequest): Promise<IResponse<BulkStatCycleResult>> {
-    const params = {} as SDKRequestConfig
+  createStatCycleBulk(data: BulkStatCycleRequest): Promise<Response<BulkStatCycleResult>> {
+    const params = {} as AxiosRequestConfig
     const url = '/social/v1/public/namespaces/{namespace}/statCycles/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BulkStatCycleResult, 'BulkStatCycleResult')
   }
-
   /**
    * Get stat cycle.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: stat cycle info&lt;/ul&gt;
    */
-  getStatCycle_ByCycleId(cycleId: string): Promise<IResponse<StatCycleInfo>> {
-    const params = {} as SDKRequestConfig
+  getStatCycle_ByCycleId(cycleId: string): Promise<Response<StatCycleInfo>> {
+    const params = {} as AxiosRequestConfig
     const url = '/social/v1/public/namespaces/{namespace}/statCycles/{cycleId}'
       .replace('{namespace}', this.namespace)
       .replace('{cycleId}', cycleId)

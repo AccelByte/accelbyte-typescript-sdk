@@ -6,43 +6,41 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { GlobalConfiguration } from '../../generated-definitions/GlobalConfiguration.js'
 import { PutGlobalConfigurationRequest } from '../../generated-definitions/PutGlobalConfigurationRequest.js'
 
 export class AdminAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Delete of global configuration data.
    */
-  deleteGlobalConfiguration(): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteGlobalConfiguration(): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/lobby/v1/admin/global-configurations'
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Get dsmc global configuration.
    */
-  getGlobalConfigurations(): Promise<IResponse<GlobalConfiguration>> {
-    const params = {} as SDKRequestConfig
+  getGlobalConfigurations(): Promise<Response<GlobalConfiguration>> {
+    const params = {} as AxiosRequestConfig
     const url = '/lobby/v1/admin/global-configurations'
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GlobalConfiguration, 'GlobalConfiguration')
   }
-
   /**
    * Upsert global configuration data.
    */
-  updateGlobalConfiguration(data: PutGlobalConfigurationRequest): Promise<IResponse<GlobalConfiguration>> {
-    const params = {} as SDKRequestConfig
+  updateGlobalConfiguration(data: PutGlobalConfigurationRequest): Promise<Response<GlobalConfiguration>> {
+    const params = {} as AxiosRequestConfig
     const url = '/lobby/v1/admin/global-configurations'
     const resultPromise = this.axiosInstance.put(url, data, { params })
 

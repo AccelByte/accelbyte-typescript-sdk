@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { AgreementAdminApi } from '../AgreementAdminApi.js'
 
 import { AcceptAgreementRequest } from '../../generated-definitions/AcceptAgreementRequest.js'
@@ -18,22 +18,35 @@ import { PagedRetrieveUserAcceptedAgreementResponse } from '../../generated-defi
 import { RetrieveAcceptedAgreementResponseArray } from '../../generated-definitions/RetrieveAcceptedAgreementResponseArray.js'
 
 export enum Key_AgreementAdmin {
-  AgreementsPolicyVersionsUsers = 'AgreementAdmin.AgreementsPolicyVersionsUsers',
-  AgreementPolicyUser_ByUserId = 'AgreementAdmin.AgreementPolicyUser_ByUserId',
-  AgreementLocalizedPolicyVersionPreferenceUserId_ByUserId = 'AgreementAdmin.AgreementLocalizedPolicyVersionPreferenceUserId_ByUserId'
+  AgreementsPolicyVersionsUsers = 'Legal.AgreementAdmin.AgreementsPolicyVersionsUsers',
+  AgreementPolicyUser_ByUserId = 'Legal.AgreementAdmin.AgreementPolicyUser_ByUserId',
+  AgreementLocalizedPolicyVersionPreferenceUserId_ByUserId = 'Legal.AgreementAdmin.AgreementLocalizedPolicyVersionPreferenceUserId_ByUserId'
 }
 
-export const useAdmAgreementsPolicyVersionsUsers = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams: { policyVersionId: string | null; keyword?: string | null; limit?: number; offset?: number } },
+/**
+ * This API will return users who has accepted a specific policy version.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AgreementAdmin.AgreementsPolicyVersionsUsers, input]
+ * }
+ * ```
+ */
+export const useAgreementAdminApi_GetAgreementsPolicyVersionsUsers = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams: { policyVersionId: string | null; keyword?: string | null; limit?: number; offset?: number } },
   options?: Omit<UseQueryOptions<PagedRetrieveUserAcceptedAgreementResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: PagedRetrieveUserAcceptedAgreementResponse) => void
+  callback?: (data: AxiosResponse<PagedRetrieveUserAcceptedAgreementResponse>) => void
 ): UseQueryResult<PagedRetrieveUserAcceptedAgreementResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmAgreementsPolicyVersionsUsers>[1]) => async () => {
-    const data = await AgreementAdminApi(sdk, { namespace: input.namespace }).getAgreementsPolicyVersionsUsers(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useAgreementAdminApi_GetAgreementsPolicyVersionsUsers>[1]) => async () => {
+    const response = await AgreementAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getAgreementsPolicyVersionsUsers(input.queryParams)
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<PagedRetrieveUserAcceptedAgreementResponse, AxiosError<ApiError>>({
@@ -43,17 +56,30 @@ export const useAdmAgreementsPolicyVersionsUsers = (
   })
 }
 
-export const useAdmAgreementPolicyUser_ByUserId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { userId: string },
+/**
+ * This API will return all accepted Legal Agreements for specified user
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AgreementAdmin.AgreementPolicyUser_ByUserId, input]
+ * }
+ * ```
+ */
+export const useAgreementAdminApi_GetAgreementPolicyUser_ByUserId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { userId: string },
   options?: Omit<UseQueryOptions<RetrieveAcceptedAgreementResponseArray, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: RetrieveAcceptedAgreementResponseArray) => void
+  callback?: (data: AxiosResponse<RetrieveAcceptedAgreementResponseArray>) => void
 ): UseQueryResult<RetrieveAcceptedAgreementResponseArray, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmAgreementPolicyUser_ByUserId>[1]) => async () => {
-    const data = await AgreementAdminApi(sdk, { namespace: input.namespace }).getAgreementPolicyUser_ByUserId(input.userId)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useAgreementAdminApi_GetAgreementPolicyUser_ByUserId>[1]) => async () => {
+    const response = await AgreementAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getAgreementPolicyUser_ByUserId(input.userId)
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<RetrieveAcceptedAgreementResponseArray, AxiosError<ApiError>>({
@@ -63,22 +89,32 @@ export const useAdmAgreementPolicyUser_ByUserId = (
   })
 }
 
-export const useAdmPatchAgreementLocalizedPolicyVersionPreferenceUserId_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * This API will Update Preference Consent
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AgreementAdmin.AgreementLocalizedPolicyVersionPreferenceUserId_ByUserId, input]
+ * }
+ * ```
+ */
+export const useAgreementAdminApi_PatchAgreementLocalizedPolicyVersionPreferenceUserId_ByUserIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string; data: AcceptAgreementRequest[] }>,
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: AcceptAgreementRequest[] }>,
     'mutationKey'
   >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string; data: AcceptAgreementRequest[] }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string; data: AcceptAgreementRequest[] }) => {
-    const data = await AgreementAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: AcceptAgreementRequest[] }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; data: AcceptAgreementRequest[] }) => {
+    const response = await AgreementAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).patchAgreementLocalizedPolicyVersionPreferenceUserId_ByUserId(input.userId, input.data)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

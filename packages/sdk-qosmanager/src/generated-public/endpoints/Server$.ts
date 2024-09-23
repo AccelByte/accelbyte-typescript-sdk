@@ -6,20 +6,20 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { HeartbeatRequest } from '../../generated-definitions/HeartbeatRequest.js'
 
 export class Server$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * ``` Required permission: QOS:SERVER [CREATE][UPDATE] Required scope: social This endpoint is intended to be called by QoS service to register and periodically let QoS Manager know that it is still alive. ```
    */
-  createServerHeartbeat(data: HeartbeatRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  createServerHeartbeat(data: HeartbeatRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/qosm/servers/heartbeat'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 

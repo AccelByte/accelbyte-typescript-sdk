@@ -7,6 +7,8 @@ import { z } from 'zod'
 
 export const Configuration = z.object({
   logLevel: z.enum(['debug', 'error', 'fatal', 'info', 'panic', 'trace', 'warning']).nullish(),
+  logLevelDB: z.enum(['debug', 'error', 'fatal', 'info', 'panic', 'trace', 'warning']).nullish(),
+  slowQueryThreshold: z.number().int().nullish(),
   socketLogEnabled: z.boolean().nullish()
 })
 

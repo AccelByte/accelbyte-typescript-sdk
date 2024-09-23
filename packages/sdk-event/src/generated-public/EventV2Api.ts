@@ -8,45 +8,68 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { EventResponseV2 } from '../generated-definitions/EventResponseV2.js'
 import { EventV2$ } from './endpoints/EventV2$.js'
 
-export function EventV2Api(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function EventV2Api(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * Requires valid user access token
-   */
-  async function getEvent_ByUserId(
-    userId: string,
-    queryParams?: { endDate?: string | null; eventName?: string | null; offset?: number; pageSize?: number; startDate?: string | null }
-  ): Promise<EventResponseV2> {
-    const $ = new EventV2$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getEvent_ByUserId(userId, queryParams)
-    if (resp.error) throw resp.error
-    return resp.response.data
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
   }
 
-  /**
-   * Available Type: * email * password * displayname * dateofbirth * country * language
-   */
-  async function getEdithistory_ByUserId(
+  async function getEvent_ByUserId_v2(
+    userId: string,
+    queryParams?: { endDate?: string | null; eventName?: string | null; offset?: number; pageSize?: number; startDate?: string | null }
+  ): Promise<AxiosResponse<EventResponseV2>> {
+    const $ = new EventV2$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getEvent_ByUserId_v2(userId, queryParams)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function getEdithistory_ByUserId_v2(
     userId: string,
     queryParams?: { endDate?: string | null; offset?: number; pageSize?: number; startDate?: string | null; type?: string | null }
-  ): Promise<EventResponseV2> {
-    const $ = new EventV2$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getEdithistory_ByUserId(userId, queryParams)
+  ): Promise<AxiosResponse<EventResponseV2>> {
+    const $ = new EventV2$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getEdithistory_ByUserId_v2(userId, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
-    getEvent_ByUserId,
-    getEdithistory_ByUserId
+    /**
+     * Requires valid user access token
+     */
+    getEvent_ByUserId_v2,
+    /**
+     * Available Type: * email * password * displayname * dateofbirth * country * language
+     */
+    getEdithistory_ByUserId_v2
   }
 }

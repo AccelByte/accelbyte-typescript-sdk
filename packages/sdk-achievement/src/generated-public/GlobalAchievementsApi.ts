@@ -8,22 +8,42 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { PaginatedContributorResponse } from '../generated-definitions/PaginatedContributorResponse.js'
 import { PaginatedGlobalAchievementResponse } from '../generated-definitions/PaginatedGlobalAchievementResponse.js'
 import { PaginatedUserContributionResponse } from '../generated-definitions/PaginatedUserContributionResponse.js'
 import { GlobalAchievements$ } from './endpoints/GlobalAchievements$.js'
 
-export function GlobalAchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function GlobalAchievementsApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt; &lt;p&gt;Note:&lt;/p&gt; &lt;p&gt; Global achievement status value mean: &lt;code&gt;status = 1 (in progress)&lt;/code&gt; and &lt;code&gt;status = 2 (unlocked)&lt;/code&gt;&lt;/p&gt;
-   */
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
+  }
+
   async function getGlobalAchievements(queryParams?: {
     achievementCodes?: string | null
     limit?: number
@@ -31,53 +51,56 @@ export function GlobalAchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     sortBy?: string | null
     status?: string | null
     tags?: string[]
-  }): Promise<PaginatedGlobalAchievementResponse> {
-    const $ = new GlobalAchievements$(Network.create(requestConfig), namespace, useSchemaValidation)
+  }): Promise<AxiosResponse<PaginatedGlobalAchievementResponse>> {
+    const $ = new GlobalAchievements$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getGlobalAchievements(queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
-   */
   async function getGlobalAchievements_ByUserId(
     userId: string,
     queryParams?: { achievementCodes?: string | null; limit?: number; offset?: number; sortBy?: string | null; tags?: string[] }
-  ): Promise<PaginatedUserContributionResponse> {
-    const $ = new GlobalAchievements$(Network.create(requestConfig), namespace, useSchemaValidation)
+  ): Promise<AxiosResponse<PaginatedUserContributionResponse>> {
+    const $ = new GlobalAchievements$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getGlobalAchievements_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
-   */
   async function getContributorsGlobal_ByAchievementCode(
     achievementCode: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null }
-  ): Promise<PaginatedContributorResponse> {
-    const $ = new GlobalAchievements$(Network.create(requestConfig), namespace, useSchemaValidation)
+  ): Promise<AxiosResponse<PaginatedContributorResponse>> {
+    const $ = new GlobalAchievements$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getContributorsGlobal_ByAchievementCode(achievementCode, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt; &lt;p&gt;Note:&lt;/p&gt; &lt;p&gt; Global achievement should be unlocked to claim the reward. Only contributor of global achievement are eligible for rewards
-   */
-  async function createClaimGlobal_ByUserId_ByAchievementCode(userId: string, achievementCode: string): Promise<unknown> {
-    const $ = new GlobalAchievements$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.createClaimGlobal_ByUserId_ByAchievementCode(userId, achievementCode)
+  async function updateClaimGlobal_ByUserId_ByAchievementCode(userId: string, achievementCode: string): Promise<AxiosResponse<unknown>> {
+    const $ = new GlobalAchievements$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.updateClaimGlobal_ByUserId_ByAchievementCode(userId, achievementCode)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt; &lt;p&gt;Note:&lt;/p&gt; &lt;p&gt; Global achievement status value mean: &lt;code&gt;status = 1 (in progress)&lt;/code&gt; and &lt;code&gt;status = 2 (unlocked)&lt;/code&gt;&lt;/p&gt;
+     */
     getGlobalAchievements,
+    /**
+     * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
+     */
     getGlobalAchievements_ByUserId,
+    /**
+     * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
+     */
     getContributorsGlobal_ByAchievementCode,
-    createClaimGlobal_ByUserId_ByAchievementCode
+    /**
+     * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [UPDATE]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt; &lt;p&gt;Note:&lt;/p&gt; &lt;p&gt; Global achievement should be unlocked to claim the reward. Only contributor of global achievement are eligible for rewards
+     */
+    updateClaimGlobal_ByUserId_ByAchievementCode
   }
 }

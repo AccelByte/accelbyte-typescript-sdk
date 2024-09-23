@@ -4,6 +4,7 @@
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
+import { ExtendConfiguration } from './ExtendConfiguration.js'
 import { NativeSessionSetting } from './NativeSessionSetting.js'
 
 export const UpdateConfigurationTemplateRequest = z.object({
@@ -22,6 +23,7 @@ export const UpdateConfigurationTemplateRequest = z.object({
   dsSource: z.string().nullish(),
   enableSecret: z.boolean().nullish(),
   fallbackClaimKeys: z.array(z.string()).nullish(),
+  grpcSessionConfig: ExtendConfiguration.nullish(),
   immutableStorage: z.boolean().nullish(),
   inactiveTimeout: z.number().int(),
   inviteTimeout: z.number().int(),

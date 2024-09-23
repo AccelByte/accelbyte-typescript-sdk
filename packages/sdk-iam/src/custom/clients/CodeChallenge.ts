@@ -3,10 +3,10 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
+import { BrowserHelper } from '@accelbyte/sdk'
 import cryptoJs from 'crypto-js'
 import * as uuid from 'uuid'
 import { z } from 'zod'
-import { BrowserHelper } from '@accelbyte/sdk'
 
 export class CodeChallenge {
   //

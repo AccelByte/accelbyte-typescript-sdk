@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { DlcConfigRewardShortInfo } from '../../generated-definitions/DlcConfigRewardShortInfo.js'
 import { EpicGamesDlcSyncRequest } from '../../generated-definitions/EpicGamesDlcSyncRequest.js'
@@ -19,16 +19,16 @@ import { XblDlcSyncRequest } from '../../generated-definitions/XblDlcSyncRequest
 
 export class Dlc$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Get user dlc reward contents. If includeAllNamespaces is false, will only return the dlc synced from the current namespace&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user dlc&lt;/li&gt;&lt;/ul&gt;
    */
   getUsersMeDlcContent(queryParams: {
     type: 'EPICGAMES' | 'OCULUS' | 'PSN' | 'STEAM' | 'XBOX'
     includeAllNamespaces?: boolean | null
-  }): Promise<IResponse<SimpleUserDlcRewardContentsResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  }): Promise<Response<SimpleUserDlcRewardContentsResponse>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/platform/public/users/me/dlc/content'
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -39,14 +39,13 @@ export class Dlc$ {
       'SimpleUserDlcRewardContentsResponse'
     )
   }
-
   /**
    * Get dlc reward simple map, only return the sku of durable item reward.
    */
   getDlcRewardsDurableMap(queryParams: {
     dlcType: 'EPICGAMES' | 'OCULUS' | 'PSN' | 'STEAM' | 'XBOX'
-  }): Promise<IResponse<DlcConfigRewardShortInfo>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  }): Promise<Response<DlcConfigRewardShortInfo>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/platform/public/namespaces/{namespace}/dlc/rewards/durable/map'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -57,12 +56,11 @@ export class Dlc$ {
       'DlcConfigRewardShortInfo'
     )
   }
-
   /**
    * Synchronize with dlc entitlements in PSN Store.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: result of synchronization&lt;/li&gt;&lt;/ul&gt;
    */
-  updateDlcPsnSync_ByUserId(userId: string, data: PlayStationDlcSyncRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  updateDlcPsnSync_ByUserId(userId: string, data: PlayStationDlcSyncRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/dlc/psn/sync'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -70,12 +68,11 @@ export class Dlc$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Sync Xbox inventory&#39;s dlc items
    */
-  updateDlcXblSync_ByUserId(userId: string, data: XblDlcSyncRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  updateDlcXblSync_ByUserId(userId: string, data: XblDlcSyncRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/dlc/xbl/sync'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -83,12 +80,11 @@ export class Dlc$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Sync steam dlc
    */
-  updateDlcSteamSync_ByUserId(userId: string, data: SteamDlcSyncRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  updateDlcSteamSync_ByUserId(userId: string, data: SteamDlcSyncRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/dlc/steam/sync'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -96,12 +92,11 @@ export class Dlc$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Sync oculus dlc
    */
-  updateDlcOculuSync_ByUserId(userId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  updateDlcOculuSync_ByUserId(userId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/dlc/oculus/sync'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -109,12 +104,11 @@ export class Dlc$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Sync epic games dlc items
    */
-  updateDlcEpicgameSync_ByUserId(userId: string, data: EpicGamesDlcSyncRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  updateDlcEpicgameSync_ByUserId(userId: string, data: EpicGamesDlcSyncRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/dlc/epicgames/sync'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -122,15 +116,14 @@ export class Dlc$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Synchronize with dlc entitlements in PSN Store with multiple service labels.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: result of synchronization&lt;/li&gt;&lt;/ul&gt;
    */
   updateDlcPsnSyncMultiServiceLabel_ByUserId(
     userId: string,
     data: PlayStationDlcSyncMultiServiceLabelsRequest
-  ): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  ): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/dlc/psn/sync/multiServiceLabels'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

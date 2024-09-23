@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { PlayerAttributesRequestBody } from '../../generated-definitions/PlayerAttributesRequestBody.js'
 import { PlayerAttributesResponseBody } from '../../generated-definitions/PlayerAttributesResponseBody.js'
@@ -16,13 +16,13 @@ import { PlayersCurrentPlatformResponse } from '../../generated-definitions/Play
 
 export class Player$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Get bulk players current platform.
    */
-  createUserBulkPlatform(data: PlayersCurrentPlatformRequest): Promise<IResponse<PlayersCurrentPlatformResponse>> {
-    const params = {} as SDKRequestConfig
+  fetchUserBulkPlatform(data: PlayersCurrentPlatformRequest): Promise<Response<PlayersCurrentPlatformResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/session/v1/public/namespaces/{namespace}/users/bulk/platform'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
@@ -33,23 +33,21 @@ export class Player$ {
       'PlayersCurrentPlatformResponse'
     )
   }
-
   /**
    * Reset player attributes.
    */
-  deleteUserMeAttribute(): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteUserMeAttribute(): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/session/v1/public/namespaces/{namespace}/users/me/attributes'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Get player attributes. Field descriptions: - userID : user who owns the attributes. - crossplayEnabled : set to true if the player wants to enable crossplay to their session (default: false). - platforms : list of the player&#39;s 3rd party platform account information. - name : platform name. supported platforms: STEAM, XBOX, PSN - userID : platform userID - data : other data that the player wants to store. - PSN_PUSH_CONTEXT_ID: if provided, session will refer to this when performing session sync with PSN, otherwise will populate from session attributes - currentPlatform : latest user game platform. - roles : user role for matchmaking role base support.
    */
-  getUsersMeAttributes(): Promise<IResponse<PlayerAttributesResponseBody>> {
-    const params = {} as SDKRequestConfig
+  getUsersMeAttributes(): Promise<Response<PlayerAttributesResponseBody>> {
+    const params = {} as AxiosRequestConfig
     const url = '/session/v1/public/namespaces/{namespace}/users/me/attributes'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -60,12 +58,11 @@ export class Player$ {
       'PlayerAttributesResponseBody'
     )
   }
-
   /**
    * This API behaves to upsert player&#39;s attributes. Field descriptions: - userID : user who owns the attributes. - crossplayEnabled : set to true if the player wants to enable crossplay to their session (default: false). - platforms : list of the player&#39;s 3rd party platform account information. - name : platform name. supported platforms: STEAM, XBOX, PSN - userID : platform userID - data : other data that the player wants to store. - PSN_PUSH_CONTEXT_ID: if provided, session will refer to this when performing session sync with PSN, otherwise will populate from session attributes - currentPlatform : latest user game platform. - roles : user role for matchmaking role base support.
    */
-  createUserMeAttribute(data: PlayerAttributesRequestBody): Promise<IResponse<PlayerAttributesResponseBody>> {
-    const params = {} as SDKRequestConfig
+  createUserMeAttribute(data: PlayerAttributesRequestBody): Promise<Response<PlayerAttributesResponseBody>> {
+    const params = {} as AxiosRequestConfig
     const url = '/session/v1/public/namespaces/{namespace}/users/me/attributes'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 

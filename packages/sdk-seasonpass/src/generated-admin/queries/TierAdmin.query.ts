@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { TierAdminApi } from '../TierAdminApi.js'
 
 import { Tier } from '../../generated-definitions/Tier.js'
@@ -24,25 +24,38 @@ import { UserSeasonSummary } from '../../generated-definitions/UserSeasonSummary
 import { UserTierGrant } from '../../generated-definitions/UserTierGrant.js'
 
 export enum Key_TierAdmin {
-  Tiers_BySeasonId = 'TierAdmin.Tiers_BySeasonId',
-  Tier_BySeasonId = 'TierAdmin.Tier_BySeasonId',
-  Tier_BySeasonId_ById = 'TierAdmin.Tier_BySeasonId_ById',
-  SeasonCurrentExp_ByUserId = 'TierAdmin.SeasonCurrentExp_ByUserId',
-  SeasonCurrentTier_ByUserId = 'TierAdmin.SeasonCurrentTier_ByUserId',
-  Reorder_BySeasonId_ById = 'TierAdmin.Reorder_BySeasonId_ById'
+  Tiers_BySeasonId = 'Seasonpass.TierAdmin.Tiers_BySeasonId',
+  Tier_BySeasonId = 'Seasonpass.TierAdmin.Tier_BySeasonId',
+  Tier_BySeasonId_ById = 'Seasonpass.TierAdmin.Tier_BySeasonId_ById',
+  SeasonCurrentExp_ByUserId = 'Seasonpass.TierAdmin.SeasonCurrentExp_ByUserId',
+  SeasonCurrentTier_ByUserId = 'Seasonpass.TierAdmin.SeasonCurrentTier_ByUserId',
+  Reorder_BySeasonId_ById = 'Seasonpass.TierAdmin.Reorder_BySeasonId_ById'
 }
 
-export const useAdmTiers_BySeasonId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { seasonId: string; queryParams?: { limit?: number; offset?: number } },
+/**
+ * This API is used to query paginated tiers for a season.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of passes&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_TierAdmin.Tiers_BySeasonId, input]
+ * }
+ * ```
+ */
+export const useTierAdminApi_GetTiers_BySeasonId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { seasonId: string; queryParams?: { limit?: number; offset?: number } },
   options?: Omit<UseQueryOptions<TierPagingSlicedResult, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: TierPagingSlicedResult) => void
+  callback?: (data: AxiosResponse<TierPagingSlicedResult>) => void
 ): UseQueryResult<TierPagingSlicedResult, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmTiers_BySeasonId>[1]) => async () => {
-    const data = await TierAdminApi(sdk, { namespace: input.namespace }).getTiers_BySeasonId(input.seasonId, input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useTierAdminApi_GetTiers_BySeasonId>[1]) => async () => {
+    const response = await TierAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getTiers_BySeasonId(
+      input.seasonId,
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<TierPagingSlicedResult, AxiosError<ApiError>>({
@@ -52,19 +65,32 @@ export const useAdmTiers_BySeasonId = (
   })
 }
 
-export const useAdmCreateTier_BySeasonIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<TierArray, AxiosError<ApiError>, ApiArgs & { seasonId: string; data: TierCreate }>, 'mutationKey'>,
+/**
+ * This API is used to create tier for a draft season, can create multiple tiers at same time.&lt;p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_TierAdmin.Tier_BySeasonId, input]
+ * }
+ * ```
+ */
+export const useTierAdminApi_CreateTier_BySeasonIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<TierArray, AxiosError<ApiError>, SdkSetConfigParam & { seasonId: string; data: TierCreate }>,
+    'mutationKey'
+  >,
   callback?: (data: TierArray) => void
-): UseMutationResult<TierArray, AxiosError<ApiError>, ApiArgs & { seasonId: string; data: TierCreate }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { seasonId: string; data: TierCreate }) => {
-    const data = await TierAdminApi(sdk, { namespace: input.namespace, config: input.config }).createTier_BySeasonId(
+): UseMutationResult<TierArray, AxiosError<ApiError>, SdkSetConfigParam & { seasonId: string; data: TierCreate }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { seasonId: string; data: TierCreate }) => {
+    const response = await TierAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createTier_BySeasonId(
       input.seasonId,
       input.data
     )
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -74,19 +100,29 @@ export const useAdmCreateTier_BySeasonIdMutation = (
   })
 }
 
-export const useAdmDeleteTier_BySeasonId_ByIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { seasonId: string; id: string }>, 'mutationKey'>,
+/**
+ * This API is used to delete a tier permanently, only draft season pass can be deleted. &lt;p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_TierAdmin.Tier_BySeasonId_ById, input]
+ * }
+ * ```
+ */
+export const useTierAdminApi_DeleteTier_BySeasonId_ByIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { seasonId: string; id: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { seasonId: string; id: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { seasonId: string; id: string }) => {
-    const data = await TierAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteTier_BySeasonId_ById(
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { seasonId: string; id: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { seasonId: string; id: string }) => {
+    const response = await TierAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteTier_BySeasonId_ById(
       input.seasonId,
       input.id
     )
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -96,23 +132,33 @@ export const useAdmDeleteTier_BySeasonId_ByIdMutation = (
   })
 }
 
-export const useAdmUpdateTier_BySeasonId_ByIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * This API is used to update a tier. Only draft season pass can be updated.&lt;p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_TierAdmin.Tier_BySeasonId_ById, input]
+ * }
+ * ```
+ */
+export const useTierAdminApi_UpdateTier_BySeasonId_ByIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<Tier, AxiosError<ApiError>, ApiArgs & { seasonId: string; id: string; data: TierInput }>,
+    UseMutationOptions<Tier, AxiosError<ApiError>, SdkSetConfigParam & { seasonId: string; id: string; data: TierInput }>,
     'mutationKey'
   >,
   callback?: (data: Tier) => void
-): UseMutationResult<Tier, AxiosError<ApiError>, ApiArgs & { seasonId: string; id: string; data: TierInput }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { seasonId: string; id: string; data: TierInput }) => {
-    const data = await TierAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateTier_BySeasonId_ById(
+): UseMutationResult<Tier, AxiosError<ApiError>, SdkSetConfigParam & { seasonId: string; id: string; data: TierInput }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { seasonId: string; id: string; data: TierInput }) => {
+    const response = await TierAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateTier_BySeasonId_ById(
       input.seasonId,
       input.id,
       input.data
     )
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -122,22 +168,32 @@ export const useAdmUpdateTier_BySeasonId_ByIdMutation = (
   })
 }
 
-export const useAdmCreateSeasonCurrentExp_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * This API is used to grant exp to user, it will auto enroll if there&#39;s no user season but active published season exist, season only located in non-publisher namespace, otherwise ignore.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user season data&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_TierAdmin.SeasonCurrentExp_ByUserId, input]
+ * }
+ * ```
+ */
+export const useTierAdminApi_CreateSeasonCurrentExp_ByUserIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<UserSeasonSummary, AxiosError<ApiError>, ApiArgs & { userId: string; data: UserExpGrant }>,
+    UseMutationOptions<UserSeasonSummary, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: UserExpGrant }>,
     'mutationKey'
   >,
   callback?: (data: UserSeasonSummary) => void
-): UseMutationResult<UserSeasonSummary, AxiosError<ApiError>, ApiArgs & { userId: string; data: UserExpGrant }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string; data: UserExpGrant }) => {
-    const data = await TierAdminApi(sdk, { namespace: input.namespace, config: input.config }).createSeasonCurrentExp_ByUserId(
-      input.userId,
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<UserSeasonSummary, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: UserExpGrant }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; data: UserExpGrant }) => {
+    const response = await TierAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).createSeasonCurrentExp_ByUserId(input.userId, input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -147,22 +203,32 @@ export const useAdmCreateSeasonCurrentExp_ByUserIdMutation = (
   })
 }
 
-export const useAdmCreateSeasonCurrentTier_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * This API is used to grant tier to user, it will auto enroll if there&#39;s no user season but active published season exist, season only located in non-publisher namespace, otherwise ignore.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user season data&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_TierAdmin.SeasonCurrentTier_ByUserId, input]
+ * }
+ * ```
+ */
+export const useTierAdminApi_CreateSeasonCurrentTier_ByUserIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<UserSeasonSummary, AxiosError<ApiError>, ApiArgs & { userId: string; data: UserTierGrant }>,
+    UseMutationOptions<UserSeasonSummary, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: UserTierGrant }>,
     'mutationKey'
   >,
   callback?: (data: UserSeasonSummary) => void
-): UseMutationResult<UserSeasonSummary, AxiosError<ApiError>, ApiArgs & { userId: string; data: UserTierGrant }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string; data: UserTierGrant }) => {
-    const data = await TierAdminApi(sdk, { namespace: input.namespace, config: input.config }).createSeasonCurrentTier_ByUserId(
-      input.userId,
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<UserSeasonSummary, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: UserTierGrant }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; data: UserTierGrant }) => {
+    const response = await TierAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).createSeasonCurrentTier_ByUserId(input.userId, input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -172,23 +238,32 @@ export const useAdmCreateSeasonCurrentTier_ByUserIdMutation = (
   })
 }
 
-export const useAdmUpdateReorder_BySeasonId_ByIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * This API is used to reorder a tier. Only draft season pass can be updated.&lt;p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_TierAdmin.Reorder_BySeasonId_ById, input]
+ * }
+ * ```
+ */
+export const useTierAdminApi_UpdateReorder_BySeasonId_ByIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<Tier, AxiosError<ApiError>, ApiArgs & { seasonId: string; id: string; data: TierReorder }>,
+    UseMutationOptions<Tier, AxiosError<ApiError>, SdkSetConfigParam & { seasonId: string; id: string; data: TierReorder }>,
     'mutationKey'
   >,
   callback?: (data: Tier) => void
-): UseMutationResult<Tier, AxiosError<ApiError>, ApiArgs & { seasonId: string; id: string; data: TierReorder }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { seasonId: string; id: string; data: TierReorder }) => {
-    const data = await TierAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateReorder_BySeasonId_ById(
-      input.seasonId,
-      input.id,
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<Tier, AxiosError<ApiError>, SdkSetConfigParam & { seasonId: string; id: string; data: TierReorder }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { seasonId: string; id: string; data: TierReorder }) => {
+    const response = await TierAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateReorder_BySeasonId_ById(input.seasonId, input.id, input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

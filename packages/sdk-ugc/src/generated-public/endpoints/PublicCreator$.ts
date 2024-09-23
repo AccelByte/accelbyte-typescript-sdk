@@ -6,15 +6,15 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { CreatorResponse } from '../../generated-definitions/CreatorResponse.js'
 import { PaginatedCreatorOverviewResponse } from '../../generated-definitions/PaginatedCreatorOverviewResponse.js'
 
 export class PublicCreator$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Public user can access without token or if token specified, requires valid user token
    */
@@ -23,8 +23,8 @@ export class PublicCreator$ {
     offset?: number
     orderby?: string | null
     sortby?: string | null
-  }): Promise<IResponse<PaginatedCreatorOverviewResponse>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  }): Promise<Response<PaginatedCreatorOverviewResponse>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -35,12 +35,11 @@ export class PublicCreator$ {
       'PaginatedCreatorOverviewResponse'
     )
   }
-
   /**
    * Public user can access without token or if token specified, requires valid user token
    */
-  getUser_ByUserId(userId: string): Promise<IResponse<CreatorResponse>> {
-    const params = {} as SDKRequestConfig
+  getUser_ByUserId(userId: string): Promise<Response<CreatorResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}'.replace('{namespace}', this.namespace).replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 

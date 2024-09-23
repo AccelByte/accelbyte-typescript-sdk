@@ -7,34 +7,48 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { DataRetrievalAdminApi } from '../DataRetrievalAdminApi.js'
 
+import { DataRetrievalResponse } from '../../generated-definitions/DataRetrievalResponse.js'
 import { ListPersonalDataResponse } from '../../generated-definitions/ListPersonalDataResponse.js'
+import { UserDataUrl } from '../../generated-definitions/UserDataUrl.js'
 import { UserPersonalDataResponse } from '../../generated-definitions/UserPersonalDataResponse.js'
 
 export enum Key_DataRetrievalAdmin {
-  Requests = 'DataRetrievalAdmin.Requests',
-  Requests_ByUserId = 'DataRetrievalAdmin.Requests_ByUserId',
-  postRequest_ByUserId = 'DataRetrievalAdmin.postRequest_ByUserId',
-  Request_ByUserId_ByRequestDate = 'DataRetrievalAdmin.Request_ByUserId_ByRequestDate',
-  postGenerate_ByUserId_ByRequestDate = 'DataRetrievalAdmin.postGenerate_ByUserId_ByRequestDate'
+  Requests = 'Gdpr.DataRetrievalAdmin.Requests',
+  Requests_ByUserId = 'Gdpr.DataRetrievalAdmin.Requests_ByUserId',
+  Request_ByUserId = 'Gdpr.DataRetrievalAdmin.Request_ByUserId',
+  Request_ByUserId_ByRequestDate = 'Gdpr.DataRetrievalAdmin.Request_ByUserId_ByRequestDate',
+  Generate_ByUserId_ByRequestDate = 'Gdpr.DataRetrievalAdmin.Generate_ByUserId_ByRequestDate'
 }
 
-export const useAdmRequests = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams?: { limit?: number; offset?: number; requestDate?: string | null } },
+/**
+ * Get list personal data requests Scope: account
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_DataRetrievalAdmin.Requests, input]
+ * }
+ * ```
+ */
+export const useDataRetrievalAdminApi_GetRequests = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams?: { limit?: number; offset?: number; requestDate?: string | null } },
   options?: Omit<UseQueryOptions<ListPersonalDataResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: ListPersonalDataResponse) => void
+  callback?: (data: AxiosResponse<ListPersonalDataResponse>) => void
 ): UseQueryResult<ListPersonalDataResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmRequests>[1]) => async () => {
-    const data = await DataRetrievalAdminApi(sdk, { namespace: input.namespace }).getRequests(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useDataRetrievalAdminApi_GetRequests>[1]) => async () => {
+    const response = await DataRetrievalAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getRequests(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<ListPersonalDataResponse, AxiosError<ApiError>>({
@@ -44,17 +58,30 @@ export const useAdmRequests = (
   })
 }
 
-export const useAdmRequests_ByUserId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { userId: string; queryParams?: { limit?: number; offset?: number } },
+/**
+ * Get user&#39;s personal data requests Scope: account
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_DataRetrievalAdmin.Requests_ByUserId, input]
+ * }
+ * ```
+ */
+export const useDataRetrievalAdminApi_GetRequests_ByUserId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { userId: string; queryParams?: { limit?: number; offset?: number } },
   options?: Omit<UseQueryOptions<UserPersonalDataResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: UserPersonalDataResponse) => void
+  callback?: (data: AxiosResponse<UserPersonalDataResponse>) => void
 ): UseQueryResult<UserPersonalDataResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmRequests_ByUserId>[1]) => async () => {
-    const data = await DataRetrievalAdminApi(sdk, { namespace: input.namespace }).getRequests_ByUserId(input.userId, input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useDataRetrievalAdminApi_GetRequests_ByUserId>[1]) => async () => {
+    const response = await DataRetrievalAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getRequests_ByUserId(input.userId, input.queryParams)
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<UserPersonalDataResponse, AxiosError<ApiError>>({
@@ -64,23 +91,122 @@ export const useAdmRequests_ByUserId = (
   })
 }
 
-export const useAdmDeleteRequest_ByUserId_ByRequestDateMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string; requestDate: string }>, 'mutationKey'>,
+/**
+ * Submit user personal data retrieval request. Scope: account ### Request Header: - **Content-Type: application/x-www-form-urlencoded**
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_DataRetrievalAdmin.Request_ByUserId, input]
+ * }
+ * ```
+ */
+export const useDataRetrievalAdminApi_PostRequest_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<
+      DataRetrievalResponse,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { userId: string; data: { password?: string | null } }
+    >,
+    'mutationKey'
+  >,
+  callback?: (data: DataRetrievalResponse) => void
+): UseMutationResult<
+  DataRetrievalResponse,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { userId: string; data: { password?: string | null } }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; data: { password?: string | null } }) => {
+    const response = await DataRetrievalAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).postRequest_ByUserId(input.userId, input.data)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_DataRetrievalAdmin.Request_ByUserId],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Cancel user&#39;s personal data requests Scope: account
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_DataRetrievalAdmin.Request_ByUserId_ByRequestDate, input]
+ * }
+ * ```
+ */
+export const useDataRetrievalAdminApi_DeleteRequest_ByUserId_ByRequestDateMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; requestDate: string }>,
+    'mutationKey'
+  >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string; requestDate: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string; requestDate: string }) => {
-    const data = await DataRetrievalAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; requestDate: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; requestDate: string }) => {
+    const response = await DataRetrievalAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).deleteRequest_ByUserId_ByRequestDate(input.userId, input.requestDate)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
     mutationKey: [Key_DataRetrievalAdmin.Request_ByUserId_ByRequestDate],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Generate personal data download url. Scope: account ### Request Header: - **Content-Type: application/x-www-form-urlencoded**
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_DataRetrievalAdmin.Generate_ByUserId_ByRequestDate, input]
+ * }
+ * ```
+ */
+export const useDataRetrievalAdminApi_PostGenerate_ByUserId_ByRequestDateMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<
+      UserDataUrl,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { userId: string; requestDate: string; data: { password: string | null } }
+    >,
+    'mutationKey'
+  >,
+  callback?: (data: UserDataUrl) => void
+): UseMutationResult<
+  UserDataUrl,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { userId: string; requestDate: string; data: { password: string | null } }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; requestDate: string; data: { password: string | null } }) => {
+    const response = await DataRetrievalAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).postGenerate_ByUserId_ByRequestDate(input.userId, input.requestDate, input.data)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_DataRetrievalAdmin.Generate_ByUserId_ByRequestDate],
     mutationFn,
     ...options
   })

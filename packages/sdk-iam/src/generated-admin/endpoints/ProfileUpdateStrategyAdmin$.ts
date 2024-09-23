@@ -6,23 +6,23 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { GetProfileUpdateStrategyConfigResponse } from '../../generated-definitions/GetProfileUpdateStrategyConfigResponse.js'
 import { SimpleProfileUpdateStrategyConfigs } from '../../generated-definitions/SimpleProfileUpdateStrategyConfigs.js'
 import { UpdateProfileUpdateStrategyConfigRequest } from '../../generated-definitions/UpdateProfileUpdateStrategyConfigRequest.js'
 
 export class ProfileUpdateStrategyAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * This API is for admin to get profile update strategy by namespace and field. Note: If the config is not found, this API will return a config with unlimited.
    */
-  getProfileUpdateStrategies(queryParams?: {
+  getProfileUpdateStrategies_v3(queryParams?: {
     field?: 'country' | 'display_name' | 'dob' | 'username'
-  }): Promise<IResponse<GetProfileUpdateStrategyConfigResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  }): Promise<Response<GetProfileUpdateStrategyConfigResponse>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/profileUpdateStrategies'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -33,15 +33,14 @@ export class ProfileUpdateStrategyAdmin$ {
       'GetProfileUpdateStrategyConfigResponse'
     )
   }
-
   /**
    * This API includes upsert behavior. Note: 1. field &#39;config&#39;&#39; in request body will only work when type is limited
    */
-  updateProfileUpdateStrategy(
+  updateProfileUpdateStrategy_v3(
     data: UpdateProfileUpdateStrategyConfigRequest,
     queryParams: { field: 'country' | 'display_name' | 'dob' | 'username' }
-  ): Promise<IResponse<SimpleProfileUpdateStrategyConfigs>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  ): Promise<Response<SimpleProfileUpdateStrategyConfigs>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/iam/v3/admin/namespaces/{namespace}/profileUpdateStrategies'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 

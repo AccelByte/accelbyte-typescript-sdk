@@ -6,30 +6,29 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { Configuration } from '../../generated-definitions/Configuration.js'
 
 export class ConfigAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Get Log Configuration.&lt;br&gt;
    */
-  getConfigLog(): Promise<IResponse<Configuration>> {
-    const params = {} as SDKRequestConfig
+  getConfigLog(): Promise<Response<Configuration>> {
+    const params = {} as AxiosRequestConfig
     const url = '/match2/v1/admin/config/log'
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Configuration, 'Configuration')
   }
-
   /**
    * Update Log Configuration.&lt;br&gt;
    */
-  patchConfigLog(data: Configuration): Promise<IResponse<Configuration>> {
-    const params = {} as SDKRequestConfig
+  patchConfigLog(data: Configuration): Promise<Response<Configuration>> {
+    const params = {} as AxiosRequestConfig
     const url = '/match2/v1/admin/config/log'
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 

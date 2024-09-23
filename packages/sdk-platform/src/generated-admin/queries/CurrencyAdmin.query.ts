@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { CurrencyAdminApi } from '../CurrencyAdminApi.js'
 
 import { CurrencyConfig } from '../../generated-definitions/CurrencyConfig.js'
@@ -21,24 +21,36 @@ import { CurrencySummary } from '../../generated-definitions/CurrencySummary.js'
 import { CurrencyUpdate } from '../../generated-definitions/CurrencyUpdate.js'
 
 export enum Key_CurrencyAdmin {
-  Currencies = 'CurrencyAdmin.Currencies',
-  Currency = 'CurrencyAdmin.Currency',
-  Currency_ByCurrencyCode = 'CurrencyAdmin.Currency_ByCurrencyCode',
-  Config_ByCurrencyCode = 'CurrencyAdmin.Config_ByCurrencyCode',
-  Summary_ByCurrencyCode = 'CurrencyAdmin.Summary_ByCurrencyCode'
+  Currencies = 'Platform.CurrencyAdmin.Currencies',
+  Currency = 'Platform.CurrencyAdmin.Currency',
+  Currency_ByCurrencyCode = 'Platform.CurrencyAdmin.Currency_ByCurrencyCode',
+  Config_ByCurrencyCode = 'Platform.CurrencyAdmin.Config_ByCurrencyCode',
+  Summary_ByCurrencyCode = 'Platform.CurrencyAdmin.Summary_ByCurrencyCode'
 }
 
-export const useAdmCurrencies = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams?: { currencyType?: 'REAL' | 'VIRTUAL' } },
+/**
+ * List currencies of a namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Currency List&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_CurrencyAdmin.Currencies, input]
+ * }
+ * ```
+ */
+export const useCurrencyAdminApi_GetCurrencies = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams?: { currencyType?: 'REAL' | 'VIRTUAL' } },
   options?: Omit<UseQueryOptions<CurrencyInfoArray, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: CurrencyInfoArray) => void
+  callback?: (data: AxiosResponse<CurrencyInfoArray>) => void
 ): UseQueryResult<CurrencyInfoArray, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmCurrencies>[1]) => async () => {
-    const data = await CurrencyAdminApi(sdk, { namespace: input.namespace }).getCurrencies(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useCurrencyAdminApi_GetCurrencies>[1]) => async () => {
+    const response = await CurrencyAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getCurrencies(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<CurrencyInfoArray, AxiosError<ApiError>>({
@@ -48,16 +60,28 @@ export const useAdmCurrencies = (
   })
 }
 
-export const useAdmCreateCurrencyMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<CurrencyInfo, AxiosError<ApiError>, ApiArgs & { data: CurrencyCreate }>, 'mutationKey'>,
+/**
+ * Create a currency.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created currency&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_CurrencyAdmin.Currency, input]
+ * }
+ * ```
+ */
+export const useCurrencyAdminApi_CreateCurrencyMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<CurrencyInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: CurrencyCreate }>, 'mutationKey'>,
   callback?: (data: CurrencyInfo) => void
-): UseMutationResult<CurrencyInfo, AxiosError<ApiError>, ApiArgs & { data: CurrencyCreate }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: CurrencyCreate }) => {
-    const data = await CurrencyAdminApi(sdk, { namespace: input.namespace, config: input.config }).createCurrency(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<CurrencyInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: CurrencyCreate }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: CurrencyCreate }) => {
+    const response = await CurrencyAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createCurrency(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -67,18 +91,29 @@ export const useAdmCreateCurrencyMutation = (
   })
 }
 
-export const useAdmDeleteCurrency_ByCurrencyCodeMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<CurrencyInfo, AxiosError<ApiError>, ApiArgs & { currencyCode: string }>, 'mutationKey'>,
+/**
+ * Delete a currency by currency code.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_CurrencyAdmin.Currency_ByCurrencyCode, input]
+ * }
+ * ```
+ */
+export const useCurrencyAdminApi_DeleteCurrency_ByCurrencyCodeMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<CurrencyInfo, AxiosError<ApiError>, SdkSetConfigParam & { currencyCode: string }>, 'mutationKey'>,
   callback?: (data: CurrencyInfo) => void
-): UseMutationResult<CurrencyInfo, AxiosError<ApiError>, ApiArgs & { currencyCode: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { currencyCode: string }) => {
-    const data = await CurrencyAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteCurrency_ByCurrencyCode(
-      input.currencyCode
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<CurrencyInfo, AxiosError<ApiError>, SdkSetConfigParam & { currencyCode: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { currencyCode: string }) => {
+    const response = await CurrencyAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteCurrency_ByCurrencyCode(input.currencyCode)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -88,22 +123,32 @@ export const useAdmDeleteCurrency_ByCurrencyCodeMutation = (
   })
 }
 
-export const useAdmUpdateCurrency_ByCurrencyCodeMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Update a currency by currency code.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated currency&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_CurrencyAdmin.Currency_ByCurrencyCode, input]
+ * }
+ * ```
+ */
+export const useCurrencyAdminApi_UpdateCurrency_ByCurrencyCodeMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<CurrencyInfo, AxiosError<ApiError>, ApiArgs & { currencyCode: string; data: CurrencyUpdate }>,
+    UseMutationOptions<CurrencyInfo, AxiosError<ApiError>, SdkSetConfigParam & { currencyCode: string; data: CurrencyUpdate }>,
     'mutationKey'
   >,
   callback?: (data: CurrencyInfo) => void
-): UseMutationResult<CurrencyInfo, AxiosError<ApiError>, ApiArgs & { currencyCode: string; data: CurrencyUpdate }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { currencyCode: string; data: CurrencyUpdate }) => {
-    const data = await CurrencyAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateCurrency_ByCurrencyCode(
-      input.currencyCode,
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<CurrencyInfo, AxiosError<ApiError>, SdkSetConfigParam & { currencyCode: string; data: CurrencyUpdate }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { currencyCode: string; data: CurrencyUpdate }) => {
+    const response = await CurrencyAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateCurrency_ByCurrencyCode(input.currencyCode, input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -113,17 +158,29 @@ export const useAdmUpdateCurrency_ByCurrencyCodeMutation = (
   })
 }
 
-export const useAdmConfig_ByCurrencyCode = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { currencyCode: string },
+/**
+ * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; Get currency config by code.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: simplified Currency&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_CurrencyAdmin.Config_ByCurrencyCode, input]
+ * }
+ * ```
+ */
+export const useCurrencyAdminApi_GetConfig_ByCurrencyCode = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { currencyCode: string },
   options?: Omit<UseQueryOptions<CurrencyConfig, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: CurrencyConfig) => void
+  callback?: (data: AxiosResponse<CurrencyConfig>) => void
 ): UseQueryResult<CurrencyConfig, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmConfig_ByCurrencyCode>[1]) => async () => {
-    const data = await CurrencyAdminApi(sdk, { namespace: input.namespace }).getConfig_ByCurrencyCode(input.currencyCode)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useCurrencyAdminApi_GetConfig_ByCurrencyCode>[1]) => async () => {
+    const response = await CurrencyAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getConfig_ByCurrencyCode(
+      input.currencyCode
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<CurrencyConfig, AxiosError<ApiError>>({
@@ -133,17 +190,30 @@ export const useAdmConfig_ByCurrencyCode = (
   })
 }
 
-export const useAdmSummary_ByCurrencyCode = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { currencyCode: string },
+/**
+ * Get currency summary by code.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: simplified Currency&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_CurrencyAdmin.Summary_ByCurrencyCode, input]
+ * }
+ * ```
+ */
+export const useCurrencyAdminApi_GetSummary_ByCurrencyCode = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { currencyCode: string },
   options?: Omit<UseQueryOptions<CurrencySummary, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: CurrencySummary) => void
+  callback?: (data: AxiosResponse<CurrencySummary>) => void
 ): UseQueryResult<CurrencySummary, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmSummary_ByCurrencyCode>[1]) => async () => {
-    const data = await CurrencyAdminApi(sdk, { namespace: input.namespace }).getSummary_ByCurrencyCode(input.currencyCode)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useCurrencyAdminApi_GetSummary_ByCurrencyCode>[1]) => async () => {
+    const response = await CurrencyAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getSummary_ByCurrencyCode(input.currencyCode)
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<CurrencySummary, AxiosError<ApiError>>({

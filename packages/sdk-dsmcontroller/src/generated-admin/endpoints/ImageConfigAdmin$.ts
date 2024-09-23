@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { CreateImagePatchRequest } from '../../generated-definitions/CreateImagePatchRequest.js'
 import { CreateImageRequest } from '../../generated-definitions/CreateImageRequest.js'
@@ -22,63 +22,58 @@ import { RepositoryRecord } from '../../generated-definitions/RepositoryRecord.j
 
 export class ImageConfigAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * ``` Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [CREATE] Required scope: social This endpoint will create image. Sample image: { &#34;namespace&#34;:&#34;dewa&#34;, &#34;version&#34;:&#34;1.0.0&#34;, &#34;image&#34;:&#34;144436415367.dkr.ecr.us-west-2.amazonaws.com/dewa:1.0.0&#34;, &#34;persistent&#34;:false } ```
    */
-  createImage(data: CreateImageRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  createImage(data: CreateImageRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/images'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * ``` Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [UPDATE] Required scope: social This endpoint will update an image name and/or image persistent flag. Sample image: { &#34;namespace&#34;:&#34;dewa&#34;, &#34;version&#34;:&#34;1.0.0&#34;, &#34;image&#34;:&#34;144436415367.dkr.ecr.us-west-2.amazonaws.com/dewa:1.0.0&#34;, &#34;persistent&#34;:false } ```
    */
-  updateImage(data: ImageRecordUpdate): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  updateImage(data: ImageRecordUpdate): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/images'
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * ``` Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [CREATE] Required scope: social This endpoint will create image repository. Sample repository: { &#34;namespace&#34;:&#34;testing&#34;, &#34;repository&#34;:&#34;ds-testing-924623&#34;, } ```
    */
-  createRepository(data: CreateRepositoryRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  createRepository(data: CreateRepositoryRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/repository'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * ``` Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [CREATE] Required scope: social This endpoint will create image patch. Sample image: { &#34;namespace&#34;:&#34;dewa&#34;, &#34;version&#34;:&#34;1.0.0&#34;, &#34;patchVersion&#34;:&#34;1.0.0-patch&#34;, &#34;image&#34;:&#34;144436415367.dkr.ecr.us-west-2.amazonaws.com/dewa:1.0.0-patch&#34;, &#34;persistent&#34;:false } ```
    */
-  createImagePatche(data: CreateImagePatchRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  createImagePatche(data: CreateImagePatchRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/images/patches'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [UPDATE] Required scope: social. This endpoint will delete an image that specified in the request parameter. Default image is cannot be deleted and will throw error 422 (Unprocessable entity).
    */
-  deleteImage(queryParams: { imageURI: string | null; version: string | null }): Promise<IResponse<unknown>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  deleteImage(queryParams: { imageURI: string | null; version: string | null }): Promise<Response<unknown>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/images'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint lists all of dedicated servers images. Parameter Offset and Count is Required
    */
@@ -88,36 +83,33 @@ export class ImageConfigAdmin$ {
     q?: string | null
     sortBy?: 'createdAt' | 'updatedAt' | 'version'
     sortDirection?: 'asc' | 'desc'
-  }): Promise<IResponse<ListImageResponse>> {
-    const params = { sortBy: 'createdAt', sortDirection: 'asc', ...queryParams } as SDKRequestConfig
+  }): Promise<Response<ListImageResponse>> {
+    const params = { sortBy: 'createdAt', sortDirection: 'asc', ...queryParams } as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/images'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ListImageResponse, 'ListImageResponse')
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get a dedicated servers repository name in a namespace.
    */
-  getRepository(): Promise<IResponse<RepositoryRecord>> {
-    const params = {} as SDKRequestConfig
+  getRepository(): Promise<Response<RepositoryRecord>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/repository'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RepositoryRecord, 'RepositoryRecord')
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get ds image limit for specific namespace
    */
-  getImagesLimit(): Promise<IResponse<GetImageLimitResponse>> {
-    const params = {} as SDKRequestConfig
+  getImagesLimit(): Promise<Response<GetImageLimitResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/images/limit'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GetImageLimitResponse, 'GetImageLimitResponse')
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [UPDATE] Required scope: social This endpoint will delete an image patch that specified in the request parameter
    */
@@ -125,19 +117,18 @@ export class ImageConfigAdmin$ {
     imageURI: string | null
     version: string | null
     versionPatch: string | null
-  }): Promise<IResponse<unknown>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  }): Promise<Response<unknown>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/images/patches'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get specific version of dedicated servers images.
    */
-  getImageVersion_ByVersion(version: string): Promise<IResponse<GetImageDetailResponse>> {
-    const params = {} as SDKRequestConfig
+  getImageVersion_ByVersion(version: string): Promise<Response<GetImageDetailResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/images/versions/{version}'
       .replace('{namespace}', this.namespace)
       .replace('{version}', version)
@@ -150,12 +141,11 @@ export class ImageConfigAdmin$ {
       'GetImageDetailResponse'
     )
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get image patches by version. Image Size unit is byte.
    */
-  getPatchesImages_ByVersion(version: string): Promise<IResponse<ListImagePatchesResponse>> {
-    const params = {} as SDKRequestConfig
+  getPatchesImages_ByVersion(version: string): Promise<Response<ListImagePatchesResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/images/versions/{version}/patches'
       .replace('{namespace}', this.namespace)
       .replace('{version}', version)
@@ -168,12 +158,11 @@ export class ImageConfigAdmin$ {
       'ListImagePatchesResponse'
     )
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get specific image patch version of dedicated servers version.
    */
-  getPatcheImage_ByVersion_ByVersionPatch(version: string, versionPatch: string): Promise<IResponse<GetImagePatchDetailResponse>> {
-    const params = {} as SDKRequestConfig
+  getPatcheImage_ByVersion_ByVersionPatch(version: string, versionPatch: string): Promise<Response<GetImagePatchDetailResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/images/versions/{version}/patches/{versionPatch}'
       .replace('{namespace}', this.namespace)
       .replace('{version}', version)

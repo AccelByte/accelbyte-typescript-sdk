@@ -6,19 +6,19 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { CurrencyInfoArray } from '../../generated-definitions/CurrencyInfoArray.js'
 
 export class Currency$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * List currencies of a namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Currency List&lt;/li&gt;&lt;/ul&gt;
    */
-  getCurrencies(queryParams?: { currencyType?: 'REAL' | 'VIRTUAL' }): Promise<IResponse<CurrencyInfoArray>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  getCurrencies(queryParams?: { currencyType?: 'REAL' | 'VIRTUAL' }): Promise<Response<CurrencyInfoArray>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/platform/public/namespaces/{namespace}/currencies'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 

@@ -23,7 +23,8 @@ export const StatInfo = z.object({
   statCode: z.string(),
   status: z.enum(['INIT', 'TIED']),
   tags: z.array(z.string()).nullish(),
-  updatedAt: z.string()
+  updatedAt: z.string(),
+  visibility: z.enum(['SERVERONLY', 'SHOWALL']).nullish()
 })
 
 export interface StatInfo extends z.TypeOf<typeof StatInfo> {}

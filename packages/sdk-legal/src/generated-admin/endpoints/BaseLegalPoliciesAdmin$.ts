@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { CreateBasePolicyRequest } from '../../generated-definitions/CreateBasePolicyRequest.js'
 import { CreateBasePolicyResponse } from '../../generated-definitions/CreateBasePolicyResponse.js'
 import { RetrieveBasePolicyResponse } from '../../generated-definitions/RetrieveBasePolicyResponse.js'
@@ -19,13 +19,13 @@ import { UpdateBasePolicyResponse } from '../../generated-definitions/UpdateBase
 
 export class BaseLegalPoliciesAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Retrieve all supported policy types.
    */
-  getPolicyTypes(queryParams: { offset?: number; limit: number }): Promise<IResponse<RetrievePolicyTypeResponseArray>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  getPolicyTypes(queryParams: { limit: number; offset?: number }): Promise<Response<RetrievePolicyTypeResponseArray>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/agreement/admin/policy-types'
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -36,12 +36,11 @@ export class BaseLegalPoliciesAdmin$ {
       'RetrievePolicyTypeResponseArray'
     )
   }
-
   /**
    * Retrieve all base policies.
    */
-  getBasePolicies(queryParams?: { visibleOnly?: boolean | null }): Promise<IResponse<RetrieveBasePolicyResponseArray>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  getBasePolicies(queryParams?: { visibleOnly?: boolean | null }): Promise<Response<RetrieveBasePolicyResponseArray>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/agreement/admin/base-policies'
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -52,12 +51,11 @@ export class BaseLegalPoliciesAdmin$ {
       'RetrieveBasePolicyResponseArray'
     )
   }
-
   /**
    * Create a legal policy.
    */
-  createBasePolicy(data: CreateBasePolicyRequest): Promise<IResponse<CreateBasePolicyResponse>> {
-    const params = {} as SDKRequestConfig
+  createBasePolicy(data: CreateBasePolicyRequest): Promise<Response<CreateBasePolicyResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/agreement/admin/base-policies'
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
@@ -68,12 +66,11 @@ export class BaseLegalPoliciesAdmin$ {
       'CreateBasePolicyResponse'
     )
   }
-
   /**
    * Retrieve a base policy.
    */
-  getBasePolicy_ByBasePolicyId(basePolicyId: string): Promise<IResponse<RetrieveBasePolicyResponse>> {
-    const params = {} as SDKRequestConfig
+  getBasePolicy_ByBasePolicyId(basePolicyId: string): Promise<Response<RetrieveBasePolicyResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/agreement/admin/base-policies/{basePolicyId}'.replace('{basePolicyId}', basePolicyId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -84,12 +81,11 @@ export class BaseLegalPoliciesAdmin$ {
       'RetrieveBasePolicyResponse'
     )
   }
-
   /**
    * Update an existing base policy.
    */
-  patchBasePolicy_ByBasePolicyId(basePolicyId: string, data: UpdateBasePolicyRequest): Promise<IResponse<UpdateBasePolicyResponse>> {
-    const params = {} as SDKRequestConfig
+  patchBasePolicy_ByBasePolicyId(basePolicyId: string, data: UpdateBasePolicyRequest): Promise<Response<UpdateBasePolicyResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/agreement/admin/base-policies/{basePolicyId}'.replace('{basePolicyId}', basePolicyId)
     const resultPromise = this.axiosInstance.patch(url, data, { params })
 
@@ -100,12 +96,11 @@ export class BaseLegalPoliciesAdmin$ {
       'UpdateBasePolicyResponse'
     )
   }
-
   /**
    * Retrieve a Base Legal Policy based on a Particular Country.
    */
-  getCountry_ByBasePolicyId_ByCountryCode(basePolicyId: string, countryCode: string): Promise<IResponse<RetrievePolicyResponse>> {
-    const params = {} as SDKRequestConfig
+  getCountry_ByBasePolicyId_ByCountryCode(basePolicyId: string, countryCode: string): Promise<Response<RetrievePolicyResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/agreement/admin/base-policies/{basePolicyId}/countries/{countryCode}'
       .replace('{basePolicyId}', basePolicyId)
       .replace('{countryCode}', countryCode)

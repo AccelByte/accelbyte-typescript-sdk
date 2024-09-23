@@ -6,19 +6,19 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { PlatformAccountClosureHistoryInfoArray } from '../../generated-definitions/PlatformAccountClosureHistoryInfoArray.js'
 
 export class PlatformAccountClosureAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Get user platform account closure history.&lt;br&gt;
    */
-  getPlatformClosureHistory_ByUserId(userId: string): Promise<IResponse<PlatformAccountClosureHistoryInfoArray>> {
-    const params = {} as SDKRequestConfig
+  getPlatformClosureHistory_ByUserId(userId: string): Promise<Response<PlatformAccountClosureHistoryInfoArray>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/platform/closure/history'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

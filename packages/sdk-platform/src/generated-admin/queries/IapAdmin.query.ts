@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { IapAdminApi } from '../IapAdminApi.js'
 
 import { AppleIapConfigInfo } from '../../generated-definitions/AppleIapConfigInfo.js'
@@ -38,36 +38,47 @@ import { XblIapConfigInfo } from '../../generated-definitions/XblIapConfigInfo.j
 import { XblIapConfigRequest } from '../../generated-definitions/XblIapConfigRequest.js'
 
 export enum Key_IapAdmin {
-  IapConfigXbl = 'IapAdmin.IapConfigXbl',
-  IapConfigItem = 'IapAdmin.IapConfigItem',
-  IapConfigApple = 'IapAdmin.IapConfigApple',
-  IapConfigSteam = 'IapAdmin.IapConfigSteam',
-  IapConfigGoogle = 'IapAdmin.IapConfigGoogle',
-  IapConfigOculu = 'IapAdmin.IapConfigOculu',
-  IapConfigOculus = 'IapAdmin.IapConfigOculus',
-  IapConfigTwitch = 'IapAdmin.IapConfigTwitch',
-  Iap_ByUserId = 'IapAdmin.Iap_ByUserId',
-  IapConfigXblCert = 'IapAdmin.IapConfigXblCert',
-  IapConfigEpicgame = 'IapAdmin.IapConfigEpicgame',
-  IapConfigEpicgames = 'IapAdmin.IapConfigEpicgames',
-  IapConfigGoogleCert = 'IapAdmin.IapConfigGoogleCert',
-  IapConfigPlaystation = 'IapAdmin.IapConfigPlaystation',
-  IapAll_ByUserId = 'IapAdmin.IapAll_ByUserId',
-  IapConfigPlaystationValidate = 'IapAdmin.IapConfigPlaystationValidate',
-  IapMockReceipt_ByUserId = 'IapAdmin.IapMockReceipt_ByUserId',
-  IapConsumeHistory_ByUserId = 'IapAdmin.IapConsumeHistory_ByUserId'
+  IapConfigXbl = 'Platform.IapAdmin.IapConfigXbl',
+  IapConfigItem = 'Platform.IapAdmin.IapConfigItem',
+  IapConfigApple = 'Platform.IapAdmin.IapConfigApple',
+  IapConfigSteam = 'Platform.IapAdmin.IapConfigSteam',
+  IapConfigGoogle = 'Platform.IapAdmin.IapConfigGoogle',
+  IapConfigOculu = 'Platform.IapAdmin.IapConfigOculu',
+  IapConfigOculus = 'Platform.IapAdmin.IapConfigOculus',
+  IapConfigTwitch = 'Platform.IapAdmin.IapConfigTwitch',
+  Iap_ByUserId = 'Platform.IapAdmin.Iap_ByUserId',
+  IapConfigXblCert = 'Platform.IapAdmin.IapConfigXblCert',
+  IapConfigEpicgame = 'Platform.IapAdmin.IapConfigEpicgame',
+  IapConfigEpicgames = 'Platform.IapAdmin.IapConfigEpicgames',
+  IapConfigAppleCert = 'Platform.IapAdmin.IapConfigAppleCert',
+  IapConfigGoogleCert = 'Platform.IapAdmin.IapConfigGoogleCert',
+  IapConfigPlaystation = 'Platform.IapAdmin.IapConfigPlaystation',
+  IapAll_ByUserId = 'Platform.IapAdmin.IapAll_ByUserId',
+  IapConfigPlaystationValidate = 'Platform.IapAdmin.IapConfigPlaystationValidate',
+  IapMockReceipt_ByUserId = 'Platform.IapAdmin.IapMockReceipt_ByUserId',
+  IapConsumeHistory_ByUserId = 'Platform.IapAdmin.IapConsumeHistory_ByUserId'
 }
 
-export const useAdmDeleteIapConfigXblMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs>, 'mutationKey'>,
+/**
+ * Delete xbl iap config.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigXbl, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_DeleteIapConfigXblMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs> => {
-  //
-  const mutationFn = async (input: ApiArgs) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteIapConfigXbl()
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam> => {
+  const mutationFn = async (input: SdkSetConfigParam) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteIapConfigXbl()
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -77,17 +88,27 @@ export const useAdmDeleteIapConfigXblMutation = (
   })
 }
 
-export const useAdmIapConfigXbl = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Get xbox iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: xbox iap config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigXbl, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_GetIapConfigXbl = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<XblIapConfigInfo, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: XblIapConfigInfo) => void
+  callback?: (data: AxiosResponse<XblIapConfigInfo>) => void
 ): UseQueryResult<XblIapConfigInfo, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmIapConfigXbl>[1]) => async () => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace }).getIapConfigXbl()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useIapAdminApi_GetIapConfigXbl>[1]) => async () => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getIapConfigXbl()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<XblIapConfigInfo, AxiosError<ApiError>>({
@@ -97,16 +118,29 @@ export const useAdmIapConfigXbl = (
   })
 }
 
-export const useAdmUpdateIapConfigXblMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<XblIapConfigInfo, AxiosError<ApiError>, ApiArgs & { data: XblIapConfigRequest }>, 'mutationKey'>,
+/**
+ * Update xbl iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated xbl iap config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigXbl, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_UpdateIapConfigXblMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<XblIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: XblIapConfigRequest }>,
+    'mutationKey'
+  >,
   callback?: (data: XblIapConfigInfo) => void
-): UseMutationResult<XblIapConfigInfo, AxiosError<ApiError>, ApiArgs & { data: XblIapConfigRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: XblIapConfigRequest }) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateIapConfigXbl(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<XblIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: XblIapConfigRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: XblIapConfigRequest }) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateIapConfigXbl(input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -116,16 +150,26 @@ export const useAdmUpdateIapConfigXblMutation = (
   })
 }
 
-export const useAdmDeleteIapConfigItemMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs>, 'mutationKey'>,
+/**
+ * delete a iap item config.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigItem, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_DeleteIapConfigItemMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs> => {
-  //
-  const mutationFn = async (input: ApiArgs) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteIapConfigItem()
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam> => {
+  const mutationFn = async (input: SdkSetConfigParam) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteIapConfigItem()
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -135,17 +179,27 @@ export const useAdmDeleteIapConfigItemMutation = (
   })
 }
 
-export const useAdmIapConfigItem = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Get iap item config.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigItem, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_GetIapConfigItem = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<IapItemConfigInfo, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: IapItemConfigInfo) => void
+  callback?: (data: AxiosResponse<IapItemConfigInfo>) => void
 ): UseQueryResult<IapItemConfigInfo, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmIapConfigItem>[1]) => async () => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace }).getIapConfigItem()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useIapAdminApi_GetIapConfigItem>[1]) => async () => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getIapConfigItem()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<IapItemConfigInfo, AxiosError<ApiError>>({
@@ -155,16 +209,31 @@ export const useAdmIapConfigItem = (
   })
 }
 
-export const useAdmUpdateIapConfigItemMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<IapItemConfigInfo, AxiosError<ApiError>, ApiArgs & { data: IapItemConfigUpdate }>, 'mutationKey'>,
+/**
+ * Update iap item config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated iap item config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigItem, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_UpdateIapConfigItemMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<IapItemConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: IapItemConfigUpdate }>,
+    'mutationKey'
+  >,
   callback?: (data: IapItemConfigInfo) => void
-): UseMutationResult<IapItemConfigInfo, AxiosError<ApiError>, ApiArgs & { data: IapItemConfigUpdate }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: IapItemConfigUpdate }) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateIapConfigItem(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<IapItemConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: IapItemConfigUpdate }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: IapItemConfigUpdate }) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateIapConfigItem(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -174,16 +243,26 @@ export const useAdmUpdateIapConfigItemMutation = (
   })
 }
 
-export const useAdmDeleteIapConfigAppleMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs>, 'mutationKey'>,
+/**
+ * Delete apple iap config.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigApple, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_DeleteIapConfigAppleMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs> => {
-  //
-  const mutationFn = async (input: ApiArgs) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteIapConfigApple()
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam> => {
+  const mutationFn = async (input: SdkSetConfigParam) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteIapConfigApple()
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -193,17 +272,27 @@ export const useAdmDeleteIapConfigAppleMutation = (
   })
 }
 
-export const useAdmIapConfigApple = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Get apple iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: apple iap config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigApple, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_GetIapConfigApple = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<AppleIapConfigInfo, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: AppleIapConfigInfo) => void
+  callback?: (data: AxiosResponse<AppleIapConfigInfo>) => void
 ): UseQueryResult<AppleIapConfigInfo, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmIapConfigApple>[1]) => async () => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace }).getIapConfigApple()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useIapAdminApi_GetIapConfigApple>[1]) => async () => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getIapConfigApple()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<AppleIapConfigInfo, AxiosError<ApiError>>({
@@ -213,16 +302,31 @@ export const useAdmIapConfigApple = (
   })
 }
 
-export const useAdmUpdateIapConfigAppleMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<AppleIapConfigInfo, AxiosError<ApiError>, ApiArgs & { data: AppleIapConfigRequest }>, 'mutationKey'>,
+/**
+ * Update apple iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated apple iap config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigApple, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_UpdateIapConfigAppleMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<AppleIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: AppleIapConfigRequest }>,
+    'mutationKey'
+  >,
   callback?: (data: AppleIapConfigInfo) => void
-): UseMutationResult<AppleIapConfigInfo, AxiosError<ApiError>, ApiArgs & { data: AppleIapConfigRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: AppleIapConfigRequest }) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateIapConfigApple(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<AppleIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: AppleIapConfigRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: AppleIapConfigRequest }) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateIapConfigApple(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -232,16 +336,26 @@ export const useAdmUpdateIapConfigAppleMutation = (
   })
 }
 
-export const useAdmDeleteIapConfigSteamMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs>, 'mutationKey'>,
+/**
+ * Delete steam iap config.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigSteam, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_DeleteIapConfigSteamMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs> => {
-  //
-  const mutationFn = async (input: ApiArgs) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteIapConfigSteam()
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam> => {
+  const mutationFn = async (input: SdkSetConfigParam) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteIapConfigSteam()
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -251,17 +365,27 @@ export const useAdmDeleteIapConfigSteamMutation = (
   })
 }
 
-export const useAdmIapConfigSteam = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Get steam iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: steam iap config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigSteam, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_GetIapConfigSteam = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<SteamIapConfig, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: SteamIapConfig) => void
+  callback?: (data: AxiosResponse<SteamIapConfig>) => void
 ): UseQueryResult<SteamIapConfig, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmIapConfigSteam>[1]) => async () => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace }).getIapConfigSteam()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useIapAdminApi_GetIapConfigSteam>[1]) => async () => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getIapConfigSteam()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<SteamIapConfig, AxiosError<ApiError>>({
@@ -271,16 +395,31 @@ export const useAdmIapConfigSteam = (
   })
 }
 
-export const useAdmUpdateIapConfigSteamMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<SteamIapConfigInfo, AxiosError<ApiError>, ApiArgs & { data: SteamIapConfigRequest }>, 'mutationKey'>,
+/**
+ * Update steam iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated steam iap config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigSteam, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_UpdateIapConfigSteamMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<SteamIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: SteamIapConfigRequest }>,
+    'mutationKey'
+  >,
   callback?: (data: SteamIapConfigInfo) => void
-): UseMutationResult<SteamIapConfigInfo, AxiosError<ApiError>, ApiArgs & { data: SteamIapConfigRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: SteamIapConfigRequest }) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateIapConfigSteam(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<SteamIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: SteamIapConfigRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: SteamIapConfigRequest }) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateIapConfigSteam(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -290,16 +429,26 @@ export const useAdmUpdateIapConfigSteamMutation = (
   })
 }
 
-export const useAdmDeleteIapConfigGoogleMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs>, 'mutationKey'>,
+/**
+ * Delete google iap config.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigGoogle, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_DeleteIapConfigGoogleMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs> => {
-  //
-  const mutationFn = async (input: ApiArgs) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteIapConfigGoogle()
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam> => {
+  const mutationFn = async (input: SdkSetConfigParam) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteIapConfigGoogle()
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -309,17 +458,27 @@ export const useAdmDeleteIapConfigGoogleMutation = (
   })
 }
 
-export const useAdmIapConfigGoogle = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Get google iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: google iap config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigGoogle, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_GetIapConfigGoogle = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<GoogleIapConfigInfo, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: GoogleIapConfigInfo) => void
+  callback?: (data: AxiosResponse<GoogleIapConfigInfo>) => void
 ): UseQueryResult<GoogleIapConfigInfo, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmIapConfigGoogle>[1]) => async () => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace }).getIapConfigGoogle()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useIapAdminApi_GetIapConfigGoogle>[1]) => async () => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getIapConfigGoogle()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<GoogleIapConfigInfo, AxiosError<ApiError>>({
@@ -329,16 +488,31 @@ export const useAdmIapConfigGoogle = (
   })
 }
 
-export const useAdmUpdateIapConfigGoogleMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<GoogleIapConfigInfo, AxiosError<ApiError>, ApiArgs & { data: GoogleIapConfigRequest }>, 'mutationKey'>,
+/**
+ * Update google iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated google iap config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigGoogle, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_UpdateIapConfigGoogleMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<GoogleIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: GoogleIapConfigRequest }>,
+    'mutationKey'
+  >,
   callback?: (data: GoogleIapConfigInfo) => void
-): UseMutationResult<GoogleIapConfigInfo, AxiosError<ApiError>, ApiArgs & { data: GoogleIapConfigRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: GoogleIapConfigRequest }) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateIapConfigGoogle(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<GoogleIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: GoogleIapConfigRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: GoogleIapConfigRequest }) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateIapConfigGoogle(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -348,16 +522,26 @@ export const useAdmUpdateIapConfigGoogleMutation = (
   })
 }
 
-export const useAdmDeleteIapConfigOculuMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs>, 'mutationKey'>,
+/**
+ * Delete oculus iap config.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigOculu, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_DeleteIapConfigOculuMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs> => {
-  //
-  const mutationFn = async (input: ApiArgs) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteIapConfigOculu()
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam> => {
+  const mutationFn = async (input: SdkSetConfigParam) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteIapConfigOculu()
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -367,17 +551,27 @@ export const useAdmDeleteIapConfigOculuMutation = (
   })
 }
 
-export const useAdmIapConfigOculus = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Get oculus iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: steam iap config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigOculus, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_GetIapConfigOculus = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<OculusIapConfigInfo, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: OculusIapConfigInfo) => void
+  callback?: (data: AxiosResponse<OculusIapConfigInfo>) => void
 ): UseQueryResult<OculusIapConfigInfo, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmIapConfigOculus>[1]) => async () => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace }).getIapConfigOculus()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useIapAdminApi_GetIapConfigOculus>[1]) => async () => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getIapConfigOculus()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<OculusIapConfigInfo, AxiosError<ApiError>>({
@@ -387,16 +581,31 @@ export const useAdmIapConfigOculus = (
   })
 }
 
-export const useAdmUpdateIapConfigOculuMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<OculusIapConfigInfo, AxiosError<ApiError>, ApiArgs & { data: OculusIapConfigRequest }>, 'mutationKey'>,
+/**
+ * Update oculus iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated steam iap config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigOculu, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_UpdateIapConfigOculuMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<OculusIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: OculusIapConfigRequest }>,
+    'mutationKey'
+  >,
   callback?: (data: OculusIapConfigInfo) => void
-): UseMutationResult<OculusIapConfigInfo, AxiosError<ApiError>, ApiArgs & { data: OculusIapConfigRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: OculusIapConfigRequest }) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateIapConfigOculu(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<OculusIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: OculusIapConfigRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: OculusIapConfigRequest }) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateIapConfigOculu(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -406,16 +615,26 @@ export const useAdmUpdateIapConfigOculuMutation = (
   })
 }
 
-export const useAdmDeleteIapConfigTwitchMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs>, 'mutationKey'>,
+/**
+ * Delete twitch iap config.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigTwitch, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_DeleteIapConfigTwitchMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs> => {
-  //
-  const mutationFn = async (input: ApiArgs) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteIapConfigTwitch()
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam> => {
+  const mutationFn = async (input: SdkSetConfigParam) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteIapConfigTwitch()
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -425,17 +644,27 @@ export const useAdmDeleteIapConfigTwitchMutation = (
   })
 }
 
-export const useAdmIapConfigTwitch = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Get twitch iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: twitch iap config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigTwitch, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_GetIapConfigTwitch = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<TwitchIapConfigInfo, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: TwitchIapConfigInfo) => void
+  callback?: (data: AxiosResponse<TwitchIapConfigInfo>) => void
 ): UseQueryResult<TwitchIapConfigInfo, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmIapConfigTwitch>[1]) => async () => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace }).getIapConfigTwitch()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useIapAdminApi_GetIapConfigTwitch>[1]) => async () => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getIapConfigTwitch()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<TwitchIapConfigInfo, AxiosError<ApiError>>({
@@ -445,16 +674,31 @@ export const useAdmIapConfigTwitch = (
   })
 }
 
-export const useAdmUpdateIapConfigTwitchMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<TwitchIapConfigInfo, AxiosError<ApiError>, ApiArgs & { data: TwitchIapConfigRequest }>, 'mutationKey'>,
+/**
+ * Update twitch iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated twitch iap config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigTwitch, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_UpdateIapConfigTwitchMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<TwitchIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: TwitchIapConfigRequest }>,
+    'mutationKey'
+  >,
   callback?: (data: TwitchIapConfigInfo) => void
-): UseMutationResult<TwitchIapConfigInfo, AxiosError<ApiError>, ApiArgs & { data: TwitchIapConfigRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: TwitchIapConfigRequest }) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateIapConfigTwitch(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<TwitchIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: TwitchIapConfigRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: TwitchIapConfigRequest }) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateIapConfigTwitch(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -464,9 +708,20 @@ export const useAdmUpdateIapConfigTwitchMutation = (
   })
 }
 
-export const useAdmIap_ByUserId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * Query IAP orders.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated iap orders&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.Iap_ByUserId, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_GetIap_ByUserId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     userId: string
     queryParams?: {
       endTime?: string | null
@@ -479,13 +734,15 @@ export const useAdmIap_ByUserId = (
     }
   },
   options?: Omit<UseQueryOptions<IapOrderPagingSlicedResult, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: IapOrderPagingSlicedResult) => void
+  callback?: (data: AxiosResponse<IapOrderPagingSlicedResult>) => void
 ): UseQueryResult<IapOrderPagingSlicedResult, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmIap_ByUserId>[1]) => async () => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace }).getIap_ByUserId(input.userId, input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useIapAdminApi_GetIap_ByUserId>[1]) => async () => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getIap_ByUserId(
+      input.userId,
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<IapOrderPagingSlicedResult, AxiosError<ApiError>>({
@@ -495,19 +752,31 @@ export const useAdmIap_ByUserId = (
   })
 }
 
-export const useAdmUpdateIapConfigXblCertMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Upload xbl business partner cert file.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated xbl iap config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigXblCert, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_UpdateIapConfigXblCertMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<XblIapConfigInfo, AxiosError<ApiError>, ApiArgs & { data: { file?: File; password?: string | null } }>,
+    UseMutationOptions<XblIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: { file?: File; password?: string | null } }>,
     'mutationKey'
   >,
   callback?: (data: XblIapConfigInfo) => void
-): UseMutationResult<XblIapConfigInfo, AxiosError<ApiError>, ApiArgs & { data: { file?: File; password?: string | null } }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: { file?: File; password?: string | null } }) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateIapConfigXblCert(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<XblIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: { file?: File; password?: string | null } }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: { file?: File; password?: string | null } }) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateIapConfigXblCert(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -517,16 +786,26 @@ export const useAdmUpdateIapConfigXblCertMutation = (
   })
 }
 
-export const useAdmDeleteIapConfigEpicgameMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs>, 'mutationKey'>,
+/**
+ * Delete epic games iap config.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigEpicgame, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_DeleteIapConfigEpicgameMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs> => {
-  //
-  const mutationFn = async (input: ApiArgs) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteIapConfigEpicgame()
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam> => {
+  const mutationFn = async (input: SdkSetConfigParam) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteIapConfigEpicgame()
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -536,17 +815,27 @@ export const useAdmDeleteIapConfigEpicgameMutation = (
   })
 }
 
-export const useAdmIapConfigEpicgames = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Get epic games iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: epic games iap config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigEpicgames, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_GetIapConfigEpicgames = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<EpicGamesIapConfigInfo, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: EpicGamesIapConfigInfo) => void
+  callback?: (data: AxiosResponse<EpicGamesIapConfigInfo>) => void
 ): UseQueryResult<EpicGamesIapConfigInfo, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmIapConfigEpicgames>[1]) => async () => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace }).getIapConfigEpicgames()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useIapAdminApi_GetIapConfigEpicgames>[1]) => async () => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getIapConfigEpicgames()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<EpicGamesIapConfigInfo, AxiosError<ApiError>>({
@@ -556,19 +845,31 @@ export const useAdmIapConfigEpicgames = (
   })
 }
 
-export const useAdmUpdateIapConfigEpicgameMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Update epic games iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated epic games iap config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigEpicgame, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_UpdateIapConfigEpicgameMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<EpicGamesIapConfigInfo, AxiosError<ApiError>, ApiArgs & { data: EpicGamesIapConfigRequest }>,
+    UseMutationOptions<EpicGamesIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: EpicGamesIapConfigRequest }>,
     'mutationKey'
   >,
   callback?: (data: EpicGamesIapConfigInfo) => void
-): UseMutationResult<EpicGamesIapConfigInfo, AxiosError<ApiError>, ApiArgs & { data: EpicGamesIapConfigRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: EpicGamesIapConfigRequest }) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateIapConfigEpicgame(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<EpicGamesIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: EpicGamesIapConfigRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: EpicGamesIapConfigRequest }) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateIapConfigEpicgame(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -578,16 +879,65 @@ export const useAdmUpdateIapConfigEpicgameMutation = (
   })
 }
 
-export const useAdmUpdateIapConfigGoogleCertMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<GoogleIapConfigInfo, AxiosError<ApiError>, ApiArgs & { data: { file?: File } }>, 'mutationKey'>,
+/**
+ * Upload Apple Store p8 file.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated apple iap config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigAppleCert, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_UpdateIapConfigAppleCertMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<AppleIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: { file?: File } }>,
+    'mutationKey'
+  >,
+  callback?: (data: AppleIapConfigInfo) => void
+): UseMutationResult<AppleIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: { file?: File } }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: { file?: File } }) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateIapConfigAppleCert(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_IapAdmin.IapConfigAppleCert],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Upload google play p12 file.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated google iap config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigGoogleCert, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_UpdateIapConfigGoogleCertMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<GoogleIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: { file?: File } }>,
+    'mutationKey'
+  >,
   callback?: (data: GoogleIapConfigInfo) => void
-): UseMutationResult<GoogleIapConfigInfo, AxiosError<ApiError>, ApiArgs & { data: { file?: File } }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: { file?: File } }) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateIapConfigGoogleCert(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<GoogleIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: { file?: File } }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: { file?: File } }) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateIapConfigGoogleCert(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -597,16 +947,26 @@ export const useAdmUpdateIapConfigGoogleCertMutation = (
   })
 }
 
-export const useAdmDeleteIapConfigPlaystationMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs>, 'mutationKey'>,
+/**
+ * Delete playstation iap config.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigPlaystation, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_DeleteIapConfigPlaystationMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs> => {
-  //
-  const mutationFn = async (input: ApiArgs) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteIapConfigPlaystation()
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam> => {
+  const mutationFn = async (input: SdkSetConfigParam) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteIapConfigPlaystation()
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -616,17 +976,27 @@ export const useAdmDeleteIapConfigPlaystationMutation = (
   })
 }
 
-export const useAdmIapConfigPlaystation = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Get playstation iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: playstation iap config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigPlaystation, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_GetIapConfigPlaystation = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<PlayStationIapConfigInfo, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: PlayStationIapConfigInfo) => void
+  callback?: (data: AxiosResponse<PlayStationIapConfigInfo>) => void
 ): UseQueryResult<PlayStationIapConfigInfo, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmIapConfigPlaystation>[1]) => async () => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace }).getIapConfigPlaystation()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useIapAdminApi_GetIapConfigPlaystation>[1]) => async () => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getIapConfigPlaystation()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<PlayStationIapConfigInfo, AxiosError<ApiError>>({
@@ -636,19 +1006,31 @@ export const useAdmIapConfigPlaystation = (
   })
 }
 
-export const useAdmUpdateIapConfigPlaystationMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Update playstation iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated playstation iap config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigPlaystation, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_UpdateIapConfigPlaystationMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<PlayStationIapConfigInfo, AxiosError<ApiError>, ApiArgs & { data: PlaystationIapConfigRequest }>,
+    UseMutationOptions<PlayStationIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: PlaystationIapConfigRequest }>,
     'mutationKey'
   >,
   callback?: (data: PlayStationIapConfigInfo) => void
-): UseMutationResult<PlayStationIapConfigInfo, AxiosError<ApiError>, ApiArgs & { data: PlaystationIapConfigRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: PlaystationIapConfigRequest }) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateIapConfigPlaystation(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<PlayStationIapConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: PlaystationIapConfigRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: PlaystationIapConfigRequest }) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateIapConfigPlaystation(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -658,17 +1040,29 @@ export const useAdmUpdateIapConfigPlaystationMutation = (
   })
 }
 
-export const useAdmIapAll_ByUserId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { userId: string },
+/**
+ * Query all user IAP orders.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of iap orders&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapAll_ByUserId, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_GetIapAll_ByUserId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { userId: string },
   options?: Omit<UseQueryOptions<IapOrderPagingSlicedResult, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: IapOrderPagingSlicedResult) => void
+  callback?: (data: AxiosResponse<IapOrderPagingSlicedResult>) => void
 ): UseQueryResult<IapOrderPagingSlicedResult, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmIapAll_ByUserId>[1]) => async () => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace }).getIapAll_ByUserId(input.userId)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useIapAdminApi_GetIapAll_ByUserId>[1]) => async () => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getIapAll_ByUserId(
+      input.userId
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<IapOrderPagingSlicedResult, AxiosError<ApiError>>({
@@ -678,17 +1072,30 @@ export const useAdmIapAll_ByUserId = (
   })
 }
 
-export const useAdmIapConfigPlaystationValidate = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Validate playstation iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Test Results&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigPlaystationValidate, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_GetIapConfigPlaystationValidate = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<TestResult, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: TestResult) => void
+  callback?: (data: AxiosResponse<TestResult>) => void
 ): UseQueryResult<TestResult, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmIapConfigPlaystationValidate>[1]) => async () => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace }).getIapConfigPlaystationValidate()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useIapAdminApi_GetIapConfigPlaystationValidate>[1]) => async () => {
+    const response = await IapAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getIapConfigPlaystationValidate()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<TestResult, AxiosError<ApiError>>({
@@ -698,16 +1105,32 @@ export const useAdmIapConfigPlaystationValidate = (
   })
 }
 
-export const useAdmUpdateIapConfigPlaystationValidateMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<TestResult, AxiosError<ApiError>, ApiArgs & { data: PlaystationIapConfigRequest }>, 'mutationKey'>,
+/**
+ * Validate playstation iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Test Results&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConfigPlaystationValidate, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_UpdateIapConfigPlaystationValidateMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<TestResult, AxiosError<ApiError>, SdkSetConfigParam & { data: PlaystationIapConfigRequest }>,
+    'mutationKey'
+  >,
   callback?: (data: TestResult) => void
-): UseMutationResult<TestResult, AxiosError<ApiError>, ApiArgs & { data: PlaystationIapConfigRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: PlaystationIapConfigRequest }) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateIapConfigPlaystationValidate(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<TestResult, AxiosError<ApiError>, SdkSetConfigParam & { data: PlaystationIapConfigRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: PlaystationIapConfigRequest }) => {
+    const response = await IapAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateIapConfigPlaystationValidate(input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -717,19 +1140,32 @@ export const useAdmUpdateIapConfigPlaystationValidateMutation = (
   })
 }
 
-export const useAdmUpdateIapMockReceipt_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string; data: MockIapReceipt }>, 'mutationKey'>,
+/**
+ * &lt;b&gt;[TEST FACILITY ONLY] Forbidden in live environment. &lt;/b&gt; Mock fulfill iap item without validate receipt.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapMockReceipt_ByUserId, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_UpdateIapMockReceipt_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: MockIapReceipt }>,
+    'mutationKey'
+  >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string; data: MockIapReceipt }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string; data: MockIapReceipt }) => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateIapMockReceipt_ByUserId(
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: MockIapReceipt }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; data: MockIapReceipt }) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateIapMockReceipt_ByUserId(
       input.userId,
       input.data
     )
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -739,9 +1175,20 @@ export const useAdmUpdateIapMockReceipt_ByUserIdMutation = (
   })
 }
 
-export const useAdmIapConsumeHistory_ByUserId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * Query IAP consume history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated iap consume history&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapConsumeHistory_ByUserId, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_GetIapConsumeHistory_ByUserId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     userId: string
     queryParams?: {
       endTime?: string | null
@@ -753,13 +1200,15 @@ export const useAdmIapConsumeHistory_ByUserId = (
     }
   },
   options?: Omit<UseQueryOptions<IapConsumeHistoryPagingSlicedResult, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: IapConsumeHistoryPagingSlicedResult) => void
+  callback?: (data: AxiosResponse<IapConsumeHistoryPagingSlicedResult>) => void
 ): UseQueryResult<IapConsumeHistoryPagingSlicedResult, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmIapConsumeHistory_ByUserId>[1]) => async () => {
-    const data = await IapAdminApi(sdk, { namespace: input.namespace }).getIapConsumeHistory_ByUserId(input.userId, input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useIapAdminApi_GetIapConsumeHistory_ByUserId>[1]) => async () => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getIapConsumeHistory_ByUserId(
+      input.userId,
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<IapConsumeHistoryPagingSlicedResult, AxiosError<ApiError>>({

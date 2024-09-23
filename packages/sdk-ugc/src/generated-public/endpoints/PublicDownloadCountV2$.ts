@@ -6,23 +6,23 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { AddDownloadCountResponse } from '../../generated-definitions/AddDownloadCountResponse.js'
 import { PaginatedContentDownloaderResponse } from '../../generated-definitions/PaginatedContentDownloaderResponse.js'
 
 export class PublicDownloadCountV2$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * This endpoint will only display the list of users who performed add download count from v2 endpoint.
    */
-  getDownloader_ByContentId(
+  getDownloader_ByContentId_v2(
     contentId: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null; userId?: string | null }
-  ): Promise<IResponse<PaginatedContentDownloaderResponse>> {
-    const params = { limit: 20, sortBy: '*createdTime:desc*', ...queryParams } as SDKRequestConfig
+  ): Promise<Response<PaginatedContentDownloaderResponse>> {
+    const params = { limit: 20, sortBy: '*createdTime:desc*', ...queryParams } as AxiosRequestConfig
     const url = '/ugc/v2/public/namespaces/{namespace}/contents/{contentId}/downloader'
       .replace('{namespace}', this.namespace)
       .replace('{contentId}', contentId)
@@ -35,12 +35,11 @@ export class PublicDownloadCountV2$ {
       'PaginatedContentDownloaderResponse'
     )
   }
-
   /**
    * This endpoint can be used to count how many the ugc downloaded
    */
-  createDownloadcount_ByContentId(contentId: string): Promise<IResponse<AddDownloadCountResponse>> {
-    const params = {} as SDKRequestConfig
+  createDownloadcount_ByContentId_v2(contentId: string): Promise<Response<AddDownloadCountResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/ugc/v2/public/namespaces/{namespace}/contents/{contentId}/downloadcount'
       .replace('{namespace}', this.namespace)
       .replace('{contentId}', contentId)

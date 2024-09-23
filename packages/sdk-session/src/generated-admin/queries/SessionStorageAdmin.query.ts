@@ -7,29 +7,40 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { SessionStorageAdminApi } from '../SessionStorageAdminApi.js'
 
 export enum Key_SessionStorageAdmin {
-  Storage_BySessionId = 'SessionStorageAdmin.Storage_BySessionId',
-  StorageUser_BySessionId_ByUserId = 'SessionStorageAdmin.StorageUser_BySessionId_ByUserId'
+  Storage_BySessionId = 'Session.SessionStorageAdmin.Storage_BySessionId',
+  StorageUser_BySessionId_ByUserId = 'Session.SessionStorageAdmin.StorageUser_BySessionId_ByUserId'
 }
 
-export const useAdmDeleteStorage_BySessionIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { sessionId: string }>, 'mutationKey'>,
+/**
+ *  Delete Session Storage By sessionID Session Storage feature only available for Gamesession
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_SessionStorageAdmin.Storage_BySessionId, input]
+ * }
+ * ```
+ */
+export const useSessionStorageAdminApi_DeleteStorage_BySessionIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { sessionId: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { sessionId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { sessionId: string }) => {
-    const data = await SessionStorageAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteStorage_BySessionId(
-      input.sessionId
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { sessionId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { sessionId: string }) => {
+    const response = await SessionStorageAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteStorage_BySessionId(input.sessionId)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -39,17 +50,30 @@ export const useAdmDeleteStorage_BySessionIdMutation = (
   })
 }
 
-export const useAdmStorage_BySessionId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { sessionId: string },
+/**
+ *  Read Session Storage by sessionID Session Storage feature only available for Gamesession
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_SessionStorageAdmin.Storage_BySessionId, input]
+ * }
+ * ```
+ */
+export const useSessionStorageAdminApi_GetStorage_BySessionId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { sessionId: string },
   options?: Omit<UseQueryOptions<unknown, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: unknown) => void
+  callback?: (data: AxiosResponse<unknown>) => void
 ): UseQueryResult<unknown, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmStorage_BySessionId>[1]) => async () => {
-    const data = await SessionStorageAdminApi(sdk, { namespace: input.namespace }).getStorage_BySessionId(input.sessionId)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useSessionStorageAdminApi_GetStorage_BySessionId>[1]) => async () => {
+    const response = await SessionStorageAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getStorage_BySessionId(input.sessionId)
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<unknown, AxiosError<ApiError>>({
@@ -59,21 +83,32 @@ export const useAdmStorage_BySessionId = (
   })
 }
 
-export const useAdmStorageUser_BySessionId_ByUserId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { sessionId: string; userId: string },
+/**
+ *  Read Session Storage by sessionID and userID Session Storage feature only available for Gamesession
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_SessionStorageAdmin.StorageUser_BySessionId_ByUserId, input]
+ * }
+ * ```
+ */
+export const useSessionStorageAdminApi_GetStorageUser_BySessionId_ByUserId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { sessionId: string; userId: string },
   options?: Omit<UseQueryOptions<unknown, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: unknown) => void
+  callback?: (data: AxiosResponse<unknown>) => void
 ): UseQueryResult<unknown, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmStorageUser_BySessionId_ByUserId>[1]) => async () => {
-    const data = await SessionStorageAdminApi(sdk, { namespace: input.namespace }).getStorageUser_BySessionId_ByUserId(
-      input.sessionId,
-      input.userId
-    )
-    callback && callback(data)
-    return data
-  }
+  const queryFn =
+    (sdk: AccelByteSDK, input: Parameters<typeof useSessionStorageAdminApi_GetStorageUser_BySessionId_ByUserId>[1]) => async () => {
+      const response = await SessionStorageAdminApi(sdk, {
+        coreConfig: input.coreConfig,
+        axiosConfig: input.axiosConfig
+      }).getStorageUser_BySessionId_ByUserId(input.sessionId, input.userId)
+      callback && callback(response)
+      return response.data
+    }
 
   return useQuery<unknown, AxiosError<ApiError>>({
     queryKey: [Key_SessionStorageAdmin.StorageUser_BySessionId_ByUserId, input],

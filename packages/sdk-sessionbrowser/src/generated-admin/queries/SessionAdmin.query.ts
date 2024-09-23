@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { SessionAdminApi } from '../SessionAdminApi.js'
 
 import { ActiveCustomGameResponse } from '../../generated-definitions/ActiveCustomGameResponse.js'
@@ -22,18 +22,29 @@ import { GetSessionHistorySearchResponseV2 } from '../../generated-definitions/G
 import { SessionQueryResponse } from '../../generated-definitions/SessionQueryResponse.js'
 
 export enum Key_SessionAdmin {
-  Gamesession = 'SessionAdmin.Gamesession',
-  Gamesession_BySessionId = 'SessionAdmin.Gamesession_BySessionId',
-  SessionsHistorySearch = 'SessionAdmin.SessionsHistorySearch',
-  GamesessionActiveCount = 'SessionAdmin.GamesessionActiveCount',
-  GamesessionActiveCustomGame = 'SessionAdmin.GamesessionActiveCustomGame',
-  GamesessionActiveMatchmakingGame = 'SessionAdmin.GamesessionActiveMatchmakingGame',
-  HistoryDetailed_ByMatchId = 'SessionAdmin.HistoryDetailed_ByMatchId'
+  Gamesession = 'Sessionbrowser.SessionAdmin.Gamesession',
+  Gamesession_BySessionId = 'Sessionbrowser.SessionAdmin.Gamesession_BySessionId',
+  SessionsHistorySearch = 'Sessionbrowser.SessionAdmin.SessionsHistorySearch',
+  GamesessionActiveCount = 'Sessionbrowser.SessionAdmin.GamesessionActiveCount',
+  GamesessionActiveCustomGame = 'Sessionbrowser.SessionAdmin.GamesessionActiveCustomGame',
+  GamesessionActiveMatchmakingGame = 'Sessionbrowser.SessionAdmin.GamesessionActiveMatchmakingGame',
+  HistoryDetailed_ByMatchId = 'Sessionbrowser.SessionAdmin.HistoryDetailed_ByMatchId'
 }
 
-export const useAdmGamesession = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * Query to available game session
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_SessionAdmin.Gamesession, input]
+ * }
+ * ```
+ */
+export const useSessionAdminApi_GetGamesession = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     queryParams: {
       session_type: string | null
       game_mode?: string | null
@@ -48,13 +59,14 @@ export const useAdmGamesession = (
     }
   },
   options?: Omit<UseQueryOptions<SessionQueryResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: SessionQueryResponse) => void
+  callback?: (data: AxiosResponse<SessionQueryResponse>) => void
 ): UseQueryResult<SessionQueryResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmGamesession>[1]) => async () => {
-    const data = await SessionAdminApi(sdk, { namespace: input.namespace }).getGamesession(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useSessionAdminApi_GetGamesession>[1]) => async () => {
+    const response = await SessionAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getGamesession(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<SessionQueryResponse, AxiosError<ApiError>>({
@@ -64,18 +76,29 @@ export const useAdmGamesession = (
   })
 }
 
-export const useAdmDeleteGamesession_BySessionIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<AdminSessionResponse, AxiosError<ApiError>, ApiArgs & { sessionID: string }>, 'mutationKey'>,
+/**
+ * Admin delete the session by session ID
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_SessionAdmin.Gamesession_BySessionId, input]
+ * }
+ * ```
+ */
+export const useSessionAdminApi_DeleteGamesession_BySessionIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<AdminSessionResponse, AxiosError<ApiError>, SdkSetConfigParam & { sessionID: string }>, 'mutationKey'>,
   callback?: (data: AdminSessionResponse) => void
-): UseMutationResult<AdminSessionResponse, AxiosError<ApiError>, ApiArgs & { sessionID: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { sessionID: string }) => {
-    const data = await SessionAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteGamesession_BySessionId(
-      input.sessionID
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<AdminSessionResponse, AxiosError<ApiError>, SdkSetConfigParam & { sessionID: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { sessionID: string }) => {
+    const response = await SessionAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteGamesession_BySessionId(input.sessionID)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -85,17 +108,30 @@ export const useAdmDeleteGamesession_BySessionIdMutation = (
   })
 }
 
-export const useAdmGamesession_BySessionId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { sessionID: string },
+/**
+ * Get the session by session ID for admin user
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_SessionAdmin.Gamesession_BySessionId, input]
+ * }
+ * ```
+ */
+export const useSessionAdminApi_GetGamesession_BySessionId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { sessionID: string },
   options?: Omit<UseQueryOptions<AdminSessionResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: AdminSessionResponse) => void
+  callback?: (data: AxiosResponse<AdminSessionResponse>) => void
 ): UseQueryResult<AdminSessionResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmGamesession_BySessionId>[1]) => async () => {
-    const data = await SessionAdminApi(sdk, { namespace: input.namespace }).getGamesession_BySessionId(input.sessionID)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useSessionAdminApi_GetGamesession_BySessionId>[1]) => async () => {
+    const response = await SessionAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getGamesession_BySessionId(input.sessionID)
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<AdminSessionResponse, AxiosError<ApiError>>({
@@ -105,9 +141,20 @@ export const useAdmGamesession_BySessionId = (
   })
 }
 
-export const useAdmSessionsHistorySearch = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * Search sessions. Optimize the query by differentiating query with filter namespace only and filter with namespace &amp; other filter (partyID, userID, matchID). Query with filter namespace only will not group whole session data while query with filter namespace &amp; other filter will include session data.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_SessionAdmin.SessionsHistorySearch, input]
+ * }
+ * ```
+ */
+export const useSessionAdminApi_GetSessionsHistorySearch = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     queryParams: {
       limit: number
       offset: number
@@ -121,13 +168,14 @@ export const useAdmSessionsHistorySearch = (
     }
   },
   options?: Omit<UseQueryOptions<GetSessionHistorySearchResponseV2, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: GetSessionHistorySearchResponseV2) => void
+  callback?: (data: AxiosResponse<GetSessionHistorySearchResponseV2>) => void
 ): UseQueryResult<GetSessionHistorySearchResponseV2, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmSessionsHistorySearch>[1]) => async () => {
-    const data = await SessionAdminApi(sdk, { namespace: input.namespace }).getSessionsHistorySearch(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useSessionAdminApi_GetSessionsHistorySearch>[1]) => async () => {
+    const response = await SessionAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getSessionsHistorySearch(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<GetSessionHistorySearchResponseV2, AxiosError<ApiError>>({
@@ -137,17 +185,29 @@ export const useAdmSessionsHistorySearch = (
   })
 }
 
-export const useAdmGamesessionActiveCount = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams?: { session_type?: string | null } },
+/**
+ * Get all active session
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_SessionAdmin.GamesessionActiveCount, input]
+ * }
+ * ```
+ */
+export const useSessionAdminApi_GetGamesessionActiveCount = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams?: { session_type?: string | null } },
   options?: Omit<UseQueryOptions<CountActiveSessionResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: CountActiveSessionResponse) => void
+  callback?: (data: AxiosResponse<CountActiveSessionResponse>) => void
 ): UseQueryResult<CountActiveSessionResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmGamesessionActiveCount>[1]) => async () => {
-    const data = await SessionAdminApi(sdk, { namespace: input.namespace }).getGamesessionActiveCount(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useSessionAdminApi_GetGamesessionActiveCount>[1]) => async () => {
+    const response = await SessionAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getGamesessionActiveCount(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<CountActiveSessionResponse, AxiosError<ApiError>>({
@@ -157,17 +217,32 @@ export const useAdmGamesessionActiveCount = (
   })
 }
 
-export const useAdmGamesessionActiveCustomGame = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams?: { limit?: number; offset?: number; server_region?: string | null; session_id?: string | null } },
+/**
+ * Get all active session for custom game, this return only dedicated session type
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_SessionAdmin.GamesessionActiveCustomGame, input]
+ * }
+ * ```
+ */
+export const useSessionAdminApi_GetGamesessionActiveCustomGame = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
+    queryParams?: { limit?: number; offset?: number; server_region?: string | null; session_id?: string | null }
+  },
   options?: Omit<UseQueryOptions<ActiveCustomGameResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: ActiveCustomGameResponse) => void
+  callback?: (data: AxiosResponse<ActiveCustomGameResponse>) => void
 ): UseQueryResult<ActiveCustomGameResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmGamesessionActiveCustomGame>[1]) => async () => {
-    const data = await SessionAdminApi(sdk, { namespace: input.namespace }).getGamesessionActiveCustomGame(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useSessionAdminApi_GetGamesessionActiveCustomGame>[1]) => async () => {
+    const response = await SessionAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getGamesessionActiveCustomGame(input.queryParams)
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<ActiveCustomGameResponse, AxiosError<ApiError>>({
@@ -177,19 +252,32 @@ export const useAdmGamesessionActiveCustomGame = (
   })
 }
 
-export const useAdmGamesessionActiveMatchmakingGame = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * Get all active session for matchmaking game, this return only dedicated session type
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_SessionAdmin.GamesessionActiveMatchmakingGame, input]
+ * }
+ * ```
+ */
+export const useSessionAdminApi_GetGamesessionActiveMatchmakingGame = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     queryParams?: { limit?: number; match_id?: string | null; offset?: number; server_region?: string | null; session_id?: string | null }
   },
   options?: Omit<UseQueryOptions<ActiveMatchmakingGameResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: ActiveMatchmakingGameResponse) => void
+  callback?: (data: AxiosResponse<ActiveMatchmakingGameResponse>) => void
 ): UseQueryResult<ActiveMatchmakingGameResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmGamesessionActiveMatchmakingGame>[1]) => async () => {
-    const data = await SessionAdminApi(sdk, { namespace: input.namespace }).getGamesessionActiveMatchmakingGame(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useSessionAdminApi_GetGamesessionActiveMatchmakingGame>[1]) => async () => {
+    const response = await SessionAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getGamesessionActiveMatchmakingGame(input.queryParams)
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<ActiveMatchmakingGameResponse, AxiosError<ApiError>>({
@@ -199,17 +287,30 @@ export const useAdmGamesessionActiveMatchmakingGame = (
   })
 }
 
-export const useAdmHistoryDetailed_ByMatchId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { matchID: string },
+/**
+ * Get session history detailed. if party_id value empty/null, field will not show in response body.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_SessionAdmin.HistoryDetailed_ByMatchId, input]
+ * }
+ * ```
+ */
+export const useSessionAdminApi_GetHistoryDetailed_ByMatchId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { matchID: string },
   options?: Omit<UseQueryOptions<GetSessionHistoryDetailedResponseItemArray, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: GetSessionHistoryDetailedResponseItemArray) => void
+  callback?: (data: AxiosResponse<GetSessionHistoryDetailedResponseItemArray>) => void
 ): UseQueryResult<GetSessionHistoryDetailedResponseItemArray, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmHistoryDetailed_ByMatchId>[1]) => async () => {
-    const data = await SessionAdminApi(sdk, { namespace: input.namespace }).getHistoryDetailed_ByMatchId(input.matchID)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useSessionAdminApi_GetHistoryDetailed_ByMatchId>[1]) => async () => {
+    const response = await SessionAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getHistoryDetailed_ByMatchId(input.matchID)
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<GetSessionHistoryDetailedResponseItemArray, AxiosError<ApiError>>({

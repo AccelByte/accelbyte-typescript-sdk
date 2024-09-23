@@ -6,22 +6,22 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { RetrieveDiffCacheResponse } from '../../generated-definitions/RetrieveDiffCacheResponse.js'
 
 export class Caching$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * This API is used to retrieve detailed diff cache.&lt;br/&gt;The response will contains list of diff cache files along with its download url.
    */
   getDestCacheDiff_BySourceBuildId_ByDestinationBuildId(
     sourceBuildId: string,
     destinationBuildId: string
-  ): Promise<IResponse<RetrieveDiffCacheResponse>> {
-    const params = {} as SDKRequestConfig
+  ): Promise<Response<RetrieveDiffCacheResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/buildinfo/public/namespaces/{namespace}/diff/cache/source/{sourceBuildId}/dest/{destinationBuildId}'
       .replace('{namespace}', this.namespace)
       .replace('{sourceBuildId}', sourceBuildId)

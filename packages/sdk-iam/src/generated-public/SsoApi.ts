@@ -8,36 +8,59 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 import { Sso$ } from './endpoints/Sso$.js'
 
-export function SsoApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function SsoApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  async function getSso_ByPlatformId(platformId: string, queryParams?: { payload?: string | null }): Promise<unknown> {
-    const $ = new Sso$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getSso_ByPlatformId(platformId, queryParams)
-    if (resp.error) throw resp.error
-    return resp.response.data
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
   }
 
-  /**
-   * Logout user&#39;s session on platform that logged in using SSO. Supported platforms: - discourse
-   */
-  async function createLogout_ByPlatformId(platformId: string): Promise<unknown> {
-    const $ = new Sso$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.createLogout_ByPlatformId(platformId)
+  async function getSso_ByPlatformId_v3(platformId: string, queryParams?: { payload?: string | null }): Promise<AxiosResponse<unknown>> {
+    const $ = new Sso$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getSso_ByPlatformId_v3(platformId, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
+  }
+
+  async function createLogout_ByPlatformId_v3(platformId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new Sso$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.createLogout_ByPlatformId_v3(platformId)
+    if (resp.error) throw resp.error
+    return resp.response
   }
 
   return {
-    getSso_ByPlatformId,
-    createLogout_ByPlatformId
+    getSso_ByPlatformId_v3,
+    /**
+     * Logout user&#39;s session on platform that logged in using SSO. Supported platforms: - discourse
+     */
+    createLogout_ByPlatformId_v3
   }
 }

@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { Attribute } from '../../generated-definitions/Attribute.js'
 import { GameProfileHeaderArray } from '../../generated-definitions/GameProfileHeaderArray.js'
@@ -17,24 +17,23 @@ import { UserGameProfilesArray } from '../../generated-definitions/UserGameProfi
 
 export class GameProfile$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Returns all profiles for specified users.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of profiles&lt;/ul&gt;
    */
-  getProfiles(queryParams: { userIds: string[] }): Promise<IResponse<UserGameProfilesArray>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  getProfiles(queryParams: { userIds: string[] }): Promise<Response<UserGameProfilesArray>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/social/public/namespaces/{namespace}/profiles'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserGameProfilesArray, 'UserGameProfilesArray')
   }
-
   /**
    * Returns all profiles&#39; header for a user.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of profiles&lt;/li&gt;&lt;/ul&gt;
    */
-  getProfiles_ByUserId(userId: string): Promise<IResponse<GameProfileHeaderArray>> {
-    const params = {} as SDKRequestConfig
+  getProfiles_ByUserId(userId: string): Promise<Response<GameProfileHeaderArray>> {
+    const params = {} as AxiosRequestConfig
     const url = '/social/public/namespaces/{namespace}/users/{userId}/profiles'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -47,12 +46,11 @@ export class GameProfile$ {
       'GameProfileHeaderArray'
     )
   }
-
   /**
    * Create new profile for user.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/li&gt;: created game profile&lt;/li&gt;&lt;/ul&gt;
    */
-  createProfile_ByUserId(userId: string, data: GameProfileRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  createProfile_ByUserId(userId: string, data: GameProfileRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/social/public/namespaces/{namespace}/users/{userId}/profiles'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -60,12 +58,11 @@ export class GameProfile$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Deletes game profile.&lt;br&gt;
    */
-  deleteProfile_ByUserId_ByProfileId(userId: string, profileId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteProfile_ByUserId_ByProfileId(userId: string, profileId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/social/public/namespaces/{namespace}/users/{userId}/profiles/{profileId}'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -74,12 +71,11 @@ export class GameProfile$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Returns profile for a user.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: game profile info&lt;/li&gt;&lt;/ul&gt;
    */
-  getProfile_ByUserId_ByProfileId(userId: string, profileId: string): Promise<IResponse<GameProfileInfo>> {
-    const params = {} as SDKRequestConfig
+  getProfile_ByUserId_ByProfileId(userId: string, profileId: string): Promise<Response<GameProfileInfo>> {
+    const params = {} as AxiosRequestConfig
     const url = '/social/public/namespaces/{namespace}/users/{userId}/profiles/{profileId}'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -88,12 +84,11 @@ export class GameProfile$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GameProfileInfo, 'GameProfileInfo')
   }
-
   /**
    * Updates user game profile, returns updated profile.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated game profile&lt;/li&gt;&lt;/ul&gt;
    */
-  updateProfile_ByUserId_ByProfileId(userId: string, profileId: string, data: GameProfileRequest): Promise<IResponse<GameProfileInfo>> {
-    const params = {} as SDKRequestConfig
+  updateProfile_ByUserId_ByProfileId(userId: string, profileId: string, data: GameProfileRequest): Promise<Response<GameProfileInfo>> {
+    const params = {} as AxiosRequestConfig
     const url = '/social/public/namespaces/{namespace}/users/{userId}/profiles/{profileId}'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -102,7 +97,6 @@ export class GameProfile$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GameProfileInfo, 'GameProfileInfo')
   }
-
   /**
    * Returns game profile attribute.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: attribute info&lt;/li&gt;&lt;/ul&gt;
    */
@@ -110,8 +104,8 @@ export class GameProfile$ {
     userId: string,
     profileId: string,
     attributeName: string
-  ): Promise<IResponse<Attribute>> {
-    const params = {} as SDKRequestConfig
+  ): Promise<Response<Attribute>> {
+    const params = {} as AxiosRequestConfig
     const url = '/social/public/namespaces/{namespace}/users/{userId}/profiles/{profileId}/attributes/{attributeName}'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -121,7 +115,6 @@ export class GameProfile$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Attribute, 'Attribute')
   }
-
   /**
    * Updates game profile attribute, returns updated profile.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated attribute&lt;/li&gt;&lt;/ul&gt;
    */
@@ -130,8 +123,8 @@ export class GameProfile$ {
     profileId: string,
     attributeName: string,
     data: Attribute
-  ): Promise<IResponse<GameProfileInfo>> {
-    const params = {} as SDKRequestConfig
+  ): Promise<Response<GameProfileInfo>> {
+    const params = {} as AxiosRequestConfig
     const url = '/social/public/namespaces/{namespace}/users/{userId}/profiles/{profileId}/attributes/{attributeName}'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

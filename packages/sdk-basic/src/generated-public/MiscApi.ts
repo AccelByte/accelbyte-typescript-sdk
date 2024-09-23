@@ -8,63 +8,86 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { CountryObjectArray } from '../generated-definitions/CountryObjectArray.js'
 import { RetrieveTimeResponse } from '../generated-definitions/RetrieveTimeResponse.js'
 import { Misc$ } from './endpoints/Misc$.js'
 
-export function MiscApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function MiscApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * Get server time
-   */
-  async function getMiscTime(): Promise<RetrieveTimeResponse> {
-    const $ = new Misc$(Network.create(requestConfig), namespace, useSchemaValidation)
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
+  }
+
+  async function getMiscTime(): Promise<AxiosResponse<RetrieveTimeResponse>> {
+    const $ = new Misc$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getMiscTime()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * @deprecated
-   * List countries.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: country code list&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getMiscCountries_DEPRECATED(queryParams?: { lang?: string | null }): Promise<CountryObjectArray> {
-    const $ = new Misc$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getMiscCountries_DEPRECATED(queryParams)
+  async function getMiscCountries(queryParams?: { lang?: string | null }): Promise<AxiosResponse<CountryObjectArray>> {
+    const $ = new Misc$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getMiscCountries(queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * List languages.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: language list&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getMiscLanguages(): Promise<unknown> {
-    const $ = new Misc$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getMiscLanguages(): Promise<AxiosResponse<unknown>> {
+    const $ = new Misc$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getMiscLanguages()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * List time zones.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: time zones&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getMiscTimezones(): Promise<unknown> {
-    const $ = new Misc$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getMiscTimezones(): Promise<AxiosResponse<unknown>> {
+    const $ = new Misc$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getMiscTimezones()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     * Get server time
+     */
     getMiscTime,
-    getMiscCountries_DEPRECATED,
+    /**
+     * @deprecated
+     * List countries.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: country code list&lt;/li&gt;&lt;/ul&gt;
+     */
+    getMiscCountries,
+    /**
+     * List languages.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: language list&lt;/li&gt;&lt;/ul&gt;
+     */
     getMiscLanguages,
+    /**
+     * List time zones.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: time zones&lt;/li&gt;&lt;/ul&gt;
+     */
     getMiscTimezones
   }
 }

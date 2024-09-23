@@ -1,0 +1,38 @@
+{
+  "name": "@accelbyte/validator",
+  "version": "0.2.21",
+  "author": "AccelByte Inc",
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/es/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "test-and-build": "yarn test && yarn build",
+    "analyze": "tsup ./src/index.ts --metafile --no-config --outDir . && rimraf ./index.js",
+    "test": "vitest",
+    "clean": "npx rimraf dist && npx rimraf node_modules"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "peerDependencies": {
+    "validator": "^13.7.0",
+    "zod": "^3.17.3"
+  },
+  "devDependencies": {
+    "@types/validator": "13.7.10",
+    "esbuild-plugin-copy": "2.1.1",
+    "rimraf": "4.1.2",
+    "tsup": "8.2.4",
+    "typescript": "5.5.4",
+    "validator": "13.7.0",
+    "vitest": "2.0.5",
+    "zod": "3.17.3"
+  },
+  "dependencies": {
+    "naughty-words": "1.2.0",
+    "xregexp": "5.1.0"
+  },
+  "sideEffects": false
+}

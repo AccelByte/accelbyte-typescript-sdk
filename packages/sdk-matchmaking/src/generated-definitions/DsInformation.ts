@@ -10,7 +10,7 @@ export const DsInformation = z.object({
   MinPlayers: z.number().int(),
   RequestedAt: z.string(),
   RequestedRegions: z.array(z.string()),
-  Server,
+  Server: Server,
   Status: z.string()
 })
 

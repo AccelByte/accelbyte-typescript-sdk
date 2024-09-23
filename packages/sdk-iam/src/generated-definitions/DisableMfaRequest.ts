@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const DisableMfaRequest = z.object({ mfaToken: z.string().nullish() })
+export const DisableMfaRequest = z.object({ factor: z.string().nullish(), mfaToken: z.string().nullish() })
 
 export interface DisableMfaRequest extends z.TypeOf<typeof DisableMfaRequest> {}

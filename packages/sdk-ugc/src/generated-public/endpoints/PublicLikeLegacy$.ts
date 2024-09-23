@@ -6,16 +6,16 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { ContentLikeRequest } from '../../generated-definitions/ContentLikeRequest.js'
 import { ContentLikeResponse } from '../../generated-definitions/ContentLikeResponse.js'
 import { PaginatedContentDownloadResponse } from '../../generated-definitions/PaginatedContentDownloadResponse.js'
 
 export class PublicLikeLegacy$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * For advance tag filtering supports &amp; as AND operator and | as OR operator and parentheses ( ) for priority. e.g: *tags=red* *tags=red&amp;animal* *tags=red|animal* *tags=red&amp;animal|wild* *tags=red&amp;(animal|wild)* The precedence of logical operator is AND &gt; OR, so if no parentheses, AND logical operator will be executed first. Allowed character for operand: alphanumeric, underscore _ and dash - Allowed character for operator: &amp; | ( ) **Please note that value of tags query param should be URL encoded**
    */
@@ -29,8 +29,8 @@ export class PublicLikeLegacy$ {
     subtype?: string | null
     tags?: string[]
     type?: string | null
-  }): Promise<IResponse<PaginatedContentDownloadResponse>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  }): Promise<Response<PaginatedContentDownloadResponse>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/contents/liked'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -41,12 +41,11 @@ export class PublicLikeLegacy$ {
       'PaginatedContentDownloadResponse'
     )
   }
-
   /**
    * This endpoint will update like/unlike state from a content
    */
-  updateLike_ByContentId(contentId: string, data: ContentLikeRequest): Promise<IResponse<ContentLikeResponse>> {
-    const params = {} as SDKRequestConfig
+  updateLike_ByContentId(contentId: string, data: ContentLikeRequest): Promise<Response<ContentLikeResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/contents/{contentId}/like'
       .replace('{namespace}', this.namespace)
       .replace('{contentId}', contentId)

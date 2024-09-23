@@ -12,6 +12,7 @@ export const MatchTicket = z.object({
   IsPivot: z.boolean().nullish(),
   Latencies: z.record(z.number().int()).nullish(),
   MatchPool: z.string().nullish(),
+  MatchedAt: z.string().nullish(),
   Namespace: z.string().nullish(),
   PartySessionID: z.string().nullish(),
   Players: z.array(PlayerData).nullish(),

@@ -7,16 +7,19 @@
  * AUTO GENERATED
  */
 
-import { TagsAdminApi } from './generated-admin/TagsAdminApi.js'
+import { author, name, version } from '../package.json'
 import { AchievementsAdminApi } from './generated-admin/AchievementsAdminApi.js'
-import { PlatformAchievementAdminApi } from './generated-admin/PlatformAchievementAdminApi.js'
-import { GlobalAchievementsAdminApi } from './generated-admin/GlobalAchievementsAdminApi.js'
-import { UserAchievementsAdminApi } from './generated-admin/UserAchievementsAdminApi.js'
 import { AnonymizationAdminApi } from './generated-admin/AnonymizationAdminApi.js'
-import { TagsApi } from './generated-public/TagsApi.js'
+import { GlobalAchievementsAdminApi } from './generated-admin/GlobalAchievementsAdminApi.js'
+import { PlatformAchievementAdminApi } from './generated-admin/PlatformAchievementAdminApi.js'
+import { TagsAdminApi } from './generated-admin/TagsAdminApi.js'
+import { UserAchievementsAdminApi } from './generated-admin/UserAchievementsAdminApi.js'
 import { AchievementsApi } from './generated-public/AchievementsApi.js'
 import { GlobalAchievementsApi } from './generated-public/GlobalAchievementsApi.js'
+import { TagsApi } from './generated-public/TagsApi.js'
 import { UserAchievementsApi } from './generated-public/UserAchievementsApi.js'
+
+console.log(`${name}@${version}`)
 
 const apis = {
   TagsAdminApi,
@@ -28,7 +31,13 @@ const apis = {
   TagsApi,
   AchievementsApi,
   GlobalAchievementsApi,
-  UserAchievementsApi
+  UserAchievementsApi,
+  version: () =>
+    console.log({
+      version,
+      name,
+      author
+    })
 }
 
 export const Achievement = apis

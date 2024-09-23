@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { ChannelResponse } from '../../generated-definitions/ChannelResponse.js'
 import { PaginatedGetChannelResponse } from '../../generated-definitions/PaginatedGetChannelResponse.js'
@@ -16,16 +16,16 @@ import { UpdateChannelRequest } from '../../generated-definitions/UpdateChannelR
 
 export class PublicChannel$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Get user channel paginated
    */
   getChannels_ByUserId(
     userId: string,
     queryParams?: { limit?: number; name?: string | null; offset?: number }
-  ): Promise<IResponse<PaginatedGetChannelResponse>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  ): Promise<Response<PaginatedGetChannelResponse>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/channels'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -38,12 +38,11 @@ export class PublicChannel$ {
       'PaginatedGetChannelResponse'
     )
   }
-
   /**
    * Create user channel
    */
-  createChannel_ByUserId(userId: string, data: PublicChannelRequest): Promise<IResponse<ChannelResponse>> {
-    const params = {} as SDKRequestConfig
+  createChannel_ByUserId(userId: string, data: PublicChannelRequest): Promise<Response<ChannelResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/channels'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -51,12 +50,11 @@ export class PublicChannel$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ChannelResponse, 'ChannelResponse')
   }
-
   /**
    * Delete user channel
    */
-  deleteChannel_ByUserId_ByChannelId(userId: string, channelId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteChannel_ByUserId_ByChannelId(userId: string, channelId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/channels/{channelId}'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -65,12 +63,11 @@ export class PublicChannel$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Update user channel
    */
-  updateChannel_ByUserId_ByChannelId(userId: string, channelId: string, data: UpdateChannelRequest): Promise<IResponse<ChannelResponse>> {
-    const params = {} as SDKRequestConfig
+  updateChannel_ByUserId_ByChannelId(userId: string, channelId: string, data: UpdateChannelRequest): Promise<Response<ChannelResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/channels/{channelId}'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

@@ -7,22 +7,33 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { PartyAdminApi } from '../PartyAdminApi.js'
 
 import { PartyQueryResponse } from '../../generated-definitions/PartyQueryResponse.js'
 
 export enum Key_PartyAdmin {
-  Parties = 'PartyAdmin.Parties',
-  NativeSync_ByUserId = 'PartyAdmin.NativeSync_ByUserId'
+  Parties = 'Session.PartyAdmin.Parties',
+  NativeSync_ByUserId = 'Session.PartyAdmin.NativeSync_ByUserId'
 }
 
-export const useAdmParties = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * Query parties.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PartyAdmin.Parties, input]
+ * }
+ * ```
+ */
+export const usePartyAdminApi_GetParties = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     queryParams?: {
       isSoftDeleted?: string | null
       joinability?: string | null
@@ -39,13 +50,14 @@ export const useAdmParties = (
     }
   },
   options?: Omit<UseQueryOptions<PartyQueryResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: PartyQueryResponse) => void
+  callback?: (data: AxiosResponse<PartyQueryResponse>) => void
 ): UseQueryResult<PartyQueryResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmParties>[1]) => async () => {
-    const data = await PartyAdminApi(sdk, { namespace: input.namespace }).getParties(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof usePartyAdminApi_GetParties>[1]) => async () => {
+    const response = await PartyAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getParties(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<PartyQueryResponse, AxiosError<ApiError>>({
@@ -55,16 +67,28 @@ export const useAdmParties = (
   })
 }
 
-export const useAdmCreateNativeSync_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }>, 'mutationKey'>,
+/**
+ * Trigger user&#39;s active party session to native platform.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PartyAdmin.NativeSync_ByUserId, input]
+ * }
+ * ```
+ */
+export const usePartyAdminApi_CreateNativeSync_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string }) => {
-    const data = await PartyAdminApi(sdk, { namespace: input.namespace, config: input.config }).createNativeSync_ByUserId(input.userId)
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string }) => {
+    const response = await PartyAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createNativeSync_ByUserId(
+      input.userId
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

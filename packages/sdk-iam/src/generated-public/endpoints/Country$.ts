@@ -6,19 +6,19 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { CountryResponseArray } from '../../generated-definitions/CountryResponseArray.js'
 
 export class Country$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Public get country list, will filter out countries in black list
    */
-  getCountries(): Promise<IResponse<CountryResponseArray>> {
-    const params = {} as SDKRequestConfig
+  getCountries_v3(): Promise<Response<CountryResponseArray>> {
+    const params = {} as AxiosRequestConfig
     const url = '/iam/v3/public/namespaces/{namespace}/countries'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 

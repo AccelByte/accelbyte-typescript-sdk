@@ -8,7 +8,8 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { CreateGroupRequest } from '../generated-definitions/CreateGroupRequest.js'
 import { CreateGroupResponse } from '../generated-definitions/CreateGroupResponse.js'
 import { PaginatedContentDownloadResponse } from '../generated-definitions/PaginatedContentDownloadResponse.js'
@@ -16,98 +17,127 @@ import { PaginatedContentDownloadResponseV2 } from '../generated-definitions/Pag
 import { PaginatedGroupResponse } from '../generated-definitions/PaginatedGroupResponse.js'
 import { PublicGroup$ } from './endpoints/PublicGroup$.js'
 
-export function PublicGroupApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function PublicGroupApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * Get user groups paginated
-   */
-  async function getGroups_ByUserId(userId: string, queryParams?: { limit?: number; offset?: number }): Promise<PaginatedGroupResponse> {
-    const $ = new PublicGroup$(Network.create(requestConfig), namespace, useSchemaValidation)
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
+  }
+
+  async function getGroups_ByUserId(
+    userId: string,
+    queryParams?: { limit?: number; offset?: number }
+  ): Promise<AxiosResponse<PaginatedGroupResponse>> {
+    const $ = new PublicGroup$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getGroups_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Create group
-   */
-  async function createGroup_ByUserId(userId: string, data: CreateGroupRequest): Promise<CreateGroupResponse> {
-    const $ = new PublicGroup$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function createGroup_ByUserId(userId: string, data: CreateGroupRequest): Promise<AxiosResponse<CreateGroupResponse>> {
+    const $ = new PublicGroup$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createGroup_ByUserId(userId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Delete user group by group ID
-   */
-  async function deleteGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<unknown> {
-    const $ = new PublicGroup$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new PublicGroup$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteGroup_ByUserId_ByGroupId(userId, groupId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get user groups by group ID
-   */
-  async function getGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<CreateGroupResponse> {
-    const $ = new PublicGroup$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<AxiosResponse<CreateGroupResponse>> {
+    const $ = new PublicGroup$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getGroup_ByUserId_ByGroupId(userId, groupId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Replace group name and contents with new ones
-   */
-  async function updateGroup_ByUserId_ByGroupId(userId: string, groupId: string, data: CreateGroupRequest): Promise<CreateGroupResponse> {
-    const $ = new PublicGroup$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateGroup_ByUserId_ByGroupId(
+    userId: string,
+    groupId: string,
+    data: CreateGroupRequest
+  ): Promise<AxiosResponse<CreateGroupResponse>> {
+    const $ = new PublicGroup$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateGroup_ByUserId_ByGroupId(userId, groupId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get content that belong to a group
-   */
   async function getContents_ByUserId_ByGroupId(
     userId: string,
     groupId: string,
     queryParams?: { limit?: number; offset?: number }
-  ): Promise<PaginatedContentDownloadResponse> {
-    const $ = new PublicGroup$(Network.create(requestConfig), namespace, useSchemaValidation)
+  ): Promise<AxiosResponse<PaginatedContentDownloadResponse>> {
+    const $ = new PublicGroup$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getContents_ByUserId_ByGroupId(userId, groupId, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get content belong to a group
-   */
-  async function getContents_ByUserId_ByGroupId_ByNS(
+  async function getContents_ByUserId_ByGroupId_v2(
     userId: string,
     groupId: string,
     queryParams?: { limit?: number; offset?: number }
-  ): Promise<PaginatedContentDownloadResponseV2> {
-    const $ = new PublicGroup$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getContents_ByUserId_ByGroupId_ByNS(userId, groupId, queryParams)
+  ): Promise<AxiosResponse<PaginatedContentDownloadResponseV2>> {
+    const $ = new PublicGroup$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getContents_ByUserId_ByGroupId_v2(userId, groupId, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     * Get user groups paginated
+     */
     getGroups_ByUserId,
+    /**
+     * Create group
+     */
     createGroup_ByUserId,
+    /**
+     * Delete user group by group ID
+     */
     deleteGroup_ByUserId_ByGroupId,
+    /**
+     * Get user groups by group ID
+     */
     getGroup_ByUserId_ByGroupId,
+    /**
+     * Replace group name and contents with new ones
+     */
     updateGroup_ByUserId_ByGroupId,
+    /**
+     * Get content that belong to a group
+     */
     getContents_ByUserId_ByGroupId,
-    getContents_ByUserId_ByGroupId_ByNS
+    /**
+     * Get content belong to a group
+     */
+    getContents_ByUserId_ByGroupId_v2
   }
 }

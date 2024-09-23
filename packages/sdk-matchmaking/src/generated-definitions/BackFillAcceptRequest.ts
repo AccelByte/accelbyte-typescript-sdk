@@ -5,6 +5,10 @@
  */
 import { z } from 'zod'
 
-export const BackFillAcceptRequest = z.object({ proposalId: z.string(), stop: z.boolean() })
+export const BackFillAcceptRequest = z.object({
+  partialAcceptTicketIDs: z.array(z.string()).nullish(),
+  proposalId: z.string(),
+  stop: z.boolean()
+})
 
 export interface BackFillAcceptRequest extends z.TypeOf<typeof BackFillAcceptRequest> {}

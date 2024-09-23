@@ -8,7 +8,7 @@ import { ResetConfig } from './ResetConfig.js'
 
 export const CreateChallengeRequest = z.object({
   activeGoalsPerRotation: z.number().int().nullish(),
-  assignmentRule: z.enum(['FIXED', 'RANDOMIZED', 'UNSCHEDULED']),
+  assignmentRule: z.enum(['CUSTOM', 'FIXED', 'RANDOMIZED', 'UNSCHEDULED']),
   code: z.string(),
   description: z.string().nullish(),
   endAfter: z.number().int().nullish(),

@@ -4,40 +4,10 @@
  * and restrictions contact your company contract manager.
  */
 
-import { AxiosError, Method } from 'axios'
-import { RequestInterceptor, ResponseInterceptor, ErrorInterceptor } from './utils/Network'
+import { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
+import { MakeOptional } from './utils/Type'
 
-/**
- * This interface is used to override the values set when Accelbyte.SDK was initialized.
- * For example, you can override the headers in a certain API call by passing `config.headers`:
- *
- * ```ts
- * Platform.ItemApi(sdk, {
- *   config: {
- *     headers: {
- *       Authorization: "Bearer ..."
- *     }
- *   }
- * }).getLocale_ByItemId(itemId)
- * ```
- */
-export interface ApiArgs {
-  config?: SDKRequestConfig
-  namespace?: string
-}
-
-export interface CustomInterceptors {
-  request: RequestInterceptor
-  response: ResponseInterceptor
-  error: ErrorInterceptor
-}
-
-export type ApiError = {
-  errorCode: number | string
-  errorMessage: string
-}
-
-export interface SDKOptions {
+export interface CoreConfig {
   /**
    * The client ID for the SDK. This value is retrieved from Admin Portal, OAuth Clients.
    */
@@ -57,62 +27,43 @@ export interface SDKOptions {
   namespace: string
 
   /**
-   * Custom interceptors for axios. If not provided, by default the SDK will send a POST request
-   * to `/iam/v3/oauth/token` whenever there is a `401 Unauthenticated` response status.
+   * When "false" is provided, the SDK bypasses Zod Schema Validation.
+   * Default is "true".
    */
-  customInterceptors?: CustomInterceptors
-
-  /**
-   * Use when in internal Accelbyte network. Must be used in server only environment.
-   * When value is true, it will call `http://{service-name}/{path}` instead of `baseURL`
-   */
-  useInternalNetwork?: boolean
-
-  /**
-   * default is "true". When "false" is provided, the SDK bypasses Zod Schema Validation
-   */
-  useSchemaValidation?: boolean
+  useSchemaValidation: boolean
 }
 
-export interface SDKEvents {
-  /**
-   * The callback fired when the session expires.
-   */
-  onSessionExpired?: () => void
-  /**
-   * The callback fired when user session is retrieved, which can be from
-   * logging in, or refreshing access token.
-   */
-  onGetUserSession?: (accessToken: string, refreshToken: string) => void
-  /**
-   * The callback fired when there are legal changes, usually related to user age.
-   * [Docs reference](https://docs.accelbyte.io/gaming-services/knowledge-base/api-endpoints-error-codes/#10130---user-under-age).
-   */
-  onUserEligibilityChange?: () => void
-  /**
-   * The callback fired whenever there is a 429 response error (request being throttled/rate-limited).
-   */
-  onTooManyRequest?: (error: AxiosError) => void
-  /**
-   * The callback fired whenever there is a non-specific response error.
-   */
-  onError?: (error: AxiosError) => void
+export interface AxiosConfig {
+  interceptors?: Interceptor[]
+  request?: AxiosRequestConfig
 }
 
-// This is high level strict types taken from the AxiosRequestConfig implementation
-export interface SDKRequestConfig<D = any> {
-  // AxiosRequestConfig
-  url?: string
-  method?: Method | string
-  baseURL?: string
-  headers?: Record<string, string | number | boolean>
-  params?: any
-  paramsSerializer?: (params: any) => string
-  data?: D
-  timeout?: number
-  timeoutErrorMessage?: string
-  signal?: AbortSignal
-  // `withCredentials` indicates whether or not cross-site Access-Control requests should be made using credentials
-  // withCredentials:true will automatically send the cookie to the client-side
-  withCredentials?: boolean // default true
+export type Interceptor =
+  | {
+      type: 'request'
+      name: string
+      onRequest?: (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig>
+      onError?: (error: unknown) => unknown
+    }
+  | {
+      type: 'response'
+      name: string
+      onSuccess?: (response: AxiosResponse<unknown>) => AxiosResponse<unknown>
+      onError?: (error: unknown) => unknown
+    }
+
+export interface SdkConstructorParam {
+  coreConfig: MakeOptional<CoreConfig, 'useSchemaValidation'>
+  axiosConfig?: AxiosConfig
 }
+
+export interface SdkSetConfigParam {
+  coreConfig?: Partial<CoreConfig>
+  axiosConfig?: AxiosConfig
+}
+
+export type ApiError = {
+  errorCode: number | string
+  errorMessage: string
+}
+export type TokenConfig = { accessToken?: string; refreshToken?: string | null }

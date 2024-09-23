@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const UpdateLocalizedPolicyVersionRequest = z.object({
-  contentType: z.string().nullish(),
-  attachmentLocation: z.string().nullish(),
   attachmentChecksum: z.string().nullish(),
+  attachmentLocation: z.string().nullish(),
   attachmentVersionIdentifier: z.string().nullish(),
+  contentType: z.string().nullish(),
   description: z.string().nullish()
 })
 

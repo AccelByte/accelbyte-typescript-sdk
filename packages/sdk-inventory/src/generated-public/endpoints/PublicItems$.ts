@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { ConsumeItemReq } from '../../generated-definitions/ConsumeItemReq.js'
 import { ItemResp } from '../../generated-definitions/ItemResp.js'
 import { ListItemResp } from '../../generated-definitions/ListItemResp.js'
@@ -19,13 +19,13 @@ import { UpdateItemRespArray } from '../../generated-definitions/UpdateItemRespA
 
 export class PublicItems$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    *  Bulk remove user&#39;s own items.
    */
-  deleteItemMeUser_ByInventoryId(inventoryId: string, data: RemoveInventoryItemReq[]): Promise<IResponse<UpdateItemRespArray>> {
-    const params = {} as SDKRequestConfig
+  deleteItemMeUser_ByInventoryId(inventoryId: string, data: RemoveInventoryItemReq[]): Promise<Response<UpdateItemRespArray>> {
+    const params = {} as AxiosRequestConfig
     const url = '/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/items'
       .replace('{namespace}', this.namespace)
       .replace('{inventoryId}', inventoryId)
@@ -33,7 +33,6 @@ export class PublicItems$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UpdateItemRespArray, 'UpdateItemRespArray')
   }
-
   /**
    *  Listing all user&#39;s owned items in an inventory. The response body will be in the form of standard pagination.
    */
@@ -46,8 +45,8 @@ export class PublicItems$ {
       sourceItemId?: string | null
       tags?: string | null
     }
-  ): Promise<IResponse<ListItemResp>> {
-    const params = { limit: 25, sortBy: 'createdAt', ...queryParams } as SDKRequestConfig
+  ): Promise<Response<ListItemResp>> {
+    const params = { limit: 25, sortBy: 'createdAt', ...queryParams } as AxiosRequestConfig
     const url = '/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/items'
       .replace('{namespace}', this.namespace)
       .replace('{inventoryId}', inventoryId)
@@ -55,12 +54,11 @@ export class PublicItems$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ListItemResp, 'ListItemResp')
   }
-
   /**
    *  Bulk Updating user&#39;s own items.
    */
-  updateItemMeUser_ByInventoryId(inventoryId: string, data: UpdateItemReq[]): Promise<IResponse<UpdateItemRespArray>> {
-    const params = {} as SDKRequestConfig
+  updateItemMeUser_ByInventoryId(inventoryId: string, data: UpdateItemReq[]): Promise<Response<UpdateItemRespArray>> {
+    const params = {} as AxiosRequestConfig
     const url = '/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/items'
       .replace('{namespace}', this.namespace)
       .replace('{inventoryId}', inventoryId)
@@ -68,12 +66,11 @@ export class PublicItems$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UpdateItemRespArray, 'UpdateItemRespArray')
   }
-
   /**
    *  Consume user&#39;s own item.
    */
-  createConsumeUser_ByInventoryId(inventoryId: string, data: ConsumeItemReq): Promise<IResponse<ItemResp>> {
-    const params = {} as SDKRequestConfig
+  createConsumeUser_ByInventoryId(inventoryId: string, data: ConsumeItemReq): Promise<Response<ItemResp>> {
+    const params = {} as AxiosRequestConfig
     const url = '/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/consume'
       .replace('{namespace}', this.namespace)
       .replace('{inventoryId}', inventoryId)
@@ -81,12 +78,11 @@ export class PublicItems$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemResp, 'ItemResp')
   }
-
   /**
-   *  Move items between inventories that is owned by the same user. Currently, this endpoint supports transferring items exclusively from source OTHER. Items from source ECOMMERCE are not yet eligible for transfer. We are working on expanding support to include source ECOMMERCE in future updates.
+   *  Move items between inventories that is owned by the same user.
    */
-  createItemMovementUser_ByInventoryId(inventoryId: string, data: MoveItemsReq): Promise<IResponse<MoveItemsResp>> {
-    const params = {} as SDKRequestConfig
+  createItemMovementUser_ByInventoryId(inventoryId: string, data: MoveItemsReq): Promise<Response<MoveItemsResp>> {
+    const params = {} as AxiosRequestConfig
     const url = '/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/items/movement'
       .replace('{namespace}', this.namespace)
       .replace('{inventoryId}', inventoryId)
@@ -94,7 +90,6 @@ export class PublicItems$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, MoveItemsResp, 'MoveItemsResp')
   }
-
   /**
    *  Getting an user&#39;s owned item info.
    */
@@ -102,8 +97,8 @@ export class PublicItems$ {
     inventoryId: string,
     slotId: string,
     sourceItemId: string
-  ): Promise<IResponse<ItemResp>> {
-    const params = {} as SDKRequestConfig
+  ): Promise<Response<ItemResp>> {
+    const params = {} as AxiosRequestConfig
     const url = '/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/slots/{slotId}/sourceItems/{sourceItemId}'
       .replace('{namespace}', this.namespace)
       .replace('{inventoryId}', inventoryId)

@@ -7,8 +7,8 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
 import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { ConfigAdminApi } from '../ConfigAdminApi.js'
@@ -16,24 +16,36 @@ import { ConfigAdminApi } from '../ConfigAdminApi.js'
 import { ConfigValueResponseV3 } from '../../generated-definitions/ConfigValueResponseV3.js'
 
 export enum Key_ConfigAdmin {
-  Config_ByConfigKey = 'ConfigAdmin.Config_ByConfigKey'
+  Config_ByConfigKey_v3 = 'Iam.ConfigAdmin.Config_ByConfigKey_v3'
 }
 
-export const useAdmConfig_ByConfigKey = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { configKey: string },
+/**
+ * This endpoint return the value of config key. The namespace should be publisher namespace or studio namespace. **Supported config key:** * uniqueDisplayNameEnabled * usernameDisabled * mandatoryEmailVerificationEnabled
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ConfigAdmin.Config_ByConfigKey_v3, input]
+ * }
+ * ```
+ */
+export const useConfigAdminApi_GetConfig_ByConfigKey_v3 = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { configKey: string },
   options?: Omit<UseQueryOptions<ConfigValueResponseV3, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: ConfigValueResponseV3) => void
+  callback?: (data: AxiosResponse<ConfigValueResponseV3>) => void
 ): UseQueryResult<ConfigValueResponseV3, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmConfig_ByConfigKey>[1]) => async () => {
-    const data = await ConfigAdminApi(sdk, { namespace: input.namespace }).getConfig_ByConfigKey(input.configKey)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useConfigAdminApi_GetConfig_ByConfigKey_v3>[1]) => async () => {
+    const response = await ConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getConfig_ByConfigKey_v3(
+      input.configKey
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<ConfigValueResponseV3, AxiosError<ApiError>>({
-    queryKey: [Key_ConfigAdmin.Config_ByConfigKey, input],
+    queryKey: [Key_ConfigAdmin.Config_ByConfigKey_v3, input],
     queryFn: queryFn(sdk, input),
     ...options
   })

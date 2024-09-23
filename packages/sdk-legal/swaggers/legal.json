@@ -8,7 +8,7 @@
     },
     "description": "Justice Legal Service",
     "title": "justice-legal-service",
-    "version": "1.43.0"
+    "version": "1.44.0"
   },
   "schemes": ["https"],
   "tags": [
@@ -66,20 +66,6 @@
     "url": "https://development.accelbyte.io/agreement"
   },
   "securityDefinitions": {
-    "HasPermission": {
-      "authorizationUrl": "https://dummy.oauth.net/auth",
-      "flow": "accessCode",
-      "scopes": {},
-      "tokenUrl": "https://dumy.oauth.net/token",
-      "type": "oauth2"
-    },
-    "HasScope": {
-      "authorizationUrl": "https://dummy.oauth.net/auth",
-      "flow": "accessCode",
-      "scopes": {},
-      "tokenUrl": "https://dumy.oauth.net/token",
-      "type": "oauth2"
-    },
     "authorization": {
       "in": "header",
       "name": "Authorization",
@@ -3208,6 +3194,12 @@
               "$ref": "#/definitions/RetrieveLocalizedPolicyVersionPublicResponse"
             }
           },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eNumericErrorCode\u003c/td\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e40081\u003c/td\u003e\u003ctd\u003eerrors.net.accelbyte.platform.legal.policy_not_accessible\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/ErrorEntity"
+            }
+          },
           "404": {
             "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eNumericErrorCode\u003c/td\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e40038\u003c/td\u003e\u003ctd\u003eerrors.net.accelbyte.platform.legal.localized_policy_version_not_found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
@@ -3218,7 +3210,8 @@
         "summary": "Retrieve a Localized Version",
         "tags": ["Localized Policy Versions"],
         "x-errorCodes": {
-          "40038": "errors.net.accelbyte.platform.legal.localized_policy_version_not_found"
+          "40038": "errors.net.accelbyte.platform.legal.localized_policy_version_not_found",
+          "40081": "errors.net.accelbyte.platform.legal.policy_not_accessible"
         }
       }
     },
@@ -3250,6 +3243,12 @@
               "$ref": "#/definitions/RetrieveLocalizedPolicyVersionPublicResponse"
             }
           },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eNumericErrorCode\u003c/td\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e40081\u003c/td\u003e\u003ctd\u003eerrors.net.accelbyte.platform.legal.policy_not_accessible\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/ErrorEntity"
+            }
+          },
           "404": {
             "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eNumericErrorCode\u003c/td\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e40038\u003c/td\u003e\u003ctd\u003eerrors.net.accelbyte.platform.legal.localized_policy_version_not_found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
@@ -3260,7 +3259,8 @@
         "summary": "Retrieve a Localized Version",
         "tags": ["Localized Policy Versions With Namespace"],
         "x-errorCodes": {
-          "40038": "errors.net.accelbyte.platform.legal.localized_policy_version_not_found"
+          "40038": "errors.net.accelbyte.platform.legal.localized_policy_version_not_found",
+          "40081": "errors.net.accelbyte.platform.legal.policy_not_accessible"
         }
       }
     },
@@ -3598,6 +3598,12 @@
           "type": "string"
         },
         "isHidden": {
+          "description": "active status of this policy, it will affect user's eligibility status check",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "isHiddenPublic": {
+          "description": "hide the policy from public(e.g. legal website), it will NOT affect user's eligibility status check",
           "type": "boolean",
           "x-omitempty": false
         },
@@ -3640,6 +3646,12 @@
           "type": "string"
         },
         "isHidden": {
+          "description": "active status of this policy, it will affect user's eligibility status check",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "isHiddenPublic": {
+          "description": "hide the policy from public(e.g. legal website), it will NOT affect user's eligibility status check",
           "type": "boolean",
           "x-omitempty": false
         },
@@ -3686,6 +3698,12 @@
           "type": "string"
         },
         "isHidden": {
+          "description": "active status of this policy, it will affect user's eligibility status check",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "isHiddenPublic": {
+          "description": "hide the policy from public(e.g. legal website), it will NOT affect user's eligibility status check",
           "type": "boolean",
           "x-omitempty": false
         },
@@ -4201,6 +4219,12 @@
           "type": "string"
         },
         "isHidden": {
+          "description": "active status of this policy, it will affect user's eligibility status check",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "isHiddenPublic": {
+          "description": "hide the policy from public(e.g. legal website), it will NOT affect user's eligibility status check",
           "type": "boolean",
           "x-omitempty": false
         },
@@ -4666,6 +4690,11 @@
           "type": "boolean",
           "x-omitempty": false
         },
+        "isHiddenPublic": {
+          "description": "hide the policy from public(e.g. legal website), it will NOT affect user's eligibility status check",
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "isMandatory": {
           "type": "boolean",
           "x-omitempty": false
@@ -4731,6 +4760,12 @@
           "type": "string"
         },
         "isHidden": {
+          "description": "active status of this policy, it will affect user's eligibility status check",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "isHiddenPublic": {
+          "description": "hide the policy from public(e.g. legal website), it will NOT affect user's eligibility status check",
           "type": "boolean",
           "x-omitempty": false
         },
@@ -4770,6 +4805,12 @@
           "type": "string"
         },
         "isHidden": {
+          "description": "active status of this policy, it will affect user's eligibility status check",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "isHiddenPublic": {
+          "description": "hide the policy from public(e.g. legal website), it will NOT affect user's eligibility status check",
           "type": "boolean",
           "x-omitempty": false
         },
@@ -4813,6 +4854,12 @@
           "type": "string"
         },
         "isHidden": {
+          "description": "active status of this policy, it will affect user's eligibility status check",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "isHiddenPublic": {
+          "description": "hide the policy from public(e.g. legal website), it will NOT affect user's eligibility status check",
           "type": "boolean",
           "x-omitempty": false
         },
@@ -5072,17 +5119,17 @@
     "path": "/agreement/swagger.json"
   },
   "x-version": {
-    "buildBy": "Gradle 6.9.1",
-    "buildDate": "2024-08-05T02:36:31+00:00",
-    "buildID": "1.43.0",
-    "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
-    "buildOS": "Linux amd64 5.10.220-209.869.amzn2.x86_64",
-    "gitBranchName": "master",
-    "gitHash": "d6d914f9a9",
+    "buildBy": "Gradle 8.5",
+    "buildDate": "2024-09-13T07:45:31+00:00",
+    "buildID": "1.44.0",
+    "buildJDK": "21.0.4 (Amazon.com Inc. 21.0.4+7-LTS)",
+    "buildOS": "Linux amd64 5.10.223-212.873.amzn2.x86_64",
+    "gitBranchName": "upgrade-java",
+    "gitHash": "d20761ddda",
     "gitTag": "1.43.0",
     "name": "justice-legal-service",
     "realm": "dev",
-    "version": "1.43.0",
+    "version": "1.44.0",
     "version-roles-seeding": "0.0.3"
   }
 }

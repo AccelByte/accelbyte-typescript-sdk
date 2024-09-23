@@ -6,14 +6,14 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { UserPlatformAccountClosureHistoriesResponse } from '../../generated-definitions/UserPlatformAccountClosureHistoriesResponse.js'
 
 export class PlatformAccountClosureHistoryAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Get user&#39;s platform account closure histories. Scope: account ------ Supported platforms: * psn
    */
@@ -22,8 +22,8 @@ export class PlatformAccountClosureHistoryAdmin$ {
     offset?: number
     platform?: string | null
     userId?: string | null
-  }): Promise<IResponse<UserPlatformAccountClosureHistoriesResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  }): Promise<Response<UserPlatformAccountClosureHistoriesResponse>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/gdpr/admin/namespaces/{namespace}/users/platforms/closure/histories'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 

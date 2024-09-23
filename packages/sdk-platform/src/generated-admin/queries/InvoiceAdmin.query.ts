@@ -7,8 +7,8 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
 import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { InvoiceAdminApi } from '../InvoiceAdminApi.js'
@@ -16,19 +16,29 @@ import { InvoiceAdminApi } from '../InvoiceAdminApi.js'
 import { InvoiceSummary } from '../../generated-definitions/InvoiceSummary.js'
 
 export enum Key_InvoiceAdmin {
-  InvoiceSummary = 'InvoiceAdmin.InvoiceSummary',
-  InvoiceDetailsCsv = 'InvoiceAdmin.InvoiceDetailsCsv'
+  InvoiceSummary = 'Platform.InvoiceAdmin.InvoiceSummary',
+  InvoiceDetailsCsv = 'Platform.InvoiceAdmin.InvoiceDetailsCsv'
 }
 
-export const useAdmInvoiceSummary = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * Generate invoice summary.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: query orders&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_InvoiceAdmin.InvoiceSummary, input]
+ * }
+ * ```
+ */
+export const useInvoiceAdminApi_GetInvoiceSummary = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     queryParams: {
       endTime: string | null
-      startTime: string | null
-      feature?: string | null
-      itemId?: string | null
-      itemType?:
+      feature: string | null
+      itemId: string | null
+      itemType:
         | 'APP'
         | 'BUNDLE'
         | 'CODE'
@@ -40,16 +50,18 @@ export const useAdmInvoiceSummary = (
         | 'OPTIONBOX'
         | 'SEASON'
         | 'SUBSCRIPTION'
+      startTime: string | null
     }
   },
   options?: Omit<UseQueryOptions<InvoiceSummary, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: InvoiceSummary) => void
+  callback?: (data: AxiosResponse<InvoiceSummary>) => void
 ): UseQueryResult<InvoiceSummary, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmInvoiceSummary>[1]) => async () => {
-    const data = await InvoiceAdminApi(sdk, { namespace: input.namespace }).getInvoiceSummary(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useInvoiceAdminApi_GetInvoiceSummary>[1]) => async () => {
+    const response = await InvoiceAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getInvoiceSummary(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<InvoiceSummary, AxiosError<ApiError>>({
@@ -59,15 +71,25 @@ export const useAdmInvoiceSummary = (
   })
 }
 
-export const useAdmInvoiceDetailsCsv = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * Download invoice details as a csv file.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: invoice details csv file&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_InvoiceAdmin.InvoiceDetailsCsv, input]
+ * }
+ * ```
+ */
+export const useInvoiceAdminApi_GetInvoiceDetailsCsv = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     queryParams: {
       endTime: string | null
-      startTime: string | null
-      feature?: string | null
-      itemId?: string | null
-      itemType?:
+      feature: string | null
+      itemId: string | null
+      itemType:
         | 'APP'
         | 'BUNDLE'
         | 'CODE'
@@ -79,16 +101,18 @@ export const useAdmInvoiceDetailsCsv = (
         | 'OPTIONBOX'
         | 'SEASON'
         | 'SUBSCRIPTION'
+      startTime: string | null
     }
   },
   options?: Omit<UseQueryOptions<unknown, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: unknown) => void
+  callback?: (data: AxiosResponse<unknown>) => void
 ): UseQueryResult<unknown, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmInvoiceDetailsCsv>[1]) => async () => {
-    const data = await InvoiceAdminApi(sdk, { namespace: input.namespace }).getInvoiceDetailsCsv(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useInvoiceAdminApi_GetInvoiceDetailsCsv>[1]) => async () => {
+    const response = await InvoiceAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getInvoiceDetailsCsv(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<unknown, AxiosError<ApiError>>({

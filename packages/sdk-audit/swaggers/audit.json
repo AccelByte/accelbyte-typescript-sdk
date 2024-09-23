@@ -1,0 +1,1006 @@
+{
+  "host": "demo.accelbyte.io",
+  "info": {
+    "contact": {
+      "email": "engineering@accelbyte.io",
+      "name": "Engineering Team at AccelByte",
+      "url": "https://accelbyte.io"
+    },
+    "description": "Justice Audit Log Service",
+    "title": "justice-audit-log-service",
+    "version": "1.3.0"
+  },
+  "schemes": ["https"],
+  "externalDocs": {
+    "description": "API Docs",
+    "url": "https://development.accelbyte.io/audit/apidocs"
+  },
+  "securityDefinitions": {
+    "authorization": {
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey"
+    }
+  },
+  "swagger": "2.0",
+  "paths": {
+    "/audit/healthz": {
+      "get": {
+        "operationId": "GetHealthcheckInfoV1",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "x-errorCodes": {}
+      }
+    },
+    "/audit/v1/admin/config/categories": {
+      "get": {
+        "description": "This API is used to query category and related action names.",
+        "operationId": "AdminGetCategoryV1",
+        "parameters": [
+          {
+            "description": "End date of logs in unix timestamp format. Range between startDate should not exceed 30 day. Default: Current time in UTC.",
+            "in": "query",
+            "name": "endDate",
+            "type": "number"
+          },
+          {
+            "description": "namespace",
+            "in": "query",
+            "name": "namespace",
+            "type": "string"
+          },
+          {
+            "description": "Start date of logs in unix timestamp format. Range between endDate should not exceed 30 day. Default: Current time in UTC minus 15 minutes.",
+            "in": "query",
+            "name": "startDate",
+            "type": "number"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.CategoryResponse"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Query category and action names",
+        "tags": ["Audit Logs"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access"
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:AUDIT [READ]"]
+          }
+        ]
+      }
+    },
+    "/audit/v1/admin/config/time-range": {
+      "get": {
+        "description": "We do not support query all time audit log.\nThis API will return the number of days between the earliest day can be query and the current date.\neg: if current date is 2023-01-10 and this API return 5, then it mean: API commitment can query to the data of the earliest date is 2023-01-05.\nThe \u0026#39;commitment\u0026#39; means expiration of the log file will be archived but may not be executed immediately.\n",
+        "operationId": "AdminGetTimeRangeConfigV1",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/models.TimeRangeConfigResponse"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get valid time range for query",
+        "tags": ["Audit Logs"],
+        "x-errorCodes": {
+          "20001": "unauthorized access"
+        },
+        "x-security": [{}]
+      }
+    },
+    "/audit/v1/admin/logs": {
+      "get": {
+        "description": "This API is used to query audit logs.\n\nThe **{namespace}** permission value will be pointed to \u0026#34;namespace\u0026#34; query param.\n\n**1. If \u0026#34;namespace\u0026#34; query param exist:**\nThe permission validation will validate that single namespace value.\n\n**2. If \u0026#34;namespace\u0026#34; query param not exist:**\nThe permission validation will automatically check the users audit permissions (ADMIN:NAMESPACE:{namespace}:AUDIT).\nThe query result can only returns data that matched with the namespace from the users AUDIT permissions\ne.g: If current user was assign permission with namespaces [game1, game2], then API will query by game1 \u0026amp; game2\n",
+        "operationId": "AdminQueryAuditLogV1",
+        "parameters": [
+          {
+            "description": "action",
+            "in": "query",
+            "name": "action",
+            "type": "string"
+          },
+          {
+            "description": "actor id, user id for user token, client id for app client token",
+            "in": "query",
+            "name": "actor",
+            "type": "string"
+          },
+          {
+            "description": "actor type, allow: [USER, CLIENT]",
+            "enum": ["CLIENT", "USER"],
+            "in": "query",
+            "name": "actorType",
+            "type": "string"
+          },
+          {
+            "description": "category",
+            "in": "query",
+            "name": "category",
+            "type": "string"
+          },
+          {
+            "description": "End date of logs in unix timestamp format. Range between startDate should not exceed 30 day. Default: Current time in UTC.",
+            "in": "query",
+            "name": "endDate",
+            "type": "number"
+          },
+          {
+            "description": "Limit of query. Default: 20. Max: 500",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "object namespace, the namespace of this audit happened, not actor's token namespace",
+            "in": "query",
+            "name": "namespace",
+            "type": "string"
+          },
+          {
+            "description": "object id",
+            "in": "query",
+            "name": "objectId",
+            "type": "string"
+          },
+          {
+            "description": "object type",
+            "in": "query",
+            "name": "objectType",
+            "type": "string"
+          },
+          {
+            "description": "Offset of query. Default : 0. ",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "description": "Sort of order by timestamp, default is -1. note: 1 is asc, -1 is desc.",
+            "enum": ["-1", "1"],
+            "in": "query",
+            "name": "order",
+            "type": "integer"
+          },
+          {
+            "description": "Start date of logs in unix timestamp format. Range between endDate should not exceed 30 day. Default: Current time in UTC minus 15 minutes.",
+            "in": "query",
+            "name": "startDate",
+            "type": "number"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.PaginatedAuditLogsResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Query audit logs",
+        "tags": ["Audit Logs"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:AUDIT [READ]"]
+          }
+        ]
+      }
+    },
+    "/audit/v1/admin/namespace/{namespace}/logs/{logId}": {
+      "get": {
+        "description": "This API is used to get audit details.",
+        "operationId": "AdminGetAuditLogV1",
+        "parameters": [
+          {
+            "description": "log id",
+            "in": "path",
+            "name": "logId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.AuditLogInfo"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e17001\u003c/td\u003e\u003ctd\u003eaudit log not found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get audit details by id",
+        "tags": ["Audit Logs"],
+        "x-errorCodes": {
+          "17001": "audit log not found"
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:AUDIT [READ]"]
+          }
+        ]
+      }
+    },
+    "/audit/v1/admin/namespace/{namespace}/users/{userId}/account/histories": {
+      "delete": {
+        "description": "This API is used to delete user account histories. For example: for GDPR account deletion\n",
+        "operationId": "AdminDeleteUserAccountHistoryV1",
+        "parameters": [
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user id",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Delete User Account History",
+        "tags": ["Account History"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [DELETE]"]
+          }
+        ]
+      },
+      "get": {
+        "description": "This API is used to query user account histories. \n**Note**: the namespace should be the publisher namespace and the user id should be publisher user id\n-------\t\n- Supported **propertyType**:\n\t- profile: this is the default value\n\t\t- properties of **profile**:\n\t\t\t- display_name\n\t\t\t- unique_display_name\n\t\t\t- username\n\t\t\t- country\n\t\t\t- date_of_birth\n\t\t\t- email\n\t\t\t- password\n\t- mfa\n\t\t- properties of **mfa**:\n\t\t\t- mfa_authenticator\n\t\t\t- mfa_email\n\t\t\t- mfa_backup_code\n\t- all\n",
+        "operationId": "AdminQueryAccountHistoryV1",
+        "parameters": [
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user id",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "End date of logs in unix timestamp format. Range between startDate should not exceed 30 day. Default: Current time in UTC.",
+            "in": "query",
+            "name": "endDate",
+            "type": "number"
+          },
+          {
+            "description": "Limit of query. Default: 20. Max: 500",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "Offset of query. Default : 0. ",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "description": "sort by timestamp, default: 1, asc: 1, desc: -1",
+            "in": "query",
+            "name": "order",
+            "type": "string"
+          },
+          {
+            "description": "property of the account",
+            "in": "query",
+            "name": "property",
+            "type": "string"
+          },
+          {
+            "description": "type of the property, default: profile",
+            "in": "query",
+            "name": "propertyType",
+            "type": "string"
+          },
+          {
+            "description": "Start date of logs in unix timestamp format. Range between endDate should not exceed 30 day. Default: Current time in UTC minus 15 minutes.",
+            "in": "query",
+            "name": "startDate",
+            "type": "number"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.PaginatedAccountHistoryResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Query User Account History",
+        "tags": ["Account History"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [READ]"]
+          }
+        ]
+      }
+    },
+    "/audit/v1/admin/users/me/account/histories": {
+      "get": {
+        "description": "This API is used to query admin own account histories.\n-------\nSupported **property**:\n- display_name\n- unique_display_name\n- username\n- country\n- date_of_birth\n- email\n- password\n",
+        "operationId": "AdminQueryMyAccountHistoryV1",
+        "parameters": [
+          {
+            "description": "End date of logs in unix timestamp format. Range between startDate should not exceed 30 day. Default: Current time in UTC.",
+            "in": "query",
+            "name": "endDate",
+            "type": "number"
+          },
+          {
+            "description": "Limit of query. Default: 20. Max: 500",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "Offset of query. Default : 0. ",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "description": "property of the account",
+            "in": "query",
+            "name": "property",
+            "type": "string"
+          },
+          {
+            "description": "Start date of logs in unix timestamp format. Range between endDate should not exceed 30 day. Default: Current time in UTC minus 15 minutes.",
+            "in": "query",
+            "name": "startDate",
+            "type": "number"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.PaginatedAccountHistoryResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Query Admin Own Account History",
+        "tags": ["Account History"],
+        "x-errorCodes": {},
+        "x-security": []
+      }
+    },
+    "/audit/v1/public/users/me/account/histories": {
+      "get": {
+        "description": "This API is used to query user account histories.\n-------\nSupported **property**:\n- display_name\n- unique_display_name\n- username\n- country\n- date_of_birth\n- email\n- password\n",
+        "operationId": "PublicQueryMyAccountHistoryV1",
+        "parameters": [
+          {
+            "description": "End date of logs in unix timestamp format. Range between startDate should not exceed 30 day. Default: Current time in UTC.",
+            "in": "query",
+            "name": "endDate",
+            "type": "number"
+          },
+          {
+            "description": "Limit of query. Default: 20. Max: 500",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "Offset of query. Default : 0. ",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "description": "property of the account",
+            "in": "query",
+            "name": "property",
+            "type": "string"
+          },
+          {
+            "description": "Start date of logs in unix timestamp format. Range between endDate should not exceed 30 day. Default: Current time in UTC minus 15 minutes.",
+            "in": "query",
+            "name": "startDate",
+            "type": "number"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.PaginatedAccountHistoryResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Query User Account History",
+        "tags": ["Account History"],
+        "x-errorCodes": {},
+        "x-security": []
+      }
+    },
+    "/audit/version": {
+      "get": {
+        "operationId": "showVersionHandler",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "x-errorCodes": {}
+      }
+    },
+    "/healthz": {
+      "get": {
+        "operationId": "GetHealthcheckInfo",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "x-errorCodes": {}
+      }
+    }
+  },
+  "definitions": {
+    "models.Action": {
+      "properties": {
+        "actionDisplayName": {
+          "description": "action display name",
+          "type": "string"
+        },
+        "actionName": {
+          "description": "action query name",
+          "type": "string"
+        }
+      },
+      "required": ["actionDisplayName", "actionName"]
+    },
+    "models.AuditLogInfo": {
+      "properties": {
+        "actionDisplayName": {
+          "type": "string"
+        },
+        "actionName": {
+          "type": "string"
+        },
+        "actor": {
+          "type": "string"
+        },
+        "actorNamespace": {
+          "type": "string"
+        },
+        "actorType": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "categoryDisplayName": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "content": {
+          "type": "object"
+        },
+        "deviceId": {
+          "type": "string"
+        },
+        "diff": {
+          "type": "object"
+        },
+        "id": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "objectId": {
+          "type": "string"
+        },
+        "objectNamespace": {
+          "type": "string"
+        },
+        "objectType": {
+          "type": "string"
+        },
+        "objectTypeDisplayName": {
+          "type": "string"
+        },
+        "targetUserId": {
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        }
+      },
+      "required": [
+        "actionDisplayName",
+        "actionName",
+        "actor",
+        "actorNamespace",
+        "actorType",
+        "category",
+        "categoryDisplayName",
+        "clientId",
+        "content",
+        "deviceId",
+        "diff",
+        "id",
+        "ip",
+        "objectId",
+        "objectNamespace",
+        "objectType",
+        "objectTypeDisplayName",
+        "targetUserId",
+        "timestamp"
+      ]
+    },
+    "models.Category": {
+      "properties": {
+        "actions": {
+          "items": {
+            "$ref": "#/definitions/models.Action"
+          },
+          "type": "array"
+        },
+        "category": {
+          "description": "category query name",
+          "type": "string"
+        },
+        "categoryDisplayName": {
+          "description": "category display name",
+          "type": "string"
+        },
+        "objectTypes": {
+          "items": {
+            "$ref": "#/definitions/models.ObjectType"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["actions", "category", "categoryDisplayName", "objectTypes"]
+    },
+    "models.CategoryResponse": {
+      "properties": {
+        "categories": {
+          "items": {
+            "$ref": "#/definitions/models.Category"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["categories"]
+    },
+    "models.ObjectType": {
+      "properties": {
+        "objectType": {
+          "description": "object type",
+          "type": "string"
+        },
+        "objectTypeDisplayName": {
+          "description": "object type display name",
+          "type": "string"
+        }
+      },
+      "required": ["objectType", "objectTypeDisplayName"]
+    },
+    "models.PaginatedAccountHistoryResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.UserAccountHistory"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/models.Paging"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "models.PaginatedAuditLogsResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.SimpleAuditLog"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/models.Paging"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "models.Paging": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        }
+      }
+    },
+    "models.SimpleAuditLog": {
+      "properties": {
+        "actionDisplayName": {
+          "type": "string"
+        },
+        "actionName": {
+          "type": "string"
+        },
+        "actor": {
+          "type": "string"
+        },
+        "actorNamespace": {
+          "type": "string"
+        },
+        "actorType": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "categoryDisplayName": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "deviceId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "objectId": {
+          "type": "string"
+        },
+        "objectNamespace": {
+          "type": "string"
+        },
+        "objectType": {
+          "type": "string"
+        },
+        "objectTypeDisplayName": {
+          "type": "string"
+        },
+        "targetUserId": {
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        }
+      },
+      "required": [
+        "actionDisplayName",
+        "actionName",
+        "actor",
+        "actorNamespace",
+        "actorType",
+        "category",
+        "categoryDisplayName",
+        "clientId",
+        "deviceId",
+        "id",
+        "ip",
+        "objectId",
+        "objectNamespace",
+        "objectType",
+        "objectTypeDisplayName",
+        "targetUserId",
+        "timestamp"
+      ]
+    },
+    "models.TimeRangeConfigResponse": {
+      "properties": {
+        "day": {
+          "description": "The number of days between the earliest day can be query and the current date",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": ["day"]
+    },
+    "models.UserAccountHistory": {
+      "properties": {
+        "actionName": {
+          "type": "string"
+        },
+        "actor": {
+          "type": "string"
+        },
+        "actorNamespace": {
+          "type": "string"
+        },
+        "actorType": {
+          "type": "string"
+        },
+        "createdAt": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "payload": {
+          "type": "object"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "required": ["actionName", "actor", "actorNamespace", "actorType", "createdAt", "namespace", "payload", "userId"]
+    },
+    "response.ErrorResponse": {
+      "properties": {
+        "errorCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "errorMessage": {
+          "type": "string"
+        }
+      },
+      "required": ["errorCode", "errorMessage"]
+    }
+  },
+  "x-docs": {
+    "alias": "audit",
+    "host": "https://development.accelbyte.io",
+    "path": "/audit/apidocs/api.json"
+  },
+  "x-version": {
+    "buildDate": "2024-09-13T08:58:09+00:00",
+    "gitHash": "b9cadf99e66a6282efd9a8f9c01243bcf14202a3",
+    "name": "justice-audit-log-service",
+    "realm": "dev",
+    "version": "1.3.0",
+    "version-roles-seeding": "0.0.15"
+  }
+}

@@ -7,6 +7,7 @@ import { z } from 'zod'
 
 export const TotalActiveSession = z.object({
   createdAt: z.string().nullish(),
+  matchPool: z.string().nullish(),
   namespace: z.string().nullish(),
   region: z.string().nullish(),
   value: z.number().int().nullish()

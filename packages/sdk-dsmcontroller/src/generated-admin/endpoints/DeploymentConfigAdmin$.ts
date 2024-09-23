@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { CreateDeploymentOverrideRequest } from '../../generated-definitions/CreateDeploymentOverrideRequest.js'
 import { CreateDeploymentRequest } from '../../generated-definitions/CreateDeploymentRequest.js'
@@ -20,13 +20,13 @@ import { UpdateRegionOverrideRequest } from '../../generated-definitions/UpdateR
 
 export class DeploymentConfigAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get a all deployments in a namespace Parameter Offset and Count is Required
    */
-  getConfigsDeployments(queryParams: { count: number; offset: number; name?: string | null }): Promise<IResponse<ListDeploymentResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  getConfigsDeployments(queryParams: { count: number; offset: number; name?: string | null }): Promise<Response<ListDeploymentResponse>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/deployments'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -37,12 +37,11 @@ export class DeploymentConfigAdmin$ {
       'ListDeploymentResponse'
     )
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [DELETE] Required scope: social This endpoint delete a dedicated server deployment in a namespace
    */
-  deleteConfigDeployment_ByDeployment(deployment: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteConfigDeployment_ByDeployment(deployment: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}'
       .replace('{namespace}', this.namespace)
       .replace('{deployment}', deployment)
@@ -50,12 +49,11 @@ export class DeploymentConfigAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get a dedicated server deployment in a namespace
    */
-  getConfigDeployment_ByDeployment(deployment: string): Promise<IResponse<DeploymentWithOverride>> {
-    const params = {} as SDKRequestConfig
+  getConfigDeployment_ByDeployment(deployment: string): Promise<Response<DeploymentWithOverride>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}'
       .replace('{namespace}', this.namespace)
       .replace('{deployment}', deployment)
@@ -68,12 +66,11 @@ export class DeploymentConfigAdmin$ {
       'DeploymentWithOverride'
     )
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [UPDATE] Required scope: social This endpoint update a dedicated servers deployment in a namespace.
    */
-  patchConfigDeployment_ByDeployment(deployment: string, data: UpdateDeploymentRequest): Promise<IResponse<DeploymentWithOverride>> {
-    const params = {} as SDKRequestConfig
+  patchConfigDeployment_ByDeployment(deployment: string, data: UpdateDeploymentRequest): Promise<Response<DeploymentWithOverride>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}'
       .replace('{namespace}', this.namespace)
       .replace('{deployment}', deployment)
@@ -86,12 +83,11 @@ export class DeploymentConfigAdmin$ {
       'DeploymentWithOverride'
     )
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [CREATE] Required scope: social This endpoint create a dedicated servers deployment in a namespace.
    */
-  createConfigDeployment_ByDeployment(deployment: string, data: CreateDeploymentRequest): Promise<IResponse<DeploymentWithOverride>> {
-    const params = {} as SDKRequestConfig
+  createConfigDeployment_ByDeployment(deployment: string, data: CreateDeploymentRequest): Promise<Response<DeploymentWithOverride>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}'
       .replace('{namespace}', this.namespace)
       .replace('{deployment}', deployment)
@@ -104,12 +100,11 @@ export class DeploymentConfigAdmin$ {
       'DeploymentWithOverride'
     )
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [DELETE] Required scope: social This endpoint deletes the deployment creating server count queue in a namespace in all registered region for the selected version
    */
-  deleteQueueConfig_ByDeployment_ByVersion(deployment: string, version: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteQueueConfig_ByDeployment_ByVersion(deployment: string, version: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}/versions/{version}/queues'
       .replace('{namespace}', this.namespace)
       .replace('{deployment}', deployment)
@@ -118,12 +113,11 @@ export class DeploymentConfigAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [DELETE] Required scope: social This endpoint delete a dedicated server deployment override in a namespace in a region for root deployment
    */
-  deleteOverrideRegionConfig_ByDeployment_ByRegion(deployment: string, region: string): Promise<IResponse<DeploymentWithOverride>> {
-    const params = {} as SDKRequestConfig
+  deleteOverrideRegionConfig_ByDeployment_ByRegion(deployment: string, region: string): Promise<Response<DeploymentWithOverride>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}/overrides/regions/{region}'
       .replace('{namespace}', this.namespace)
       .replace('{deployment}', deployment)
@@ -137,7 +131,6 @@ export class DeploymentConfigAdmin$ {
       'DeploymentWithOverride'
     )
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [UPDATE] Required scope: social This endpoint update a dedicated servers deployment override in a namespace in a region for root deployment.
    */
@@ -145,8 +138,8 @@ export class DeploymentConfigAdmin$ {
     deployment: string,
     region: string,
     data: UpdateRegionOverrideRequest
-  ): Promise<IResponse<DeploymentWithOverride>> {
-    const params = {} as SDKRequestConfig
+  ): Promise<Response<DeploymentWithOverride>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}/overrides/regions/{region}'
       .replace('{namespace}', this.namespace)
       .replace('{deployment}', deployment)
@@ -160,7 +153,6 @@ export class DeploymentConfigAdmin$ {
       'DeploymentWithOverride'
     )
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [CREATE] Required scope: social This endpoint creates a dedicated servers deployment override in a namespace in a region for root deployment.
    */
@@ -168,8 +160,8 @@ export class DeploymentConfigAdmin$ {
     deployment: string,
     region: string,
     data: CreateRegionOverrideRequest
-  ): Promise<IResponse<DeploymentWithOverride>> {
-    const params = {} as SDKRequestConfig
+  ): Promise<Response<DeploymentWithOverride>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}/overrides/regions/{region}'
       .replace('{namespace}', this.namespace)
       .replace('{deployment}', deployment)
@@ -183,7 +175,6 @@ export class DeploymentConfigAdmin$ {
       'DeploymentWithOverride'
     )
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [CREATE] Required scope: social This endpoint create a dedicated servers deployment override in a namespace.
    */
@@ -191,8 +182,8 @@ export class DeploymentConfigAdmin$ {
     deployment: string,
     version: string,
     data: CreateDeploymentOverrideRequest
-  ): Promise<IResponse<DeploymentWithOverride>> {
-    const params = {} as SDKRequestConfig
+  ): Promise<Response<DeploymentWithOverride>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}/overrides/version/{version}'
       .replace('{namespace}', this.namespace)
       .replace('{deployment}', deployment)
@@ -206,12 +197,11 @@ export class DeploymentConfigAdmin$ {
       'DeploymentWithOverride'
     )
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [DELETE] Required scope: social This endpoint delete a dedicated server deployment override in a namespace
    */
-  deleteOverrideVersionConfig_ByDeployment_ByVersion(deployment: string, version: string): Promise<IResponse<DeploymentWithOverride>> {
-    const params = {} as SDKRequestConfig
+  deleteOverrideVersionConfig_ByDeployment_ByVersion(deployment: string, version: string): Promise<Response<DeploymentWithOverride>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}/overrides/versions/{version}'
       .replace('{namespace}', this.namespace)
       .replace('{deployment}', deployment)
@@ -225,7 +215,6 @@ export class DeploymentConfigAdmin$ {
       'DeploymentWithOverride'
     )
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [UPDATE] Required scope: social This endpoint update a dedicated servers deployment override in a namespace.
    */
@@ -233,8 +222,8 @@ export class DeploymentConfigAdmin$ {
     deployment: string,
     version: string,
     data: UpdateDeploymentOverrideRequest
-  ): Promise<IResponse<DeploymentWithOverride>> {
-    const params = {} as SDKRequestConfig
+  ): Promise<Response<DeploymentWithOverride>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}/overrides/versions/{version}'
       .replace('{namespace}', this.namespace)
       .replace('{deployment}', deployment)
@@ -248,7 +237,6 @@ export class DeploymentConfigAdmin$ {
       'DeploymentWithOverride'
     )
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [DELETE] Required scope: social This endpoint delete a dedicated server deployment override in a namespace in a region for deployment overrides
    */
@@ -256,8 +244,8 @@ export class DeploymentConfigAdmin$ {
     deployment: string,
     version: string,
     region: string
-  ): Promise<IResponse<DeploymentWithOverride>> {
-    const params = {} as SDKRequestConfig
+  ): Promise<Response<DeploymentWithOverride>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}/overrides/versions/{version}/regions/{region}'
       .replace('{namespace}', this.namespace)
       .replace('{deployment}', deployment)
@@ -272,7 +260,6 @@ export class DeploymentConfigAdmin$ {
       'DeploymentWithOverride'
     )
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [UPDATE] Required scope: social This endpoint update a dedicated servers deployment override in a namespace in a region for deployment overrides.
    */
@@ -281,8 +268,8 @@ export class DeploymentConfigAdmin$ {
     version: string,
     region: string,
     data: UpdateRegionOverrideRequest
-  ): Promise<IResponse<DeploymentWithOverride>> {
-    const params = {} as SDKRequestConfig
+  ): Promise<Response<DeploymentWithOverride>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}/overrides/versions/{version}/regions/{region}'
       .replace('{namespace}', this.namespace)
       .replace('{deployment}', deployment)
@@ -297,7 +284,6 @@ export class DeploymentConfigAdmin$ {
       'DeploymentWithOverride'
     )
   }
-
   /**
    * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [CREATE] Required scope: social This endpoint creates a dedicated servers deployment override in a namespace in a region for deployment overrides.
    */
@@ -306,8 +292,8 @@ export class DeploymentConfigAdmin$ {
     version: string,
     region: string,
     data: CreateRegionOverrideRequest
-  ): Promise<IResponse<DeploymentWithOverride>> {
-    const params = {} as SDKRequestConfig
+  ): Promise<Response<DeploymentWithOverride>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/admin/namespaces/{namespace}/configs/deployments/{deployment}/overrides/versions/{version}/regions/{region}'
       .replace('{namespace}', this.namespace)
       .replace('{deployment}', deployment)

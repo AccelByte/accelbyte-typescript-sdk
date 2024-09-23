@@ -11,6 +11,7 @@ export const Ticket = z.object({
   CreatedAt: z.string().nullish(),
   Latencies: z.record(z.number().int()).nullish(),
   MatchPool: z.string().nullish(),
+  MatchedAt: z.string().nullish(),
   Namespace: z.string().nullish(),
   PartySessionID: z.string().nullish(),
   Players: z.array(PlayerData).nullish(),

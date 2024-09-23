@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { InboxAdminApi } from '../InboxAdminApi.js'
 
 import { AddInboxCategoryRequest } from '../../generated-definitions/AddInboxCategoryRequest.js'
@@ -30,30 +30,42 @@ import { UpdateInboxCategoryRequest } from '../../generated-definitions/UpdateIn
 import { UpdateInboxMessageRequest } from '../../generated-definitions/UpdateInboxMessageRequest.js'
 
 export enum Key_InboxAdmin {
-  InboxStats = 'InboxAdmin.InboxStats',
-  InboxMessages = 'InboxAdmin.InboxMessages',
-  InboxMessage = 'InboxAdmin.InboxMessage',
-  InboxCategories = 'InboxAdmin.InboxCategories',
-  InboxCategory = 'InboxAdmin.InboxCategory',
-  InboxMessage_ByMessageId = 'InboxAdmin.InboxMessage_ByMessageId',
-  InboxCategory_ByCategory = 'InboxAdmin.InboxCategory_ByCategory',
-  UsersInbox_ByInbox = 'InboxAdmin.UsersInbox_ByInbox',
-  UnsendInbox_ByInbox = 'InboxAdmin.UnsendInbox_ByInbox',
-  SendInbox_ByMessageId = 'InboxAdmin.SendInbox_ByMessageId',
-  SchemaJsonInbox_ByCategory = 'InboxAdmin.SchemaJsonInbox_ByCategory'
+  InboxStats = 'Chat.InboxAdmin.InboxStats',
+  InboxMessages = 'Chat.InboxAdmin.InboxMessages',
+  InboxMessage = 'Chat.InboxAdmin.InboxMessage',
+  InboxCategories = 'Chat.InboxAdmin.InboxCategories',
+  InboxCategory = 'Chat.InboxAdmin.InboxCategory',
+  InboxMessage_ByMessageId = 'Chat.InboxAdmin.InboxMessage_ByMessageId',
+  InboxCategory_ByCategory = 'Chat.InboxAdmin.InboxCategory_ByCategory',
+  UsersInbox_ByInbox = 'Chat.InboxAdmin.UsersInbox_ByInbox',
+  UnsendInbox_ByInbox = 'Chat.InboxAdmin.UnsendInbox_ByInbox',
+  SendInbox_ByMessageId = 'Chat.InboxAdmin.SendInbox_ByMessageId',
+  SchemaJsonInbox_ByCategory = 'Chat.InboxAdmin.SchemaJsonInbox_ByCategory'
 }
 
-export const useAdmInboxStats = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams?: { messageId?: string[] } },
+/**
+ * Get inbox stats
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_InboxAdmin.InboxStats, input]
+ * }
+ * ```
+ */
+export const useInboxAdminApi_GetInboxStats = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams?: { messageId?: string[] } },
   options?: Omit<UseQueryOptions<GetInboxStatsResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: GetInboxStatsResponse) => void
+  callback?: (data: AxiosResponse<GetInboxStatsResponse>) => void
 ): UseQueryResult<GetInboxStatsResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmInboxStats>[1]) => async () => {
-    const data = await InboxAdminApi(sdk, { namespace: input.namespace }).getInboxStats(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useInboxAdminApi_GetInboxStats>[1]) => async () => {
+    const response = await InboxAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getInboxStats(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<GetInboxStatsResponse, AxiosError<ApiError>>({
@@ -63,9 +75,20 @@ export const useAdmInboxStats = (
   })
 }
 
-export const useAdmInboxMessages = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * Get inbox messages
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_InboxAdmin.InboxMessages, input]
+ * }
+ * ```
+ */
+export const useInboxAdminApi_GetInboxMessages = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     queryParams?: {
       activeOnly?: boolean | null
       endCreatedAt?: number
@@ -80,13 +103,14 @@ export const useAdmInboxMessages = (
     }
   },
   options?: Omit<UseQueryOptions<GetInboxMessagesResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: GetInboxMessagesResponse) => void
+  callback?: (data: AxiosResponse<GetInboxMessagesResponse>) => void
 ): UseQueryResult<GetInboxMessagesResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmInboxMessages>[1]) => async () => {
-    const data = await InboxAdminApi(sdk, { namespace: input.namespace }).getInboxMessages(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useInboxAdminApi_GetInboxMessages>[1]) => async () => {
+    const response = await InboxAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getInboxMessages(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<GetInboxMessagesResponse, AxiosError<ApiError>>({
@@ -96,19 +120,31 @@ export const useAdmInboxMessages = (
   })
 }
 
-export const useAdmCreateInboxMessageMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Save inbox message
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_InboxAdmin.InboxMessage, input]
+ * }
+ * ```
+ */
+export const useInboxAdminApi_CreateInboxMessageMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<SaveInboxMessageResponse, AxiosError<ApiError>, ApiArgs & { data: SaveInboxMessageRequest }>,
+    UseMutationOptions<SaveInboxMessageResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: SaveInboxMessageRequest }>,
     'mutationKey'
   >,
   callback?: (data: SaveInboxMessageResponse) => void
-): UseMutationResult<SaveInboxMessageResponse, AxiosError<ApiError>, ApiArgs & { data: SaveInboxMessageRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: SaveInboxMessageRequest }) => {
-    const data = await InboxAdminApi(sdk, { namespace: input.namespace, config: input.config }).createInboxMessage(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<SaveInboxMessageResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: SaveInboxMessageRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: SaveInboxMessageRequest }) => {
+    const response = await InboxAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createInboxMessage(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -118,17 +154,27 @@ export const useAdmCreateInboxMessageMutation = (
   })
 }
 
-export const useAdmInboxCategories = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Get inbox categories
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_InboxAdmin.InboxCategories, input]
+ * }
+ * ```
+ */
+export const useInboxAdminApi_GetInboxCategories = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<GetInboxCategoriesResponseItemArray, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: GetInboxCategoriesResponseItemArray) => void
+  callback?: (data: AxiosResponse<GetInboxCategoriesResponseItemArray>) => void
 ): UseQueryResult<GetInboxCategoriesResponseItemArray, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmInboxCategories>[1]) => async () => {
-    const data = await InboxAdminApi(sdk, { namespace: input.namespace }).getInboxCategories()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useInboxAdminApi_GetInboxCategories>[1]) => async () => {
+    const response = await InboxAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getInboxCategories()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<GetInboxCategoriesResponseItemArray, AxiosError<ApiError>>({
@@ -138,19 +184,31 @@ export const useAdmInboxCategories = (
   })
 }
 
-export const useAdmCreateInboxCategoryMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Add inbox category.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_InboxAdmin.InboxCategory, input]
+ * }
+ * ```
+ */
+export const useInboxAdminApi_CreateInboxCategoryMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<AddInboxCategoryResponse, AxiosError<ApiError>, ApiArgs & { data: AddInboxCategoryRequest }>,
+    UseMutationOptions<AddInboxCategoryResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: AddInboxCategoryRequest }>,
     'mutationKey'
   >,
   callback?: (data: AddInboxCategoryResponse) => void
-): UseMutationResult<AddInboxCategoryResponse, AxiosError<ApiError>, ApiArgs & { data: AddInboxCategoryRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: AddInboxCategoryRequest }) => {
-    const data = await InboxAdminApi(sdk, { namespace: input.namespace, config: input.config }).createInboxCategory(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<AddInboxCategoryResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: AddInboxCategoryRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: AddInboxCategoryRequest }) => {
+    const response = await InboxAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createInboxCategory(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -160,113 +218,174 @@ export const useAdmCreateInboxCategoryMutation = (
   })
 }
 
-export const useAdmDeleteInboxMessage_ByMessageIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Delete inbox message
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_InboxAdmin.InboxMessage_ByMessageId, input]
+ * }
+ * ```
+ */
+export const useInboxAdminApi_DeleteInboxMessage_ByMessageIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { messageId: string; queryParams?: { force?: boolean | null } }>,
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { messageId: string; queryParams?: { force?: boolean | null } }>,
     'mutationKey'
   >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { messageId: string; queryParams?: { force?: boolean | null } }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { messageId: string; queryParams?: { force?: boolean | null } }) => {
-    const data = await InboxAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteInboxMessage_ByMessageId(
-      input.messageId,
+): UseMutationResult<
+  unknown,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { messageId: string; queryParams?: { force?: boolean | null } }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { messageId: string; queryParams?: { force?: boolean | null } }) => {
+    const response = await InboxAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteInboxMessage_ByMessageId(input.messageId, input.queryParams)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_InboxAdmin.InboxMessage_ByMessageId],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Update inbox message
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_InboxAdmin.InboxMessage_ByMessageId, input]
+ * }
+ * ```
+ */
+export const useInboxAdminApi_PatchInboxMessage_ByMessageIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { messageId: string; data: UpdateInboxMessageRequest }>,
+    'mutationKey'
+  >,
+  callback?: (data: unknown) => void
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { messageId: string; data: UpdateInboxMessageRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { messageId: string; data: UpdateInboxMessageRequest }) => {
+    const response = await InboxAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).patchInboxMessage_ByMessageId(input.messageId, input.data)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_InboxAdmin.InboxMessage_ByMessageId],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Delete inbox category
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_InboxAdmin.InboxCategory_ByCategory, input]
+ * }
+ * ```
+ */
+export const useInboxAdminApi_DeleteInboxCategory_ByCategoryMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { category: string }>, 'mutationKey'>,
+  callback?: (data: unknown) => void
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { category: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { category: string }) => {
+    const response = await InboxAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteInboxCategory_ByCategory(input.category)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_InboxAdmin.InboxCategory_ByCategory],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Update inbox category
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_InboxAdmin.InboxCategory_ByCategory, input]
+ * }
+ * ```
+ */
+export const useInboxAdminApi_PatchInboxCategory_ByCategoryMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { category: string; data: UpdateInboxCategoryRequest }>,
+    'mutationKey'
+  >,
+  callback?: (data: unknown) => void
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { category: string; data: UpdateInboxCategoryRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { category: string; data: UpdateInboxCategoryRequest }) => {
+    const response = await InboxAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).patchInboxCategory_ByCategory(input.category, input.data)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_InboxAdmin.InboxCategory_ByCategory],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Get inbox users
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_InboxAdmin.UsersInbox_ByInbox, input]
+ * }
+ * ```
+ */
+export const useInboxAdminApi_GetUsersInbox_ByInbox = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
+    inbox: string
+    queryParams?: { limit?: number; offset?: number; status?: 'READ' | 'UNREAD'; userId?: string | null }
+  },
+  options?: Omit<UseQueryOptions<GetInboxUsersResponse, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<GetInboxUsersResponse>) => void
+): UseQueryResult<GetInboxUsersResponse, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useInboxAdminApi_GetUsersInbox_ByInbox>[1]) => async () => {
+    const response = await InboxAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getUsersInbox_ByInbox(
+      input.inbox,
       input.queryParams
     )
-    callback && callback(data)
-    return data
-  }
-
-  return useMutation({
-    mutationKey: [Key_InboxAdmin.InboxMessage_ByMessageId],
-    mutationFn,
-    ...options
-  })
-}
-
-export const useAdmPatchInboxMessage_ByMessageIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<
-    UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { messageId: string; data: UpdateInboxMessageRequest }>,
-    'mutationKey'
-  >,
-  callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { messageId: string; data: UpdateInboxMessageRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { messageId: string; data: UpdateInboxMessageRequest }) => {
-    const data = await InboxAdminApi(sdk, { namespace: input.namespace, config: input.config }).patchInboxMessage_ByMessageId(
-      input.messageId,
-      input.data
-    )
-    callback && callback(data)
-    return data
-  }
-
-  return useMutation({
-    mutationKey: [Key_InboxAdmin.InboxMessage_ByMessageId],
-    mutationFn,
-    ...options
-  })
-}
-
-export const useAdmDeleteInboxCategory_ByCategoryMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { category: string }>, 'mutationKey'>,
-  callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { category: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { category: string }) => {
-    const data = await InboxAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteInboxCategory_ByCategory(
-      input.category
-    )
-    callback && callback(data)
-    return data
-  }
-
-  return useMutation({
-    mutationKey: [Key_InboxAdmin.InboxCategory_ByCategory],
-    mutationFn,
-    ...options
-  })
-}
-
-export const useAdmPatchInboxCategory_ByCategoryMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<
-    UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { category: string; data: UpdateInboxCategoryRequest }>,
-    'mutationKey'
-  >,
-  callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { category: string; data: UpdateInboxCategoryRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { category: string; data: UpdateInboxCategoryRequest }) => {
-    const data = await InboxAdminApi(sdk, { namespace: input.namespace, config: input.config }).patchInboxCategory_ByCategory(
-      input.category,
-      input.data
-    )
-    callback && callback(data)
-    return data
-  }
-
-  return useMutation({
-    mutationKey: [Key_InboxAdmin.InboxCategory_ByCategory],
-    mutationFn,
-    ...options
-  })
-}
-
-export const useAdmUsersInbox_ByInbox = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { inbox: string; queryParams?: { limit?: number; offset?: number; status?: 'READ' | 'UNREAD'; userId?: string | null } },
-  options?: Omit<UseQueryOptions<GetInboxUsersResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: GetInboxUsersResponse) => void
-): UseQueryResult<GetInboxUsersResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmUsersInbox_ByInbox>[1]) => async () => {
-    const data = await InboxAdminApi(sdk, { namespace: input.namespace }).getUsersInbox_ByInbox(input.inbox, input.queryParams)
-    callback && callback(data)
-    return data
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<GetInboxUsersResponse, AxiosError<ApiError>>({
@@ -276,22 +395,40 @@ export const useAdmUsersInbox_ByInbox = (
   })
 }
 
-export const useAdmCreateUnsendInbox_ByInboxMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Unsend inbox message
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_InboxAdmin.UnsendInbox_ByInbox, input]
+ * }
+ * ```
+ */
+export const useInboxAdminApi_UpdateUnsendInbox_ByInboxMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<UnsendInboxMessageResponse, AxiosError<ApiError>, ApiArgs & { inbox: string; data: UnsendInboxMessageRequest }>,
+    UseMutationOptions<
+      UnsendInboxMessageResponse,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { inbox: string; data: UnsendInboxMessageRequest }
+    >,
     'mutationKey'
   >,
   callback?: (data: UnsendInboxMessageResponse) => void
-): UseMutationResult<UnsendInboxMessageResponse, AxiosError<ApiError>, ApiArgs & { inbox: string; data: UnsendInboxMessageRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { inbox: string; data: UnsendInboxMessageRequest }) => {
-    const data = await InboxAdminApi(sdk, { namespace: input.namespace, config: input.config }).createUnsendInbox_ByInbox(
+): UseMutationResult<
+  UnsendInboxMessageResponse,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { inbox: string; data: UnsendInboxMessageRequest }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { inbox: string; data: UnsendInboxMessageRequest }) => {
+    const response = await InboxAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateUnsendInbox_ByInbox(
       input.inbox,
       input.data
     )
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -301,22 +438,40 @@ export const useAdmCreateUnsendInbox_ByInboxMutation = (
   })
 }
 
-export const useAdmCreateSendInbox_ByMessageIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Send inbox message
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_InboxAdmin.SendInbox_ByMessageId, input]
+ * }
+ * ```
+ */
+export const useInboxAdminApi_UpdateSendInbox_ByMessageIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<SendInboxMessageResponse, AxiosError<ApiError>, ApiArgs & { messageId: string; data: SendInboxMessageRequest }>,
+    UseMutationOptions<
+      SendInboxMessageResponse,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { messageId: string; data: SendInboxMessageRequest }
+    >,
     'mutationKey'
   >,
   callback?: (data: SendInboxMessageResponse) => void
-): UseMutationResult<SendInboxMessageResponse, AxiosError<ApiError>, ApiArgs & { messageId: string; data: SendInboxMessageRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { messageId: string; data: SendInboxMessageRequest }) => {
-    const data = await InboxAdminApi(sdk, { namespace: input.namespace, config: input.config }).createSendInbox_ByMessageId(
+): UseMutationResult<
+  SendInboxMessageResponse,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { messageId: string; data: SendInboxMessageRequest }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { messageId: string; data: SendInboxMessageRequest }) => {
+    const response = await InboxAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateSendInbox_ByMessageId(
       input.messageId,
       input.data
     )
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -326,17 +481,30 @@ export const useAdmCreateSendInbox_ByMessageIdMutation = (
   })
 }
 
-export const useAdmSchemaJsonInbox_ByCategory = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { category: string },
+/**
+ * Get category schema.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_InboxAdmin.SchemaJsonInbox_ByCategory, input]
+ * }
+ * ```
+ */
+export const useInboxAdminApi_GetSchemaJsonInbox_ByCategory = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { category: string },
   options?: Omit<UseQueryOptions<JsonSchemaType, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: JsonSchemaType) => void
+  callback?: (data: AxiosResponse<JsonSchemaType>) => void
 ): UseQueryResult<JsonSchemaType, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmSchemaJsonInbox_ByCategory>[1]) => async () => {
-    const data = await InboxAdminApi(sdk, { namespace: input.namespace }).getSchemaJsonInbox_ByCategory(input.category)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useInboxAdminApi_GetSchemaJsonInbox_ByCategory>[1]) => async () => {
+    const response = await InboxAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getSchemaJsonInbox_ByCategory(input.category)
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<JsonSchemaType, AxiosError<ApiError>>({

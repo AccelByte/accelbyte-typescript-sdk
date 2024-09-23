@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { ChatMessageResponseArray } from '../../generated-definitions/ChatMessageResponseArray.js'
 import { MuteUserRequest } from '../../generated-definitions/MuteUserRequest.js'
@@ -20,13 +20,13 @@ import { UnmuteUserRequest } from '../../generated-definitions/UnmuteUserRequest
 
 export class Topic$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * get chat muted topics in a namespace.
    */
-  getMuted(): Promise<IResponse<MutedTopicResponseArray>> {
-    const params = {} as SDKRequestConfig
+  getMuted(): Promise<Response<MutedTopicResponseArray>> {
+    const params = {} as AxiosRequestConfig
     const url = '/chat/public/namespaces/{namespace}/muted'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -37,12 +37,11 @@ export class Topic$ {
       'MutedTopicResponseArray'
     )
   }
-
   /**
    * get chat list of topic in a namespace.
    */
-  getTopic(queryParams?: { limit?: number; offset?: number; topicType?: string | null }): Promise<IResponse<ChatMessageResponseArray>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  getTopic(queryParams?: { limit?: number; offset?: number; topicType?: string | null }): Promise<Response<ChatMessageResponseArray>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/chat/public/namespaces/{namespace}/topic'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -53,26 +52,24 @@ export class Topic$ {
       'ChatMessageResponseArray'
     )
   }
-
   /**
    * Mute user.
    */
-  updateMute_ByTopic(topic: string, data: MuteUserRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  updateMute_ByTopic(topic: string, data: MuteUserRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/chat/public/namespaces/{namespace}/topic/{topic}/mute'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * get chat history in a namespace.
    */
   getChats_ByTopic(
     topic: string,
     queryParams?: { limit?: number; order?: string | null; startCreatedAt?: number }
-  ): Promise<IResponse<ChatMessageResponseArray>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  ): Promise<Response<ChatMessageResponseArray>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/chat/public/namespaces/{namespace}/topic/{topic}/chats'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -83,23 +80,21 @@ export class Topic$ {
       'ChatMessageResponseArray'
     )
   }
-
   /**
    * Unmute user.
    */
-  updateUnmute_ByTopic(topic: string, data: UnmuteUserRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  updateUnmute_ByTopic(topic: string, data: UnmuteUserRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/chat/public/namespaces/{namespace}/topic/{topic}/unmute'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Ban topic members in a group topic.
    */
-  createBanMember_ByTopic(topic: string, data: PublicBanTopicMembersRequest): Promise<IResponse<PublicBanTopicMembersResponse>> {
-    const params = {} as SDKRequestConfig
+  updateBanMember_ByTopic(topic: string, data: PublicBanTopicMembersRequest): Promise<Response<PublicBanTopicMembersResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/chat/public/namespaces/{namespace}/topic/{topic}/ban-members'
       .replace('{namespace}', this.namespace)
       .replace('{topic}', topic)
@@ -112,12 +107,11 @@ export class Topic$ {
       'PublicBanTopicMembersResponse'
     )
   }
-
   /**
    * Unban topic members in a group topic.
    */
-  createUnbanMember_ByTopic(topic: string, data: PublicUnbanTopicMembersRequest): Promise<IResponse<PublicUnbanTopicMembersResponse>> {
-    const params = {} as SDKRequestConfig
+  updateUnbanMember_ByTopic(topic: string, data: PublicUnbanTopicMembersRequest): Promise<Response<PublicUnbanTopicMembersResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/chat/public/namespaces/{namespace}/topic/{topic}/unban-members'
       .replace('{namespace}', this.namespace)
       .replace('{topic}', topic)
@@ -130,12 +124,11 @@ export class Topic$ {
       'PublicUnbanTopicMembersResponse'
     )
   }
-
   /**
    * Delete chat.
    */
-  deleteChat_ByTopic_ByChatId(topic: string, chatId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteChat_ByTopic_ByChatId(topic: string, chatId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/chat/public/namespaces/{namespace}/topic/{topic}/chats/{chatId}'
       .replace('{namespace}', this.namespace)
       .replace('{topic}', topic)

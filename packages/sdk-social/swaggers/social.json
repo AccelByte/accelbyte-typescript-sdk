@@ -8,7 +8,7 @@
     },
     "description": "Justice Statistics Service",
     "title": "justice-statistics-service",
-    "version": "2.17.0"
+    "version": "2.17.1"
   },
   "schemes": ["https"],
   "tags": [
@@ -42,22 +42,6 @@
     "url": "https://development.accelbyte.io/social"
   },
   "securityDefinitions": {
-    "HasPermission": {
-      "authorizationUrl": "https://dummy.oauth.net/auth",
-      "flow": "accessCode",
-      "scopes": {
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [READ]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [READ]"
-      },
-      "tokenUrl": "https://dumy.oauth.net/token",
-      "type": "oauth2"
-    },
-    "HasScope": {
-      "authorizationUrl": "https://dummy.oauth.net/auth",
-      "flow": "accessCode",
-      "scopes": {},
-      "tokenUrl": "https://dumy.oauth.net/token",
-      "type": "oauth2"
-    },
     "authorization": {
       "in": "header",
       "name": "Authorization",
@@ -1940,6 +1924,12 @@
               "$ref": "#/definitions/ErrorEntity"
             }
           },
+          "409": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003ctd\u003eErrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e12274\u003c/td\u003e\u003ctd\u003eStat cycle with id [{id}] already exists in namespace [{namespace}]\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/ErrorEntity"
+            }
+          },
           "422": {
             "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003ctd\u003eErrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20002\u003c/td\u003e\u003ctd\u003evalidation error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
@@ -1963,6 +1953,7 @@
         "x-errorCodes": {
           "12225": "Invalid time range",
           "12226": "Invalid date [{date}] of month [{month}]",
+          "12274": "Stat cycle with id [{id}] already exists in namespace [{namespace}]",
           "20000": "Internal server error",
           "20001": "Unauthorized",
           "20002": "validation error",
@@ -3581,7 +3572,7 @@
       },
       "patch": {
         "consumes": ["application/json"],
-        "description": "Update stat.\u0026lt;br\u0026gt;Other detail info:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: updated stat\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Field globalAggregationMethod will be ignored when the stat is not set as global\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Field globalAggregationMethod is not updatable when the stat status is TIED\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "description": "Update stat.\u0026lt;br\u0026gt;Other detail info:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: updated stat\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Field globalAggregationMethod will be ignored when the stat is not set as global\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Field globalAggregationMethod is not updatable when the stat status is TIED\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Field visibility is not updatable when the stat status is TIED\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
         "operationId": "updateStat",
         "parameters": [
           {
@@ -7625,10 +7616,6 @@
         "security": [
           {
             "authorization": []
-          },
-          {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:STATITEM [READ]"],
-            "authorization": []
           }
         ],
         "summary": "Bulk get user's statitems value by user id and multiple stat codes",
@@ -9050,6 +9037,11 @@
           },
           "type": "array",
           "uniqueItems": true
+        },
+        "visibility": {
+          "description": "The visibility for a stat, the default SHOWALL",
+          "enum": ["SERVERONLY", "SHOWALL"],
+          "type": "string"
         }
       },
       "required": ["defaultValue", "name", "setBy", "statCode"],
@@ -9359,6 +9351,10 @@
           "format": "date-time",
           "type": "string",
           "x-nullable": false
+        },
+        "visibility": {
+          "enum": ["SERVERONLY", "SHOWALL"],
+          "type": "string"
         }
       },
       "required": [
@@ -9522,6 +9518,10 @@
           },
           "type": "array",
           "uniqueItems": true
+        },
+        "visibility": {
+          "enum": ["SERVERONLY", "SHOWALL"],
+          "type": "string"
         }
       },
       "type": "object"
@@ -9729,16 +9729,16 @@
   },
   "x-version": {
     "buildBy": "Gradle 6.9.1",
-    "buildDate": "2024-08-06T04:33:28+00:00",
-    "buildID": "2.17.0",
+    "buildDate": "2024-09-19T03:38:28+00:00",
+    "buildID": "2.17.1",
     "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
-    "buildOS": "Linux amd64 5.10.220-209.869.amzn2.x86_64",
-    "gitBranchName": "JES-3570-make-imports-process-async",
-    "gitHash": "3d683e384b",
-    "gitTag": "2.9.0",
+    "buildOS": "Linux amd64 5.10.224-212.876.amzn2.x86_64",
+    "gitBranchName": "master",
+    "gitHash": "13091bf218",
+    "gitTag": "2.17.1",
     "name": "justice-social-service",
     "realm": "dev",
-    "version": "2.17.0",
+    "version": "2.17.1",
     "version-roles-seeding": "0.0.12"
   }
 }

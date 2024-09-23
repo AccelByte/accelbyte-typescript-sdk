@@ -1,0 +1,11 @@
+node_modules
+build
+dist
+docs
+dev-dist
+config-service-app
+scripts/*
+build.js
+**/*.js
+**/vite.config.ts
+docgen*.ts

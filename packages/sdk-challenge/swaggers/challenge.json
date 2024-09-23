@@ -11,33 +11,6 @@
     "url": "https://development.accelbyte.io/challenge/apidocs"
   },
   "securityDefinitions": {
-    "HasPermission": {
-      "authorizationUrl": "https://dummy.oauth.net/auth",
-      "flow": "accessCode",
-      "scopes": {
-        "ADMIN:NAMESPACE:{namespace}:CHALLENGE [CREATE]": "ADMIN:NAMESPACE:{namespace}:CHALLENGE [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:CHALLENGE [DELETE]": "ADMIN:NAMESPACE:{namespace}:CHALLENGE [DELETE]",
-        "ADMIN:NAMESPACE:{namespace}:CHALLENGE [READ]": "ADMIN:NAMESPACE:{namespace}:CHALLENGE [READ]",
-        "ADMIN:NAMESPACE:{namespace}:CHALLENGE [UPDATE]": "ADMIN:NAMESPACE:{namespace}:CHALLENGE [UPDATE]",
-        "ADMIN:NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]": "ADMIN:NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]",
-        "ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]": "ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]",
-        "ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]": "ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]",
-        "NAMESPACE:{namespace}:CHALLENGE [READ]": "NAMESPACE:{namespace}:CHALLENGE [READ]",
-        "NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]": "NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]",
-        "NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]": "NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]",
-        "NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]": "NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]",
-        "NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]": "NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]"
-      },
-      "tokenUrl": "https://dumy.oauth.net/token",
-      "type": "oauth2"
-    },
-    "HasScope": {
-      "authorizationUrl": "https://dummy.oauth.net/auth",
-      "flow": "accessCode",
-      "scopes": {},
-      "tokenUrl": "https://dumy.oauth.net/token",
-      "type": "oauth2"
-    },
     "authorization": {
       "in": "header",
       "name": "Authorization",
@@ -115,7 +88,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHALLENGE [READ]"],
             "authorization": []
           }
         ],
@@ -129,7 +101,7 @@
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [CREATE]\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;Challenge is a collection of goals that can be completed by players. Challenge can have rules that specify what and when goals will be available for players to be taken.\u0026lt;p\u0026gt;Request body:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;code: only lowercase letters, numbers, and the separator - are allowed; must start and end with letter\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;name: name of the challenge\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;description: text describing about the challenge (optional)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;startDate: timestamp of when the challenge is started\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;endDate: timestamp of when the challenge is ended (optional)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;endAfter: describe number of period challenge will be retired after (optional)\u0026lt;/li\u0026gt;To configure challenge that never end, leave the endDate and endAfter field null/empty.\u0026lt;li\u0026gt;repeatAfter: describe number of period challenge\u0026#39;s goals will be repeated after. Leave it empty if you don\u0026#39;t want to repeat the challenge.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;rotation: describe how long goals in a challenge will be available for players to progress before rotated with another goals. (DAILY|WEEKLY|MONTHLY|NONE)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;activeGoalsPerRotation: number of goals per rotation (currently only applicable for RANDOMIZE assignment)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;assignmentRule: describe how the goals will be assigned and scheduled to users. (FIXED|RANDOMIZED|UNSCHEDULED)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;goalsVisibility: describe whether users can see all goals under challenge, or only active goal in one rotation period only. (SHOWALL|PERIODONLY)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetConfig: describe when rotation reset will happen (optional).\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;resetTime: Reset time must follow hours:minutes in 24 hours format (e.g. 01:30, 23:15) and in UTC timezone. Default to \u0026#34;00:00\u0026#34;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetDay: Reset Day follows the ISO-8601 standard, from 1 (Monday) to 7 (Sunday). Default to 1 in WEEKLY rotation.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetDate: Reset Date must be a number 1 - 31. Default to 1 in MONTHLY rotation.\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;randomizedPerRotation:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;true: each goal will be randomly assigned to multiple periods\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;false: a goal will only be assigned to one period \u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/p\u0026gt;",
+        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [CREATE]\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;Challenge is a collection of goals that can be completed by players. Challenge can have rules that specify what and when goals will be available for players to be taken.\u0026lt;p\u0026gt;Request body:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;code: only lowercase letters, numbers, and the separator - are allowed; must start and end with letter\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;name: name of the challenge\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;description: text describing about the challenge (optional)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;startDate: timestamp of when the challenge is started\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;endDate: timestamp of when the challenge is ended (optional)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;endAfter: describe number of period challenge will be retired after (optional)\u0026lt;/li\u0026gt;To configure challenge that never end, leave the endDate and endAfter field null/empty.\u0026lt;li\u0026gt;repeatAfter: describe number of period challenge\u0026#39;s goals will be repeated after. Leave it empty if you don\u0026#39;t want to repeat the challenge.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;rotation: describe how long goals in a challenge will be available for players to progress before rotated with another goals. (DAILY|WEEKLY|MONTHLY|NONE)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;activeGoalsPerRotation: number of goals per rotation (currently only applicable for RANDOMIZE assignment)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;assignmentRule: describe how the goals will be assigned and scheduled to users. (FIXED|RANDOMIZED|UNSCHEDULED|CUSTOM)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;goalsVisibility: describe whether users can see all goals under challenge, or only active goal in one rotation period only. (SHOWALL|PERIODONLY)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetConfig: describe when rotation reset will happen (optional).\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;resetTime: Reset time must follow hours:minutes in 24 hours format (e.g. 01:30, 23:15) and in UTC timezone. Default to \u0026#34;00:00\u0026#34;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetDay: Reset Day follows the ISO-8601 standard, from 1 (Monday) to 7 (Sunday). Default to 1 in WEEKLY rotation.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetDate: Reset Date must be a number 1 - 31. Default to 1 in MONTHLY rotation.\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;randomizedPerRotation:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;true: each goal will be randomly assigned to multiple periods\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;false: a goal will only be assigned to one period \u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/p\u0026gt;",
         "operationId": "adminCreateChallenge",
         "parameters": [
           {
@@ -195,7 +167,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHALLENGE [CREATE]"],
             "authorization": []
           }
         ],
@@ -208,6 +179,81 @@
           "20018": "bad request: {{message}}",
           "99002": "duplicate key error: {{message}}",
           "99003": "challenge validation error: {{message}}"
+        }
+      }
+    },
+    "/challenge/v1/admin/namespaces/{namespace}/challenges/users/{userId}": {
+      "get": {
+        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [READ]\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "adminGetActiveChallenges",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user id",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 20,
+            "description": "limit the amount of data retrieved",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "default": 0,
+            "description": "offset",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/model.ListChallengeResponse"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permission\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "List User's Active Challenges",
+        "tags": ["Challenge Configuration"],
+        "x-errorCodes": {
+          "20000": "internal server error: {{message}}",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission"
         }
       }
     },
@@ -269,7 +315,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHALLENGE [DELETE]"],
             "authorization": []
           }
         ],
@@ -337,7 +382,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHALLENGE [READ]"],
             "authorization": []
           }
         ],
@@ -352,7 +396,7 @@
       },
       "put": {
         "consumes": ["application/json"],
-        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [UPDATE]\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;p\u0026gt;Request body:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;name: name of the challenge\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;description: text describing about the challenge (optional)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;startDate: timestamp of when the challenge is started\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;endDate: timestamp of when the challenge is ended (optional)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;endAfter: describe number of period challenge will be retired after (optional)\u0026lt;/li\u0026gt;To configure challenge that never end, leave the endDate and endAfter field null/empty.\u0026lt;li\u0026gt;repeatAfter: describe number of period challenge\u0026#39;s goals will be repeated after. Leave it empty if you don\u0026#39;t want to repeat the challenge.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;rotation: describe how long goals in a challenge will be available for players to progress before rotated with another goals. (DAILY|WEEKLY|MONTHLY|NONE)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;activeGoalsPerRotation: number of goals per rotation (currently only applicable for RANDOMIZE assignment)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;assignmentRule: describe how the goals will be assigned and scheduled to users. (FIXED|RANDOMIZED|UNSCHEDULED)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;goalsVisibility: describe whether users can see all goals under challenge, or only active goal in one rotation period only. (SHOWALL|PERIODONLY)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetConfig: describe when rotation reset will happen (optional).\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;resetTime: Reset time must follow hours:minutes in 24 hours format (e.g. 01:30, 23:15) and in UTC timezone. Default to \u0026#34;00:00\u0026#34;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetDay: Reset Day follows the ISO-8601 standard, from 1 (Monday) to 7 (Sunday). Default to 1 in WEEKLY rotation.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetDate: Reset Date must be a number 1 - 31. Default to 1 in MONTHLY rotation.\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;randomizedPerRotation:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;true: each goal will be randomly assigned to multiple periods\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;false: a goal will only be assigned to one period \u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/p\u0026gt;",
+        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [UPDATE]\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;p\u0026gt;Request body:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;name: name of the challenge\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;description: text describing about the challenge (optional)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;startDate: timestamp of when the challenge is started\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;endDate: timestamp of when the challenge is ended (optional)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;endAfter: describe number of period challenge will be retired after (optional)\u0026lt;/li\u0026gt;To configure challenge that never end, leave the endDate and endAfter field null/empty.\u0026lt;li\u0026gt;repeatAfter: describe number of period challenge\u0026#39;s goals will be repeated after. Leave it empty if you don\u0026#39;t want to repeat the challenge.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;rotation: describe how long goals in a challenge will be available for players to progress before rotated with another goals. (DAILY|WEEKLY|MONTHLY|NONE)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;activeGoalsPerRotation: number of goals per rotation (currently only applicable for RANDOMIZE assignment)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;assignmentRule: describe how the goals will be assigned and scheduled to users. (FIXED|RANDOMIZED|UNSCHEDULED|CUSTOM)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;goalsVisibility: describe whether users can see all goals under challenge, or only active goal in one rotation period only. (SHOWALL|PERIODONLY)\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetConfig: describe when rotation reset will happen (optional).\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;resetTime: Reset time must follow hours:minutes in 24 hours format (e.g. 01:30, 23:15) and in UTC timezone. Default to \u0026#34;00:00\u0026#34;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetDay: Reset Day follows the ISO-8601 standard, from 1 (Monday) to 7 (Sunday). Default to 1 in WEEKLY rotation.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;resetDate: Reset Date must be a number 1 - 31. Default to 1 in MONTHLY rotation.\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;randomizedPerRotation:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;true: each goal will be randomly assigned to multiple periods\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;false: a goal will only be assigned to one period \u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/p\u0026gt;",
         "operationId": "adminUpdateChallenge",
         "parameters": [
           {
@@ -425,7 +469,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHALLENGE [UPDATE]"],
             "authorization": []
           }
         ],
@@ -511,7 +554,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHALLENGE [READ]"],
             "authorization": []
           }
         ],
@@ -526,7 +568,7 @@
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [CREATE]\u0026lt;/li\u0026gt;\u0026lt;p\u0026gt;Request body:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;code: unique within a challenge.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;name: name of the goal.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;description: text describing the goal (optional).\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;schedule: a time range that indicated the availability of a goal within a timeframe. Used in FIXED assignment rule, this will be required in that case.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;requirementGroups: list of conditions that conform with the goal progressions.\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;operator: logical operator used to validate the completion of a goal. a goal is considered complete once complete predicates operated with operator result in true.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;predicates: list of progression parameters to be tracked.\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;parameterType: the type of parameter for challenge to be progressed with. the available options are:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt; STATISTIC: progress by user statistic item value.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; STATISTIC_CYCLE: progress user statistic cycle item value. statCycleId must be included.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; ACHIEVEMENT: progress by user achievement.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; USERACCOUNT: progress by user account event.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; ENTITLEMENT: progress by user\u0026#39;s item entitlement ownership. Supported item types are APP, CODE, INGAMEITEM, LOOTBOX, MEDIA, and OPTIONBOX.\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;parameterName: the name of the parameter for challenge to be progressed with.\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt; STATISTIC: refers to stat code.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; STATISTIC_CYCLE: refers to stat code with statCycleId must be included.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; ACHIEVEMENT: refers to achievement code.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; USERACCOUNT: one of the user account event. current possible values are (userAccountCreated, gameUserAccountCreated, userAccountVerified, userAccountLinked, userAccountUpgraded,thirdPartyAccountCreated).\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; ENTITLEMENT: ecommerce store\u0026#39;s item SKU.\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;matcher: the comparison operator used to compare the curent value of a parameter and targetValue to validate the completion of a predicate. Possible values are EQUAL, LESS_THAN, GREATER_THAN, LESS_THAN_EQUAL, and GREATER_THAN_EQUAL.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;targetValue: the target number to be reached by the parameter.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;statCycleId: specify the statCycleId used to track statistic value in a cycle with STATISTIC_CYCLE parameterType (optional).\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;rewards: list of rewards that will be claimable once a goal is complete.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;tag: goal\u0026#39;s labels.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;isActive: when goal is in a schedule, isActive determine whether goal is active to progress or not.\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;Goal describe set of requirements that need to be fulfilled by players in order to complete it and describe what is the rewards given to player when they complete the goal.The requirement will have target value and a operator that will evaluate that against an observable player’s attribute (e.g. statistic, entitlement). Goal belongs to a challenge.Supported item type for ENTITLEMENT reward type: APP, BUNDLE, CODE, COINS, EXTENSION, INGAMEITEM, LOOTBOX, MEDIA, OPTIONBOX",
+        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [CREATE]\u0026lt;/li\u0026gt;\u0026lt;p\u0026gt;Request body:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;code: unique within a challenge.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;name: name of the goal.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;description: text describing the goal (optional).\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;schedule: a time range that indicated the availability of a goal within a timeframe. Used in FIXED assignment rule, this will be required in that case.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;requirementGroups: list of conditions that conform with the goal progressions.\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;operator: logical operator used to validate the completion of a goal. a goal is considered complete once complete predicates operated with operator result in true.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;predicates: list of progression parameters to be tracked.\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;parameterType: the type of parameter for challenge to be progressed with. the available options are:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt; STATISTIC: progress by user statistic item value.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; STATISTIC_CYCLE: progress user statistic cycle item value. statCycleId must be included.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; ACHIEVEMENT: progress by user achievement.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; USERACCOUNT: progress by user account event.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; ENTITLEMENT: progress by user\u0026#39;s item entitlement ownership. Supported item types are APP, CODE, INGAMEITEM, LOOTBOX, MEDIA, and OPTIONBOX.\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;parameterName: the name of the parameter for challenge to be progressed with.\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt; STATISTIC: refers to stat code.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; STATISTIC_CYCLE: refers to stat code with statCycleId must be included.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; ACHIEVEMENT: refers to achievement code.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; USERACCOUNT: one of the user account event. current possible values are (userAccountCreated, gameUserAccountCreated, userAccountVerified, userAccountLinked, userAccountUpgraded,thirdPartyAccountCreated).\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt; ENTITLEMENT: ecommerce store\u0026#39;s item SKU.\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;matcher: the comparison operator used to compare the curent value of a parameter and targetValue to validate the completion of a predicate. Possible values are EQUAL, LESS_THAN, GREATER_THAN, LESS_THAN_EQUAL, and GREATER_THAN_EQUAL.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;targetValue: the target number to be reached by the parameter.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;statCycleId: specify the statCycleId used to track statistic value in a cycle with STATISTIC_CYCLE parameterType (optional).\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;rewards: list of rewards that will be claimable once a goal is complete.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;tag: goal\u0026#39;s labels.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;isActive: when goal is in a schedule, isActive determine whether goal is active to progress or not.\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;Goal describe set of requirements that need to be fulfilled by players in order to complete it and describe what is the rewards given to player when they complete the goal.\nThe requirement will have target value and a operator that will evaluate that against an observable player’s attribute (e.g. statistic, entitlement). Goal belongs to a challenge.\nSupported item type for ENTITLEMENT reward type: APP, BUNDLE, CODE, COINS, EXTENSION, INGAMEITEM, LOOTBOX, MEDIA, OPTIONBOX.\nNumber of goals per challenge is \u0026lt;b\u0026gt;limited to 100 goals\u0026lt;/b\u0026gt;.",
         "operationId": "adminCreateGoal",
         "parameters": [
           {
@@ -605,7 +647,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHALLENGE [CREATE]"],
             "authorization": []
           }
         ],
@@ -675,7 +716,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHALLENGE [DELETE]"],
             "authorization": []
           }
         ],
@@ -748,7 +788,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHALLENGE [READ]"],
             "authorization": []
           }
         ],
@@ -814,6 +853,12 @@
               "$ref": "#/definitions/response.Error"
             }
           },
+          "422": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e99004\u003c/td\u003e\u003ctd\u003eunprocessable entity: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "schema": {
@@ -823,14 +868,14 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHALLENGE [UPDATE]"],
             "authorization": []
           }
         ],
         "summary": "Update Goal",
         "tags": ["Goal Configuration"],
         "x-errorCodes": {
-          "20018": "bad request: {{message}}"
+          "20018": "bad request: {{message}}",
+          "99004": "unprocessable entity: {{message}}"
         }
       }
     },
@@ -903,7 +948,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHALLENGE [READ]"],
             "authorization": []
           }
         ],
@@ -981,7 +1025,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHALLENGE [UPDATE]"],
             "authorization": []
           }
         ],
@@ -1054,7 +1097,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHALLENGE [DELETE]"],
             "authorization": []
           }
         ],
@@ -1069,10 +1111,364 @@
         }
       }
     },
+    "/challenge/v1/admin/namespaces/{namespace}/challenges/{challengeCode}/tied/schedule": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE [UPDATE]\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;p\u0026gt;Request body:\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;action: Update the challenge schedule. The available options are:\u0026lt;/li\u0026gt;\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;STOP: Ends the challenge, changing its status to RETIRED. This option supports all types of challenges.\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;ACCELERATE: Speeds up the challenge\u0026#39;s end time. Note that this option does not apply to challenges with an \u0026#39;endAfter\u0026#39; value.\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;\u0026lt;li\u0026gt;endDate: The timestamp specifying when the challenge should end (required if the action is ACCELERATE).\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "adminUpdateTiedChallengeSchedule",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/model.UpdateChallengeScheduleRequest"
+            }
+          },
+          {
+            "description": "the code of the challenge data to be updated",
+            "in": "path",
+            "name": "challengeCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/model.ChallengeResponse"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20018\u003c/td\u003e\u003ctd\u003ebad request: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Update Tied Challenge Schedule",
+        "tags": ["Challenge Configuration"],
+        "x-errorCodes": {
+          "20018": "bad request: {{message}}"
+        }
+      }
+    },
+    "/challenge/v1/admin/namespaces/{namespace}/plugins/assignment": {
+      "delete": {
+        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PLUGIN [DELETE]\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "adminDeleteAssignmentPlugin",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20018\u003c/td\u003e\u003ctd\u003ebad request: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permission\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20029\u003c/td\u003e\u003ctd\u003enot found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Delete assignment plugin",
+        "tags": ["Plugins"],
+        "x-errorCodes": {
+          "20000": "internal server error: {{message}}",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "20018": "bad request: {{message}}",
+          "20029": "not found"
+        }
+      },
+      "get": {
+        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PLUGIN [READ]\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "adminGetAssignmentPlugin",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/model.PluginAssignmentResponse"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20018\u003c/td\u003e\u003ctd\u003ebad request: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permission\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20029\u003c/td\u003e\u003ctd\u003enot found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get assignment plugin",
+        "tags": ["Plugins"],
+        "x-errorCodes": {
+          "20000": "internal server error: {{message}}",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "20018": "bad request: {{message}}",
+          "20029": "not found"
+        }
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PLUGIN [CREATE]\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "adminCreateAssignmentPlugin",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/model.PluginAssignmentRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/model.PluginAssignmentResponse"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20018\u003c/td\u003e\u003ctd\u003ebad request: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permission\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Create assignment plugin",
+        "tags": ["Plugins"],
+        "x-errorCodes": {
+          "20000": "internal server error: {{message}}",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "20018": "bad request: {{message}}"
+        }
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PLUGIN [UPDATE]\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "adminUpdateAssignmentPlugin",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/model.PluginAssignmentRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/model.PluginAssignmentResponse"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20018\u003c/td\u003e\u003ctd\u003ebad request: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permission\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20029\u003c/td\u003e\u003ctd\u003enot found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Update assignment plugin",
+        "tags": ["Plugins"],
+        "x-errorCodes": {
+          "20000": "internal server error: {{message}}",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "20018": "bad request: {{message}}",
+          "20029": "not found"
+        }
+      }
+    },
     "/challenge/v1/admin/namespaces/{namespace}/progress/evaluate": {
       "post": {
         "consumes": ["application/json"],
-        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]\u0026lt;/li\u0026gt;\u0026lt;li\u0026gt;Limited up to 10 users per request\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
         "operationId": "adminEvaluateProgress",
         "parameters": [
           {
@@ -1095,6 +1491,12 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20018\u003c/td\u003e\u003ctd\u003ebad request: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
           },
           "401": {
             "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
@@ -1123,7 +1525,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]"],
             "authorization": []
           }
         ],
@@ -1133,6 +1534,7 @@
           "20000": "internal server error: {{message}}",
           "20001": "unauthorized access",
           "20013": "insufficient permission",
+          "20018": "bad request: {{message}}",
           "20029": "not found"
         }
       }
@@ -1206,7 +1608,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]"],
             "authorization": []
           }
         ],
@@ -1218,6 +1619,232 @@
           "20013": "insufficient permission",
           "20018": "bad request: {{message}}",
           "20029": "not found"
+        }
+      }
+    },
+    "/challenge/v1/admin/namespaces/{namespace}/users/{userId}/challenges/{challengeCode}/rewards/claim": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "adminClaimUserRewardsByGoalCode",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/model.ClaimUserRewardsByGoalCodeRequest"
+            }
+          },
+          {
+            "in": "path",
+            "name": "challengeCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/model.UserReward"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20018\u003c/td\u003e\u003ctd\u003ebad request: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permission\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20029\u003c/td\u003e\u003ctd\u003enot found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "422": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e99004\u003c/td\u003e\u003ctd\u003eunprocessable entity: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Claim rewards of a single user by goal code",
+        "tags": ["Player Reward"],
+        "x-errorCodes": {
+          "20000": "internal server error: {{message}}",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "20018": "bad request: {{message}}",
+          "20029": "not found",
+          "99004": "unprocessable entity: {{message}}"
+        }
+      }
+    },
+    "/challenge/v1/admin/namespaces/{namespace}/users/{userId}/progress/{challengeCode}": {
+      "get": {
+        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "adminGetUserProgression",
+        "parameters": [
+          {
+            "description": "challenge code",
+            "in": "path",
+            "name": "challengeCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user id",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "specific schedule date time. use RFC3339 format(2006-01-02T15:04:05Z).",
+            "format": "date-time",
+            "in": "query",
+            "name": "dateTime",
+            "type": "string",
+            "x-nullable": true
+          },
+          {
+            "description": "goal code",
+            "in": "query",
+            "name": "goalCode",
+            "type": "string"
+          },
+          {
+            "default": 20,
+            "description": "limit the amount of data retrieved",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "default": 0,
+            "description": "offset",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "collectionFormat": "csv",
+            "description": "filter goals by tags, comma separated value",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "tags",
+            "type": "array"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/model.UserProgressionResponse"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20018\u003c/td\u003e\u003ctd\u003ebad request: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permission\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20029\u003c/td\u003e\u003ctd\u003enot found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "422": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e99004\u003c/td\u003e\u003ctd\u003eunprocessable entity: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "List User's Progressions",
+        "tags": ["Challenge Progression"],
+        "x-errorCodes": {
+          "20000": "internal server error: {{message}}",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "20018": "bad request: {{message}}",
+          "20029": "not found",
+          "99004": "unprocessable entity: {{message}}"
         }
       }
     },
@@ -1297,7 +1924,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]"],
             "authorization": []
           }
         ],
@@ -1383,7 +2009,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]"],
             "authorization": []
           }
         ],
@@ -1467,7 +2092,6 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:CHALLENGE [READ]"],
             "authorization": []
           }
         ],
@@ -1559,7 +2183,6 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:CHALLENGE [READ]"],
             "authorization": []
           }
         ],
@@ -1570,6 +2193,98 @@
           "20001": "unauthorized access",
           "20013": "insufficient permission",
           "20029": "not found"
+        }
+      }
+    },
+    "/challenge/v1/public/namespaces/{namespace}/users/me/challenges/{challengeCode}/rewards/claim": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "publicClaimUserRewardsByGoalCode",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/model.ClaimUserRewardsByGoalCodeRequest"
+            }
+          },
+          {
+            "in": "path",
+            "name": "challengeCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/model.UserReward"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permission\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20029\u003c/td\u003e\u003ctd\u003enot found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "422": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e99004\u003c/td\u003e\u003ctd\u003eunprocessable entity: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/iam.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Claim User's Rewards by Goal Code",
+        "tags": ["Player Reward"],
+        "x-errorCodes": {
+          "20000": "internal server error: {{message}}",
+          "20001": "unauthorized access",
+          "20013": "insufficient permission",
+          "20029": "not found",
+          "99004": "unprocessable entity: {{message}}"
         }
       }
     },
@@ -1612,7 +2327,6 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]"],
             "authorization": []
           }
         ],
@@ -1715,6 +2429,12 @@
               "$ref": "#/definitions/iam.ErrorResponse"
             }
           },
+          "422": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e99004\u003c/td\u003e\u003ctd\u003eunprocessable entity: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
           "500": {
             "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error: {{message}}\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
@@ -1724,7 +2444,6 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]"],
             "authorization": []
           }
         ],
@@ -1735,7 +2454,8 @@
           "20001": "unauthorized access",
           "20013": "insufficient permission",
           "20018": "bad request: {{message}}",
-          "20029": "not found"
+          "20029": "not found",
+          "99004": "unprocessable entity: {{message}}"
         }
       }
     },
@@ -1837,7 +2557,6 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]"],
             "authorization": []
           }
         ],
@@ -1921,7 +2640,6 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]"],
             "authorization": []
           }
         ],
@@ -2000,7 +2718,6 @@
         },
         "security": [
           {
-            "HasPermission": ["NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]"],
             "authorization": []
           }
         ],
@@ -2051,7 +2768,7 @@
           "type": "integer"
         },
         "assignmentRule": {
-          "enum": ["FIXED", "RANDOMIZED", "UNSCHEDULED"],
+          "enum": ["CUSTOM", "FIXED", "RANDOMIZED", "UNSCHEDULED"],
           "type": "string"
         },
         "code": {
@@ -2119,6 +2836,14 @@
         "updatedAt"
       ]
     },
+    "model.ClaimUserRewardsByGoalCodeRequest": {
+      "properties": {
+        "goalCode": {
+          "type": "string"
+        }
+      },
+      "required": ["goalCode"]
+    },
     "model.ClaimUserRewardsReq": {
       "properties": {
         "rewardIDs": {
@@ -2173,7 +2898,7 @@
           "type": "integer"
         },
         "assignmentRule": {
-          "enum": ["FIXED", "RANDOMIZED", "UNSCHEDULED"],
+          "enum": ["CUSTOM", "FIXED", "RANDOMIZED", "UNSCHEDULED"],
           "type": "string"
         },
         "code": {
@@ -2396,7 +3121,8 @@
           "type": "array"
         },
         "schedule": {
-          "$ref": "#/definitions/model.GoalSchedule"
+          "$ref": "#/definitions/model.GoalSchedule",
+          "description": "this field will be deprecated"
         },
         "tags": {
           "items": {
@@ -2498,6 +3224,52 @@
         }
       },
       "required": ["first", "last", "next", "previous"]
+    },
+    "model.PluginAsignmentAppConfig": {
+      "properties": {
+        "appName": {
+          "type": "string"
+        }
+      },
+      "required": ["appName"]
+    },
+    "model.PluginAssignmentCustomConfig": {
+      "properties": {
+        "grpcServerAddress": {
+          "type": "string"
+        }
+      },
+      "required": ["grpcServerAddress"]
+    },
+    "model.PluginAssignmentRequest": {
+      "properties": {
+        "appName": {
+          "type": "string"
+        },
+        "extendType": {
+          "enum": ["APP", "CUSTOM"],
+          "type": "string"
+        },
+        "grpcServerAddress": {
+          "type": "string"
+        }
+      },
+      "required": ["extendType"]
+    },
+    "model.PluginAssignmentResponse": {
+      "properties": {
+        "appConfig": {
+          "$ref": "#/definitions/model.PluginAsignmentAppConfig"
+        },
+        "customConfig": {
+          "$ref": "#/definitions/model.PluginAssignmentCustomConfig"
+        },
+        "extendType": {
+          "enum": ["APP", "CUSTOM"],
+          "type": "string"
+        }
+      },
+      "required": ["extendType"]
     },
     "model.Predicate": {
       "properties": {
@@ -2641,7 +3413,7 @@
           "type": "integer"
         },
         "assignmentRule": {
-          "enum": ["FIXED", "RANDOMIZED", "UNSCHEDULED"],
+          "enum": ["CUSTOM", "FIXED", "RANDOMIZED", "UNSCHEDULED"],
           "type": "string"
         },
         "description": {
@@ -2684,6 +3456,20 @@
           "x-nullable": true
         }
       }
+    },
+    "model.UpdateChallengeScheduleRequest": {
+      "properties": {
+        "action": {
+          "enum": ["ACCELERATE", "STOP"],
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "required": ["action"]
     },
     "model.UpdateGoalRequest": {
       "properties": {
@@ -2867,11 +3653,11 @@
     "path": "/challenge/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-08-07T04:42:37+00:00",
-    "gitHash": "5e0be04fecabfec4e4544a2c4c482b84d1bb6fdb",
+    "buildDate": "2024-09-20T10:59:53+00:00",
+    "gitHash": "eba7fd8d0553c303d6fd3be12be778080c4480d7",
     "name": "justice-challenge-service",
     "realm": "DEV",
-    "version": "1.8.2",
-    "version-roles-seeding": "1.2.48"
+    "version": "1.9.3",
+    "version-roles-seeding": "1.2.74"
   }
 }

@@ -8,50 +8,73 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { DefaultProvider } from '../generated-definitions/DefaultProvider.js'
 import { Public$ } from './endpoints/Public$.js'
 
-export function PublicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function PublicApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * This endpoints returns list of supported providers. Armada is the default provider.
-   */
-  async function getProviders(): Promise<unknown> {
-    const $ = new Public$(Network.create(requestConfig), namespace, useSchemaValidation)
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
+  }
+
+  async function getProviders(): Promise<AxiosResponse<unknown>> {
+    const $ = new Public$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getProviders()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This endpoints returns the default provider.
-   */
-  async function getProviderDefault(): Promise<DefaultProvider> {
-    const $ = new Public$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getProviderDefault(): Promise<AxiosResponse<DefaultProvider>> {
+    const $ = new Public$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getProviderDefault()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This endpoint returns the providers by region.
-   */
-  async function getProviderRegion_ByRegion(region: string): Promise<unknown> {
-    const $ = new Public$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getProviderRegion_ByRegion(region: string): Promise<AxiosResponse<unknown>> {
+    const $ = new Public$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getProviderRegion_ByRegion(region)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     * This endpoints returns list of supported providers. Armada is the default provider.
+     */
     getProviders,
+    /**
+     * This endpoints returns the default provider.
+     */
     getProviderDefault,
+    /**
+     * This endpoint returns the providers by region.
+     */
     getProviderRegion_ByRegion
   }
 }

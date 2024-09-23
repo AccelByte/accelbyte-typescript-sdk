@@ -7,157 +7,295 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { LeaderboardDataV3AdminApi } from '../LeaderboardDataV3AdminApi.js'
 
 import { GetLeaderboardRankingResp } from '../../generated-definitions/GetLeaderboardRankingResp.js'
 import { UserRankingResponseV3 } from '../../generated-definitions/UserRankingResponseV3.js'
 
 export enum Key_LeaderboardDataV3Admin {
-  User_ByUserId = 'LeaderboardDataV3Admin.User_ByUserId',
-  Reset_ByLeaderboardCode = 'LeaderboardDataV3Admin.Reset_ByLeaderboardCode',
-  Alltime_ByLeaderboardCode = 'LeaderboardDataV3Admin.Alltime_ByLeaderboardCode',
-  User_ByLeaderboardCode_ByUserId = 'LeaderboardDataV3Admin.User_ByLeaderboardCode_ByUserId',
-  Cycle_ByLeaderboardCode_ByCycleId = 'LeaderboardDataV3Admin.Cycle_ByLeaderboardCode_ByCycleId'
+  User_ByUserId_v3 = 'Leaderboard.LeaderboardDataV3Admin.User_ByUserId_v3',
+  Reset_ByLeaderboardCode_v3 = 'Leaderboard.LeaderboardDataV3Admin.Reset_ByLeaderboardCode_v3',
+  Alltime_ByLeaderboardCode_v3 = 'Leaderboard.LeaderboardDataV3Admin.Alltime_ByLeaderboardCode_v3',
+  User_ByLeaderboardCode_ByUserId_v3 = 'Leaderboard.LeaderboardDataV3Admin.User_ByLeaderboardCode_ByUserId_v3',
+  Cycle_ByLeaderboardCode_ByCycleId_v3 = 'Leaderboard.LeaderboardDataV3Admin.Cycle_ByLeaderboardCode_ByCycleId_v3',
+  Reset_ByLeaderboardCode_ByCycleId_v3 = 'Leaderboard.LeaderboardDataV3Admin.Reset_ByLeaderboardCode_ByCycleId_v3',
+  User_ByLeaderboardCode_ByCycleId_ByUserId_v3 = 'Leaderboard.LeaderboardDataV3Admin.User_ByLeaderboardCode_ByCycleId_ByUserId_v3'
 }
 
-export const useAdmDeleteUser_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Delete user ranking across leaderboard Remove entry with provided userId from leaderboard.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_LeaderboardDataV3Admin.User_ByUserId_v3, input]
+ * }
+ * ```
+ */
+export const useLeaderboardDataV3AdminApi_DeleteUser_ByUserIdMutation_v3 = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string; queryParams: { leaderboardCode: string[] } }>,
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; queryParams: { leaderboardCode: string[] } }>,
     'mutationKey'
   >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string; queryParams: { leaderboardCode: string[] } }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string; queryParams: { leaderboardCode: string[] } }) => {
-    const data = await LeaderboardDataV3AdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteUser_ByUserId(
-      input.userId,
-      input.queryParams
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; queryParams: { leaderboardCode: string[] } }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; queryParams: { leaderboardCode: string[] } }) => {
+    const response = await LeaderboardDataV3AdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteUser_ByUserId_v3(input.userId, input.queryParams)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
-    mutationKey: [Key_LeaderboardDataV3Admin.User_ByUserId],
+    mutationKey: [Key_LeaderboardDataV3Admin.User_ByUserId_v3],
     mutationFn,
     ...options
   })
 }
 
-export const useAdmDeleteReset_ByLeaderboardCodeMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { leaderboardCode: string }>, 'mutationKey'>,
+/**
+ * &lt;p&gt;This endpoint will delete user ranking by leaderboard code&lt;/p&gt; &lt;p&gt;&lt;b&gt;Warning&lt;/b&gt;: This will permanently delete your data. Make sure to back up anything important before continuing.&lt;/p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_LeaderboardDataV3Admin.Reset_ByLeaderboardCode_v3, input]
+ * }
+ * ```
+ */
+export const useLeaderboardDataV3AdminApi_DeleteReset_ByLeaderboardCodeMutation_v3 = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { leaderboardCode: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { leaderboardCode: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { leaderboardCode: string }) => {
-    const data = await LeaderboardDataV3AdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteReset_ByLeaderboardCode(
-      input.leaderboardCode
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { leaderboardCode: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { leaderboardCode: string }) => {
+    const response = await LeaderboardDataV3AdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteReset_ByLeaderboardCode_v3(input.leaderboardCode)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
-    mutationKey: [Key_LeaderboardDataV3Admin.Reset_ByLeaderboardCode],
+    mutationKey: [Key_LeaderboardDataV3Admin.Reset_ByLeaderboardCode_v3],
     mutationFn,
     ...options
   })
 }
 
-export const useAdmAlltime_ByLeaderboardCode = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { leaderboardCode: string; queryParams?: { limit?: number; offset?: number } },
+/**
+ * &lt;p&gt;Get rankings in an all time leaderboard.&lt;/p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_LeaderboardDataV3Admin.Alltime_ByLeaderboardCode_v3, input]
+ * }
+ * ```
+ */
+export const useLeaderboardDataV3AdminApi_GetAlltime_ByLeaderboardCode_v3 = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { leaderboardCode: string; queryParams?: { limit?: number; offset?: number } },
   options?: Omit<UseQueryOptions<GetLeaderboardRankingResp, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: GetLeaderboardRankingResp) => void
+  callback?: (data: AxiosResponse<GetLeaderboardRankingResp>) => void
 ): UseQueryResult<GetLeaderboardRankingResp, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmAlltime_ByLeaderboardCode>[1]) => async () => {
-    const data = await LeaderboardDataV3AdminApi(sdk, { namespace: input.namespace }).getAlltime_ByLeaderboardCode(
-      input.leaderboardCode,
-      input.queryParams
-    )
-    callback && callback(data)
-    return data
-  }
+  const queryFn =
+    (sdk: AccelByteSDK, input: Parameters<typeof useLeaderboardDataV3AdminApi_GetAlltime_ByLeaderboardCode_v3>[1]) => async () => {
+      const response = await LeaderboardDataV3AdminApi(sdk, {
+        coreConfig: input.coreConfig,
+        axiosConfig: input.axiosConfig
+      }).getAlltime_ByLeaderboardCode_v3(input.leaderboardCode, input.queryParams)
+      callback && callback(response)
+      return response.data
+    }
 
   return useQuery<GetLeaderboardRankingResp, AxiosError<ApiError>>({
-    queryKey: [Key_LeaderboardDataV3Admin.Alltime_ByLeaderboardCode, input],
+    queryKey: [Key_LeaderboardDataV3Admin.Alltime_ByLeaderboardCode_v3, input],
     queryFn: queryFn(sdk, input),
     ...options
   })
 }
 
-export const useAdmDeleteUser_ByLeaderboardCode_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { leaderboardCode: string; userId: string }>, 'mutationKey'>,
+/**
+ * Delete user ranking Remove entry with provided userId from leaderboard. If leaderboard with given leaderboard code not found, it will return http status not found (404). If the leaderboard is found and no entry found in it, it will still return success (204)
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_LeaderboardDataV3Admin.User_ByLeaderboardCode_ByUserId_v3, input]
+ * }
+ * ```
+ */
+export const useLeaderboardDataV3AdminApi_DeleteUser_ByLeaderboardCode_ByUserIdMutation_v3 = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { leaderboardCode: string; userId: string }>,
+    'mutationKey'
+  >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { leaderboardCode: string; userId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { leaderboardCode: string; userId: string }) => {
-    const data = await LeaderboardDataV3AdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
-    }).deleteUser_ByLeaderboardCode_ByUserId(input.leaderboardCode, input.userId)
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { leaderboardCode: string; userId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { leaderboardCode: string; userId: string }) => {
+    const response = await LeaderboardDataV3AdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteUser_ByLeaderboardCode_ByUserId_v3(input.leaderboardCode, input.userId)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
-    mutationKey: [Key_LeaderboardDataV3Admin.User_ByLeaderboardCode_ByUserId],
+    mutationKey: [Key_LeaderboardDataV3Admin.User_ByLeaderboardCode_ByUserId_v3],
     mutationFn,
     ...options
   })
 }
 
-export const useAdmUser_ByLeaderboardCode_ByUserId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { leaderboardCode: string; userId: string },
+/**
+ * &lt;p&gt;Get user ranking in leaderboard&lt;/p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_LeaderboardDataV3Admin.User_ByLeaderboardCode_ByUserId_v3, input]
+ * }
+ * ```
+ */
+export const useLeaderboardDataV3AdminApi_GetUser_ByLeaderboardCode_ByUserId_v3 = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { leaderboardCode: string; userId: string },
   options?: Omit<UseQueryOptions<UserRankingResponseV3, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: UserRankingResponseV3) => void
+  callback?: (data: AxiosResponse<UserRankingResponseV3>) => void
 ): UseQueryResult<UserRankingResponseV3, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmUser_ByLeaderboardCode_ByUserId>[1]) => async () => {
-    const data = await LeaderboardDataV3AdminApi(sdk, { namespace: input.namespace }).getUser_ByLeaderboardCode_ByUserId(
-      input.leaderboardCode,
-      input.userId
-    )
-    callback && callback(data)
-    return data
-  }
+  const queryFn =
+    (sdk: AccelByteSDK, input: Parameters<typeof useLeaderboardDataV3AdminApi_GetUser_ByLeaderboardCode_ByUserId_v3>[1]) => async () => {
+      const response = await LeaderboardDataV3AdminApi(sdk, {
+        coreConfig: input.coreConfig,
+        axiosConfig: input.axiosConfig
+      }).getUser_ByLeaderboardCode_ByUserId_v3(input.leaderboardCode, input.userId)
+      callback && callback(response)
+      return response.data
+    }
 
   return useQuery<UserRankingResponseV3, AxiosError<ApiError>>({
-    queryKey: [Key_LeaderboardDataV3Admin.User_ByLeaderboardCode_ByUserId, input],
+    queryKey: [Key_LeaderboardDataV3Admin.User_ByLeaderboardCode_ByUserId_v3, input],
     queryFn: queryFn(sdk, input),
     ...options
   })
 }
 
-export const useAdmCycle_ByLeaderboardCode_ByCycleId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { leaderboardCode: string; cycleId: string; queryParams?: { limit?: number; offset?: number } },
+/**
+ * &lt;p&gt;Get rankings in cycle leaderboard.&lt;/p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_LeaderboardDataV3Admin.Cycle_ByLeaderboardCode_ByCycleId_v3, input]
+ * }
+ * ```
+ */
+export const useLeaderboardDataV3AdminApi_GetCycle_ByLeaderboardCode_ByCycleId_v3 = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { leaderboardCode: string; cycleId: string; queryParams?: { limit?: number; offset?: number } },
   options?: Omit<UseQueryOptions<GetLeaderboardRankingResp, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: GetLeaderboardRankingResp) => void
+  callback?: (data: AxiosResponse<GetLeaderboardRankingResp>) => void
 ): UseQueryResult<GetLeaderboardRankingResp, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmCycle_ByLeaderboardCode_ByCycleId>[1]) => async () => {
-    const data = await LeaderboardDataV3AdminApi(sdk, { namespace: input.namespace }).getCycle_ByLeaderboardCode_ByCycleId(
-      input.leaderboardCode,
-      input.cycleId,
-      input.queryParams
-    )
-    callback && callback(data)
-    return data
-  }
+  const queryFn =
+    (sdk: AccelByteSDK, input: Parameters<typeof useLeaderboardDataV3AdminApi_GetCycle_ByLeaderboardCode_ByCycleId_v3>[1]) => async () => {
+      const response = await LeaderboardDataV3AdminApi(sdk, {
+        coreConfig: input.coreConfig,
+        axiosConfig: input.axiosConfig
+      }).getCycle_ByLeaderboardCode_ByCycleId_v3(input.leaderboardCode, input.cycleId, input.queryParams)
+      callback && callback(response)
+      return response.data
+    }
 
   return useQuery<GetLeaderboardRankingResp, AxiosError<ApiError>>({
-    queryKey: [Key_LeaderboardDataV3Admin.Cycle_ByLeaderboardCode_ByCycleId, input],
+    queryKey: [Key_LeaderboardDataV3Admin.Cycle_ByLeaderboardCode_ByCycleId_v3, input],
     queryFn: queryFn(sdk, input),
+    ...options
+  })
+}
+
+/**
+ * &lt;p&gt;This endpoint will delete user ranking by cycleId&lt;/p&gt; &lt;p&gt;&lt;b&gt;Warning&lt;/b&gt;: This will permanently delete your data. Make sure to back up anything important before continuing.&lt;/p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_LeaderboardDataV3Admin.Reset_ByLeaderboardCode_ByCycleId_v3, input]
+ * }
+ * ```
+ */
+export const useLeaderboardDataV3AdminApi_DeleteReset_ByLeaderboardCode_ByCycleIdMutation_v3 = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { leaderboardCode: string; cycleId: string }>,
+    'mutationKey'
+  >,
+  callback?: (data: unknown) => void
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { leaderboardCode: string; cycleId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { leaderboardCode: string; cycleId: string }) => {
+    const response = await LeaderboardDataV3AdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteReset_ByLeaderboardCode_ByCycleId_v3(input.leaderboardCode, input.cycleId)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_LeaderboardDataV3Admin.Reset_ByLeaderboardCode_ByCycleId_v3],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Delete user ranking by cycle id Remove entry with provided cycleId and userId from leaderboard. If leaderboard with given leaderboard code not found, it will return http status not found (404). If the leaderboard is found and no entry found in it, it will still return success (204)
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_LeaderboardDataV3Admin.User_ByLeaderboardCode_ByCycleId_ByUserId_v3, input]
+ * }
+ * ```
+ */
+export const useLeaderboardDataV3AdminApi_DeleteUser_ByLeaderboardCode_ByCycleId_ByUserIdMutation_v3 = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { leaderboardCode: string; cycleId: string; userId: string }>,
+    'mutationKey'
+  >,
+  callback?: (data: unknown) => void
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { leaderboardCode: string; cycleId: string; userId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { leaderboardCode: string; cycleId: string; userId: string }) => {
+    const response = await LeaderboardDataV3AdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteUser_ByLeaderboardCode_ByCycleId_ByUserId_v3(input.leaderboardCode, input.cycleId, input.userId)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_LeaderboardDataV3Admin.User_ByLeaderboardCode_ByCycleId_ByUserId_v3],
+    mutationFn,
     ...options
   })
 }

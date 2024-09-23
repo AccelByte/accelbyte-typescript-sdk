@@ -1,0 +1,1820 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Config Service",
+    "title": "Config Service",
+    "contact": {
+      "name": "Engineering Team at AccelByte",
+      "url": "https://accelbyte.io",
+      "email": "engineering@accelbyte.io"
+    },
+    "version": "1.8.2"
+  },
+  "paths": {
+    "/config/healthz": {
+      "get": {
+        "operationId": "GetHealthcheckInfoV1",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/config/v1/admin/namespaces/{namespace}/configs": {
+      "get": {
+        "description": "Get all configs in the namespace",
+        "produces": ["application/json"],
+        "tags": ["Common Configuration"],
+        "summary": "Get all configs",
+        "operationId": "adminGetAllConfigs",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "limit number of returned data. Default: 100",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "offset",
+            "name": "offset",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConfigsWithPagination"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:COMMON [READ]"]
+          }
+        ]
+      },
+      "post": {
+        "description": "Create a config in the namespace with the given key",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Common Configuration"],
+        "summary": "Create a config",
+        "operationId": "adminCreateConfig",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Create config request",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.CreateConfig"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConfigInfo"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:COMMON [CREATE]"]
+          }
+        ]
+      }
+    },
+    "/config/v1/admin/namespaces/{namespace}/configs/account": {
+      "post": {
+        "description": "Created account profile related config values.\n\n**Supported Config Key:**\n  * uniqueDisplayNameEnabled\n  * usernameDisabled\n      ",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Account Profile Config"],
+        "summary": "Create Account Profile Related Config",
+        "operationId": "AdminCreateAccountProfileConfig",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Update config value",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.CreateConfig"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConfigInfo"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:ACCOUNT [CREATE]"]
+          }
+        ]
+      }
+    },
+    "/config/v1/admin/namespaces/{namespace}/configs/account/{configKey}": {
+      "get": {
+        "description": "Get account profile related config values.\n      \n**Supported Config Key:**\n  * uniqueDisplayNameEnabled\n  * usernameDisabled\n      ",
+        "produces": ["application/json"],
+        "tags": ["Account Profile Config"],
+        "summary": "Get Account Profile Related Config",
+        "operationId": "AdminGetAccountProfileConfig",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "key of the config",
+            "name": "configKey",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConfigInfo"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:ACCOUNT [READ]"]
+          }
+        ]
+      },
+      "put": {
+        "description": "Update account profile related config values.\n      \n**Supported Config Key:**\n  * uniqueDisplayNameEnabled\n  * usernameDisabled\n      ",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Account Profile Config"],
+        "summary": "Update Account Profile Related Config",
+        "operationId": "AdminUpdateAccountProfileConfig",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "key of the config",
+            "name": "configKey",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Update config value",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.UpdateConfig"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConfigInfo"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:ACCOUNT [UPDATE]"]
+          }
+        ]
+      }
+    },
+    "/config/v1/admin/namespaces/{namespace}/configs/{configKey}": {
+      "get": {
+        "description": "Get a config by namespace and key",
+        "produces": ["application/json"],
+        "tags": ["Common Configuration"],
+        "summary": "Get a config",
+        "operationId": "adminGetConfig",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "key of the config",
+            "name": "configKey",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConfigInfo"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:COMMON [READ]"]
+          }
+        ]
+      },
+      "delete": {
+        "description": "Delete a config by namespace and key.",
+        "produces": ["application/json"],
+        "tags": ["Common Configuration"],
+        "summary": "Delete a config",
+        "operationId": "adminDeleteConfig",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "key of the config",
+            "name": "configKey",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:COMMON [DELETE]"]
+          }
+        ]
+      },
+      "patch": {
+        "description": "Update a config by namespace and key",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Common Configuration"],
+        "summary": "Update a config",
+        "operationId": "adminUpdateConfig",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "key of the config",
+            "name": "configKey",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "update config request",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.UpdateConfig"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConfigInfo"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:COMMON [UPDATE]"]
+          }
+        ]
+      }
+    },
+    "/config/v1/admin/namespaces/{namespace}/emailsender": {
+      "get": {
+        "description": "Get an email sender for the requested namespace.\n\nIf email sender in the requested namespace didn't configured yet or not verified yet, and <code>ALLOW_FALLBACK_TO_PUBLISHER_EMAIL_SENDER</code> environment was activated, \nit will return email sender of the configured publisher namespace.",
+        "produces": ["application/json"],
+        "tags": ["Email Sender Configuration"],
+        "summary": "Get email sender",
+        "operationId": "adminGetEmailSender",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "boolean",
+            "description": "Include related email templates in the response (default: false)",
+            "name": "includeEmailTemplates",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.EmailSenderResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:EMAILSENDER [READ]"]
+          }
+        ]
+      },
+      "post": {
+        "description": "Set an email sender of the namespace and request domain authentication to the email platform (currently only SendGrid supported).\n\n**Email Sender API Key Logic:**\nIf there's no Email Sender API Key defined yet in the requested namespace, the API logic will fallback to use Publisher Namespace API Key.\n",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Email Sender Configuration"],
+        "summary": "Add email sender",
+        "operationId": "adminCreateEmailSender",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Create email sender",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.CreateEmailSenderRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/apimodels.EmailSenderDomainResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:EMAILSENDER [CREATE]"]
+          }
+        ]
+      },
+      "delete": {
+        "description": "Delete an email sender.",
+        "produces": ["application/json"],
+        "tags": ["Email Sender Configuration"],
+        "summary": "Delete email sender",
+        "operationId": "adminDeleteEmailSender",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:EMAILSENDER [DELETE]"]
+          }
+        ]
+      },
+      "patch": {
+        "description": "Update email sender of the specified namespace.\n\nThese attributes can be updated:\n\t- fromAddress (the domain name of the email address must be similar with the existing)\n\t- fromName\n",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Email Sender Configuration"],
+        "summary": "Update email sender",
+        "operationId": "adminUpdateEmailSender",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Update email sender",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.UpdateEmailSenderRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:EMAILSENDER [UPDATE]"]
+          }
+        ]
+      }
+    },
+    "/config/v1/admin/namespaces/{namespace}/emailsender/accounts/{account}/emailtemplates": {
+      "get": {
+        "description": "Get all available API key account names.",
+        "produces": ["application/json"],
+        "tags": ["Email Sender Template"],
+        "summary": "Get email templates of an account",
+        "operationId": "adminGetEmailTemplate",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "account name of the email template",
+            "name": "account",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/apimodels.EmailTemplatePair"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:EMAILSENDER:EMAILTEMPLATE [READ]"]
+          }
+        ]
+      },
+      "put": {
+        "description": "Create email templates which will be used for email sending. Currently only support SendGrid platform email templates.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Email Sender Template"],
+        "summary": "Create or update email templates of an account",
+        "operationId": "adminCreateEmailTemplate",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "account name of the email template",
+            "name": "account",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Create API keys account request",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/apimodels.EmailTemplatePair"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/apimodels.EmailTemplatePair"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:EMAILSENDER:EMAILTEMPLATE [UPDATE]"]
+          }
+        ]
+      },
+      "delete": {
+        "description": "Delete email templates of an account.",
+        "produces": ["application/json"],
+        "tags": ["Email Sender Template"],
+        "summary": "Delete email templates of an account",
+        "operationId": "adminDeleteEmailTemplate",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "account name of the email template",
+            "name": "account",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:EMAILSENDER:EMAILTEMPLATE [DELETE]"]
+          }
+        ]
+      }
+    },
+    "/config/v1/admin/namespaces/{namespace}/emailsender/apikeys/accounts": {
+      "get": {
+        "description": "Get all available API key accounts in the namespace, including the API key and its use count.\nIt will return records from all namespaces if the **namespace** path param equals to configured publisher namespace.",
+        "produces": ["application/json"],
+        "tags": ["Email Sender API Key"],
+        "summary": "Get all API key accounts",
+        "operationId": "adminGetEmailSenderAPIKeys",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/apimodels.EmailSenderAPIKeyResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:EMAILSENDER:APIKEY [READ]"]
+          }
+        ]
+      },
+      "post": {
+        "description": "Add an API key account which will be used for email sending. Currently only support SendGrid platform API Key.",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["Email Sender API Key"],
+        "summary": "Add an API key account",
+        "operationId": "adminCreateEmailSenderAPIKey",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Create API key account request",
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apimodels.CreateEmailSenderAPIKeyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/apimodels.EmailSenderAPIKeyResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:EMAILSENDER:APIKEY [CREATE]"]
+          }
+        ]
+      }
+    },
+    "/config/v1/admin/namespaces/{namespace}/emailsender/apikeys/accounts/{account}": {
+      "delete": {
+        "description": "Delete an API key account.",
+        "produces": ["application/json"],
+        "tags": ["Email Sender API Key"],
+        "summary": "Delete an API key account",
+        "operationId": "adminDeleteEmailSenderAPIKey",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "account name of the API key",
+            "name": "account",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:EMAILSENDER:APIKEY [DELETE]"]
+          }
+        ]
+      }
+    },
+    "/config/v1/admin/namespaces/{namespace}/emailsender/apikeys/accounts/{account}/linkedsenders": {
+      "get": {
+        "description": "Get email senders that linked with API Key account.",
+        "produces": ["application/json"],
+        "tags": ["Email Sender API Key"],
+        "summary": "Get email senders that linked with API Key account",
+        "operationId": "adminGetAPIKeyLinkedEmailSenders",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "account name of the API key",
+            "name": "account",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "number",
+            "description": "Limit of query. Default: 10",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "number",
+            "description": "Offset of query. Default : 0",
+            "name": "offset",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.LinkedEmailSendersResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:EMAILSENDER:APIKEY [READ]"]
+          }
+        ]
+      }
+    },
+    "/config/v1/admin/namespaces/{namespace}/emailsender/authentication": {
+      "get": {
+        "description": "Get email sender domain authentication status.",
+        "produces": ["application/json"],
+        "tags": ["Email Sender Configuration"],
+        "summary": "Get email sender domain authentication",
+        "operationId": "adminGetEmailSenderDomainAuthentication",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.EmailSenderDomainResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:EMAILSENDER [READ]"]
+          }
+        ]
+      }
+    },
+    "/config/v1/admin/namespaces/{namespace}/emailsender/authentication/verify": {
+      "post": {
+        "description": "Verify the authentication of the email sender domain. \n\nIf verification is failed, it will return 400 error.\n",
+        "produces": ["application/json"],
+        "tags": ["Email Sender Configuration"],
+        "summary": "Verify email sender domain authentication",
+        "operationId": "adminVerifyEmailSender",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.EmailSenderVerifyResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:EMAILSENDER [CREATE]"]
+          }
+        ]
+      }
+    },
+    "/config/v1/admin/namespaces/{namespace}/publisher/configs/{configKey}": {
+      "get": {
+        "description": "It will return a publisher namespace config of the given namespace and key.",
+        "produces": ["application/json"],
+        "tags": ["Common Configuration"],
+        "summary": "Get a config by key and namespace",
+        "operationId": "adminPublisherConfig",
+        "deprecated": true,
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "key of the config",
+            "name": "configKey",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConfigInfo"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CONFIG:COMMON [READ]"]
+          }
+        ]
+      }
+    },
+    "/config/v1/public/namespaces/{namespace}/configs": {
+      "get": {
+        "description": "Get all public configs in the namespace",
+        "produces": ["application/json"],
+        "tags": ["Common Configuration"],
+        "summary": "Get all public configs",
+        "operationId": "publicGetAllConfigs",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/apimodels.ConfigInfo"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        }
+      }
+    },
+    "/config/v1/public/namespaces/{namespace}/configs/{configKey}": {
+      "get": {
+        "description": "Get public config by namespace and key",
+        "produces": ["application/json"],
+        "tags": ["Common Configuration"],
+        "summary": "Get a public config",
+        "operationId": "publicGetConfig",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "namespace",
+            "name": "namespace",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "configKey",
+            "name": "configKey",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ConfigInfo"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        }
+      }
+    },
+    "/healthz": {
+      "get": {
+        "operationId": "GetHealthcheckInfo",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "apimodels.APIKeyInfo": {
+      "required": ["namespace", "account"],
+      "properties": {
+        "account": {
+          "description": "sender's account that associated with the api key",
+          "type": "string"
+        },
+        "namespace": {
+          "description": "namespace of the api key",
+          "type": "string"
+        }
+      }
+    },
+    "apimodels.ConfigInfo": {
+      "required": ["namespace", "key", "value", "createdAt", "updatedAt", "isPublic"],
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isPublic": {
+          "type": "boolean"
+        },
+        "key": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "apimodels.ConfigsWithPagination": {
+      "required": ["data", "paging"],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apimodels.ConfigInfo"
+          }
+        },
+        "paging": {
+          "$ref": "#/definitions/apimodels.Paging"
+        }
+      }
+    },
+    "apimodels.CreateConfig": {
+      "required": ["key", "value", "isPublic"],
+      "properties": {
+        "isPublic": {
+          "description": "if the config is set to public, it will be accessible from the public get endpoints",
+          "type": "boolean"
+        },
+        "key": {
+          "description": "key of config",
+          "type": "string"
+        },
+        "value": {
+          "description": "value of config",
+          "type": "string"
+        }
+      }
+    },
+    "apimodels.CreateEmailSenderAPIKeyRequest": {
+      "required": ["account", "apiKey"],
+      "properties": {
+        "account": {
+          "description": "sender's account that associated with the api key. max length is 50, only allow alpha numeric, hyphen and underscore",
+          "type": "string"
+        },
+        "apiKey": {
+          "description": "sender's apikey. max length is 100",
+          "type": "string"
+        }
+      }
+    },
+    "apimodels.CreateEmailSenderRequest": {
+      "required": ["fromAddress", "fromName"],
+      "properties": {
+        "fromAddress": {
+          "description": "from address. max length is 50, only accept valid email address format",
+          "type": "string"
+        },
+        "fromName": {
+          "description": "from name. max length is 50, only allow alpha numeric and space",
+          "type": "string"
+        }
+      }
+    },
+    "apimodels.DNS": {
+      "required": ["mail_cname", "dkim1", "dkim2"],
+      "properties": {
+        "dkim1": {
+          "$ref": "#/definitions/apimodels.DNSData"
+        },
+        "dkim2": {
+          "$ref": "#/definitions/apimodels.DNSData"
+        },
+        "mail_cname": {
+          "$ref": "#/definitions/apimodels.DNSData"
+        }
+      }
+    },
+    "apimodels.DNSData": {
+      "required": ["valid", "type", "host", "data"],
+      "properties": {
+        "data": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "valid": {
+          "type": "boolean"
+        }
+      }
+    },
+    "apimodels.EmailSenderAPIKeyResponse": {
+      "required": ["namespace", "account", "useCount"],
+      "properties": {
+        "account": {
+          "description": "sender's account that associated with the api key",
+          "type": "string"
+        },
+        "apiKey": {
+          "description": "sender's apikey. the value will be masked, except if the requester are client credentials or super user credential",
+          "type": "string"
+        },
+        "namespace": {
+          "description": "namespace of the api key",
+          "type": "string"
+        },
+        "useCount": {
+          "description": "the count of how many times the apikey is used for domain authentication",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "apimodels.EmailSenderDomainResponse": {
+      "required": ["namespace", "fromAddress", "fromName", "domain", "isDomainAuthenticated", "dns"],
+      "properties": {
+        "dns": {
+          "description": "DNS records that need to configure in DNS provider in order to allow the domain authentication",
+          "$ref": "#/definitions/apimodels.DNS"
+        },
+        "domain": {
+          "description": "domain of from address",
+          "type": "string"
+        },
+        "fromAddress": {
+          "description": "from address",
+          "type": "string"
+        },
+        "fromName": {
+          "description": "from name",
+          "type": "string"
+        },
+        "isDomainAuthenticated": {
+          "description": "false means the DNS of the domain are not properly configured yet",
+          "type": "boolean"
+        },
+        "namespace": {
+          "description": "namespace of the email sender",
+          "type": "string"
+        }
+      }
+    },
+    "apimodels.EmailSenderResponse": {
+      "required": ["namespace", "fromAddress", "fromName", "apiKey", "apiKeyInfo", "isDomainAuthenticated"],
+      "properties": {
+        "apiKey": {
+          "description": "sender's apikey. the value will be masked, except if the requester are client credentials or super user credential",
+          "type": "string"
+        },
+        "apiKeyInfo": {
+          "description": "api key information",
+          "$ref": "#/definitions/apimodels.APIKeyInfo"
+        },
+        "emailTemplates": {
+          "description": "email templates that associated with the sender's account. only returned when includeEmailTemplates query param is set to true",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apimodels.EmailTemplatePair"
+          }
+        },
+        "fromAddress": {
+          "description": "from address",
+          "type": "string"
+        },
+        "fromName": {
+          "description": "from name",
+          "type": "string"
+        },
+        "isDomainAuthenticated": {
+          "description": "false means the DNS of the domain are not properly configured yet",
+          "type": "boolean"
+        },
+        "namespace": {
+          "description": "namespace of the email sender",
+          "type": "string"
+        }
+      }
+    },
+    "apimodels.EmailSenderVerifyResponse": {
+      "required": ["namespace", "fromAddress", "fromName", "domain", "isDomainAuthenticated"],
+      "properties": {
+        "domain": {
+          "description": "domain of from address",
+          "type": "string"
+        },
+        "fromAddress": {
+          "description": "from address",
+          "type": "string"
+        },
+        "fromName": {
+          "description": "from name",
+          "type": "string"
+        },
+        "isDomainAuthenticated": {
+          "description": "false means the DNS records of the domain are not properly configured yet",
+          "type": "boolean"
+        },
+        "namespace": {
+          "description": "namespace of the email sender",
+          "type": "string"
+        }
+      }
+    },
+    "apimodels.EmailTemplatePair": {
+      "required": ["templateName", "templateId"],
+      "properties": {
+        "templateId": {
+          "description": "template id. max length is 50",
+          "type": "string"
+        },
+        "templateName": {
+          "description": "template name. max length is 50, only allow alpha numeric and underscore",
+          "type": "string"
+        }
+      }
+    },
+    "apimodels.LinkedEmailSender": {
+      "required": ["namespace", "fromAddress", "fromName", "isDomainAuthenticated"],
+      "properties": {
+        "fromAddress": {
+          "description": "from address",
+          "type": "string"
+        },
+        "fromName": {
+          "description": "from name",
+          "type": "string"
+        },
+        "isDomainAuthenticated": {
+          "description": "false means the DNS of the domain are not properly configured yet",
+          "type": "boolean"
+        },
+        "namespace": {
+          "description": "namespace of the email sender",
+          "type": "string"
+        }
+      }
+    },
+    "apimodels.LinkedEmailSendersResponse": {
+      "required": ["data", "paging"],
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apimodels.LinkedEmailSender"
+          }
+        },
+        "paging": {
+          "$ref": "#/definitions/apimodels.Paging"
+        }
+      }
+    },
+    "apimodels.Paging": {
+      "properties": {
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        }
+      }
+    },
+    "apimodels.UpdateConfig": {
+      "required": ["value", "isPublic"],
+      "properties": {
+        "isPublic": {
+          "description": "if the config is set to public, it will be accessible from the public get endpoints",
+          "type": "boolean"
+        },
+        "value": {
+          "description": "value of config",
+          "type": "string"
+        }
+      }
+    },
+    "apimodels.UpdateEmailSenderRequest": {
+      "required": ["fromAddress", "fromName"],
+      "properties": {
+        "fromAddress": {
+          "description": "from address. max length is 50, only accept valid email address format",
+          "type": "string"
+        },
+        "fromName": {
+          "description": "from name. max length is 50, only allow alpha numeric and space",
+          "type": "string"
+        }
+      }
+    },
+    "response.Error": {
+      "required": ["errorCode", "errorMessage", "name", "message", "attributes"],
+      "properties": {
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "errorCode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "authorization": []
+    }
+  ]
+}

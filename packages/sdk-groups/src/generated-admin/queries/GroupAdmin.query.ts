@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { GroupAdminApi } from '../GroupAdminApi.js'
 
 import { GetGroupListRequestV2 } from '../../generated-definitions/GetGroupListRequestV2.js'
@@ -19,14 +19,25 @@ import { GetGroupsResponseV1 } from '../../generated-definitions/GetGroupsRespon
 import { GroupResponseV1 } from '../../generated-definitions/GroupResponseV1.js'
 
 export enum Key_GroupAdmin {
-  Groups = 'GroupAdmin.Groups',
-  GroupBulk = 'GroupAdmin.GroupBulk',
-  Group_ByGroupId = 'GroupAdmin.Group_ByGroupId'
+  Groups = 'Groups.GroupAdmin.Groups',
+  GroupBulk_v2 = 'Groups.GroupAdmin.GroupBulk_v2',
+  Group_ByGroupId = 'Groups.GroupAdmin.Group_ByGroupId'
 }
 
-export const useAdmGroups = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * Get list of groups. This endpoint will show any types of group Action Code: 73301
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_GroupAdmin.Groups, input]
+ * }
+ * ```
+ */
+export const useGroupAdminApi_GetGroups = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     queryParams?: {
       configurationCode?: string | null
       groupName?: string | null
@@ -36,13 +47,12 @@ export const useAdmGroups = (
     }
   },
   options?: Omit<UseQueryOptions<GetGroupsListResponseV1, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: GetGroupsListResponseV1) => void
+  callback?: (data: AxiosResponse<GetGroupsListResponseV1>) => void
 ): UseQueryResult<GetGroupsListResponseV1, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmGroups>[1]) => async () => {
-    const data = await GroupAdminApi(sdk, { namespace: input.namespace }).getGroups(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useGroupAdminApi_GetGroups>[1]) => async () => {
+    const response = await GroupAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getGroups(input.queryParams)
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<GetGroupsListResponseV1, AxiosError<ApiError>>({
@@ -52,35 +62,60 @@ export const useAdmGroups = (
   })
 }
 
-export const useAdmCreateGroupBulkMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<GetGroupsResponseV1, AxiosError<ApiError>, ApiArgs & { data: GetGroupListRequestV2 }>, 'mutationKey'>,
-  callback?: (data: GetGroupsResponseV1) => void
-): UseMutationResult<GetGroupsResponseV1, AxiosError<ApiError>, ApiArgs & { data: GetGroupListRequestV2 }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: GetGroupListRequestV2 }) => {
-    const data = await GroupAdminApi(sdk, { namespace: input.namespace, config: input.config }).createGroupBulk(input.data)
-    callback && callback(data)
-    return data
+/**
+ * Required valid user authentication Get list of groups by group Ids. Action Code: 73303
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_GroupAdmin.GroupBulk_v2, input]
+ * }
+ * ```
+ */
+export const useGroupAdminApi_FetchGroupBulk_v2 = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { data: GetGroupListRequestV2 },
+  options?: Omit<UseQueryOptions<GetGroupsResponseV1, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<GetGroupsResponseV1>) => void
+): UseQueryResult<GetGroupsResponseV1, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useGroupAdminApi_FetchGroupBulk_v2>[1]) => async () => {
+    const response = await GroupAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).fetchGroupBulk_v2(
+      input.data
+    )
+    callback && callback(response)
+    return response.data
   }
 
-  return useMutation({
-    mutationKey: [Key_GroupAdmin.GroupBulk],
-    mutationFn,
+  return useQuery<GetGroupsResponseV1, AxiosError<ApiError>>({
+    queryKey: [Key_GroupAdmin.GroupBulk_v2, input],
+    queryFn: queryFn(sdk, input),
     ...options
   })
 }
 
-export const useAdmDeleteGroup_ByGroupIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { groupId: string }>, 'mutationKey'>,
+/**
+ * Delete existing group. It will check whether the groupID is exist before doing the process to delete the group. Action Code: 73302
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_GroupAdmin.Group_ByGroupId, input]
+ * }
+ * ```
+ */
+export const useGroupAdminApi_DeleteGroup_ByGroupIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { groupId: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { groupId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { groupId: string }) => {
-    const data = await GroupAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteGroup_ByGroupId(input.groupId)
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { groupId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { groupId: string }) => {
+    const response = await GroupAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteGroup_ByGroupId(
+      input.groupId
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -90,17 +125,29 @@ export const useAdmDeleteGroup_ByGroupIdMutation = (
   })
 }
 
-export const useAdmGroup_ByGroupId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { groupId: string },
+/**
+ * Get single group information. This endpoint will show the group information by the groupId Action Code: 73306
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_GroupAdmin.Group_ByGroupId, input]
+ * }
+ * ```
+ */
+export const useGroupAdminApi_GetGroup_ByGroupId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { groupId: string },
   options?: Omit<UseQueryOptions<GroupResponseV1, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: GroupResponseV1) => void
+  callback?: (data: AxiosResponse<GroupResponseV1>) => void
 ): UseQueryResult<GroupResponseV1, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmGroup_ByGroupId>[1]) => async () => {
-    const data = await GroupAdminApi(sdk, { namespace: input.namespace }).getGroup_ByGroupId(input.groupId)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useGroupAdminApi_GetGroup_ByGroupId>[1]) => async () => {
+    const response = await GroupAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getGroup_ByGroupId(
+      input.groupId
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<GroupResponseV1, AxiosError<ApiError>>({

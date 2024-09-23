@@ -1,14 +1,14 @@
 {
-  "buildBy": "Gradle 6.9.1",
-  "buildDate": "2024-08-05T03:06:55+00:00",
-  "buildID": "4.55.0",
-  "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
-  "buildOS": "Linux amd64 5.10.220-209.869.amzn2.x86_64",
-  "gitBranchName": "master",
-  "gitHash": "9d771feeae",
+  "buildBy": "Gradle 8.5",
+  "buildDate": "2024-09-13T11:21:17+00:00",
+  "buildID": "4.55.3",
+  "buildJDK": "21.0.4 (Amazon.com Inc. 21.0.4+7-LTS)",
+  "buildOS": "Linux amd64 5.10.223-212.873.amzn2.x86_64",
+  "gitBranchName": "upgrade-java",
+  "gitHash": "64eeb411e6",
   "gitTag": "3.31.0",
   "name": "justice-platform-service",
   "realm": "dev",
-  "version": "4.55.0",
-  "version-roles-seeding": "1.2.55"
+  "version": "4.55.3",
+  "version-roles-seeding": "1.2.72"
 }

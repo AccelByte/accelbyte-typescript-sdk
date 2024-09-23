@@ -8,7 +8,8 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { CreateBasePolicyRequest } from '../generated-definitions/CreateBasePolicyRequest.js'
 import { CreateBasePolicyResponse } from '../generated-definitions/CreateBasePolicyResponse.js'
 import { RetrieveBasePolicyResponse } from '../generated-definitions/RetrieveBasePolicyResponse.js'
@@ -19,79 +20,107 @@ import { UpdateBasePolicyRequest } from '../generated-definitions/UpdateBasePoli
 import { UpdateBasePolicyResponse } from '../generated-definitions/UpdateBasePolicyResponse.js'
 import { BaseLegalPoliciesAdmin$ } from './endpoints/BaseLegalPoliciesAdmin$.js'
 
-export function BaseLegalPoliciesAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function BaseLegalPoliciesAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * Retrieve all supported policy types.
-   */
-  async function getPolicyTypes(queryParams: { offset?: number; limit: number }): Promise<RetrievePolicyTypeResponseArray> {
-    const $ = new BaseLegalPoliciesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
+  }
+
+  async function getPolicyTypes(queryParams: { limit: number; offset?: number }): Promise<AxiosResponse<RetrievePolicyTypeResponseArray>> {
+    const $ = new BaseLegalPoliciesAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getPolicyTypes(queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Retrieve all base policies.
-   */
-  async function getBasePolicies(queryParams?: { visibleOnly?: boolean | null }): Promise<RetrieveBasePolicyResponseArray> {
-    const $ = new BaseLegalPoliciesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getBasePolicies(queryParams?: { visibleOnly?: boolean | null }): Promise<AxiosResponse<RetrieveBasePolicyResponseArray>> {
+    const $ = new BaseLegalPoliciesAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getBasePolicies(queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Create a legal policy.
-   */
-  async function createBasePolicy(data: CreateBasePolicyRequest): Promise<CreateBasePolicyResponse> {
-    const $ = new BaseLegalPoliciesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function createBasePolicy(data: CreateBasePolicyRequest): Promise<AxiosResponse<CreateBasePolicyResponse>> {
+    const $ = new BaseLegalPoliciesAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createBasePolicy(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Retrieve a base policy.
-   */
-  async function getBasePolicy_ByBasePolicyId(basePolicyId: string): Promise<RetrieveBasePolicyResponse> {
-    const $ = new BaseLegalPoliciesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getBasePolicy_ByBasePolicyId(basePolicyId: string): Promise<AxiosResponse<RetrieveBasePolicyResponse>> {
+    const $ = new BaseLegalPoliciesAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getBasePolicy_ByBasePolicyId(basePolicyId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Update an existing base policy.
-   */
-  async function patchBasePolicy_ByBasePolicyId(basePolicyId: string, data: UpdateBasePolicyRequest): Promise<UpdateBasePolicyResponse> {
-    const $ = new BaseLegalPoliciesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function patchBasePolicy_ByBasePolicyId(
+    basePolicyId: string,
+    data: UpdateBasePolicyRequest
+  ): Promise<AxiosResponse<UpdateBasePolicyResponse>> {
+    const $ = new BaseLegalPoliciesAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.patchBasePolicy_ByBasePolicyId(basePolicyId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Retrieve a Base Legal Policy based on a Particular Country.
-   */
-  async function getCountry_ByBasePolicyId_ByCountryCode(basePolicyId: string, countryCode: string): Promise<RetrievePolicyResponse> {
-    const $ = new BaseLegalPoliciesAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getCountry_ByBasePolicyId_ByCountryCode(
+    basePolicyId: string,
+    countryCode: string
+  ): Promise<AxiosResponse<RetrievePolicyResponse>> {
+    const $ = new BaseLegalPoliciesAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getCountry_ByBasePolicyId_ByCountryCode(basePolicyId, countryCode)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     * Retrieve all supported policy types.
+     */
     getPolicyTypes,
+    /**
+     * Retrieve all base policies.
+     */
     getBasePolicies,
+    /**
+     * Create a legal policy.
+     */
     createBasePolicy,
+    /**
+     * Retrieve a base policy.
+     */
     getBasePolicy_ByBasePolicyId,
+    /**
+     * Update an existing base policy.
+     */
     patchBasePolicy_ByBasePolicyId,
+    /**
+     * Retrieve a Base Legal Policy based on a Particular Country.
+     */
     getCountry_ByBasePolicyId_ByCountryCode
   }
 }

@@ -9,7 +9,7 @@ import { BannedBy } from './BannedBy.js'
 export const UserBanResponse = z.object({
   Ban: z.string(),
   BanId: z.string(),
-  BannedBy,
+  BannedBy: BannedBy,
   Comment: z.string(),
   CreatedAt: z.string(),
   DisabledDate: z.string().nullish(),

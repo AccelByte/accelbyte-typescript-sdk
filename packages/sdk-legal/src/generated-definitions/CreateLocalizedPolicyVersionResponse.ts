@@ -6,11 +6,11 @@
 import { z } from 'zod'
 
 export const CreateLocalizedPolicyVersionResponse = z.object({
-  id: z.string(),
   createdAt: z.string().nullish(),
-  updatedAt: z.string().nullish(),
+  description: z.string().nullish(),
+  id: z.string(),
   localeCode: z.string().nullish(),
-  description: z.string().nullish()
+  updatedAt: z.string().nullish()
 })
 
 export interface CreateLocalizedPolicyVersionResponse extends z.TypeOf<typeof CreateLocalizedPolicyVersionResponse> {}

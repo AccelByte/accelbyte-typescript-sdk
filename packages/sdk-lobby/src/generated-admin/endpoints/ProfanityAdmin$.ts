@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { AdminAddProfanityFilterIntoListRequest } from '../../generated-definitions/AdminAddProfanityFilterIntoListRequest.js'
 import { AdminAddProfanityFiltersRequest } from '../../generated-definitions/AdminAddProfanityFiltersRequest.js'
@@ -25,35 +25,33 @@ import { ProfanityRule } from '../../generated-definitions/ProfanityRule.js'
 
 export class ProfanityAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Get current profanity rule
    */
-  getProfanityRule(): Promise<IResponse<ProfanityRule>> {
-    const params = {} as SDKRequestConfig
+  getProfanityRule(): Promise<Response<ProfanityRule>> {
+    const params = {} as AxiosRequestConfig
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/rule'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ProfanityRule, 'ProfanityRule')
   }
-
   /**
    * Set current profanity rule
    */
-  createProfanityRule(data: AdminSetProfanityRuleForNamespaceRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  updateProfanityRule(data: AdminSetProfanityRuleForNamespaceRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/rule'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Get lists
    */
-  getProfanityLists(): Promise<IResponse<AdminGetProfanityListsListResponseArray>> {
-    const params = {} as SDKRequestConfig
+  getProfanityLists(): Promise<Response<AdminGetProfanityListsListResponseArray>> {
+    const params = {} as AxiosRequestConfig
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/lists'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -64,23 +62,21 @@ export class ProfanityAdmin$ {
       'AdminGetProfanityListsListResponseArray'
     )
   }
-
   /**
    * Create a new list
    */
-  createProfanityList(data: AdminCreateProfanityListRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  createProfanityList(data: AdminCreateProfanityListRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/lists'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Verify a message directly from the UI or other services
    */
-  createProfanityVerify(data: AdminVerifyMessageProfanityRequest): Promise<IResponse<AdminVerifyMessageProfanityResponse>> {
-    const params = {} as SDKRequestConfig
+  fetchProfanityVerify(data: AdminVerifyMessageProfanityRequest): Promise<Response<AdminVerifyMessageProfanityResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/verify'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
@@ -91,12 +87,11 @@ export class ProfanityAdmin$ {
       'AdminVerifyMessageProfanityResponse'
     )
   }
-
   /**
    * Delete a list include all filters inside of it
    */
-  deleteProfanityList_ByList(list: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteProfanityList_ByList(list: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/lists/{list}'
       .replace('{namespace}', this.namespace)
       .replace('{list}', list)
@@ -104,12 +99,11 @@ export class ProfanityAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Update the list
    */
-  createProfanityList_ByList(list: string, data: AdminUpdateProfanityList): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  updateProfanityList_ByList(list: string, data: AdminUpdateProfanityList): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/lists/{list}'
       .replace('{namespace}', this.namespace)
       .replace('{list}', list)
@@ -117,23 +111,21 @@ export class ProfanityAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Get the list of filters that would modify the phrase
    */
-  createProfanityFilterDebug(data: DebugProfanityFilterRequest): Promise<IResponse<ProfanityFilterArray>> {
-    const params = {} as SDKRequestConfig
+  fetchProfanityFilterDebug(data: DebugProfanityFilterRequest): Promise<Response<ProfanityFilterArray>> {
+    const params = {} as AxiosRequestConfig
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/filters/debug'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ProfanityFilterArray, 'ProfanityFilterArray')
   }
-
   /**
    * Get the list of filters inside the list.
    */
-  getFiltersProfanity_ByList(list: string): Promise<IResponse<AdminGetProfanityListFiltersV1Response>> {
-    const params = {} as SDKRequestConfig
+  getFiltersProfanity_ByList(list: string): Promise<Response<AdminGetProfanityListFiltersV1Response>> {
+    const params = {} as AxiosRequestConfig
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/list/{list}/filters'
       .replace('{namespace}', this.namespace)
       .replace('{list}', list)
@@ -146,12 +138,11 @@ export class ProfanityAdmin$ {
       'AdminGetProfanityListFiltersV1Response'
     )
   }
-
   /**
    * Add a single filter into the list
    */
-  createFilterProfanity_ByList(list: string, data: AdminAddProfanityFilterIntoListRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  createFilterProfanity_ByList(list: string, data: AdminAddProfanityFilterIntoListRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/list/{list}/filters'
       .replace('{namespace}', this.namespace)
       .replace('{list}', list)
@@ -159,12 +150,11 @@ export class ProfanityAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Add multiple filters into the list
    */
-  createFilterBulkProfanity_ByList(list: string, data: AdminAddProfanityFiltersRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  createFilterBulkProfanity_ByList(list: string, data: AdminAddProfanityFiltersRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/list/{list}/filters/bulk'
       .replace('{namespace}', this.namespace)
       .replace('{list}', list)
@@ -172,12 +162,11 @@ export class ProfanityAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Delete the filter from the list
    */
-  createFilterDeleteProfanity_ByList(list: string, data: AdminDeleteProfanityFilterRequest): Promise<IResponse<ProfanityFilterArray>> {
-    const params = {} as SDKRequestConfig
+  createFilterDeleteProfanity_ByList(list: string, data: AdminDeleteProfanityFilterRequest): Promise<Response<ProfanityFilterArray>> {
+    const params = {} as AxiosRequestConfig
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/list/{list}/filters/delete'
       .replace('{namespace}', this.namespace)
       .replace('{list}', list)
@@ -185,12 +174,11 @@ export class ProfanityAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ProfanityFilterArray, 'ProfanityFilterArray')
   }
-
   /**
    * Import a file with filters
    */
-  createFilterBulkFileProfanity_ByList(list: string, data: number[]): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  createFilterBulkFileProfanity_ByList(list: string, data: number[]): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/lobby/v1/admin/profanity/namespaces/{namespace}/list/{list}/filters/bulk-file'
       .replace('{namespace}', this.namespace)
       .replace('{list}', list)

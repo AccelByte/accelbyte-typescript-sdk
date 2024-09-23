@@ -7,29 +7,38 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { SectionAdminApi } from '../SectionAdminApi.js'
 
 import { FullSectionInfo } from '../../generated-definitions/FullSectionInfo.js'
-import { FullSectionInfoArray } from '../../generated-definitions/FullSectionInfoArray.js'
 import { SectionCreate } from '../../generated-definitions/SectionCreate.js'
 import { SectionPagingSlicedResult } from '../../generated-definitions/SectionPagingSlicedResult.js'
 import { SectionUpdate } from '../../generated-definitions/SectionUpdate.js'
 
 export enum Key_SectionAdmin {
-  Sections = 'SectionAdmin.Sections',
-  Section = 'SectionAdmin.Section',
-  SectionBulk = 'SectionAdmin.SectionBulk',
-  Section_BySectionId = 'SectionAdmin.Section_BySectionId',
-  SectionPurgeExpired = 'SectionAdmin.SectionPurgeExpired'
+  Sections = 'Platform.SectionAdmin.Sections',
+  Section = 'Platform.SectionAdmin.Section',
+  Section_BySectionId = 'Platform.SectionAdmin.Section_BySectionId',
+  SectionPurgeExpired = 'Platform.SectionAdmin.SectionPurgeExpired'
 }
 
-export const useAdmSections = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * This API is used to query sections.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated sections&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_SectionAdmin.Sections, input]
+ * }
+ * ```
+ */
+export const useSectionAdminApi_GetSections = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     queryParams?: {
       end?: string | null
       limit?: number
@@ -40,13 +49,14 @@ export const useAdmSections = (
     }
   },
   options?: Omit<UseQueryOptions<SectionPagingSlicedResult, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: SectionPagingSlicedResult) => void
+  callback?: (data: AxiosResponse<SectionPagingSlicedResult>) => void
 ): UseQueryResult<SectionPagingSlicedResult, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmSections>[1]) => async () => {
-    const data = await SectionAdminApi(sdk, { namespace: input.namespace }).getSections(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useSectionAdminApi_GetSections>[1]) => async () => {
+    const response = await SectionAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getSections(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<SectionPagingSlicedResult, AxiosError<ApiError>>({
@@ -56,22 +66,40 @@ export const useAdmSections = (
   })
 }
 
-export const useAdmCreateSectionMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * This API is used to create a section.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created a section&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;Restrictions for section extension and localization extension&lt;/h2&gt; 1. Cannot use &lt;b&gt;&#34;.&#34;&lt;/b&gt; as the key name - &lt;pre&gt;{ &#34;data.2&#34;: &#34;value&#34; }&lt;/pre&gt; 2. Cannot use &lt;b&gt;&#34;$&#34;&lt;/b&gt; as the prefix in key names - &lt;pre&gt;{ &#34;$data&#34;: &#34;value&#34; }&lt;/pre&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_SectionAdmin.Section, input]
+ * }
+ * ```
+ */
+export const useSectionAdminApi_CreateSectionMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<FullSectionInfo, AxiosError<ApiError>, ApiArgs & { data: SectionCreate; queryParams: { storeId: string | null } }>,
+    UseMutationOptions<
+      FullSectionInfo,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { data: SectionCreate; queryParams: { storeId: string | null } }
+    >,
     'mutationKey'
   >,
   callback?: (data: FullSectionInfo) => void
-): UseMutationResult<FullSectionInfo, AxiosError<ApiError>, ApiArgs & { data: SectionCreate; queryParams: { storeId: string | null } }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: SectionCreate; queryParams: { storeId: string | null } }) => {
-    const data = await SectionAdminApi(sdk, { namespace: input.namespace, config: input.config }).createSection(
+): UseMutationResult<
+  FullSectionInfo,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { data: SectionCreate; queryParams: { storeId: string | null } }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: SectionCreate; queryParams: { storeId: string | null } }) => {
+    const response = await SectionAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createSection(
       input.data,
       input.queryParams
     )
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -81,55 +109,32 @@ export const useAdmCreateSectionMutation = (
   })
 }
 
-export const useAdmCreateSectionBulkMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * This API is used to delete s section.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_SectionAdmin.Section_BySectionId, input]
+ * }
+ * ```
+ */
+export const useSectionAdminApi_DeleteSection_BySectionIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<
-      FullSectionInfoArray,
-      AxiosError<ApiError>,
-      ApiArgs & { data: SectionCreate[]; queryParams: { storeId: string | null } }
-    >,
-    'mutationKey'
-  >,
-  callback?: (data: FullSectionInfoArray) => void
-): UseMutationResult<
-  FullSectionInfoArray,
-  AxiosError<ApiError>,
-  ApiArgs & { data: SectionCreate[]; queryParams: { storeId: string | null } }
-> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: SectionCreate[]; queryParams: { storeId: string | null } }) => {
-    const data = await SectionAdminApi(sdk, { namespace: input.namespace, config: input.config }).createSectionBulk(
-      input.data,
-      input.queryParams
-    )
-    callback && callback(data)
-    return data
-  }
-
-  return useMutation({
-    mutationKey: [Key_SectionAdmin.SectionBulk],
-    mutationFn,
-    ...options
-  })
-}
-
-export const useAdmDeleteSection_BySectionIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<
-    UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { sectionId: string; queryParams: { storeId: string | null } }>,
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { sectionId: string; queryParams: { storeId: string | null } }>,
     'mutationKey'
   >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { sectionId: string; queryParams: { storeId: string | null } }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { sectionId: string; queryParams: { storeId: string | null } }) => {
-    const data = await SectionAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteSection_BySectionId(
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { sectionId: string; queryParams: { storeId: string | null } }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { sectionId: string; queryParams: { storeId: string | null } }) => {
+    const response = await SectionAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteSection_BySectionId(
       input.sectionId,
       input.queryParams
     )
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -139,17 +144,30 @@ export const useAdmDeleteSection_BySectionIdMutation = (
   })
 }
 
-export const useAdmSection_BySectionId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { sectionId: string; queryParams?: { storeId?: string | null } },
+/**
+ * This API is used to get a section.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: section data&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_SectionAdmin.Section_BySectionId, input]
+ * }
+ * ```
+ */
+export const useSectionAdminApi_GetSection_BySectionId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { sectionId: string; queryParams?: { storeId?: string | null } },
   options?: Omit<UseQueryOptions<FullSectionInfo, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: FullSectionInfo) => void
+  callback?: (data: AxiosResponse<FullSectionInfo>) => void
 ): UseQueryResult<FullSectionInfo, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmSection_BySectionId>[1]) => async () => {
-    const data = await SectionAdminApi(sdk, { namespace: input.namespace }).getSection_BySectionId(input.sectionId, input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useSectionAdminApi_GetSection_BySectionId>[1]) => async () => {
+    const response = await SectionAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getSection_BySectionId(
+      input.sectionId,
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<FullSectionInfo, AxiosError<ApiError>>({
@@ -159,13 +177,24 @@ export const useAdmSection_BySectionId = (
   })
 }
 
-export const useAdmUpdateSection_BySectionIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * This API is used to update s section.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated section data&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;Restrictions for section extension and localization extension&lt;/h2&gt; 1. Cannot use &lt;b&gt;&#34;.&#34;&lt;/b&gt; as the key name - &lt;pre&gt;{ &#34;data.2&#34;: &#34;value&#34; }&lt;/pre&gt; 2. Cannot use &lt;b&gt;&#34;$&#34;&lt;/b&gt; as the prefix in key names - &lt;pre&gt;{ &#34;$data&#34;: &#34;value&#34; }&lt;/pre&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_SectionAdmin.Section_BySectionId, input]
+ * }
+ * ```
+ */
+export const useSectionAdminApi_UpdateSection_BySectionIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
     UseMutationOptions<
       FullSectionInfo,
       AxiosError<ApiError>,
-      ApiArgs & { sectionId: string; data: SectionUpdate; queryParams: { storeId: string | null } }
+      SdkSetConfigParam & { sectionId: string; data: SectionUpdate; queryParams: { storeId: string | null } }
     >,
     'mutationKey'
   >,
@@ -173,17 +202,18 @@ export const useAdmUpdateSection_BySectionIdMutation = (
 ): UseMutationResult<
   FullSectionInfo,
   AxiosError<ApiError>,
-  ApiArgs & { sectionId: string; data: SectionUpdate; queryParams: { storeId: string | null } }
+  SdkSetConfigParam & { sectionId: string; data: SectionUpdate; queryParams: { storeId: string | null } }
 > => {
-  //
-  const mutationFn = async (input: ApiArgs & { sectionId: string; data: SectionUpdate; queryParams: { storeId: string | null } }) => {
-    const data = await SectionAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateSection_BySectionId(
+  const mutationFn = async (
+    input: SdkSetConfigParam & { sectionId: string; data: SectionUpdate; queryParams: { storeId: string | null } }
+  ) => {
+    const response = await SectionAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateSection_BySectionId(
       input.sectionId,
       input.data,
       input.queryParams
     )
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -193,18 +223,31 @@ export const useAdmUpdateSection_BySectionIdMutation = (
   })
 }
 
-export const useAdmDeleteSectionPurgeExpiredMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { queryParams: { storeId: string | null } }>, 'mutationKey'>,
+/**
+ * This API is used to purge expired section.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_SectionAdmin.SectionPurgeExpired, input]
+ * }
+ * ```
+ */
+export const useSectionAdminApi_DeleteSectionPurgeExpiredMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { queryParams: { storeId: string | null } }>,
+    'mutationKey'
+  >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { queryParams: { storeId: string | null } }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { queryParams: { storeId: string | null } }) => {
-    const data = await SectionAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteSectionPurgeExpired(
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { queryParams: { storeId: string | null } }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { queryParams: { storeId: string | null } }) => {
+    const response = await SectionAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteSectionPurgeExpired(
       input.queryParams
     )
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

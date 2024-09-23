@@ -6,19 +6,19 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { ListEnvironmentVariablesResponse } from '../../generated-definitions/ListEnvironmentVariablesResponse.js'
 
 export class EnvironmentVariables$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * List environment variables.
    */
-  getEnvironmentVariables(): Promise<IResponse<ListEnvironmentVariablesResponse>> {
-    const params = {} as SDKRequestConfig
+  getEnvironmentVariables(): Promise<Response<ListEnvironmentVariablesResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/match2/v1/environment-variables'
     const resultPromise = this.axiosInstance.get(url, { params })
 

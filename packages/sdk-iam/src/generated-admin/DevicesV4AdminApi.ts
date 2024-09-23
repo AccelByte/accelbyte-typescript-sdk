@@ -8,7 +8,8 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { DeviceBanRequestV4 } from '../generated-definitions/DeviceBanRequestV4.js'
 import { DeviceBanResponseV4 } from '../generated-definitions/DeviceBanResponseV4.js'
 import { DeviceBanUpdateRequestV4 } from '../generated-definitions/DeviceBanUpdateRequestV4.js'
@@ -20,156 +21,178 @@ import { DeviceUsersResponseV4 } from '../generated-definitions/DeviceUsersRespo
 import { DevicesResponseV4 } from '../generated-definitions/DevicesResponseV4.js'
 import { DevicesV4Admin$ } from './endpoints/DevicesV4Admin$.js'
 
-export function DevicesV4AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function DevicesV4AdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * This is the endpoint for an admin to get devices a user ever used to login
-   */
-  async function getDevices(queryParams?: { userId?: string | null }): Promise<DevicesResponseV4> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getDevices(queryParams)
-    if (resp.error) throw resp.error
-    return resp.response.data
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
   }
 
-  /**
-   * This is the endpoint for an admin to get device bans of user
-   */
-  async function getDevicesBans(queryParams: { userId: string | null }): Promise<DeviceBansResponseV4> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getDevicesBans(queryParams)
+  async function getDevices_v4(queryParams?: { userId?: string | null }): Promise<AxiosResponse<DevicesResponseV4>> {
+    const $ = new DevicesV4Admin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getDevices_v4(queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This is the endpoint for an admin to ban a device
-   */
-  async function createDeviceBan(data: DeviceBanRequestV4): Promise<unknown> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.createDeviceBan(data)
+  async function getDevicesBans_v4(queryParams: { userId: string | null }): Promise<AxiosResponse<DeviceBansResponseV4>> {
+    const $ = new DevicesV4Admin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getDevicesBans_v4(queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This is the endpoint for an admin to get device types
-   */
-  async function getDevicesTypes(): Promise<DeviceTypesResponseV4> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getDevicesTypes()
+  async function createDeviceBan_v4(data: DeviceBanRequestV4): Promise<AxiosResponse<unknown>> {
+    const $ = new DevicesV4Admin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.createDeviceBan_v4(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This is the endpoint for an admin to get banned devices
-   */
-  async function getDevicesBanned(queryParams?: {
+  async function getDevicesTypes_v4(): Promise<AxiosResponse<DeviceTypesResponseV4>> {
+    const $ = new DevicesV4Admin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getDevicesTypes_v4()
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function getDevicesBanned_v4(queryParams?: {
     deviceType?: string | null
     endDate?: string | null
     limit?: number
     offset?: number
     startDate?: string | null
-  }): Promise<DeviceBannedResponseV4> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getDevicesBanned(queryParams)
+  }): Promise<AxiosResponse<DeviceBannedResponseV4>> {
+    const $ = new DevicesV4Admin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getDevicesBanned_v4(queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This is the endpoint for an admin to generate device report
-   */
-  async function getDevicesReport(queryParams: {
+  async function getDevicesReport_v4(queryParams: {
     deviceType: string | null
     endDate?: string | null
     startDate?: string | null
-  }): Promise<unknown> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getDevicesReport(queryParams)
+  }): Promise<AxiosResponse<unknown>> {
+    const $ = new DevicesV4Admin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getDevicesReport_v4(queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This is the endpoint for an admin to get device ban config
-   */
-  async function getDeviceBan_ByBanId(banId: string): Promise<DeviceBanResponseV4> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getDeviceBan_ByBanId(banId)
+  async function getDeviceBan_ByBanId_v4(banId: string): Promise<AxiosResponse<DeviceBanResponseV4>> {
+    const $ = new DevicesV4Admin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getDeviceBan_ByBanId_v4(banId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This is the endpoint for an admin to update a device ban config
-   */
-  async function updateDeviceBan_ByBanId(banId: string, data: DeviceBanUpdateRequestV4): Promise<unknown> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.updateDeviceBan_ByBanId(banId, data)
+  async function updateDeviceBan_ByBanId_v4(banId: string, data: DeviceBanUpdateRequestV4): Promise<AxiosResponse<unknown>> {
+    const $ = new DevicesV4Admin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.updateDeviceBan_ByBanId_v4(banId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This is the endpoint for an admin to get device ban list
-   */
-  async function getBans_ByDeviceId(deviceId: string): Promise<DeviceBansResponseV4> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getBans_ByDeviceId(deviceId)
+  async function getBans_ByDeviceId_v4(deviceId: string): Promise<AxiosResponse<DeviceBansResponseV4>> {
+    const $ = new DevicesV4Admin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getBans_ByDeviceId_v4(deviceId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This is the endpoint for an admin to unban device
-   */
-  async function updateUnban_ByDeviceId(deviceId: string): Promise<unknown> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.updateUnban_ByDeviceId(deviceId)
+  async function updateUnban_ByDeviceId_v4(deviceId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new DevicesV4Admin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.updateUnban_ByDeviceId_v4(deviceId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This is the endpoint for an admin to get users that ever login on the device
-   */
-  async function getUsers_ByDeviceId(deviceId: string): Promise<DeviceUsersResponseV4> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getUsers_ByDeviceId(deviceId)
+  async function getUsers_ByDeviceId_v4(deviceId: string): Promise<AxiosResponse<DeviceUsersResponseV4>> {
+    const $ = new DevicesV4Admin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getUsers_ByDeviceId_v4(deviceId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * @deprecated
-   * This is the endpoint for an admin to decrypt device id
-   */
-  async function getDecrypt_ByDeviceId_DEPRECATED(deviceId: string): Promise<DeviceIdDecryptResponseV4> {
-    const $ = new DevicesV4Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getDecrypt_ByDeviceId_DEPRECATED(deviceId)
+  async function getDecrypt_ByDeviceId_v4(deviceId: string): Promise<AxiosResponse<DeviceIdDecryptResponseV4>> {
+    const $ = new DevicesV4Admin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getDecrypt_ByDeviceId_v4(deviceId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
-    getDevices,
-    getDevicesBans,
-    createDeviceBan,
-    getDevicesTypes,
-    getDevicesBanned,
-    getDevicesReport,
-    getDeviceBan_ByBanId,
-    updateDeviceBan_ByBanId,
-    getBans_ByDeviceId,
-    updateUnban_ByDeviceId,
-    getUsers_ByDeviceId,
-    getDecrypt_ByDeviceId_DEPRECATED
+    /**
+     * This is the endpoint for an admin to get devices a user ever used to login
+     */
+    getDevices_v4,
+    /**
+     * This is the endpoint for an admin to get device bans of user
+     */
+    getDevicesBans_v4,
+    /**
+     * This is the endpoint for an admin to ban a device
+     */
+    createDeviceBan_v4,
+    /**
+     * This is the endpoint for an admin to get device types
+     */
+    getDevicesTypes_v4,
+    /**
+     * This is the endpoint for an admin to get banned devices
+     */
+    getDevicesBanned_v4,
+    /**
+     * This is the endpoint for an admin to generate device report
+     */
+    getDevicesReport_v4,
+    /**
+     * This is the endpoint for an admin to get device ban config
+     */
+    getDeviceBan_ByBanId_v4,
+    /**
+     * This is the endpoint for an admin to update a device ban config
+     */
+    updateDeviceBan_ByBanId_v4,
+    /**
+     * This is the endpoint for an admin to get device ban list
+     */
+    getBans_ByDeviceId_v4,
+    /**
+     * This is the endpoint for an admin to unban device
+     */
+    updateUnban_ByDeviceId_v4,
+    /**
+     * This is the endpoint for an admin to get users that ever login on the device
+     */
+    getUsers_ByDeviceId_v4,
+    /**
+     * @deprecated
+     * This is the endpoint for an admin to decrypt device id
+     */
+    getDecrypt_ByDeviceId_v4
   }
 }

@@ -6,19 +6,19 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { ListTagsResponse } from '../../generated-definitions/ListTagsResponse.js'
 
 export class PublicTags$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * ## Description Retrieve list of available tags by namespace
    */
-  getTags(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<ListTagsResponse>> {
-    const params = { limit: 25, ...queryParams } as SDKRequestConfig
+  getTags(queryParams?: { limit?: number; offset?: number }): Promise<Response<ListTagsResponse>> {
+    const params = { limit: 25, ...queryParams } as AxiosRequestConfig
     const url = '/cloudsave/v1/namespaces/{namespace}/tags'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 

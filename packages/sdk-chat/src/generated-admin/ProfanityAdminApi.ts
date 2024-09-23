@@ -8,7 +8,8 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { Dictionary } from '../generated-definitions/Dictionary.js'
 import { DictionaryExport } from '../generated-definitions/DictionaryExport.js'
 import { DictionaryGroupArray } from '../generated-definitions/DictionaryGroupArray.js'
@@ -19,16 +20,35 @@ import { DictionaryQueryResult } from '../generated-definitions/DictionaryQueryR
 import { DictionaryUpdateRequest } from '../generated-definitions/DictionaryUpdateRequest.js'
 import { ProfanityAdmin$ } from './endpoints/ProfanityAdmin$.js'
 
-export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function ProfanityAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * Query all profanity words.
-   */
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
+  }
+
   async function getProfanityDictionary(queryParams?: {
     filterMask?: string | null
     includeChildren?: boolean | null
@@ -37,94 +57,100 @@ export function ProfanityAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     parentId?: string | null
     startWith?: string | null
     wordType?: string | null
-  }): Promise<DictionaryQueryResult> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  }): Promise<AxiosResponse<DictionaryQueryResult>> {
+    const $ = new ProfanityAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getProfanityDictionary(queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Insert new word for profanity censor
-   */
-  async function createProfanityDictionary(data: DictionaryInsertRequest): Promise<Dictionary> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function createProfanityDictionary(data: DictionaryInsertRequest): Promise<AxiosResponse<Dictionary>> {
+    const $ = new ProfanityAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createProfanityDictionary(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Delete profanity words.
-   */
-  async function deleteProfanityDictionary_ById(id: string): Promise<unknown> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteProfanityDictionary_ById(id: string): Promise<AxiosResponse<unknown>> {
+    const $ = new ProfanityAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteProfanityDictionary_ById(id)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Update profanity word
-   */
-  async function updateProfanityDictionary_ById(id: string, data: DictionaryUpdateRequest): Promise<Dictionary> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateProfanityDictionary_ById(id: string, data: DictionaryUpdateRequest): Promise<AxiosResponse<Dictionary>> {
+    const $ = new ProfanityAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateProfanityDictionary_ById(id, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Bulk insert new word for profanity censor
-   */
-  async function createProfanityDictionaryBulk(data: DictionaryInsertBulkRequest): Promise<Dictionary> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function createProfanityDictionaryBulk(data: DictionaryInsertBulkRequest): Promise<AxiosResponse<Dictionary>> {
+    const $ = new ProfanityAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createProfanityDictionaryBulk(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get profanity words group.
-   */
-  async function getProfanityDictionaryGroup(queryParams?: { limit?: number; offset?: number }): Promise<DictionaryGroupArray> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getProfanityDictionaryGroup(queryParams?: {
+    limit?: number
+    offset?: number
+  }): Promise<AxiosResponse<DictionaryGroupArray>> {
+    const $ = new ProfanityAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getProfanityDictionaryGroup(queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Export profanity words
-   */
-  async function getProfanityDictionaryExport(): Promise<DictionaryExport> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getProfanityDictionaryExport(): Promise<AxiosResponse<DictionaryExport>> {
+    const $ = new ProfanityAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getProfanityDictionaryExport()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Import profanity words
-   */
   async function createProfanityDictionaryImport(
     data: { file: File },
     queryParams?: { action?: 'FULLREPLACE' | 'LEAVEOUT' | 'REPLACE'; showResult?: boolean | null }
-  ): Promise<DictionaryImportResult> {
-    const $ = new ProfanityAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  ): Promise<AxiosResponse<DictionaryImportResult>> {
+    const $ = new ProfanityAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createProfanityDictionaryImport(data, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     * Query all profanity words.
+     */
     getProfanityDictionary,
+    /**
+     * Insert new word for profanity censor
+     */
     createProfanityDictionary,
+    /**
+     * Delete profanity words.
+     */
     deleteProfanityDictionary_ById,
+    /**
+     * Update profanity word
+     */
     updateProfanityDictionary_ById,
+    /**
+     * Bulk insert new word for profanity censor
+     */
     createProfanityDictionaryBulk,
+    /**
+     * Get profanity words group.
+     */
     getProfanityDictionaryGroup,
+    /**
+     * Export profanity words
+     */
     getProfanityDictionaryExport,
+    /**
+     * Import profanity words
+     */
     createProfanityDictionaryImport
   }
 }

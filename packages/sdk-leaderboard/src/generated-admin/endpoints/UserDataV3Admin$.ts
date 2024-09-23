@@ -6,22 +6,22 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { GetAllUserLeaderboardsRespV3 } from '../../generated-definitions/GetAllUserLeaderboardsRespV3.js'
 
 export class UserDataV3Admin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * &lt;p&gt;Get user leaderboard rankings&lt;/p&gt;
    */
-  getLeaderboards_ByUserId(
+  getLeaderboards_ByUserId_v3(
     userId: string,
     queryParams?: { limit?: number; offset?: number }
-  ): Promise<IResponse<GetAllUserLeaderboardsRespV3>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  ): Promise<Response<GetAllUserLeaderboardsRespV3>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/leaderboard/v3/admin/namespaces/{namespace}/users/{userId}/leaderboards'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

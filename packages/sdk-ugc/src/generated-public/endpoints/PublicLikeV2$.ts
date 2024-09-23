@@ -6,24 +6,24 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { ContentLikeRequest } from '../../generated-definitions/ContentLikeRequest.js'
 import { ContentLikeResponse } from '../../generated-definitions/ContentLikeResponse.js'
 import { PaginatedContentLikersResponse } from '../../generated-definitions/PaginatedContentLikersResponse.js'
 
 export class PublicLikeV2$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * This endpoint will only display the list of users who performed like from v2 endpoint.
    */
-  getLike_ByContentId(
+  getLike_ByContentId_v2(
     contentId: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null }
-  ): Promise<IResponse<PaginatedContentLikersResponse>> {
-    const params = { limit: 20, sortBy: 'createdTime:desc', ...queryParams } as SDKRequestConfig
+  ): Promise<Response<PaginatedContentLikersResponse>> {
+    const params = { limit: 20, sortBy: 'createdTime:desc', ...queryParams } as AxiosRequestConfig
     const url = '/ugc/v2/public/namespaces/{namespace}/contents/{contentId}/like'
       .replace('{namespace}', this.namespace)
       .replace('{contentId}', contentId)
@@ -36,12 +36,11 @@ export class PublicLikeV2$ {
       'PaginatedContentLikersResponse'
     )
   }
-
   /**
    * This endpoint will update like/unlike state from a content
    */
-  updateLike_ByContentId(contentId: string, data: ContentLikeRequest): Promise<IResponse<ContentLikeResponse>> {
-    const params = {} as SDKRequestConfig
+  updateLike_ByContentId_v2(contentId: string, data: ContentLikeRequest): Promise<Response<ContentLikeResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/ugc/v2/public/namespaces/{namespace}/contents/{contentId}/like'
       .replace('{namespace}', this.namespace)
       .replace('{contentId}', contentId)

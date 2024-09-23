@@ -6,16 +6,16 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { ClawbackInfo } from '../../generated-definitions/ClawbackInfo.js'
 import { IapClawbackPagingSlicedResult } from '../../generated-definitions/IapClawbackPagingSlicedResult.js'
 import { StreamEvent } from '../../generated-definitions/StreamEvent.js'
 
 export class ClawbackAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Query clawback history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated clawback history&lt;/li&gt;&lt;/ul&gt;
    */
@@ -28,8 +28,8 @@ export class ClawbackAdmin$ {
     startTime?: string | null
     status?: 'FAIL' | 'IGNORED' | 'INIT' | 'SUCCESS'
     userId?: string | null
-  }): Promise<IResponse<IapClawbackPagingSlicedResult>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  }): Promise<Response<IapClawbackPagingSlicedResult>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/iap/clawback/histories'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -40,12 +40,11 @@ export class ClawbackAdmin$ {
       'IapClawbackPagingSlicedResult'
     )
   }
-
   /**
    * Mock Sync PlayStation Clawback event..
    */
-  createIapClawbackPlaystationMock(data: StreamEvent): Promise<IResponse<ClawbackInfo>> {
-    const params = {} as SDKRequestConfig
+  createIapClawbackPlaystationMock(data: StreamEvent): Promise<Response<ClawbackInfo>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/iap/clawback/playstation/mock'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 

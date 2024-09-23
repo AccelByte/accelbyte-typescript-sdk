@@ -1,11 +1,5 @@
 # @accelbyte/sdk
 
-## 3.0.8
-
-### Patch Changes
-
-- fix(sdk): unable to refresh token on cross-origin requests
-
 ## 3.0.7
 
 ### Major Changes

@@ -8,7 +8,8 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { BulkUserProgressionRequest } from '../generated-definitions/BulkUserProgressionRequest.js'
 import { ClaimableUserSeasonInfo } from '../generated-definitions/ClaimableUserSeasonInfo.js'
 import { ExpGrantHistoryPagingSlicedResult } from '../generated-definitions/ExpGrantHistoryPagingSlicedResult.js'
@@ -27,143 +28,129 @@ import { UserSeasonSummary } from '../generated-definitions/UserSeasonSummary.js
 import { UserSeasonSummaryArray } from '../generated-definitions/UserSeasonSummaryArray.js'
 import { SeasonAdmin$ } from './endpoints/SeasonAdmin$.js'
 
-export function SeasonAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function SeasonAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * This API is used to query seasons, seasons only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of season basic info&lt;/li&gt;&lt;/ul&gt;
-   */
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
+  }
+
   async function getSeasons(queryParams?: {
     limit?: number
     offset?: number
     status?: string[]
-  }): Promise<ListSeasonInfoPagingSlicedResult> {
-    const $ = new SeasonAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  }): Promise<AxiosResponse<ListSeasonInfoPagingSlicedResult>> {
+    const $ = new SeasonAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getSeasons(queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This API is used to create a season, season only allowed in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created season&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function createSeason(data: SeasonCreate): Promise<SeasonInfo> {
-    const $ = new SeasonAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function createSeason(data: SeasonCreate): Promise<AxiosResponse<SeasonInfo>> {
+    const $ = new SeasonAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createSeason(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * [SERVICE COMMUNICATION ONLY]This API is used to get current published season summary which includes previous published season summary if exists, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: season summary data&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getSeasonsCurrent(): Promise<SeasonSummary> {
-    const $ = new SeasonAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getSeasonsCurrent(): Promise<AxiosResponse<SeasonSummary>> {
+    const $ = new SeasonAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getSeasonsCurrent()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This API is used to delete a season permanently, only draft season can be deleted. &lt;p&gt;
-   */
-  async function deleteSeason_BySeasonId(seasonId: string): Promise<unknown> {
-    const $ = new SeasonAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteSeason_BySeasonId(seasonId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new SeasonAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteSeason_BySeasonId(seasonId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This API is used to get a season, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: season data&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getSeason_BySeasonId(seasonId: string): Promise<SeasonInfo> {
-    const $ = new SeasonAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getSeason_BySeasonId(seasonId: string): Promise<AxiosResponse<SeasonInfo>> {
+    const $ = new SeasonAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getSeason_BySeasonId(seasonId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This API is used to update a season. Only draft season can be updated.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated season&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function patchSeason_BySeasonId(seasonId: string, data: SeasonUpdate): Promise<SeasonInfo> {
-    const $ = new SeasonAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function patchSeason_BySeasonId(seasonId: string, data: SeasonUpdate): Promise<AxiosResponse<SeasonInfo>> {
+    const $ = new SeasonAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.patchSeason_BySeasonId(seasonId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This API is used to get user participated season data, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user participated season data&lt;/li&gt;&lt;/ul&gt;
-   */
   async function getSeasons_ByUserId(
     userId: string,
     queryParams?: { limit?: number; offset?: number }
-  ): Promise<ListUserSeasonInfoPagingSlicedResult> {
-    const $ = new SeasonAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  ): Promise<AxiosResponse<ListUserSeasonInfoPagingSlicedResult>> {
+    const $ = new SeasonAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getSeasons_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This API is used to get a season full content, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: season data&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getFull_BySeasonId(seasonId: string): Promise<FullSeasonInfo> {
-    const $ = new SeasonAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getFull_BySeasonId(seasonId: string): Promise<AxiosResponse<FullSeasonInfo>> {
+    const $ = new SeasonAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getFull_BySeasonId(seasonId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This API is used to clone a season.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: cloned season info&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function createClone_BySeasonId(seasonId: string, data: SeasonCloneRequest): Promise<SeasonInfo> {
-    const $ = new SeasonAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function createClone_BySeasonId(seasonId: string, data: SeasonCloneRequest): Promise<AxiosResponse<SeasonInfo>> {
+    const $ = new SeasonAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createClone_BySeasonId(seasonId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This API is used to retire a published season, if the season has not ended it will report error except with force.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: season info&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function updateRetire_BySeasonId(seasonId: string, queryParams?: { force?: boolean | null }): Promise<SeasonInfo> {
-    const $ = new SeasonAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateRetire_BySeasonId(seasonId: string, queryParams?: { force?: boolean | null }): Promise<AxiosResponse<SeasonInfo>> {
+    const $ = new SeasonAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateRetire_BySeasonId(seasonId, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This API is used to publish a draft season, only one published season allowed at same time in a namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: published season&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function updatePublish_BySeasonId(seasonId: string): Promise<SeasonInfo> {
-    const $ = new SeasonAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updatePublish_BySeasonId(seasonId: string): Promise<AxiosResponse<SeasonInfo>> {
+    const $ = new SeasonAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updatePublish_BySeasonId(seasonId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This API is used to unpublish a published season, if the season already started it will report error except with force.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: season info&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function updateUnpublish_BySeasonId(seasonId: string, queryParams?: { force?: boolean | null }): Promise<SeasonInfo> {
-    const $ = new SeasonAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateUnpublish_BySeasonId(
+    seasonId: string,
+    queryParams?: { force?: boolean | null }
+  ): Promise<AxiosResponse<SeasonInfo>> {
+    const $ = new SeasonAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateUnpublish_BySeasonId(seasonId, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This API is used to get user exp acquisition history, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;default will query from current active season&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated grant history&lt;/li&gt;&lt;/ul&gt;
-   */
   async function getSeasonsExpHistory_ByUserId(
     userId: string,
     queryParams?: {
@@ -175,103 +162,148 @@ export function SeasonAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       tags?: string[]
       to?: string | null
     }
-  ): Promise<ExpGrantHistoryPagingSlicedResult> {
-    const $ = new SeasonAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  ): Promise<AxiosResponse<ExpGrantHistoryPagingSlicedResult>> {
+    const $ = new SeasonAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getSeasonsExpHistory_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * &lt;b&gt;[TEST FACILITY ONLY] Forbidden in live environment. &lt;/b&gt;This API is used to reset user data in current season, it will not revoke the rewarded entitlements.&lt;p&gt;
-   */
-  async function deleteSeasonCurrentReset_ByUserId(userId: string): Promise<unknown> {
-    const $ = new SeasonAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteSeasonCurrentReset_ByUserId(userId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new SeasonAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteSeasonCurrentReset_ByUserId(userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This API is used to bulk get user current season progression, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user season progression&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function createSeasonCurrentUserBulkProgression(data: BulkUserProgressionRequest): Promise<UserSeasonSummaryArray> {
-    const $ = new SeasonAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function createSeasonCurrentUserBulkProgression(data: BulkUserProgressionRequest): Promise<AxiosResponse<UserSeasonSummaryArray>> {
+    const $ = new SeasonAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createSeasonCurrentUserBulkProgression(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This API is used to get user season data, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user season data&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getData_ByUserId_BySeasonId(userId: string, seasonId: string): Promise<ClaimableUserSeasonInfo> {
-    const $ = new SeasonAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getData_ByUserId_BySeasonId(userId: string, seasonId: string): Promise<AxiosResponse<ClaimableUserSeasonInfo>> {
+    const $ = new SeasonAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getData_ByUserId_BySeasonId(userId, seasonId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This API is used to get user exp acquisition history&#39;s tag list.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;default will query from current active season&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: exp grant history tags list&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getSeasonsExpHistoryTags_ByUserId(userId: string, queryParams?: { seasonId?: string | null }): Promise<ReasonTagsResult> {
-    const $ = new SeasonAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getSeasonsExpHistoryTags_ByUserId(
+    userId: string,
+    queryParams?: { seasonId?: string | null }
+  ): Promise<AxiosResponse<ReasonTagsResult>> {
+    const $ = new SeasonAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getSeasonsExpHistoryTags_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This API is used to get current user season progression, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user season progression&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getSeasonsCurrentProgression_ByUserId(userId: string): Promise<UserSeasonSummary> {
-    const $ = new SeasonAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getSeasonsCurrentProgression_ByUserId(userId: string): Promise<AxiosResponse<UserSeasonSummary>> {
+    const $ = new SeasonAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getSeasonsCurrentProgression_ByUserId(userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This API is used to check pass or tier purchasable, season only located in non-publisher namespace.&lt;p&gt;
-   */
-  async function createSeasonCurrentPurchasable_ByUserId(userId: string, data: UserPurchasable): Promise<unknown> {
-    const $ = new SeasonAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function createSeasonCurrentPurchasable_ByUserId(userId: string, data: UserPurchasable): Promise<AxiosResponse<unknown>> {
+    const $ = new SeasonAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createSeasonCurrentPurchasable_ByUserId(userId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * [SERVICE COMMUNICATION ONLY]This API is used to get ownership for any pass codes, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: ownership&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getSeasonsCurrentPassesOwnershipAny_ByUserId(userId: string, queryParams?: { passCodes?: string[] }): Promise<Ownership> {
-    const $ = new SeasonAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getSeasonsCurrentPassesOwnershipAny_ByUserId(
+    userId: string,
+    queryParams?: { passCodes?: string[] }
+  ): Promise<AxiosResponse<Ownership>> {
+    const $ = new SeasonAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getSeasonsCurrentPassesOwnershipAny_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     * This API is used to query seasons, seasons only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of season basic info&lt;/li&gt;&lt;/ul&gt;
+     */
     getSeasons,
+    /**
+     * This API is used to create a season, season only allowed in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created season&lt;/li&gt;&lt;/ul&gt;
+     */
     createSeason,
+    /**
+     * [SERVICE COMMUNICATION ONLY]This API is used to get current published season summary which includes previous published season summary if exists, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: season summary data&lt;/li&gt;&lt;/ul&gt;
+     */
     getSeasonsCurrent,
+    /**
+     * This API is used to delete a season permanently, only draft season can be deleted. &lt;p&gt;
+     */
     deleteSeason_BySeasonId,
+    /**
+     * This API is used to get a season, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: season data&lt;/li&gt;&lt;/ul&gt;
+     */
     getSeason_BySeasonId,
+    /**
+     * This API is used to update a season. Only draft season can be updated.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated season&lt;/li&gt;&lt;/ul&gt;
+     */
     patchSeason_BySeasonId,
+    /**
+     * This API is used to get user participated season data, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user participated season data&lt;/li&gt;&lt;/ul&gt;
+     */
     getSeasons_ByUserId,
+    /**
+     * This API is used to get a season full content, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: season data&lt;/li&gt;&lt;/ul&gt;
+     */
     getFull_BySeasonId,
+    /**
+     * This API is used to clone a season.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: cloned season info&lt;/li&gt;&lt;/ul&gt;
+     */
     createClone_BySeasonId,
+    /**
+     * This API is used to retire a published season, if the season has not ended it will report error except with force.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: season info&lt;/li&gt;&lt;/ul&gt;
+     */
     updateRetire_BySeasonId,
+    /**
+     * This API is used to publish a draft season, only one published season allowed at same time in a namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: published season&lt;/li&gt;&lt;/ul&gt;
+     */
     updatePublish_BySeasonId,
+    /**
+     * This API is used to unpublish a published season, if the season already started it will report error except with force.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: season info&lt;/li&gt;&lt;/ul&gt;
+     */
     updateUnpublish_BySeasonId,
+    /**
+     * This API is used to get user exp acquisition history, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;default will query from current active season&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated grant history&lt;/li&gt;&lt;/ul&gt;
+     */
     getSeasonsExpHistory_ByUserId,
+    /**
+     * &lt;b&gt;[TEST FACILITY ONLY] Forbidden in live environment. &lt;/b&gt;This API is used to reset user data in current season, it will not revoke the rewarded entitlements.&lt;p&gt;
+     */
     deleteSeasonCurrentReset_ByUserId,
+    /**
+     * This API is used to bulk get user current season progression, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user season progression&lt;/li&gt;&lt;/ul&gt;
+     */
     createSeasonCurrentUserBulkProgression,
+    /**
+     * This API is used to get user season data, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user season data&lt;/li&gt;&lt;/ul&gt;
+     */
     getData_ByUserId_BySeasonId,
+    /**
+     * This API is used to get user exp acquisition history&#39;s tag list.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;default will query from current active season&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: exp grant history tags list&lt;/li&gt;&lt;/ul&gt;
+     */
     getSeasonsExpHistoryTags_ByUserId,
+    /**
+     * This API is used to get current user season progression, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user season progression&lt;/li&gt;&lt;/ul&gt;
+     */
     getSeasonsCurrentProgression_ByUserId,
+    /**
+     * This API is used to check pass or tier purchasable, season only located in non-publisher namespace.&lt;p&gt;
+     */
     createSeasonCurrentPurchasable_ByUserId,
+    /**
+     * [SERVICE COMMUNICATION ONLY]This API is used to get ownership for any pass codes, season only located in non-publisher namespace.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: ownership&lt;/li&gt;&lt;/ul&gt;
+     */
     getSeasonsCurrentPassesOwnershipAny_ByUserId
   }
 }

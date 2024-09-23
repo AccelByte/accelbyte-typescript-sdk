@@ -6,24 +6,23 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { InvoiceSummary } from '../../generated-definitions/InvoiceSummary.js'
 
 export class InvoiceAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Generate invoice summary.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: query orders&lt;/li&gt;&lt;/ul&gt;
    */
   getInvoiceSummary(queryParams: {
     endTime: string | null
-    startTime: string | null
-    feature?: string | null
-    itemId?: string | null
-    itemType?:
+    feature: string | null
+    itemId: string | null
+    itemType:
       | 'APP'
       | 'BUNDLE'
       | 'CODE'
@@ -35,23 +34,22 @@ export class InvoiceAdmin$ {
       | 'OPTIONBOX'
       | 'SEASON'
       | 'SUBSCRIPTION'
-  }): Promise<IResponse<InvoiceSummary>> {
-    const params = { ...queryParams } as SDKRequestConfig
+    startTime: string | null
+  }): Promise<Response<InvoiceSummary>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/invoice/summary'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, InvoiceSummary, 'InvoiceSummary')
   }
-
   /**
    * Download invoice details as a csv file.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: invoice details csv file&lt;/li&gt;&lt;/ul&gt;
    */
   getInvoiceDetailsCsv(queryParams: {
     endTime: string | null
-    startTime: string | null
-    feature?: string | null
-    itemId?: string | null
-    itemType?:
+    feature: string | null
+    itemId: string | null
+    itemType:
       | 'APP'
       | 'BUNDLE'
       | 'CODE'
@@ -63,8 +61,9 @@ export class InvoiceAdmin$ {
       | 'OPTIONBOX'
       | 'SEASON'
       | 'SUBSCRIPTION'
-  }): Promise<IResponse<unknown>> {
-    const params = { ...queryParams } as SDKRequestConfig
+    startTime: string | null
+  }): Promise<Response<unknown>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/invoice/details.csv'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 

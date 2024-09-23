@@ -7,14 +7,17 @@
  * AUTO GENERATED
  */
 
-import { GroupRolesAdminApi } from './generated-admin/GroupRolesAdminApi.js'
-import { GroupAdminApi } from './generated-admin/GroupAdminApi.js'
+import { author, name, version } from '../package.json'
 import { ConfigurationAdminApi } from './generated-admin/ConfigurationAdminApi.js'
+import { GroupAdminApi } from './generated-admin/GroupAdminApi.js'
 import { GroupMemberAdminApi } from './generated-admin/GroupMemberAdminApi.js'
+import { GroupRolesAdminApi } from './generated-admin/GroupRolesAdminApi.js'
+import { GroupApi } from './generated-public/GroupApi.js'
 import { GroupMemberApi } from './generated-public/GroupMemberApi.js'
 import { GroupRolesApi } from './generated-public/GroupRolesApi.js'
-import { GroupApi } from './generated-public/GroupApi.js'
 import { MemberRequestApi } from './generated-public/MemberRequestApi.js'
+
+console.log(`${name}@${version}`)
 
 const apis = {
   GroupRolesAdminApi,
@@ -24,7 +27,13 @@ const apis = {
   GroupMemberApi,
   GroupRolesApi,
   GroupApi,
-  MemberRequestApi
+  MemberRequestApi,
+  version: () =>
+    console.log({
+      version,
+      name,
+      author
+    })
 }
 
 export const Group = apis

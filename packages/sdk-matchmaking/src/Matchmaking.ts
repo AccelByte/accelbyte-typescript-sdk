@@ -7,14 +7,17 @@
  * AUTO GENERATED
  */
 
+import { author, name, version } from '../package.json'
 import { ConfigAdminApi } from './generated-admin/ConfigAdminApi.js'
+import { BackfillApi } from './generated-public/BackfillApi.js'
 import { ConfigApi } from './generated-public/ConfigApi.js'
 import { EnvironmentVariablesApi } from './generated-public/EnvironmentVariablesApi.js'
-import { BackfillApi } from './generated-public/BackfillApi.js'
-import { RuleSetsApi } from './generated-public/RuleSetsApi.js'
+import { MatchFunctionsApi } from './generated-public/MatchFunctionsApi.js'
 import { MatchPoolsApi } from './generated-public/MatchPoolsApi.js'
 import { MatchTicketsApi } from './generated-public/MatchTicketsApi.js'
-import { MatchFunctionsApi } from './generated-public/MatchFunctionsApi.js'
+import { RuleSetsApi } from './generated-public/RuleSetsApi.js'
+
+console.log(`${name}@${version}`)
 
 const apis = {
   ConfigAdminApi,
@@ -24,7 +27,13 @@ const apis = {
   RuleSetsApi,
   MatchPoolsApi,
   MatchTicketsApi,
-  MatchFunctionsApi
+  MatchFunctionsApi,
+  version: () =>
+    console.log({
+      version,
+      name,
+      author
+    })
 }
 
 export const Matchmaking = apis

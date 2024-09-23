@@ -11,9 +11,9 @@ export const MatchTicketRecord = z.object({
   CreatedAt: z.string(),
   IsActive: z.boolean(),
   PartySessionID: z.string(),
-  ProposedProposal,
+  ProposedProposal: ProposedProposal,
   SessionID: z.string(),
-  Ticket,
+  Ticket: Ticket,
   TicketID: z.string(),
   UniqueTicketID: z.string()
 })

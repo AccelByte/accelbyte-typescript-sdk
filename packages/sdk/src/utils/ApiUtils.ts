@@ -4,17 +4,16 @@
  * and restrictions contact your company contract manager.
  */
 
-import { ApiArgs, SDKRequestConfig } from '../Types'
-import axios from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
 
 export class ApiUtils {
-  static mergedConfigs = (config: SDKRequestConfig, overrides?: ApiArgs): SDKRequestConfig => {
+  static mergeAxiosConfigs = (config: AxiosRequestConfig, overrides?: AxiosRequestConfig): AxiosRequestConfig => {
     return {
       ...config,
-      ...overrides?.config,
+      ...overrides,
       headers: {
-        ...config.headers,
-        ...overrides?.config?.headers
+        ...config?.headers,
+        ...overrides?.headers
       }
     }
   }

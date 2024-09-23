@@ -6,23 +6,23 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { GetUsersPresenceResponse } from '../../generated-definitions/GetUsersPresenceResponse.js'
 import { RequestUserPresence } from '../../generated-definitions/RequestUserPresence.js'
 
 export class Presence$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Query users presence with given namespace and userIds.
    */
   getPresenceUsersPresence(queryParams: {
     userIds: string | null
     countOnly?: boolean | null
-  }): Promise<IResponse<GetUsersPresenceResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  }): Promise<Response<GetUsersPresenceResponse>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/lobby/v1/public/presence/namespaces/{namespace}/users/presence'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -33,15 +33,14 @@ export class Presence$ {
       'GetUsersPresenceResponse'
     )
   }
-
   /**
    * Query users presence with given namespace and userIds.
    */
   createPresenceUserPresence(
     data: RequestUserPresence,
     queryParams?: { countOnly?: boolean | null }
-  ): Promise<IResponse<GetUsersPresenceResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  ): Promise<Response<GetUsersPresenceResponse>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/lobby/v1/public/presence/namespaces/{namespace}/users/presence'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 

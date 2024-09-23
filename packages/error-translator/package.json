@@ -1,0 +1,44 @@
+{
+  "name": "@accelbyte/error-translator",
+  "version": "0.3.3",
+  "author": "AccelByte Inc",
+  "license": "SEE LICENSE IN LICENSE",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/es/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "yarn build:js && yarn build:types",
+    "build:js": "rollup -c rollup.config.mjs",
+    "build:types": "tsc --project tsconfig.build.json --emitDeclarationOnly",
+    "test-and-build": "yarn test && yarn build",
+    "test": "echo ''",
+    "clean": "npx rimraf dist && npx rimraf node_modules"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "peerDependencies": {
+    "flat": "^5.0.2",
+    "i18next": "^22.4.9",
+    "react": "^17.0.0",
+    "react-i18next": "^12.1.4"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "20.0.0",
+    "@rollup/plugin-json": "4.1.0",
+    "@rollup/plugin-node-resolve": "13.0.4",
+    "@rollup/plugin-typescript": "11.0.0",
+    "@types/react": "17.0.2",
+    "flat": "5.0.2",
+    "i18next": "22.4.9",
+    "i18next-scanner": "4.0.0",
+    "json5": "2.2.1",
+    "react": "17.0.2",
+    "react-i18next": "12.1.4",
+    "rollup": "3.8.1",
+    "rollup-plugin-peer-deps-external": "2.2.4",
+    "tslib": "2.4.0",
+    "typescript": "4.6.4"
+  },
+  "sideEffects": false
+}

@@ -7,7 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
 import { AxiosError } from 'axios'
 // @ts-ignore
 import { useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
@@ -19,21 +19,33 @@ import { CommitDiffCacheRequest } from '../../generated-definitions/CommitDiffCa
 import { CreateDiffCacheRequest } from '../../generated-definitions/CreateDiffCacheRequest.js'
 
 export enum Key_CachingAdmin {
-  DiffCache = 'CachingAdmin.DiffCache',
-  DiffCalculate = 'CachingAdmin.DiffCalculate',
-  DiffCalculateBulk = 'CachingAdmin.DiffCalculateBulk'
+  DiffCache = 'Buildinfo.CachingAdmin.DiffCache',
+  DiffCalculate = 'Buildinfo.CachingAdmin.DiffCalculate',
+  DiffCalculateBulk = 'Buildinfo.CachingAdmin.DiffCalculateBulk'
 }
 
-export const useAdmCreateDiffCacheMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { data: CreateDiffCacheRequest }>, 'mutationKey'>,
+/**
+ * This API is used to save detailed diff cache. Only used by differ. Not to be used directly.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_CachingAdmin.DiffCache, input]
+ * }
+ * ```
+ */
+export const useCachingAdminApi_CreateDiffCacheMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: CreateDiffCacheRequest }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { data: CreateDiffCacheRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: CreateDiffCacheRequest }) => {
-    const data = await CachingAdminApi(sdk, { namespace: input.namespace, config: input.config }).createDiffCache(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: CreateDiffCacheRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: CreateDiffCacheRequest }) => {
+    const response = await CachingAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createDiffCache(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -43,16 +55,28 @@ export const useAdmCreateDiffCacheMutation = (
   })
 }
 
-export const useAdmUpdateDiffCacheMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { data: CommitDiffCacheRequest }>, 'mutationKey'>,
+/**
+ * This API is used to mark that the diff caching is complete and diff summary file uploaded to s3. Only used by differ. Not to be used directly.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_CachingAdmin.DiffCache, input]
+ * }
+ * ```
+ */
+export const useCachingAdminApi_UpdateDiffCacheMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: CommitDiffCacheRequest }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { data: CommitDiffCacheRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: CommitDiffCacheRequest }) => {
-    const data = await CachingAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateDiffCache(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: CommitDiffCacheRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: CommitDiffCacheRequest }) => {
+    const response = await CachingAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateDiffCache(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -62,16 +86,28 @@ export const useAdmUpdateDiffCacheMutation = (
   })
 }
 
-export const useAdmCreateDiffCalculateMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { data: CalculateDiffCacheRequest }>, 'mutationKey'>,
+/**
+ * This API is used to dispatch diff caching request.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_CachingAdmin.DiffCalculate, input]
+ * }
+ * ```
+ */
+export const useCachingAdminApi_CreateDiffCalculateMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: CalculateDiffCacheRequest }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { data: CalculateDiffCacheRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: CalculateDiffCacheRequest }) => {
-    const data = await CachingAdminApi(sdk, { namespace: input.namespace, config: input.config }).createDiffCalculate(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: CalculateDiffCacheRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: CalculateDiffCacheRequest }) => {
+    const response = await CachingAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createDiffCalculate(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -81,16 +117,31 @@ export const useAdmCreateDiffCalculateMutation = (
   })
 }
 
-export const useAdmCreateDiffCalculateBulkMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { data: BulkCalculateDiffCacheRequest }>, 'mutationKey'>,
+/**
+ * This API is used to bulk dispatch diff caching requests to differ instance.&lt;br/&gt;The processing order will follow the order of the array.&lt;br/&gt;The &lt;b&gt;priority&lt;/b&gt; flag means that request will be set as priority inside the queue and always served first even if there’s existing non-priority request(s) beforehand.&lt;br/&gt;&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;Request is skipped if the source and destination versions is same&lt;/li&gt;&lt;li&gt;Request is skipped if the source version is not found&lt;/li&gt;&lt;li&gt;Request is skipped if the destination version is not found&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_CachingAdmin.DiffCalculateBulk, input]
+ * }
+ * ```
+ */
+export const useCachingAdminApi_CreateDiffCalculateBulkMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: BulkCalculateDiffCacheRequest }>,
+    'mutationKey'
+  >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { data: BulkCalculateDiffCacheRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: BulkCalculateDiffCacheRequest }) => {
-    const data = await CachingAdminApi(sdk, { namespace: input.namespace, config: input.config }).createDiffCalculateBulk(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: BulkCalculateDiffCacheRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: BulkCalculateDiffCacheRequest }) => {
+    const response = await CachingAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createDiffCalculateBulk(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

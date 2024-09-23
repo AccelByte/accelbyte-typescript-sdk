@@ -6,19 +6,19 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { ChatSnapshots } from '../../generated-definitions/ChatSnapshots.js'
 
 export class Moderation$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Get the chat snapshot
    */
-  getSnapshot_ByTopic_ByChatId(topic: string, chatId: string): Promise<IResponse<ChatSnapshots>> {
-    const params = {} as SDKRequestConfig
+  getSnapshot_ByTopic_ByChatId(topic: string, chatId: string): Promise<Response<ChatSnapshots>> {
+    const params = {} as AxiosRequestConfig
     const url = '/chat/v1/public/namespaces/{namespace}/topic/{topic}/snapshot/{chatId}'
       .replace('{namespace}', this.namespace)
       .replace('{topic}', topic)

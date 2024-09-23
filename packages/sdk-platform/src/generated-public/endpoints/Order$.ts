@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { OrderCreate } from '../../generated-definitions/OrderCreate.js'
 import { OrderDiscountPreviewRequest } from '../../generated-definitions/OrderDiscountPreviewRequest.js'
@@ -18,8 +18,8 @@ import { OrderPagingSlicedResult } from '../../generated-definitions/OrderPaging
 
 export class Order$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Query user orders.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: get order&lt;/li&gt;&lt;/ul&gt;
    */
@@ -43,8 +43,8 @@ export class Order$ {
         | 'REFUNDING'
         | 'REFUND_FAILED'
     }
-  ): Promise<IResponse<OrderPagingSlicedResult>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  ): Promise<Response<OrderPagingSlicedResult>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/orders'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -57,12 +57,11 @@ export class Order$ {
       'OrderPagingSlicedResult'
     )
   }
-
   /**
    * Create an order. The result contains the checkout link and payment token. User with permission SANDBOX will create sandbox order that not real paid for xsolla/alipay and not validate price for wxpay.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Optional permission(user with this permission will create sandbox order)&lt;/i&gt;: resource=&#34;SANDBOX&#34;, action=1 (CREATE)&lt;/li&gt;&lt;li&gt;It will be forbidden while the user is banned: ORDER_INITIATE or ORDER_AND_PAYMENT&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created order&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;Restrictions for ext field&lt;/h2&gt; 1. Cannot use &lt;b&gt;&#34;.&#34;&lt;/b&gt; as the key name - &lt;pre&gt;{ &#34;data.2&#34;: &#34;value&#34; }&lt;/pre&gt; 2. Cannot use &lt;b&gt;&#34;$&#34;&lt;/b&gt; as the prefix in key names - &lt;pre&gt;{ &#34;$data&#34;: &#34;value&#34; }&lt;/pre&gt;
    */
-  createOrder_ByUserId(userId: string, data: OrderCreate): Promise<IResponse<OrderInfo>> {
-    const params = {} as SDKRequestConfig
+  createOrder_ByUserId(userId: string, data: OrderCreate): Promise<Response<OrderInfo>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/orders'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -70,12 +69,11 @@ export class Order$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, OrderInfo, 'OrderInfo')
   }
-
   /**
    * Get user order.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: get order&lt;/li&gt;&lt;/ul&gt;
    */
-  getOrder_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<IResponse<OrderInfo>> {
-    const params = {} as SDKRequestConfig
+  getOrder_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<Response<OrderInfo>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/orders/{orderNo}'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -84,12 +82,11 @@ export class Order$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, OrderInfo, 'OrderInfo')
   }
-
   /**
    * Cancel user order.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: cancelled order&lt;/li&gt;&lt;/ul&gt;
    */
-  updateCancel_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<IResponse<OrderInfo>> {
-    const params = {} as SDKRequestConfig
+  updateCancel_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<Response<OrderInfo>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/orders/{orderNo}/cancel'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -98,12 +95,11 @@ export class Order$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, OrderInfo, 'OrderInfo')
   }
-
   /**
    * Preview order price with discount code, this api is used to auto calc order price with discount code.Notes: this api don&#39;t do full order validation, only check discount code and calc final order price.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: previewed order&lt;/li&gt;&lt;/ul&gt;
    */
-  createOrderDiscountPreview_ByUserId(userId: string, data: OrderDiscountPreviewRequest): Promise<IResponse<OrderDiscountPreviewResponse>> {
-    const params = {} as SDKRequestConfig
+  createOrderDiscountPreview_ByUserId(userId: string, data: OrderDiscountPreviewRequest): Promise<Response<OrderDiscountPreviewResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/orders/discount/preview'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -116,12 +112,11 @@ export class Order$ {
       'OrderDiscountPreviewResponse'
     )
   }
-
   /**
    * Get user order histories.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: get order history&lt;/li&gt;&lt;/ul&gt;
    */
-  getHistory_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<IResponse<OrderHistoryInfoArray>> {
-    const params = {} as SDKRequestConfig
+  getHistory_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<Response<OrderHistoryInfoArray>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/orders/{orderNo}/history'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -130,12 +125,11 @@ export class Order$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, OrderHistoryInfoArray, 'OrderHistoryInfoArray')
   }
-
   /**
    * Download user order receipt by orderNo.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: order receipt pdf&lt;/li&gt;&lt;/ul&gt;
    */
-  getReceiptPdf_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  getReceiptPdf_ByUserId_ByOrderNo(userId: string, orderNo: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/public/namespaces/{namespace}/users/{userId}/orders/{orderNo}/receipt.pdf'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

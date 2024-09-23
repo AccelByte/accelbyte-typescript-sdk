@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { GameSessionDetail } from '../../generated-definitions/GameSessionDetail.js'
 import { GameSessionDetailQueryResponse } from '../../generated-definitions/GameSessionDetailQueryResponse.js'
 import { MatchmakingDetail } from '../../generated-definitions/MatchmakingDetail.js'
@@ -19,8 +19,8 @@ import { TicketObservabilityDetail } from '../../generated-definitions/TicketObs
 
 export class GameSessionDetailAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Get all parties.
    */
@@ -31,8 +31,8 @@ export class GameSessionDetailAdmin$ {
     orderBy?: string | null
     partyID?: string | null
     userID?: string | null
-  }): Promise<IResponse<PartyDetailQueryResponse>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  }): Promise<Response<PartyDetailQueryResponse>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/sessionhistory/v1/admin/namespaces/{namespace}/parties'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -43,7 +43,6 @@ export class GameSessionDetailAdmin$ {
       'PartyDetailQueryResponse'
     )
   }
-
   /**
    * Get all matchmaking ticket.
    */
@@ -57,8 +56,8 @@ export class GameSessionDetailAdmin$ {
     region?: string | null
     startDate?: string | null
     userIDs?: string | null
-  }): Promise<IResponse<TicketDetailQueryResponse>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  }): Promise<Response<TicketDetailQueryResponse>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/sessionhistory/v1/admin/namespaces/{namespace}/tickets'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -69,7 +68,6 @@ export class GameSessionDetailAdmin$ {
       'TicketDetailQueryResponse'
     )
   }
-
   /**
    * Get all matchmaking.
    */
@@ -81,8 +79,8 @@ export class GameSessionDetailAdmin$ {
     orderBy?: string | null
     ticketID?: string | null
     userID?: string | null
-  }): Promise<IResponse<MatchmakingDetailQueryResponse>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  }): Promise<Response<MatchmakingDetailQueryResponse>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/sessionhistory/v1/admin/namespaces/{namespace}/matchmaking'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -93,7 +91,6 @@ export class GameSessionDetailAdmin$ {
       'MatchmakingDetailQueryResponse'
     )
   }
-
   /**
    * Get all game sessions.
    */
@@ -106,8 +103,8 @@ export class GameSessionDetailAdmin$ {
     orderBy?: string | null
     startDate?: string | null
     userID?: string | null
-  }): Promise<IResponse<GameSessionDetailQueryResponse>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  }): Promise<Response<GameSessionDetailQueryResponse>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/sessionhistory/v1/admin/namespaces/{namespace}/gamesessions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -118,12 +115,11 @@ export class GameSessionDetailAdmin$ {
       'GameSessionDetailQueryResponse'
     )
   }
-
   /**
    * Get detail matchmaking ticket history by ticket ID.
    */
-  getTicket_ByTicketId(ticketId: string): Promise<IResponse<TicketObservabilityDetail>> {
-    const params = {} as SDKRequestConfig
+  getTicket_ByTicketId(ticketId: string): Promise<Response<TicketObservabilityDetail>> {
+    const params = {} as AxiosRequestConfig
     const url = '/sessionhistory/v1/admin/namespaces/{namespace}/tickets/{ticketId}'
       .replace('{namespace}', this.namespace)
       .replace('{ticketId}', ticketId)
@@ -136,12 +132,11 @@ export class GameSessionDetailAdmin$ {
       'TicketObservabilityDetail'
     )
   }
-
   /**
    * Get party detail.
    */
-  getParty_BySessionId(sessionId: string): Promise<IResponse<PartyDetail>> {
-    const params = {} as SDKRequestConfig
+  getParty_BySessionId(sessionId: string): Promise<Response<PartyDetail>> {
+    const params = {} as AxiosRequestConfig
     const url = '/sessionhistory/v1/admin/namespaces/{namespace}/parties/{sessionId}'
       .replace('{namespace}', this.namespace)
       .replace('{sessionId}', sessionId)
@@ -149,12 +144,11 @@ export class GameSessionDetailAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PartyDetail, 'PartyDetail')
   }
-
   /**
    * Get game session detail.
    */
-  getGamesession_BySessionId(sessionId: string): Promise<IResponse<GameSessionDetail>> {
-    const params = {} as SDKRequestConfig
+  getGamesession_BySessionId(sessionId: string): Promise<Response<GameSessionDetail>> {
+    const params = {} as AxiosRequestConfig
     const url = '/sessionhistory/v1/admin/namespaces/{namespace}/gamesessions/{sessionId}'
       .replace('{namespace}', this.namespace)
       .replace('{sessionId}', sessionId)
@@ -162,12 +156,11 @@ export class GameSessionDetailAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GameSessionDetail, 'GameSessionDetail')
   }
-
   /**
    * Get detail matchmaking history by ticket ID.
    */
-  getMatchmakingTicket_ByTicketId(ticketId: string): Promise<IResponse<MatchmakingDetail>> {
-    const params = {} as SDKRequestConfig
+  getMatchmakingTicket_ByTicketId(ticketId: string): Promise<Response<MatchmakingDetail>> {
+    const params = {} as AxiosRequestConfig
     const url = '/sessionhistory/v1/admin/namespaces/{namespace}/matchmaking/ticket/{ticketId}'
       .replace('{namespace}', this.namespace)
       .replace('{ticketId}', ticketId)
@@ -175,12 +168,11 @@ export class GameSessionDetailAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, MatchmakingDetail, 'MatchmakingDetail')
   }
-
   /**
    * Get detail matchmaking history by session ID.
    */
-  getMatchmakingSession_BySessionId(sessionId: string): Promise<IResponse<MatchmakingDetail>> {
-    const params = {} as SDKRequestConfig
+  getMatchmakingSession_BySessionId(sessionId: string): Promise<Response<MatchmakingDetail>> {
+    const params = {} as AxiosRequestConfig
     const url = '/sessionhistory/v1/admin/namespaces/{namespace}/matchmaking/session/{sessionId}'
       .replace('{namespace}', this.namespace)
       .replace('{sessionId}', sessionId)

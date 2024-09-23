@@ -6,14 +6,14 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { ListItemTypesResp } from '../../generated-definitions/ListItemTypesResp.js'
 
 export class PublicItemTypes$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    *  This endpoint will list all item types in a namespace. The response body will be in the form of standard pagination.
    */
@@ -21,8 +21,8 @@ export class PublicItemTypes$ {
     limit?: number
     offset?: number
     sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc' | 'name' | 'name:asc' | 'name:desc'
-  }): Promise<IResponse<ListItemTypesResp>> {
-    const params = { limit: 25, sortBy: 'createdAt', ...queryParams } as SDKRequestConfig
+  }): Promise<Response<ListItemTypesResp>> {
+    const params = { limit: 25, sortBy: 'createdAt', ...queryParams } as AxiosRequestConfig
     const url = '/inventory/v1/public/namespaces/{namespace}/itemtypes'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 

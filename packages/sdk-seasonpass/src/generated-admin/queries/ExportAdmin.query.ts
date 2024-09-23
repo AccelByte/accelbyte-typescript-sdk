@@ -7,27 +7,37 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
 import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { ExportAdminApi } from '../ExportAdminApi.js'
 
 export enum Key_ExportAdmin {
-  Export = 'ExportAdmin.Export'
+  Export = 'Seasonpass.ExportAdmin.Export'
 }
 
-export const useAdmExport = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * This API is used to export all of season service data files with csv format.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ExportAdmin.Export, input]
+ * }
+ * ```
+ */
+export const useExportAdminApi_GetExport = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<unknown, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: unknown) => void
+  callback?: (data: AxiosResponse<unknown>) => void
 ): UseQueryResult<unknown, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmExport>[1]) => async () => {
-    const data = await ExportAdminApi(sdk, { namespace: input.namespace }).getExport()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useExportAdminApi_GetExport>[1]) => async () => {
+    const response = await ExportAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getExport()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<unknown, AxiosError<ApiError>>({

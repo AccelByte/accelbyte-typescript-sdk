@@ -8,10 +8,12 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { FulfillCodeRequest } from '../generated-definitions/FulfillCodeRequest.js'
 import { FulfillmentHistoryPagingSlicedResult } from '../generated-definitions/FulfillmentHistoryPagingSlicedResult.js'
 import { FulfillmentItemArray } from '../generated-definitions/FulfillmentItemArray.js'
+import { FulfillmentPagingSlicedResult } from '../generated-definitions/FulfillmentPagingSlicedResult.js'
 import { FulfillmentRequest } from '../generated-definitions/FulfillmentRequest.js'
 import { FulfillmentResult } from '../generated-definitions/FulfillmentResult.js'
 import { FulfillmentV2Request } from '../generated-definitions/FulfillmentV2Request.js'
@@ -21,17 +23,36 @@ import { RevokeFulfillmentV2Result } from '../generated-definitions/RevokeFulfil
 import { RewardsRequest } from '../generated-definitions/RewardsRequest.js'
 import { FulfillmentAdmin$ } from './endpoints/FulfillmentAdmin$.js'
 
-export function FulfillmentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function FulfillmentAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt; Query fulfillments in a namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: query fulfillments&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getFulfillments(queryParams?: {
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
+  }
+
+  async function getFulfillments_v2(queryParams?: {
     endTime?: string | null
     limit?: number
     offset?: number
@@ -39,111 +60,134 @@ export function FulfillmentAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     state?: 'FULFILLED' | 'FULFILL_FAILED' | 'REVOKED' | 'REVOKE_FAILED'
     transactionId?: string | null
     userId?: string | null
-  }): Promise<FulfillmentHistoryPagingSlicedResult> {
-    const $ = new FulfillmentAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getFulfillments(queryParams)
+  }): Promise<AxiosResponse<FulfillmentPagingSlicedResult>> {
+    const $ = new FulfillmentAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getFulfillments_v2(queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Query fulfillment histories in a namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: query fulfillment history&lt;/li&gt;&lt;/ul&gt;
-   */
   async function getFulfillmentHistory(queryParams?: {
     limit?: number
     offset?: number
     status?: 'FAIL' | 'SUCCESS'
     userId?: string | null
-  }): Promise<FulfillmentHistoryPagingSlicedResult> {
-    const $ = new FulfillmentAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  }): Promise<AxiosResponse<FulfillmentHistoryPagingSlicedResult>> {
+    const $ = new FulfillmentAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getFulfillmentHistory(queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Fulfill item.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment result&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function createFulfillment_ByUserId(userId: string, data: FulfillmentRequest): Promise<FulfillmentResult> {
-    const $ = new FulfillmentAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function createFulfillment_ByUserId(userId: string, data: FulfillmentRequest): Promise<AxiosResponse<FulfillmentResult>> {
+    const $ = new FulfillmentAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createFulfillment_ByUserId(userId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Redeem campaign code.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment result&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function createFulfillmentCode_ByUserId(userId: string, data: FulfillCodeRequest): Promise<FulfillmentResult> {
-    const $ = new FulfillmentAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function createFulfillmentCode_ByUserId(userId: string, data: FulfillCodeRequest): Promise<AxiosResponse<FulfillmentResult>> {
+    const $ = new FulfillmentAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createFulfillmentCode_ByUserId(userId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; Fulfill rewards.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment result&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function createFulfillmentReward_ByUserId(userId: string, data: RewardsRequest): Promise<unknown> {
-    const $ = new FulfillmentAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function createFulfillmentReward_ByUserId(userId: string, data: RewardsRequest): Promise<AxiosResponse<unknown>> {
+    const $ = new FulfillmentAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createFulfillmentReward_ByUserId(userId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Retrieve and check fulfillment items based on the provided request.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of fulfillment items&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function createFulfillmentPreCheck_ByUserId(userId: string, data: PreCheckFulfillmentRequest): Promise<FulfillmentItemArray> {
-    const $ = new FulfillmentAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function createFulfillmentPreCheck_ByUserId(
+    userId: string,
+    data: PreCheckFulfillmentRequest
+  ): Promise<AxiosResponse<FulfillmentItemArray>> {
+    const $ = new FulfillmentAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createFulfillmentPreCheck_ByUserId(userId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; Fulfill rewards.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment result&lt;/li&gt;&lt;li&gt;&lt;i&gt;rewards Item unsupported Type&lt;/i&gt;: SUBSCRIPTION&lt;/ul&gt;
-   */
-  async function createFulfillmentReward_ByUserId_ByNS(userId: string, data: RewardsRequest): Promise<FulfillmentResult> {
-    const $ = new FulfillmentAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.createFulfillmentReward_ByUserId_ByNS(userId, data)
+  async function createFulfillmentReward_ByUserId_v2(userId: string, data: RewardsRequest): Promise<AxiosResponse<FulfillmentResult>> {
+    const $ = new FulfillmentAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.createFulfillmentReward_ByUserId_v2(userId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt; Fulfill items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function updateFulfillment_ByUserId_ByTransactionId(
+  async function updateFulfillment_ByUserId_ByTransactionId_v2(
     userId: string,
     transactionId: string,
     data: FulfillmentV2Request
-  ): Promise<FulfillmentV2Result> {
-    const $ = new FulfillmentAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.updateFulfillment_ByUserId_ByTransactionId(userId, transactionId, data)
+  ): Promise<AxiosResponse<FulfillmentV2Result>> {
+    const $ = new FulfillmentAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.updateFulfillment_ByUserId_ByTransactionId_v2(userId, transactionId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt; Revoke items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: revoke fulfillment v2 result&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function updateRevoke_ByUserId_ByTransactionId(userId: string, transactionId: string): Promise<RevokeFulfillmentV2Result> {
-    const $ = new FulfillmentAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.updateRevoke_ByUserId_ByTransactionId(userId, transactionId)
+  async function updateRetry_ByUserId_ByTransactionId_v2(
+    userId: string,
+    transactionId: string
+  ): Promise<AxiosResponse<FulfillmentV2Result>> {
+    const $ = new FulfillmentAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.updateRetry_ByUserId_ByTransactionId_v2(userId, transactionId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
+  }
+
+  async function updateRevoke_ByUserId_ByTransactionId_v2(
+    userId: string,
+    transactionId: string
+  ): Promise<AxiosResponse<RevokeFulfillmentV2Result>> {
+    const $ = new FulfillmentAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.updateRevoke_ByUserId_ByTransactionId_v2(userId, transactionId)
+    if (resp.error) throw resp.error
+    return resp.response
   }
 
   return {
-    getFulfillments,
+    /**
+     * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Query fulfillments in a namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of fulfillment info:&lt;ul&gt;&lt;li&gt;storeId in items can be ignored&lt;/li&gt;&lt;li&gt;error in successList will always be null&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;
+     */
+    getFulfillments_v2,
+    /**
+     * Query fulfillment histories in a namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: query fulfillment history&lt;/li&gt;&lt;/ul&gt;
+     */
     getFulfillmentHistory,
+    /**
+     * Fulfill item.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment result&lt;/li&gt;&lt;/ul&gt;
+     */
     createFulfillment_ByUserId,
+    /**
+     * Redeem campaign code.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment result&lt;/li&gt;&lt;/ul&gt;
+     */
     createFulfillmentCode_ByUserId,
+    /**
+     * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; Fulfill rewards.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment result&lt;/li&gt;&lt;/ul&gt;
+     */
     createFulfillmentReward_ByUserId,
+    /**
+     * Retrieve and check fulfillment items based on the provided request.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of fulfillment items&lt;/li&gt;&lt;/ul&gt;
+     */
     createFulfillmentPreCheck_ByUserId,
-    createFulfillmentReward_ByUserId_ByNS,
-    updateFulfillment_ByUserId_ByTransactionId,
-    updateRevoke_ByUserId_ByTransactionId
+    /**
+     * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; Fulfill rewards.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment result&lt;/li&gt;&lt;li&gt;&lt;i&gt;rewards Item unsupported Type&lt;/i&gt;: SUBSCRIPTION&lt;/ul&gt;
+     */
+    createFulfillmentReward_ByUserId_v2,
+    /**
+     * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Fulfill items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Request body&lt;/i&gt;: storeId, region, language, and entitlementCollectionId can be ignored.&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
+     */
+    updateFulfillment_ByUserId_ByTransactionId_v2,
+    /**
+     * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Retry fulfill items by transactionId without sending the original payload.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
+     */
+    updateRetry_ByUserId_ByTransactionId_v2,
+    /**
+     * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Revoke items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: revoke fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
+     */
+    updateRevoke_ByUserId_ByTransactionId_v2
   }
 }

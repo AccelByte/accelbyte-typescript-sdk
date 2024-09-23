@@ -4,14 +4,14 @@
  * and restrictions contact your company contract manager.
  */
 import { UrlHelper } from '@accelbyte/sdk'
+import { AcceptedPoliciesRequest } from '@accelbyte/sdk-iam'
+import DOMPurify from 'dompurify'
 import isURL from 'validator/lib/isURL.js'
+import { PolicyVersionWithLocalizedVersionObject } from '../../generated-definitions/PolicyVersionWithLocalizedVersionObject.js'
+import { RetrievePolicyPublicResponse } from '../../generated-definitions/RetrievePolicyPublicResponse.js'
+import { RetrieveUserEligibilitiesResponse } from '../../generated-definitions/RetrieveUserEligibilitiesResponse.js'
 import { RetrieveUserEligibilitiesResponseArray } from '../../generated-definitions/RetrieveUserEligibilitiesResponseArray.js'
 import { DisplayedPolicy } from '../models/Legal.js'
-import { RetrievePolicyPublicResponse } from '../../generated-definitions/RetrievePolicyPublicResponse.js'
-import { AcceptedPoliciesRequest } from '@accelbyte/sdk-iam'
-import { RetrieveUserEligibilitiesResponse } from '../../generated-definitions/RetrieveUserEligibilitiesResponse.js'
-import { PolicyVersionWithLocalizedVersionObject } from '../../generated-definitions/PolicyVersionWithLocalizedVersionObject.js'
-import DOMPurify from 'dompurify'
 
 export class LegalHelper {
   static getUnsignedPolicies = (userEligibilities: RetrieveUserEligibilitiesResponseArray): RetrieveUserEligibilitiesResponseArray => {

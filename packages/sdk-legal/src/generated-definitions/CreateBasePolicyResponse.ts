@@ -6,19 +6,19 @@
 import { z } from 'zod'
 
 export const CreateBasePolicyResponse = z.object({
-  id: z.string(),
-  createdAt: z.string().nullish(),
-  updatedAt: z.string().nullish(),
-  namespace: z.string().nullish(),
-  policyId: z.string().nullish(),
-  typeId: z.string().nullish(),
-  globalPolicyName: z.string().nullish(),
-  description: z.string().nullish(),
+  affectedClientIds: z.array(z.string()).nullish(),
   affectedCountries: z.array(z.string()).nullish(),
+  createdAt: z.string().nullish(),
+  description: z.string().nullish(),
+  globalPolicyName: z.string().nullish(),
+  id: z.string(),
   isHidden: z.boolean().nullish(),
   isHiddenPublic: z.boolean().nullish(),
-  affectedClientIds: z.array(z.string()).nullish(),
-  tags: z.array(z.string()).nullish()
+  namespace: z.string().nullish(),
+  policyId: z.string().nullish(),
+  tags: z.array(z.string()).nullish(),
+  typeId: z.string().nullish(),
+  updatedAt: z.string().nullish()
 })
 
 export interface CreateBasePolicyResponse extends z.TypeOf<typeof CreateBasePolicyResponse> {}

@@ -8,7 +8,7 @@
     },
     "description": "Justice IAM Service",
     "title": "justice-iam-service",
-    "version": "7.21.1"
+    "version": "7.21.2"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -9212,6 +9212,140 @@
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MISC [UPDATE]"]
+          }
+        ]
+      }
+    },
+    "/iam/v3/admin/namespaces/{namespace}/loginAllowlist": {
+      "get": {
+        "description": "This endpoint return login allowlist configuration from specific namespace.",
+        "operationId": "AdminGetLoginAllowlistV3",
+        "parameters": [
+          {
+            "description": "Namespace, only accept alphabet and numeric",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/model.LoginAllowlistResponse"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permissions\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Admin get login allowlist",
+        "tags": ["Login Allowlist"],
+        "x-errorCodes": {
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20013": "insufficient permissions"
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LOGINALLOWLIST [READ]"]
+          }
+        ]
+      },
+      "put": {
+        "consumes": ["application/json"],
+        "description": "This endpoint update login allowlist configuration from specific game namespace.\nroleIds: are list of role that allowed to login\nNote: only accept game namespace\n",
+        "operationId": "AdminUpdateLoginAllowlistV3",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/model.LoginAllowlistRequest"
+            }
+          },
+          {
+            "description": "Namespace, only accept alphabet and numeric",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/model.LoginAllowlistResponse"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20019\u003c/td\u003e\u003ctd\u003eunable to parse request body\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e10240\u003c/td\u003e\u003ctd\u003enamespace is not game namespace\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e10470\u003c/td\u003e\u003ctd\u003erole is empty\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permissions\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Admin update login allowlist",
+        "tags": ["Login Allowlist"],
+        "x-errorCodes": {
+          "10240": "namespace is not game namespace",
+          "10470": "role is empty",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20013": "insufficient permissions",
+          "20019": "unable to parse request body"
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:LOGINALLOWLIST [UPDATE]"]
           }
         ]
       }
@@ -24541,9 +24675,18 @@
     },
     "/iam/v4/admin/namespaces/{namespace}/users/{userId}/mfa/disable": {
       "delete": {
-        "description": "**This endpoint is used to disable user 2FA.**",
+        "consumes": ["application/json"],
+        "description": "This endpoint is used to disable user 2FA.\n-----------\n**Note**: if the factor is not specified, will disable all 2FA methods.\n",
         "operationId": "AdminDisableUserMFAV4",
         "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/model.DisableMFARequest"
+            }
+          },
           {
             "description": "Namespace, only accept alphabet and numeric",
             "in": "path",
@@ -24617,6 +24760,80 @@
         "x-security": [
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [DELETE]"]
+          }
+        ]
+      }
+    },
+    "/iam/v4/admin/namespaces/{namespace}/users/{userId}/mfa/status": {
+      "get": {
+        "description": "**This endpoint is used to get user\u0026#39;s 2FA status.**",
+        "operationId": "AdminGetUserMFAStatusV4",
+        "parameters": [
+          {
+            "description": "Namespace, only accept alphabet and numeric",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/model.UserMFAStatusResponseV4"
+            }
+          },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eunauthorized access\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20013\u003c/td\u003e\u003ctd\u003einsufficient permissions\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e10139\u003c/td\u003e\u003ctd\u003eplatform account not found\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20008\u003c/td\u003e\u003ctd\u003euser not found\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eerrorCode\u003c/td\u003e\u003ctd\u003eerrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20000\u003c/td\u003e\u003ctd\u003einternal server error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get User 2FA Status",
+        "tags": ["Users V4"],
+        "x-errorCodes": {
+          "10139": "platform account not found",
+          "20000": "internal server error",
+          "20001": "unauthorized access",
+          "20008": "user not found",
+          "20013": "insufficient permissions"
+        },
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [READ]"]
           }
         ]
       }
@@ -31567,6 +31784,7 @@
     "accountcommon.ProfileUpdateConfig": {
       "properties": {
         "minimumAllowedInterval": {
+          "description": "max value is 366*24=8784 hours",
           "format": "int64",
           "type": "integer"
         }
@@ -33181,6 +33399,9 @@
     },
     "model.DisableMFARequest": {
       "properties": {
+        "factor": {
+          "type": "string"
+        },
         "mfaToken": {
           "type": "string"
         }
@@ -33214,6 +33435,10 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "remainingBackupCodeCount": {
+          "format": "int32",
+          "type": "integer"
         }
       },
       "required": ["default", "enabled"]
@@ -33940,6 +34165,39 @@
         }
       },
       "required": ["data"]
+    },
+    "model.LoginAllowlistRequest": {
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "roleIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["active", "roleIds"]
+    },
+    "model.LoginAllowlistResponse": {
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "roleIds": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["active", "namespace", "roleIds"]
     },
     "model.LoginHistoriesResponse": {
       "properties": {
@@ -37245,6 +37503,10 @@
         "platformId": {
           "type": "string"
         },
+        "remainingBackupCodeCount": {
+          "format": "int32",
+          "type": "integer"
+        },
         "userBan": {
           "$ref": "#/definitions/oauthmodel.UserBan"
         }
@@ -37748,11 +38010,11 @@
     "path": "/iam/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-09-03T01:00:32+00:00",
-    "gitHash": "5a8866480378a05fa7fbc7549c5a00e81e364a2a",
+    "buildDate": "2024-09-20T12:23:03+00:00",
+    "gitHash": "9827c9615e3ccfabf728906f33532d404d26c877",
     "name": "justice-iam-service",
     "realm": "dev",
-    "version": "7.21.1",
-    "version-roles-seeding": "1.2.65"
+    "version": "7.21.2",
+    "version-roles-seeding": "1.2.71"
   }
 }

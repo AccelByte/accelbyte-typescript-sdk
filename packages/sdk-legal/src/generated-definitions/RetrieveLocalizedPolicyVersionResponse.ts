@@ -8,18 +8,18 @@ import { PolicyObject } from './PolicyObject.js'
 import { PolicyVersionObject } from './PolicyVersionObject.js'
 
 export const RetrieveLocalizedPolicyVersionResponse = z.object({
-  id: z.string(),
-  createdAt: z.string().nullish(),
-  updatedAt: z.string().nullish(),
-  localeCode: z.string(),
-  contentType: z.string().nullish(),
-  baseUrls: z.array(z.string()).nullish(),
-  attachmentLocation: z.string().nullish(),
   attachmentChecksum: z.string().nullish(),
+  attachmentLocation: z.string().nullish(),
   attachmentVersionIdentifier: z.string().nullish(),
+  baseUrls: z.array(z.string()).nullish(),
+  contentType: z.string().nullish(),
+  createdAt: z.string().nullish(),
   description: z.string().nullish(),
+  id: z.string(),
+  localeCode: z.string(),
+  policy: PolicyObject.nullish(),
   policyVersion: PolicyVersionObject,
-  policy: PolicyObject.nullish()
+  updatedAt: z.string().nullish()
 })
 
 export interface RetrieveLocalizedPolicyVersionResponse extends z.TypeOf<typeof RetrieveLocalizedPolicyVersionResponse> {}

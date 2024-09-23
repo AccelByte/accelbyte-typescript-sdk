@@ -7,79 +7,87 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { EventV2AdminApi } from '../EventV2AdminApi.js'
 
 import { EventResponseV2 } from '../../generated-definitions/EventResponseV2.js'
 import { GenericQueryPayload } from '../../generated-definitions/GenericQueryPayload.js'
 
 export enum Key_EventV2Admin {
-  Query = 'EventV2Admin.Query',
-  Event_ByUserId = 'EventV2Admin.Event_ByUserId'
+  Query_v2 = 'Event.EventV2Admin.Query_v2',
+  Event_ByUserId_v2 = 'Event.EventV2Admin.Event_ByUserId_v2'
 }
 
-export const useAdmCreateQueryMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<
-    UseMutationOptions<
-      EventResponseV2,
-      AxiosError<ApiError>,
-      ApiArgs & {
-        data: GenericQueryPayload
-        queryParams?: { endDate?: string | null; offset?: number; pageSize?: number; startDate?: string | null }
-      }
-    >,
-    'mutationKey'
-  >,
-  callback?: (data: EventResponseV2) => void
-): UseMutationResult<
-  EventResponseV2,
-  AxiosError<ApiError>,
-  ApiArgs & {
+/**
+ * This endpoint is using POST which is somewhat unfamiliar, but it&#39;s logical that we have to send/post a filter (search term) in order to get the data. This endpoint will not return anything if you give it an empty filters in the request body.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_EventV2Admin.Query_v2, input]
+ * }
+ * ```
+ */
+export const useEventV2AdminApi_FetchQuery_v2 = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     data: GenericQueryPayload
     queryParams?: { endDate?: string | null; offset?: number; pageSize?: number; startDate?: string | null }
-  }
-> => {
-  //
-  const mutationFn = async (
-    input: ApiArgs & {
-      data: GenericQueryPayload
-      queryParams?: { endDate?: string | null; offset?: number; pageSize?: number; startDate?: string | null }
-    }
-  ) => {
-    const data = await EventV2AdminApi(sdk, { namespace: input.namespace, config: input.config }).createQuery(input.data, input.queryParams)
-    callback && callback(data)
-    return data
+  },
+  options?: Omit<UseQueryOptions<EventResponseV2, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<EventResponseV2>) => void
+): UseQueryResult<EventResponseV2, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useEventV2AdminApi_FetchQuery_v2>[1]) => async () => {
+    const response = await EventV2AdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).fetchQuery_v2(
+      input.data,
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
-  return useMutation({
-    mutationKey: [Key_EventV2Admin.Query],
-    mutationFn,
+  return useQuery<EventResponseV2, AxiosError<ApiError>>({
+    queryKey: [Key_EventV2Admin.Query_v2, input],
+    queryFn: queryFn(sdk, input),
     ...options
   })
 }
 
-export const useAdmEvent_ByUserId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * Get events from a specific user
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_EventV2Admin.Event_ByUserId_v2, input]
+ * }
+ * ```
+ */
+export const useEventV2AdminApi_GetEvent_ByUserId_v2 = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     userId: string
     queryParams?: { endDate?: string | null; eventName?: string | null; offset?: number; pageSize?: number; startDate?: string | null }
   },
   options?: Omit<UseQueryOptions<EventResponseV2, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: EventResponseV2) => void
+  callback?: (data: AxiosResponse<EventResponseV2>) => void
 ): UseQueryResult<EventResponseV2, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmEvent_ByUserId>[1]) => async () => {
-    const data = await EventV2AdminApi(sdk, { namespace: input.namespace }).getEvent_ByUserId(input.userId, input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useEventV2AdminApi_GetEvent_ByUserId_v2>[1]) => async () => {
+    const response = await EventV2AdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getEvent_ByUserId_v2(
+      input.userId,
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<EventResponseV2, AxiosError<ApiError>>({
-    queryKey: [Key_EventV2Admin.Event_ByUserId, input],
+    queryKey: [Key_EventV2Admin.Event_ByUserId_v2, input],
     queryFn: queryFn(sdk, input),
     ...options
   })

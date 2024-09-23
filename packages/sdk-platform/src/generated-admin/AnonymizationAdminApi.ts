@@ -8,116 +8,139 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 import { AnonymizationAdmin$ } from './endpoints/AnonymizationAdmin$.js'
 
-export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function AnonymizationAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * Anonymize order. At current it will only anonymize order, order history.
-   */
-  async function deleteAnonymizationOrder_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
+  }
+
+  async function deleteAnonymizationOrder_ByUserId(userId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new AnonymizationAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteAnonymizationOrder_ByUserId(userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Anonymize payment. At current it will only anonymize payment order, payment order history.
-   */
-  async function deleteAnonymizationPayment_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteAnonymizationPayment_ByUserId(userId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new AnonymizationAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteAnonymizationPayment_ByUserId(userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Anonymize wallet. At current it will only anonymize wallet, wallet transaction.
-   */
-  async function deleteAnonymizationWallet_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteAnonymizationWallet_ByUserId(userId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new AnonymizationAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteAnonymizationWallet_ByUserId(userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Anonymize campaign. At current it will only anonymize redeem history.
-   */
-  async function deleteAnonymizationCampaign_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteAnonymizationCampaign_ByUserId(userId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new AnonymizationAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteAnonymizationCampaign_ByUserId(userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Anonymize revocation. At current it will only anonymize revocation history.
-   */
-  async function deleteAnonymizationRevocation_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteAnonymizationRevocation_ByUserId(userId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new AnonymizationAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteAnonymizationRevocation_ByUserId(userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Anonymize fulfillment. At current it will only anonymize fulfillment history.
-   */
-  async function deleteAnonymizationFulfillment_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteAnonymizationFulfillment_ByUserId(userId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new AnonymizationAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteAnonymizationFulfillment_ByUserId(userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Anonymize entitlement. At current it will only anonymize entitlement, entitlement history.
-   */
-  async function deleteAnonymizationEntitlement_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteAnonymizationEntitlement_ByUserId(userId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new AnonymizationAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteAnonymizationEntitlement_ByUserId(userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Anonymize integrations. At current it will only anonymize iap histories.
-   */
-  async function deleteAnonymizationIntegration_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteAnonymizationIntegration_ByUserId(userId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new AnonymizationAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteAnonymizationIntegration_ByUserId(userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Anonymize subscription. At current it will anonymize subscription, billing history and subscription activity.
-   */
-  async function deleteAnonymizationSubscription_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteAnonymizationSubscription_ByUserId(userId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new AnonymizationAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteAnonymizationSubscription_ByUserId(userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     * Anonymize order. At current it will only anonymize order, order history.
+     */
     deleteAnonymizationOrder_ByUserId,
+    /**
+     * Anonymize payment. At current it will only anonymize payment order, payment order history.
+     */
     deleteAnonymizationPayment_ByUserId,
+    /**
+     * Anonymize wallet. At current it will only anonymize wallet, wallet transaction.
+     */
     deleteAnonymizationWallet_ByUserId,
+    /**
+     * Anonymize campaign. At current it will only anonymize redeem history.
+     */
     deleteAnonymizationCampaign_ByUserId,
+    /**
+     * Anonymize revocation. At current it will only anonymize revocation history.
+     */
     deleteAnonymizationRevocation_ByUserId,
+    /**
+     * Anonymize fulfillment. At current it will only anonymize fulfillment history.
+     */
     deleteAnonymizationFulfillment_ByUserId,
+    /**
+     * Anonymize entitlement. At current it will only anonymize entitlement, entitlement history.
+     */
     deleteAnonymizationEntitlement_ByUserId,
+    /**
+     * Anonymize integrations. At current it will only anonymize iap histories.
+     */
     deleteAnonymizationIntegration_ByUserId,
+    /**
+     * Anonymize subscription. At current it will anonymize subscription, billing history and subscription activity.
+     */
     deleteAnonymizationSubscription_ByUserId
   }
 }

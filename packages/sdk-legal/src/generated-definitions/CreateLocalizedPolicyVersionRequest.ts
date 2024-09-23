@@ -6,9 +6,9 @@
 import { z } from 'zod'
 
 export const CreateLocalizedPolicyVersionRequest = z.object({
-  localeCode: z.string().nullish(),
   contentType: z.string().nullish(),
-  description: z.string().nullish()
+  description: z.string().nullish(),
+  localeCode: z.string().nullish()
 })
 
 export interface CreateLocalizedPolicyVersionRequest extends z.TypeOf<typeof CreateLocalizedPolicyVersionRequest> {}

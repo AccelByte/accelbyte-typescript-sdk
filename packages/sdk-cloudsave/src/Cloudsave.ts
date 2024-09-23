@@ -7,38 +7,47 @@
  * AUTO GENERATED
  */
 
-import { AdminTagsAdminApi } from './generated-admin/AdminTagsAdminApi.js'
+import { author, name, version } from '../package.json'
+import { ConcurrentRecordAdminApi } from './generated-admin/ConcurrentRecordAdminApi.js'
+import { GameBinaryRecordAdminApi } from './generated-admin/GameBinaryRecordAdminApi.js'
+import { GameRecordAdminApi } from './generated-admin/GameRecordAdminApi.js'
+import { PlayerBinaryRecordAdminApi } from './generated-admin/PlayerBinaryRecordAdminApi.js'
+import { PlayerRecordAdminApi } from './generated-admin/PlayerRecordAdminApi.js'
 import { PluginConfigAdminApi } from './generated-admin/PluginConfigAdminApi.js'
-import { AdminGameRecordAdminApi } from './generated-admin/AdminGameRecordAdminApi.js'
-import { AdminGameBinaryRecordAdminApi } from './generated-admin/AdminGameBinaryRecordAdminApi.js'
-import { AdminRecordAdminApi } from './generated-admin/AdminRecordAdminApi.js'
-import { AdminPlayerRecordAdminApi } from './generated-admin/AdminPlayerRecordAdminApi.js'
+import { RecordAdminApi } from './generated-admin/RecordAdminApi.js'
+import { TagsAdminApi } from './generated-admin/TagsAdminApi.js'
 import { TtlConfigAdminApi } from './generated-admin/TtlConfigAdminApi.js'
-import { AdminPlayerBinaryRecordAdminApi } from './generated-admin/AdminPlayerBinaryRecordAdminApi.js'
-import { AdminConcurrentRecordAdminApi } from './generated-admin/AdminConcurrentRecordAdminApi.js'
-import { PublicTagsApi } from './generated-public/PublicTagsApi.js'
+import { ConcurrentRecordApi } from './generated-public/ConcurrentRecordApi.js'
 import { PublicGameBinaryRecordApi } from './generated-public/PublicGameBinaryRecordApi.js'
 import { PublicGameRecordApi } from './generated-public/PublicGameRecordApi.js'
-import { PublicPlayerRecordApi } from './generated-public/PublicPlayerRecordApi.js'
 import { PublicPlayerBinaryRecordApi } from './generated-public/PublicPlayerBinaryRecordApi.js'
-import { ConcurrentRecordApi } from './generated-public/ConcurrentRecordApi.js'
+import { PublicPlayerRecordApi } from './generated-public/PublicPlayerRecordApi.js'
+import { PublicTagsApi } from './generated-public/PublicTagsApi.js'
+
+console.log(`${name}@${version}`)
 
 const apis = {
-  AdminTagsAdminApi,
+  TagsAdminApi,
   PluginConfigAdminApi,
-  AdminGameRecordAdminApi,
-  AdminGameBinaryRecordAdminApi,
-  AdminRecordAdminApi,
-  AdminPlayerRecordAdminApi,
+  GameRecordAdminApi,
+  GameBinaryRecordAdminApi,
+  RecordAdminApi,
+  PlayerRecordAdminApi,
   TtlConfigAdminApi,
-  AdminPlayerBinaryRecordAdminApi,
-  AdminConcurrentRecordAdminApi,
+  PlayerBinaryRecordAdminApi,
+  ConcurrentRecordAdminApi,
   PublicTagsApi,
   PublicGameBinaryRecordApi,
   PublicGameRecordApi,
   PublicPlayerRecordApi,
   PublicPlayerBinaryRecordApi,
-  ConcurrentRecordApi
+  ConcurrentRecordApi,
+  version: () =>
+    console.log({
+      version,
+      name,
+      author
+    })
 }
 
 export const Cloudsave = apis

@@ -6,12 +6,13 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { FulfillCodeRequest } from '../../generated-definitions/FulfillCodeRequest.js'
 import { FulfillmentHistoryPagingSlicedResult } from '../../generated-definitions/FulfillmentHistoryPagingSlicedResult.js'
 import { FulfillmentItemArray } from '../../generated-definitions/FulfillmentItemArray.js'
+import { FulfillmentPagingSlicedResult } from '../../generated-definitions/FulfillmentPagingSlicedResult.js'
 import { FulfillmentRequest } from '../../generated-definitions/FulfillmentRequest.js'
 import { FulfillmentResult } from '../../generated-definitions/FulfillmentResult.js'
 import { FulfillmentV2Request } from '../../generated-definitions/FulfillmentV2Request.js'
@@ -22,12 +23,12 @@ import { RewardsRequest } from '../../generated-definitions/RewardsRequest.js'
 
 export class FulfillmentAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
-   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt; Query fulfillments in a namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: query fulfillments&lt;/li&gt;&lt;/ul&gt;
+   * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Query fulfillments in a namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of fulfillment info:&lt;ul&gt;&lt;li&gt;storeId in items can be ignored&lt;/li&gt;&lt;li&gt;error in successList will always be null&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;
    */
-  getFulfillments(queryParams?: {
+  getFulfillments_v2(queryParams?: {
     endTime?: string | null
     limit?: number
     offset?: number
@@ -35,19 +36,18 @@ export class FulfillmentAdmin$ {
     state?: 'FULFILLED' | 'FULFILL_FAILED' | 'REVOKED' | 'REVOKE_FAILED'
     transactionId?: string | null
     userId?: string | null
-  }): Promise<IResponse<FulfillmentHistoryPagingSlicedResult>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  }): Promise<Response<FulfillmentPagingSlicedResult>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/platform/v2/admin/namespaces/{namespace}/fulfillments'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(
       this.useSchemaValidation,
       () => resultPromise,
-      FulfillmentHistoryPagingSlicedResult,
-      'FulfillmentHistoryPagingSlicedResult'
+      FulfillmentPagingSlicedResult,
+      'FulfillmentPagingSlicedResult'
     )
   }
-
   /**
    * Query fulfillment histories in a namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: query fulfillment history&lt;/li&gt;&lt;/ul&gt;
    */
@@ -56,8 +56,8 @@ export class FulfillmentAdmin$ {
     offset?: number
     status?: 'FAIL' | 'SUCCESS'
     userId?: string | null
-  }): Promise<IResponse<FulfillmentHistoryPagingSlicedResult>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  }): Promise<Response<FulfillmentHistoryPagingSlicedResult>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/fulfillment/history'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -68,12 +68,11 @@ export class FulfillmentAdmin$ {
       'FulfillmentHistoryPagingSlicedResult'
     )
   }
-
   /**
    * Fulfill item.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment result&lt;/li&gt;&lt;/ul&gt;
    */
-  createFulfillment_ByUserId(userId: string, data: FulfillmentRequest): Promise<IResponse<FulfillmentResult>> {
-    const params = {} as SDKRequestConfig
+  createFulfillment_ByUserId(userId: string, data: FulfillmentRequest): Promise<Response<FulfillmentResult>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/fulfillment'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -81,12 +80,11 @@ export class FulfillmentAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentResult, 'FulfillmentResult')
   }
-
   /**
    * Redeem campaign code.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment result&lt;/li&gt;&lt;/ul&gt;
    */
-  createFulfillmentCode_ByUserId(userId: string, data: FulfillCodeRequest): Promise<IResponse<FulfillmentResult>> {
-    const params = {} as SDKRequestConfig
+  createFulfillmentCode_ByUserId(userId: string, data: FulfillCodeRequest): Promise<Response<FulfillmentResult>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/fulfillment/code'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -94,12 +92,11 @@ export class FulfillmentAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentResult, 'FulfillmentResult')
   }
-
   /**
    * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; Fulfill rewards.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment result&lt;/li&gt;&lt;/ul&gt;
    */
-  createFulfillmentReward_ByUserId(userId: string, data: RewardsRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  createFulfillmentReward_ByUserId(userId: string, data: RewardsRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/fulfillment/rewards'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -107,12 +104,11 @@ export class FulfillmentAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Retrieve and check fulfillment items based on the provided request.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of fulfillment items&lt;/li&gt;&lt;/ul&gt;
    */
-  createFulfillmentPreCheck_ByUserId(userId: string, data: PreCheckFulfillmentRequest): Promise<IResponse<FulfillmentItemArray>> {
-    const params = {} as SDKRequestConfig
+  createFulfillmentPreCheck_ByUserId(userId: string, data: PreCheckFulfillmentRequest): Promise<Response<FulfillmentItemArray>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/fulfillment/preCheck'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -120,12 +116,11 @@ export class FulfillmentAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentItemArray, 'FulfillmentItemArray')
   }
-
   /**
    * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; Fulfill rewards.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment result&lt;/li&gt;&lt;li&gt;&lt;i&gt;rewards Item unsupported Type&lt;/i&gt;: SUBSCRIPTION&lt;/ul&gt;
    */
-  createFulfillmentReward_ByUserId_ByNS(userId: string, data: RewardsRequest): Promise<IResponse<FulfillmentResult>> {
-    const params = {} as SDKRequestConfig
+  createFulfillmentReward_ByUserId_v2(userId: string, data: RewardsRequest): Promise<Response<FulfillmentResult>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/v2/admin/namespaces/{namespace}/users/{userId}/fulfillment/rewards'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -133,16 +128,15 @@ export class FulfillmentAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentResult, 'FulfillmentResult')
   }
-
   /**
-   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt; Fulfill items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result&lt;/li&gt;&lt;/ul&gt;
+   * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Fulfill items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Request body&lt;/i&gt;: storeId, region, language, and entitlementCollectionId can be ignored.&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
    */
-  updateFulfillment_ByUserId_ByTransactionId(
+  updateFulfillment_ByUserId_ByTransactionId_v2(
     userId: string,
     transactionId: string,
     data: FulfillmentV2Request
-  ): Promise<IResponse<FulfillmentV2Result>> {
-    const params = {} as SDKRequestConfig
+  ): Promise<Response<FulfillmentV2Result>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/v2/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId}'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -151,12 +145,24 @@ export class FulfillmentAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentV2Result, 'FulfillmentV2Result')
   }
-
   /**
-   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt; Revoke items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: revoke fulfillment v2 result&lt;/li&gt;&lt;/ul&gt;
+   * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Retry fulfill items by transactionId without sending the original payload.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
    */
-  updateRevoke_ByUserId_ByTransactionId(userId: string, transactionId: string): Promise<IResponse<RevokeFulfillmentV2Result>> {
-    const params = {} as SDKRequestConfig
+  updateRetry_ByUserId_ByTransactionId_v2(userId: string, transactionId: string): Promise<Response<FulfillmentV2Result>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/platform/v2/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId}/retry'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{transactionId}', transactionId)
+    const resultPromise = this.axiosInstance.put(url, null, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentV2Result, 'FulfillmentV2Result')
+  }
+  /**
+   * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Revoke items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: revoke fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
+   */
+  updateRevoke_ByUserId_ByTransactionId_v2(userId: string, transactionId: string): Promise<Response<RevokeFulfillmentV2Result>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/v2/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId}/revoke'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

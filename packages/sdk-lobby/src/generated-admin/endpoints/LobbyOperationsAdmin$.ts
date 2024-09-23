@@ -6,21 +6,21 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { PartyData } from '../../generated-definitions/PartyData.js'
 import { PartyPutCustomAttributesRequest } from '../../generated-definitions/PartyPutCustomAttributesRequest.js'
 
 export class LobbyOperationsAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Update party attributes in a namespace.
    */
-  updateAttributeParty_ByPartyId(partyId: string, data: PartyPutCustomAttributesRequest): Promise<IResponse<PartyData>> {
-    const params = {} as SDKRequestConfig
+  updateAttributeParty_ByPartyId(partyId: string, data: PartyPutCustomAttributesRequest): Promise<Response<PartyData>> {
+    const params = {} as AxiosRequestConfig
     const url = '/lobby/v1/admin/party/namespaces/{namespace}/parties/{partyId}/attributes'
       .replace('{namespace}', this.namespace)
       .replace('{partyId}', partyId)
@@ -28,12 +28,11 @@ export class LobbyOperationsAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PartyData, 'PartyData')
   }
-
   /**
    * Admin join a player into a party.
    */
-  createJoinParty_ByPartyId_ByUserId(partyId: string, userId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  updateJoinParty_ByPartyId_ByUserId(partyId: string, userId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/lobby/v1/admin/party/namespaces/{namespace}/parties/{partyId}/join/{userId}'
       .replace('{namespace}', this.namespace)
       .replace('{partyId}', partyId)

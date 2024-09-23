@@ -7,7 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
 import { AxiosError } from 'axios'
 // @ts-ignore
 import { useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
@@ -16,17 +16,28 @@ import { FileUploadAdminApi } from '../FileUploadAdminApi.js'
 import { FileUploadUrlInfo } from '../../generated-definitions/FileUploadUrlInfo.js'
 
 export enum Key_FileUploadAdmin {
-  File_ByUserId = 'FileUploadAdmin.File_ByUserId',
-  File_ByFolder = 'FileUploadAdmin.File_ByFolder'
+  File_ByUserId = 'Basic.FileUploadAdmin.File_ByUserId',
+  File_ByFolder = 'Basic.FileUploadAdmin.File_ByFolder'
 }
 
-export const useAdmCreateFile_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Generate an upload URL for user content. It&#39;s valid for 10 minutes.&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11102&lt;/li&gt;&lt;li&gt;&lt;i&gt;Default maximum file count per user&lt;/i&gt;: 10 files&lt;/li&gt;&lt;li&gt;&lt;i&gt;Default maximum file size per user&lt;/i&gt;: 104857600 bytes&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: URL data&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_FileUploadAdmin.File_ByUserId, input]
+ * }
+ * ```
+ */
+export const useFileUploadAdminApi_CreateFile_ByUserIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
     UseMutationOptions<
       FileUploadUrlInfo,
       AxiosError<ApiError>,
-      ApiArgs & { userId: string; queryParams: { fileType: string | null; category?: string | null } }
+      SdkSetConfigParam & { userId: string; queryParams: { fileType: string | null; category?: string | null } }
     >,
     'mutationKey'
   >,
@@ -34,16 +45,17 @@ export const useAdmCreateFile_ByUserIdMutation = (
 ): UseMutationResult<
   FileUploadUrlInfo,
   AxiosError<ApiError>,
-  ApiArgs & { userId: string; queryParams: { fileType: string | null; category?: string | null } }
+  SdkSetConfigParam & { userId: string; queryParams: { fileType: string | null; category?: string | null } }
 > => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string; queryParams: { fileType: string | null; category?: string | null } }) => {
-    const data = await FileUploadAdminApi(sdk, { namespace: input.namespace, config: input.config }).createFile_ByUserId(
+  const mutationFn = async (
+    input: SdkSetConfigParam & { userId: string; queryParams: { fileType: string | null; category?: string | null } }
+  ) => {
+    const response = await FileUploadAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createFile_ByUserId(
       input.userId,
       input.queryParams
     )
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -53,22 +65,40 @@ export const useAdmCreateFile_ByUserIdMutation = (
   })
 }
 
-export const useAdmCreateFile_ByFolderMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Generate an upload URL. It&#39;s valid for 10 minutes.&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11101&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: URL data&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_FileUploadAdmin.File_ByFolder, input]
+ * }
+ * ```
+ */
+export const useFileUploadAdminApi_CreateFile_ByFolderMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<FileUploadUrlInfo, AxiosError<ApiError>, ApiArgs & { folder: string; queryParams: { fileType: string | null } }>,
+    UseMutationOptions<
+      FileUploadUrlInfo,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { folder: string; queryParams: { fileType: string | null } }
+    >,
     'mutationKey'
   >,
   callback?: (data: FileUploadUrlInfo) => void
-): UseMutationResult<FileUploadUrlInfo, AxiosError<ApiError>, ApiArgs & { folder: string; queryParams: { fileType: string | null } }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { folder: string; queryParams: { fileType: string | null } }) => {
-    const data = await FileUploadAdminApi(sdk, { namespace: input.namespace, config: input.config }).createFile_ByFolder(
+): UseMutationResult<
+  FileUploadUrlInfo,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { folder: string; queryParams: { fileType: string | null } }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { folder: string; queryParams: { fileType: string | null } }) => {
+    const response = await FileUploadAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createFile_ByFolder(
       input.folder,
       input.queryParams
     )
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

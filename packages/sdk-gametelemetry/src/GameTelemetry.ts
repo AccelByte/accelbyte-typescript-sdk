@@ -7,12 +7,21 @@
  * AUTO GENERATED
  */
 
+import { author, name, version } from '../package.json'
 import { TelemetryAdminApi } from './generated-admin/TelemetryAdminApi.js'
 import { GametelemetryOperationsApi } from './generated-public/GametelemetryOperationsApi.js'
 
+console.log(`${name}@${version}`)
+
 const apis = {
   TelemetryAdminApi,
-  GametelemetryOperationsApi
+  GametelemetryOperationsApi,
+  version: () =>
+    console.log({
+      version,
+      name,
+      author
+    })
 }
 
 export const GameTelemetry = apis

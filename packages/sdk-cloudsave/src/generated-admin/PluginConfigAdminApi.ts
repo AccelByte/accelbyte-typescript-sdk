@@ -8,62 +8,85 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { PluginRequest } from '../generated-definitions/PluginRequest.js'
 import { PluginResponse } from '../generated-definitions/PluginResponse.js'
 import { PluginConfigAdmin$ } from './endpoints/PluginConfigAdmin$.js'
 
-export function PluginConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function PluginConfigAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * ## Description This endpoints will delete grpc plugins configuration
-   */
-  async function deletePlugin(): Promise<unknown> {
-    const $ = new PluginConfigAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
+  }
+
+  async function deletePlugin(): Promise<AxiosResponse<unknown>> {
+    const $ = new PluginConfigAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deletePlugin()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * ## Description This endpoints will get grpc plugins configuration
-   */
-  async function getPlugins(): Promise<PluginResponse> {
-    const $ = new PluginConfigAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getPlugins(): Promise<AxiosResponse<PluginResponse>> {
+    const $ = new PluginConfigAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getPlugins()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * ## Description This endpoints will update grpc plugins configuration
-   */
-  async function patchPlugin(data: PluginRequest): Promise<PluginResponse> {
-    const $ = new PluginConfigAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function patchPlugin(data: PluginRequest): Promise<AxiosResponse<PluginResponse>> {
+    const $ = new PluginConfigAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.patchPlugin(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * ## Description This endpoints will create new grpc plugins configuration per namespace
-   */
-  async function createPlugin(data: PluginRequest): Promise<PluginResponse> {
-    const $ = new PluginConfigAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function createPlugin(data: PluginRequest): Promise<AxiosResponse<PluginResponse>> {
+    const $ = new PluginConfigAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createPlugin(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     * ## Description This endpoints will delete grpc plugins configuration
+     */
     deletePlugin,
+    /**
+     * ## Description This endpoints will get grpc plugins configuration
+     */
     getPlugins,
+    /**
+     * ## Description This endpoints will update grpc plugins configuration
+     */
     patchPlugin,
+    /**
+     * ## Description This endpoints will create new grpc plugins configuration per namespace
+     */
     createPlugin
   }
 }

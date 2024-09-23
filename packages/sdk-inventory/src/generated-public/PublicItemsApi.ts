@@ -8,7 +8,8 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ConsumeItemReq } from '../generated-definitions/ConsumeItemReq.js'
 import { ItemResp } from '../generated-definitions/ItemResp.js'
 import { ListItemResp } from '../generated-definitions/ListItemResp.js'
@@ -19,26 +20,45 @@ import { UpdateItemReq } from '../generated-definitions/UpdateItemReq.js'
 import { UpdateItemRespArray } from '../generated-definitions/UpdateItemRespArray.js'
 import { PublicItems$ } from './endpoints/PublicItems$.js'
 
-export function PublicItemsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function PublicItemsApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   *  Bulk remove user&#39;s own items.
-   */
-  async function deleteItemMeUser_ByInventoryId(inventoryId: string, data: RemoveInventoryItemReq[]): Promise<UpdateItemRespArray> {
-    const $ = new PublicItems$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.deleteItemMeUser_ByInventoryId(inventoryId, data)
-    if (resp.error) throw resp.error
-    return resp.response.data
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
   }
 
-  /**
-   *  Listing all user&#39;s owned items in an inventory. The response body will be in the form of standard pagination.
-   */
+  async function deleteItemMeUser_ByInventoryId(
+    inventoryId: string,
+    data: RemoveInventoryItemReq[]
+  ): Promise<AxiosResponse<UpdateItemRespArray>> {
+    const $ = new PublicItems$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.deleteItemMeUser_ByInventoryId(inventoryId, data)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   async function getItemsMeUsers_ByInventoryId(
     inventoryId: string,
     queryParams?: {
@@ -48,63 +68,69 @@ export function PublicItemsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       sourceItemId?: string | null
       tags?: string | null
     }
-  ): Promise<ListItemResp> {
-    const $ = new PublicItems$(Network.create(requestConfig), namespace, useSchemaValidation)
+  ): Promise<AxiosResponse<ListItemResp>> {
+    const $ = new PublicItems$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getItemsMeUsers_ByInventoryId(inventoryId, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   *  Bulk Updating user&#39;s own items.
-   */
-  async function updateItemMeUser_ByInventoryId(inventoryId: string, data: UpdateItemReq[]): Promise<UpdateItemRespArray> {
-    const $ = new PublicItems$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateItemMeUser_ByInventoryId(inventoryId: string, data: UpdateItemReq[]): Promise<AxiosResponse<UpdateItemRespArray>> {
+    const $ = new PublicItems$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateItemMeUser_ByInventoryId(inventoryId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   *  Consume user&#39;s own item.
-   */
-  async function createConsumeUser_ByInventoryId(inventoryId: string, data: ConsumeItemReq): Promise<ItemResp> {
-    const $ = new PublicItems$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function createConsumeUser_ByInventoryId(inventoryId: string, data: ConsumeItemReq): Promise<AxiosResponse<ItemResp>> {
+    const $ = new PublicItems$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createConsumeUser_ByInventoryId(inventoryId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   *  Move items between inventories that is owned by the same user. Currently, this endpoint supports transferring items exclusively from source OTHER. Items from source ECOMMERCE are not yet eligible for transfer. We are working on expanding support to include source ECOMMERCE in future updates.
-   */
-  async function createItemMovementUser_ByInventoryId(inventoryId: string, data: MoveItemsReq): Promise<MoveItemsResp> {
-    const $ = new PublicItems$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function createItemMovementUser_ByInventoryId(inventoryId: string, data: MoveItemsReq): Promise<AxiosResponse<MoveItemsResp>> {
+    const $ = new PublicItems$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createItemMovementUser_ByInventoryId(inventoryId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   *  Getting an user&#39;s owned item info.
-   */
   async function getSourceItemMeUser_ByInventoryId_BySlotId_BySourceItemId(
     inventoryId: string,
     slotId: string,
     sourceItemId: string
-  ): Promise<ItemResp> {
-    const $ = new PublicItems$(Network.create(requestConfig), namespace, useSchemaValidation)
+  ): Promise<AxiosResponse<ItemResp>> {
+    const $ = new PublicItems$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getSourceItemMeUser_ByInventoryId_BySlotId_BySourceItemId(inventoryId, slotId, sourceItemId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     *  Bulk remove user&#39;s own items.
+     */
     deleteItemMeUser_ByInventoryId,
+    /**
+     *  Listing all user&#39;s owned items in an inventory. The response body will be in the form of standard pagination.
+     */
     getItemsMeUsers_ByInventoryId,
+    /**
+     *  Bulk Updating user&#39;s own items.
+     */
     updateItemMeUser_ByInventoryId,
+    /**
+     *  Consume user&#39;s own item.
+     */
     createConsumeUser_ByInventoryId,
+    /**
+     *  Move items between inventories that is owned by the same user.
+     */
     createItemMovementUser_ByInventoryId,
+    /**
+     *  Getting an user&#39;s owned item info.
+     */
     getSourceItemMeUser_ByInventoryId_BySlotId_BySourceItemId
   }
 }

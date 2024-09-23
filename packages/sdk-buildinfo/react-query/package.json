@@ -1,0 +1,5 @@
+{
+  "main": "../dist/all-query-imports.cjs",
+  "module": "../dist/all-query-imports.js",
+  "types": "../dist/all-query-imports.d.ts"
+}

@@ -6,19 +6,19 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { LegalReadinessStatusResponse } from '../../generated-definitions/LegalReadinessStatusResponse.js'
 
 export class Utility$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Readiness status defined as at least one legal basePolicy is present and having active basePolicy.
    */
-  getReadiness(): Promise<IResponse<LegalReadinessStatusResponse>> {
-    const params = {} as SDKRequestConfig
+  getReadiness(): Promise<Response<LegalReadinessStatusResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/agreement/public/readiness'
     const resultPromise = this.axiosInstance.get(url, { params })
 

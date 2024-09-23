@@ -3,21 +3,22 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import { defineConfig } from 'vitest/config'
 import { resolve } from 'path'
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   resolve: {
     alias: {
+      '@accelbyte/sdk': resolve('../sdk/src'),
       '@accelbyte/validator': resolve('../validator/src'),
       '@accelbyte/sdk-iam': resolve('../sdk-iam/src'),
-      '@accelbyte/sdk-legal': resolve('../sdk-legal/src')
+      '@accelbyte/sdk-legal': resolve('../sdk-legal/src'),
+      '~/iam-definitions': resolve('../sdk-iam/src/generated-definitions')
     }
   },
   test: {
-    environment: 'happy-dom',
+    environment: 'node',
     exclude: [
-      'test/e2e/**',
       '**/node_modules/**',
       '**/dist/**',
       '**/cypress/**',

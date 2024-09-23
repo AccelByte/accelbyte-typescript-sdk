@@ -7,35 +7,47 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { ConfigAdminApi } from '../ConfigAdminApi.js'
 
 import { ConfigExportArray } from '../../generated-definitions/ConfigExportArray.js'
 import { ConfigList } from '../../generated-definitions/ConfigList.js'
 import { ConfigResponse } from '../../generated-definitions/ConfigResponse.js'
+import { Configuration } from '../../generated-definitions/Configuration.js'
 import { ImportConfigResponse } from '../../generated-definitions/ImportConfigResponse.js'
 
 export enum Key_ConfigAdmin {
-  Config = 'ConfigAdmin.Config',
-  Config_ByNamespace = 'ConfigAdmin.Config_ByNamespace',
-  ConfigExport = 'ConfigAdmin.ConfigExport',
-  ConfigImport = 'ConfigAdmin.ConfigImport'
+  Config = 'Chat.ConfigAdmin.Config',
+  ConfigLog = 'Chat.ConfigAdmin.ConfigLog',
+  Config_ByNamespace = 'Chat.ConfigAdmin.Config_ByNamespace',
+  ConfigExport = 'Chat.ConfigAdmin.ConfigExport',
+  ConfigImport = 'Chat.ConfigAdmin.ConfigImport'
 }
 
-export const useAdmConfig = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Get chat config of all namespaces.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ConfigAdmin.Config, input]
+ * }
+ * ```
+ */
+export const useConfigAdminApi_GetConfig = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<ConfigList, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: ConfigList) => void
+  callback?: (data: AxiosResponse<ConfigList>) => void
 ): UseQueryResult<ConfigList, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmConfig>[1]) => async () => {
-    const data = await ConfigAdminApi(sdk, { namespace: input.namespace }).getConfig()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useConfigAdminApi_GetConfig>[1]) => async () => {
+    const response = await ConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getConfig()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<ConfigList, AxiosError<ApiError>>({
@@ -45,17 +57,86 @@ export const useAdmConfig = (
   })
 }
 
-export const useAdmConfig_ByNamespace = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ *  Get Log Configuration logLevel use for logging in service, the value can use is trace|debug|info|warning|error|fatal|panic socketLogEnabled is use for enable socket log logLevelDB use for logging in DB, the value can use is trace|debug|info|warning|error|fatal|panic slowQueryThreshold use for logging slow threshold in time measure is nano second
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ConfigAdmin.ConfigLog, input]
+ * }
+ * ```
+ */
+export const useConfigAdminApi_GetConfigLog = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
+  options?: Omit<UseQueryOptions<Configuration, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<Configuration>) => void
+): UseQueryResult<Configuration, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useConfigAdminApi_GetConfigLog>[1]) => async () => {
+    const response = await ConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getConfigLog()
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<Configuration, AxiosError<ApiError>>({
+    queryKey: [Key_ConfigAdmin.ConfigLog, input],
+    queryFn: queryFn(sdk, input),
+    ...options
+  })
+}
+
+/**
+ *  Update Log Configuration logLevel use for logging in service, the value can use is trace|debug|info|warning|error|fatal|panic socketLogEnabled is use for enable socket log logLevelDB use for logging in DB, the value can use is trace|debug|info|warning|error|fatal|panic slowQueryThreshold use for logging slow threshold in time measure is nano second
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ConfigAdmin.ConfigLog, input]
+ * }
+ * ```
+ */
+export const useConfigAdminApi_PatchConfigLogMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<Configuration, AxiosError<ApiError>, SdkSetConfigParam & { data: Configuration }>, 'mutationKey'>,
+  callback?: (data: Configuration) => void
+): UseMutationResult<Configuration, AxiosError<ApiError>, SdkSetConfigParam & { data: Configuration }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: Configuration }) => {
+    const response = await ConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).patchConfigLog(input.data)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_ConfigAdmin.ConfigLog],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Get chat config of a namespace.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ConfigAdmin.Config_ByNamespace, input]
+ * }
+ * ```
+ */
+export const useConfigAdminApi_GetConfig_ByNamespace = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<ConfigResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: ConfigResponse) => void
+  callback?: (data: AxiosResponse<ConfigResponse>) => void
 ): UseQueryResult<ConfigResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmConfig_ByNamespace>[1]) => async () => {
-    const data = await ConfigAdminApi(sdk, { namespace: input.namespace }).getConfig_ByNamespace()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useConfigAdminApi_GetConfig_ByNamespace>[1]) => async () => {
+    const response = await ConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getConfig_ByNamespace()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<ConfigResponse, AxiosError<ApiError>>({
@@ -65,16 +146,28 @@ export const useAdmConfig_ByNamespace = (
   })
 }
 
-export const useAdmUpdateConfig_ByNamespaceMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<ConfigResponse, AxiosError<ApiError>, ApiArgs & { data: ConfigResponse }>, 'mutationKey'>,
+/**
+ * Update chat config of a namespace.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ConfigAdmin.Config_ByNamespace, input]
+ * }
+ * ```
+ */
+export const useConfigAdminApi_UpdateConfig_ByNamespaceMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<ConfigResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: ConfigResponse }>, 'mutationKey'>,
   callback?: (data: ConfigResponse) => void
-): UseMutationResult<ConfigResponse, AxiosError<ApiError>, ApiArgs & { data: ConfigResponse }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: ConfigResponse }) => {
-    const data = await ConfigAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateConfig_ByNamespace(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<ConfigResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: ConfigResponse }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: ConfigResponse }) => {
+    const response = await ConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateConfig_ByNamespace(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -84,17 +177,27 @@ export const useAdmUpdateConfig_ByNamespaceMutation = (
   })
 }
 
-export const useAdmConfigExport = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ *  Export chat configuration to a json file. The file can then be imported from the /import endpoint.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ConfigAdmin.ConfigExport, input]
+ * }
+ * ```
+ */
+export const useConfigAdminApi_GetConfigExport = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<ConfigExportArray, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: ConfigExportArray) => void
+  callback?: (data: AxiosResponse<ConfigExportArray>) => void
 ): UseQueryResult<ConfigExportArray, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmConfigExport>[1]) => async () => {
-    const data = await ConfigAdminApi(sdk, { namespace: input.namespace }).getConfigExport()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useConfigAdminApi_GetConfigExport>[1]) => async () => {
+    const response = await ConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getConfigExport()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<ConfigExportArray, AxiosError<ApiError>>({
@@ -104,16 +207,31 @@ export const useAdmConfigExport = (
   })
 }
 
-export const useAdmCreateConfigImportMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<ImportConfigResponse, AxiosError<ApiError>, ApiArgs & { data: { file?: File } }>, 'mutationKey'>,
+/**
+ *  Import config configuration from file. The existing configuration will be replaced. The json file to import can be obtained from the /export endpoint.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ConfigAdmin.ConfigImport, input]
+ * }
+ * ```
+ */
+export const useConfigAdminApi_UpdateConfigImportMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<ImportConfigResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: { file?: File } }>,
+    'mutationKey'
+  >,
   callback?: (data: ImportConfigResponse) => void
-): UseMutationResult<ImportConfigResponse, AxiosError<ApiError>, ApiArgs & { data: { file?: File } }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: { file?: File } }) => {
-    const data = await ConfigAdminApi(sdk, { namespace: input.namespace, config: input.config }).createConfigImport(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<ImportConfigResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: { file?: File } }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: { file?: File } }) => {
+    const response = await ConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateConfigImport(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

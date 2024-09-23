@@ -7,6 +7,6 @@ import { z } from 'zod'
 import { Event } from './Event.js'
 import { Pagination } from './Pagination.js'
 
-export const EventResponse = z.object({ Data: z.array(Event), Pagination })
+export const EventResponse = z.object({ Data: z.array(Event), Pagination: Pagination })
 
 export interface EventResponse extends z.TypeOf<typeof EventResponse> {}

@@ -11,26 +11,6 @@
     "url": "https://development.accelbyte.io/qosm/apidocs"
   },
   "securityDefinitions": {
-    "HasPermission": {
-      "authorizationUrl": "https://dummy.oauth.net/auth",
-      "flow": "accessCode",
-      "scopes": {
-        "ADMIN:NAMESPACE:{namespace}:QOS:SERVER [UPDATE]": "ADMIN:NAMESPACE:{namespace}:QOS:SERVER [UPDATE]",
-        "ADMIN:QOS:SERVER [DELETE]": "ADMIN:QOS:SERVER [DELETE]",
-        "ADMIN:QOS:SERVER []": "ADMIN:QOS:SERVER []"
-      },
-      "tokenUrl": "https://dumy.oauth.net/token",
-      "type": "oauth2"
-    },
-    "HasScope": {
-      "authorizationUrl": "https://dummy.oauth.net/auth",
-      "flow": "accessCode",
-      "scopes": {
-        "social": "social"
-      },
-      "tokenUrl": "https://dumy.oauth.net/token",
-      "type": "oauth2"
-    },
     "authorization": {
       "in": "header",
       "name": "Authorization",
@@ -94,8 +74,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:QOS:SERVER [UPDATE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
@@ -132,8 +110,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:QOS:SERVER [DELETE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
@@ -190,8 +166,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:QOS:SERVER []"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
@@ -310,8 +284,6 @@
         },
         "security": [
           {
-            "HasPermission": [],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
@@ -409,8 +381,8 @@
     "path": "/qosm/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-07-02T03:16:59+00:00",
-    "gitHash": "731471bec9653b9f926fd423412876f1c09fa4a8",
+    "buildDate": "2024-09-20T10:22:34+00:00",
+    "gitHash": "7ed43f3b21c84384821653228ce6b78cb169db6c",
     "name": "Justice QoS Manager Service",
     "revisionID": "1.19.4",
     "version": "1.19.4",

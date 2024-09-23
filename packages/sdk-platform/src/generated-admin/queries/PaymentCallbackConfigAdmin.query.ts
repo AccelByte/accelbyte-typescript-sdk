@@ -7,31 +7,45 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { PaymentCallbackConfigAdminApi } from '../PaymentCallbackConfigAdminApi.js'
 
 import { PaymentCallbackConfigInfo } from '../../generated-definitions/PaymentCallbackConfigInfo.js'
 import { PaymentCallbackConfigUpdate } from '../../generated-definitions/PaymentCallbackConfigUpdate.js'
 
 export enum Key_PaymentCallbackConfigAdmin {
-  PaymentConfigCallback = 'PaymentCallbackConfigAdmin.PaymentConfigCallback'
+  PaymentConfigCallback = 'Platform.PaymentCallbackConfigAdmin.PaymentConfigCallback'
 }
 
-export const useAdmPaymentConfigCallback = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt;Get payment callback configuration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Payment callback config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PaymentCallbackConfigAdmin.PaymentConfigCallback, input]
+ * }
+ * ```
+ */
+export const usePaymentCallbackConfigAdminApi_GetPaymentConfigCallback = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<PaymentCallbackConfigInfo, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: PaymentCallbackConfigInfo) => void
+  callback?: (data: AxiosResponse<PaymentCallbackConfigInfo>) => void
 ): UseQueryResult<PaymentCallbackConfigInfo, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmPaymentConfigCallback>[1]) => async () => {
-    const data = await PaymentCallbackConfigAdminApi(sdk, { namespace: input.namespace }).getPaymentConfigCallback()
-    callback && callback(data)
-    return data
-  }
+  const queryFn =
+    (sdk: AccelByteSDK, input: Parameters<typeof usePaymentCallbackConfigAdminApi_GetPaymentConfigCallback>[1]) => async () => {
+      const response = await PaymentCallbackConfigAdminApi(sdk, {
+        coreConfig: input.coreConfig,
+        axiosConfig: input.axiosConfig
+      }).getPaymentConfigCallback()
+      callback && callback(response)
+      return response.data
+    }
 
   return useQuery<PaymentCallbackConfigInfo, AxiosError<ApiError>>({
     queryKey: [Key_PaymentCallbackConfigAdmin.PaymentConfigCallback, input],
@@ -40,21 +54,32 @@ export const useAdmPaymentConfigCallback = (
   })
 }
 
-export const useAdmUpdatePaymentConfigCallbackMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt;Update payment callback configuration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Payment callback config&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PaymentCallbackConfigAdmin.PaymentConfigCallback, input]
+ * }
+ * ```
+ */
+export const usePaymentCallbackConfigAdminApi_UpdatePaymentConfigCallbackMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<PaymentCallbackConfigInfo, AxiosError<ApiError>, ApiArgs & { data: PaymentCallbackConfigUpdate }>,
+    UseMutationOptions<PaymentCallbackConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: PaymentCallbackConfigUpdate }>,
     'mutationKey'
   >,
   callback?: (data: PaymentCallbackConfigInfo) => void
-): UseMutationResult<PaymentCallbackConfigInfo, AxiosError<ApiError>, ApiArgs & { data: PaymentCallbackConfigUpdate }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: PaymentCallbackConfigUpdate }) => {
-    const data = await PaymentCallbackConfigAdminApi(sdk, { namespace: input.namespace, config: input.config }).updatePaymentConfigCallback(
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<PaymentCallbackConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: PaymentCallbackConfigUpdate }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: PaymentCallbackConfigUpdate }) => {
+    const response = await PaymentCallbackConfigAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updatePaymentConfigCallback(input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

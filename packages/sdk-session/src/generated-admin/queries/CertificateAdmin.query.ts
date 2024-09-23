@@ -7,7 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
 import { AxiosError } from 'axios'
 // @ts-ignore
 import { useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
@@ -16,16 +16,27 @@ import { CertificateAdminApi } from '../CertificateAdminApi.js'
 import { PlatformCredentials } from '../../generated-definitions/PlatformCredentials.js'
 
 export enum Key_CertificateAdmin {
-  CertificatePfxPlatformXbl = 'CertificateAdmin.CertificatePfxPlatformXbl'
+  CertificatePfxPlatformXbl = 'Session.CertificateAdmin.CertificatePfxPlatformXbl'
 }
 
-export const useAdmUpdateCertificatePfxPlatformXblMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Upload certificates for xbox. Certificate must be in the valid form of PFX format.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_CertificateAdmin.CertificatePfxPlatformXbl, input]
+ * }
+ * ```
+ */
+export const useCertificateAdminApi_UpdateCertificatePfxPlatformXblMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
     UseMutationOptions<
       PlatformCredentials,
       AxiosError<ApiError>,
-      ApiArgs & { data: { file: File; password: string | null; certname: string | null; description?: string | null } }
+      SdkSetConfigParam & { data: { file: File; password: string | null; certname: string | null; description?: string | null } }
     >,
     'mutationKey'
   >,
@@ -33,17 +44,17 @@ export const useAdmUpdateCertificatePfxPlatformXblMutation = (
 ): UseMutationResult<
   PlatformCredentials,
   AxiosError<ApiError>,
-  ApiArgs & { data: { file: File; password: string | null; certname: string | null; description?: string | null } }
+  SdkSetConfigParam & { data: { file: File; password: string | null; certname: string | null; description?: string | null } }
 > => {
-  //
   const mutationFn = async (
-    input: ApiArgs & { data: { file: File; password: string | null; certname: string | null; description?: string | null } }
+    input: SdkSetConfigParam & { data: { file: File; password: string | null; certname: string | null; description?: string | null } }
   ) => {
-    const data = await CertificateAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateCertificatePfxPlatformXbl(
-      input.data
-    )
-    callback && callback(data)
-    return data
+    const response = await CertificateAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateCertificatePfxPlatformXbl(input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

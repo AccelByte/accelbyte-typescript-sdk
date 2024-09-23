@@ -6,10 +6,10 @@
 import { z } from 'zod'
 
 export const CopyContentRequest = z.object({
-  Tags: z.array(z.string()),
   customAttributes: z.record(z.any()).nullish(),
   name: z.string().nullish(),
   subType: z.string().nullish(),
+  tags: z.array(z.string()).nullish(),
   targetChannelId: z.string(),
   type: z.string().nullish()
 })

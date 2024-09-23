@@ -9,7 +9,7 @@ export const User = z.object({
   ID: z.string(),
   PlatformID: z.string(),
   PlatformUserID: z.string(),
-  PreviousStatus: z.string(),
+  PreviousStatus: z.string().nullish(),
   Status: z.string(),
   StatusV2: z.string(),
   UpdatedAt: z.string()

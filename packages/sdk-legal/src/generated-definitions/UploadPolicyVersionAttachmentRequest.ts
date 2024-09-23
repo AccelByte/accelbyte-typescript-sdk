@@ -5,6 +5,6 @@
  */
 import { z } from 'zod'
 
-export const UploadPolicyVersionAttachmentRequest = z.object({ contentType: z.string().nullish(), contentMD5: z.string().nullish() })
+export const UploadPolicyVersionAttachmentRequest = z.object({ contentMD5: z.string().nullish(), contentType: z.string().nullish() })
 
 export interface UploadPolicyVersionAttachmentRequest extends z.TypeOf<typeof UploadPolicyVersionAttachmentRequest> {}

@@ -8,7 +8,8 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { GetAllPlayerBlockedByUsersResponse } from '../generated-definitions/GetAllPlayerBlockedByUsersResponse.js'
 import { GetAllPlayerBlockedUsersResponse } from '../generated-definitions/GetAllPlayerBlockedUsersResponse.js'
 import { GetAllPlayerSessionAttributeResponse } from '../generated-definitions/GetAllPlayerSessionAttributeResponse.js'
@@ -21,112 +22,139 @@ import { ListUnblockPlayerRequest } from '../generated-definitions/ListUnblockPl
 import { SetPlayerSessionAttributeRequest } from '../generated-definitions/SetPlayerSessionAttributeRequest.js'
 import { PlayerAdmin$ } from './endpoints/PlayerAdmin$.js'
 
-export function PlayerAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function PlayerAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * Get the number of players connected to the Lobby in the given namespace.
-   */
-  async function getPlayerCcu(): Promise<GetLobbyCcuResponse> {
-    const $ = new PlayerAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
+  }
+
+  async function getPlayerCcu(): Promise<AxiosResponse<GetLobbyCcuResponse>> {
+    const $ = new PlayerAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getPlayerCcu()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get blocked players data by bulk user ids in a namespace.
-   */
-  async function createPlayerUserBulkBlocked(data: GetBulkAllPlayerBlockedUsersRequest): Promise<GetBulkAllPlayerBlockedUsersResponse> {
-    const $ = new PlayerAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.createPlayerUserBulkBlocked(data)
+  async function fetchPlayerUserBulkBlocked(
+    data: GetBulkAllPlayerBlockedUsersRequest
+  ): Promise<AxiosResponse<GetBulkAllPlayerBlockedUsersResponse>> {
+    const $ = new PlayerAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.fetchPlayerUserBulkBlocked(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get blocked players data by user id in a namespace.
-   */
-  async function getBlockedPlayer_ByUserId(userId: string): Promise<GetAllPlayerBlockedUsersResponse> {
-    const $ = new PlayerAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getBlockedPlayer_ByUserId(userId: string): Promise<AxiosResponse<GetAllPlayerBlockedUsersResponse>> {
+    const $ = new PlayerAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getBlockedPlayer_ByUserId(userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get all player&#39;s session attribute by user id in a namespace.
-   */
-  async function getAttributesPlayer_ByUserId(userId: string): Promise<GetAllPlayerSessionAttributeResponse> {
-    const $ = new PlayerAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getAttributesPlayer_ByUserId(userId: string): Promise<AxiosResponse<GetAllPlayerSessionAttributeResponse>> {
+    const $ = new PlayerAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getAttributesPlayer_ByUserId(userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Set player&#39;s session attribute by user id in a namespace.
-   */
-  async function updateAttributePlayer_ByUserId(userId: string, data: SetPlayerSessionAttributeRequest): Promise<unknown> {
-    const $ = new PlayerAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateAttributePlayer_ByUserId(userId: string, data: SetPlayerSessionAttributeRequest): Promise<AxiosResponse<unknown>> {
+    const $ = new PlayerAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateAttributePlayer_ByUserId(userId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Load get players who blocked this player in a namespace based on user id
-   */
-  async function getBlockedByPlayer_ByUserId(userId: string): Promise<GetAllPlayerBlockedByUsersResponse> {
-    const $ = new PlayerAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getBlockedByPlayer_ByUserId(userId: string): Promise<AxiosResponse<GetAllPlayerBlockedByUsersResponse>> {
+    const $ = new PlayerAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getBlockedByPlayer_ByUserId(userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Bulk block player in a namespace by list of user id
-   */
-  async function createBulkBlockPlayer_ByUserId(userId: string, data: ListBlockedPlayerRequest): Promise<unknown> {
-    const $ = new PlayerAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function createBulkBlockPlayer_ByUserId(userId: string, data: ListBlockedPlayerRequest): Promise<AxiosResponse<unknown>> {
+    const $ = new PlayerAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createBulkBlockPlayer_ByUserId(userId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Bulk unblock player in a namespace by list of user id
-   */
-  async function deleteBulkUnblockPlayer_ByUserId(userId: string, data: ListUnblockPlayerRequest): Promise<unknown> {
-    const $ = new PlayerAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteBulkUnblockPlayer_ByUserId(userId: string, data: ListUnblockPlayerRequest): Promise<AxiosResponse<unknown>> {
+    const $ = new PlayerAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteBulkUnblockPlayer_ByUserId(userId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get player&#39;s specific session attribute by user id in a namespace.
-   */
-  async function getAttributePlayer_ByUserId_ByAttribute(userId: string, attribute: string): Promise<GetPlayerSessionAttributeResponse> {
-    const $ = new PlayerAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getAttributePlayer_ByUserId_ByAttribute(
+    userId: string,
+    attribute: string
+  ): Promise<AxiosResponse<GetPlayerSessionAttributeResponse>> {
+    const $ = new PlayerAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getAttributePlayer_ByUserId_ByAttribute(userId, attribute)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     * Get the number of players connected to the Lobby in the given namespace.
+     */
     getPlayerCcu,
-    createPlayerUserBulkBlocked,
+    /**
+     * Get blocked players data by bulk user ids in a namespace.
+     */
+    fetchPlayerUserBulkBlocked,
+    /**
+     * Get blocked players data by user id in a namespace.
+     */
     getBlockedPlayer_ByUserId,
+    /**
+     * Get all player&#39;s session attribute by user id in a namespace.
+     */
     getAttributesPlayer_ByUserId,
+    /**
+     * Set player&#39;s session attribute by user id in a namespace.
+     */
     updateAttributePlayer_ByUserId,
+    /**
+     * Load get players who blocked this player in a namespace based on user id
+     */
     getBlockedByPlayer_ByUserId,
+    /**
+     * Bulk block player in a namespace by list of user id
+     */
     createBulkBlockPlayer_ByUserId,
+    /**
+     * Bulk unblock player in a namespace by list of user id
+     */
     deleteBulkUnblockPlayer_ByUserId,
+    /**
+     * Get player&#39;s specific session attribute by user id in a namespace.
+     */
     getAttributePlayer_ByUserId_ByAttribute
   }
 }

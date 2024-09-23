@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { KeyGroupAdminApi } from '../KeyGroupAdminApi.js'
 
 import { BulkOperationResult } from '../../generated-definitions/BulkOperationResult.js'
@@ -22,25 +22,38 @@ import { KeyGroupUpdate } from '../../generated-definitions/KeyGroupUpdate.js'
 import { KeyPagingSliceResult } from '../../generated-definitions/KeyPagingSliceResult.js'
 
 export enum Key_KeyGroupAdmin {
-  Keygroups = 'KeyGroupAdmin.Keygroups',
-  Keygroup = 'KeyGroupAdmin.Keygroup',
-  Keygroup_ByKeyGroupId = 'KeyGroupAdmin.Keygroup_ByKeyGroupId',
-  Keys_ByKeyGroupId = 'KeyGroupAdmin.Keys_ByKeyGroupId',
-  Key_ByKeyGroupId = 'KeyGroupAdmin.Key_ByKeyGroupId',
-  Dynamic_ByKeyGroupId = 'KeyGroupAdmin.Dynamic_ByKeyGroupId'
+  Keygroups = 'Platform.KeyGroupAdmin.Keygroups',
+  Keygroup = 'Platform.KeyGroupAdmin.Keygroup',
+  KeygroupsByBoothName = 'Platform.KeyGroupAdmin.KeygroupsByBoothName',
+  Keygroup_ByKeyGroupId = 'Platform.KeyGroupAdmin.Keygroup_ByKeyGroupId',
+  Keys_ByKeyGroupId = 'Platform.KeyGroupAdmin.Keys_ByKeyGroupId',
+  Key_ByKeyGroupId = 'Platform.KeyGroupAdmin.Key_ByKeyGroupId',
+  Dynamic_ByKeyGroupId = 'Platform.KeyGroupAdmin.Dynamic_ByKeyGroupId'
 }
 
-export const useAdmKeygroups = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams?: { limit?: number; name?: string | null; offset?: number; tag?: string | null } },
+/**
+ * Query key groups, if name is presented, it&#39;s fuzzy match.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: slice of key group&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_KeyGroupAdmin.Keygroups, input]
+ * }
+ * ```
+ */
+export const useKeyGroupAdminApi_GetKeygroups = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams?: { limit?: number; name?: string | null; offset?: number; tag?: string | null } },
   options?: Omit<UseQueryOptions<KeyGroupPagingSlicedResult, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: KeyGroupPagingSlicedResult) => void
+  callback?: (data: AxiosResponse<KeyGroupPagingSlicedResult>) => void
 ): UseQueryResult<KeyGroupPagingSlicedResult, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmKeygroups>[1]) => async () => {
-    const data = await KeyGroupAdminApi(sdk, { namespace: input.namespace }).getKeygroups(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useKeyGroupAdminApi_GetKeygroups>[1]) => async () => {
+    const response = await KeyGroupAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getKeygroups(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<KeyGroupPagingSlicedResult, AxiosError<ApiError>>({
@@ -50,16 +63,28 @@ export const useAdmKeygroups = (
   })
 }
 
-export const useAdmCreateKeygroupMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<KeyGroupInfo, AxiosError<ApiError>, ApiArgs & { data: KeyGroupCreate }>, 'mutationKey'>,
+/**
+ * Create key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created key group&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_KeyGroupAdmin.Keygroup, input]
+ * }
+ * ```
+ */
+export const useKeyGroupAdminApi_CreateKeygroupMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<KeyGroupInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: KeyGroupCreate }>, 'mutationKey'>,
   callback?: (data: KeyGroupInfo) => void
-): UseMutationResult<KeyGroupInfo, AxiosError<ApiError>, ApiArgs & { data: KeyGroupCreate }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: KeyGroupCreate }) => {
-    const data = await KeyGroupAdminApi(sdk, { namespace: input.namespace, config: input.config }).createKeygroup(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<KeyGroupInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: KeyGroupCreate }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: KeyGroupCreate }) => {
+    const response = await KeyGroupAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createKeygroup(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -69,17 +94,62 @@ export const useAdmCreateKeygroupMutation = (
   })
 }
 
-export const useAdmKeygroup_ByKeyGroupId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { keyGroupId: string },
+/**
+ * @deprecated
+ * Get key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_KeyGroupAdmin.KeygroupsByBoothName, input]
+ * }
+ * ```
+ */
+export const useKeyGroupAdminApi_GetKeygroupsByBoothName = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams: { boothName: string | null } },
   options?: Omit<UseQueryOptions<KeyGroupInfo, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: KeyGroupInfo) => void
+  callback?: (data: AxiosResponse<KeyGroupInfo>) => void
 ): UseQueryResult<KeyGroupInfo, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmKeygroup_ByKeyGroupId>[1]) => async () => {
-    const data = await KeyGroupAdminApi(sdk, { namespace: input.namespace }).getKeygroup_ByKeyGroupId(input.keyGroupId)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useKeyGroupAdminApi_GetKeygroupsByBoothName>[1]) => async () => {
+    const response = await KeyGroupAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getKeygroupsByBoothName(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<KeyGroupInfo, AxiosError<ApiError>>({
+    queryKey: [Key_KeyGroupAdmin.KeygroupsByBoothName, input],
+    queryFn: queryFn(sdk, input),
+    ...options
+  })
+}
+
+/**
+ * Get key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_KeyGroupAdmin.Keygroup_ByKeyGroupId, input]
+ * }
+ * ```
+ */
+export const useKeyGroupAdminApi_GetKeygroup_ByKeyGroupId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { keyGroupId: string },
+  options?: Omit<UseQueryOptions<KeyGroupInfo, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<KeyGroupInfo>) => void
+): UseQueryResult<KeyGroupInfo, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useKeyGroupAdminApi_GetKeygroup_ByKeyGroupId>[1]) => async () => {
+    const response = await KeyGroupAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getKeygroup_ByKeyGroupId(
+      input.keyGroupId
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<KeyGroupInfo, AxiosError<ApiError>>({
@@ -89,22 +159,32 @@ export const useAdmKeygroup_ByKeyGroupId = (
   })
 }
 
-export const useAdmUpdateKeygroup_ByKeyGroupIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Update key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated key group&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_KeyGroupAdmin.Keygroup_ByKeyGroupId, input]
+ * }
+ * ```
+ */
+export const useKeyGroupAdminApi_UpdateKeygroup_ByKeyGroupIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<KeyGroupInfo, AxiosError<ApiError>, ApiArgs & { keyGroupId: string; data: KeyGroupUpdate }>,
+    UseMutationOptions<KeyGroupInfo, AxiosError<ApiError>, SdkSetConfigParam & { keyGroupId: string; data: KeyGroupUpdate }>,
     'mutationKey'
   >,
   callback?: (data: KeyGroupInfo) => void
-): UseMutationResult<KeyGroupInfo, AxiosError<ApiError>, ApiArgs & { keyGroupId: string; data: KeyGroupUpdate }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { keyGroupId: string; data: KeyGroupUpdate }) => {
-    const data = await KeyGroupAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateKeygroup_ByKeyGroupId(
-      input.keyGroupId,
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<KeyGroupInfo, AxiosError<ApiError>, SdkSetConfigParam & { keyGroupId: string; data: KeyGroupUpdate }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { keyGroupId: string; data: KeyGroupUpdate }) => {
+    const response = await KeyGroupAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateKeygroup_ByKeyGroupId(input.keyGroupId, input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -114,17 +194,30 @@ export const useAdmUpdateKeygroup_ByKeyGroupIdMutation = (
   })
 }
 
-export const useAdmKeys_ByKeyGroupId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { keyGroupId: string; queryParams?: { limit?: number; offset?: number; status?: 'ACQUIRED' | 'ACTIVE' } },
+/**
+ * This API is used to list keys of a key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: keys&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_KeyGroupAdmin.Keys_ByKeyGroupId, input]
+ * }
+ * ```
+ */
+export const useKeyGroupAdminApi_GetKeys_ByKeyGroupId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { keyGroupId: string; queryParams?: { limit?: number; offset?: number; status?: 'ACQUIRED' | 'ACTIVE' } },
   options?: Omit<UseQueryOptions<KeyPagingSliceResult, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: KeyPagingSliceResult) => void
+  callback?: (data: AxiosResponse<KeyPagingSliceResult>) => void
 ): UseQueryResult<KeyPagingSliceResult, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmKeys_ByKeyGroupId>[1]) => async () => {
-    const data = await KeyGroupAdminApi(sdk, { namespace: input.namespace }).getKeys_ByKeyGroupId(input.keyGroupId, input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useKeyGroupAdminApi_GetKeys_ByKeyGroupId>[1]) => async () => {
+    const response = await KeyGroupAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getKeys_ByKeyGroupId(
+      input.keyGroupId,
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<KeyPagingSliceResult, AxiosError<ApiError>>({
@@ -134,22 +227,32 @@ export const useAdmKeys_ByKeyGroupId = (
   })
 }
 
-export const useAdmCreateKey_ByKeyGroupIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * This API is used to upload keys with csv format to a key group.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: item data&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_KeyGroupAdmin.Key_ByKeyGroupId, input]
+ * }
+ * ```
+ */
+export const useKeyGroupAdminApi_CreateKey_ByKeyGroupIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<BulkOperationResult, AxiosError<ApiError>, ApiArgs & { keyGroupId: string; data: { file?: File } }>,
+    UseMutationOptions<BulkOperationResult, AxiosError<ApiError>, SdkSetConfigParam & { keyGroupId: string; data: { file?: File } }>,
     'mutationKey'
   >,
   callback?: (data: BulkOperationResult) => void
-): UseMutationResult<BulkOperationResult, AxiosError<ApiError>, ApiArgs & { keyGroupId: string; data: { file?: File } }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { keyGroupId: string; data: { file?: File } }) => {
-    const data = await KeyGroupAdminApi(sdk, { namespace: input.namespace, config: input.config }).createKey_ByKeyGroupId(
+): UseMutationResult<BulkOperationResult, AxiosError<ApiError>, SdkSetConfigParam & { keyGroupId: string; data: { file?: File } }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { keyGroupId: string; data: { file?: File } }) => {
+    const response = await KeyGroupAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createKey_ByKeyGroupId(
       input.keyGroupId,
       input.data
     )
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -159,17 +262,29 @@ export const useAdmCreateKey_ByKeyGroupIdMutation = (
   })
 }
 
-export const useAdmDynamic_ByKeyGroupId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { keyGroupId: string },
+/**
+ * Get key group dynamic.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_KeyGroupAdmin.Dynamic_ByKeyGroupId, input]
+ * }
+ * ```
+ */
+export const useKeyGroupAdminApi_GetDynamic_ByKeyGroupId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { keyGroupId: string },
   options?: Omit<UseQueryOptions<KeyGroupDynamicInfo, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: KeyGroupDynamicInfo) => void
+  callback?: (data: AxiosResponse<KeyGroupDynamicInfo>) => void
 ): UseQueryResult<KeyGroupDynamicInfo, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmDynamic_ByKeyGroupId>[1]) => async () => {
-    const data = await KeyGroupAdminApi(sdk, { namespace: input.namespace }).getDynamic_ByKeyGroupId(input.keyGroupId)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useKeyGroupAdminApi_GetDynamic_ByKeyGroupId>[1]) => async () => {
+    const response = await KeyGroupAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getDynamic_ByKeyGroupId(
+      input.keyGroupId
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<KeyGroupDynamicInfo, AxiosError<ApiError>>({

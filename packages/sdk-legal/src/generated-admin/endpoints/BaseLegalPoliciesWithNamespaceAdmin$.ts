@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { CreateBasePolicyRequestV2 } from '../../generated-definitions/CreateBasePolicyRequestV2.js'
 import { CreateBasePolicyResponse } from '../../generated-definitions/CreateBasePolicyResponse.js'
 import { RetrieveBasePolicyResponse } from '../../generated-definitions/RetrieveBasePolicyResponse.js'
@@ -19,13 +19,13 @@ import { UpdateBasePolicyResponse } from '../../generated-definitions/UpdateBase
 
 export class BaseLegalPoliciesWithNamespaceAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Retrieve all supported policy types.
    */
-  getPolicyTypes(queryParams: { offset?: number; limit: number }): Promise<IResponse<RetrievePolicyTypeResponseArray>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  getPolicyTypes(queryParams: { limit: number; offset?: number }): Promise<Response<RetrievePolicyTypeResponseArray>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/agreement/admin/namespaces/{namespace}/policy-types'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -36,12 +36,11 @@ export class BaseLegalPoliciesWithNamespaceAdmin$ {
       'RetrievePolicyTypeResponseArray'
     )
   }
-
   /**
    * Retrieve all base policies in the namespace.
    */
-  getBasePolicies(queryParams?: { visibleOnly?: boolean | null }): Promise<IResponse<RetrieveBasePolicyResponseArray>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  getBasePolicies(queryParams?: { visibleOnly?: boolean | null }): Promise<Response<RetrieveBasePolicyResponseArray>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/agreement/admin/namespaces/{namespace}/base-policies'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -52,12 +51,11 @@ export class BaseLegalPoliciesWithNamespaceAdmin$ {
       'RetrieveBasePolicyResponseArray'
     )
   }
-
   /**
    * Create a legal policy.
    */
-  createBasePolicy(data: CreateBasePolicyRequestV2): Promise<IResponse<CreateBasePolicyResponse>> {
-    const params = {} as SDKRequestConfig
+  createBasePolicy(data: CreateBasePolicyRequestV2): Promise<Response<CreateBasePolicyResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/agreement/admin/namespaces/{namespace}/base-policies'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
@@ -68,12 +66,11 @@ export class BaseLegalPoliciesWithNamespaceAdmin$ {
       'CreateBasePolicyResponse'
     )
   }
-
   /**
    * Retrieve a base policy.
    */
-  getBasePolicy_ByBasePolicyId(basePolicyId: string): Promise<IResponse<RetrieveBasePolicyResponse>> {
-    const params = {} as SDKRequestConfig
+  getBasePolicy_ByBasePolicyId(basePolicyId: string): Promise<Response<RetrieveBasePolicyResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/agreement/admin/namespaces/{namespace}/base-policies/{basePolicyId}'
       .replace('{namespace}', this.namespace)
       .replace('{basePolicyId}', basePolicyId)
@@ -86,12 +83,11 @@ export class BaseLegalPoliciesWithNamespaceAdmin$ {
       'RetrieveBasePolicyResponse'
     )
   }
-
   /**
    * Update an existing base policy.
    */
-  patchBasePolicy_ByBasePolicyId(basePolicyId: string, data: UpdateBasePolicyRequestV2): Promise<IResponse<UpdateBasePolicyResponse>> {
-    const params = {} as SDKRequestConfig
+  patchBasePolicy_ByBasePolicyId(basePolicyId: string, data: UpdateBasePolicyRequestV2): Promise<Response<UpdateBasePolicyResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/agreement/admin/namespaces/{namespace}/base-policies/{basePolicyId}'
       .replace('{namespace}', this.namespace)
       .replace('{basePolicyId}', basePolicyId)
@@ -104,12 +100,11 @@ export class BaseLegalPoliciesWithNamespaceAdmin$ {
       'UpdateBasePolicyResponse'
     )
   }
-
   /**
    * Retrieve a Base Legal Policy based on a Particular Country.
    */
-  getCountry_ByBasePolicyId_ByCountryCode(basePolicyId: string, countryCode: string): Promise<IResponse<RetrievePolicyResponse>> {
-    const params = {} as SDKRequestConfig
+  getCountry_ByBasePolicyId_ByCountryCode(basePolicyId: string, countryCode: string): Promise<Response<RetrievePolicyResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/agreement/admin/namespaces/{namespace}/base-policies/{basePolicyId}/countries/{countryCode}'
       .replace('{namespace}', this.namespace)
       .replace('{basePolicyId}', basePolicyId)

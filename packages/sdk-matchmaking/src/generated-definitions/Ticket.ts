@@ -9,14 +9,17 @@ import { ProposedProposal } from './ProposedProposal.js'
 
 export const Ticket = z.object({
   CreatedAt: z.string(),
+  ExcludedSessions: z.array(z.string()),
   IsActive: z.boolean(),
   IsPivot: z.boolean(),
+  IsSinglePlay: z.boolean(),
   Latencies: z.record(z.number().int()),
   MatchPool: z.string(),
+  MatchedAt: z.string(),
   Namespace: z.string(),
   PartySessionID: z.string(),
   Players: z.array(PlayerData),
-  ProposedProposal,
+  ProposedProposal: ProposedProposal,
   TicketAttributes: z.record(z.any()),
   TicketID: z.string(),
   TicketInformation: z.record(z.any())

@@ -7,12 +7,21 @@
  * AUTO GENERATED
  */
 
+import { author, name, version } from '../package.json'
 import { SessionAdminApi } from './generated-admin/SessionAdminApi.js'
 import { SessionApi } from './generated-public/SessionApi.js'
 
+console.log(`${name}@${version}`)
+
 const apis = {
   SessionAdminApi,
-  SessionApi
+  SessionApi,
+  version: () =>
+    console.log({
+      version,
+      name,
+      author
+    })
 }
 
 export const SessionBrowser = apis

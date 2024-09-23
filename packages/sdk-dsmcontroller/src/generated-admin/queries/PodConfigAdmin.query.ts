@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { PodConfigAdminApi } from '../PodConfigAdminApi.js'
 
 import { CreatePodConfigRequest } from '../../generated-definitions/CreatePodConfigRequest.js'
@@ -20,22 +20,32 @@ import { PodConfigRecord } from '../../generated-definitions/PodConfigRecord.js'
 import { UpdatePodConfigRequest } from '../../generated-definitions/UpdatePodConfigRequest.js'
 
 export enum Key_PodConfigAdmin {
-  InstancesSpecLowest = 'PodConfigAdmin.InstancesSpecLowest',
-  ConfigsPods = 'PodConfigAdmin.ConfigsPods',
-  ConfigPod_ByName = 'PodConfigAdmin.ConfigPod_ByName'
+  InstancesSpecLowest = 'Dsmcontroller.PodConfigAdmin.InstancesSpecLowest',
+  ConfigsPods = 'Dsmcontroller.PodConfigAdmin.ConfigsPods',
+  ConfigPod_ByName = 'Dsmcontroller.PodConfigAdmin.ConfigPod_ByName'
 }
 
-export const useAdmInstancesSpecLowest = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Required permission: ADMIN:NAMESPACE:*:DSM:CONFIG [READ] Required scope: social This endpoint returns the lowest instance spec, both cpu (in Mhz) and memory (in Mb).
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PodConfigAdmin.InstancesSpecLowest, input]
+ * }
+ * ```
+ */
+export const usePodConfigAdminApi_GetInstancesSpecLowest = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<InstanceSpec, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: InstanceSpec) => void
+  callback?: (data: AxiosResponse<InstanceSpec>) => void
 ): UseQueryResult<InstanceSpec, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmInstancesSpecLowest>[1]) => async () => {
-    const data = await PodConfigAdminApi(sdk, { namespace: input.namespace }).getInstancesSpecLowest()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof usePodConfigAdminApi_GetInstancesSpecLowest>[1]) => async () => {
+    const response = await PodConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getInstancesSpecLowest()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<InstanceSpec, AxiosError<ApiError>>({
@@ -45,17 +55,29 @@ export const useAdmInstancesSpecLowest = (
   })
 }
 
-export const useAdmConfigsPods = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams: { count: number; offset: number } },
+/**
+ * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get a all pod configs in a namespace Parameter Offset and Count is Required
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PodConfigAdmin.ConfigsPods, input]
+ * }
+ * ```
+ */
+export const usePodConfigAdminApi_GetConfigsPods = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams: { count: number; offset: number } },
   options?: Omit<UseQueryOptions<ListPodConfigResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: ListPodConfigResponse) => void
+  callback?: (data: AxiosResponse<ListPodConfigResponse>) => void
 ): UseQueryResult<ListPodConfigResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmConfigsPods>[1]) => async () => {
-    const data = await PodConfigAdminApi(sdk, { namespace: input.namespace }).getConfigsPods(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof usePodConfigAdminApi_GetConfigsPods>[1]) => async () => {
+    const response = await PodConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getConfigsPods(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<ListPodConfigResponse, AxiosError<ApiError>>({
@@ -65,16 +87,28 @@ export const useAdmConfigsPods = (
   })
 }
 
-export const useAdmDeleteConfigPod_ByNameMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { name: string }>, 'mutationKey'>,
+/**
+ * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [DELETE] Required scope: social This endpoint delete a dedicated server pod config in a namespace
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PodConfigAdmin.ConfigPod_ByName, input]
+ * }
+ * ```
+ */
+export const usePodConfigAdminApi_DeleteConfigPod_ByNameMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { name: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { name: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { name: string }) => {
-    const data = await PodConfigAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteConfigPod_ByName(input.name)
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { name: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { name: string }) => {
+    const response = await PodConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteConfigPod_ByName(
+      input.name
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -84,17 +118,29 @@ export const useAdmDeleteConfigPod_ByNameMutation = (
   })
 }
 
-export const useAdmConfigPod_ByName = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { name: string },
+/**
+ * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get a dedicated server pod config in a namespace
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PodConfigAdmin.ConfigPod_ByName, input]
+ * }
+ * ```
+ */
+export const usePodConfigAdminApi_GetConfigPod_ByName = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { name: string },
   options?: Omit<UseQueryOptions<PodConfigRecord, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: PodConfigRecord) => void
+  callback?: (data: AxiosResponse<PodConfigRecord>) => void
 ): UseQueryResult<PodConfigRecord, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmConfigPod_ByName>[1]) => async () => {
-    const data = await PodConfigAdminApi(sdk, { namespace: input.namespace }).getConfigPod_ByName(input.name)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof usePodConfigAdminApi_GetConfigPod_ByName>[1]) => async () => {
+    const response = await PodConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getConfigPod_ByName(
+      input.name
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<PodConfigRecord, AxiosError<ApiError>>({
@@ -104,22 +150,32 @@ export const useAdmConfigPod_ByName = (
   })
 }
 
-export const useAdmPatchConfigPod_ByNameMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [UPDATE] Required scope: social This endpoint update a dedicated servers pod config in a namespace.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PodConfigAdmin.ConfigPod_ByName, input]
+ * }
+ * ```
+ */
+export const usePodConfigAdminApi_PatchConfigPod_ByNameMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<PodConfigRecord, AxiosError<ApiError>, ApiArgs & { name: string; data: UpdatePodConfigRequest }>,
+    UseMutationOptions<PodConfigRecord, AxiosError<ApiError>, SdkSetConfigParam & { name: string; data: UpdatePodConfigRequest }>,
     'mutationKey'
   >,
   callback?: (data: PodConfigRecord) => void
-): UseMutationResult<PodConfigRecord, AxiosError<ApiError>, ApiArgs & { name: string; data: UpdatePodConfigRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { name: string; data: UpdatePodConfigRequest }) => {
-    const data = await PodConfigAdminApi(sdk, { namespace: input.namespace, config: input.config }).patchConfigPod_ByName(
+): UseMutationResult<PodConfigRecord, AxiosError<ApiError>, SdkSetConfigParam & { name: string; data: UpdatePodConfigRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { name: string; data: UpdatePodConfigRequest }) => {
+    const response = await PodConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).patchConfigPod_ByName(
       input.name,
       input.data
     )
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -129,22 +185,32 @@ export const useAdmPatchConfigPod_ByNameMutation = (
   })
 }
 
-export const useAdmCreateConfigPod_ByNameMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [CREATE] Required scope: social This endpoint create a dedicated servers pod config in a namespace.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PodConfigAdmin.ConfigPod_ByName, input]
+ * }
+ * ```
+ */
+export const usePodConfigAdminApi_CreateConfigPod_ByNameMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<PodConfigRecord, AxiosError<ApiError>, ApiArgs & { name: string; data: CreatePodConfigRequest }>,
+    UseMutationOptions<PodConfigRecord, AxiosError<ApiError>, SdkSetConfigParam & { name: string; data: CreatePodConfigRequest }>,
     'mutationKey'
   >,
   callback?: (data: PodConfigRecord) => void
-): UseMutationResult<PodConfigRecord, AxiosError<ApiError>, ApiArgs & { name: string; data: CreatePodConfigRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { name: string; data: CreatePodConfigRequest }) => {
-    const data = await PodConfigAdminApi(sdk, { namespace: input.namespace, config: input.config }).createConfigPod_ByName(
+): UseMutationResult<PodConfigRecord, AxiosError<ApiError>, SdkSetConfigParam & { name: string; data: CreatePodConfigRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { name: string; data: CreatePodConfigRequest }) => {
+    const response = await PodConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createConfigPod_ByName(
       input.name,
       input.data
     )
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { FullSectionInfo } from '../../generated-definitions/FullSectionInfo.js'
 import { SectionCreate } from '../../generated-definitions/SectionCreate.js'
@@ -16,8 +16,8 @@ import { SectionUpdate } from '../../generated-definitions/SectionUpdate.js'
 
 export class SectionAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * This API is used to query sections.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated sections&lt;/li&gt;&lt;/ul&gt;
    */
@@ -28,8 +28,8 @@ export class SectionAdmin$ {
     start?: string | null
     storeId?: string | null
     viewId?: string | null
-  }): Promise<IResponse<SectionPagingSlicedResult>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  }): Promise<Response<SectionPagingSlicedResult>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/sections'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -40,23 +40,21 @@ export class SectionAdmin$ {
       'SectionPagingSlicedResult'
     )
   }
-
   /**
    * This API is used to create a section.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created a section&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;Restrictions for section extension and localization extension&lt;/h2&gt; 1. Cannot use &lt;b&gt;&#34;.&#34;&lt;/b&gt; as the key name - &lt;pre&gt;{ &#34;data.2&#34;: &#34;value&#34; }&lt;/pre&gt; 2. Cannot use &lt;b&gt;&#34;$&#34;&lt;/b&gt; as the prefix in key names - &lt;pre&gt;{ &#34;$data&#34;: &#34;value&#34; }&lt;/pre&gt;
    */
-  createSection(data: SectionCreate, queryParams: { storeId: string | null }): Promise<IResponse<FullSectionInfo>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  createSection(data: SectionCreate, queryParams: { storeId: string | null }): Promise<Response<FullSectionInfo>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/sections'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullSectionInfo, 'FullSectionInfo')
   }
-
   /**
    * This API is used to delete s section.
    */
-  deleteSection_BySectionId(sectionId: string, queryParams: { storeId: string | null }): Promise<IResponse<unknown>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  deleteSection_BySectionId(sectionId: string, queryParams: { storeId: string | null }): Promise<Response<unknown>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/sections/{sectionId}'
       .replace('{namespace}', this.namespace)
       .replace('{sectionId}', sectionId)
@@ -64,12 +62,11 @@ export class SectionAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * This API is used to get a section.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: section data&lt;/li&gt;&lt;/ul&gt;
    */
-  getSection_BySectionId(sectionId: string, queryParams?: { storeId?: string | null }): Promise<IResponse<FullSectionInfo>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  getSection_BySectionId(sectionId: string, queryParams?: { storeId?: string | null }): Promise<Response<FullSectionInfo>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/sections/{sectionId}'
       .replace('{namespace}', this.namespace)
       .replace('{sectionId}', sectionId)
@@ -77,7 +74,6 @@ export class SectionAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullSectionInfo, 'FullSectionInfo')
   }
-
   /**
    * This API is used to update s section.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated section data&lt;/li&gt;&lt;/ul&gt;&lt;h2&gt;Restrictions for section extension and localization extension&lt;/h2&gt; 1. Cannot use &lt;b&gt;&#34;.&#34;&lt;/b&gt; as the key name - &lt;pre&gt;{ &#34;data.2&#34;: &#34;value&#34; }&lt;/pre&gt; 2. Cannot use &lt;b&gt;&#34;$&#34;&lt;/b&gt; as the prefix in key names - &lt;pre&gt;{ &#34;$data&#34;: &#34;value&#34; }&lt;/pre&gt;
    */
@@ -85,8 +81,8 @@ export class SectionAdmin$ {
     sectionId: string,
     data: SectionUpdate,
     queryParams: { storeId: string | null }
-  ): Promise<IResponse<FullSectionInfo>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  ): Promise<Response<FullSectionInfo>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/sections/{sectionId}'
       .replace('{namespace}', this.namespace)
       .replace('{sectionId}', sectionId)
@@ -94,12 +90,11 @@ export class SectionAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullSectionInfo, 'FullSectionInfo')
   }
-
   /**
    * This API is used to purge expired section.
    */
-  deleteSectionPurgeExpired(queryParams: { storeId: string | null }): Promise<IResponse<unknown>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  deleteSectionPurgeExpired(queryParams: { storeId: string | null }): Promise<Response<unknown>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/sections/purge/expired'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 

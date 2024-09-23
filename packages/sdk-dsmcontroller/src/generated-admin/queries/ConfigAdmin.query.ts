@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { ConfigAdminApi } from '../ConfigAdminApi.js'
 
 import { CreateDsmConfigRequest } from '../../generated-definitions/CreateDsmConfigRequest.js'
@@ -22,27 +22,37 @@ import { UpdateDsmConfigRequest } from '../../generated-definitions/UpdateDsmCon
 import { UpdatePortRequest } from '../../generated-definitions/UpdatePortRequest.js'
 
 export enum Key_ConfigAdmin {
-  Configs = 'ConfigAdmin.Configs',
-  Config = 'ConfigAdmin.Config',
-  Configs_ByNS = 'ConfigAdmin.Configs_ByNS',
-  Config_ByNS = 'ConfigAdmin.Config_ByNS',
-  ConfigCache = 'ConfigAdmin.ConfigCache',
-  ConfigsExport = 'ConfigAdmin.ConfigsExport',
-  ConfigImport = 'ConfigAdmin.ConfigImport',
-  ConfigPort_ByName = 'ConfigAdmin.ConfigPort_ByName'
+  Configs = 'Dsmcontroller.ConfigAdmin.Configs',
+  Config = 'Dsmcontroller.ConfigAdmin.Config',
+  Configs_ByNS = 'Dsmcontroller.ConfigAdmin.Configs_ByNS',
+  Config_ByNS = 'Dsmcontroller.ConfigAdmin.Config_ByNS',
+  ConfigCache = 'Dsmcontroller.ConfigAdmin.ConfigCache',
+  ConfigsExport = 'Dsmcontroller.ConfigAdmin.ConfigsExport',
+  ConfigImport = 'Dsmcontroller.ConfigAdmin.ConfigImport',
+  ConfigPort_ByName = 'Dsmcontroller.ConfigAdmin.ConfigPort_ByName'
 }
 
-export const useAdmConfigs = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint lists all of dedicated servers configs.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ConfigAdmin.Configs, input]
+ * }
+ * ```
+ */
+export const useConfigAdminApi_GetConfigs = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<ListConfigResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: ListConfigResponse) => void
+  callback?: (data: AxiosResponse<ListConfigResponse>) => void
 ): UseQueryResult<ListConfigResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmConfigs>[1]) => async () => {
-    const data = await ConfigAdminApi(sdk, { namespace: input.namespace }).getConfigs()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useConfigAdminApi_GetConfigs>[1]) => async () => {
+    const response = await ConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getConfigs()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<ListConfigResponse, AxiosError<ApiError>>({
@@ -52,16 +62,27 @@ export const useAdmConfigs = (
   })
 }
 
-export const useAdmDeleteConfigMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs>, 'mutationKey'>,
+/**
+ * @deprecated
+ * ``` Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [CREATE] Required scope: social This endpoint adds/modifies config. When there are ready servers and the server version is updated, those servers will be replaced with newer version. Port is where your game listens for incoming UDP connection, if empty it&#39;ll be set to 15000 CPU and Memory limit / request are formatted with Kubernetes format, e.g. CPU of 1000m is 1 core, and Memory of 512Mi is 512 MB. The creation/claim/session/unreachable/heartbeat timeouts are all in seconds. Creation timeout is time limit for DS to startup until registers itself. Claim timeout is time limit for game session manager to claim its ready DS. Session timeout is time limit for match session before deleted. Unreachable timeout is time limit for DS in UNREACHABLE state before deleted. Heartbeat timeout is time limit for DS to give heartbeat before marked as UNREACHABLE. Sample config: { &#34;namespace&#34;: &#34;accelbyte&#34;, &#34;providers&#34;: [ &#34;aws&#34; ], &#34;port&#34;: 7777, &#34;protocol&#34;: &#34;udp&#34;, &#34;creation_timeout&#34;: 120, &#34;claim_timeout&#34;: 60, &#34;session_timeout&#34;: 1800, &#34;heartbeat_timeout&#34;: 30, &#34;unreachable_timeout&#34;: 30, &#34;image_version_mapping&#34;: { &#34;1.4.0&#34;: &#34;accelbyte/sample-ds-go:1.4.0&#34; }, &#34;default_version&#34;: &#34;1.4.0&#34;, &#34;cpu_limit&#34;: &#34;100&#34;, &#34;mem_limit&#34;: &#34;64&#34;, &#34;params&#34;: &#34;&#34;, &#34;min_count&#34;: 0, &#34;max_count&#34;: 0, &#34;buffer_count&#34;: 0, &#34;configurations&#34;: { &#34;1player&#34;: { &#34;cpu_limit&#34;: &#34;100&#34;, &#34;mem_limit&#34;: &#34;64&#34;, &#34;params&#34;: &#34;-gamemode 1p&#34;, }, &#34;50players&#34;: { &#34;cpu_limit&#34;: &#34;200&#34;, &#34;mem_limit&#34;: &#34;512&#34;, &#34;params&#34;: &#34;-gamemode 50p&#34;, } }, &#34;deployments&#34;: { &#34;global-1p&#34;: { &#34;game_version&#34;: &#34;1.4.0&#34;&#34;, &#34;regions&#34;: [&#34;us-west&#34;, &#34;ap-southeast&#34;], &#34;configuration&#34;: &#34;1player&#34;, &#34;min_count&#34;: 0, &#34;max_count&#34;: 0, &#34;buffer_count&#34;: 2 }, &#34;us-50p&#34;: { &#34;game_version&#34;: &#34;1.4.0&#34;&#34;, &#34;regions&#34;: [&#34;us-west&#34;], &#34;configuration&#34;: &#34;50players&#34;, &#34;min_count&#34;: 0, &#34;max_count&#34;: 0, &#34;buffer_count&#34;: 5 }, }, } ```
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ConfigAdmin.Config, input]
+ * }
+ * ```
+ */
+export const useConfigAdminApi_CreateConfigMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: DsmConfigRecord }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs> => {
-  //
-  const mutationFn = async (input: ApiArgs) => {
-    const data = await ConfigAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteConfig()
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: DsmConfigRecord }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: DsmConfigRecord }) => {
+    const response = await ConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createConfig(input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -71,17 +92,56 @@ export const useAdmDeleteConfigMutation = (
   })
 }
 
-export const useAdmConfigs_ByNS = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * ``` Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [DELETE] Required scope: social This endpoint removes config. When there are ready servers, those servers will be removed. ```
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ConfigAdmin.Config, input]
+ * }
+ * ```
+ */
+export const useConfigAdminApi_DeleteConfigMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam>, 'mutationKey'>,
+  callback?: (data: unknown) => void
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam> => {
+  const mutationFn = async (input: SdkSetConfigParam) => {
+    const response = await ConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteConfig()
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_ConfigAdmin.Config],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint get a dedicated servers config in a namespace.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ConfigAdmin.Configs_ByNS, input]
+ * }
+ * ```
+ */
+export const useConfigAdminApi_GetConfigs_ByNS = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<DsmConfigRecord, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: DsmConfigRecord) => void
+  callback?: (data: AxiosResponse<DsmConfigRecord>) => void
 ): UseQueryResult<DsmConfigRecord, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmConfigs_ByNS>[1]) => async () => {
-    const data = await ConfigAdminApi(sdk, { namespace: input.namespace }).getConfigs_ByNS()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useConfigAdminApi_GetConfigs_ByNS>[1]) => async () => {
+    const response = await ConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getConfigs_ByNS()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<DsmConfigRecord, AxiosError<ApiError>>({
@@ -91,16 +151,29 @@ export const useAdmConfigs_ByNS = (
   })
 }
 
-export const useAdmPatchConfigMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<DsmConfigRecord, AxiosError<ApiError>, ApiArgs & { data: UpdateDsmConfigRequest }>, 'mutationKey'>,
+/**
+ * ``` Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [UPDATE] Required scope: social This endpoint modifies config. When there are ready servers and the server version is updated, those servers will be replaced with newer version. Port is where your game listens for incoming UDP connection, if empty it&#39;ll be set to 15000 CPU and Memory limit / request are formatted with Kubernetes format, e.g. CPU of 1000m is 1 core, and Memory of 512Mi is 512 MB. The creation/claim/session/unreachable/heartbeat timeouts are all in seconds. Creation timeout is time limit for DS to startup until registers itself. Claim timeout is time limit for game session manager to claim its ready DS. Session timeout is time limit for match session before deleted. Unreachable timeout is time limit for DS in UNREACHABLE state before deleted. Heartbeat timeout is time limit for DS to give heartbeat before marked as UNREACHABLE. Sample config: { &#34;namespace&#34;: &#34;accelbyte&#34;, &#34;providers&#34;: [ &#34;aws&#34; ], &#34;port&#34;: 7777, &#34;protocol&#34;: &#34;udp&#34;, &#34;creation_timeout&#34;: 120, &#34;claim_timeout&#34;: 60, &#34;session_timeout&#34;: 1800, &#34;heartbeat_timeout&#34;: 30, &#34;unreachable_timeout&#34;: 30, } ```
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ConfigAdmin.Config, input]
+ * }
+ * ```
+ */
+export const useConfigAdminApi_PatchConfigMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<DsmConfigRecord, AxiosError<ApiError>, SdkSetConfigParam & { data: UpdateDsmConfigRequest }>,
+    'mutationKey'
+  >,
   callback?: (data: DsmConfigRecord) => void
-): UseMutationResult<DsmConfigRecord, AxiosError<ApiError>, ApiArgs & { data: UpdateDsmConfigRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: UpdateDsmConfigRequest }) => {
-    const data = await ConfigAdminApi(sdk, { namespace: input.namespace, config: input.config }).patchConfig(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<DsmConfigRecord, AxiosError<ApiError>, SdkSetConfigParam & { data: UpdateDsmConfigRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: UpdateDsmConfigRequest }) => {
+    const response = await ConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).patchConfig(input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -110,16 +183,31 @@ export const useAdmPatchConfigMutation = (
   })
 }
 
-export const useAdmCreateConfig_ByNSMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<DsmConfigRecord, AxiosError<ApiError>, ApiArgs & { data: CreateDsmConfigRequest }>, 'mutationKey'>,
+/**
+ * ``` Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [CREATE] Required scope: social This endpoint creates config. Port is where your game listens for incoming UDP connection, if empty it&#39;ll be set to 15000 CPU and Memory limit / request are formatted with Kubernetes format, e.g. CPU of 1000m is 1 core, and Memory of 512Mi is 512 MB. The creation/claim/session/unreachable/heartbeat timeouts are all in seconds. Creation timeout is time limit for DS to startup until registers itself. Claim timeout is time limit for game session manager to claim its ready DS. Session timeout is time limit for match session before deleted. Unreachable timeout is time limit for DS in UNREACHABLE state before deleted. Heartbeat timeout is time limit for DS to give heartbeat before marked as UNREACHABLE. Sample config: { &#34;namespace&#34;: &#34;accelbyte&#34;, &#34;providers&#34;: [ &#34;aws&#34; ], &#34;port&#34;: 7777, &#34;protocol&#34;: &#34;udp&#34;, &#34;creation_timeout&#34;: 120, &#34;claim_timeout&#34;: 60, &#34;session_timeout&#34;: 1800, &#34;heartbeat_timeout&#34;: 30, &#34;unreachable_timeout&#34;: 30, } ```
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ConfigAdmin.Config_ByNS, input]
+ * }
+ * ```
+ */
+export const useConfigAdminApi_CreateConfig_ByNSMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<DsmConfigRecord, AxiosError<ApiError>, SdkSetConfigParam & { data: CreateDsmConfigRequest }>,
+    'mutationKey'
+  >,
   callback?: (data: DsmConfigRecord) => void
-): UseMutationResult<DsmConfigRecord, AxiosError<ApiError>, ApiArgs & { data: CreateDsmConfigRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: CreateDsmConfigRequest }) => {
-    const data = await ConfigAdminApi(sdk, { namespace: input.namespace, config: input.config }).createConfig_ByNS(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<DsmConfigRecord, AxiosError<ApiError>, SdkSetConfigParam & { data: CreateDsmConfigRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: CreateDsmConfigRequest }) => {
+    const response = await ConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createConfig_ByNS(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -129,16 +217,26 @@ export const useAdmCreateConfig_ByNSMutation = (
   })
 }
 
-export const useAdmDeleteConfigCacheMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs>, 'mutationKey'>,
+/**
+ * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [DELETE] Required scope: social This endpoint clears config cache in a namespace
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ConfigAdmin.ConfigCache, input]
+ * }
+ * ```
+ */
+export const useConfigAdminApi_DeleteConfigCacheMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs> => {
-  //
-  const mutationFn = async (input: ApiArgs) => {
-    const data = await ConfigAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteConfigCache()
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam> => {
+  const mutationFn = async (input: SdkSetConfigParam) => {
+    const response = await ConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteConfigCache()
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -148,17 +246,27 @@ export const useAdmDeleteConfigCacheMutation = (
   })
 }
 
-export const useAdmConfigsExport = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [READ] Required scope: social This endpoint export a dedicated servers config in a namespace.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ConfigAdmin.ConfigsExport, input]
+ * }
+ * ```
+ */
+export const useConfigAdminApi_GetConfigsExport = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<unknown, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: unknown) => void
+  callback?: (data: AxiosResponse<unknown>) => void
 ): UseQueryResult<unknown, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmConfigsExport>[1]) => async () => {
-    const data = await ConfigAdminApi(sdk, { namespace: input.namespace }).getConfigsExport()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useConfigAdminApi_GetConfigsExport>[1]) => async () => {
+    const response = await ConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getConfigsExport()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<unknown, AxiosError<ApiError>>({
@@ -168,16 +276,28 @@ export const useAdmConfigsExport = (
   })
 }
 
-export const useAdmCreateConfigImportMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<ImportResponse, AxiosError<ApiError>, ApiArgs & { data: { file?: File } }>, 'mutationKey'>,
+/**
+ * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [CREATE] Required scope: social This endpoint import a dedicated servers config in a namespace. If there is an existing configuration, the configuration would be replaced.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ConfigAdmin.ConfigImport, input]
+ * }
+ * ```
+ */
+export const useConfigAdminApi_CreateConfigImportMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<ImportResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: { file?: File } }>, 'mutationKey'>,
   callback?: (data: ImportResponse) => void
-): UseMutationResult<ImportResponse, AxiosError<ApiError>, ApiArgs & { data: { file?: File } }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: { file?: File } }) => {
-    const data = await ConfigAdminApi(sdk, { namespace: input.namespace, config: input.config }).createConfigImport(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<ImportResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: { file?: File } }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: { file?: File } }) => {
+    const response = await ConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createConfigImport(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -187,16 +307,28 @@ export const useAdmCreateConfigImportMutation = (
   })
 }
 
-export const useAdmDeleteConfigPort_ByNameMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<DsmConfigRecord, AxiosError<ApiError>, ApiArgs & { name: string }>, 'mutationKey'>,
+/**
+ * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [DELETE] Required scope: social This endpoint delete a dedicated server port config in a namespace
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ConfigAdmin.ConfigPort_ByName, input]
+ * }
+ * ```
+ */
+export const useConfigAdminApi_DeleteConfigPort_ByNameMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<DsmConfigRecord, AxiosError<ApiError>, SdkSetConfigParam & { name: string }>, 'mutationKey'>,
   callback?: (data: DsmConfigRecord) => void
-): UseMutationResult<DsmConfigRecord, AxiosError<ApiError>, ApiArgs & { name: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { name: string }) => {
-    const data = await ConfigAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteConfigPort_ByName(input.name)
-    callback && callback(data)
-    return data
+): UseMutationResult<DsmConfigRecord, AxiosError<ApiError>, SdkSetConfigParam & { name: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { name: string }) => {
+    const response = await ConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteConfigPort_ByName(
+      input.name
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -206,22 +338,32 @@ export const useAdmDeleteConfigPort_ByNameMutation = (
   })
 }
 
-export const useAdmPatchConfigPort_ByNameMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [UPDATE] Required scope: social This endpoint update a dedicated servers port config in a namespace.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ConfigAdmin.ConfigPort_ByName, input]
+ * }
+ * ```
+ */
+export const useConfigAdminApi_PatchConfigPort_ByNameMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<DsmConfigRecord, AxiosError<ApiError>, ApiArgs & { name: string; data: UpdatePortRequest }>,
+    UseMutationOptions<DsmConfigRecord, AxiosError<ApiError>, SdkSetConfigParam & { name: string; data: UpdatePortRequest }>,
     'mutationKey'
   >,
   callback?: (data: DsmConfigRecord) => void
-): UseMutationResult<DsmConfigRecord, AxiosError<ApiError>, ApiArgs & { name: string; data: UpdatePortRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { name: string; data: UpdatePortRequest }) => {
-    const data = await ConfigAdminApi(sdk, { namespace: input.namespace, config: input.config }).patchConfigPort_ByName(
+): UseMutationResult<DsmConfigRecord, AxiosError<ApiError>, SdkSetConfigParam & { name: string; data: UpdatePortRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { name: string; data: UpdatePortRequest }) => {
+    const response = await ConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).patchConfigPort_ByName(
       input.name,
       input.data
     )
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -231,22 +373,32 @@ export const useAdmPatchConfigPort_ByNameMutation = (
   })
 }
 
-export const useAdmCreateConfigPort_ByNameMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Required permission: ADMIN:NAMESPACE:{namespace}:DSM:CONFIG [CREATE] Required scope: social This endpoint create a dedicated servers port config in a namespace.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ConfigAdmin.ConfigPort_ByName, input]
+ * }
+ * ```
+ */
+export const useConfigAdminApi_CreateConfigPort_ByNameMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<DsmConfigRecord, AxiosError<ApiError>, ApiArgs & { name: string; data: CreatePortRequest }>,
+    UseMutationOptions<DsmConfigRecord, AxiosError<ApiError>, SdkSetConfigParam & { name: string; data: CreatePortRequest }>,
     'mutationKey'
   >,
   callback?: (data: DsmConfigRecord) => void
-): UseMutationResult<DsmConfigRecord, AxiosError<ApiError>, ApiArgs & { name: string; data: CreatePortRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { name: string; data: CreatePortRequest }) => {
-    const data = await ConfigAdminApi(sdk, { namespace: input.namespace, config: input.config }).createConfigPort_ByName(
+): UseMutationResult<DsmConfigRecord, AxiosError<ApiError>, SdkSetConfigParam & { name: string; data: CreatePortRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { name: string; data: CreatePortRequest }) => {
+    const response = await ConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createConfigPort_ByName(
       input.name,
       input.data
     )
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

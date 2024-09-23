@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { PaginatedContentDownloadResponse } from '../../generated-definitions/PaginatedContentDownloadResponse.js'
 import { PaginatedCreatorOverviewResponse } from '../../generated-definitions/PaginatedCreatorOverviewResponse.js'
 import { UserFollowRequest } from '../../generated-definitions/UserFollowRequest.js'
@@ -15,13 +15,13 @@ import { UserFollowResponse } from '../../generated-definitions/UserFollowRespon
 
 export class PublicFollow$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Requires valid user token
    */
-  getUsersFollowed(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<PaginatedCreatorOverviewResponse>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  getUsersFollowed(queryParams?: { limit?: number; offset?: number }): Promise<Response<PaginatedCreatorOverviewResponse>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/followed'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -32,12 +32,11 @@ export class PublicFollow$ {
       'PaginatedCreatorOverviewResponse'
     )
   }
-
   /**
    * Requires valid user token
    */
-  getContentsFollowed(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<PaginatedContentDownloadResponse>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  getContentsFollowed(queryParams?: { limit?: number; offset?: number }): Promise<Response<PaginatedContentDownloadResponse>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/contents/followed'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -48,12 +47,11 @@ export class PublicFollow$ {
       'PaginatedContentDownloadResponse'
     )
   }
-
   /**
    * Requires valid user token
    */
-  updateFollow_ByUserId(userId: string, data: UserFollowRequest): Promise<IResponse<UserFollowResponse>> {
-    const params = {} as SDKRequestConfig
+  updateFollow_ByUserId(userId: string, data: UserFollowRequest): Promise<Response<UserFollowResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/follow'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -65,8 +63,8 @@ export class PublicFollow$ {
   getFollowers_ByUserId(
     userId: string,
     queryParams?: { limit?: number; offset?: number }
-  ): Promise<IResponse<PaginatedCreatorOverviewResponse>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  ): Promise<Response<PaginatedCreatorOverviewResponse>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/followers'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -83,8 +81,8 @@ export class PublicFollow$ {
   getFollowing_ByUserId(
     userId: string,
     queryParams?: { limit?: number; offset?: number }
-  ): Promise<IResponse<PaginatedCreatorOverviewResponse>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  ): Promise<Response<PaginatedCreatorOverviewResponse>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/following'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

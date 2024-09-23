@@ -3,59 +3,11 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import axios, { InternalAxiosRequestConfig, AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import qs from 'query-string'
 import { SdkDevice } from './SdkDevice'
 
-type EjectId = number
-
-export type RequestInterceptor = (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig>
-export type ResponseInterceptor = (response: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>
-export type ErrorInterceptor = (error: AxiosError) => Promise<unknown> | unknown
-
-const requestInterceptors = new Map<
-  EjectId,
-  {
-    interceptor: RequestInterceptor
-    errorInterceptor: ErrorInterceptor
-  }
->()
-
-const responseInterceptors = new Map<
-  EjectId,
-  {
-    interceptor: ResponseInterceptor
-    errorInterceptor: ErrorInterceptor
-  }
->()
-
-export const injectRequestInterceptors = (requestInterceptor: RequestInterceptor, errorInterceptor: ErrorInterceptor): EjectId => {
-  const pair = { interceptor: requestInterceptor, errorInterceptor }
-  const ejectId = axios.interceptors.request.use(requestInterceptor, errorInterceptor)
-  requestInterceptors.set(ejectId, pair)
-  return ejectId
-}
-
-export const injectResponseInterceptors = (responseInterceptor: ResponseInterceptor, errorInterceptor: ErrorInterceptor): EjectId => {
-  const pair = { interceptor: responseInterceptor, errorInterceptor }
-  const ejectId = axios.interceptors.response.use(responseInterceptor, errorInterceptor)
-  responseInterceptors.set(ejectId, pair)
-  return ejectId
-}
-
-const loggerInterceptor = (axiosInstance: AxiosInstance) => {
-  axiosInstance.interceptors.request.use(
-    config => {
-      return config
-    },
-    error => {
-      return Promise.reject(error)
-    }
-  )
-}
-
 export class Network {
-  //
   static create(...configs: AxiosRequestConfig[]): AxiosInstance {
     const axiosInstance = axios.create(
       Object.assign(
@@ -65,18 +17,6 @@ export class Network {
         ...configs
       )
     )
-
-    Array.from(requestInterceptors).forEach(([_key, interceptorPair]) => {
-      const { interceptor, errorInterceptor } = interceptorPair
-      axiosInstance.interceptors.request.use(interceptor, errorInterceptor)
-    })
-
-    Array.from(responseInterceptors).forEach(([_key, interceptorPair]) => {
-      const { interceptor, errorInterceptor } = interceptorPair
-      axiosInstance.interceptors.response.use(interceptor, errorInterceptor)
-    })
-
-    loggerInterceptor(axiosInstance)
 
     return axiosInstance
   }

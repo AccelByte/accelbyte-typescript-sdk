@@ -8,7 +8,8 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { CreateLocalizedPolicyVersionRequest } from '../generated-definitions/CreateLocalizedPolicyVersionRequest.js'
 import { CreateLocalizedPolicyVersionResponse } from '../generated-definitions/CreateLocalizedPolicyVersionResponse.js'
 import { RetrieveLocalizedPolicyVersionResponse } from '../generated-definitions/RetrieveLocalizedPolicyVersionResponse.js'
@@ -19,92 +20,114 @@ import { UploadLocalizedPolicyVersionAttachmentResponse } from '../generated-def
 import { UploadPolicyVersionAttachmentRequest } from '../generated-definitions/UploadPolicyVersionAttachmentRequest.js'
 import { LocalizedPolicyVersionsAdmin$ } from './endpoints/LocalizedPolicyVersionsAdmin$.js'
 
-export function LocalizedPolicyVersionsAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function LocalizedPolicyVersionsAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * Retrieve a version of a particular country-specific policy.
-   */
-  async function getLocalizedPolicyVersion_ByLocalizedPolicyVersionId(
-    localizedPolicyVersionId: string
-  ): Promise<RetrieveLocalizedPolicyVersionResponse> {
-    const $ = new LocalizedPolicyVersionsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getLocalizedPolicyVersion_ByLocalizedPolicyVersionId(localizedPolicyVersionId)
-    if (resp.error) throw resp.error
-    return resp.response.data
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
   }
 
-  /**
-   * Update a version of a particular country-specific policy.
-   */
+  async function getLocalizedPolicyVersion_ByLocalizedPolicyVersionId(
+    localizedPolicyVersionId: string
+  ): Promise<AxiosResponse<RetrieveLocalizedPolicyVersionResponse>> {
+    const $ = new LocalizedPolicyVersionsAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getLocalizedPolicyVersion_ByLocalizedPolicyVersionId(localizedPolicyVersionId)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   async function updateLocalizedPolicyVersion_ByLocalizedPolicyVersionId(
     localizedPolicyVersionId: string,
     data: UpdateLocalizedPolicyVersionRequest
-  ): Promise<UpdateLocalizedPolicyVersionResponse> {
-    const $ = new LocalizedPolicyVersionsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  ): Promise<AxiosResponse<UpdateLocalizedPolicyVersionResponse>> {
+    const $ = new LocalizedPolicyVersionsAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateLocalizedPolicyVersion_ByLocalizedPolicyVersionId(localizedPolicyVersionId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Retrieve versions of a particular country-specific policy.
-   */
   async function getLocalizedPolicyVersionVersion_ByPolicyVersionId(
     policyVersionId: string
-  ): Promise<RetrieveLocalizedPolicyVersionResponseArray> {
-    const $ = new LocalizedPolicyVersionsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  ): Promise<AxiosResponse<RetrieveLocalizedPolicyVersionResponseArray>> {
+    const $ = new LocalizedPolicyVersionsAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getLocalizedPolicyVersionVersion_ByPolicyVersionId(policyVersionId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Create a version of a particular country-specific policy.
-   */
   async function createLocalizedPolicyVersionVersion_ByPolicyVersionId(
     policyVersionId: string,
     data: CreateLocalizedPolicyVersionRequest
-  ): Promise<CreateLocalizedPolicyVersionResponse> {
-    const $ = new LocalizedPolicyVersionsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  ): Promise<AxiosResponse<CreateLocalizedPolicyVersionResponse>> {
+    const $ = new LocalizedPolicyVersionsAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createLocalizedPolicyVersionVersion_ByPolicyVersionId(policyVersionId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Update a localized version policy to be the default.
-   */
-  async function patchDefault_ByLocalizedPolicyVersionId(localizedPolicyVersionId: string): Promise<unknown> {
-    const $ = new LocalizedPolicyVersionsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function patchDefault_ByLocalizedPolicyVersionId(localizedPolicyVersionId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new LocalizedPolicyVersionsAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.patchDefault_ByLocalizedPolicyVersionId(localizedPolicyVersionId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Request presigned URL for upload attachment for a particular localized version of base policy.
-   */
   async function createAttachment_ByLocalizedPolicyVersionId(
     localizedPolicyVersionId: string,
     data: UploadPolicyVersionAttachmentRequest
-  ): Promise<UploadLocalizedPolicyVersionAttachmentResponse> {
-    const $ = new LocalizedPolicyVersionsAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  ): Promise<AxiosResponse<UploadLocalizedPolicyVersionAttachmentResponse>> {
+    const $ = new LocalizedPolicyVersionsAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createAttachment_ByLocalizedPolicyVersionId(localizedPolicyVersionId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     * Retrieve a version of a particular country-specific policy.
+     */
     getLocalizedPolicyVersion_ByLocalizedPolicyVersionId,
+    /**
+     * Update a version of a particular country-specific policy.
+     */
     updateLocalizedPolicyVersion_ByLocalizedPolicyVersionId,
+    /**
+     * Retrieve versions of a particular country-specific policy.
+     */
     getLocalizedPolicyVersionVersion_ByPolicyVersionId,
+    /**
+     * Create a version of a particular country-specific policy.
+     */
     createLocalizedPolicyVersionVersion_ByPolicyVersionId,
+    /**
+     * Update a localized version policy to be the default.
+     */
     patchDefault_ByLocalizedPolicyVersionId,
+    /**
+     * Request presigned URL for upload attachment for a particular localized version of base policy.
+     */
     createAttachment_ByLocalizedPolicyVersionId
   }
 }

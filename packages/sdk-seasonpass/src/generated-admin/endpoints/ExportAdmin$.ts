@@ -6,19 +6,19 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 
 export class ExportAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * This API is used to export all of season service data files with csv format.
    */
-  getExport(): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  getExport(): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/seasonpass/admin/namespace/{namespace}/export'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 

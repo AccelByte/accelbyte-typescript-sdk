@@ -8,7 +8,7 @@
     },
     "description": "Justice Cloudsave Service",
     "title": "justice-cloudsave-service",
-    "version": "3.20.9"
+    "version": "3.21.0"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -16,22 +16,6 @@
     "url": "https://development.accelbyte.io/cloudsave/apidocs"
   },
   "securityDefinitions": {
-    "HasPermission": {
-      "authorizationUrl": "https://dummy.oauth.net/auth",
-      "flow": "accessCode",
-      "scopes": {
-        "CLIENT []": "CLIENT []"
-      },
-      "tokenUrl": "https://dumy.oauth.net/token",
-      "type": "oauth2"
-    },
-    "HasScope": {
-      "authorizationUrl": "https://dummy.oauth.net/auth",
-      "flow": "accessCode",
-      "scopes": {},
-      "tokenUrl": "https://dumy.oauth.net/token",
-      "type": "oauth2"
-    },
     "authorization": {
       "in": "header",
       "name": "Authorization",
@@ -1415,7 +1399,6 @@
         },
         "security": [
           {
-            "HasPermission": ["CLIENT []"],
             "authorization": []
           }
         ],
@@ -2062,7 +2045,6 @@
         },
         "security": [
           {
-            "HasPermission": ["CLIENT []"],
             "authorization": []
           }
         ],
@@ -2152,7 +2134,6 @@
         },
         "security": [
           {
-            "HasPermission": ["CLIENT []"],
             "authorization": []
           }
         ],
@@ -4350,7 +4331,6 @@
         },
         "security": [
           {
-            "HasPermission": ["CLIENT []"],
             "authorization": []
           }
         ],
@@ -4465,7 +4445,6 @@
         },
         "security": [
           {
-            "HasPermission": ["CLIENT []"],
             "authorization": []
           }
         ],
@@ -5002,7 +4981,6 @@
         },
         "security": [
           {
-            "HasPermission": ["CLIENT []"],
             "authorization": []
           }
         ],
@@ -5097,7 +5075,6 @@
         },
         "security": [
           {
-            "HasPermission": ["CLIENT []"],
             "authorization": []
           }
         ],
@@ -9287,7 +9264,9 @@
         },
         "updatedAt": {
           "description": "Precondition for concurrent request, updatedAt should be the same as record's updatedAt",
-          "type": "string"
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
         },
         "value": {
           "description": "Record data, should be in valid json format",
@@ -9307,7 +9286,9 @@
         },
         "updatedAt": {
           "description": "Precondition for concurrent request, updatedAt should be the same as record's updatedAt",
-          "type": "string"
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
         },
         "value": {
           "description": "Admin game record data, should be in valid json format",
@@ -9364,7 +9345,9 @@
         },
         "updatedAt": {
           "description": "Precondition for concurrent request, updatedAt should be the same as record's updatedAt",
-          "type": "string"
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
         },
         "value": {
           "description": "Admin player record data, should be in valid json format",
@@ -9717,7 +9700,9 @@
       "properties": {
         "updatedAt": {
           "description": "Precondition for concurrent request, updatedAt should be the same as record's updatedAt",
-          "type": "string"
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
         },
         "value": {
           "description": "Record data, should be in valid json format",
@@ -10556,11 +10541,11 @@
     "path": "/cloudsave/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-07-23T06:42:39+00:00",
-    "gitHash": "53f64ebf98e16d47a89a358f9df33f8acdfbd674",
+    "buildDate": "2024-09-20T07:56:26+00:00",
+    "gitHash": "ad7cd73c3f4907fa4ce297b3e0e6d11475519897",
     "name": "justice-cloudsave-service",
-    "revisionID": "3.20.9",
-    "version": "3.20.9",
+    "revisionID": "3.21.0",
+    "version": "3.21.0",
     "version-roles-seeding": "0.0.46"
   }
 }

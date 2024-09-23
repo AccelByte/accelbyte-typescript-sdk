@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { CreateTopicRequest } from '../../generated-definitions/CreateTopicRequest.js'
 import { FreeFormNotificationRequest } from '../../generated-definitions/FreeFormNotificationRequest.js'
@@ -19,8 +19,8 @@ import { UpdateTopicRequest } from '../../generated-definitions/UpdateTopicReque
 
 export class Notification$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Get list of notifications in a namespace. The query parameters **startTime** and **endTime** can be filled with the **sequenceID** value in the notification, where the value is an epoch timestamp. Example **sequenceID** or epoch timestamp value: **1706595813**
    */
@@ -29,14 +29,13 @@ export class Notification$ {
     limit?: number
     offset?: number
     startTime?: number
-  }): Promise<IResponse<NotificationResponse>> {
-    const params = { limit: 25, ...queryParams } as SDKRequestConfig
+  }): Promise<Response<NotificationResponse>> {
+    const params = { limit: 25, ...queryParams } as AxiosRequestConfig
     const url = '/notification/namespaces/{namespace}/me'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, NotificationResponse, 'NotificationResponse')
   }
-
   /**
    * get topic by namespace.
    */
@@ -44,8 +43,8 @@ export class Notification$ {
     after?: string | null
     before?: string | null
     limit?: number
-  }): Promise<IResponse<TopicByNamespacesResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  }): Promise<Response<TopicByNamespacesResponse>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/notification/namespaces/{namespace}/topics'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -56,34 +55,31 @@ export class Notification$ {
       'TopicByNamespacesResponse'
     )
   }
-
   /**
    * Create new notification topic. &lt;br&gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST. Already existing topic can not be created
    */
-  createNotificationTopic(data: CreateTopicRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  createNotificationTopic(data: CreateTopicRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/notification/namespaces/{namespace}/topics'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * delete topic information by topic name. &lt;br&gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST. Already existing topic can not be created
    */
-  deleteNotificationTopic_ByTopic(topic: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteNotificationTopic_ByTopic(topic: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/notification/namespaces/{namespace}/topics/{topic}'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * get topic information by topic name.
    */
-  getNotificationTopic_ByTopic(topic: string): Promise<IResponse<NotificationTopicResponse>> {
-    const params = {} as SDKRequestConfig
+  getNotificationTopic_ByTopic(topic: string): Promise<Response<NotificationTopicResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/notification/namespaces/{namespace}/topics/{topic}'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -94,23 +90,21 @@ export class Notification$ {
       'NotificationTopicResponse'
     )
   }
-
   /**
    * update topic information by topic name. &lt;br&gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST. Already existing topic can not be created
    */
-  updateNotificationTopic_ByTopic(topic: string, data: UpdateTopicRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  updateNotificationTopic_ByTopic(topic: string, data: UpdateTopicRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/notification/namespaces/{namespace}/topics/{topic}'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Sends notification to a user.
    */
-  createFreeformNotification_ByUserId(userId: string, data: FreeFormNotificationRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  createFreeformNotification_ByUserId(userId: string, data: FreeFormNotificationRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/notification/namespaces/{namespace}/users/{userId}/freeform'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -118,12 +112,11 @@ export class Notification$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Sends notification to a user with predefined template. &lt;br&gt;In the request body, specify which template slug (template identifier) to use and the template language. &lt;br&gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content. Template need to be published before it can be use to send notifications
    */
-  createTemplatedNotification_ByUserId(userId: string, data: NotificationWithTemplateRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  createTemplatedNotification_ByUserId(userId: string, data: NotificationWithTemplateRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/notification/namespaces/{namespace}/users/{userId}/templated'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

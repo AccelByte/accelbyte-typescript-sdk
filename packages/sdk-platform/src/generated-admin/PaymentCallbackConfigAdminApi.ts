@@ -8,40 +8,63 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { PaymentCallbackConfigInfo } from '../generated-definitions/PaymentCallbackConfigInfo.js'
 import { PaymentCallbackConfigUpdate } from '../generated-definitions/PaymentCallbackConfigUpdate.js'
 import { PaymentCallbackConfigAdmin$ } from './endpoints/PaymentCallbackConfigAdmin$.js'
 
-export function PaymentCallbackConfigAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function PaymentCallbackConfigAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Get payment callback configuration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Payment callback config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getPaymentConfigCallback(): Promise<PaymentCallbackConfigInfo> {
-    const $ = new PaymentCallbackConfigAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getPaymentConfigCallback()
-    if (resp.error) throw resp.error
-    return resp.response.data
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
   }
 
-  /**
-   * &lt;b&gt;[Not Supported Yet In Starter]&lt;/b&gt;Update payment callback configuration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Payment callback config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function updatePaymentConfigCallback(data: PaymentCallbackConfigUpdate): Promise<PaymentCallbackConfigInfo> {
-    const $ = new PaymentCallbackConfigAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getPaymentConfigCallback(): Promise<AxiosResponse<PaymentCallbackConfigInfo>> {
+    const $ = new PaymentCallbackConfigAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getPaymentConfigCallback()
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function updatePaymentConfigCallback(data: PaymentCallbackConfigUpdate): Promise<AxiosResponse<PaymentCallbackConfigInfo>> {
+    const $ = new PaymentCallbackConfigAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updatePaymentConfigCallback(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt;Get payment callback configuration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Payment callback config&lt;/li&gt;&lt;/ul&gt;
+     */
     getPaymentConfigCallback,
+    /**
+     * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt;Update payment callback configuration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Payment callback config&lt;/li&gt;&lt;/ul&gt;
+     */
     updatePaymentConfigCallback
   }
 }

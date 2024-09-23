@@ -6,20 +6,31 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { RetrieveUserInfoCacheStatusResponseArray } from '../../generated-definitions/RetrieveUserInfoCacheStatusResponseArray.js'
 
 export class UserInfoAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
-   * Get user info cache last updated time per namespace.<br>The query parameter namespaces can be a list of namespace separated by comma.<br>If query parameter namespaces is empty, user info cache status for all available namespaces will be returned.
+   * @deprecated
+   * Invalidate user info cache in agreement service.
    */
-  getUserInfo(queryParams?: { namespaces?: string | null }): Promise<IResponse<RetrieveUserInfoCacheStatusResponseArray>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  deleteUserInfo(queryParams?: { namespace?: string | null }): Promise<Response<unknown>> {
+    const params = { ...queryParams } as AxiosRequestConfig
+    const url = '/agreement/admin/userInfo'
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
+  }
+  /**
+   * Get user info cache last updated time per namespace.&lt;br&gt;The query parameter namespaces can be a list of namespace separated by comma.&lt;br&gt;If query parameter namespaces is empty, user info cache status for all available namespaces will be returned.
+   */
+  getUserInfo(queryParams?: { namespaces?: string | null }): Promise<Response<RetrieveUserInfoCacheStatusResponseArray>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/agreement/admin/userInfo'
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -30,27 +41,14 @@ export class UserInfoAdmin$ {
       'RetrieveUserInfoCacheStatusResponseArray'
     )
   }
-
   /**
    * @deprecated
    * Sync user info cache in agreement service with iam service.
    */
-  updateUserInfo_DEPRECATED(queryParams: { namespace: string | null }): Promise<IResponse<unknown>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  updateUserInfo(queryParams: { namespace: string | null }): Promise<Response<unknown>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/agreement/admin/userInfo'
     const resultPromise = this.axiosInstance.put(url, null, { params })
-
-    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
-  }
-
-  /**
-   * @deprecated
-   * Invalidate user info cache in agreement service.
-   */
-  deleteUserInfo_DEPRECATED(queryParams?: { namespace?: string | null }): Promise<IResponse<unknown>> {
-    const params = { ...queryParams } as SDKRequestConfig
-    const url = '/agreement/admin/userInfo'
-    const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }

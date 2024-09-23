@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { GetGroupListRequestV2 } from '../../generated-definitions/GetGroupListRequestV2.js'
 import { GetGroupsListResponseV1 } from '../../generated-definitions/GetGroupsListResponseV1.js'
@@ -16,8 +16,8 @@ import { GroupResponseV1 } from '../../generated-definitions/GroupResponseV1.js'
 
 export class GroupAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Get list of groups. This endpoint will show any types of group Action Code: 73301
    */
@@ -27,8 +27,8 @@ export class GroupAdmin$ {
     groupRegion?: string | null
     limit?: number
     offset?: number
-  }): Promise<IResponse<GetGroupsListResponseV1>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  }): Promise<Response<GetGroupsListResponseV1>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/group/v1/admin/namespaces/{namespace}/groups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -39,23 +39,21 @@ export class GroupAdmin$ {
       'GetGroupsListResponseV1'
     )
   }
-
   /**
    * Required valid user authentication Get list of groups by group Ids. Action Code: 73303
    */
-  createGroupBulk(data: GetGroupListRequestV2): Promise<IResponse<GetGroupsResponseV1>> {
-    const params = {} as SDKRequestConfig
+  fetchGroupBulk_v2(data: GetGroupListRequestV2): Promise<Response<GetGroupsResponseV1>> {
+    const params = {} as AxiosRequestConfig
     const url = '/group/v2/admin/namespaces/{namespace}/groups/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, GetGroupsResponseV1, 'GetGroupsResponseV1')
   }
-
   /**
    * Delete existing group. It will check whether the groupID is exist before doing the process to delete the group. Action Code: 73302
    */
-  deleteGroup_ByGroupId(groupId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteGroup_ByGroupId(groupId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/group/v1/admin/namespaces/{namespace}/groups/{groupId}'
       .replace('{namespace}', this.namespace)
       .replace('{groupId}', groupId)
@@ -63,12 +61,11 @@ export class GroupAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Get single group information. This endpoint will show the group information by the groupId Action Code: 73306
    */
-  getGroup_ByGroupId(groupId: string): Promise<IResponse<GroupResponseV1>> {
-    const params = {} as SDKRequestConfig
+  getGroup_ByGroupId(groupId: string): Promise<Response<GroupResponseV1>> {
+    const params = {} as AxiosRequestConfig
     const url = '/group/v1/admin/namespaces/{namespace}/groups/{groupId}'
       .replace('{namespace}', this.namespace)
       .replace('{groupId}', groupId)

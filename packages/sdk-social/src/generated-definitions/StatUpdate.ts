@@ -13,7 +13,8 @@ export const StatUpdate = z.object({
   ignoreAdditionalDataOnValueRejected: z.boolean().nullish(),
   isPublic: z.boolean().nullish(),
   name: z.string().nullish(),
-  tags: z.array(z.string()).nullish()
+  tags: z.array(z.string()).nullish(),
+  visibility: z.enum(['SERVERONLY', 'SHOWALL']).nullish()
 })
 
 export interface StatUpdate extends z.TypeOf<typeof StatUpdate> {}

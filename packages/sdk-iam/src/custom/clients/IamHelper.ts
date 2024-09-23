@@ -4,11 +4,11 @@
  * and restrictions contact your company contract manager.
  */
 
-import { BanType, EligibleUser } from '../models/UserTypes.js'
-import { UserResponseV3 } from '../../generated-definitions/UserResponseV3'
 import { UserActiveBanResponseV3 } from '../../generated-definitions/UserActiveBanResponseV3'
-import { UserResponseV4 } from '../../generated-definitions/UserResponseV4'
 import { UserActiveBanResponseV4 } from '../../generated-definitions/UserActiveBanResponseV4'
+import { UserResponseV3 } from '../../generated-definitions/UserResponseV3'
+import { UserResponseV4 } from '../../generated-definitions/UserResponseV4'
+import { BanType, EligibleUser } from '../models/UserTypes.js'
 
 export class IamHelper {
   static getAuthorizationCodeParams(urlSearchParams: string) {

@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { TicketAcquireRequest } from '../../generated-definitions/TicketAcquireRequest.js'
 import { TicketAcquireResult } from '../../generated-definitions/TicketAcquireResult.js'
@@ -19,13 +19,13 @@ import { TicketSaleIncrementResult } from '../../generated-definitions/TicketSal
 
 export class TicketAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; Get ticket(code/key) dynamic based on booth name.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: ticket dynamic&lt;/li&gt;&lt;/ul&gt;
    */
-  getTicket_ByBoothName(boothName: string): Promise<IResponse<TicketDynamicInfo>> {
-    const params = {} as SDKRequestConfig
+  getTicket_ByBoothName(boothName: string): Promise<Response<TicketDynamicInfo>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/tickets/{boothName}'
       .replace('{namespace}', this.namespace)
       .replace('{boothName}', boothName)
@@ -33,12 +33,11 @@ export class TicketAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TicketDynamicInfo, 'TicketDynamicInfo')
   }
-
   /**
    * Get ticket(code/key) booth ID.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: ticket booth id&lt;/li&gt;&lt;/ul&gt;
    */
-  getId_ByBoothName(boothName: string): Promise<IResponse<TicketBoothId>> {
-    const params = {} as SDKRequestConfig
+  getId_ByBoothName(boothName: string): Promise<Response<TicketBoothId>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/tickets/{boothName}/id'
       .replace('{namespace}', this.namespace)
       .replace('{boothName}', boothName)
@@ -46,12 +45,11 @@ export class TicketAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TicketBoothId, 'TicketBoothId')
   }
-
   /**
    * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; Decrease ticket(code/key) sale if requested orderNo is already increased.
    */
-  updateDecrement_ByBoothName(boothName: string, data: TicketSaleDecrementRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  updateDecrement_ByBoothName(boothName: string, data: TicketSaleDecrementRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/tickets/{boothName}/decrement'
       .replace('{namespace}', this.namespace)
       .replace('{boothName}', boothName)
@@ -59,12 +57,11 @@ export class TicketAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; increase ticket(code/key) sale.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Ticket sale increment result&lt;/li&gt;&lt;/ul&gt;
    */
-  updateIncrement_ByBoothName(boothName: string, data: TicketSaleIncrementRequest): Promise<IResponse<TicketSaleIncrementResult>> {
-    const params = {} as SDKRequestConfig
+  updateIncrement_ByBoothName(boothName: string, data: TicketSaleIncrementRequest): Promise<Response<TicketSaleIncrementResult>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/tickets/{boothName}/increment'
       .replace('{namespace}', this.namespace)
       .replace('{boothName}', boothName)
@@ -77,16 +74,11 @@ export class TicketAdmin$ {
       'TicketSaleIncrementResult'
     )
   }
-
   /**
    * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; Acquire ticket(code/key) based on booth name.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: acquire result&lt;/li&gt;&lt;/ul&gt;
    */
-  createTicket_ByUserId_ByBoothName(
-    userId: string,
-    boothName: string,
-    data: TicketAcquireRequest
-  ): Promise<IResponse<TicketAcquireResult>> {
-    const params = {} as SDKRequestConfig
+  createTicket_ByUserId_ByBoothName(userId: string, boothName: string, data: TicketAcquireRequest): Promise<Response<TicketAcquireResult>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/tickets/{boothName}'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

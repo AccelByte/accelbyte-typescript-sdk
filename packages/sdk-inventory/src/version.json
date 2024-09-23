@@ -1,8 +1,8 @@
 {
-  "buildDate": "2024-07-29T08:11:14+00:00",
-  "gitHash": "ff82bf460a1c0bb3338de3459861f9b1e3f3e327",
+  "buildDate": "2024-09-05T02:23:54+00:00",
+  "gitHash": "298d4b60266fa74573e4339ff65d1f4b62feaeda",
   "name": "justice-inventory-service",
   "realm": "DEV",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "version-roles-seeding": "1.2.34"
 }

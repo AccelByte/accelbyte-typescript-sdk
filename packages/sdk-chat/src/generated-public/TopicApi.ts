@@ -8,7 +8,8 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ChatMessageResponseArray } from '../generated-definitions/ChatMessageResponseArray.js'
 import { MuteUserRequest } from '../generated-definitions/MuteUserRequest.js'
 import { MutedTopicResponseArray } from '../generated-definitions/MutedTopicResponseArray.js'
@@ -19,104 +20,136 @@ import { PublicUnbanTopicMembersResponse } from '../generated-definitions/Public
 import { UnmuteUserRequest } from '../generated-definitions/UnmuteUserRequest.js'
 import { Topic$ } from './endpoints/Topic$.js'
 
-export function TopicApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function TopicApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * get chat muted topics in a namespace.
-   */
-  async function getMuted(): Promise<MutedTopicResponseArray> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, useSchemaValidation)
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
+  }
+
+  async function getMuted(): Promise<AxiosResponse<MutedTopicResponseArray>> {
+    const $ = new Topic$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getMuted()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * get chat list of topic in a namespace.
-   */
-  async function getTopic(queryParams?: { limit?: number; offset?: number; topicType?: string | null }): Promise<ChatMessageResponseArray> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getTopic(queryParams?: {
+    limit?: number
+    offset?: number
+    topicType?: string | null
+  }): Promise<AxiosResponse<ChatMessageResponseArray>> {
+    const $ = new Topic$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getTopic(queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Mute user.
-   */
-  async function updateMute_ByTopic(topic: string, data: MuteUserRequest): Promise<unknown> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateMute_ByTopic(topic: string, data: MuteUserRequest): Promise<AxiosResponse<unknown>> {
+    const $ = new Topic$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateMute_ByTopic(topic, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * get chat history in a namespace.
-   */
   async function getChats_ByTopic(
     topic: string,
     queryParams?: { limit?: number; order?: string | null; startCreatedAt?: number }
-  ): Promise<ChatMessageResponseArray> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, useSchemaValidation)
+  ): Promise<AxiosResponse<ChatMessageResponseArray>> {
+    const $ = new Topic$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getChats_ByTopic(topic, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Unmute user.
-   */
-  async function updateUnmute_ByTopic(topic: string, data: UnmuteUserRequest): Promise<unknown> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateUnmute_ByTopic(topic: string, data: UnmuteUserRequest): Promise<AxiosResponse<unknown>> {
+    const $ = new Topic$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateUnmute_ByTopic(topic, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Ban topic members in a group topic.
-   */
-  async function createBanMember_ByTopic(topic: string, data: PublicBanTopicMembersRequest): Promise<PublicBanTopicMembersResponse> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.createBanMember_ByTopic(topic, data)
+  async function updateBanMember_ByTopic(
+    topic: string,
+    data: PublicBanTopicMembersRequest
+  ): Promise<AxiosResponse<PublicBanTopicMembersResponse>> {
+    const $ = new Topic$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.updateBanMember_ByTopic(topic, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Unban topic members in a group topic.
-   */
-  async function createUnbanMember_ByTopic(topic: string, data: PublicUnbanTopicMembersRequest): Promise<PublicUnbanTopicMembersResponse> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.createUnbanMember_ByTopic(topic, data)
+  async function updateUnbanMember_ByTopic(
+    topic: string,
+    data: PublicUnbanTopicMembersRequest
+  ): Promise<AxiosResponse<PublicUnbanTopicMembersResponse>> {
+    const $ = new Topic$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.updateUnbanMember_ByTopic(topic, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Delete chat.
-   */
-  async function deleteChat_ByTopic_ByChatId(topic: string, chatId: string): Promise<unknown> {
-    const $ = new Topic$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteChat_ByTopic_ByChatId(topic: string, chatId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new Topic$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteChat_ByTopic_ByChatId(topic, chatId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     * get chat muted topics in a namespace.
+     */
     getMuted,
+    /**
+     * get chat list of topic in a namespace.
+     */
     getTopic,
+    /**
+     * Mute user.
+     */
     updateMute_ByTopic,
+    /**
+     * get chat history in a namespace.
+     */
     getChats_ByTopic,
+    /**
+     * Unmute user.
+     */
     updateUnmute_ByTopic,
-    createBanMember_ByTopic,
-    createUnbanMember_ByTopic,
+    /**
+     * Ban topic members in a group topic.
+     */
+    updateBanMember_ByTopic,
+    /**
+     * Unban topic members in a group topic.
+     */
+    updateUnbanMember_ByTopic,
+    /**
+     * Delete chat.
+     */
     deleteChat_ByTopic_ByChatId
   }
 }

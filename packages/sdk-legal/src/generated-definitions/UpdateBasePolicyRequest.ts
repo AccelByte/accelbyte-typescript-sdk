@@ -6,14 +6,14 @@
 import { z } from 'zod'
 
 export const UpdateBasePolicyRequest = z.object({
-  namespace: z.string().nullish(),
+  affectedClientIds: z.array(z.string()).nullish(),
+  affectedCountries: z.array(z.string()).nullish(),
   basePolicyName: z.string().nullish(),
   description: z.string().nullish(),
-  affectedCountries: z.array(z.string()).nullish(),
-  affectedClientIds: z.array(z.string()).nullish(),
-  tags: z.array(z.string()).nullish(),
   isHidden: z.boolean().nullish(),
-  isHiddenPublic: z.boolean().nullish()
+  isHiddenPublic: z.boolean().nullish(),
+  namespace: z.string().nullish(),
+  tags: z.array(z.string()).nullish()
 })
 
 export interface UpdateBasePolicyRequest extends z.TypeOf<typeof UpdateBasePolicyRequest> {}

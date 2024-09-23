@@ -1,93 +1,22 @@
 {
+  "extends": "../../base.tsconfig.json",
   "compilerOptions": {
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "jsx": "react",
-    "lib": [
-      "dom",
-      "esnext"
-    ],
-    "moduleResolution": "node",
-    "module": "ESNext",
-    "types": [
-      "node"
-    ],
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": false,
-    "strict": true,
-    "noUnusedLocals": true,
-    "pretty": true,
-    "skipLibCheck": true,
     "target": "es2021",
-    "resolveJsonModule": true,
-    "declaration": true,
-    "sourceMap": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "newLine": "crlf",
+    "module": "ESNext",
+    "lib": ["dom", "esnext"],
+    "types": ["node"],
+    "allowJs": true,
+    "declarationDir": "types",
+    "jsx": "react",
+    "outDir": "dist",
+    "rootDir": "..",
     "baseUrl": ".",
     "paths": {
-      "@accelbyte/validator": [
-        "../validator/src"
-      ],
-      "@accelbyte/error-translator": [
-        "../error-translator/src"
-      ],
-      "@accelbyte/sdk/*": [
-        "./src/*",
-        "../../accelbyte-web-sdk/packages/sdk/src/*"
-      ],
-      "@accelbyte/sdk": [
-        "./src",
-        "../../accelbyte-web-sdk/packages/sdk/src"
-      ],
-      "@accelbyte/sdk-audit": [
-        "../sdk-audit/src"
-      ],
-      "@accelbyte/sdk-basic": [
-        "../sdk-basic/src"
-      ],
-      "@accelbyte/sdk-buildinfo": [
-        "../sdk-buildinfo/src"
-      ],
-      "@accelbyte/sdk-event": [
-        "../sdk-event/src"
-      ],
-      "@accelbyte/sdk-gdpr": [
-        "../sdk-gdpr/src"
-      ],
-      "@accelbyte/sdk-iam": [
-        "../sdk-iam/src"
-      ],
-      "@accelbyte/sdk-legal": [
-        "../sdk-legal/src"
-      ],
-      "@accelbyte/sdk-odinconfig": [
-        "../sdk-odinconfig/src"
-      ],
-      "@accelbyte/sdk-platform": [
-        "../sdk-platform/src"
-      ],
-      "~/iam-definitions/*": [
-        "../sdk-iam/src/generated-definitions/*"
-      ]
-    },
-    "declarationDir": "types",
-    "outDir": "dist",
-    "rootDir": ".."
+      "@accelbyte/sdk": ["../sdk/src"],
+      "@accelbyte/sdk/*": ["..//sdk/src/*"],
+      "~/iam-definitions/*": ["../sdk-iam/src/generated-definitions/*"]
+    }
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "scripts",
-    "test",
-    "node_modules",
-    "dist",
-    "vitest.config.ts"
-  ]
+  "include": ["src"],
+  "exclude": ["scripts", "test", "node_modules", "dist", "vitest.config.ts"]
 }

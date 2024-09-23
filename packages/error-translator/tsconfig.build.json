@@ -1,0 +1,17 @@
+{
+  "extends": "../../base.tsconfig.json",
+  "compilerOptions": {
+    "target": "es2021",
+    "module": "esnext",
+    "lib": ["dom", "esnext"],
+    "types": ["node"],
+    "allowJs": true,
+    "declarationDir": "dist",
+    "jsx": "react",
+    "outDir": "dist",
+    "rootDir": "src",
+    "paths": {}
+  },
+  "include": ["src"],
+  "exclude": ["scripts", "test", "node_modules", "dist", "vitest.config.ts"]
+}

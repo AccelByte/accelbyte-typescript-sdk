@@ -7,7 +7,7 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
 import { AxiosError } from 'axios'
 // @ts-ignore
 import { useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
@@ -17,24 +17,35 @@ import { BulkCreatePsnEventResponse } from '../../generated-definitions/BulkCrea
 import { BulkCreatePsnEvents } from '../../generated-definitions/BulkCreatePsnEvents.js'
 
 export enum Key_PlatformAchievementAdmin {
-  PlatformPsnBulk = 'PlatformAchievementAdmin.PlatformPsnBulk'
+  PlatformPsnBulk = 'Achievement.PlatformAchievementAdmin.PlatformPsnBulk'
 }
 
-export const useAdmCreatePlatformPsnBulkMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Create PSN UDS events. Player need to login first using playstation token to IAM service.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PlatformAchievementAdmin.PlatformPsnBulk, input]
+ * }
+ * ```
+ */
+export const usePlatformAchievementAdminApi_CreatePlatformPsnBulkMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<BulkCreatePsnEventResponse, AxiosError<ApiError>, ApiArgs & { data: BulkCreatePsnEvents }>,
+    UseMutationOptions<BulkCreatePsnEventResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: BulkCreatePsnEvents }>,
     'mutationKey'
   >,
   callback?: (data: BulkCreatePsnEventResponse) => void
-): UseMutationResult<BulkCreatePsnEventResponse, AxiosError<ApiError>, ApiArgs & { data: BulkCreatePsnEvents }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: BulkCreatePsnEvents }) => {
-    const data = await PlatformAchievementAdminApi(sdk, { namespace: input.namespace, config: input.config }).createPlatformPsnBulk(
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<BulkCreatePsnEventResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: BulkCreatePsnEvents }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: BulkCreatePsnEvents }) => {
+    const response = await PlatformAchievementAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).createPlatformPsnBulk(input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

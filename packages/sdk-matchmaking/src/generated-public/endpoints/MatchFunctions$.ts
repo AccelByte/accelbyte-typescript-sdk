@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { ListMatchFunctionsResponse } from '../../generated-definitions/ListMatchFunctionsResponse.js'
 import { MatchFunctionConfig } from '../../generated-definitions/MatchFunctionConfig.js'
@@ -15,13 +15,13 @@ import { MatchFunctionRequest } from '../../generated-definitions/MatchFunctionR
 
 export class MatchFunctions$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * List existing match functions.
    */
-  getMatchFunctions(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<ListMatchFunctionsResponse>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  getMatchFunctions(queryParams?: { limit?: number; offset?: number }): Promise<Response<ListMatchFunctionsResponse>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/match2/v1/namespaces/{namespace}/match-functions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -32,34 +32,31 @@ export class MatchFunctions$ {
       'ListMatchFunctionsResponse'
     )
   }
-
   /**
    * Creates a new matchmaking function.
    */
-  createMatchFunction(data: MatchFunctionRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  createMatchFunction(data: MatchFunctionRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/match2/v1/namespaces/{namespace}/match-functions'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Deletes an existing match function.
    */
-  deleteMatchFunction_ByName(name: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteMatchFunction_ByName(name: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/match2/v1/namespaces/{namespace}/match-functions/{name}'.replace('{namespace}', this.namespace).replace('{name}', name)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Update existing matchmaking function.
    */
-  updateMatchFunction_ByName(name: string, data: MatchFunctionRequest): Promise<IResponse<MatchFunctionConfig>> {
-    const params = {} as SDKRequestConfig
+  updateMatchFunction_ByName(name: string, data: MatchFunctionRequest): Promise<Response<MatchFunctionConfig>> {
+    const params = {} as AxiosRequestConfig
     const url = '/match2/v1/namespaces/{namespace}/match-functions/{name}'.replace('{namespace}', this.namespace).replace('{name}', name)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 

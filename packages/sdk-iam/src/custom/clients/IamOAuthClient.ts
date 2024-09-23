@@ -4,13 +4,14 @@
  * and restrictions contact your company contract manager.
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiUtils, CodeGenUtil, Network, SDKRequestConfig, Validate } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, CodeGenUtil, Network, SdkConstructorParam, Validate } from '@accelbyte/sdk'
+import { AxiosRequestConfig } from 'axios'
 import { Buffer } from 'buffer'
-import { MFA_DATA_STORAGE_KEY } from './IamUserAuthorizationClient.js'
-import { Request2FAEmailCode, Verify2FAParam } from '../models/TwoFA.js'
-import { OAuth20Extension$ } from '../../generated-public/endpoints/OAuth20Extension$'
-import { OAuth20$ } from '../../generated-public/endpoints/OAuth20$'
 import { TokenResponse } from '../../generated-definitions/TokenResponse'
+import { OAuth20$ } from '../../generated-public/endpoints/OAuth20$'
+import { OAuth20Extension$ } from '../../generated-public/endpoints/OAuth20Extension$'
+import { Request2FAEmailCode, Verify2FAParam } from '../models/TwoFA.js'
+import { MFA_DATA_STORAGE_KEY } from './IamUserAuthorizationClient.js'
 
 export interface OAuthApiOptions {
   clientId: string
@@ -20,16 +21,23 @@ export interface OAuthApiOptions {
  * Oauth client functions
  */
 export class IamOAuthClient {
-  conf: SDKRequestConfig
+  conf: AxiosRequestConfig
   namespace: string
   options: OAuthApiOptions
+  sdk: AccelByteSDK
 
-  constructor(sdk: AccelbyteSDK, args?: ApiArgs) {
-    const { config, namespace, clientId } = sdk.assembly()
-    this.conf = ApiUtils.mergedConfigs(config, args)
-    this.namespace = args?.namespace ? args?.namespace : namespace
+  constructor(sdk: AccelByteSDK, args?: SdkConstructorParam) {
+    const { coreConfig, axiosInstance } = sdk.assembly()
+    const baseURLOverride = args?.coreConfig?.baseURL
+
+    this.sdk = sdk
+    this.conf = ApiUtils.mergeAxiosConfigs(axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...args?.axiosConfig?.request
+    })
+    this.namespace = args?.coreConfig?.namespace ? args?.coreConfig?.namespace : coreConfig?.namespace
     this.options = {
-      clientId
+      clientId: coreConfig?.clientId
     }
   }
 
@@ -51,7 +59,10 @@ export class IamOAuthClient {
       headers: { 'Content-Type': 'text/plain' }
     })
     localStorage.removeItem(MFA_DATA_STORAGE_KEY)
-    return new OAuth20Extension$(axios, this.namespace).createLogout()
+    return new OAuth20Extension$(axios, this.namespace).createLogout_v3().then(response => {
+      this.sdk.removeToken()
+      return response
+    })
   }
 
   /**
@@ -68,7 +79,7 @@ export class IamOAuthClient {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     })
-    return new OAuth20$(axios, this.namespace).postOauthRevoke({ token })
+    return new OAuth20$(axios, this.namespace).postOauthRevoke_v3({ token })
   }
 
   /**
@@ -82,7 +93,7 @@ export class IamOAuthClient {
    */
   verify2FA = async ({ factor, code, mfaToken = null, rememberDevice }: Verify2FAParam) => {
     Network.setDeviceTokenCookie()
-    const result = await this.newInstance().postOauthMfaVerify({ factor, code, rememberDevice, mfaToken })
+    const result = await this.newInstance().postOauthMfaVerify_v3({ factor, code, rememberDevice, mfaToken })
     if (result.error) throw result.error
     Network.removeDeviceTokenCookie()
     localStorage.removeItem(MFA_DATA_STORAGE_KEY)
@@ -93,7 +104,7 @@ export class IamOAuthClient {
    * POST [/iam/v3/oauth/mfa/code](api)
    */
   request2FAEmailCode = async ({ mfaToken = null, factor }: Request2FAEmailCode) => {
-    const result = await this.newInstance().postOauthMfaCode({ mfaToken, clientId: this.options.clientId, factor })
+    const result = await this.newInstance().postOauthMfaCode_v3({ mfaToken, clientId: this.options.clientId, factor })
     if (result.error) throw result.error
     return result.response
   }
@@ -111,7 +122,7 @@ export class IamOAuthClient {
     },
     sdkAssemblyConfig
   ) => {
-    const params = {} as SDKRequestConfig
+    const params = {} as AxiosRequestConfig
     const url = '/iam/v3/oauth/platforms/{platformId}/token'.replace('{platformId}', platformId)
     const resultPromise = Network.create(sdkAssemblyConfig).post(url, CodeGenUtil.getFormUrlEncodedData(data), {
       ...params,

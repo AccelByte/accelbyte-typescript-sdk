@@ -5,6 +5,11 @@
  */
 import { z } from 'zod'
 
-export const GoogleIapConfigRequest = z.object({ applicationName: z.string(), serviceAccountId: z.string() })
+export const GoogleIapConfigRequest = z.object({
+  applicationName: z.string(),
+  notificationTokenAudience: z.string().nullish(),
+  notificationTokenEmail: z.string().nullish(),
+  serviceAccountId: z.string()
+})
 
 export interface GoogleIapConfigRequest extends z.TypeOf<typeof GoogleIapConfigRequest> {}

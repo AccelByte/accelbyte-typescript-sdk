@@ -8,7 +8,8 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { AppleIapConfigInfo } from '../generated-definitions/AppleIapConfigInfo.js'
 import { AppleIapConfigRequest } from '../generated-definitions/AppleIapConfigRequest.js'
 import { EpicGamesIapConfigInfo } from '../generated-definitions/EpicGamesIapConfigInfo.js'
@@ -34,226 +35,182 @@ import { XblIapConfigInfo } from '../generated-definitions/XblIapConfigInfo.js'
 import { XblIapConfigRequest } from '../generated-definitions/XblIapConfigRequest.js'
 import { IapAdmin$ } from './endpoints/IapAdmin$.js'
 
-export function IapAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function IapAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * Delete xbl iap config.
-   */
-  async function deleteIapConfigXbl(): Promise<unknown> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
+  }
+
+  async function deleteIapConfigXbl(): Promise<AxiosResponse<unknown>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteIapConfigXbl()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get xbox iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: xbox iap config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getIapConfigXbl(): Promise<XblIapConfigInfo> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getIapConfigXbl(): Promise<AxiosResponse<XblIapConfigInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getIapConfigXbl()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Update xbl iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated xbl iap config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function updateIapConfigXbl(data: XblIapConfigRequest): Promise<XblIapConfigInfo> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateIapConfigXbl(data: XblIapConfigRequest): Promise<AxiosResponse<XblIapConfigInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateIapConfigXbl(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * delete a iap item config.
-   */
-  async function deleteIapConfigItem(): Promise<unknown> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteIapConfigItem(): Promise<AxiosResponse<unknown>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteIapConfigItem()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get iap item config.
-   */
-  async function getIapConfigItem(): Promise<IapItemConfigInfo> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getIapConfigItem(): Promise<AxiosResponse<IapItemConfigInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getIapConfigItem()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Update iap item config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated iap item config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function updateIapConfigItem(data: IapItemConfigUpdate): Promise<IapItemConfigInfo> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateIapConfigItem(data: IapItemConfigUpdate): Promise<AxiosResponse<IapItemConfigInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateIapConfigItem(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Delete apple iap config.
-   */
-  async function deleteIapConfigApple(): Promise<unknown> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteIapConfigApple(): Promise<AxiosResponse<unknown>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteIapConfigApple()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get apple iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: apple iap config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getIapConfigApple(): Promise<AppleIapConfigInfo> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getIapConfigApple(): Promise<AxiosResponse<AppleIapConfigInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getIapConfigApple()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Update apple iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated apple iap config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function updateIapConfigApple(data: AppleIapConfigRequest): Promise<AppleIapConfigInfo> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateIapConfigApple(data: AppleIapConfigRequest): Promise<AxiosResponse<AppleIapConfigInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateIapConfigApple(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Delete steam iap config.
-   */
-  async function deleteIapConfigSteam(): Promise<unknown> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteIapConfigSteam(): Promise<AxiosResponse<unknown>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteIapConfigSteam()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get steam iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: steam iap config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getIapConfigSteam(): Promise<SteamIapConfig> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getIapConfigSteam(): Promise<AxiosResponse<SteamIapConfig>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getIapConfigSteam()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Update steam iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated steam iap config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function updateIapConfigSteam(data: SteamIapConfigRequest): Promise<SteamIapConfigInfo> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateIapConfigSteam(data: SteamIapConfigRequest): Promise<AxiosResponse<SteamIapConfigInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateIapConfigSteam(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Delete google iap config.
-   */
-  async function deleteIapConfigGoogle(): Promise<unknown> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteIapConfigGoogle(): Promise<AxiosResponse<unknown>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteIapConfigGoogle()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get google iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: google iap config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getIapConfigGoogle(): Promise<GoogleIapConfigInfo> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getIapConfigGoogle(): Promise<AxiosResponse<GoogleIapConfigInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getIapConfigGoogle()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Update google iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated google iap config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function updateIapConfigGoogle(data: GoogleIapConfigRequest): Promise<GoogleIapConfigInfo> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateIapConfigGoogle(data: GoogleIapConfigRequest): Promise<AxiosResponse<GoogleIapConfigInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateIapConfigGoogle(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Delete oculus iap config.
-   */
-  async function deleteIapConfigOculu(): Promise<unknown> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteIapConfigOculu(): Promise<AxiosResponse<unknown>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteIapConfigOculu()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get oculus iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: steam iap config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getIapConfigOculus(): Promise<OculusIapConfigInfo> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getIapConfigOculus(): Promise<AxiosResponse<OculusIapConfigInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getIapConfigOculus()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Update oculus iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated steam iap config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function updateIapConfigOculu(data: OculusIapConfigRequest): Promise<OculusIapConfigInfo> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateIapConfigOculu(data: OculusIapConfigRequest): Promise<AxiosResponse<OculusIapConfigInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateIapConfigOculu(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Delete twitch iap config.
-   */
-  async function deleteIapConfigTwitch(): Promise<unknown> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteIapConfigTwitch(): Promise<AxiosResponse<unknown>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteIapConfigTwitch()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get twitch iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: twitch iap config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getIapConfigTwitch(): Promise<TwitchIapConfigInfo> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getIapConfigTwitch(): Promise<AxiosResponse<TwitchIapConfigInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getIapConfigTwitch()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Update twitch iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated twitch iap config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function updateIapConfigTwitch(data: TwitchIapConfigRequest): Promise<TwitchIapConfigInfo> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateIapConfigTwitch(data: TwitchIapConfigRequest): Promise<AxiosResponse<TwitchIapConfigInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateIapConfigTwitch(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Query IAP orders.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated iap orders&lt;/li&gt;&lt;/ul&gt;
-   */
   async function getIap_ByUserId(
     userId: string,
     queryParams?: {
@@ -265,136 +222,104 @@ export function IapAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       status?: 'FAILED' | 'FULFILLED' | 'VERIFIED'
       type?: 'APPLE' | 'EPICGAMES' | 'GOOGLE' | 'OCULUS' | 'PLAYSTATION' | 'STADIA' | 'STEAM' | 'TWITCH' | 'XBOX'
     }
-  ): Promise<IapOrderPagingSlicedResult> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  ): Promise<AxiosResponse<IapOrderPagingSlicedResult>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getIap_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Upload xbl business partner cert file.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated xbl iap config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function updateIapConfigXblCert(data: { file?: File; password?: string | null }): Promise<XblIapConfigInfo> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateIapConfigXblCert(data: { file?: File; password?: string | null }): Promise<AxiosResponse<XblIapConfigInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateIapConfigXblCert(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Delete epic games iap config.
-   */
-  async function deleteIapConfigEpicgame(): Promise<unknown> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteIapConfigEpicgame(): Promise<AxiosResponse<unknown>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteIapConfigEpicgame()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get epic games iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: epic games iap config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getIapConfigEpicgames(): Promise<EpicGamesIapConfigInfo> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getIapConfigEpicgames(): Promise<AxiosResponse<EpicGamesIapConfigInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getIapConfigEpicgames()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Update epic games iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated epic games iap config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function updateIapConfigEpicgame(data: EpicGamesIapConfigRequest): Promise<EpicGamesIapConfigInfo> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateIapConfigEpicgame(data: EpicGamesIapConfigRequest): Promise<AxiosResponse<EpicGamesIapConfigInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateIapConfigEpicgame(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Upload google play p12 file.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated google iap config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function updateIapConfigGoogleCert(data: { file?: File }): Promise<GoogleIapConfigInfo> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateIapConfigAppleCert(data: { file?: File }): Promise<AxiosResponse<AppleIapConfigInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.updateIapConfigAppleCert(data)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function updateIapConfigGoogleCert(data: { file?: File }): Promise<AxiosResponse<GoogleIapConfigInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateIapConfigGoogleCert(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Delete playstation iap config.
-   */
-  async function deleteIapConfigPlaystation(): Promise<unknown> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteIapConfigPlaystation(): Promise<AxiosResponse<unknown>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteIapConfigPlaystation()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get playstation iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: playstation iap config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getIapConfigPlaystation(): Promise<PlayStationIapConfigInfo> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getIapConfigPlaystation(): Promise<AxiosResponse<PlayStationIapConfigInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getIapConfigPlaystation()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Update playstation iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated playstation iap config&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function updateIapConfigPlaystation(data: PlaystationIapConfigRequest): Promise<PlayStationIapConfigInfo> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateIapConfigPlaystation(data: PlaystationIapConfigRequest): Promise<AxiosResponse<PlayStationIapConfigInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateIapConfigPlaystation(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Query all user IAP orders.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of iap orders&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getIapAll_ByUserId(userId: string): Promise<IapOrderPagingSlicedResult> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getIapAll_ByUserId(userId: string): Promise<AxiosResponse<IapOrderPagingSlicedResult>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getIapAll_ByUserId(userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Validate playstation iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Test Results&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function getIapConfigPlaystationValidate(): Promise<TestResult> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getIapConfigPlaystationValidate(): Promise<AxiosResponse<TestResult>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getIapConfigPlaystationValidate()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Validate playstation iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Test Results&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function updateIapConfigPlaystationValidate(data: PlaystationIapConfigRequest): Promise<TestResult> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateIapConfigPlaystationValidate(data: PlaystationIapConfigRequest): Promise<AxiosResponse<TestResult>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateIapConfigPlaystationValidate(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * &lt;b&gt;[TEST FACILITY ONLY] Forbidden in live environment. &lt;/b&gt; Mock fulfill iap item without validate receipt.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
-   */
-  async function updateIapMockReceipt_ByUserId(userId: string, data: MockIapReceipt): Promise<unknown> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateIapMockReceipt_ByUserId(userId: string, data: MockIapReceipt): Promise<AxiosResponse<unknown>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateIapMockReceipt_ByUserId(userId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Query IAP consume history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated iap consume history&lt;/li&gt;&lt;/ul&gt;
-   */
   async function getIapConsumeHistory_ByUserId(
     userId: string,
     queryParams?: {
@@ -405,48 +330,157 @@ export function IapAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       status?: 'FAIL' | 'PENDING' | 'SUCCESS'
       type?: 'APPLE' | 'EPICGAMES' | 'GOOGLE' | 'OCULUS' | 'PLAYSTATION' | 'STADIA' | 'STEAM' | 'TWITCH' | 'XBOX'
     }
-  ): Promise<IapConsumeHistoryPagingSlicedResult> {
-    const $ = new IapAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  ): Promise<AxiosResponse<IapConsumeHistoryPagingSlicedResult>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getIapConsumeHistory_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     * Delete xbl iap config.
+     */
     deleteIapConfigXbl,
+    /**
+     * Get xbox iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: xbox iap config&lt;/li&gt;&lt;/ul&gt;
+     */
     getIapConfigXbl,
+    /**
+     * Update xbl iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated xbl iap config&lt;/li&gt;&lt;/ul&gt;
+     */
     updateIapConfigXbl,
+    /**
+     * delete a iap item config.
+     */
     deleteIapConfigItem,
+    /**
+     * Get iap item config.
+     */
     getIapConfigItem,
+    /**
+     * Update iap item config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated iap item config&lt;/li&gt;&lt;/ul&gt;
+     */
     updateIapConfigItem,
+    /**
+     * Delete apple iap config.
+     */
     deleteIapConfigApple,
+    /**
+     * Get apple iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: apple iap config&lt;/li&gt;&lt;/ul&gt;
+     */
     getIapConfigApple,
+    /**
+     * Update apple iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated apple iap config&lt;/li&gt;&lt;/ul&gt;
+     */
     updateIapConfigApple,
+    /**
+     * Delete steam iap config.
+     */
     deleteIapConfigSteam,
+    /**
+     * Get steam iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: steam iap config&lt;/li&gt;&lt;/ul&gt;
+     */
     getIapConfigSteam,
+    /**
+     * Update steam iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated steam iap config&lt;/li&gt;&lt;/ul&gt;
+     */
     updateIapConfigSteam,
+    /**
+     * Delete google iap config.
+     */
     deleteIapConfigGoogle,
+    /**
+     * Get google iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: google iap config&lt;/li&gt;&lt;/ul&gt;
+     */
     getIapConfigGoogle,
+    /**
+     * Update google iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated google iap config&lt;/li&gt;&lt;/ul&gt;
+     */
     updateIapConfigGoogle,
+    /**
+     * Delete oculus iap config.
+     */
     deleteIapConfigOculu,
+    /**
+     * Get oculus iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: steam iap config&lt;/li&gt;&lt;/ul&gt;
+     */
     getIapConfigOculus,
+    /**
+     * Update oculus iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated steam iap config&lt;/li&gt;&lt;/ul&gt;
+     */
     updateIapConfigOculu,
+    /**
+     * Delete twitch iap config.
+     */
     deleteIapConfigTwitch,
+    /**
+     * Get twitch iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: twitch iap config&lt;/li&gt;&lt;/ul&gt;
+     */
     getIapConfigTwitch,
+    /**
+     * Update twitch iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated twitch iap config&lt;/li&gt;&lt;/ul&gt;
+     */
     updateIapConfigTwitch,
+    /**
+     * Query IAP orders.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated iap orders&lt;/li&gt;&lt;/ul&gt;
+     */
     getIap_ByUserId,
+    /**
+     * Upload xbl business partner cert file.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated xbl iap config&lt;/li&gt;&lt;/ul&gt;
+     */
     updateIapConfigXblCert,
+    /**
+     * Delete epic games iap config.
+     */
     deleteIapConfigEpicgame,
+    /**
+     * Get epic games iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: epic games iap config&lt;/li&gt;&lt;/ul&gt;
+     */
     getIapConfigEpicgames,
+    /**
+     * Update epic games iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated epic games iap config&lt;/li&gt;&lt;/ul&gt;
+     */
     updateIapConfigEpicgame,
+    /**
+     * Upload Apple Store p8 file.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated apple iap config&lt;/li&gt;&lt;/ul&gt;
+     */
+    updateIapConfigAppleCert,
+    /**
+     * Upload google play p12 file.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated google iap config&lt;/li&gt;&lt;/ul&gt;
+     */
     updateIapConfigGoogleCert,
+    /**
+     * Delete playstation iap config.
+     */
     deleteIapConfigPlaystation,
+    /**
+     * Get playstation iap config.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: playstation iap config&lt;/li&gt;&lt;/ul&gt;
+     */
     getIapConfigPlaystation,
+    /**
+     * Update playstation iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated playstation iap config&lt;/li&gt;&lt;/ul&gt;
+     */
     updateIapConfigPlaystation,
+    /**
+     * Query all user IAP orders.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of iap orders&lt;/li&gt;&lt;/ul&gt;
+     */
     getIapAll_ByUserId,
+    /**
+     * Validate playstation iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Test Results&lt;/li&gt;&lt;/ul&gt;
+     */
     getIapConfigPlaystationValidate,
+    /**
+     * Validate playstation iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Test Results&lt;/li&gt;&lt;/ul&gt;
+     */
     updateIapConfigPlaystationValidate,
+    /**
+     * &lt;b&gt;[TEST FACILITY ONLY] Forbidden in live environment. &lt;/b&gt; Mock fulfill iap item without validate receipt.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
+     */
     updateIapMockReceipt_ByUserId,
+    /**
+     * Query IAP consume history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated iap consume history&lt;/li&gt;&lt;/ul&gt;
+     */
     getIapConsumeHistory_ByUserId
   }
 }

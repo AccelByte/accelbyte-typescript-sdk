@@ -1,11 +1,14 @@
 {
-  "description": "Justice Legal Service",
-  "version": "1.43.0",
-  "title": "justice-legal-service",
-  "contact": {
-    "name": "Engineering Team at AccelByte",
-    "url": "https://accelbyte.io",
-    "email": "engineering@accelbyte.io"
-  },
-  "gitHash": "1.43.0"
+  "buildBy": "Gradle 8.5",
+  "buildDate": "2024-09-13T07:45:31+00:00",
+  "buildID": "1.44.0",
+  "buildJDK": "21.0.4 (Amazon.com Inc. 21.0.4+7-LTS)",
+  "buildOS": "Linux amd64 5.10.223-212.873.amzn2.x86_64",
+  "gitBranchName": "upgrade-java",
+  "gitHash": "d20761ddda",
+  "gitTag": "1.43.0",
+  "name": "justice-legal-service",
+  "realm": "dev",
+  "version": "1.44.0",
+  "version-roles-seeding": "0.0.3"
 }

@@ -7,30 +7,43 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { GlobalConfigurationAdminApi } from '../GlobalConfigurationAdminApi.js'
 
 import { GlobalConfigurationResponse } from '../../generated-definitions/GlobalConfigurationResponse.js'
 import { PutGlobalConfigurationRequest } from '../../generated-definitions/PutGlobalConfigurationRequest.js'
 
 export enum Key_GlobalConfigurationAdmin {
-  GlobalConfiguration = 'GlobalConfigurationAdmin.GlobalConfiguration',
-  GlobalConfigurations = 'GlobalConfigurationAdmin.GlobalConfigurations'
+  GlobalConfiguration = 'Session.GlobalConfigurationAdmin.GlobalConfiguration',
+  GlobalConfigurations = 'Session.GlobalConfigurationAdmin.GlobalConfigurations'
 }
 
-export const useAdmDeleteGlobalConfigurationMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs>, 'mutationKey'>,
+/**
+ * Delete of global configuration data.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_GlobalConfigurationAdmin.GlobalConfiguration, input]
+ * }
+ * ```
+ */
+export const useGlobalConfigurationAdminApi_DeleteGlobalConfigurationMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs> => {
-  //
-  const mutationFn = async (input: ApiArgs) => {
-    const data = await GlobalConfigurationAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteGlobalConfiguration()
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam> => {
+  const mutationFn = async (input: SdkSetConfigParam) => {
+    const response = await GlobalConfigurationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteGlobalConfiguration()
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -40,17 +53,30 @@ export const useAdmDeleteGlobalConfigurationMutation = (
   })
 }
 
-export const useAdmGlobalConfigurations = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Record of global configuration data.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_GlobalConfigurationAdmin.GlobalConfigurations, input]
+ * }
+ * ```
+ */
+export const useGlobalConfigurationAdminApi_GetGlobalConfigurations = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<GlobalConfigurationResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: GlobalConfigurationResponse) => void
+  callback?: (data: AxiosResponse<GlobalConfigurationResponse>) => void
 ): UseQueryResult<GlobalConfigurationResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmGlobalConfigurations>[1]) => async () => {
-    const data = await GlobalConfigurationAdminApi(sdk, { namespace: input.namespace }).getGlobalConfigurations()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useGlobalConfigurationAdminApi_GetGlobalConfigurations>[1]) => async () => {
+    const response = await GlobalConfigurationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getGlobalConfigurations()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<GlobalConfigurationResponse, AxiosError<ApiError>>({
@@ -60,21 +86,32 @@ export const useAdmGlobalConfigurations = (
   })
 }
 
-export const useAdmUpdateGlobalConfigurationMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Upsert global configuration data.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_GlobalConfigurationAdmin.GlobalConfiguration, input]
+ * }
+ * ```
+ */
+export const useGlobalConfigurationAdminApi_UpdateGlobalConfigurationMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<GlobalConfigurationResponse, AxiosError<ApiError>, ApiArgs & { data: PutGlobalConfigurationRequest }>,
+    UseMutationOptions<GlobalConfigurationResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: PutGlobalConfigurationRequest }>,
     'mutationKey'
   >,
   callback?: (data: GlobalConfigurationResponse) => void
-): UseMutationResult<GlobalConfigurationResponse, AxiosError<ApiError>, ApiArgs & { data: PutGlobalConfigurationRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: PutGlobalConfigurationRequest }) => {
-    const data = await GlobalConfigurationAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateGlobalConfiguration(
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<GlobalConfigurationResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: PutGlobalConfigurationRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: PutGlobalConfigurationRequest }) => {
+    const response = await GlobalConfigurationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateGlobalConfiguration(input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

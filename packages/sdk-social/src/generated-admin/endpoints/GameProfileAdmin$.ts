@@ -6,20 +6,20 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { GameProfileHeaderArray } from '../../generated-definitions/GameProfileHeaderArray.js'
 import { GameProfileInfo } from '../../generated-definitions/GameProfileInfo.js'
 
 export class GameProfileAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Returns all profiles&#39; header for a user.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of profiles&lt;/li&gt;&lt;/ul&gt;
    */
-  getProfiles_ByUserId(userId: string): Promise<IResponse<GameProfileHeaderArray>> {
-    const params = {} as SDKRequestConfig
+  getProfiles_ByUserId(userId: string): Promise<Response<GameProfileHeaderArray>> {
+    const params = {} as AxiosRequestConfig
     const url = '/social/admin/namespaces/{namespace}/users/{userId}/profiles'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -32,12 +32,11 @@ export class GameProfileAdmin$ {
       'GameProfileHeaderArray'
     )
   }
-
   /**
    * Returns profile for a user.&lt;br&gt;Other detail info:&lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: game profile info&lt;/li&gt;&lt;/ul&gt;
    */
-  getProfile_ByUserId_ByProfileId(userId: string, profileId: string): Promise<IResponse<GameProfileInfo>> {
-    const params = {} as SDKRequestConfig
+  getProfile_ByUserId_ByProfileId(userId: string, profileId: string): Promise<Response<GameProfileInfo>> {
+    const params = {} as AxiosRequestConfig
     const url = '/social/admin/namespaces/{namespace}/users/{userId}/profiles/{profileId}'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

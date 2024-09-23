@@ -1,0 +1,11 @@
+{
+  "description": "Config Service",
+  "title": "Config Service",
+  "contact": {
+    "name": "Engineering Team at AccelByte",
+    "url": "https://accelbyte.io",
+    "email": "engineering@accelbyte.io"
+  },
+  "version": "1.8.2",
+  "gitHash": "1.8.2"
+}

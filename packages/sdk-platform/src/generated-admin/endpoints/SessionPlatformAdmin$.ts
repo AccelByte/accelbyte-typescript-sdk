@@ -6,20 +6,20 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { XblUserSessionRequest } from '../../generated-definitions/XblUserSessionRequest.js'
 
 export class SessionPlatformAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * This API is used to register/update a session on xbox.
    */
-  updateSessionXbl_ByUserId(userId: string, data: XblUserSessionRequest): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  updateSessionXbl_ByUserId(userId: string, data: XblUserSessionRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/session/xbl'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

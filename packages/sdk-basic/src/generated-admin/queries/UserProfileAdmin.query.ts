@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { UserProfileAdminApi } from '../UserProfileAdminApi.js'
 
 import { UserProfileAdmin } from '../../generated-definitions/UserProfileAdmin.js'
@@ -21,30 +21,42 @@ import { UserProfilePublicInfoArray } from '../../generated-definitions/UserProf
 import { UserProfileStatusUpdate } from '../../generated-definitions/UserProfileStatusUpdate.js'
 
 export enum Key_UserProfileAdmin {
-  ProfilePublic = 'UserProfileAdmin.ProfilePublic',
-  ProfilesByPublicId = 'UserProfileAdmin.ProfilesByPublicId',
-  Profile_ByUserId = 'UserProfileAdmin.Profile_ByUserId',
-  Profiles_ByUserId = 'UserProfileAdmin.Profiles_ByUserId',
-  ProfileStatus_ByUserId = 'UserProfileAdmin.ProfileStatus_ByUserId',
-  ProfilesCustomAttributes_ByUserId = 'UserProfileAdmin.ProfilesCustomAttributes_ByUserId',
-  ProfileCustomAttribute_ByUserId = 'UserProfileAdmin.ProfileCustomAttribute_ByUserId',
-  ProfilesPrivateCustomAttributes_ByUserId = 'UserProfileAdmin.ProfilesPrivateCustomAttributes_ByUserId',
-  ProfilePrivateCustomAttribute_ByUserId = 'UserProfileAdmin.ProfilePrivateCustomAttribute_ByUserId'
+  ProfilePublic = 'Basic.UserProfileAdmin.ProfilePublic',
+  ProfilesByPublicId = 'Basic.UserProfileAdmin.ProfilesByPublicId',
+  Profile_ByUserId = 'Basic.UserProfileAdmin.Profile_ByUserId',
+  Profiles_ByUserId = 'Basic.UserProfileAdmin.Profiles_ByUserId',
+  ProfileStatus_ByUserId = 'Basic.UserProfileAdmin.ProfileStatus_ByUserId',
+  ProfilesCustomAttributes_ByUserId = 'Basic.UserProfileAdmin.ProfilesCustomAttributes_ByUserId',
+  ProfileCustomAttribute_ByUserId = 'Basic.UserProfileAdmin.ProfileCustomAttribute_ByUserId',
+  ProfilesPrivateCustomAttributes_ByUserId = 'Basic.UserProfileAdmin.ProfilesPrivateCustomAttributes_ByUserId',
+  ProfilePrivateCustomAttribute_ByUserId = 'Basic.UserProfileAdmin.ProfilePrivateCustomAttribute_ByUserId'
 }
 
-export const useAdmCreateProfilePublicMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Admin get user public profile by ids.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Required permission&lt;/i&gt;: resource=&lt;b&gt;&#34;ADMIN:NAMESPACE:{namespace}:PROFILE&#34;&lt;/b&gt;, action=2 &lt;b&gt;(GET)&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11405&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user public profiles&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_UserProfileAdmin.ProfilePublic, input]
+ * }
+ * ```
+ */
+export const useUserProfileAdminApi_CreateProfilePublicMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<UserProfilePublicInfoArray, AxiosError<ApiError>, ApiArgs & { data: UserProfileBulkRequest }>,
+    UseMutationOptions<UserProfilePublicInfoArray, AxiosError<ApiError>, SdkSetConfigParam & { data: UserProfileBulkRequest }>,
     'mutationKey'
   >,
   callback?: (data: UserProfilePublicInfoArray) => void
-): UseMutationResult<UserProfilePublicInfoArray, AxiosError<ApiError>, ApiArgs & { data: UserProfileBulkRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: UserProfileBulkRequest }) => {
-    const data = await UserProfileAdminApi(sdk, { namespace: input.namespace, config: input.config }).createProfilePublic(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<UserProfilePublicInfoArray, AxiosError<ApiError>, SdkSetConfigParam & { data: UserProfileBulkRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: UserProfileBulkRequest }) => {
+    const response = await UserProfileAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createProfilePublic(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -54,17 +66,29 @@ export const useAdmCreateProfilePublicMutation = (
   })
 }
 
-export const useAdmProfilesByPublicId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams: { publicId: string | null } },
+/**
+ * Get user profile by public id.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user profile info&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_UserProfileAdmin.ProfilesByPublicId, input]
+ * }
+ * ```
+ */
+export const useUserProfileAdminApi_GetProfilesByPublicId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams: { publicId: string | null } },
   options?: Omit<UseQueryOptions<UserProfileInfo, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: UserProfileInfo) => void
+  callback?: (data: AxiosResponse<UserProfileInfo>) => void
 ): UseQueryResult<UserProfileInfo, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmProfilesByPublicId>[1]) => async () => {
-    const data = await UserProfileAdminApi(sdk, { namespace: input.namespace }).getProfilesByPublicId(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useUserProfileAdminApi_GetProfilesByPublicId>[1]) => async () => {
+    const response = await UserProfileAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getProfilesByPublicId(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<UserProfileInfo, AxiosError<ApiError>>({
@@ -74,16 +98,29 @@ export const useAdmProfilesByPublicId = (
   })
 }
 
-export const useAdmDeleteProfile_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<UserProfilePrivateInfo, AxiosError<ApiError>, ApiArgs & { userId: string }>, 'mutationKey'>,
+/**
+ * Delete user profile.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11407&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Delete user profile&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_UserProfileAdmin.Profile_ByUserId, input]
+ * }
+ * ```
+ */
+export const useUserProfileAdminApi_DeleteProfile_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<UserProfilePrivateInfo, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }>, 'mutationKey'>,
   callback?: (data: UserProfilePrivateInfo) => void
-): UseMutationResult<UserProfilePrivateInfo, AxiosError<ApiError>, ApiArgs & { userId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string }) => {
-    const data = await UserProfileAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteProfile_ByUserId(input.userId)
-    callback && callback(data)
-    return data
+): UseMutationResult<UserProfilePrivateInfo, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string }) => {
+    const response = await UserProfileAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteProfile_ByUserId(input.userId)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -93,17 +130,29 @@ export const useAdmDeleteProfile_ByUserIdMutation = (
   })
 }
 
-export const useAdmProfiles_ByUserId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { userId: string },
+/**
+ * Get user profile.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user profile&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11403&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_UserProfileAdmin.Profiles_ByUserId, input]
+ * }
+ * ```
+ */
+export const useUserProfileAdminApi_GetProfiles_ByUserId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { userId: string },
   options?: Omit<UseQueryOptions<UserProfilePrivateInfo, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: UserProfilePrivateInfo) => void
+  callback?: (data: AxiosResponse<UserProfilePrivateInfo>) => void
 ): UseQueryResult<UserProfilePrivateInfo, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmProfiles_ByUserId>[1]) => async () => {
-    const data = await UserProfileAdminApi(sdk, { namespace: input.namespace }).getProfiles_ByUserId(input.userId)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useUserProfileAdminApi_GetProfiles_ByUserId>[1]) => async () => {
+    const response = await UserProfileAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getProfiles_ByUserId(
+      input.userId
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<UserProfilePrivateInfo, AxiosError<ApiError>>({
@@ -113,22 +162,32 @@ export const useAdmProfiles_ByUserId = (
   })
 }
 
-export const useAdmUpdateProfile_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Update user profile.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11402&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Updated user profile&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_UserProfileAdmin.Profile_ByUserId, input]
+ * }
+ * ```
+ */
+export const useUserProfileAdminApi_UpdateProfile_ByUserIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<UserProfilePrivateInfo, AxiosError<ApiError>, ApiArgs & { userId: string; data: UserProfileAdmin }>,
+    UseMutationOptions<UserProfilePrivateInfo, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: UserProfileAdmin }>,
     'mutationKey'
   >,
   callback?: (data: UserProfilePrivateInfo) => void
-): UseMutationResult<UserProfilePrivateInfo, AxiosError<ApiError>, ApiArgs & { userId: string; data: UserProfileAdmin }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string; data: UserProfileAdmin }) => {
-    const data = await UserProfileAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateProfile_ByUserId(
-      input.userId,
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<UserProfilePrivateInfo, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: UserProfileAdmin }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; data: UserProfileAdmin }) => {
+    const response = await UserProfileAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateProfile_ByUserId(input.userId, input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -138,22 +197,36 @@ export const useAdmUpdateProfile_ByUserIdMutation = (
   })
 }
 
-export const useAdmPatchProfileStatus_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Update user profile status.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11406&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user profile&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_UserProfileAdmin.ProfileStatus_ByUserId, input]
+ * }
+ * ```
+ */
+export const useUserProfileAdminApi_PatchProfileStatus_ByUserIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<UserProfilePrivateInfo, AxiosError<ApiError>, ApiArgs & { userId: string; data: UserProfileStatusUpdate }>,
+    UseMutationOptions<UserProfilePrivateInfo, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: UserProfileStatusUpdate }>,
     'mutationKey'
   >,
   callback?: (data: UserProfilePrivateInfo) => void
-): UseMutationResult<UserProfilePrivateInfo, AxiosError<ApiError>, ApiArgs & { userId: string; data: UserProfileStatusUpdate }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string; data: UserProfileStatusUpdate }) => {
-    const data = await UserProfileAdminApi(sdk, { namespace: input.namespace, config: input.config }).patchProfileStatus_ByUserId(
-      input.userId,
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<
+  UserProfilePrivateInfo,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { userId: string; data: UserProfileStatusUpdate }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; data: UserProfileStatusUpdate }) => {
+    const response = await UserProfileAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).patchProfileStatus_ByUserId(input.userId, input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -163,18 +236,32 @@ export const useAdmPatchProfileStatus_ByUserIdMutation = (
   })
 }
 
-export const useAdmProfilesCustomAttributes_ByUserId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { userId: string },
+/**
+ * Get user custom attributes.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: custom attributes&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11403&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_UserProfileAdmin.ProfilesCustomAttributes_ByUserId, input]
+ * }
+ * ```
+ */
+export const useUserProfileAdminApi_GetProfilesCustomAttributes_ByUserId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { userId: string },
   options?: Omit<UseQueryOptions<unknown, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: unknown) => void
+  callback?: (data: AxiosResponse<unknown>) => void
 ): UseQueryResult<unknown, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmProfilesCustomAttributes_ByUserId>[1]) => async () => {
-    const data = await UserProfileAdminApi(sdk, { namespace: input.namespace }).getProfilesCustomAttributes_ByUserId(input.userId)
-    callback && callback(data)
-    return data
-  }
+  const queryFn =
+    (sdk: AccelByteSDK, input: Parameters<typeof useUserProfileAdminApi_GetProfilesCustomAttributes_ByUserId>[1]) => async () => {
+      const response = await UserProfileAdminApi(sdk, {
+        coreConfig: input.coreConfig,
+        axiosConfig: input.axiosConfig
+      }).getProfilesCustomAttributes_ByUserId(input.userId)
+      callback && callback(response)
+      return response.data
+    }
 
   return useQuery<unknown, AxiosError<ApiError>>({
     queryKey: [Key_UserProfileAdmin.ProfilesCustomAttributes_ByUserId, input],
@@ -183,19 +270,29 @@ export const useAdmProfilesCustomAttributes_ByUserId = (
   })
 }
 
-export const useAdmUpdateProfileCustomAttribute_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string; data: any }>, 'mutationKey'>,
+/**
+ * Update partially custom attributes tied to the user id.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11402&lt;/li&gt;&lt;li&gt;&lt;i&gt;Request body&lt;/i&gt;: allowed format: JSON object&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Updated custom attributes&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_UserProfileAdmin.ProfileCustomAttribute_ByUserId, input]
+ * }
+ * ```
+ */
+export const useUserProfileAdminApi_UpdateProfileCustomAttribute_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: any }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string; data: any }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string; data: any }) => {
-    const data = await UserProfileAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateProfileCustomAttribute_ByUserId(
-      input.userId,
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: any }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; data: any }) => {
+    const response = await UserProfileAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateProfileCustomAttribute_ByUserId(input.userId, input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -205,18 +302,32 @@ export const useAdmUpdateProfileCustomAttribute_ByUserIdMutation = (
   })
 }
 
-export const useAdmProfilesPrivateCustomAttributes_ByUserId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { userId: string },
+/**
+ * Get user private custom attributes.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: custom attributes&lt;/li&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11403&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_UserProfileAdmin.ProfilesPrivateCustomAttributes_ByUserId, input]
+ * }
+ * ```
+ */
+export const useUserProfileAdminApi_GetProfilesPrivateCustomAttributes_ByUserId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { userId: string },
   options?: Omit<UseQueryOptions<unknown, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: unknown) => void
+  callback?: (data: AxiosResponse<unknown>) => void
 ): UseQueryResult<unknown, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmProfilesPrivateCustomAttributes_ByUserId>[1]) => async () => {
-    const data = await UserProfileAdminApi(sdk, { namespace: input.namespace }).getProfilesPrivateCustomAttributes_ByUserId(input.userId)
-    callback && callback(data)
-    return data
-  }
+  const queryFn =
+    (sdk: AccelByteSDK, input: Parameters<typeof useUserProfileAdminApi_GetProfilesPrivateCustomAttributes_ByUserId>[1]) => async () => {
+      const response = await UserProfileAdminApi(sdk, {
+        coreConfig: input.coreConfig,
+        axiosConfig: input.axiosConfig
+      }).getProfilesPrivateCustomAttributes_ByUserId(input.userId)
+      callback && callback(response)
+      return response.data
+    }
 
   return useQuery<unknown, AxiosError<ApiError>>({
     queryKey: [Key_UserProfileAdmin.ProfilesPrivateCustomAttributes_ByUserId, input],
@@ -225,19 +336,29 @@ export const useAdmProfilesPrivateCustomAttributes_ByUserId = (
   })
 }
 
-export const useAdmUpdateProfilePrivateCustomAttribute_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string; data: any }>, 'mutationKey'>,
+/**
+ * Update partially private custom attributes tied to the user id.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11402&lt;/li&gt;&lt;li&gt;&lt;i&gt;Request body&lt;/i&gt;: allowed format: JSON object&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Updated custom attributes&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_UserProfileAdmin.ProfilePrivateCustomAttribute_ByUserId, input]
+ * }
+ * ```
+ */
+export const useUserProfileAdminApi_UpdateProfilePrivateCustomAttribute_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: any }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string; data: any }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string; data: any }) => {
-    const data = await UserProfileAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: any }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; data: any }) => {
+    const response = await UserProfileAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).updateProfilePrivateCustomAttribute_ByUserId(input.userId, input.data)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

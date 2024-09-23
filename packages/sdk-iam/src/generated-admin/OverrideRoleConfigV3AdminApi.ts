@@ -8,7 +8,8 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { RoleOverrideResponse } from '../generated-definitions/RoleOverrideResponse.js'
 import { RoleOverrideSourceResponse } from '../generated-definitions/RoleOverrideSourceResponse.js'
 import { RoleOverrideStatsUpdateRequest } from '../generated-definitions/RoleOverrideStatsUpdateRequest.js'
@@ -16,76 +17,100 @@ import { RoleOverrideUpdateRequest } from '../generated-definitions/RoleOverride
 import { RolePermissionResponseV3 } from '../generated-definitions/RolePermissionResponseV3.js'
 import { OverrideRoleConfigV3Admin$ } from './endpoints/OverrideRoleConfigV3Admin$.js'
 
-export function OverrideRoleConfigV3AdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function OverrideRoleConfigV3AdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * Get role override config. This API has upsert behavior, if there is no config yet, it will create a new one with inactive status.
-   */
-  async function getRoleoverride(queryParams: { identity: 'GAME_ADMIN' | 'USER' | 'VIEW_ONLY' }): Promise<RoleOverrideResponse> {
-    const $ = new OverrideRoleConfigV3Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getRoleoverride(queryParams)
-    if (resp.error) throw resp.error
-    return resp.response.data
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
   }
 
-  /**
-   * This API is for updating role override config. Note: This API has upsert behavior, if there is no config yet, it will create a new one first.
-   */
-  async function patchRoleoverride(
+  async function getRoleoverride_v3(queryParams: {
+    identity: 'GAME_ADMIN' | 'USER' | 'VIEW_ONLY'
+  }): Promise<AxiosResponse<RoleOverrideResponse>> {
+    const $ = new OverrideRoleConfigV3Admin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getRoleoverride_v3(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function patchRoleoverride_v3(
     data: RoleOverrideUpdateRequest,
     queryParams: { identity: 'GAME_ADMIN' | 'USER' | 'VIEW_ONLY' }
-  ): Promise<RoleOverrideResponse> {
-    const $ = new OverrideRoleConfigV3Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.patchRoleoverride(data, queryParams)
+  ): Promise<AxiosResponse<RoleOverrideResponse>> {
+    const $ = new OverrideRoleConfigV3Admin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.patchRoleoverride_v3(data, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get role source permission set.
-   */
-  async function getRoleoverrideSource(queryParams: {
+  async function getRoleoverrideSource_v3(queryParams: {
     identity: 'GAME_ADMIN' | 'USER' | 'VIEW_ONLY'
-  }): Promise<RoleOverrideSourceResponse> {
-    const $ = new OverrideRoleConfigV3Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getRoleoverrideSource(queryParams)
+  }): Promise<AxiosResponse<RoleOverrideSourceResponse>> {
+    const $ = new OverrideRoleConfigV3Admin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getRoleoverrideSource_v3(queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Enable or disable the target role override feature in path namespace. Note: This API has upsert behavior, if there is no config yet, it will create a new one first.
-   */
-  async function patchRoleoverrideStatus(
+  async function patchRoleoverrideStatus_v3(
     data: RoleOverrideStatsUpdateRequest,
     queryParams: { identity: 'GAME_ADMIN' | 'USER' | 'VIEW_ONLY' }
-  ): Promise<RoleOverrideResponse> {
-    const $ = new OverrideRoleConfigV3Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.patchRoleoverrideStatus(data, queryParams)
+  ): Promise<AxiosResponse<RoleOverrideResponse>> {
+    const $ = new OverrideRoleConfigV3Admin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.patchRoleoverrideStatus_v3(data, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get role namespace permission set.
-   */
-  async function getPermissions_ByRoleId(roleId: string): Promise<RolePermissionResponseV3> {
-    const $ = new OverrideRoleConfigV3Admin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.getPermissions_ByRoleId(roleId)
+  async function getPermissions_ByRoleId_v3(roleId: string): Promise<AxiosResponse<RolePermissionResponseV3>> {
+    const $ = new OverrideRoleConfigV3Admin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getPermissions_ByRoleId_v3(roleId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
-    getRoleoverride,
-    patchRoleoverride,
-    getRoleoverrideSource,
-    patchRoleoverrideStatus,
-    getPermissions_ByRoleId
+    /**
+     * Get role override config. This API has upsert behavior, if there is no config yet, it will create a new one with inactive status.
+     */
+    getRoleoverride_v3,
+    /**
+     * This API is for updating role override config. Note: This API has upsert behavior, if there is no config yet, it will create a new one first.
+     */
+    patchRoleoverride_v3,
+    /**
+     * Get role source permission set.
+     */
+    getRoleoverrideSource_v3,
+    /**
+     * Enable or disable the target role override feature in path namespace. Note: This API has upsert behavior, if there is no config yet, it will create a new one first.
+     */
+    patchRoleoverrideStatus_v3,
+    /**
+     * Get role namespace permission set.
+     */
+    getPermissions_ByRoleId_v3
   }
 }

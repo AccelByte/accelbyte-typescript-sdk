@@ -7,6 +7,7 @@ import { z } from 'zod'
 
 export const MatchTicketRequest = z.object({
   attributes: z.record(z.any()),
+  excludedSessions: z.array(z.string()).nullish(),
   latencies: z.record(z.number().int()),
   matchPool: z.string(),
   sessionID: z.string().nullish(),

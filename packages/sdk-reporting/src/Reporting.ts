@@ -7,24 +7,33 @@
  * AUTO GENERATED
  */
 
-import { AdminExtensionCategoriesAndAutoModerationActionsAdminApi } from './generated-admin/AdminExtensionCategoriesAndAutoModerationActionsAdminApi.js'
-import { AdminModerationRuleAdminApi } from './generated-admin/AdminModerationRuleAdminApi.js'
-import { AdminReasonsAdminApi } from './generated-admin/AdminReasonsAdminApi.js'
-import { AdminReportsAdminApi } from './generated-admin/AdminReportsAdminApi.js'
-import { AdminTicketsAdminApi } from './generated-admin/AdminTicketsAdminApi.js'
-import { AdminConfigurationsAdminApi } from './generated-admin/AdminConfigurationsAdminApi.js'
+import { author, name, version } from '../package.json'
+import { ConfigurationsAdminApi } from './generated-admin/ConfigurationsAdminApi.js'
+import { ExtensionCategoriesAndAutoModerationActionsAdminApi } from './generated-admin/ExtensionCategoriesAndAutoModerationActionsAdminApi.js'
+import { ModerationRuleAdminApi } from './generated-admin/ModerationRuleAdminApi.js'
+import { ReasonsAdminApi } from './generated-admin/ReasonsAdminApi.js'
+import { ReportsAdminApi } from './generated-admin/ReportsAdminApi.js'
+import { TicketsAdminApi } from './generated-admin/TicketsAdminApi.js'
 import { PublicReasonsApi } from './generated-public/PublicReasonsApi.js'
 import { PublicReportsApi } from './generated-public/PublicReportsApi.js'
 
+console.log(`${name}@${version}`)
+
 const apis = {
-  AdminExtensionCategoriesAndAutoModerationActionsAdminApi,
-  AdminModerationRuleAdminApi,
-  AdminReasonsAdminApi,
-  AdminReportsAdminApi,
-  AdminTicketsAdminApi,
-  AdminConfigurationsAdminApi,
+  ExtensionCategoriesAndAutoModerationActionsAdminApi,
+  ModerationRuleAdminApi,
+  ReasonsAdminApi,
+  ReportsAdminApi,
+  TicketsAdminApi,
+  ConfigurationsAdminApi,
   PublicReasonsApi,
-  PublicReportsApi
+  PublicReportsApi,
+  version: () =>
+    console.log({
+      version,
+      name,
+      author
+    })
 }
 
 export const Reporting = apis

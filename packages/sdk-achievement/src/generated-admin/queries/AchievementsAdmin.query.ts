@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { AchievementsAdminApi } from '../AchievementsAdminApi.js'
 
 import { AchievementOrderUpdateRequest } from '../../generated-definitions/AchievementOrderUpdateRequest.js'
@@ -21,16 +21,27 @@ import { ImportConfigResponse } from '../../generated-definitions/ImportConfigRe
 import { PaginatedAchievementResponse } from '../../generated-definitions/PaginatedAchievementResponse.js'
 
 export enum Key_AchievementsAdmin {
-  Achievements = 'AchievementsAdmin.Achievements',
-  Achievement = 'AchievementsAdmin.Achievement',
-  AchievementsExport = 'AchievementsAdmin.AchievementsExport',
-  AchievementImport = 'AchievementsAdmin.AchievementImport',
-  Achievement_ByAchievementCode = 'AchievementsAdmin.Achievement_ByAchievementCode'
+  Achievements = 'Achievement.AchievementsAdmin.Achievements',
+  Achievement = 'Achievement.AchievementsAdmin.Achievement',
+  AchievementsExport = 'Achievement.AchievementsAdmin.AchievementsExport',
+  AchievementImport = 'Achievement.AchievementsAdmin.AchievementImport',
+  Achievement_ByAchievementCode = 'Achievement.AchievementsAdmin.Achievement_ByAchievementCode'
 }
 
-export const useAdmAchievements = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AchievementsAdmin.Achievements, input]
+ * }
+ * ```
+ */
+export const useAchievementsAdminApi_GetAchievements = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     queryParams?: {
       global?: boolean | null
       limit?: number
@@ -49,13 +60,14 @@ export const useAdmAchievements = (
     }
   },
   options?: Omit<UseQueryOptions<PaginatedAchievementResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: PaginatedAchievementResponse) => void
+  callback?: (data: AxiosResponse<PaginatedAchievementResponse>) => void
 ): UseQueryResult<PaginatedAchievementResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmAchievements>[1]) => async () => {
-    const data = await AchievementsAdminApi(sdk, { namespace: input.namespace }).getAchievements(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useAchievementsAdminApi_GetAchievements>[1]) => async () => {
+    const response = await AchievementsAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getAchievements(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<PaginatedAchievementResponse, AxiosError<ApiError>>({
@@ -65,16 +77,31 @@ export const useAdmAchievements = (
   })
 }
 
-export const useAdmCreateAchievementMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<AchievementResponse, AxiosError<ApiError>, ApiArgs & { data: AchievementRequest }>, 'mutationKey'>,
+/**
+ * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [CREATE]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt; Other detail info: - achievementCode: Human readable unique code to indentify the achievement. Must be lowercase and maximum length is 32 - incremental: If the achievement is not incremental, it does not need to store a goal value of a stat to be unlocked. If the achievement is incremental, it needs to set statCode and goalValue - statCode: Selected statistic code, from the published statistic code event.Human readable unique code to indentify the achievement. Must be lowercase and maximum length is 32 - goalValue: Statistics value required to unlock the achievement. - defaultLanguage: localozation for achievement name and achievement description. Allowed format : en, en-US - slug: specify the image they want to use, it can be file image name or something to define the achievement icon.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AchievementsAdmin.Achievement, input]
+ * }
+ * ```
+ */
+export const useAchievementsAdminApi_CreateAchievementMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<AchievementResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: AchievementRequest }>,
+    'mutationKey'
+  >,
   callback?: (data: AchievementResponse) => void
-): UseMutationResult<AchievementResponse, AxiosError<ApiError>, ApiArgs & { data: AchievementRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: AchievementRequest }) => {
-    const data = await AchievementsAdminApi(sdk, { namespace: input.namespace, config: input.config }).createAchievement(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<AchievementResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: AchievementRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: AchievementRequest }) => {
+    const response = await AchievementsAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createAchievement(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -84,17 +111,30 @@ export const useAdmCreateAchievementMutation = (
   })
 }
 
-export const useAdmAchievementsExport = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams?: { tags?: string[] } },
+/**
+ * &lt;p&gt; Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt;&lt;/p&gt;&lt;p&gt;Required Scope: &lt;code&gt;social&lt;/code&gt;&lt;p&gt;Successful response header will contain: &lt;code&gt;content-disposition: attachment; filename=achievement_&lt;namespace&gt;_config.json&lt;/code&gt;&lt;/p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AchievementsAdmin.AchievementsExport, input]
+ * }
+ * ```
+ */
+export const useAchievementsAdminApi_GetAchievementsExport = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams?: { tags?: string[] } },
   options?: Omit<UseQueryOptions<unknown, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: unknown) => void
+  callback?: (data: AxiosResponse<unknown>) => void
 ): UseQueryResult<unknown, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmAchievementsExport>[1]) => async () => {
-    const data = await AchievementsAdminApi(sdk, { namespace: input.namespace }).getAchievementsExport(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useAchievementsAdminApi_GetAchievementsExport>[1]) => async () => {
+    const response = await AchievementsAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getAchievementsExport(input.queryParams)
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<unknown, AxiosError<ApiError>>({
@@ -104,19 +144,36 @@ export const useAdmAchievementsExport = (
   })
 }
 
-export const useAdmCreateAchievementImportMutation = (
-  sdk: AccelbyteSDK,
+/**
+ *  Required permission ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [UPDATE] Required Scope: social Import achievement configuration from file. It will merge with existing achievement. Available import strategy: - leaveOut: if achievement with same key exist, the existing will be used and imported one will be ignored (default) - replace: if achievement with same key exist, the imported achievement will be used and existing one will be removed
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AchievementsAdmin.AchievementImport, input]
+ * }
+ * ```
+ */
+export const useAchievementsAdminApi_UpdateAchievementImportMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<ImportConfigResponse, AxiosError<ApiError>, ApiArgs & { data: { file?: File; strategy?: string | null } }>,
+    UseMutationOptions<ImportConfigResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: { file?: File; strategy?: string | null } }>,
     'mutationKey'
   >,
   callback?: (data: ImportConfigResponse) => void
-): UseMutationResult<ImportConfigResponse, AxiosError<ApiError>, ApiArgs & { data: { file?: File; strategy?: string | null } }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: { file?: File; strategy?: string | null } }) => {
-    const data = await AchievementsAdminApi(sdk, { namespace: input.namespace, config: input.config }).createAchievementImport(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<
+  ImportConfigResponse,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { data: { file?: File; strategy?: string | null } }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: { file?: File; strategy?: string | null } }) => {
+    const response = await AchievementsAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateAchievementImport(input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -126,18 +183,29 @@ export const useAdmCreateAchievementImportMutation = (
   })
 }
 
-export const useAdmDeleteAchievement_ByAchievementCodeMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { achievementCode: string }>, 'mutationKey'>,
+/**
+ * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [DELETE]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AchievementsAdmin.Achievement_ByAchievementCode, input]
+ * }
+ * ```
+ */
+export const useAchievementsAdminApi_DeleteAchievement_ByAchievementCodeMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { achievementCode: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { achievementCode: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { achievementCode: string }) => {
-    const data = await AchievementsAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteAchievement_ByAchievementCode(
-      input.achievementCode
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { achievementCode: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { achievementCode: string }) => {
+    const response = await AchievementsAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteAchievement_ByAchievementCode(input.achievementCode)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -147,18 +215,32 @@ export const useAdmDeleteAchievement_ByAchievementCodeMutation = (
   })
 }
 
-export const useAdmAchievement_ByAchievementCode = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { achievementCode: string },
+/**
+ * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AchievementsAdmin.Achievement_ByAchievementCode, input]
+ * }
+ * ```
+ */
+export const useAchievementsAdminApi_GetAchievement_ByAchievementCode = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { achievementCode: string },
   options?: Omit<UseQueryOptions<AchievementResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: AchievementResponse) => void
+  callback?: (data: AxiosResponse<AchievementResponse>) => void
 ): UseQueryResult<AchievementResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmAchievement_ByAchievementCode>[1]) => async () => {
-    const data = await AchievementsAdminApi(sdk, { namespace: input.namespace }).getAchievement_ByAchievementCode(input.achievementCode)
-    callback && callback(data)
-    return data
-  }
+  const queryFn =
+    (sdk: AccelByteSDK, input: Parameters<typeof useAchievementsAdminApi_GetAchievement_ByAchievementCode>[1]) => async () => {
+      const response = await AchievementsAdminApi(sdk, {
+        coreConfig: input.coreConfig,
+        axiosConfig: input.axiosConfig
+      }).getAchievement_ByAchievementCode(input.achievementCode)
+      callback && callback(response)
+      return response.data
+    }
 
   return useQuery<AchievementResponse, AxiosError<ApiError>>({
     queryKey: [Key_AchievementsAdmin.Achievement_ByAchievementCode, input],
@@ -167,22 +249,36 @@ export const useAdmAchievement_ByAchievementCode = (
   })
 }
 
-export const useAdmPatchAchievement_ByAchievementCodeMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [UPDATE]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AchievementsAdmin.Achievement_ByAchievementCode, input]
+ * }
+ * ```
+ */
+export const useAchievementsAdminApi_PatchAchievement_ByAchievementCodeMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { achievementCode: string; data: AchievementOrderUpdateRequest }>,
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { achievementCode: string; data: AchievementOrderUpdateRequest }>,
     'mutationKey'
   >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { achievementCode: string; data: AchievementOrderUpdateRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { achievementCode: string; data: AchievementOrderUpdateRequest }) => {
-    const data = await AchievementsAdminApi(sdk, { namespace: input.namespace, config: input.config }).patchAchievement_ByAchievementCode(
-      input.achievementCode,
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<
+  unknown,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { achievementCode: string; data: AchievementOrderUpdateRequest }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { achievementCode: string; data: AchievementOrderUpdateRequest }) => {
+    const response = await AchievementsAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).patchAchievement_ByAchievementCode(input.achievementCode, input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -192,22 +288,40 @@ export const useAdmPatchAchievement_ByAchievementCodeMutation = (
   })
 }
 
-export const useAdmUpdateAchievement_ByAchievementCodeMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [UPDATE]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AchievementsAdmin.Achievement_ByAchievementCode, input]
+ * }
+ * ```
+ */
+export const useAchievementsAdminApi_UpdateAchievement_ByAchievementCodeMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<AchievementResponse, AxiosError<ApiError>, ApiArgs & { achievementCode: string; data: AchievementUpdateRequest }>,
+    UseMutationOptions<
+      AchievementResponse,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { achievementCode: string; data: AchievementUpdateRequest }
+    >,
     'mutationKey'
   >,
   callback?: (data: AchievementResponse) => void
-): UseMutationResult<AchievementResponse, AxiosError<ApiError>, ApiArgs & { achievementCode: string; data: AchievementUpdateRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { achievementCode: string; data: AchievementUpdateRequest }) => {
-    const data = await AchievementsAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateAchievement_ByAchievementCode(
-      input.achievementCode,
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<
+  AchievementResponse,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { achievementCode: string; data: AchievementUpdateRequest }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { achievementCode: string; data: AchievementUpdateRequest }) => {
+    const response = await AchievementsAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateAchievement_ByAchievementCode(input.achievementCode, input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

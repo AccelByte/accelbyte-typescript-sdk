@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { NamespaceAdminApi } from '../NamespaceAdminApi.js'
 
 import { NamespaceContext } from '../../generated-definitions/NamespaceContext.js'
@@ -22,28 +22,40 @@ import { NamespaceStatusUpdate } from '../../generated-definitions/NamespaceStat
 import { NamespaceUpdate } from '../../generated-definitions/NamespaceUpdate.js'
 
 export enum Key_NamespaceAdmin {
-  Namespaces = 'NamespaceAdmin.Namespaces',
-  Namespace = 'NamespaceAdmin.Namespace',
-  Namespace_ByNamespace = 'NamespaceAdmin.Namespace_ByNamespace',
-  Game = 'NamespaceAdmin.Game',
-  Basic = 'NamespaceAdmin.Basic',
-  Child = 'NamespaceAdmin.Child',
-  Status = 'NamespaceAdmin.Status',
-  Context = 'NamespaceAdmin.Context',
-  Publisher = 'NamespaceAdmin.Publisher'
+  Namespaces = 'Basic.NamespaceAdmin.Namespaces',
+  Namespace = 'Basic.NamespaceAdmin.Namespace',
+  Namespace_ByNamespace = 'Basic.NamespaceAdmin.Namespace_ByNamespace',
+  Game = 'Basic.NamespaceAdmin.Game',
+  Basic = 'Basic.NamespaceAdmin.Basic',
+  Child = 'Basic.NamespaceAdmin.Child',
+  Status = 'Basic.NamespaceAdmin.Status',
+  Context = 'Basic.NamespaceAdmin.Context',
+  Publisher = 'Basic.NamespaceAdmin.Publisher'
 }
 
-export const useAdmNamespaces = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams?: { activeOnly?: boolean | null } },
+/**
+ * Get all namespaces.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11303&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of namespaces&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NamespaceAdmin.Namespaces, input]
+ * }
+ * ```
+ */
+export const useNamespaceAdminApi_GetNamespaces = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams?: { activeOnly?: boolean | null } },
   options?: Omit<UseQueryOptions<NamespaceInfoArray, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: NamespaceInfoArray) => void
+  callback?: (data: AxiosResponse<NamespaceInfoArray>) => void
 ): UseQueryResult<NamespaceInfoArray, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmNamespaces>[1]) => async () => {
-    const data = await NamespaceAdminApi(sdk, { namespace: input.namespace }).getNamespaces(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useNamespaceAdminApi_GetNamespaces>[1]) => async () => {
+    const response = await NamespaceAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getNamespaces(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<NamespaceInfoArray, AxiosError<ApiError>>({
@@ -53,16 +65,28 @@ export const useAdmNamespaces = (
   })
 }
 
-export const useAdmCreateNamespaceMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<NamespaceInfo, AxiosError<ApiError>, ApiArgs & { data: NamespaceCreate }>, 'mutationKey'>,
+/**
+ * Create a namespace.&lt;br&gt;By default the namespace is enabled.&lt;br&gt;In multi tenant mode, parentNamespace will be automatically filled with requester namespace if the requester is using studio or publisher token, and it will be filled with studio namespace if the requester uses game token. An oauth client will also be created and the id will be returned. &lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11301&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created namespace&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NamespaceAdmin.Namespace, input]
+ * }
+ * ```
+ */
+export const useNamespaceAdminApi_CreateNamespaceMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<NamespaceInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: NamespaceCreate }>, 'mutationKey'>,
   callback?: (data: NamespaceInfo) => void
-): UseMutationResult<NamespaceInfo, AxiosError<ApiError>, ApiArgs & { data: NamespaceCreate }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: NamespaceCreate }) => {
-    const data = await NamespaceAdminApi(sdk, { namespace: input.namespace, config: input.config }).createNamespace(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<NamespaceInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: NamespaceCreate }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: NamespaceCreate }) => {
+    const response = await NamespaceAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createNamespace(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -72,16 +96,29 @@ export const useAdmCreateNamespaceMutation = (
   })
 }
 
-export const useAdmDeleteNamespace_ByNamespaceMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<NamespaceInfo, AxiosError<ApiError>, ApiArgs>, 'mutationKey'>,
+/**
+ * Delete a namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11307&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: deleted namespace&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NamespaceAdmin.Namespace_ByNamespace, input]
+ * }
+ * ```
+ */
+export const useNamespaceAdminApi_DeleteNamespace_ByNamespaceMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<NamespaceInfo, AxiosError<ApiError>, SdkSetConfigParam>, 'mutationKey'>,
   callback?: (data: NamespaceInfo) => void
-): UseMutationResult<NamespaceInfo, AxiosError<ApiError>, ApiArgs> => {
-  //
-  const mutationFn = async (input: ApiArgs) => {
-    const data = await NamespaceAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteNamespace_ByNamespace()
-    callback && callback(data)
-    return data
+): UseMutationResult<NamespaceInfo, AxiosError<ApiError>, SdkSetConfigParam> => {
+  const mutationFn = async (input: SdkSetConfigParam) => {
+    const response = await NamespaceAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteNamespace_ByNamespace()
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -91,17 +128,30 @@ export const useAdmDeleteNamespace_ByNamespaceMutation = (
   })
 }
 
-export const useAdmNamespace_ByNamespace = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams?: { activeOnly?: boolean | null } },
+/**
+ * Get a namespace.&lt;br&gt;In multi tenant mode, parentNamespace will be returned.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11304&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: namespace&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NamespaceAdmin.Namespace_ByNamespace, input]
+ * }
+ * ```
+ */
+export const useNamespaceAdminApi_GetNamespace_ByNamespace = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams?: { activeOnly?: boolean | null } },
   options?: Omit<UseQueryOptions<NamespaceInfo, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: NamespaceInfo) => void
+  callback?: (data: AxiosResponse<NamespaceInfo>) => void
 ): UseQueryResult<NamespaceInfo, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmNamespace_ByNamespace>[1]) => async () => {
-    const data = await NamespaceAdminApi(sdk, { namespace: input.namespace }).getNamespace_ByNamespace(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useNamespaceAdminApi_GetNamespace_ByNamespace>[1]) => async () => {
+    const response = await NamespaceAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getNamespace_ByNamespace(input.queryParams)
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<NamespaceInfo, AxiosError<ApiError>>({
@@ -111,17 +161,29 @@ export const useAdmNamespace_ByNamespace = (
   })
 }
 
-export const useAdmGame = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams?: { activeOnly?: boolean | null } },
+/**
+ * Get game namespaces.&lt;br&gt;In multi tenant mode, a given super admin namespace will return all game namespaces of studio namespaces&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11308&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of namespaces&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NamespaceAdmin.Game, input]
+ * }
+ * ```
+ */
+export const useNamespaceAdminApi_GetGame = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams?: { activeOnly?: boolean | null } },
   options?: Omit<UseQueryOptions<NamespaceInfoArray, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: NamespaceInfoArray) => void
+  callback?: (data: AxiosResponse<NamespaceInfoArray>) => void
 ): UseQueryResult<NamespaceInfoArray, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmGame>[1]) => async () => {
-    const data = await NamespaceAdminApi(sdk, { namespace: input.namespace }).getGame(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useNamespaceAdminApi_GetGame>[1]) => async () => {
+    const response = await NamespaceAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getGame(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<NamespaceInfoArray, AxiosError<ApiError>>({
@@ -131,16 +193,26 @@ export const useAdmGame = (
   })
 }
 
-export const useAdmPatchBasicMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<NamespaceInfo, AxiosError<ApiError>, ApiArgs & { data: NamespaceUpdate }>, 'mutationKey'>,
+/**
+ * Update namespace basic info.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11302&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated namespace&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NamespaceAdmin.Basic, input]
+ * }
+ * ```
+ */
+export const useNamespaceAdminApi_PatchBasicMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<NamespaceInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: NamespaceUpdate }>, 'mutationKey'>,
   callback?: (data: NamespaceInfo) => void
-): UseMutationResult<NamespaceInfo, AxiosError<ApiError>, ApiArgs & { data: NamespaceUpdate }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: NamespaceUpdate }) => {
-    const data = await NamespaceAdminApi(sdk, { namespace: input.namespace, config: input.config }).patchBasic(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<NamespaceInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: NamespaceUpdate }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: NamespaceUpdate }) => {
+    const response = await NamespaceAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).patchBasic(input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -150,17 +222,29 @@ export const useAdmPatchBasicMutation = (
   })
 }
 
-export const useAdmChild = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams?: { activeOnly?: boolean | null } },
+/**
+ * Get child namespaces.&lt;br&gt;If input namespace is publisher namespace, then it will return its all studio namespace.&lt;br&gt;If input namespace is studio namespace, then it will return its all game namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of child namespaces&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NamespaceAdmin.Child, input]
+ * }
+ * ```
+ */
+export const useNamespaceAdminApi_GetChild = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams?: { activeOnly?: boolean | null } },
   options?: Omit<UseQueryOptions<NamespaceInfoArray, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: NamespaceInfoArray) => void
+  callback?: (data: AxiosResponse<NamespaceInfoArray>) => void
 ): UseQueryResult<NamespaceInfoArray, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmChild>[1]) => async () => {
-    const data = await NamespaceAdminApi(sdk, { namespace: input.namespace }).getChild(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useNamespaceAdminApi_GetChild>[1]) => async () => {
+    const response = await NamespaceAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getChild(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<NamespaceInfoArray, AxiosError<ApiError>>({
@@ -170,16 +254,29 @@ export const useAdmChild = (
   })
 }
 
-export const useAdmPatchStatusMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<NamespaceInfo, AxiosError<ApiError>, ApiArgs & { data: NamespaceStatusUpdate }>, 'mutationKey'>,
+/**
+ * Change a namespace status.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;Action code&lt;i&gt;&lt;/i&gt;: 11306&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated namespace&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NamespaceAdmin.Status, input]
+ * }
+ * ```
+ */
+export const useNamespaceAdminApi_PatchStatusMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<NamespaceInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: NamespaceStatusUpdate }>,
+    'mutationKey'
+  >,
   callback?: (data: NamespaceInfo) => void
-): UseMutationResult<NamespaceInfo, AxiosError<ApiError>, ApiArgs & { data: NamespaceStatusUpdate }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: NamespaceStatusUpdate }) => {
-    const data = await NamespaceAdminApi(sdk, { namespace: input.namespace, config: input.config }).patchStatus(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<NamespaceInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: NamespaceStatusUpdate }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: NamespaceStatusUpdate }) => {
+    const response = await NamespaceAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).patchStatus(input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -189,17 +286,27 @@ export const useAdmPatchStatusMutation = (
   })
 }
 
-export const useAdmContext = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Get context of namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: context of namespace&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NamespaceAdmin.Context, input]
+ * }
+ * ```
+ */
+export const useNamespaceAdminApi_GetContext = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<NamespaceContext, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: NamespaceContext) => void
+  callback?: (data: AxiosResponse<NamespaceContext>) => void
 ): UseQueryResult<NamespaceContext, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmContext>[1]) => async () => {
-    const data = await NamespaceAdminApi(sdk, { namespace: input.namespace }).getContext()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useNamespaceAdminApi_GetContext>[1]) => async () => {
+    const response = await NamespaceAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getContext()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<NamespaceContext, AxiosError<ApiError>>({
@@ -209,17 +316,27 @@ export const useAdmContext = (
   })
 }
 
-export const useAdmPublisher = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Get namespace info related publisher namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11305&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Namespace info related publisher namespace&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NamespaceAdmin.Publisher, input]
+ * }
+ * ```
+ */
+export const useNamespaceAdminApi_GetPublisher = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<NamespacePublisherInfo, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: NamespacePublisherInfo) => void
+  callback?: (data: AxiosResponse<NamespacePublisherInfo>) => void
 ): UseQueryResult<NamespacePublisherInfo, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmPublisher>[1]) => async () => {
-    const data = await NamespaceAdminApi(sdk, { namespace: input.namespace }).getPublisher()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useNamespaceAdminApi_GetPublisher>[1]) => async () => {
+    const response = await NamespaceAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getPublisher()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<NamespacePublisherInfo, AxiosError<ApiError>>({

@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { RewardAdminApi } from '../RewardAdminApi.js'
 
 import { RewardCreate } from '../../generated-definitions/RewardCreate.js'
@@ -19,22 +19,35 @@ import { RewardInfoArray } from '../../generated-definitions/RewardInfoArray.js'
 import { RewardUpdate } from '../../generated-definitions/RewardUpdate.js'
 
 export enum Key_RewardAdmin {
-  Rewards_BySeasonId = 'RewardAdmin.Rewards_BySeasonId',
-  Reward_BySeasonId = 'RewardAdmin.Reward_BySeasonId',
-  Reward_BySeasonId_ByCode = 'RewardAdmin.Reward_BySeasonId_ByCode'
+  Rewards_BySeasonId = 'Seasonpass.RewardAdmin.Rewards_BySeasonId',
+  Reward_BySeasonId = 'Seasonpass.RewardAdmin.Reward_BySeasonId',
+  Reward_BySeasonId_ByCode = 'Seasonpass.RewardAdmin.Reward_BySeasonId_ByCode'
 }
 
-export const useAdmRewards_BySeasonId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { seasonId: string; queryParams?: { q?: string | null } },
+/**
+ * This API is used to query rewards for a season.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of rewards&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_RewardAdmin.Rewards_BySeasonId, input]
+ * }
+ * ```
+ */
+export const useRewardAdminApi_GetRewards_BySeasonId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { seasonId: string; queryParams?: { q?: string | null } },
   options?: Omit<UseQueryOptions<RewardInfoArray, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: RewardInfoArray) => void
+  callback?: (data: AxiosResponse<RewardInfoArray>) => void
 ): UseQueryResult<RewardInfoArray, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmRewards_BySeasonId>[1]) => async () => {
-    const data = await RewardAdminApi(sdk, { namespace: input.namespace }).getRewards_BySeasonId(input.seasonId, input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useRewardAdminApi_GetRewards_BySeasonId>[1]) => async () => {
+    const response = await RewardAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getRewards_BySeasonId(
+      input.seasonId,
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<RewardInfoArray, AxiosError<ApiError>>({
@@ -44,19 +57,32 @@ export const useAdmRewards_BySeasonId = (
   })
 }
 
-export const useAdmCreateReward_BySeasonIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<RewardInfo, AxiosError<ApiError>, ApiArgs & { seasonId: string; data: RewardCreate }>, 'mutationKey'>,
+/**
+ * This API is used to create a reward for a draft season.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created reward&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_RewardAdmin.Reward_BySeasonId, input]
+ * }
+ * ```
+ */
+export const useRewardAdminApi_CreateReward_BySeasonIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<RewardInfo, AxiosError<ApiError>, SdkSetConfigParam & { seasonId: string; data: RewardCreate }>,
+    'mutationKey'
+  >,
   callback?: (data: RewardInfo) => void
-): UseMutationResult<RewardInfo, AxiosError<ApiError>, ApiArgs & { seasonId: string; data: RewardCreate }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { seasonId: string; data: RewardCreate }) => {
-    const data = await RewardAdminApi(sdk, { namespace: input.namespace, config: input.config }).createReward_BySeasonId(
+): UseMutationResult<RewardInfo, AxiosError<ApiError>, SdkSetConfigParam & { seasonId: string; data: RewardCreate }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { seasonId: string; data: RewardCreate }) => {
+    const response = await RewardAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createReward_BySeasonId(
       input.seasonId,
       input.data
     )
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -66,19 +92,29 @@ export const useAdmCreateReward_BySeasonIdMutation = (
   })
 }
 
-export const useAdmDeleteReward_BySeasonId_ByCodeMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { seasonId: string; code: string }>, 'mutationKey'>,
+/**
+ * This API is used to delete a reward permanently, only draft season reward can be deleted. &lt;p&gt;Other detail info: &lt;ul&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_RewardAdmin.Reward_BySeasonId_ByCode, input]
+ * }
+ * ```
+ */
+export const useRewardAdminApi_DeleteReward_BySeasonId_ByCodeMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { seasonId: string; code: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { seasonId: string; code: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { seasonId: string; code: string }) => {
-    const data = await RewardAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteReward_BySeasonId_ByCode(
-      input.seasonId,
-      input.code
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { seasonId: string; code: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { seasonId: string; code: string }) => {
+    const response = await RewardAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteReward_BySeasonId_ByCode(input.seasonId, input.code)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -88,17 +124,30 @@ export const useAdmDeleteReward_BySeasonId_ByCodeMutation = (
   })
 }
 
-export const useAdmReward_BySeasonId_ByCode = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { seasonId: string; code: string },
+/**
+ * This API is used to get a reward for a season.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: reward data&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_RewardAdmin.Reward_BySeasonId_ByCode, input]
+ * }
+ * ```
+ */
+export const useRewardAdminApi_GetReward_BySeasonId_ByCode = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { seasonId: string; code: string },
   options?: Omit<UseQueryOptions<RewardInfo, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: RewardInfo) => void
+  callback?: (data: AxiosResponse<RewardInfo>) => void
 ): UseQueryResult<RewardInfo, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmReward_BySeasonId_ByCode>[1]) => async () => {
-    const data = await RewardAdminApi(sdk, { namespace: input.namespace }).getReward_BySeasonId_ByCode(input.seasonId, input.code)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useRewardAdminApi_GetReward_BySeasonId_ByCode>[1]) => async () => {
+    const response = await RewardAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getReward_BySeasonId_ByCode(input.seasonId, input.code)
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<RewardInfo, AxiosError<ApiError>>({
@@ -108,23 +157,32 @@ export const useAdmReward_BySeasonId_ByCode = (
   })
 }
 
-export const useAdmPatchReward_BySeasonId_ByCodeMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * This API is used to update a reward. Only draft season reward can be updated.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated reward&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_RewardAdmin.Reward_BySeasonId_ByCode, input]
+ * }
+ * ```
+ */
+export const useRewardAdminApi_PatchReward_BySeasonId_ByCodeMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<RewardInfo, AxiosError<ApiError>, ApiArgs & { seasonId: string; code: string; data: RewardUpdate }>,
+    UseMutationOptions<RewardInfo, AxiosError<ApiError>, SdkSetConfigParam & { seasonId: string; code: string; data: RewardUpdate }>,
     'mutationKey'
   >,
   callback?: (data: RewardInfo) => void
-): UseMutationResult<RewardInfo, AxiosError<ApiError>, ApiArgs & { seasonId: string; code: string; data: RewardUpdate }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { seasonId: string; code: string; data: RewardUpdate }) => {
-    const data = await RewardAdminApi(sdk, { namespace: input.namespace, config: input.config }).patchReward_BySeasonId_ByCode(
-      input.seasonId,
-      input.code,
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<RewardInfo, AxiosError<ApiError>, SdkSetConfigParam & { seasonId: string; code: string; data: RewardUpdate }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { seasonId: string; code: string; data: RewardUpdate }) => {
+    const response = await RewardAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).patchReward_BySeasonId_ByCode(input.seasonId, input.code, input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

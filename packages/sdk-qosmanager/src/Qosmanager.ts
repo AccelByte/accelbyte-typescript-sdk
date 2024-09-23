@@ -7,14 +7,23 @@
  * AUTO GENERATED
  */
 
+import { author, name, version } from '../package.json'
 import { AdminAdminApi } from './generated-admin/AdminAdminApi.js'
 import { PublicApi } from './generated-public/PublicApi.js'
 import { ServerApi } from './generated-public/ServerApi.js'
 
+console.log(`${name}@${version}`)
+
 const apis = {
   AdminAdminApi,
   PublicApi,
-  ServerApi
+  ServerApi,
+  version: () =>
+    console.log({
+      version,
+      name,
+      author
+    })
 }
 
 export const Qosmanager = apis

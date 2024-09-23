@@ -6,19 +6,19 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 
 export class AnonymizationAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * &lt;p&gt;This API will delete specified user achievement&lt;p&gt; &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ANONYMIZATION [DELETE]&lt;/code&gt; &lt;/p&gt;
    */
-  deleteAnonymizationAchievement_ByUserId(userId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteAnonymizationAchievement_ByUserId(userId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/achievement/v1/admin/namespaces/{namespace}/users/{userId}/anonymization/achievements'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

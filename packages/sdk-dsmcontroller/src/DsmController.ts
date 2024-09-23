@@ -7,18 +7,21 @@
  * AUTO GENERATED
  */
 
-import { ImageConfigAdminApi } from './generated-admin/ImageConfigAdminApi.js'
-import { ConfigAdminApi } from './generated-admin/ConfigAdminApi.js'
-import { PodConfigAdminApi } from './generated-admin/PodConfigAdminApi.js'
+import { author, name, version } from '../package.json'
 import { AdminAdminApi } from './generated-admin/AdminAdminApi.js'
+import { ConfigAdminApi } from './generated-admin/ConfigAdminApi.js'
 import { DeploymentConfigAdminApi } from './generated-admin/DeploymentConfigAdminApi.js'
+import { ImageConfigAdminApi } from './generated-admin/ImageConfigAdminApi.js'
+import { PodConfigAdminApi } from './generated-admin/PodConfigAdminApi.js'
+import { DeploymentConfigApi } from './generated-public/DeploymentConfigApi.js'
 import { DsmcOperationsApi } from './generated-public/DsmcOperationsApi.js'
-import { PublicApi } from './generated-public/PublicApi.js'
 import { ImageConfigApi } from './generated-public/ImageConfigApi.js'
+import { PodConfigApi } from './generated-public/PodConfigApi.js'
+import { PublicApi } from './generated-public/PublicApi.js'
 import { ServerApi } from './generated-public/ServerApi.js'
 import { SessionApi } from './generated-public/SessionApi.js'
-import { PodConfigApi } from './generated-public/PodConfigApi.js'
-import { DeploymentConfigApi } from './generated-public/DeploymentConfigApi.js'
+
+console.log(`${name}@${version}`)
 
 const apis = {
   ImageConfigAdminApi,
@@ -32,7 +35,13 @@ const apis = {
   ServerApi,
   SessionApi,
   PodConfigApi,
-  DeploymentConfigApi
+  DeploymentConfigApi,
+  version: () =>
+    console.log({
+      version,
+      name,
+      author
+    })
 }
 
 export const DsmController = apis

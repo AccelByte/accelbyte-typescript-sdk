@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { CatalogChangesAdminApi } from '../CatalogChangesAdminApi.js'
 
 import { CatalogChangePagingResult } from '../../generated-definitions/CatalogChangePagingResult.js'
@@ -18,30 +18,40 @@ import { CatalogChangeStatistics } from '../../generated-definitions/CatalogChan
 import { StoreInfo } from '../../generated-definitions/StoreInfo.js'
 
 export enum Key_CatalogChangesAdmin {
-  CatalogChangeSelectAll_ByStoreId = 'CatalogChangesAdmin.CatalogChangeSelectAll_ByStoreId',
-  CatalogChangesByCriteria_ByStoreId = 'CatalogChangesAdmin.CatalogChangesByCriteria_ByStoreId',
-  CatalogChangePublishAll_ByStoreId = 'CatalogChangesAdmin.CatalogChangePublishAll_ByStoreId',
-  CatalogChangesStatistics_ByStoreId = 'CatalogChangesAdmin.CatalogChangesStatistics_ByStoreId',
-  CatalogChangeUnselectAll_ByStoreId = 'CatalogChangesAdmin.CatalogChangeUnselectAll_ByStoreId',
-  CatalogChangePublishSelected_ByStoreId = 'CatalogChangesAdmin.CatalogChangePublishSelected_ByStoreId',
-  Select_ByStoreId_ByChangeId = 'CatalogChangesAdmin.Select_ByStoreId_ByChangeId',
-  Unselect_ByStoreId_ByChangeId = 'CatalogChangesAdmin.Unselect_ByStoreId_ByChangeId',
-  CatalogChangeSelectAllByCriteria_ByStoreId = 'CatalogChangesAdmin.CatalogChangeSelectAllByCriteria_ByStoreId'
+  CatalogChangeSelectAll_ByStoreId = 'Platform.CatalogChangesAdmin.CatalogChangeSelectAll_ByStoreId',
+  CatalogChangesByCriteria_ByStoreId = 'Platform.CatalogChangesAdmin.CatalogChangesByCriteria_ByStoreId',
+  CatalogChangePublishAll_ByStoreId = 'Platform.CatalogChangesAdmin.CatalogChangePublishAll_ByStoreId',
+  CatalogChangesStatistics_ByStoreId = 'Platform.CatalogChangesAdmin.CatalogChangesStatistics_ByStoreId',
+  CatalogChangeUnselectAll_ByStoreId = 'Platform.CatalogChangesAdmin.CatalogChangeUnselectAll_ByStoreId',
+  CatalogChangePublishSelected_ByStoreId = 'Platform.CatalogChangesAdmin.CatalogChangePublishSelected_ByStoreId',
+  Select_ByStoreId_ByChangeId = 'Platform.CatalogChangesAdmin.Select_ByStoreId_ByChangeId',
+  Unselect_ByStoreId_ByChangeId = 'Platform.CatalogChangesAdmin.Unselect_ByStoreId_ByChangeId',
+  CatalogChangeSelectAllByCriteria_ByStoreId = 'Platform.CatalogChangesAdmin.CatalogChangeSelectAllByCriteria_ByStoreId'
 }
 
-export const useAdmUpdateCatalogChangeSelectAll_ByStoreIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { storeId: string }>, 'mutationKey'>,
+/**
+ * Select all changes.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_CatalogChangesAdmin.CatalogChangeSelectAll_ByStoreId, input]
+ * }
+ * ```
+ */
+export const useCatalogChangesAdminApi_UpdateCatalogChangeSelectAll_ByStoreIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { storeId: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { storeId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { storeId: string }) => {
-    const data = await CatalogChangesAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { storeId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { storeId: string }) => {
+    const response = await CatalogChangesAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).updateCatalogChangeSelectAll_ByStoreId(input.storeId)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -51,9 +61,20 @@ export const useAdmUpdateCatalogChangeSelectAll_ByStoreIdMutation = (
   })
 }
 
-export const useAdmCatalogChangesByCriteria_ByStoreId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * This API is used to query changes .&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the pagination of changes&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_CatalogChangesAdmin.CatalogChangesByCriteria_ByStoreId, input]
+ * }
+ * ```
+ */
+export const useCatalogChangesAdminApi_GetCatalogChangesByCriteria_ByStoreId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     storeId: string
     queryParams?: {
       action?: 'CREATE' | 'DELETE' | 'UPDATE'
@@ -82,17 +103,17 @@ export const useAdmCatalogChangesByCriteria_ByStoreId = (
     }
   },
   options?: Omit<UseQueryOptions<CatalogChangePagingResult, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: CatalogChangePagingResult) => void
+  callback?: (data: AxiosResponse<CatalogChangePagingResult>) => void
 ): UseQueryResult<CatalogChangePagingResult, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmCatalogChangesByCriteria_ByStoreId>[1]) => async () => {
-    const data = await CatalogChangesAdminApi(sdk, { namespace: input.namespace }).getCatalogChangesByCriteria_ByStoreId(
-      input.storeId,
-      input.queryParams
-    )
-    callback && callback(data)
-    return data
-  }
+  const queryFn =
+    (sdk: AccelByteSDK, input: Parameters<typeof useCatalogChangesAdminApi_GetCatalogChangesByCriteria_ByStoreId>[1]) => async () => {
+      const response = await CatalogChangesAdminApi(sdk, {
+        coreConfig: input.coreConfig,
+        axiosConfig: input.axiosConfig
+      }).getCatalogChangesByCriteria_ByStoreId(input.storeId, input.queryParams)
+      callback && callback(response)
+      return response.data
+    }
 
   return useQuery<CatalogChangePagingResult, AxiosError<ApiError>>({
     queryKey: [Key_CatalogChangesAdmin.CatalogChangesByCriteria_ByStoreId, input],
@@ -101,19 +122,29 @@ export const useAdmCatalogChangesByCriteria_ByStoreId = (
   })
 }
 
-export const useAdmUpdateCatalogChangePublishAll_ByStoreIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<StoreInfo, AxiosError<ApiError>, ApiArgs & { storeId: string }>, 'mutationKey'>,
+/**
+ * This API is used to publish all unpublished changes.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: no content&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_CatalogChangesAdmin.CatalogChangePublishAll_ByStoreId, input]
+ * }
+ * ```
+ */
+export const useCatalogChangesAdminApi_UpdateCatalogChangePublishAll_ByStoreIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<StoreInfo, AxiosError<ApiError>, SdkSetConfigParam & { storeId: string }>, 'mutationKey'>,
   callback?: (data: StoreInfo) => void
-): UseMutationResult<StoreInfo, AxiosError<ApiError>, ApiArgs & { storeId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { storeId: string }) => {
-    const data = await CatalogChangesAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<StoreInfo, AxiosError<ApiError>, SdkSetConfigParam & { storeId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { storeId: string }) => {
+    const response = await CatalogChangesAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).updateCatalogChangePublishAll_ByStoreId(input.storeId)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -123,9 +154,20 @@ export const useAdmUpdateCatalogChangePublishAll_ByStoreIdMutation = (
   })
 }
 
-export const useAdmCatalogChangesStatistics_ByStoreId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * This API is used to query catalog changes statistics .&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: catalog changes statistics changes&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_CatalogChangesAdmin.CatalogChangesStatistics_ByStoreId, input]
+ * }
+ * ```
+ */
+export const useCatalogChangesAdminApi_GetCatalogChangesStatistics_ByStoreId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     storeId: string
     queryParams?: {
       action?: 'CREATE' | 'DELETE' | 'UPDATE'
@@ -148,17 +190,17 @@ export const useAdmCatalogChangesStatistics_ByStoreId = (
     }
   },
   options?: Omit<UseQueryOptions<CatalogChangeStatistics, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: CatalogChangeStatistics) => void
+  callback?: (data: AxiosResponse<CatalogChangeStatistics>) => void
 ): UseQueryResult<CatalogChangeStatistics, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmCatalogChangesStatistics_ByStoreId>[1]) => async () => {
-    const data = await CatalogChangesAdminApi(sdk, { namespace: input.namespace }).getCatalogChangesStatistics_ByStoreId(
-      input.storeId,
-      input.queryParams
-    )
-    callback && callback(data)
-    return data
-  }
+  const queryFn =
+    (sdk: AccelByteSDK, input: Parameters<typeof useCatalogChangesAdminApi_GetCatalogChangesStatistics_ByStoreId>[1]) => async () => {
+      const response = await CatalogChangesAdminApi(sdk, {
+        coreConfig: input.coreConfig,
+        axiosConfig: input.axiosConfig
+      }).getCatalogChangesStatistics_ByStoreId(input.storeId, input.queryParams)
+      callback && callback(response)
+      return response.data
+    }
 
   return useQuery<CatalogChangeStatistics, AxiosError<ApiError>>({
     queryKey: [Key_CatalogChangesAdmin.CatalogChangesStatistics_ByStoreId, input],
@@ -167,19 +209,29 @@ export const useAdmCatalogChangesStatistics_ByStoreId = (
   })
 }
 
-export const useAdmUpdateCatalogChangeUnselectAll_ByStoreIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { storeId: string }>, 'mutationKey'>,
+/**
+ * Unselect all change.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_CatalogChangesAdmin.CatalogChangeUnselectAll_ByStoreId, input]
+ * }
+ * ```
+ */
+export const useCatalogChangesAdminApi_UpdateCatalogChangeUnselectAll_ByStoreIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { storeId: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { storeId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { storeId: string }) => {
-    const data = await CatalogChangesAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { storeId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { storeId: string }) => {
+    const response = await CatalogChangesAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).updateCatalogChangeUnselectAll_ByStoreId(input.storeId)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -189,19 +241,29 @@ export const useAdmUpdateCatalogChangeUnselectAll_ByStoreIdMutation = (
   })
 }
 
-export const useAdmUpdateCatalogChangePublishSelected_ByStoreIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<StoreInfo, AxiosError<ApiError>, ApiArgs & { storeId: string }>, 'mutationKey'>,
+/**
+ * This API is used to publish selected unpublished changes.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: no content&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_CatalogChangesAdmin.CatalogChangePublishSelected_ByStoreId, input]
+ * }
+ * ```
+ */
+export const useCatalogChangesAdminApi_UpdateCatalogChangePublishSelected_ByStoreIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<StoreInfo, AxiosError<ApiError>, SdkSetConfigParam & { storeId: string }>, 'mutationKey'>,
   callback?: (data: StoreInfo) => void
-): UseMutationResult<StoreInfo, AxiosError<ApiError>, ApiArgs & { storeId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { storeId: string }) => {
-    const data = await CatalogChangesAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<StoreInfo, AxiosError<ApiError>, SdkSetConfigParam & { storeId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { storeId: string }) => {
+    const response = await CatalogChangesAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).updateCatalogChangePublishSelected_ByStoreId(input.storeId)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -211,19 +273,32 @@ export const useAdmUpdateCatalogChangePublishSelected_ByStoreIdMutation = (
   })
 }
 
-export const useAdmUpdateSelect_ByStoreId_ByChangeIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { storeId: string; changeId: string }>, 'mutationKey'>,
+/**
+ * Select a change, it will be included when partial publish.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_CatalogChangesAdmin.Select_ByStoreId_ByChangeId, input]
+ * }
+ * ```
+ */
+export const useCatalogChangesAdminApi_UpdateSelect_ByStoreId_ByChangeIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { storeId: string; changeId: string }>,
+    'mutationKey'
+  >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { storeId: string; changeId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { storeId: string; changeId: string }) => {
-    const data = await CatalogChangesAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateSelect_ByStoreId_ByChangeId(
-      input.storeId,
-      input.changeId
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { storeId: string; changeId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { storeId: string; changeId: string }) => {
+    const response = await CatalogChangesAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateSelect_ByStoreId_ByChangeId(input.storeId, input.changeId)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -233,19 +308,32 @@ export const useAdmUpdateSelect_ByStoreId_ByChangeIdMutation = (
   })
 }
 
-export const useAdmUpdateUnselect_ByStoreId_ByChangeIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { storeId: string; changeId: string }>, 'mutationKey'>,
+/**
+ * Unselect a change, it will not be included when partial publish.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_CatalogChangesAdmin.Unselect_ByStoreId_ByChangeId, input]
+ * }
+ * ```
+ */
+export const useCatalogChangesAdminApi_UpdateUnselect_ByStoreId_ByChangeIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { storeId: string; changeId: string }>,
+    'mutationKey'
+  >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { storeId: string; changeId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { storeId: string; changeId: string }) => {
-    const data = await CatalogChangesAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { storeId: string; changeId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { storeId: string; changeId: string }) => {
+    const response = await CatalogChangesAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).updateUnselect_ByStoreId_ByChangeId(input.storeId, input.changeId)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -255,13 +343,24 @@ export const useAdmUpdateUnselect_ByStoreId_ByChangeIdMutation = (
   })
 }
 
-export const useAdmUpdateCatalogChangeSelectAllByCriteria_ByStoreIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Select all changes by criteria
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_CatalogChangesAdmin.CatalogChangeSelectAllByCriteria_ByStoreId, input]
+ * }
+ * ```
+ */
+export const useCatalogChangesAdminApi_UpdateCatalogChangeSelectAllByCriteria_ByStoreIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
     UseMutationOptions<
       unknown,
       AxiosError<ApiError>,
-      ApiArgs & {
+      SdkSetConfigParam & {
         storeId: string
         queryParams?: {
           action?: 'CREATE' | 'DELETE' | 'UPDATE'
@@ -291,7 +390,7 @@ export const useAdmUpdateCatalogChangeSelectAllByCriteria_ByStoreIdMutation = (
 ): UseMutationResult<
   unknown,
   AxiosError<ApiError>,
-  ApiArgs & {
+  SdkSetConfigParam & {
     storeId: string
     queryParams?: {
       action?: 'CREATE' | 'DELETE' | 'UPDATE'
@@ -315,9 +414,8 @@ export const useAdmUpdateCatalogChangeSelectAllByCriteria_ByStoreIdMutation = (
     }
   }
 > => {
-  //
   const mutationFn = async (
-    input: ApiArgs & {
+    input: SdkSetConfigParam & {
       storeId: string
       queryParams?: {
         action?: 'CREATE' | 'DELETE' | 'UPDATE'
@@ -341,12 +439,12 @@ export const useAdmUpdateCatalogChangeSelectAllByCriteria_ByStoreIdMutation = (
       }
     }
   ) => {
-    const data = await CatalogChangesAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+    const response = await CatalogChangesAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).updateCatalogChangeSelectAllByCriteria_ByStoreId(input.storeId, input.queryParams)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

@@ -1,44 +1,46 @@
 {
-  "name": "accelbyte-web-sdk",
-  "workspaces": [
-    "packages/sdk",
-    "packages/sdk-achievement",
-    "packages/sdk-basic",
-    "packages/sdk-buildinfo",
-    "packages/sdk-challenge",
-    "packages/sdk-chat",
-    "packages/sdk-cloudsave",
-    "packages/sdk-differ",
-    "packages/sdk-dsmcontroller",
-    "packages/sdk-event",
-    "packages/sdk-gametelemetry",
-    "packages/sdk-gdpr",
-    "packages/sdk-groups",
-    "packages/sdk-iam",
-    "packages/sdk-inventory",
-    "packages/sdk-leaderboard",
-    "packages/sdk-legal",
-    "packages/sdk-lobby",
-    "packages/sdk-matchmaking-v1",
-    "packages/sdk-matchmaking",
-    "packages/sdk-odinconfig",
-    "packages/sdk-platform",
-    "packages/sdk-reporting",
-    "packages/sdk-qosmanager",
-    "packages/sdk-seasonpass",
-    "packages/sdk-session",
-    "packages/sdk-sessionbrowser",
-    "packages/sdk-sessionhistory",
-    "packages/sdk-social",
-    "packages/sdk-ugc",
-    "packages/examples"
-  ],
+  "name": "justice-typescript-sdk",
+  "version": "1.0.0",
   "private": true,
-  "repository": "https://github.com/AccelByte/accelbyte-web-sdk",
-  "devDependencies": {
-    "semver": "7.5.0"
+  "description": "[AccelByte TypeScript SDK](https://development.accelbyte.io/web-sdk-playground/) is a JavaScript library enabling the building of web applications using AccelByte API services. The library is platform-agnostic and can be consumed in a browser or in a server environment.",
+  "scripts": {
+    "build:error-translator": "yarn workspace @accelbyte/error-translator build",
+    "build:sdk": "yarn build:sdk-core && node ./scripts/generate/sdk-generate.mjs sdk-build-all",
+    "build:sdk-core": "yarn workspace @accelbyte/validator build && yarn workspace @accelbyte/sdk build",
+    "clean": "rimraf ./node_modules && yarn workspaces run clean",
+    "codegen:sdk": "node ./scripts/generate/sdk-generate.mjs sdk-codegen-all",
+    "format:all": "prettier --write .",
+    "lint": "eslint . --fix --quiet",
+    "prepare": "husky install",
+    "changeset:version": "changeset version && yarn install --mode=update-lockfile",
+    "sync-examples-versions": "node ./scripts/examples/sync-versions.js"
   },
-  "excludedPackagesFromNpmPublish": [
-    "packages/sdk-odinconfig"
-  ]
+  "keywords": [],
+  "author": "",
+  "workspaces": [
+    "packages/*"
+  ],
+  "packageManager": "yarn@4.4.0",
+  "devDependencies": {
+    "@changesets/cli": "2.27.7",
+    "@types/eslint": "8.4.10",
+    "@types/node": "22.3.0",
+    "@typescript-eslint/eslint-plugin": "7.0.0",
+    "@typescript-eslint/parser": "7.0.0",
+    "eslint": "8.56.0",
+    "eslint-config-prettier": "8.6.0",
+    "eslint-config-standard": "17.0.0",
+    "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-monorepo-cop": "1.0.2",
+    "eslint-plugin-n": "15.6.1",
+    "eslint-plugin-promise": "6.1.1",
+    "eslint-plugin-unused-imports": "3.0.0",
+    "execa": "7.1.1",
+    "husky": "8.0.1",
+    "prettier": "3.3.3",
+    "prettier-plugin-organize-imports": "3.1.1",
+    "rimraf": "4.1.2",
+    "semver": "7.6.3",
+    "typescript": "5.5.4"
+  }
 }

@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { AcceptAgreementRequest } from '../../generated-definitions/AcceptAgreementRequest.js'
 import { PagedRetrieveUserAcceptedAgreementResponse } from '../../generated-definitions/PagedRetrieveUserAcceptedAgreementResponse.js'
@@ -15,18 +15,18 @@ import { RetrieveAcceptedAgreementResponseArray } from '../../generated-definiti
 
 export class AgreementAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * This API will return users who has accepted a specific policy version.
    */
   getAgreementsPolicyVersionsUsers(queryParams: {
     policyVersionId: string | null
     keyword?: string | null
-    offset?: number
     limit?: number
-  }): Promise<IResponse<PagedRetrieveUserAcceptedAgreementResponse>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+    offset?: number
+  }): Promise<Response<PagedRetrieveUserAcceptedAgreementResponse>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/agreement/admin/agreements/policy-versions/users'
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -37,12 +37,11 @@ export class AgreementAdmin$ {
       'PagedRetrieveUserAcceptedAgreementResponse'
     )
   }
-
   /**
    * This API will return all accepted Legal Agreements for specified user
    */
-  getAgreementPolicyUser_ByUserId(userId: string): Promise<IResponse<RetrieveAcceptedAgreementResponseArray>> {
-    const params = {} as SDKRequestConfig
+  getAgreementPolicyUser_ByUserId(userId: string): Promise<Response<RetrieveAcceptedAgreementResponseArray>> {
+    const params = {} as AxiosRequestConfig
     const url = '/agreement/admin/agreements/policies/users/{userId}'.replace('{userId}', userId)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -53,15 +52,14 @@ export class AgreementAdmin$ {
       'RetrieveAcceptedAgreementResponseArray'
     )
   }
-
   /**
    * This API will Update Preference Consent
    */
   patchAgreementLocalizedPolicyVersionPreferenceUserId_ByUserId(
     userId: string,
     data: AcceptAgreementRequest[]
-  ): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  ): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/agreement/admin/agreements/localized-policy-versions/preferences/namespaces/{namespace}/userId/{userId}'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

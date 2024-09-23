@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { AssignRoleToMemberRequestV1 } from '../../generated-definitions/AssignRoleToMemberRequestV1.js'
 import { GetMemberRolesListResponseV1 } from '../../generated-definitions/GetMemberRolesListResponseV1.js'
@@ -16,13 +16,13 @@ import { RemoveRoleFromMemberRequestV1 } from '../../generated-definitions/Remov
 
 export class GroupRoles$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Required Member Role Permission: &#34;GROUP:ROLE \[READ\]&#34; This endpoint is used to get list of member roles Action Code: 73201
    */
-  getRoles(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<GetMemberRolesListResponseV1>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  getRoles(queryParams?: { limit?: number; offset?: number }): Promise<Response<GetMemberRolesListResponseV1>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/roles'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -33,12 +33,11 @@ export class GroupRoles$ {
       'GetMemberRolesListResponseV1'
     )
   }
-
   /**
    * This endpoint is used to get list of member roles Action Code: 73201
    */
-  getRoles_ByNS(queryParams?: { limit?: number; offset?: number }): Promise<IResponse<GetMemberRolesListResponseV1>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  getRoles_v2(queryParams?: { limit?: number; offset?: number }): Promise<Response<GetMemberRolesListResponseV1>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/roles'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -49,12 +48,11 @@ export class GroupRoles$ {
       'GetMemberRolesListResponseV1'
     )
   }
-
   /**
    * Required Member Role Permission: &#34;GROUP:ROLE [UPDATE]&#34; This endpoint is used to remove role from group member Action Code: 73204
    */
-  deleteMember_ByMemberRoleId(memberRoleId: string, data: RemoveRoleFromMemberRequestV1): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteMember_ByMemberRoleId(memberRoleId: string, data: RemoveRoleFromMemberRequestV1): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/roles/{memberRoleId}/members'
       .replace('{namespace}', this.namespace)
       .replace('{memberRoleId}', memberRoleId)
@@ -62,15 +60,14 @@ export class GroupRoles$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Required Member Role Permission: &#34;GROUP:ROLE [UPDATE] This endpoint is used to assign role to group member Action Code: 73204
    */
   createMember_ByMemberRoleId(
     memberRoleId: string,
     data: AssignRoleToMemberRequestV1
-  ): Promise<IResponse<GetUserGroupInformationResponseV1>> {
-    const params = {} as SDKRequestConfig
+  ): Promise<Response<GetUserGroupInformationResponseV1>> {
+    const params = {} as AxiosRequestConfig
     const url = '/group/v1/public/namespaces/{namespace}/roles/{memberRoleId}/members'
       .replace('{namespace}', this.namespace)
       .replace('{memberRoleId}', memberRoleId)
@@ -83,16 +80,15 @@ export class GroupRoles$ {
       'GetUserGroupInformationResponseV1'
     )
   }
-
   /**
    * Required Member Role Permission: &#34;GROUP:ROLE \[UPDATE\]&#34; This endpoint is used to remove role from group member Action Code: 73204
    */
-  deleteMember_ByMemberRoleId_ByGroupId(
+  deleteMember_ByMemberRoleId_ByGroupId_v2(
     memberRoleId: string,
     groupId: string,
     data: RemoveRoleFromMemberRequestV1
-  ): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  ): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/roles/{memberRoleId}/groups/{groupId}/members'
       .replace('{namespace}', this.namespace)
       .replace('{memberRoleId}', memberRoleId)
@@ -101,16 +97,15 @@ export class GroupRoles$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Required Member Role Permission: &#34;GROUP:ROLE [UPDATE] This endpoint is used to assign role to group member Action Code: 73204
    */
-  createMember_ByMemberRoleId_ByGroupId(
+  createMember_ByMemberRoleId_ByGroupId_v2(
     memberRoleId: string,
     groupId: string,
     data: AssignRoleToMemberRequestV1
-  ): Promise<IResponse<GetUserGroupInformationResponseV1>> {
-    const params = {} as SDKRequestConfig
+  ): Promise<Response<GetUserGroupInformationResponseV1>> {
+    const params = {} as AxiosRequestConfig
     const url = '/group/v2/public/namespaces/{namespace}/roles/{memberRoleId}/groups/{groupId}/members'
       .replace('{namespace}', this.namespace)
       .replace('{memberRoleId}', memberRoleId)

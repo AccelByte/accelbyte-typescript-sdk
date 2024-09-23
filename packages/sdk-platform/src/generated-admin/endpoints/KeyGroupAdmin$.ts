@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { BulkOperationResult } from '../../generated-definitions/BulkOperationResult.js'
 import { KeyGroupCreate } from '../../generated-definitions/KeyGroupCreate.js'
 import { KeyGroupDynamicInfo } from '../../generated-definitions/KeyGroupDynamicInfo.js'
@@ -18,8 +18,8 @@ import { KeyPagingSliceResult } from '../../generated-definitions/KeyPagingSlice
 
 export class KeyGroupAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Query key groups, if name is presented, it&#39;s fuzzy match.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: slice of key group&lt;/li&gt;&lt;/ul&gt;
    */
@@ -28,8 +28,8 @@ export class KeyGroupAdmin$ {
     name?: string | null
     offset?: number
     tag?: string | null
-  }): Promise<IResponse<KeyGroupPagingSlicedResult>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  }): Promise<Response<KeyGroupPagingSlicedResult>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/keygroups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -40,35 +40,32 @@ export class KeyGroupAdmin$ {
       'KeyGroupPagingSlicedResult'
     )
   }
-
   /**
    * Create key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created key group&lt;/li&gt;&lt;/ul&gt;
    */
-  createKeygroup(data: KeyGroupCreate): Promise<IResponse<KeyGroupInfo>> {
-    const params = {} as SDKRequestConfig
+  createKeygroup(data: KeyGroupCreate): Promise<Response<KeyGroupInfo>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/keygroups'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, KeyGroupInfo, 'KeyGroupInfo')
   }
-
   /**
    * @deprecated
    * Get key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
    */
-  getKeygroupsByBoothName_DEPRECATED(queryParams: { boothName: string | null }): Promise<IResponse<KeyGroupInfo>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  getKeygroupsByBoothName(queryParams: { boothName: string | null }): Promise<Response<KeyGroupInfo>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/keygroups/byBoothName'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, KeyGroupInfo, 'KeyGroupInfo')
   }
-
   /**
    * Get key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
    */
-  getKeygroup_ByKeyGroupId(keyGroupId: string): Promise<IResponse<KeyGroupInfo>> {
-    const params = {} as SDKRequestConfig
+  getKeygroup_ByKeyGroupId(keyGroupId: string): Promise<Response<KeyGroupInfo>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/keygroups/{keyGroupId}'
       .replace('{namespace}', this.namespace)
       .replace('{keyGroupId}', keyGroupId)
@@ -76,12 +73,11 @@ export class KeyGroupAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, KeyGroupInfo, 'KeyGroupInfo')
   }
-
   /**
    * Update key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated key group&lt;/li&gt;&lt;/ul&gt;
    */
-  updateKeygroup_ByKeyGroupId(keyGroupId: string, data: KeyGroupUpdate): Promise<IResponse<KeyGroupInfo>> {
-    const params = {} as SDKRequestConfig
+  updateKeygroup_ByKeyGroupId(keyGroupId: string, data: KeyGroupUpdate): Promise<Response<KeyGroupInfo>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/keygroups/{keyGroupId}'
       .replace('{namespace}', this.namespace)
       .replace('{keyGroupId}', keyGroupId)
@@ -89,15 +85,14 @@ export class KeyGroupAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, KeyGroupInfo, 'KeyGroupInfo')
   }
-
   /**
    * This API is used to list keys of a key group.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: keys&lt;/li&gt;&lt;/ul&gt;
    */
   getKeys_ByKeyGroupId(
     keyGroupId: string,
     queryParams?: { limit?: number; offset?: number; status?: 'ACQUIRED' | 'ACTIVE' }
-  ): Promise<IResponse<KeyPagingSliceResult>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  ): Promise<Response<KeyPagingSliceResult>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/keygroups/{keyGroupId}/keys'
       .replace('{namespace}', this.namespace)
       .replace('{keyGroupId}', keyGroupId)
@@ -105,12 +100,11 @@ export class KeyGroupAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, KeyPagingSliceResult, 'KeyPagingSliceResult')
   }
-
   /**
    * This API is used to upload keys with csv format to a key group.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: item data&lt;/li&gt;&lt;/ul&gt;
    */
-  createKey_ByKeyGroupId(keyGroupId: string, data: { file?: File }): Promise<IResponse<BulkOperationResult>> {
-    const params = {} as SDKRequestConfig
+  createKey_ByKeyGroupId(keyGroupId: string, data: { file?: File }): Promise<Response<BulkOperationResult>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/keygroups/{keyGroupId}/keys'
       .replace('{namespace}', this.namespace)
       .replace('{keyGroupId}', keyGroupId)
@@ -119,12 +113,11 @@ export class KeyGroupAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BulkOperationResult, 'BulkOperationResult')
   }
-
   /**
    * Get key group dynamic.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: key group info&lt;/li&gt;&lt;/ul&gt;
    */
-  getDynamic_ByKeyGroupId(keyGroupId: string): Promise<IResponse<KeyGroupDynamicInfo>> {
-    const params = {} as SDKRequestConfig
+  getDynamic_ByKeyGroupId(keyGroupId: string): Promise<Response<KeyGroupDynamicInfo>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/keygroups/{keyGroupId}/dynamic'
       .replace('{namespace}', this.namespace)
       .replace('{keyGroupId}', keyGroupId)

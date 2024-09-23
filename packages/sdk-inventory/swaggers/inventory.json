@@ -3,7 +3,7 @@
   "info": {
     "description": "justice-inventory-service",
     "title": "justice-inventory-service",
-    "version": "0.2.1"
+    "version": "0.2.2"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -11,42 +11,6 @@
     "url": "https://development.accelbyte.io/inventory/apidocs"
   },
   "securityDefinitions": {
-    "HasPermission": {
-      "authorizationUrl": "https://dummy.oauth.net/auth",
-      "flow": "accessCode",
-      "scopes": {
-        "ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [CREATE]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [DELETE]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [DELETE]",
-        "ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [READ]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [READ]",
-        "ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [UPDATE]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [UPDATE]",
-        "ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [CREATE]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [READ]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [READ]",
-        "ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [UPDATE]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [UPDATE]",
-        "ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [CREATE]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [DELETE]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [DELETE]",
-        "ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [READ]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [READ]",
-        "ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [CREATE]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [DELETE]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [DELETE]",
-        "ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [READ]": "ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [READ]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [CREATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [DELETE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [DELETE]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [READ]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [READ]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [DELETE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [DELETE]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [READ]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [READ]",
-        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]"
-      },
-      "tokenUrl": "https://dumy.oauth.net/token",
-      "type": "oauth2"
-    },
-    "HasScope": {
-      "authorizationUrl": "https://dummy.oauth.net/auth",
-      "flow": "accessCode",
-      "scopes": {},
-      "tokenUrl": "https://dumy.oauth.net/token",
-      "type": "oauth2"
-    },
     "authorization": {
       "in": "header",
       "name": "Authorization",
@@ -118,7 +82,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]"],
             "authorization": []
           }
         ],
@@ -183,7 +146,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [READ]"],
             "authorization": []
           }
         ],
@@ -241,7 +203,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [CREATE]"],
             "authorization": []
           }
         ],
@@ -314,7 +275,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [UPDATE]"],
             "authorization": []
           }
         ],
@@ -387,7 +347,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [UPDATE]"],
             "authorization": []
           }
         ],
@@ -474,7 +433,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [READ]"],
             "authorization": []
           }
         ],
@@ -526,7 +484,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [CREATE]"],
             "authorization": []
           }
         ],
@@ -590,7 +547,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [DELETE]"],
             "authorization": []
           }
         ],
@@ -646,7 +602,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [READ]"],
             "authorization": []
           }
         ],
@@ -711,7 +666,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]"],
             "authorization": []
           }
         ],
@@ -795,7 +749,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [READ]"],
             "authorization": []
           }
         ],
@@ -867,7 +820,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [READ]"],
             "authorization": []
           }
         ],
@@ -948,7 +900,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [READ]"],
             "authorization": []
           }
         ],
@@ -1006,7 +957,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [CREATE]"],
             "authorization": []
           }
         ],
@@ -1061,7 +1011,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [DELETE]"],
             "authorization": []
           }
         ],
@@ -1117,7 +1066,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [READ]"],
             "authorization": []
           }
         ],
@@ -1188,7 +1136,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [UPDATE]"],
             "authorization": []
           }
         ],
@@ -1253,7 +1200,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [READ]"],
             "authorization": []
           }
         ],
@@ -1311,7 +1257,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [CREATE]"],
             "authorization": []
           }
         ],
@@ -1360,7 +1305,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [DELETE]"],
             "authorization": []
           }
         ],
@@ -1431,7 +1375,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [READ]"],
             "authorization": []
           }
         ],
@@ -1489,7 +1432,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [CREATE]"],
             "authorization": []
           }
         ],
@@ -1538,7 +1480,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [DELETE]"],
             "authorization": []
           }
         ],
@@ -1612,7 +1553,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]"],
             "authorization": []
           }
         ],
@@ -1692,7 +1632,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [DELETE]"],
             "authorization": []
           }
         ],
@@ -1758,7 +1697,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]"],
             "authorization": []
           }
         ],
@@ -1836,7 +1774,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]"],
             "authorization": []
           }
         ],
@@ -1934,7 +1871,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]"],
             "authorization": []
           }
         ],
@@ -2023,7 +1959,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]"],
             "authorization": []
           }
         ],
@@ -2084,7 +2019,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]"],
             "authorization": []
           }
         ],
@@ -2175,7 +2109,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]"],
             "authorization": []
           }
         ],
@@ -2242,7 +2175,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]"],
             "authorization": []
           }
         ],
@@ -2312,7 +2244,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]"],
             "authorization": []
           }
         ],
@@ -2896,7 +2827,7 @@
     "/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/items/movement": {
       "post": {
         "consumes": ["application/json"],
-        "description": "\n\t\t\tMove items between inventories that is owned by the same user.\n\n\t\t\tCurrently, this endpoint supports transferring items exclusively from source OTHER.\n\t\t\tItems from source ECOMMERCE are not yet eligible for transfer.\n\t\t\tWe are working on expanding support to include source ECOMMERCE in future updates.\n\t\t",
+        "description": "\n\t\t\tMove items between inventories that is owned by the same user.\n\t\t",
         "operationId": "PublicMoveMyItems",
         "parameters": [
           {
@@ -4102,11 +4033,11 @@
     "path": "/inventory/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-07-29T08:11:14+00:00",
-    "gitHash": "ff82bf460a1c0bb3338de3459861f9b1e3f3e327",
+    "buildDate": "2024-09-05T02:23:54+00:00",
+    "gitHash": "298d4b60266fa74573e4339ff65d1f4b62feaeda",
     "name": "justice-inventory-service",
     "realm": "DEV",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "version-roles-seeding": "1.2.34"
   }
 }

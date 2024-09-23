@@ -51,23 +51,6 @@
     "url": "https://development.accelbyte.io/buildinfo"
   },
   "securityDefinitions": {
-    "HasPermission": {
-      "authorizationUrl": "https://dummy.oauth.net/auth",
-      "flow": "accessCode",
-      "scopes": {
-        "ADMIN:NAMESPACE:{namespace}:BUILDINFO [CREATE]": "ADMIN:NAMESPACE:{namespace}:BUILDINFO [CREATE]",
-        "ADMIN:NAMESPACE:{namespace}:BUILDINFO [DELETE]": "ADMIN:NAMESPACE:{namespace}:BUILDINFO [DELETE]"
-      },
-      "tokenUrl": "https://dumy.oauth.net/token",
-      "type": "oauth2"
-    },
-    "HasScope": {
-      "authorizationUrl": "https://dummy.oauth.net/auth",
-      "flow": "accessCode",
-      "scopes": {},
-      "tokenUrl": "https://dumy.oauth.net/token",
-      "type": "oauth2"
-    },
     "authorization": {
       "in": "header",
       "name": "Authorization",
@@ -299,10 +282,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:BUILDINFO [DELETE]"],
             "authorization": []
           }
         ],
@@ -2802,10 +2781,6 @@
         },
         "security": [
           {
-            "authorization": []
-          },
-          {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:BUILDINFO [CREATE]"],
             "authorization": []
           }
         ],

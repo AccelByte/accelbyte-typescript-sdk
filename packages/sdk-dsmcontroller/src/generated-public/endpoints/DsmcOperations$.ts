@@ -6,19 +6,19 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { AppMessageDeclarationArray } from '../../generated-definitions/AppMessageDeclarationArray.js'
 
 export class DsmcOperations$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * get the list of messages.
    */
-  getMessages(): Promise<IResponse<AppMessageDeclarationArray>> {
-    const params = {} as SDKRequestConfig
+  getMessages(): Promise<Response<AppMessageDeclarationArray>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/v1/messages'
     const resultPromise = this.axiosInstance.get(url, { params })
 

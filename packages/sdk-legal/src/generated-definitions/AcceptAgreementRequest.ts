@@ -6,11 +6,11 @@
 import { z } from 'zod'
 
 export const AcceptAgreementRequest = z.object({
-  localizedPolicyVersionId: z.string(),
-  policyVersionId: z.string(),
-  policyId: z.string(),
   isAccepted: z.boolean(),
-  isNeedToSendEventMarketing: z.boolean().nullish()
+  isNeedToSendEventMarketing: z.boolean().nullish(),
+  localizedPolicyVersionId: z.string(),
+  policyId: z.string(),
+  policyVersionId: z.string()
 })
 
 export interface AcceptAgreementRequest extends z.TypeOf<typeof AcceptAgreementRequest> {}

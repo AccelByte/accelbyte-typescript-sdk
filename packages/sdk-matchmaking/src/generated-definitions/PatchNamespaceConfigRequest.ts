@@ -6,7 +6,9 @@
 import { z } from 'zod'
 
 export const PatchNamespaceConfigRequest = z.object({
+  crossPlatformNoCurrentPlatform: z.boolean().nullish(),
   extraPlatforms: z.array(z.string()).nullish(),
+  matchAnyCommon: z.boolean().nullish(),
   platformGroup: z.record(z.array(z.string())).nullish()
 })
 

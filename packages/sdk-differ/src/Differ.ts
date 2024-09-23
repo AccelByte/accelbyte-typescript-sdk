@@ -7,10 +7,19 @@
  * AUTO GENERATED
  */
 
+import { author, name, version } from '../package.json'
 import { DiffCalculationApi } from './generated-public/DiffCalculationApi.js'
 
+console.log(`${name}@${version}`)
+
 const apis = {
-  DiffCalculationApi
+  DiffCalculationApi,
+  version: () =>
+    console.log({
+      version,
+      name,
+      author
+    })
 }
 
 export const Differ = apis

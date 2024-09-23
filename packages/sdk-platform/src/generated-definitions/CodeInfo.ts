@@ -11,6 +11,7 @@ import { RedeemableItem } from './RedeemableItem.js'
 export const CodeInfo = z.object({
   acquireOrderNo: z.string().nullish(),
   acquireUserId: z.string().nullish(),
+  batchName: z.string().nullish(),
   batchNo: z.number().int(),
   campaign: CampaignIfc.nullish(),
   campaignId: z.string(),

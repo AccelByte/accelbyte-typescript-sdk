@@ -6,19 +6,19 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 
 export class AnonymizationAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Anonymize user profile.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11501&lt;/li&gt;&lt;/ul&gt;
    */
-  deleteAnonymizationProfile_ByUserId(userId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteAnonymizationProfile_ByUserId(userId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/basic/v1/admin/namespaces/{namespace}/users/{userId}/anonymization/profiles'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

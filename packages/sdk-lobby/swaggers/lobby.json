@@ -3,7 +3,7 @@
   "info": {
     "description": "Justice Lobby Server",
     "title": "justice-lobby-server",
-    "version": "3.35.15"
+    "version": "3.36.0"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -11,24 +11,6 @@
     "url": "https://development.accelbyte.io/lobby/apidocs"
   },
   "securityDefinitions": {
-    "HasPermission": {
-      "authorizationUrl": "https://dummy.oauth.net/auth",
-      "flow": "accessCode",
-      "scopes": {
-        "ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [DELETE]": "ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [DELETE]"
-      },
-      "tokenUrl": "https://dumy.oauth.net/token",
-      "type": "oauth2"
-    },
-    "HasScope": {
-      "authorizationUrl": "https://dummy.oauth.net/auth",
-      "flow": "accessCode",
-      "scopes": {
-        "social": "social"
-      },
-      "tokenUrl": "https://dumy.oauth.net/token",
-      "type": "oauth2"
-    },
     "authorization": {
       "in": "header",
       "name": "Authorization",
@@ -1294,7 +1276,7 @@
     },
     "/lobby/v1/admin/config/log": {
       "get": {
-        "description": "Get Log Configuration.\u0026lt;br\u0026gt;",
+        "description": "\n\t\t\tGet Log Configuration\n\t\t\tlogLevel use for logging in service, the value can use is trace|debug|info|warning|error|fatal|panic\n\t\t\tsocketLogEnabled is use for enable socket log\n\t\t\tlogLevelDB use for logging in DB, the value can use is trace|debug|info|warning|error|fatal|panic\n\t\t\tslowQueryThreshold use for logging slow threshold in time measure is nano second\n\t\t\t",
         "operationId": "adminGetLogConfig",
         "produces": ["application/json"],
         "responses": {
@@ -1321,7 +1303,7 @@
       },
       "patch": {
         "consumes": ["application/json"],
-        "description": "Update Log Configuration.\u0026lt;br\u0026gt;",
+        "description": "\n\t\t\t\tUpdate Log Configuration\n\t\t\t\tlogLevel use for logging in service, the value can use is trace|debug|info|warning|error|fatal|panic\n\t\t\t\tsocketLogEnabled is use for enable socket log\n\t\t\t\tlogLevelDB use for logging in DB, the value can use is trace|debug|info|warning|error|fatal|panic\n\t\t\t\tslowQueryThreshold use for logging slow threshold in time measure is nano second\n\t\t\t",
         "operationId": "adminPatchUpdateLogConfig",
         "parameters": [
           {
@@ -5627,8 +5609,6 @@
         },
         "security": [
           {
-            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [DELETE]"],
-            "HasScope": ["social"],
             "authorization": []
           }
         ],
@@ -7912,6 +7892,14 @@
         "logLevel": {
           "enum": ["debug", "error", "fatal", "info", "panic", "trace", "warning"],
           "type": "string"
+        },
+        "logLevelDB": {
+          "enum": ["debug", "error", "fatal", "info", "panic", "trace", "warning"],
+          "type": "string"
+        },
+        "slowQueryThreshold": {
+          "format": "int64",
+          "type": "integer"
         },
         "socketLogEnabled": {
           "type": "boolean",
@@ -13852,11 +13840,11 @@
     }
   ],
   "x-version": {
-    "buildDate": "2024-08-06T05:54:50+00:00",
-    "gitHash": "eaf358d21e5a972edeb6ba7525eabf08257b1451",
+    "buildDate": "2024-09-19T09:47:30+00:00",
+    "gitHash": "2dfee1cfa59ef38b6c3be30983e16bdaa792a14f",
     "name": "justice-lobby-server",
-    "revisionID": "3.35.15",
-    "version": "3.35.15",
+    "revisionID": "3.36.0",
+    "version": "3.36.0",
     "version-justice": "3.45.0",
     "version-roles-seeding": "1.2.52"
   }

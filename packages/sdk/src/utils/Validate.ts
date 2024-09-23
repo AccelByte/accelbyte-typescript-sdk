@@ -6,22 +6,16 @@
 import { AxiosError, AxiosResponse } from 'axios'
 import { z, ZodError } from 'zod'
 
-export type IResponseError = Error | AxiosError
+export type ResponseError = Error | AxiosError
 
-// AxiosResponse
-export type IDataStatus<D> = {
-  data: D
-  status: number
-}
-
-export type IResponse<D> =
+export type Response<T> =
   | {
-      response: IDataStatus<D>
+      response: AxiosResponse<T>
       error: null
     }
   | {
       response: null
-      error: IResponseError
+      error: ResponseError
     }
 
 export class Validate {
@@ -58,17 +52,9 @@ export class Validate {
   }
 }
 
-async function wrapNetworkCallSafely<D>(networkCallFunction: () => Promise<AxiosResponse<D>>): Promise<IResponse<D>> {
+async function wrapNetworkCallSafely<D>(networkCallFunction: () => Promise<AxiosResponse<D>>): Promise<Response<D>> {
   try {
     const response = await networkCallFunction()
-    // Cleanup so we avoid polluting the response
-    // @ts-ignore
-    delete response.headers // perhaps this may be required?
-    // @ts-ignore
-    delete response.statusText
-    // @ts-ignore
-    delete response.config // axios specific
-    delete response.request
     return { response, error: null }
   } catch (error) {
     return { response: null, error: <Error>error }

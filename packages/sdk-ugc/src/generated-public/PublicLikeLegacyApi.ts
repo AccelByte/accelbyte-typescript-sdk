@@ -8,22 +8,42 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ContentLikeRequest } from '../generated-definitions/ContentLikeRequest.js'
 import { ContentLikeResponse } from '../generated-definitions/ContentLikeResponse.js'
 import { PaginatedContentDownloadResponse } from '../generated-definitions/PaginatedContentDownloadResponse.js'
 import { PublicLikeLegacy$ } from './endpoints/PublicLikeLegacy$.js'
 
-export function PublicLikeLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function PublicLikeLegacyApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * For advance tag filtering supports &amp; as AND operator and | as OR operator and parentheses ( ) for priority. e.g: *tags=red* *tags=red&amp;animal* *tags=red|animal* *tags=red&amp;animal|wild* *tags=red&amp;(animal|wild)* The precedence of logical operator is AND &gt; OR, so if no parentheses, AND logical operator will be executed first. Allowed character for operand: alphanumeric, underscore _ and dash - Allowed character for operator: &amp; | ( ) **Please note that value of tags query param should be URL encoded**
-   */
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
+  }
+
   async function getContentsLiked(queryParams?: {
     isofficial?: boolean | null
     limit?: number
@@ -34,25 +54,28 @@ export function PublicLikeLegacyApi(sdk: AccelbyteSDK, args?: ApiArgs) {
     subtype?: string | null
     tags?: string[]
     type?: string | null
-  }): Promise<PaginatedContentDownloadResponse> {
-    const $ = new PublicLikeLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
+  }): Promise<AxiosResponse<PaginatedContentDownloadResponse>> {
+    const $ = new PublicLikeLegacy$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getContentsLiked(queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * This endpoint will update like/unlike state from a content
-   */
-  async function updateLike_ByContentId(contentId: string, data: ContentLikeRequest): Promise<ContentLikeResponse> {
-    const $ = new PublicLikeLegacy$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateLike_ByContentId(contentId: string, data: ContentLikeRequest): Promise<AxiosResponse<ContentLikeResponse>> {
+    const $ = new PublicLikeLegacy$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateLike_ByContentId(contentId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     * For advance tag filtering supports &amp; as AND operator and | as OR operator and parentheses ( ) for priority. e.g: *tags=red* *tags=red&amp;animal* *tags=red|animal* *tags=red&amp;animal|wild* *tags=red&amp;(animal|wild)* The precedence of logical operator is AND &gt; OR, so if no parentheses, AND logical operator will be executed first. Allowed character for operand: alphanumeric, underscore _ and dash - Allowed character for operator: &amp; | ( ) **Please note that value of tags query param should be URL encoded**
+     */
     getContentsLiked,
+    /**
+     * This endpoint will update like/unlike state from a content
+     */
     updateLike_ByContentId
   }
 }

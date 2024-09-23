@@ -6,21 +6,21 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { RetrieveLocalizedPolicyVersionPublicResponse } from '../../generated-definitions/RetrieveLocalizedPolicyVersionPublicResponse.js'
 
 export class LocalizedPolicyVersions$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
-   * Retrieve specific localized policy version including the policy version and base policy version where the localized policy version located.<br>Other detail info: <ul></ul>
+   * Retrieve specific localized policy version including the policy version and base policy version where the localized policy version located.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/ul&gt;
    */
   getLocalizedPolicyVersion_ByLocalizedPolicyVersionId(
     localizedPolicyVersionId: string
-  ): Promise<IResponse<RetrieveLocalizedPolicyVersionPublicResponse>> {
-    const params = {} as SDKRequestConfig
+  ): Promise<Response<RetrieveLocalizedPolicyVersionPublicResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/agreement/public/localized-policy-versions/{localizedPolicyVersionId}'.replace(
       '{localizedPolicyVersionId}',
       localizedPolicyVersionId

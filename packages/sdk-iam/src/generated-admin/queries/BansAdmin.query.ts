@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { BansAdminApi } from '../BansAdminApi.js'
 
 import { BanReasonsV3 } from '../../generated-definitions/BanReasonsV3.js'
@@ -21,133 +21,197 @@ import { GetUserBanV3Response } from '../../generated-definitions/GetUserBanV3Re
 import { ListBulkUserBanResponseV3 } from '../../generated-definitions/ListBulkUserBanResponseV3.js'
 
 export enum Key_BansAdmin {
-  Bans = 'BansAdmin.Bans',
-  BansReasons = 'BansAdmin.BansReasons',
-  Bantypes = 'BansAdmin.Bantypes',
-  BansUsers = 'BansAdmin.BansUsers',
-  BanUser = 'BansAdmin.BanUser',
-  BanUserDisabled = 'BansAdmin.BanUserDisabled'
+  Bans_v3 = 'Iam.BansAdmin.Bans_v3',
+  BansReasons_v3 = 'Iam.BansAdmin.BansReasons_v3',
+  Bantypes_v3 = 'Iam.BansAdmin.Bantypes_v3',
+  BansUsers_v3 = 'Iam.BansAdmin.BansUsers_v3',
+  BanUser_v3 = 'Iam.BansAdmin.BanUser_v3',
+  BanUserDisabled_v3 = 'Iam.BansAdmin.BanUserDisabled_v3'
 }
 
-export const useAdmBans = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Ban type is the code available for ban assignment. It is applicable globally for any namespace. action code : 10201
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_BansAdmin.Bans_v3, input]
+ * }
+ * ```
+ */
+export const useBansAdminApi_GetBans_v3 = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<BansV3, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: BansV3) => void
+  callback?: (data: AxiosResponse<BansV3>) => void
 ): UseQueryResult<BansV3, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmBans>[1]) => async () => {
-    const data = await BansAdminApi(sdk, { namespace: input.namespace }).getBans()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useBansAdminApi_GetBans_v3>[1]) => async () => {
+    const response = await BansAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getBans_v3()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<BansV3, AxiosError<ApiError>>({
-    queryKey: [Key_BansAdmin.Bans, input],
+    queryKey: [Key_BansAdmin.Bans_v3, input],
     queryFn: queryFn(sdk, input),
     ...options
   })
 }
 
-export const useAdmBansReasons = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Ban reasons is the code available to justify ban assignment. It is applicable globally for any namespace. action code : 10202
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_BansAdmin.BansReasons_v3, input]
+ * }
+ * ```
+ */
+export const useBansAdminApi_GetBansReasons_v3 = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<BanReasonsV3, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: BanReasonsV3) => void
+  callback?: (data: AxiosResponse<BanReasonsV3>) => void
 ): UseQueryResult<BanReasonsV3, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmBansReasons>[1]) => async () => {
-    const data = await BansAdminApi(sdk, { namespace: input.namespace }).getBansReasons()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useBansAdminApi_GetBansReasons_v3>[1]) => async () => {
+    const response = await BansAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getBansReasons_v3()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<BanReasonsV3, AxiosError<ApiError>>({
-    queryKey: [Key_BansAdmin.BansReasons, input],
+    queryKey: [Key_BansAdmin.BansReasons_v3, input],
     queryFn: queryFn(sdk, input),
     ...options
   })
 }
 
-export const useAdmBantypes = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Ban type is the code available for ban assignment. It is applicable globally for any namespace. action code : 10201
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_BansAdmin.Bantypes_v3, input]
+ * }
+ * ```
+ */
+export const useBansAdminApi_GetBantypes_v3 = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<BansV3, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: BansV3) => void
+  callback?: (data: AxiosResponse<BansV3>) => void
 ): UseQueryResult<BansV3, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmBantypes>[1]) => async () => {
-    const data = await BansAdminApi(sdk, { namespace: input.namespace }).getBantypes()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useBansAdminApi_GetBantypes_v3>[1]) => async () => {
+    const response = await BansAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getBantypes_v3()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<BansV3, AxiosError<ApiError>>({
-    queryKey: [Key_BansAdmin.Bantypes, input],
+    queryKey: [Key_BansAdmin.Bantypes_v3, input],
     queryFn: queryFn(sdk, input),
     ...options
   })
 }
 
-export const useAdmBansUsers = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams?: { activeOnly?: boolean | null; banType?: string | null; limit?: number; offset?: number } },
+/**
+ * Ban type is the code available for ban assignment. It is applicable globally for any namespace. action code : 10201
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_BansAdmin.BansUsers_v3, input]
+ * }
+ * ```
+ */
+export const useBansAdminApi_GetBansUsers_v3 = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams?: { activeOnly?: boolean | null; banType?: string | null; limit?: number; offset?: number } },
   options?: Omit<UseQueryOptions<GetUserBanV3Response, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: GetUserBanV3Response) => void
+  callback?: (data: AxiosResponse<GetUserBanV3Response>) => void
 ): UseQueryResult<GetUserBanV3Response, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmBansUsers>[1]) => async () => {
-    const data = await BansAdminApi(sdk, { namespace: input.namespace }).getBansUsers(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useBansAdminApi_GetBansUsers_v3>[1]) => async () => {
+    const response = await BansAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getBansUsers_v3(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<GetUserBanV3Response, AxiosError<ApiError>>({
-    queryKey: [Key_BansAdmin.BansUsers, input],
+    queryKey: [Key_BansAdmin.BansUsers_v3, input],
     queryFn: queryFn(sdk, input),
     ...options
   })
 }
 
-export const useAdmCreateBanUserMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Bulk ban user with specific type of ban. Ban types and reason can be queried. The maximum limit value is 100 userIDs action code : 10141
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_BansAdmin.BanUser_v3, input]
+ * }
+ * ```
+ */
+export const useBansAdminApi_CreateBanUserMutation_v3 = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<ListBulkUserBanResponseV3, AxiosError<ApiError>, ApiArgs & { data: BulkBanCreateRequestV3 }>,
+    UseMutationOptions<ListBulkUserBanResponseV3, AxiosError<ApiError>, SdkSetConfigParam & { data: BulkBanCreateRequestV3 }>,
     'mutationKey'
   >,
   callback?: (data: ListBulkUserBanResponseV3) => void
-): UseMutationResult<ListBulkUserBanResponseV3, AxiosError<ApiError>, ApiArgs & { data: BulkBanCreateRequestV3 }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: BulkBanCreateRequestV3 }) => {
-    const data = await BansAdminApi(sdk, { namespace: input.namespace, config: input.config }).createBanUser(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<ListBulkUserBanResponseV3, AxiosError<ApiError>, SdkSetConfigParam & { data: BulkBanCreateRequestV3 }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: BulkBanCreateRequestV3 }) => {
+    const response = await BansAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createBanUser_v3(input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
-    mutationKey: [Key_BansAdmin.BanUser],
+    mutationKey: [Key_BansAdmin.BanUser_v3],
     mutationFn,
     ...options
   })
 }
 
-export const useAdmPatchBanUserDisabledMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * disable bulk ban user. The maximum limit value is 100 action code : 10142
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_BansAdmin.BanUserDisabled_v3, input]
+ * }
+ * ```
+ */
+export const useBansAdminApi_PatchBanUserDisabledMutation_v3 = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<ListBulkUserBanResponseV3, AxiosError<ApiError>, ApiArgs & { data: BulkUnbanCreateRequestV3 }>,
+    UseMutationOptions<ListBulkUserBanResponseV3, AxiosError<ApiError>, SdkSetConfigParam & { data: BulkUnbanCreateRequestV3 }>,
     'mutationKey'
   >,
   callback?: (data: ListBulkUserBanResponseV3) => void
-): UseMutationResult<ListBulkUserBanResponseV3, AxiosError<ApiError>, ApiArgs & { data: BulkUnbanCreateRequestV3 }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: BulkUnbanCreateRequestV3 }) => {
-    const data = await BansAdminApi(sdk, { namespace: input.namespace, config: input.config }).patchBanUserDisabled(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<ListBulkUserBanResponseV3, AxiosError<ApiError>, SdkSetConfigParam & { data: BulkUnbanCreateRequestV3 }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: BulkUnbanCreateRequestV3 }) => {
+    const response = await BansAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).patchBanUserDisabled_v3(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
-    mutationKey: [Key_BansAdmin.BanUserDisabled],
+    mutationKey: [Key_BansAdmin.BanUserDisabled_v3],
     mutationFn,
     ...options
   })

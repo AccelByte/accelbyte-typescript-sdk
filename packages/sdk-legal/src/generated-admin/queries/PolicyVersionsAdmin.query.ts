@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { PolicyVersionsAdminApi } from '../PolicyVersionsAdminApi.js'
 
 import { CreatePolicyVersionRequest } from '../../generated-definitions/CreatePolicyVersionRequest.js'
@@ -20,23 +20,36 @@ import { UpdatePolicyVersionRequest } from '../../generated-definitions/UpdatePo
 import { UpdatePolicyVersionResponse } from '../../generated-definitions/UpdatePolicyVersionResponse.js'
 
 export enum Key_PolicyVersionsAdmin {
-  Versions_ByPolicyId = 'PolicyVersionsAdmin.Versions_ByPolicyId',
-  Version_ByPolicyId = 'PolicyVersionsAdmin.Version_ByPolicyId',
-  PolicyVersion_ByPolicyVersionId = 'PolicyVersionsAdmin.PolicyVersion_ByPolicyVersionId',
-  LatestPolicy_ByPolicyVersionId = 'PolicyVersionsAdmin.LatestPolicy_ByPolicyVersionId'
+  Versions_ByPolicyId = 'Legal.PolicyVersionsAdmin.Versions_ByPolicyId',
+  Version_ByPolicyId = 'Legal.PolicyVersionsAdmin.Version_ByPolicyId',
+  PolicyVersion_ByPolicyVersionId = 'Legal.PolicyVersionsAdmin.PolicyVersion_ByPolicyVersionId',
+  LatestPolicy_ByPolicyVersionId = 'Legal.PolicyVersionsAdmin.LatestPolicy_ByPolicyVersionId'
 }
 
-export const useAdmVersions_ByPolicyId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { policyId: string; queryParams?: { versionId?: string | null } },
+/**
+ * Retrieve a version of a particular country specific policy. If version is not provided, the Legal Service will assume caller requesting all versions from country-specific policy.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PolicyVersionsAdmin.Versions_ByPolicyId, input]
+ * }
+ * ```
+ */
+export const usePolicyVersionsAdminApi_GetVersions_ByPolicyId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { policyId: string; queryParams?: { versionId?: string | null } },
   options?: Omit<UseQueryOptions<RetrievePolicyVersionResponseArray, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: RetrievePolicyVersionResponseArray) => void
+  callback?: (data: AxiosResponse<RetrievePolicyVersionResponseArray>) => void
 ): UseQueryResult<RetrievePolicyVersionResponseArray, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmVersions_ByPolicyId>[1]) => async () => {
-    const data = await PolicyVersionsAdminApi(sdk, { namespace: input.namespace }).getVersions_ByPolicyId(input.policyId, input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof usePolicyVersionsAdminApi_GetVersions_ByPolicyId>[1]) => async () => {
+    const response = await PolicyVersionsAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getVersions_ByPolicyId(input.policyId, input.queryParams)
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<RetrievePolicyVersionResponseArray, AxiosError<ApiError>>({
@@ -46,26 +59,40 @@ export const useAdmVersions_ByPolicyId = (
   })
 }
 
-export const useAdmCreateVersion_ByPolicyIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Create a version of a particular country-specific policy.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PolicyVersionsAdmin.Version_ByPolicyId, input]
+ * }
+ * ```
+ */
+export const usePolicyVersionsAdminApi_CreateVersion_ByPolicyIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<CreatePolicyVersionResponse, AxiosError<ApiError>, ApiArgs & { policyId: string; data: CreatePolicyVersionRequest }>,
+    UseMutationOptions<
+      CreatePolicyVersionResponse,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { policyId: string; data: CreatePolicyVersionRequest }
+    >,
     'mutationKey'
   >,
   callback?: (data: CreatePolicyVersionResponse) => void
 ): UseMutationResult<
   CreatePolicyVersionResponse,
   AxiosError<ApiError>,
-  ApiArgs & { policyId: string; data: CreatePolicyVersionRequest }
+  SdkSetConfigParam & { policyId: string; data: CreatePolicyVersionRequest }
 > => {
-  //
-  const mutationFn = async (input: ApiArgs & { policyId: string; data: CreatePolicyVersionRequest }) => {
-    const data = await PolicyVersionsAdminApi(sdk, { namespace: input.namespace, config: input.config }).createVersion_ByPolicyId(
-      input.policyId,
-      input.data
-    )
-    callback && callback(data)
-    return data
+  const mutationFn = async (input: SdkSetConfigParam & { policyId: string; data: CreatePolicyVersionRequest }) => {
+    const response = await PolicyVersionsAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).createVersion_ByPolicyId(input.policyId, input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -75,13 +102,24 @@ export const useAdmCreateVersion_ByPolicyIdMutation = (
   })
 }
 
-export const useAdmPatchPolicyVersion_ByPolicyVersionIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Update a particular policy version.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PolicyVersionsAdmin.PolicyVersion_ByPolicyVersionId, input]
+ * }
+ * ```
+ */
+export const usePolicyVersionsAdminApi_PatchPolicyVersion_ByPolicyVersionIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
     UseMutationOptions<
       UpdatePolicyVersionResponse,
       AxiosError<ApiError>,
-      ApiArgs & { policyVersionId: string; data: UpdatePolicyVersionRequest }
+      SdkSetConfigParam & { policyVersionId: string; data: UpdatePolicyVersionRequest }
     >,
     'mutationKey'
   >,
@@ -89,16 +127,15 @@ export const useAdmPatchPolicyVersion_ByPolicyVersionIdMutation = (
 ): UseMutationResult<
   UpdatePolicyVersionResponse,
   AxiosError<ApiError>,
-  ApiArgs & { policyVersionId: string; data: UpdatePolicyVersionRequest }
+  SdkSetConfigParam & { policyVersionId: string; data: UpdatePolicyVersionRequest }
 > => {
-  //
-  const mutationFn = async (input: ApiArgs & { policyVersionId: string; data: UpdatePolicyVersionRequest }) => {
-    const data = await PolicyVersionsAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+  const mutationFn = async (input: SdkSetConfigParam & { policyVersionId: string; data: UpdatePolicyVersionRequest }) => {
+    const response = await PolicyVersionsAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).patchPolicyVersion_ByPolicyVersionId(input.policyVersionId, input.data)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -108,13 +145,24 @@ export const useAdmPatchPolicyVersion_ByPolicyVersionIdMutation = (
   })
 }
 
-export const useAdmPatchLatestPolicy_ByPolicyVersionIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Manually publish a version of a particular country-specific policy.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PolicyVersionsAdmin.LatestPolicy_ByPolicyVersionId, input]
+ * }
+ * ```
+ */
+export const usePolicyVersionsAdminApi_PatchLatestPolicy_ByPolicyVersionIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
     UseMutationOptions<
       unknown,
       AxiosError<ApiError>,
-      ApiArgs & { policyVersionId: string; queryParams?: { shouldNotify?: boolean | null } }
+      SdkSetConfigParam & { policyVersionId: string; queryParams?: { shouldNotify?: boolean | null } }
     >,
     'mutationKey'
   >,
@@ -122,16 +170,15 @@ export const useAdmPatchLatestPolicy_ByPolicyVersionIdMutation = (
 ): UseMutationResult<
   unknown,
   AxiosError<ApiError>,
-  ApiArgs & { policyVersionId: string; queryParams?: { shouldNotify?: boolean | null } }
+  SdkSetConfigParam & { policyVersionId: string; queryParams?: { shouldNotify?: boolean | null } }
 > => {
-  //
-  const mutationFn = async (input: ApiArgs & { policyVersionId: string; queryParams?: { shouldNotify?: boolean | null } }) => {
-    const data = await PolicyVersionsAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+  const mutationFn = async (input: SdkSetConfigParam & { policyVersionId: string; queryParams?: { shouldNotify?: boolean | null } }) => {
+    const response = await PolicyVersionsAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).patchLatestPolicy_ByPolicyVersionId(input.policyVersionId, input.queryParams)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

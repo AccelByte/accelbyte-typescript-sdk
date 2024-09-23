@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { GlobalAchievementsAdminApi } from '../GlobalAchievementsAdminApi.js'
 
 import { PaginatedContributorResponse } from '../../generated-definitions/PaginatedContributorResponse.js'
@@ -18,15 +18,26 @@ import { PaginatedGlobalAchievementResponse } from '../../generated-definitions/
 import { PaginatedUserContributionResponse } from '../../generated-definitions/PaginatedUserContributionResponse.js'
 
 export enum Key_GlobalAchievementsAdmin {
-  GlobalAchievements = 'GlobalAchievementsAdmin.GlobalAchievements',
-  GlobalAchievements_ByUserId = 'GlobalAchievementsAdmin.GlobalAchievements_ByUserId',
-  ResetGlobal_ByAchievementCode = 'GlobalAchievementsAdmin.ResetGlobal_ByAchievementCode',
-  ContributorsGlobal_ByAchievementCode = 'GlobalAchievementsAdmin.ContributorsGlobal_ByAchievementCode'
+  GlobalAchievements = 'Achievement.GlobalAchievementsAdmin.GlobalAchievements',
+  GlobalAchievements_ByUserId = 'Achievement.GlobalAchievementsAdmin.GlobalAchievements_ByUserId',
+  ResetGlobal_ByAchievementCode = 'Achievement.GlobalAchievementsAdmin.ResetGlobal_ByAchievementCode',
+  ContributorsGlobal_ByAchievementCode = 'Achievement.GlobalAchievementsAdmin.ContributorsGlobal_ByAchievementCode'
 }
 
-export const useAdmGlobalAchievements = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt; &lt;p&gt;Note:&lt;/p&gt; &lt;p&gt; Global achievement status value mean: &lt;code&gt;status = 1 (in progress)&lt;/code&gt; and &lt;code&gt;status = 2 (unlocked)&lt;/code&gt;&lt;/p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_GlobalAchievementsAdmin.GlobalAchievements, input]
+ * }
+ * ```
+ */
+export const useGlobalAchievementsAdminApi_GetGlobalAchievements = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     queryParams?: {
       achievementCodes?: string | null
       limit?: number
@@ -37,13 +48,15 @@ export const useAdmGlobalAchievements = (
     }
   },
   options?: Omit<UseQueryOptions<PaginatedGlobalAchievementResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: PaginatedGlobalAchievementResponse) => void
+  callback?: (data: AxiosResponse<PaginatedGlobalAchievementResponse>) => void
 ): UseQueryResult<PaginatedGlobalAchievementResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmGlobalAchievements>[1]) => async () => {
-    const data = await GlobalAchievementsAdminApi(sdk, { namespace: input.namespace }).getGlobalAchievements(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useGlobalAchievementsAdminApi_GetGlobalAchievements>[1]) => async () => {
+    const response = await GlobalAchievementsAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getGlobalAchievements(input.queryParams)
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<PaginatedGlobalAchievementResponse, AxiosError<ApiError>>({
@@ -53,24 +66,35 @@ export const useAdmGlobalAchievements = (
   })
 }
 
-export const useAdmGlobalAchievements_ByUserId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_GlobalAchievementsAdmin.GlobalAchievements_ByUserId, input]
+ * }
+ * ```
+ */
+export const useGlobalAchievementsAdminApi_GetGlobalAchievements_ByUserId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     userId: string
     queryParams?: { achievementCodes?: string | null; limit?: number; offset?: number; sortBy?: string | null; tags?: string[] }
   },
   options?: Omit<UseQueryOptions<PaginatedUserContributionResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: PaginatedUserContributionResponse) => void
+  callback?: (data: AxiosResponse<PaginatedUserContributionResponse>) => void
 ): UseQueryResult<PaginatedUserContributionResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmGlobalAchievements_ByUserId>[1]) => async () => {
-    const data = await GlobalAchievementsAdminApi(sdk, { namespace: input.namespace }).getGlobalAchievements_ByUserId(
-      input.userId,
-      input.queryParams
-    )
-    callback && callback(data)
-    return data
-  }
+  const queryFn =
+    (sdk: AccelByteSDK, input: Parameters<typeof useGlobalAchievementsAdminApi_GetGlobalAchievements_ByUserId>[1]) => async () => {
+      const response = await GlobalAchievementsAdminApi(sdk, {
+        coreConfig: input.coreConfig,
+        axiosConfig: input.axiosConfig
+      }).getGlobalAchievements_ByUserId(input.userId, input.queryParams)
+      callback && callback(response)
+      return response.data
+    }
 
   return useQuery<PaginatedUserContributionResponse, AxiosError<ApiError>>({
     queryKey: [Key_GlobalAchievementsAdmin.GlobalAchievements_ByUserId, input],
@@ -79,19 +103,29 @@ export const useAdmGlobalAchievements_ByUserId = (
   })
 }
 
-export const useAdmDeleteResetGlobal_ByAchievementCodeMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { achievementCode: string }>, 'mutationKey'>,
+/**
+ * &lt;p&gt;[TEST FACILITY ONLY]&lt;/p&gt; &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [DELETE]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt; &lt;/p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_GlobalAchievementsAdmin.ResetGlobal_ByAchievementCode, input]
+ * }
+ * ```
+ */
+export const useGlobalAchievementsAdminApi_DeleteResetGlobal_ByAchievementCodeMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { achievementCode: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { achievementCode: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { achievementCode: string }) => {
-    const data = await GlobalAchievementsAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { achievementCode: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { achievementCode: string }) => {
+    const response = await GlobalAchievementsAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).deleteResetGlobal_ByAchievementCode(input.achievementCode)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -101,21 +135,32 @@ export const useAdmDeleteResetGlobal_ByAchievementCodeMutation = (
   })
 }
 
-export const useAdmContributorsGlobal_ByAchievementCode = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { achievementCode: string; queryParams?: { limit?: number; offset?: number; sortBy?: string | null } },
+/**
+ * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_GlobalAchievementsAdmin.ContributorsGlobal_ByAchievementCode, input]
+ * }
+ * ```
+ */
+export const useGlobalAchievementsAdminApi_GetContributorsGlobal_ByAchievementCode = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { achievementCode: string; queryParams?: { limit?: number; offset?: number; sortBy?: string | null } },
   options?: Omit<UseQueryOptions<PaginatedContributorResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: PaginatedContributorResponse) => void
+  callback?: (data: AxiosResponse<PaginatedContributorResponse>) => void
 ): UseQueryResult<PaginatedContributorResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmContributorsGlobal_ByAchievementCode>[1]) => async () => {
-    const data = await GlobalAchievementsAdminApi(sdk, { namespace: input.namespace }).getContributorsGlobal_ByAchievementCode(
-      input.achievementCode,
-      input.queryParams
-    )
-    callback && callback(data)
-    return data
-  }
+  const queryFn =
+    (sdk: AccelByteSDK, input: Parameters<typeof useGlobalAchievementsAdminApi_GetContributorsGlobal_ByAchievementCode>[1]) => async () => {
+      const response = await GlobalAchievementsAdminApi(sdk, {
+        coreConfig: input.coreConfig,
+        axiosConfig: input.axiosConfig
+      }).getContributorsGlobal_ByAchievementCode(input.achievementCode, input.queryParams)
+      callback && callback(response)
+      return response.data
+    }
 
   return useQuery<PaginatedContributorResponse, AxiosError<ApiError>>({
     queryKey: [Key_GlobalAchievementsAdmin.ContributorsGlobal_ByAchievementCode, input],

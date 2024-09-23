@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { NotificationAdminApi } from '../NotificationAdminApi.js'
 
 import { BulkUsersFreeFormNotificationRequestV1 } from '../../generated-definitions/BulkUsersFreeFormNotificationRequestV1.js'
@@ -27,34 +27,47 @@ import { UpdateTemplateRequest } from '../../generated-definitions/UpdateTemplat
 import { UpdateTopicRequest } from '../../generated-definitions/UpdateTopicRequest.js'
 
 export enum Key_NotificationAdmin {
-  NotificationTopics = 'NotificationAdmin.NotificationTopics',
-  NotificationTopic = 'NotificationAdmin.NotificationTopic',
-  NotificationTemplates = 'NotificationAdmin.NotificationTemplates',
-  NotificationTemplate = 'NotificationAdmin.NotificationTemplate',
-  NotificationFreeformNotify = 'NotificationAdmin.NotificationFreeformNotify',
-  NotificationTemplateNotify = 'NotificationAdmin.NotificationTemplateNotify',
-  NotificationTopic_ByTopicName = 'NotificationAdmin.NotificationTopic_ByTopicName',
-  NotificationTemplate_ByTemplateSlug = 'NotificationAdmin.NotificationTemplate_ByTemplateSlug',
-  NotificationBulkUserFreeformNotify = 'NotificationAdmin.NotificationBulkUserFreeformNotify',
-  FreeformNotifyNotification_ByUserId = 'NotificationAdmin.FreeformNotifyNotification_ByUserId',
-  TemplateNotifyNotification_ByUserId = 'NotificationAdmin.TemplateNotifyNotification_ByUserId',
-  FreeformNotifyNotification_ByPartyId = 'NotificationAdmin.FreeformNotifyNotification_ByPartyId',
-  TemplateNotifyNotification_ByPartyId = 'NotificationAdmin.TemplateNotifyNotification_ByPartyId',
-  LanguageNotification_ByTemplateSlug_ByTemplateLanguage = 'NotificationAdmin.LanguageNotification_ByTemplateSlug_ByTemplateLanguage',
-  PublishNotification_ByTemplateSlug_ByTemplateLanguage = 'NotificationAdmin.PublishNotification_ByTemplateSlug_ByTemplateLanguage'
+  NotificationTopics = 'Lobby.NotificationAdmin.NotificationTopics',
+  NotificationTopic = 'Lobby.NotificationAdmin.NotificationTopic',
+  NotificationTemplates = 'Lobby.NotificationAdmin.NotificationTemplates',
+  NotificationTemplate = 'Lobby.NotificationAdmin.NotificationTemplate',
+  NotificationFreeformNotify = 'Lobby.NotificationAdmin.NotificationFreeformNotify',
+  NotificationTemplateNotify = 'Lobby.NotificationAdmin.NotificationTemplateNotify',
+  NotificationTopic_ByTopicName = 'Lobby.NotificationAdmin.NotificationTopic_ByTopicName',
+  NotificationTemplate_ByTemplateSlug = 'Lobby.NotificationAdmin.NotificationTemplate_ByTemplateSlug',
+  NotificationBulkUserFreeformNotify = 'Lobby.NotificationAdmin.NotificationBulkUserFreeformNotify',
+  FreeformNotifyNotification_ByUserId = 'Lobby.NotificationAdmin.FreeformNotifyNotification_ByUserId',
+  TemplateNotifyNotification_ByUserId = 'Lobby.NotificationAdmin.TemplateNotifyNotification_ByUserId',
+  FreeformNotifyNotification_ByPartyId = 'Lobby.NotificationAdmin.FreeformNotifyNotification_ByPartyId',
+  TemplateNotifyNotification_ByPartyId = 'Lobby.NotificationAdmin.TemplateNotifyNotification_ByPartyId',
+  LanguageNotification_ByTemplateSlug_ByTemplateLanguage = 'Lobby.NotificationAdmin.LanguageNotification_ByTemplateSlug_ByTemplateLanguage',
+  PublishNotification_ByTemplateSlug_ByTemplateLanguage = 'Lobby.NotificationAdmin.PublishNotification_ByTemplateSlug_ByTemplateLanguage'
 }
 
-export const useAdmNotificationTopics = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams?: { after?: string | null; before?: string | null; limit?: number } },
+/**
+ * Get topic by namespace.&lt;br/&gt; Action Code: 50213
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NotificationAdmin.NotificationTopics, input]
+ * }
+ * ```
+ */
+export const useNotificationAdminApi_GetNotificationTopics = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams?: { after?: string | null; before?: string | null; limit?: number } },
   options?: Omit<UseQueryOptions<GetAllNotificationTopicsResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: GetAllNotificationTopicsResponse) => void
+  callback?: (data: AxiosResponse<GetAllNotificationTopicsResponse>) => void
 ): UseQueryResult<GetAllNotificationTopicsResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmNotificationTopics>[1]) => async () => {
-    const data = await NotificationAdminApi(sdk, { namespace: input.namespace }).getNotificationTopics(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useNotificationAdminApi_GetNotificationTopics>[1]) => async () => {
+    const response = await NotificationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getNotificationTopics(input.queryParams)
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<GetAllNotificationTopicsResponse, AxiosError<ApiError>>({
@@ -64,16 +77,29 @@ export const useAdmNotificationTopics = (
   })
 }
 
-export const useAdmCreateNotificationTopicMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { data: CreateTopicRequestV1 }>, 'mutationKey'>,
+/**
+ * Create new notification topic. &lt;br&gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST. Already existing topic can not be created&lt;br/&gt; Action Code: 50214
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NotificationAdmin.NotificationTopic, input]
+ * }
+ * ```
+ */
+export const useNotificationAdminApi_CreateNotificationTopicMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: CreateTopicRequestV1 }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { data: CreateTopicRequestV1 }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: CreateTopicRequestV1 }) => {
-    const data = await NotificationAdminApi(sdk, { namespace: input.namespace, config: input.config }).createNotificationTopic(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: CreateTopicRequestV1 }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: CreateTopicRequestV1 }) => {
+    const response = await NotificationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).createNotificationTopic(input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -83,17 +109,30 @@ export const useAdmCreateNotificationTopicMutation = (
   })
 }
 
-export const useAdmNotificationTemplates = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * Get all templates in a namespace&lt;br&gt; Action Code: 50203
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NotificationAdmin.NotificationTemplates, input]
+ * }
+ * ```
+ */
+export const useNotificationAdminApi_GetNotificationTemplates = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<NotificationTemplateResponseArray, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: NotificationTemplateResponseArray) => void
+  callback?: (data: AxiosResponse<NotificationTemplateResponseArray>) => void
 ): UseQueryResult<NotificationTemplateResponseArray, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmNotificationTemplates>[1]) => async () => {
-    const data = await NotificationAdminApi(sdk, { namespace: input.namespace }).getNotificationTemplates()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useNotificationAdminApi_GetNotificationTemplates>[1]) => async () => {
+    const response = await NotificationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getNotificationTemplates()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<NotificationTemplateResponseArray, AxiosError<ApiError>>({
@@ -103,18 +142,29 @@ export const useAdmNotificationTemplates = (
   })
 }
 
-export const useAdmCreateNotificationTemplateMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { data: CreateTemplateRequest }>, 'mutationKey'>,
+/**
+ * Create new notification template. Include handlebars {{key}} for replaceable contexts. The key inside handlebars will be the key to be replaced when sending notification. Already existing template with the same slug and language can not be created. &lt;br&gt;Check model description for detailed input restrictions.&lt;br&gt; Action Code: 50204
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NotificationAdmin.NotificationTemplate, input]
+ * }
+ * ```
+ */
+export const useNotificationAdminApi_CreateNotificationTemplateMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: CreateTemplateRequest }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { data: CreateTemplateRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: CreateTemplateRequest }) => {
-    const data = await NotificationAdminApi(sdk, { namespace: input.namespace, config: input.config }).createNotificationTemplate(
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: CreateTemplateRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: CreateTemplateRequest }) => {
+    const response = await NotificationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).createNotificationTemplate(input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -124,18 +174,32 @@ export const useAdmCreateNotificationTemplateMutation = (
   })
 }
 
-export const useAdmCreateNotificationFreeformNotifyMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { data: FreeFormNotificationRequestV1 }>, 'mutationKey'>,
+/**
+ * Sends notification to all connected users in a namespace.&lt;br&gt; Action Code: 50201
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NotificationAdmin.NotificationFreeformNotify, input]
+ * }
+ * ```
+ */
+export const useNotificationAdminApi_CreateNotificationFreeformNotifyMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: FreeFormNotificationRequestV1 }>,
+    'mutationKey'
+  >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { data: FreeFormNotificationRequestV1 }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: FreeFormNotificationRequestV1 }) => {
-    const data = await NotificationAdminApi(sdk, { namespace: input.namespace, config: input.config }).createNotificationFreeformNotify(
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: FreeFormNotificationRequestV1 }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: FreeFormNotificationRequestV1 }) => {
+    const response = await NotificationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).createNotificationFreeformNotify(input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -145,18 +209,32 @@ export const useAdmCreateNotificationFreeformNotifyMutation = (
   })
 }
 
-export const useAdmCreateNotificationTemplateNotifyMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { data: NotificationWithTemplateRequestV1 }>, 'mutationKey'>,
+/**
+ * Sends notification to all connected users in a namespace with predefined template. &lt;br&gt;In the request body, specify which template slug (template identifier) to use and the template language. &lt;br&gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content. Template need to be published before it can be use to send notifications&lt;br/&gt; Action Code: 50202
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NotificationAdmin.NotificationTemplateNotify, input]
+ * }
+ * ```
+ */
+export const useNotificationAdminApi_CreateNotificationTemplateNotifyMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: NotificationWithTemplateRequestV1 }>,
+    'mutationKey'
+  >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { data: NotificationWithTemplateRequestV1 }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: NotificationWithTemplateRequestV1 }) => {
-    const data = await NotificationAdminApi(sdk, { namespace: input.namespace, config: input.config }).createNotificationTemplateNotify(
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: NotificationWithTemplateRequestV1 }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: NotificationWithTemplateRequestV1 }) => {
+    const response = await NotificationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).createNotificationTemplateNotify(input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -166,18 +244,29 @@ export const useAdmCreateNotificationTemplateNotifyMutation = (
   })
 }
 
-export const useAdmDeleteNotificationTopic_ByTopicNameMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { topicName: string }>, 'mutationKey'>,
+/**
+ * Delete topic information by topic name. &lt;br&gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST. Already existing topic can not be created &lt;br/&gt; Action Code: 50217
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NotificationAdmin.NotificationTopic_ByTopicName, input]
+ * }
+ * ```
+ */
+export const useNotificationAdminApi_DeleteNotificationTopic_ByTopicNameMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { topicName: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { topicName: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { topicName: string }) => {
-    const data = await NotificationAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteNotificationTopic_ByTopicName(
-      input.topicName
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { topicName: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { topicName: string }) => {
+    const response = await NotificationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteNotificationTopic_ByTopicName(input.topicName)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -187,18 +276,32 @@ export const useAdmDeleteNotificationTopic_ByTopicNameMutation = (
   })
 }
 
-export const useAdmNotificationTopic_ByTopicName = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { topicName: string },
+/**
+ * Get topic information by topic name.&lt;br/&gt; Action Code: 50215
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NotificationAdmin.NotificationTopic_ByTopicName, input]
+ * }
+ * ```
+ */
+export const useNotificationAdminApi_GetNotificationTopic_ByTopicName = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { topicName: string },
   options?: Omit<UseQueryOptions<NotificationTopicResponseV1, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: NotificationTopicResponseV1) => void
+  callback?: (data: AxiosResponse<NotificationTopicResponseV1>) => void
 ): UseQueryResult<NotificationTopicResponseV1, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmNotificationTopic_ByTopicName>[1]) => async () => {
-    const data = await NotificationAdminApi(sdk, { namespace: input.namespace }).getNotificationTopic_ByTopicName(input.topicName)
-    callback && callback(data)
-    return data
-  }
+  const queryFn =
+    (sdk: AccelByteSDK, input: Parameters<typeof useNotificationAdminApi_GetNotificationTopic_ByTopicName>[1]) => async () => {
+      const response = await NotificationAdminApi(sdk, {
+        coreConfig: input.coreConfig,
+        axiosConfig: input.axiosConfig
+      }).getNotificationTopic_ByTopicName(input.topicName)
+      callback && callback(response)
+      return response.data
+    }
 
   return useQuery<NotificationTopicResponseV1, AxiosError<ApiError>>({
     queryKey: [Key_NotificationAdmin.NotificationTopic_ByTopicName, input],
@@ -207,22 +310,32 @@ export const useAdmNotificationTopic_ByTopicName = (
   })
 }
 
-export const useAdmUpdateNotificationTopic_ByTopicNameMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Update topic information by topic name. &lt;br&gt;topic should be alphabets, no special char except underscore, uppercase and no spacing. for example: TOPIC_TEST. Already existing topic can not be created &lt;br/&gt; Action Code: 50216
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NotificationAdmin.NotificationTopic_ByTopicName, input]
+ * }
+ * ```
+ */
+export const useNotificationAdminApi_UpdateNotificationTopic_ByTopicNameMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { topicName: string; data: UpdateTopicRequest }>,
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { topicName: string; data: UpdateTopicRequest }>,
     'mutationKey'
   >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { topicName: string; data: UpdateTopicRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { topicName: string; data: UpdateTopicRequest }) => {
-    const data = await NotificationAdminApi(sdk, { namespace: input.namespace, config: input.config }).updateNotificationTopic_ByTopicName(
-      input.topicName,
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { topicName: string; data: UpdateTopicRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { topicName: string; data: UpdateTopicRequest }) => {
+    const response = await NotificationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateNotificationTopic_ByTopicName(input.topicName, input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -232,19 +345,29 @@ export const useAdmUpdateNotificationTopic_ByTopicNameMutation = (
   })
 }
 
-export const useAdmDeleteNotificationTemplate_ByTemplateSlugMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { templateSlug: string }>, 'mutationKey'>,
+/**
+ * Delete template slug in notification template&lt;br&gt; Action Code: 50206
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NotificationAdmin.NotificationTemplate_ByTemplateSlug, input]
+ * }
+ * ```
+ */
+export const useNotificationAdminApi_DeleteNotificationTemplate_ByTemplateSlugMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { templateSlug: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { templateSlug: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { templateSlug: string }) => {
-    const data = await NotificationAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { templateSlug: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { templateSlug: string }) => {
+    const response = await NotificationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).deleteNotificationTemplate_ByTemplateSlug(input.templateSlug)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -254,21 +377,32 @@ export const useAdmDeleteNotificationTemplate_ByTemplateSlugMutation = (
   })
 }
 
-export const useAdmNotificationTemplate_ByTemplateSlug = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { templateSlug: string; queryParams?: { after?: string | null; before?: string | null; limit?: number } },
+/**
+ * Get all templates in a namespace&lt;br&gt; Action Code: 50205
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NotificationAdmin.NotificationTemplate_ByTemplateSlug, input]
+ * }
+ * ```
+ */
+export const useNotificationAdminApi_GetNotificationTemplate_ByTemplateSlug = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { templateSlug: string; queryParams?: { after?: string | null; before?: string | null; limit?: number } },
   options?: Omit<UseQueryOptions<GetAllNotificationTemplateSlugResp, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: GetAllNotificationTemplateSlugResp) => void
+  callback?: (data: AxiosResponse<GetAllNotificationTemplateSlugResp>) => void
 ): UseQueryResult<GetAllNotificationTemplateSlugResp, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmNotificationTemplate_ByTemplateSlug>[1]) => async () => {
-    const data = await NotificationAdminApi(sdk, { namespace: input.namespace }).getNotificationTemplate_ByTemplateSlug(
-      input.templateSlug,
-      input.queryParams
-    )
-    callback && callback(data)
-    return data
-  }
+  const queryFn =
+    (sdk: AccelByteSDK, input: Parameters<typeof useNotificationAdminApi_GetNotificationTemplate_ByTemplateSlug>[1]) => async () => {
+      const response = await NotificationAdminApi(sdk, {
+        coreConfig: input.coreConfig,
+        axiosConfig: input.axiosConfig
+      }).getNotificationTemplate_ByTemplateSlug(input.templateSlug, input.queryParams)
+      callback && callback(response)
+      return response.data
+    }
 
   return useQuery<GetAllNotificationTemplateSlugResp, AxiosError<ApiError>>({
     queryKey: [Key_NotificationAdmin.NotificationTemplate_ByTemplateSlug, input],
@@ -277,22 +411,32 @@ export const useAdmNotificationTemplate_ByTemplateSlug = (
   })
 }
 
-export const useAdmCreateNotificationBulkUserFreeformNotifyMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Sends notification to multiple user. Action Code: 50211
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NotificationAdmin.NotificationBulkUserFreeformNotify, input]
+ * }
+ * ```
+ */
+export const useNotificationAdminApi_CreateNotificationBulkUserFreeformNotifyMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { data: BulkUsersFreeFormNotificationRequestV1 }>,
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: BulkUsersFreeFormNotificationRequestV1 }>,
     'mutationKey'
   >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { data: BulkUsersFreeFormNotificationRequestV1 }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: BulkUsersFreeFormNotificationRequestV1 }) => {
-    const data = await NotificationAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: BulkUsersFreeFormNotificationRequestV1 }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: BulkUsersFreeFormNotificationRequestV1 }) => {
+    const response = await NotificationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).createNotificationBulkUserFreeformNotify(input.data)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -302,22 +446,32 @@ export const useAdmCreateNotificationBulkUserFreeformNotifyMutation = (
   })
 }
 
-export const useAdmCreateFreeformNotifyNotification_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Sends notification to a user. Action Code: 50211
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NotificationAdmin.FreeformNotifyNotification_ByUserId, input]
+ * }
+ * ```
+ */
+export const useNotificationAdminApi_CreateFreeformNotifyNotification_ByUserIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string; data: FreeFormNotificationRequestV1 }>,
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: FreeFormNotificationRequestV1 }>,
     'mutationKey'
   >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string; data: FreeFormNotificationRequestV1 }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string; data: FreeFormNotificationRequestV1 }) => {
-    const data = await NotificationAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: FreeFormNotificationRequestV1 }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; data: FreeFormNotificationRequestV1 }) => {
+    const response = await NotificationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).createFreeformNotifyNotification_ByUserId(input.userId, input.data)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -327,22 +481,32 @@ export const useAdmCreateFreeformNotifyNotification_ByUserIdMutation = (
   })
 }
 
-export const useAdmCreateTemplateNotifyNotification_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Sends templated notification to a user. &lt;br&gt;In the request body, specify which template slug (template identifier) to use and the template language. &lt;br&gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content. Template need to be published before it can be use to send notifications&lt;br&gt; Action Code: 50212
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NotificationAdmin.TemplateNotifyNotification_ByUserId, input]
+ * }
+ * ```
+ */
+export const useNotificationAdminApi_CreateTemplateNotifyNotification_ByUserIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string; data: NotificationWithTemplateRequestV1 }>,
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: NotificationWithTemplateRequestV1 }>,
     'mutationKey'
   >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string; data: NotificationWithTemplateRequestV1 }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string; data: NotificationWithTemplateRequestV1 }) => {
-    const data = await NotificationAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: NotificationWithTemplateRequestV1 }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; data: NotificationWithTemplateRequestV1 }) => {
+    const response = await NotificationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).createTemplateNotifyNotification_ByUserId(input.userId, input.data)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -352,22 +516,32 @@ export const useAdmCreateTemplateNotifyNotification_ByUserIdMutation = (
   })
 }
 
-export const useAdmCreateFreeformNotifyNotification_ByPartyIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Sends notification to a party.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NotificationAdmin.FreeformNotifyNotification_ByPartyId, input]
+ * }
+ * ```
+ */
+export const useNotificationAdminApi_CreateFreeformNotifyNotification_ByPartyIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { partyId: string; data: FreeFormNotificationRequestV1 }>,
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { partyId: string; data: FreeFormNotificationRequestV1 }>,
     'mutationKey'
   >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { partyId: string; data: FreeFormNotificationRequestV1 }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { partyId: string; data: FreeFormNotificationRequestV1 }) => {
-    const data = await NotificationAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { partyId: string; data: FreeFormNotificationRequestV1 }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { partyId: string; data: FreeFormNotificationRequestV1 }) => {
+    const response = await NotificationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).createFreeformNotifyNotification_ByPartyId(input.partyId, input.data)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -377,22 +551,32 @@ export const useAdmCreateFreeformNotifyNotification_ByPartyIdMutation = (
   })
 }
 
-export const useAdmCreateTemplateNotifyNotification_ByPartyIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Sends templated notification to a party. &lt;br&gt;In the request body, specify which template slug (template identifier) to use and the template language. &lt;br&gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content. Template need to be published before it can be use to send notifications&lt;br&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NotificationAdmin.TemplateNotifyNotification_ByPartyId, input]
+ * }
+ * ```
+ */
+export const useNotificationAdminApi_CreateTemplateNotifyNotification_ByPartyIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { partyId: string; data: NotificationWithTemplateRequestV1 }>,
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { partyId: string; data: NotificationWithTemplateRequestV1 }>,
     'mutationKey'
   >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { partyId: string; data: NotificationWithTemplateRequestV1 }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { partyId: string; data: NotificationWithTemplateRequestV1 }) => {
-    const data = await NotificationAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { partyId: string; data: NotificationWithTemplateRequestV1 }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { partyId: string; data: NotificationWithTemplateRequestV1 }) => {
+    const response = await NotificationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).createTemplateNotifyNotification_ByPartyId(input.partyId, input.data)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -402,22 +586,32 @@ export const useAdmCreateTemplateNotifyNotification_ByPartyIdMutation = (
   })
 }
 
-export const useAdmDeleteLanguageNotification_ByTemplateSlug_ByTemplateLanguageMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Delete template localization&lt;br/&gt; Action Code: 50209
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NotificationAdmin.LanguageNotification_ByTemplateSlug_ByTemplateLanguage, input]
+ * }
+ * ```
+ */
+export const useNotificationAdminApi_DeleteLanguageNotification_ByTemplateSlug_ByTemplateLanguageMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { templateSlug: string; templateLanguage: string }>,
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { templateSlug: string; templateLanguage: string }>,
     'mutationKey'
   >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { templateSlug: string; templateLanguage: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { templateSlug: string; templateLanguage: string }) => {
-    const data = await NotificationAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { templateSlug: string; templateLanguage: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { templateSlug: string; templateLanguage: string }) => {
+    const response = await NotificationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).deleteLanguageNotification_ByTemplateSlug_ByTemplateLanguage(input.templateSlug, input.templateLanguage)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -427,20 +621,32 @@ export const useAdmDeleteLanguageNotification_ByTemplateSlug_ByTemplateLanguageM
   })
 }
 
-export const useAdmLanguageNotification_ByTemplateSlug_ByTemplateLanguage = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { templateSlug: string; templateLanguage: string },
+/**
+ * Get a template localization&lt;br/&gt; Action Code: 50207
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NotificationAdmin.LanguageNotification_ByTemplateSlug_ByTemplateLanguage, input]
+ * }
+ * ```
+ */
+export const useNotificationAdminApi_GetLanguageNotification_ByTemplateSlug_ByTemplateLanguage = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { templateSlug: string; templateLanguage: string },
   options?: Omit<UseQueryOptions<Localization, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: Localization) => void
+  callback?: (data: AxiosResponse<Localization>) => void
 ): UseQueryResult<Localization, AxiosError<ApiError>> => {
-  //
   const queryFn =
-    (sdk: AccelbyteSDK, input: Parameters<typeof useAdmLanguageNotification_ByTemplateSlug_ByTemplateLanguage>[1]) => async () => {
-      const data = await NotificationAdminApi(sdk, {
-        namespace: input.namespace
+    (sdk: AccelByteSDK, input: Parameters<typeof useNotificationAdminApi_GetLanguageNotification_ByTemplateSlug_ByTemplateLanguage>[1]) =>
+    async () => {
+      const response = await NotificationAdminApi(sdk, {
+        coreConfig: input.coreConfig,
+        axiosConfig: input.axiosConfig
       }).getLanguageNotification_ByTemplateSlug_ByTemplateLanguage(input.templateSlug, input.templateLanguage)
-      callback && callback(data)
-      return data
+      callback && callback(response)
+      return response.data
     }
 
   return useQuery<Localization, AxiosError<ApiError>>({
@@ -450,13 +656,24 @@ export const useAdmLanguageNotification_ByTemplateSlug_ByTemplateLanguage = (
   })
 }
 
-export const useAdmUpdateLanguageNotification_ByTemplateSlug_ByTemplateLanguageMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Update template localization&lt;br/&gt; Action Code: 50208
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NotificationAdmin.LanguageNotification_ByTemplateSlug_ByTemplateLanguage, input]
+ * }
+ * ```
+ */
+export const useNotificationAdminApi_UpdateLanguageNotification_ByTemplateSlug_ByTemplateLanguageMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
     UseMutationOptions<
       unknown,
       AxiosError<ApiError>,
-      ApiArgs & { templateSlug: string; templateLanguage: string; data: UpdateTemplateRequest }
+      SdkSetConfigParam & { templateSlug: string; templateLanguage: string; data: UpdateTemplateRequest }
     >,
     'mutationKey'
   >,
@@ -464,16 +681,15 @@ export const useAdmUpdateLanguageNotification_ByTemplateSlug_ByTemplateLanguageM
 ): UseMutationResult<
   unknown,
   AxiosError<ApiError>,
-  ApiArgs & { templateSlug: string; templateLanguage: string; data: UpdateTemplateRequest }
+  SdkSetConfigParam & { templateSlug: string; templateLanguage: string; data: UpdateTemplateRequest }
 > => {
-  //
-  const mutationFn = async (input: ApiArgs & { templateSlug: string; templateLanguage: string; data: UpdateTemplateRequest }) => {
-    const data = await NotificationAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+  const mutationFn = async (input: SdkSetConfigParam & { templateSlug: string; templateLanguage: string; data: UpdateTemplateRequest }) => {
+    const response = await NotificationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).updateLanguageNotification_ByTemplateSlug_ByTemplateLanguage(input.templateSlug, input.templateLanguage, input.data)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -483,22 +699,32 @@ export const useAdmUpdateLanguageNotification_ByTemplateSlug_ByTemplateLanguageM
   })
 }
 
-export const useAdmCreatePublishNotification_ByTemplateSlug_ByTemplateLanguageMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Publish notification template draft. Empty draft can not be published.&lt;br/&gt; Action Code: 50210
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NotificationAdmin.PublishNotification_ByTemplateSlug_ByTemplateLanguage, input]
+ * }
+ * ```
+ */
+export const useNotificationAdminApi_CreatePublishNotification_ByTemplateSlug_ByTemplateLanguageMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { templateSlug: string; templateLanguage: string }>,
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { templateSlug: string; templateLanguage: string }>,
     'mutationKey'
   >,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { templateSlug: string; templateLanguage: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { templateSlug: string; templateLanguage: string }) => {
-    const data = await NotificationAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { templateSlug: string; templateLanguage: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { templateSlug: string; templateLanguage: string }) => {
+    const response = await NotificationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).createPublishNotification_ByTemplateSlug_ByTemplateLanguage(input.templateSlug, input.templateLanguage)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

@@ -8,6 +8,8 @@ import { z } from 'zod'
 export const GoogleIapConfigInfo = z.object({
   applicationName: z.string().nullish(),
   namespace: z.string(),
+  notificationTokenAudience: z.string().nullish(),
+  notificationTokenEmail: z.string().nullish(),
   p12FileName: z.string().nullish(),
   serviceAccountId: z.string().nullish()
 })

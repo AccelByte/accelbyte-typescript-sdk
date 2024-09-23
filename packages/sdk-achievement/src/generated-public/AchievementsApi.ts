@@ -8,21 +8,41 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { PublicAchievementResponse } from '../generated-definitions/PublicAchievementResponse.js'
 import { PublicAchievementsResponse } from '../generated-definitions/PublicAchievementsResponse.js'
 import { Achievements$ } from './endpoints/Achievements$.js'
 
-export function AchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function AchievementsApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
-   */
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
+  }
+
   async function getAchievements(queryParams: {
     language: string | null
     global?: boolean | null
@@ -39,28 +59,31 @@ export function AchievementsApi(sdk: AccelbyteSDK, args?: ApiArgs) {
       | 'updatedAt:asc'
       | 'updatedAt:desc'
     tags?: string[]
-  }): Promise<PublicAchievementsResponse> {
-    const $ = new Achievements$(Network.create(requestConfig), namespace, useSchemaValidation)
+  }): Promise<AxiosResponse<PublicAchievementsResponse>> {
+    const $ = new Achievements$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getAchievements(queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
-   */
   async function getAchievement_ByAchievementCode(
     achievementCode: string,
     queryParams: { language: string | null }
-  ): Promise<PublicAchievementResponse> {
-    const $ = new Achievements$(Network.create(requestConfig), namespace, useSchemaValidation)
+  ): Promise<AxiosResponse<PublicAchievementResponse>> {
+    const $ = new Achievements$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getAchievement_ByAchievementCode(achievementCode, queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
+     */
     getAchievements,
+    /**
+     * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
+     */
     getAchievement_ByAchievementCode
   }
 }

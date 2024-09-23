@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { BaseLegalPoliciesAdminApi } from '../BaseLegalPoliciesAdminApi.js'
 
 import { CreateBasePolicyRequest } from '../../generated-definitions/CreateBasePolicyRequest.js'
@@ -23,24 +23,36 @@ import { UpdateBasePolicyRequest } from '../../generated-definitions/UpdateBaseP
 import { UpdateBasePolicyResponse } from '../../generated-definitions/UpdateBasePolicyResponse.js'
 
 export enum Key_BaseLegalPoliciesAdmin {
-  PolicyTypes = 'BaseLegalPoliciesAdmin.PolicyTypes',
-  BasePolicies = 'BaseLegalPoliciesAdmin.BasePolicies',
-  BasePolicy = 'BaseLegalPoliciesAdmin.BasePolicy',
-  BasePolicy_ByBasePolicyId = 'BaseLegalPoliciesAdmin.BasePolicy_ByBasePolicyId',
-  Country_ByBasePolicyId_ByCountryCode = 'BaseLegalPoliciesAdmin.Country_ByBasePolicyId_ByCountryCode'
+  PolicyTypes = 'Legal.BaseLegalPoliciesAdmin.PolicyTypes',
+  BasePolicies = 'Legal.BaseLegalPoliciesAdmin.BasePolicies',
+  BasePolicy = 'Legal.BaseLegalPoliciesAdmin.BasePolicy',
+  BasePolicy_ByBasePolicyId = 'Legal.BaseLegalPoliciesAdmin.BasePolicy_ByBasePolicyId',
+  Country_ByBasePolicyId_ByCountryCode = 'Legal.BaseLegalPoliciesAdmin.Country_ByBasePolicyId_ByCountryCode'
 }
 
-export const useAdmPolicyTypes = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams: { limit: number; offset?: number } },
+/**
+ * Retrieve all supported policy types.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_BaseLegalPoliciesAdmin.PolicyTypes, input]
+ * }
+ * ```
+ */
+export const useBaseLegalPoliciesAdminApi_GetPolicyTypes = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams: { limit: number; offset?: number } },
   options?: Omit<UseQueryOptions<RetrievePolicyTypeResponseArray, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: RetrievePolicyTypeResponseArray) => void
+  callback?: (data: AxiosResponse<RetrievePolicyTypeResponseArray>) => void
 ): UseQueryResult<RetrievePolicyTypeResponseArray, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmPolicyTypes>[1]) => async () => {
-    const data = await BaseLegalPoliciesAdminApi(sdk, { namespace: input.namespace }).getPolicyTypes(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useBaseLegalPoliciesAdminApi_GetPolicyTypes>[1]) => async () => {
+    const response = await BaseLegalPoliciesAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getPolicyTypes(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<RetrievePolicyTypeResponseArray, AxiosError<ApiError>>({
@@ -50,17 +62,29 @@ export const useAdmPolicyTypes = (
   })
 }
 
-export const useAdmBasePolicies = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams?: { visibleOnly?: boolean | null } },
+/**
+ * Retrieve all base policies.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_BaseLegalPoliciesAdmin.BasePolicies, input]
+ * }
+ * ```
+ */
+export const useBaseLegalPoliciesAdminApi_GetBasePolicies = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams?: { visibleOnly?: boolean | null } },
   options?: Omit<UseQueryOptions<RetrieveBasePolicyResponseArray, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: RetrieveBasePolicyResponseArray) => void
+  callback?: (data: AxiosResponse<RetrieveBasePolicyResponseArray>) => void
 ): UseQueryResult<RetrieveBasePolicyResponseArray, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmBasePolicies>[1]) => async () => {
-    const data = await BaseLegalPoliciesAdminApi(sdk, { namespace: input.namespace }).getBasePolicies(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useBaseLegalPoliciesAdminApi_GetBasePolicies>[1]) => async () => {
+    const response = await BaseLegalPoliciesAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getBasePolicies(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<RetrieveBasePolicyResponseArray, AxiosError<ApiError>>({
@@ -70,19 +94,32 @@ export const useAdmBasePolicies = (
   })
 }
 
-export const useAdmCreateBasePolicyMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Create a legal policy.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_BaseLegalPoliciesAdmin.BasePolicy, input]
+ * }
+ * ```
+ */
+export const useBaseLegalPoliciesAdminApi_CreateBasePolicyMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<CreateBasePolicyResponse, AxiosError<ApiError>, ApiArgs & { data: CreateBasePolicyRequest }>,
+    UseMutationOptions<CreateBasePolicyResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: CreateBasePolicyRequest }>,
     'mutationKey'
   >,
   callback?: (data: CreateBasePolicyResponse) => void
-): UseMutationResult<CreateBasePolicyResponse, AxiosError<ApiError>, ApiArgs & { data: CreateBasePolicyRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: CreateBasePolicyRequest }) => {
-    const data = await BaseLegalPoliciesAdminApi(sdk, { namespace: input.namespace, config: input.config }).createBasePolicy(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<CreateBasePolicyResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: CreateBasePolicyRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: CreateBasePolicyRequest }) => {
+    const response = await BaseLegalPoliciesAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).createBasePolicy(input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -92,18 +129,32 @@ export const useAdmCreateBasePolicyMutation = (
   })
 }
 
-export const useAdmBasePolicy_ByBasePolicyId = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { basePolicyId: string },
+/**
+ * Retrieve a base policy.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_BaseLegalPoliciesAdmin.BasePolicy_ByBasePolicyId, input]
+ * }
+ * ```
+ */
+export const useBaseLegalPoliciesAdminApi_GetBasePolicy_ByBasePolicyId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { basePolicyId: string },
   options?: Omit<UseQueryOptions<RetrieveBasePolicyResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: RetrieveBasePolicyResponse) => void
+  callback?: (data: AxiosResponse<RetrieveBasePolicyResponse>) => void
 ): UseQueryResult<RetrieveBasePolicyResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmBasePolicy_ByBasePolicyId>[1]) => async () => {
-    const data = await BaseLegalPoliciesAdminApi(sdk, { namespace: input.namespace }).getBasePolicy_ByBasePolicyId(input.basePolicyId)
-    callback && callback(data)
-    return data
-  }
+  const queryFn =
+    (sdk: AccelByteSDK, input: Parameters<typeof useBaseLegalPoliciesAdminApi_GetBasePolicy_ByBasePolicyId>[1]) => async () => {
+      const response = await BaseLegalPoliciesAdminApi(sdk, {
+        coreConfig: input.coreConfig,
+        axiosConfig: input.axiosConfig
+      }).getBasePolicy_ByBasePolicyId(input.basePolicyId)
+      callback && callback(response)
+      return response.data
+    }
 
   return useQuery<RetrieveBasePolicyResponse, AxiosError<ApiError>>({
     queryKey: [Key_BaseLegalPoliciesAdmin.BasePolicy_ByBasePolicyId, input],
@@ -112,22 +163,40 @@ export const useAdmBasePolicy_ByBasePolicyId = (
   })
 }
 
-export const useAdmPatchBasePolicy_ByBasePolicyIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * Update an existing base policy.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_BaseLegalPoliciesAdmin.BasePolicy_ByBasePolicyId, input]
+ * }
+ * ```
+ */
+export const useBaseLegalPoliciesAdminApi_PatchBasePolicy_ByBasePolicyIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<UpdateBasePolicyResponse, AxiosError<ApiError>, ApiArgs & { basePolicyId: string; data: UpdateBasePolicyRequest }>,
+    UseMutationOptions<
+      UpdateBasePolicyResponse,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { basePolicyId: string; data: UpdateBasePolicyRequest }
+    >,
     'mutationKey'
   >,
   callback?: (data: UpdateBasePolicyResponse) => void
-): UseMutationResult<UpdateBasePolicyResponse, AxiosError<ApiError>, ApiArgs & { basePolicyId: string; data: UpdateBasePolicyRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { basePolicyId: string; data: UpdateBasePolicyRequest }) => {
-    const data = await BaseLegalPoliciesAdminApi(sdk, { namespace: input.namespace, config: input.config }).patchBasePolicy_ByBasePolicyId(
-      input.basePolicyId,
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<
+  UpdateBasePolicyResponse,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { basePolicyId: string; data: UpdateBasePolicyRequest }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { basePolicyId: string; data: UpdateBasePolicyRequest }) => {
+    const response = await BaseLegalPoliciesAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).patchBasePolicy_ByBasePolicyId(input.basePolicyId, input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -137,21 +206,32 @@ export const useAdmPatchBasePolicy_ByBasePolicyIdMutation = (
   })
 }
 
-export const useAdmCountry_ByBasePolicyId_ByCountryCode = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { basePolicyId: string; countryCode: string },
+/**
+ * Retrieve a Base Legal Policy based on a Particular Country.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_BaseLegalPoliciesAdmin.Country_ByBasePolicyId_ByCountryCode, input]
+ * }
+ * ```
+ */
+export const useBaseLegalPoliciesAdminApi_GetCountry_ByBasePolicyId_ByCountryCode = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { basePolicyId: string; countryCode: string },
   options?: Omit<UseQueryOptions<RetrievePolicyResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: RetrievePolicyResponse) => void
+  callback?: (data: AxiosResponse<RetrievePolicyResponse>) => void
 ): UseQueryResult<RetrievePolicyResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmCountry_ByBasePolicyId_ByCountryCode>[1]) => async () => {
-    const data = await BaseLegalPoliciesAdminApi(sdk, { namespace: input.namespace }).getCountry_ByBasePolicyId_ByCountryCode(
-      input.basePolicyId,
-      input.countryCode
-    )
-    callback && callback(data)
-    return data
-  }
+  const queryFn =
+    (sdk: AccelByteSDK, input: Parameters<typeof useBaseLegalPoliciesAdminApi_GetCountry_ByBasePolicyId_ByCountryCode>[1]) => async () => {
+      const response = await BaseLegalPoliciesAdminApi(sdk, {
+        coreConfig: input.coreConfig,
+        axiosConfig: input.axiosConfig
+      }).getCountry_ByBasePolicyId_ByCountryCode(input.basePolicyId, input.countryCode)
+      callback && callback(response)
+      return response.data
+    }
 
   return useQuery<RetrievePolicyResponse, AxiosError<ApiError>>({
     queryKey: [Key_BaseLegalPoliciesAdmin.Country_ByBasePolicyId_ByCountryCode, input],

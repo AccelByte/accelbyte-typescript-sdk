@@ -8,40 +8,63 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { MemberActiveSession } from '../generated-definitions/MemberActiveSession.js'
 import { RequestReconcileMaxActiveSession } from '../generated-definitions/RequestReconcileMaxActiveSession.js'
 import { MaxActiveAdmin$ } from './endpoints/MaxActiveAdmin$.js'
 
-export function MaxActiveAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function MaxActiveAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   *  Reconcile Max Active Session.
-   */
-  async function createReconcile_ByName(name: string, data: RequestReconcileMaxActiveSession): Promise<unknown> {
-    const $ = new MaxActiveAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
-    const resp = await $.createReconcile_ByName(name, data)
-    if (resp.error) throw resp.error
-    return resp.response.data
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
   }
 
-  /**
-   *  Get Member Active Session.
-   */
-  async function getMemberactivesession_ByName_ByUserId(name: string, userId: string): Promise<MemberActiveSession> {
-    const $ = new MaxActiveAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateReconcile_ByName(name: string, data: RequestReconcileMaxActiveSession): Promise<AxiosResponse<unknown>> {
+    const $ = new MaxActiveAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.updateReconcile_ByName(name, data)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function getMemberactivesession_ByName_ByUserId(name: string, userId: string): Promise<AxiosResponse<MemberActiveSession>> {
+    const $ = new MaxActiveAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getMemberactivesession_ByName_ByUserId(name, userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
-    createReconcile_ByName,
+    /**
+     *  Reconcile Max Active Session.
+     */
+    updateReconcile_ByName,
+    /**
+     *  Get Member Active Session.
+     */
     getMemberactivesession_ByName_ByUserId
   }
 }

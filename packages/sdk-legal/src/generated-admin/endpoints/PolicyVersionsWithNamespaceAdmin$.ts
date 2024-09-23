@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { CreatePolicyVersionRequest } from '../../generated-definitions/CreatePolicyVersionRequest.js'
 import { CreatePolicyVersionResponse } from '../../generated-definitions/CreatePolicyVersionResponse.js'
@@ -17,16 +17,16 @@ import { UpdatePolicyVersionResponse } from '../../generated-definitions/UpdateP
 
 export class PolicyVersionsWithNamespaceAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Retrieve a version of a particular country specific policy. If version is not provided, the Legal Service will assume caller requesting all versions from country-specific policy.
    */
   getVersions_ByPolicyId(
     policyId: string,
     queryParams?: { versionId?: string | null }
-  ): Promise<IResponse<RetrievePolicyVersionResponseArray>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  ): Promise<Response<RetrievePolicyVersionResponseArray>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/agreement/admin/namespaces/{namespace}/policies/{policyId}/versions'
       .replace('{namespace}', this.namespace)
       .replace('{policyId}', policyId)
@@ -39,12 +39,11 @@ export class PolicyVersionsWithNamespaceAdmin$ {
       'RetrievePolicyVersionResponseArray'
     )
   }
-
   /**
    * Create a version of a particular country-specific policy.
    */
-  createVersion_ByPolicyId(policyId: string, data: CreatePolicyVersionRequest): Promise<IResponse<CreatePolicyVersionResponse>> {
-    const params = {} as SDKRequestConfig
+  createVersion_ByPolicyId(policyId: string, data: CreatePolicyVersionRequest): Promise<Response<CreatePolicyVersionResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/agreement/admin/namespaces/{namespace}/policies/{policyId}/versions'
       .replace('{namespace}', this.namespace)
       .replace('{policyId}', policyId)
@@ -57,15 +56,14 @@ export class PolicyVersionsWithNamespaceAdmin$ {
       'CreatePolicyVersionResponse'
     )
   }
-
   /**
    * Update a particular policy version.
    */
   patchPolicyVersion_ByPolicyVersionId(
     policyVersionId: string,
     data: UpdatePolicyVersionRequest
-  ): Promise<IResponse<UpdatePolicyVersionResponse>> {
-    const params = {} as SDKRequestConfig
+  ): Promise<Response<UpdatePolicyVersionResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/agreement/admin/namespaces/{namespace}/policies/versions/{policyVersionId}'
       .replace('{namespace}', this.namespace)
       .replace('{policyVersionId}', policyVersionId)
@@ -78,15 +76,14 @@ export class PolicyVersionsWithNamespaceAdmin$ {
       'UpdatePolicyVersionResponse'
     )
   }
-
   /**
    * Manually publish a version of a particular country-specific policy.
    */
   patchLatestPolicy_ByPolicyVersionId(
     policyVersionId: string,
     queryParams?: { shouldNotify?: boolean | null }
-  ): Promise<IResponse<unknown>> {
-    const params = { shouldNotify: true, ...queryParams } as SDKRequestConfig
+  ): Promise<Response<unknown>> {
+    const params = { shouldNotify: true, ...queryParams } as AxiosRequestConfig
     const url = '/agreement/admin/namespaces/{namespace}/policies/versions/{policyVersionId}/latest'
       .replace('{namespace}', this.namespace)
       .replace('{policyVersionId}', policyVersionId)

@@ -1,0 +1,25 @@
+/* 
+ * Copyright (c) 2018-2023 AccelByte Inc. All Rights Reserved
+ * This is licensed software from AccelByte Inc, for limitations
+ * and restrictions contact your company contract manager.
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+code {
+  @apply text-red-500;
+}
+
+code::before,
+code::after {
+  content: '`';
+}
+
+a {
+  @apply text-blue-500;
+}
+
+a:hover {
+  @apply text-blue-400 underline;
+}

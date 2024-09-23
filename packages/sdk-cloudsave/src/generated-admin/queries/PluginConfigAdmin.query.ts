@@ -7,30 +7,40 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { PluginConfigAdminApi } from '../PluginConfigAdminApi.js'
 
 import { PluginRequest } from '../../generated-definitions/PluginRequest.js'
 import { PluginResponse } from '../../generated-definitions/PluginResponse.js'
 
 export enum Key_PluginConfigAdmin {
-  Plugin = 'PluginConfigAdmin.Plugin',
-  Plugins = 'PluginConfigAdmin.Plugins'
+  Plugin = 'Cloudsave.PluginConfigAdmin.Plugin',
+  Plugins = 'Cloudsave.PluginConfigAdmin.Plugins'
 }
 
-export const useAdmDeletePluginMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs>, 'mutationKey'>,
+/**
+ * ## Description This endpoints will delete grpc plugins configuration
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PluginConfigAdmin.Plugin, input]
+ * }
+ * ```
+ */
+export const usePluginConfigAdminApi_DeletePluginMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs> => {
-  //
-  const mutationFn = async (input: ApiArgs) => {
-    const data = await PluginConfigAdminApi(sdk, { namespace: input.namespace, config: input.config }).deletePlugin()
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam> => {
+  const mutationFn = async (input: SdkSetConfigParam) => {
+    const response = await PluginConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deletePlugin()
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -40,17 +50,27 @@ export const useAdmDeletePluginMutation = (
   })
 }
 
-export const useAdmPlugins = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * ## Description This endpoints will get grpc plugins configuration
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PluginConfigAdmin.Plugins, input]
+ * }
+ * ```
+ */
+export const usePluginConfigAdminApi_GetPlugins = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<PluginResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: PluginResponse) => void
+  callback?: (data: AxiosResponse<PluginResponse>) => void
 ): UseQueryResult<PluginResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmPlugins>[1]) => async () => {
-    const data = await PluginConfigAdminApi(sdk, { namespace: input.namespace }).getPlugins()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof usePluginConfigAdminApi_GetPlugins>[1]) => async () => {
+    const response = await PluginConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getPlugins()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<PluginResponse, AxiosError<ApiError>>({
@@ -60,16 +80,28 @@ export const useAdmPlugins = (
   })
 }
 
-export const useAdmPatchPluginMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<PluginResponse, AxiosError<ApiError>, ApiArgs & { data: PluginRequest }>, 'mutationKey'>,
+/**
+ * ## Description This endpoints will update grpc plugins configuration
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PluginConfigAdmin.Plugin, input]
+ * }
+ * ```
+ */
+export const usePluginConfigAdminApi_PatchPluginMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<PluginResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: PluginRequest }>, 'mutationKey'>,
   callback?: (data: PluginResponse) => void
-): UseMutationResult<PluginResponse, AxiosError<ApiError>, ApiArgs & { data: PluginRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: PluginRequest }) => {
-    const data = await PluginConfigAdminApi(sdk, { namespace: input.namespace, config: input.config }).patchPlugin(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<PluginResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: PluginRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: PluginRequest }) => {
+    const response = await PluginConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).patchPlugin(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -79,16 +111,28 @@ export const useAdmPatchPluginMutation = (
   })
 }
 
-export const useAdmCreatePluginMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<PluginResponse, AxiosError<ApiError>, ApiArgs & { data: PluginRequest }>, 'mutationKey'>,
+/**
+ * ## Description This endpoints will create new grpc plugins configuration per namespace
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PluginConfigAdmin.Plugin, input]
+ * }
+ * ```
+ */
+export const usePluginConfigAdminApi_CreatePluginMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<PluginResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: PluginRequest }>, 'mutationKey'>,
   callback?: (data: PluginResponse) => void
-): UseMutationResult<PluginResponse, AxiosError<ApiError>, ApiArgs & { data: PluginRequest }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: PluginRequest }) => {
-    const data = await PluginConfigAdminApi(sdk, { namespace: input.namespace, config: input.config }).createPlugin(input.data)
-    callback && callback(data)
-    return data
+): UseMutationResult<PluginResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: PluginRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: PluginRequest }) => {
+    const response = await PluginConfigAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createPlugin(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

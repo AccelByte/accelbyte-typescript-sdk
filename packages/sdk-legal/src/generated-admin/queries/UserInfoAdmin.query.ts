@@ -7,34 +7,116 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { UserInfoAdminApi } from '../UserInfoAdminApi.js'
 
 import { RetrieveUserInfoCacheStatusResponseArray } from '../../generated-definitions/RetrieveUserInfoCacheStatusResponseArray.js'
 
 export enum Key_UserInfoAdmin {
-  UserInfo = 'UserInfoAdmin.UserInfo'
+  UserInfo = 'Legal.UserInfoAdmin.UserInfo'
 }
 
-export const useAdmUserInfo = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams?: { namespaces?: string | null } },
+/**
+ * @deprecated
+ * Invalidate user info cache in agreement service.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_UserInfoAdmin.UserInfo, input]
+ * }
+ * ```
+ */
+export const useUserInfoAdminApi_DeleteUserInfoMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { queryParams?: { namespace?: string | null } }>,
+    'mutationKey'
+  >,
+  callback?: (data: unknown) => void
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { queryParams?: { namespace?: string | null } }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { queryParams?: { namespace?: string | null } }) => {
+    const response = await UserInfoAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteUserInfo(
+      input.queryParams
+    )
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_UserInfoAdmin.UserInfo],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Get user info cache last updated time per namespace.&lt;br&gt;The query parameter namespaces can be a list of namespace separated by comma.&lt;br&gt;If query parameter namespaces is empty, user info cache status for all available namespaces will be returned.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_UserInfoAdmin.UserInfo, input]
+ * }
+ * ```
+ */
+export const useUserInfoAdminApi_GetUserInfo = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams?: { namespaces?: string | null } },
   options?: Omit<UseQueryOptions<RetrieveUserInfoCacheStatusResponseArray, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: RetrieveUserInfoCacheStatusResponseArray) => void
+  callback?: (data: AxiosResponse<RetrieveUserInfoCacheStatusResponseArray>) => void
 ): UseQueryResult<RetrieveUserInfoCacheStatusResponseArray, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmUserInfo>[1]) => async () => {
-    const data = await UserInfoAdminApi(sdk, { namespace: input.namespace }).getUserInfo(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useUserInfoAdminApi_GetUserInfo>[1]) => async () => {
+    const response = await UserInfoAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getUserInfo(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<RetrieveUserInfoCacheStatusResponseArray, AxiosError<ApiError>>({
     queryKey: [Key_UserInfoAdmin.UserInfo, input],
     queryFn: queryFn(sdk, input),
+    ...options
+  })
+}
+
+/**
+ * @deprecated
+ * Sync user info cache in agreement service with iam service.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_UserInfoAdmin.UserInfo, input]
+ * }
+ * ```
+ */
+export const useUserInfoAdminApi_UpdateUserInfoMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { queryParams: { namespace: string | null } }>,
+    'mutationKey'
+  >,
+  callback?: (data: unknown) => void
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { queryParams: { namespace: string | null } }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { queryParams: { namespace: string | null } }) => {
+    const response = await UserInfoAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateUserInfo(
+      input.queryParams
+    )
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_UserInfoAdmin.UserInfo],
+    mutationFn,
     ...options
   })
 }

@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { ActiveCustomGameResponse } from '../../generated-definitions/ActiveCustomGameResponse.js'
 import { ActiveMatchmakingGameResponse } from '../../generated-definitions/ActiveMatchmakingGameResponse.js'
 import { AdminSessionResponse } from '../../generated-definitions/AdminSessionResponse.js'
@@ -18,8 +18,8 @@ import { SessionQueryResponse } from '../../generated-definitions/SessionQueryRe
 
 export class SessionAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Query to available game session
    */
@@ -34,19 +34,18 @@ export class SessionAdmin$ {
     offset?: number
     server_status?: string | null
     user_id?: string | null
-  }): Promise<IResponse<SessionQueryResponse>> {
-    const params = { limit: 25, ...queryParams } as SDKRequestConfig
+  }): Promise<Response<SessionQueryResponse>> {
+    const params = { limit: 25, ...queryParams } as AxiosRequestConfig
     const url = '/sessionbrowser/admin/namespaces/{namespace}/gamesession'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SessionQueryResponse, 'SessionQueryResponse')
   }
-
   /**
    * Admin delete the session by session ID
    */
-  deleteGamesession_BySessionId(sessionID: string): Promise<IResponse<AdminSessionResponse>> {
-    const params = {} as SDKRequestConfig
+  deleteGamesession_BySessionId(sessionID: string): Promise<Response<AdminSessionResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/sessionbrowser/admin/namespaces/{namespace}/gamesession/{sessionID}'
       .replace('{namespace}', this.namespace)
       .replace('{sessionID}', sessionID)
@@ -54,12 +53,11 @@ export class SessionAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, AdminSessionResponse, 'AdminSessionResponse')
   }
-
   /**
    * Get the session by session ID for admin user
    */
-  getGamesession_BySessionId(sessionID: string): Promise<IResponse<AdminSessionResponse>> {
-    const params = {} as SDKRequestConfig
+  getGamesession_BySessionId(sessionID: string): Promise<Response<AdminSessionResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/sessionbrowser/admin/namespaces/{namespace}/gamesession/{sessionID}'
       .replace('{namespace}', this.namespace)
       .replace('{sessionID}', sessionID)
@@ -67,7 +65,6 @@ export class SessionAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, AdminSessionResponse, 'AdminSessionResponse')
   }
-
   /**
    * Search sessions. Optimize the query by differentiating query with filter namespace only and filter with namespace &amp; other filter (partyID, userID, matchID). Query with filter namespace only will not group whole session data while query with filter namespace &amp; other filter will include session data.
    */
@@ -81,8 +78,8 @@ export class SessionAdmin$ {
     sessionType?: string | null
     status?: string | null
     userID?: string | null
-  }): Promise<IResponse<GetSessionHistorySearchResponseV2>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  }): Promise<Response<GetSessionHistorySearchResponseV2>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/sessionbrowser/admin/namespaces/{namespace}/sessions/history/search'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -93,12 +90,11 @@ export class SessionAdmin$ {
       'GetSessionHistorySearchResponseV2'
     )
   }
-
   /**
    * Get all active session
    */
-  getGamesessionActiveCount(queryParams?: { session_type?: string | null }): Promise<IResponse<CountActiveSessionResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  getGamesessionActiveCount(queryParams?: { session_type?: string | null }): Promise<Response<CountActiveSessionResponse>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/sessionbrowser/admin/namespaces/{namespace}/gamesession/active/count'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -109,7 +105,6 @@ export class SessionAdmin$ {
       'CountActiveSessionResponse'
     )
   }
-
   /**
    * Get all active session for custom game, this return only dedicated session type
    */
@@ -118,8 +113,8 @@ export class SessionAdmin$ {
     offset?: number
     server_region?: string | null
     session_id?: string | null
-  }): Promise<IResponse<ActiveCustomGameResponse>> {
-    const params = { limit: 25, ...queryParams } as SDKRequestConfig
+  }): Promise<Response<ActiveCustomGameResponse>> {
+    const params = { limit: 25, ...queryParams } as AxiosRequestConfig
     const url = '/sessionbrowser/admin/namespaces/{namespace}/gamesession/active/custom-game'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -130,7 +125,6 @@ export class SessionAdmin$ {
       'ActiveCustomGameResponse'
     )
   }
-
   /**
    * Get all active session for matchmaking game, this return only dedicated session type
    */
@@ -140,8 +134,8 @@ export class SessionAdmin$ {
     offset?: number
     server_region?: string | null
     session_id?: string | null
-  }): Promise<IResponse<ActiveMatchmakingGameResponse>> {
-    const params = { limit: 25, ...queryParams } as SDKRequestConfig
+  }): Promise<Response<ActiveMatchmakingGameResponse>> {
+    const params = { limit: 25, ...queryParams } as AxiosRequestConfig
     const url = '/sessionbrowser/admin/namespaces/{namespace}/gamesession/active/matchmaking-game'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -152,12 +146,11 @@ export class SessionAdmin$ {
       'ActiveMatchmakingGameResponse'
     )
   }
-
   /**
    * Get session history detailed. if party_id value empty/null, field will not show in response body.
    */
-  getHistoryDetailed_ByMatchId(matchID: string): Promise<IResponse<GetSessionHistoryDetailedResponseItemArray>> {
-    const params = {} as SDKRequestConfig
+  getHistoryDetailed_ByMatchId(matchID: string): Promise<Response<GetSessionHistoryDetailedResponseItemArray>> {
+    const params = {} as AxiosRequestConfig
     const url = '/sessionbrowser/admin/namespaces/{namespace}/sessions/{matchID}/history/detailed'
       .replace('{namespace}', this.namespace)
       .replace('{matchID}', matchID)

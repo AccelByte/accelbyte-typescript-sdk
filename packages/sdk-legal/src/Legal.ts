@@ -7,26 +7,29 @@
  * AUTO GENERATED
  */
 
-import { UserInfoAdminApi } from './generated-admin/UserInfoAdminApi.js'
-import { BaseLegalPoliciesAdminApi } from './generated-admin/BaseLegalPoliciesAdminApi.js'
-import { PoliciesAdminApi } from './generated-admin/PoliciesAdminApi.js'
-import { PolicyVersionsAdminApi } from './generated-admin/PolicyVersionsAdminApi.js'
+import { author, name, version } from '../package.json'
 import { AgreementAdminApi } from './generated-admin/AgreementAdminApi.js'
 import { AgreementWithNamespaceAdminApi } from './generated-admin/AgreementWithNamespaceAdminApi.js'
-import { BaseLegalPoliciesWithNamespaceAdminApi } from './generated-admin/BaseLegalPoliciesWithNamespaceAdminApi.js'
 import { AnonymizationAdminApi } from './generated-admin/AnonymizationAdminApi.js'
-import { PoliciesWithNamespaceAdminApi } from './generated-admin/PoliciesWithNamespaceAdminApi.js'
-import { PolicyVersionsWithNamespaceAdminApi } from './generated-admin/PolicyVersionsWithNamespaceAdminApi.js'
-import { AdminUserEligibilitiesAdminApi } from './generated-admin/AdminUserEligibilitiesAdminApi.js'
+import { BaseLegalPoliciesAdminApi } from './generated-admin/BaseLegalPoliciesAdminApi.js'
+import { BaseLegalPoliciesWithNamespaceAdminApi } from './generated-admin/BaseLegalPoliciesWithNamespaceAdminApi.js'
 import { LocalizedPolicyVersionsAdminApi } from './generated-admin/LocalizedPolicyVersionsAdminApi.js'
-import { AdminUserAgreementAdminApi } from './generated-admin/AdminUserAgreementAdminApi.js'
 import { LocalizedPolicyVersionsWithNamespaceAdminApi } from './generated-admin/LocalizedPolicyVersionsWithNamespaceAdminApi.js'
-import { UtilityApi } from './generated-public/UtilityApi.js'
+import { PoliciesAdminApi } from './generated-admin/PoliciesAdminApi.js'
+import { PoliciesWithNamespaceAdminApi } from './generated-admin/PoliciesWithNamespaceAdminApi.js'
+import { PolicyVersionsAdminApi } from './generated-admin/PolicyVersionsAdminApi.js'
+import { PolicyVersionsWithNamespaceAdminApi } from './generated-admin/PolicyVersionsWithNamespaceAdminApi.js'
+import { UserAgreementAdminApi } from './generated-admin/UserAgreementAdminApi.js'
+import { UserEligibilitiesAdminApi } from './generated-admin/UserEligibilitiesAdminApi.js'
+import { UserInfoAdminApi } from './generated-admin/UserInfoAdminApi.js'
 import { AgreementApi } from './generated-public/AgreementApi.js'
-import { PoliciesApi } from './generated-public/PoliciesApi.js'
 import { EligibilitiesApi } from './generated-public/EligibilitiesApi.js'
 import { LocalizedPolicyVersionsApi } from './generated-public/LocalizedPolicyVersionsApi.js'
 import { LocalizedPolicyVersionsWithNamespaceApi } from './generated-public/LocalizedPolicyVersionsWithNamespaceApi.js'
+import { PoliciesApi } from './generated-public/PoliciesApi.js'
+import { UtilityApi } from './generated-public/UtilityApi.js'
+
+console.log(`${name}@${version}`)
 
 const apis = {
   UserInfoAdminApi,
@@ -39,16 +42,22 @@ const apis = {
   AnonymizationAdminApi,
   PoliciesWithNamespaceAdminApi,
   PolicyVersionsWithNamespaceAdminApi,
-  AdminUserEligibilitiesAdminApi,
+  UserEligibilitiesAdminApi,
   LocalizedPolicyVersionsAdminApi,
-  AdminUserAgreementAdminApi,
+  UserAgreementAdminApi,
   LocalizedPolicyVersionsWithNamespaceAdminApi,
   UtilityApi,
   AgreementApi,
   PoliciesApi,
   EligibilitiesApi,
   LocalizedPolicyVersionsApi,
-  LocalizedPolicyVersionsWithNamespaceApi
+  LocalizedPolicyVersionsWithNamespaceApi,
+  version: () =>
+    console.log({
+      version,
+      name,
+      author
+    })
 }
 
 export const Legal = apis

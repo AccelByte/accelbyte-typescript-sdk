@@ -5,28 +5,26 @@
  */
 
 import {
-  AccelbyteSDK,
-  ApiArgs,
+  AccelByteSDK,
   ApiUtils,
   BrowserHelper,
   DesktopChecker,
-  doRefreshSession,
   Network,
-  refreshWithLock,
+  RefreshToken,
   SdkDevice,
-  SDKRequestConfig,
+  SdkSetConfigParam,
   UrlHelper,
   Validate
 } from '@accelbyte/sdk'
-import { AxiosError, AxiosResponse } from 'axios'
+import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import platform from 'platform'
 import { z } from 'zod'
-import { MFADataResponse } from '../models/TwoFA.js'
-import { CodeChallenge } from './CodeChallenge.js'
-import { OAuth20$ } from '../../generated-public/endpoints/OAuth20$'
 import { TokenWithDeviceCookieResponseV3 } from '../../generated-definitions/TokenWithDeviceCookieResponseV3'
+import { OAuth20$ } from '../../generated-public/endpoints/OAuth20$'
 import { OAuth20Extension$ } from '../../generated-public/endpoints/OAuth20Extension$'
 import { mandatoryAccountUpgradeLocalStorageName } from '../constants.js'
+import { MFADataResponse } from '../models/TwoFA.js'
+import { CodeChallenge } from './CodeChallenge.js'
 
 const AUTHORIZE_URL = '/iam/v3/oauth/authorize'
 export const MFA_DATA_STORAGE_KEY = 'mfaData'
@@ -65,18 +63,21 @@ export class LoginErrorUnknown extends Error {}
 export class LoginErrorUnmatchedState extends Error {}
 
 export class IamUserAuthorizationClient {
-  conf: SDKRequestConfig
+  conf: AxiosRequestConfig
   namespace: string
   options: UserAuthorizationOptions
 
-  constructor(private sdk: AccelbyteSDK, args?: ApiArgs) {
-    const { config, namespace, baseURL, clientId, redirectURI } = sdk.assembly()
-    this.conf = ApiUtils.mergedConfigs(config, args)
-    this.namespace = args?.namespace ? args?.namespace : namespace
+  constructor(
+    private sdk: AccelByteSDK,
+    args?: SdkSetConfigParam
+  ) {
+    const { coreConfig, axiosInstance } = sdk.assembly()
+    this.conf = ApiUtils.mergeAxiosConfigs(axiosInstance.defaults as AxiosRequestConfig, args?.axiosConfig?.request)
+    this.namespace = args?.coreConfig?.namespace ? args?.coreConfig?.namespace : coreConfig?.namespace
     this.options = {
-      baseURL,
-      clientId,
-      redirectURI
+      baseURL: coreConfig.baseURL,
+      clientId: coreConfig.clientId,
+      redirectURI: coreConfig.redirectURI
     }
   }
 
@@ -94,14 +95,14 @@ export class IamUserAuthorizationClient {
     }
     const axios = Network.create(config)
 
-    const data: Parameters<OAuth20$['postOauthToken']>[0] = {
+    const data: Parameters<OAuth20$['postOauthToken_v3']>[0] = {
       grant_type: 'authorization_code',
       code,
       code_verifier: codeVerifier,
       client_id: this.options.clientId,
       redirect_uri: this.options.redirectURI
     }
-    const result = await new OAuth20$(axios, this.namespace).postOauthToken(data)
+    const result = await new OAuth20$(axios, this.namespace).postOauthToken_v3(data)
 
     const errorResponse = (isAxiosError(result.error) && result.error.response) as AxiosResponse
     const mfaData = IamUserAuthorizationClient.getMfaDataFromError(errorResponse)
@@ -125,13 +126,13 @@ export class IamUserAuthorizationClient {
       }
     })
 
-    const data: Parameters<OAuth20$['postOauthToken']>[0] = {
+    const data: Parameters<OAuth20$['postOauthToken_v3']>[0] = {
       password,
       username,
       grant_type: 'password',
       client_id: this.options.clientId
     }
-    const result = await new OAuth20$(axios, this.namespace).postOauthToken(data)
+    const result = await new OAuth20$(axios, this.namespace).postOauthToken_v3(data)
 
     const errorResponse = (isAxiosError(result.error) && result.error.response) as AxiosResponse
     const mfaData = IamUserAuthorizationClient.getMfaDataFromError(errorResponse)
@@ -202,10 +203,10 @@ export class IamUserAuthorizationClient {
       }
     }
     const axios = Network.create(config)
-    const data: Parameters<OAuth20Extension$['postTokenExchange']>[0] = {
+    const data: Parameters<OAuth20Extension$['postTokenExchange_v3']>[0] = {
       code
     }
-    const result = await new OAuth20Extension$(axios, this.namespace).postTokenExchange(data)
+    const result = await new OAuth20Extension$(axios, this.namespace).postTokenExchange_v3(data)
     const errorResponse = (isAxiosError(result.error) && result.error.response) as AxiosResponse
     const mfaData = IamUserAuthorizationClient.getMfaDataFromError(errorResponse)
 
@@ -332,12 +333,16 @@ export class IamUserAuthorizationClient {
   /**
    * @internal
    */
-  refreshToken = (): Promise<Partial<TokenWithDeviceCookieResponseV3> | false> => {
-    const { clientId, refreshToken } = this.sdk.assembly()
+  refreshToken = (_refreshToken?: string): Promise<Partial<TokenWithDeviceCookieResponseV3> | false> => {
+    const { coreConfig } = this.sdk.assembly()
+    const { refreshToken } = this.sdk.getToken()
+    const refresh = new RefreshToken({
+      config: { axiosConfig: this.conf, clientId: coreConfig.clientId, refreshToken: refreshToken || _refreshToken }
+    })
     if (DesktopChecker.isDesktopApp()) {
-      return Promise.resolve().then(doRefreshSession({ axiosConfig: this.conf, clientId, refreshToken }))
+      return Promise.resolve().then(() => refresh.run())
     }
-    return refreshWithLock({ axiosConfig: this.conf, clientId, refreshToken })
+    return refresh.runWithLock()
   }
 
   private getSearchParams = (sentState, challenge): URLSearchParams => {

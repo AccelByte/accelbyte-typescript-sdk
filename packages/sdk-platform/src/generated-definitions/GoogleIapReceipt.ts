@@ -7,13 +7,15 @@ import { z } from 'zod'
 
 export const GoogleIapReceipt = z.object({
   autoAck: z.boolean().nullish(),
+  autoConsume: z.boolean().nullish(),
   language: z.string().nullish(),
   orderId: z.string(),
   packageName: z.string(),
-  productId: z.string(),
-  purchaseTime: z.number().int(),
+  productId: z.string().nullish(),
+  purchaseTime: z.number().int().nullish(),
   purchaseToken: z.string(),
-  region: z.string().nullish()
+  region: z.string().nullish(),
+  subscriptionPurchase: z.boolean().nullish()
 })
 
 export interface GoogleIapReceipt extends z.TypeOf<typeof GoogleIapReceipt> {}

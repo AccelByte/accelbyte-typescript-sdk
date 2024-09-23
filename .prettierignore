@@ -1,0 +1,23 @@
+dist
+docs
+build
+node_modules
+package.json
+README.md
+index.html
+.github
+_misc
+storybook-static
+*.md
+**/generated/**
+**/generated-admin/**
+**/generated-public/**
+.eslintignore
+docgen*.ts
+apps/config-service-app/contents/**
+
+# Unignore these files because we'd want prettified tables.
+!deployment/DEPLOYMENT_GUIDELINE*.md
+!/README.md
+
+.env

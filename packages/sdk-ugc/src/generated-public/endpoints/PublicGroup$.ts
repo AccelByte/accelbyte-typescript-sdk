@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { CreateGroupRequest } from '../../generated-definitions/CreateGroupRequest.js'
 import { CreateGroupResponse } from '../../generated-definitions/CreateGroupResponse.js'
@@ -17,13 +17,13 @@ import { PaginatedGroupResponse } from '../../generated-definitions/PaginatedGro
 
 export class PublicGroup$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Get user groups paginated
    */
-  getGroups_ByUserId(userId: string, queryParams?: { limit?: number; offset?: number }): Promise<IResponse<PaginatedGroupResponse>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  getGroups_ByUserId(userId: string, queryParams?: { limit?: number; offset?: number }): Promise<Response<PaginatedGroupResponse>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/groups'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -36,12 +36,11 @@ export class PublicGroup$ {
       'PaginatedGroupResponse'
     )
   }
-
   /**
    * Create group
    */
-  createGroup_ByUserId(userId: string, data: CreateGroupRequest): Promise<IResponse<CreateGroupResponse>> {
-    const params = {} as SDKRequestConfig
+  createGroup_ByUserId(userId: string, data: CreateGroupRequest): Promise<Response<CreateGroupResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/groups'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -49,12 +48,11 @@ export class PublicGroup$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
   }
-
   /**
    * Delete user group by group ID
    */
-  deleteGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/groups/{groupId}'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -63,12 +61,11 @@ export class PublicGroup$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Get user groups by group ID
    */
-  getGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<IResponse<CreateGroupResponse>> {
-    const params = {} as SDKRequestConfig
+  getGroup_ByUserId_ByGroupId(userId: string, groupId: string): Promise<Response<CreateGroupResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/groups/{groupId}'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -77,12 +74,11 @@ export class PublicGroup$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
   }
-
   /**
    * Replace group name and contents with new ones
    */
-  updateGroup_ByUserId_ByGroupId(userId: string, groupId: string, data: CreateGroupRequest): Promise<IResponse<CreateGroupResponse>> {
-    const params = {} as SDKRequestConfig
+  updateGroup_ByUserId_ByGroupId(userId: string, groupId: string, data: CreateGroupRequest): Promise<Response<CreateGroupResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/groups/{groupId}'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -91,7 +87,6 @@ export class PublicGroup$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, CreateGroupResponse, 'CreateGroupResponse')
   }
-
   /**
    * Get content that belong to a group
    */
@@ -99,8 +94,8 @@ export class PublicGroup$ {
     userId: string,
     groupId: string,
     queryParams?: { limit?: number; offset?: number }
-  ): Promise<IResponse<PaginatedContentDownloadResponse>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  ): Promise<Response<PaginatedContentDownloadResponse>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/ugc/v1/public/namespaces/{namespace}/users/{userId}/groups/{groupId}/contents'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -114,16 +109,15 @@ export class PublicGroup$ {
       'PaginatedContentDownloadResponse'
     )
   }
-
   /**
    * Get content belong to a group
    */
-  getContents_ByUserId_ByGroupId_ByNS(
+  getContents_ByUserId_ByGroupId_v2(
     userId: string,
     groupId: string,
     queryParams?: { limit?: number; offset?: number }
-  ): Promise<IResponse<PaginatedContentDownloadResponseV2>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  ): Promise<Response<PaginatedContentDownloadResponseV2>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/ugc/v2/public/namespaces/{namespace}/users/{userId}/groups/{groupId}/contents'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

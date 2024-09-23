@@ -6,19 +6,19 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 
 export class AnonymizationAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Anonymize order. At current it will only anonymize order, order history.
    */
-  deleteAnonymizationOrder_ByUserId(userId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteAnonymizationOrder_ByUserId(userId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/anonymization/orders'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -26,12 +26,11 @@ export class AnonymizationAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Anonymize payment. At current it will only anonymize payment order, payment order history.
    */
-  deleteAnonymizationPayment_ByUserId(userId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteAnonymizationPayment_ByUserId(userId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/anonymization/payment'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -39,12 +38,11 @@ export class AnonymizationAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Anonymize wallet. At current it will only anonymize wallet, wallet transaction.
    */
-  deleteAnonymizationWallet_ByUserId(userId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteAnonymizationWallet_ByUserId(userId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/anonymization/wallets'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -52,12 +50,11 @@ export class AnonymizationAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Anonymize campaign. At current it will only anonymize redeem history.
    */
-  deleteAnonymizationCampaign_ByUserId(userId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteAnonymizationCampaign_ByUserId(userId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/anonymization/campaign'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -65,12 +62,11 @@ export class AnonymizationAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Anonymize revocation. At current it will only anonymize revocation history.
    */
-  deleteAnonymizationRevocation_ByUserId(userId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteAnonymizationRevocation_ByUserId(userId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/anonymization/revocation'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -78,12 +74,11 @@ export class AnonymizationAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Anonymize fulfillment. At current it will only anonymize fulfillment history.
    */
-  deleteAnonymizationFulfillment_ByUserId(userId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteAnonymizationFulfillment_ByUserId(userId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/anonymization/fulfillment'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -91,12 +86,11 @@ export class AnonymizationAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Anonymize entitlement. At current it will only anonymize entitlement, entitlement history.
    */
-  deleteAnonymizationEntitlement_ByUserId(userId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteAnonymizationEntitlement_ByUserId(userId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/anonymization/entitlements'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -104,12 +98,11 @@ export class AnonymizationAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Anonymize integrations. At current it will only anonymize iap histories.
    */
-  deleteAnonymizationIntegration_ByUserId(userId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteAnonymizationIntegration_ByUserId(userId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/anonymization/integrations'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
@@ -117,12 +110,11 @@ export class AnonymizationAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Anonymize subscription. At current it will anonymize subscription, billing history and subscription activity.
    */
-  deleteAnonymizationSubscription_ByUserId(userId: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteAnonymizationSubscription_ByUserId(userId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/anonymization/subscriptions'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

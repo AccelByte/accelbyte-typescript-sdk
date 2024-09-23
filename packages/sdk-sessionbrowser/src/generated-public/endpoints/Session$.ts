@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { AddPlayerRequest } from '../../generated-definitions/AddPlayerRequest.js'
 import { AddPlayerResponse } from '../../generated-definitions/AddPlayerResponse.js'
 import { CreateSessionRequest } from '../../generated-definitions/CreateSessionRequest.js'
@@ -21,8 +21,8 @@ import { UpdateSettingsRequest } from '../../generated-definitions/UpdateSetting
 
 export class Session$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Query available game session
    */
@@ -37,30 +37,28 @@ export class Session$ {
     offset?: number
     server_status?: string | null
     user_id?: string | null
-  }): Promise<IResponse<SessionQueryResponse>> {
-    const params = { limit: 25, ...queryParams } as SDKRequestConfig
+  }): Promise<Response<SessionQueryResponse>> {
+    const params = { limit: 25, ...queryParams } as AxiosRequestConfig
     const url = '/sessionbrowser/namespaces/{namespace}/gamesession'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SessionQueryResponse, 'SessionQueryResponse')
   }
-
   /**
    * This end point intended to be called directly by P2P game client host or by DSMC
    */
-  createGamesession(data: CreateSessionRequest): Promise<IResponse<SessionResponse>> {
-    const params = {} as SDKRequestConfig
+  createGamesession(data: CreateSessionRequest): Promise<Response<SessionResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/sessionbrowser/namespaces/{namespace}/gamesession'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SessionResponse, 'SessionResponse')
   }
-
   /**
    * Query game sessions by comma separated user ids
    */
-  getGamesessionBulk(queryParams: { user_ids: string | null }): Promise<IResponse<SessionByUserIDsResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  getGamesessionBulk(queryParams: { user_ids: string | null }): Promise<Response<SessionByUserIDsResponse>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/sessionbrowser/namespaces/{namespace}/gamesession/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -71,12 +69,11 @@ export class Session$ {
       'SessionByUserIDsResponse'
     )
   }
-
   /**
    * Query recent player by user ID
    */
-  getRecentplayer_ByUserId(userID: string): Promise<IResponse<RecentPlayerQueryResponse>> {
-    const params = {} as SDKRequestConfig
+  getRecentplayer_ByUserId(userID: string): Promise<Response<RecentPlayerQueryResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/sessionbrowser/namespaces/{namespace}/recentplayer/{userID}'
       .replace('{namespace}', this.namespace)
       .replace('{userID}', userID)
@@ -89,12 +86,11 @@ export class Session$ {
       'RecentPlayerQueryResponse'
     )
   }
-
   /**
    * Delete the session (p2p) by session ID
    */
-  deleteGamesession_BySessionId(sessionID: string): Promise<IResponse<SessionResponse>> {
-    const params = {} as SDKRequestConfig
+  deleteGamesession_BySessionId(sessionID: string): Promise<Response<SessionResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/sessionbrowser/namespaces/{namespace}/gamesession/{sessionID}'
       .replace('{namespace}', this.namespace)
       .replace('{sessionID}', sessionID)
@@ -102,12 +98,11 @@ export class Session$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SessionResponse, 'SessionResponse')
   }
-
   /**
    * Get the session by session ID
    */
-  getGamesession_BySessionId(sessionID: string): Promise<IResponse<SessionResponse>> {
-    const params = {} as SDKRequestConfig
+  getGamesession_BySessionId(sessionID: string): Promise<Response<SessionResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/sessionbrowser/namespaces/{namespace}/gamesession/{sessionID}'
       .replace('{namespace}', this.namespace)
       .replace('{sessionID}', sessionID)
@@ -115,12 +110,11 @@ export class Session$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SessionResponse, 'SessionResponse')
   }
-
   /**
    * Update game session, used to update the current player
    */
-  updateGamesession_BySessionId(sessionID: string, data: UpdateSessionRequest): Promise<IResponse<SessionResponse>> {
-    const params = {} as SDKRequestConfig
+  updateGamesession_BySessionId(sessionID: string, data: UpdateSessionRequest): Promise<Response<SessionResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/sessionbrowser/namespaces/{namespace}/gamesession/{sessionID}'
       .replace('{namespace}', this.namespace)
       .replace('{sessionID}', sessionID)
@@ -128,12 +122,11 @@ export class Session$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SessionResponse, 'SessionResponse')
   }
-
   /**
    * Join the specified session by session ID. Possible the game required a password to join
    */
-  createJoin_BySessionId(sessionID: string, data: JoinGameSessionRequest): Promise<IResponse<SessionResponse>> {
-    const params = {} as SDKRequestConfig
+  fetchJoin_BySessionId(sessionID: string, data: JoinGameSessionRequest): Promise<Response<SessionResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/sessionbrowser/namespaces/{namespace}/gamesession/{sessionID}/join'
       .replace('{namespace}', this.namespace)
       .replace('{sessionID}', sessionID)
@@ -141,12 +134,11 @@ export class Session$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SessionResponse, 'SessionResponse')
   }
-
   /**
    * Add player to game session
    */
-  createPlayer_BySessionId(sessionID: string, data: AddPlayerRequest): Promise<IResponse<AddPlayerResponse>> {
-    const params = {} as SDKRequestConfig
+  updatePlayer_BySessionId(sessionID: string, data: AddPlayerRequest): Promise<Response<AddPlayerResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/sessionbrowser/namespaces/{namespace}/gamesession/{sessionID}/player'
       .replace('{namespace}', this.namespace)
       .replace('{sessionID}', sessionID)
@@ -154,12 +146,11 @@ export class Session$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, AddPlayerResponse, 'AddPlayerResponse')
   }
-
   /**
    * Only use for local DS entry, will error when calling non local DS entry
    */
-  deleteLocald_BySessionId(sessionID: string): Promise<IResponse<SessionResponse>> {
-    const params = {} as SDKRequestConfig
+  deleteLocald_BySessionId(sessionID: string): Promise<Response<SessionResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/sessionbrowser/namespaces/{namespace}/gamesession/{sessionID}/localds'
       .replace('{namespace}', this.namespace)
       .replace('{sessionID}', sessionID)
@@ -167,12 +158,11 @@ export class Session$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SessionResponse, 'SessionResponse')
   }
-
   /**
    * Update game session, used to update OtherSettings
    */
-  updateSetting_BySessionId(sessionID: string, data: UpdateSettingsRequest): Promise<IResponse<SessionResponse>> {
-    const params = {} as SDKRequestConfig
+  updateSetting_BySessionId(sessionID: string, data: UpdateSettingsRequest): Promise<Response<SessionResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/sessionbrowser/namespaces/{namespace}/gamesession/{sessionID}/settings'
       .replace('{namespace}', this.namespace)
       .replace('{sessionID}', sessionID)
@@ -180,12 +170,11 @@ export class Session$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SessionResponse, 'SessionResponse')
   }
-
   /**
    * Remove player from game session
    */
-  deletePlayer_BySessionId_ByUserId(sessionID: string, userID: string): Promise<IResponse<AddPlayerResponse>> {
-    const params = {} as SDKRequestConfig
+  deletePlayer_BySessionId_ByUserId(sessionID: string, userID: string): Promise<Response<AddPlayerResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/sessionbrowser/namespaces/{namespace}/gamesession/{sessionID}/player/{userID}'
       .replace('{namespace}', this.namespace)
       .replace('{sessionID}', sessionID)

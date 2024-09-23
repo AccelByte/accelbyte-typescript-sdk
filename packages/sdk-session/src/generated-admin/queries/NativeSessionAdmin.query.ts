@@ -7,8 +7,8 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
 import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { NativeSessionAdminApi } from '../NativeSessionAdminApi.js'
@@ -16,20 +16,32 @@ import { NativeSessionAdminApi } from '../NativeSessionAdminApi.js'
 import { NativeSessionPagingResponse } from '../../generated-definitions/NativeSessionPagingResponse.js'
 
 export enum Key_NativeSessionAdmin {
-  NativeSessions = 'NativeSessionAdmin.NativeSessions'
+  NativeSessions = 'Session.NativeSessionAdmin.NativeSessions'
 }
 
-export const useAdmNativeSessions = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { queryParams?: { limit?: number; offset?: number; order?: string | null } },
+/**
+ * List of native sessions.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_NativeSessionAdmin.NativeSessions, input]
+ * }
+ * ```
+ */
+export const useNativeSessionAdminApi_GetNativeSessions = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams?: { limit?: number; offset?: number; order?: string | null } },
   options?: Omit<UseQueryOptions<NativeSessionPagingResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: NativeSessionPagingResponse) => void
+  callback?: (data: AxiosResponse<NativeSessionPagingResponse>) => void
 ): UseQueryResult<NativeSessionPagingResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmNativeSessions>[1]) => async () => {
-    const data = await NativeSessionAdminApi(sdk, { namespace: input.namespace }).getNativeSessions(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useNativeSessionAdminApi_GetNativeSessions>[1]) => async () => {
+    const response = await NativeSessionAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getNativeSessions(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<NativeSessionPagingResponse, AxiosError<ApiError>>({

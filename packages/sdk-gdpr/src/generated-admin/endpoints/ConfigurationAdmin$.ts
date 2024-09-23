@@ -6,65 +6,61 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { ServiceConfigurationUpdateRequest } from '../../generated-definitions/ServiceConfigurationUpdateRequest.js'
 import { ServicesConfigurationResponse } from '../../generated-definitions/ServicesConfigurationResponse.js'
 
 export class ConfigurationAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Delete a list of admin email addresses to stop receiving personal data request notification. Scope: account
    */
-  deleteEmailConfiguration(queryParams: { emails: string[] }): Promise<IResponse<unknown>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  deleteEmailConfiguration(queryParams: { emails: string[] }): Promise<Response<unknown>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/gdpr/admin/namespaces/{namespace}/emails/configurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Get list of admin email address configuration. Scope: account
    */
-  getEmailsConfigurations(): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  getEmailsConfigurations(): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/gdpr/admin/namespaces/{namespace}/emails/configurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Add admin email address for receiving personal data request notification. Scope: account
    */
-  createEmailConfiguration(data: string[]): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  createEmailConfiguration(data: string[]): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/gdpr/admin/namespaces/{namespace}/emails/configurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Update admin email address for receiving personal data request notification. Scope: account
    */
-  updateEmailConfiguration(data: string[]): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  updateEmailConfiguration(data: string[]): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/gdpr/admin/namespaces/{namespace}/emails/configurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Get Registered Services Configuration. Scope: account
    */
-  getServicesConfigurations(): Promise<IResponse<ServicesConfigurationResponse>> {
-    const params = {} as SDKRequestConfig
+  getServicesConfigurations(): Promise<Response<ServicesConfigurationResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/gdpr/admin/namespaces/{namespace}/services/configurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -75,12 +71,11 @@ export class ConfigurationAdmin$ {
       'ServicesConfigurationResponse'
     )
   }
-
   /**
    * Update Registered Services Configuration. Scope: account
    */
-  updateServiceConfiguration(data: ServiceConfigurationUpdateRequest): Promise<IResponse<ServiceConfigurationUpdateRequest>> {
-    const params = {} as SDKRequestConfig
+  updateServiceConfiguration(data: ServiceConfigurationUpdateRequest): Promise<Response<ServiceConfigurationUpdateRequest>> {
+    const params = {} as AxiosRequestConfig
     const url = '/gdpr/admin/namespaces/{namespace}/services/configurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
@@ -91,34 +86,31 @@ export class ConfigurationAdmin$ {
       'ServiceConfigurationUpdateRequest'
     )
   }
-
   /**
    * **[TEST FACILITY ONLY]** Reset Registered Services Configuration to use the default configuration. Scope: account
    */
-  deleteServiceConfigurationReset(): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteServiceConfigurationReset(): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/gdpr/admin/namespaces/{namespace}/services/configurations/reset'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * **[TEST FACILITY ONLY]** Reset registered platform account closure services configuration to use the default configuration. Scope: account
    */
-  deleteServicePlatformClosureConfig(): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteServicePlatformClosureConfig(): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/gdpr/admin/namespaces/{namespace}/services/platforms/closure/config'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Get registered platform account closure services configuration. Scope: account
    */
-  getServicesPlatformsClosureConfig(): Promise<IResponse<ServicesConfigurationResponse>> {
-    const params = {} as SDKRequestConfig
+  getServicesPlatformsClosureConfig(): Promise<Response<ServicesConfigurationResponse>> {
+    const params = {} as AxiosRequestConfig
     const url = '/gdpr/admin/namespaces/{namespace}/services/platforms/closure/config'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -129,12 +121,11 @@ export class ConfigurationAdmin$ {
       'ServicesConfigurationResponse'
     )
   }
-
   /**
    * Update registered platform account closure services configuration. Scope: account
    */
-  updateServicePlatformClosureConfig(data: ServiceConfigurationUpdateRequest): Promise<IResponse<ServiceConfigurationUpdateRequest>> {
-    const params = {} as SDKRequestConfig
+  updateServicePlatformClosureConfig(data: ServiceConfigurationUpdateRequest): Promise<Response<ServiceConfigurationUpdateRequest>> {
+    const params = {} as AxiosRequestConfig
     const url = '/gdpr/admin/namespaces/{namespace}/services/platforms/closure/config'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 

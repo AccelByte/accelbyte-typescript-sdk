@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { Ownership } from '../../generated-definitions/Ownership.js'
 import { PlatformOwnership } from '../../generated-definitions/PlatformOwnership.js'
 import { PsnEntitlementOwnershipRequest } from '../../generated-definitions/PsnEntitlementOwnershipRequest.js'
@@ -15,13 +15,13 @@ import { XblEntitlementOwnershipRequest } from '../../generated-definitions/XblE
 
 export class PlatformAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Get Xbox entitlement ownership by product sku.
    */
-  createOwnershipXblPlatform_ByProductSku(productSku: string, data: XblEntitlementOwnershipRequest): Promise<IResponse<PlatformOwnership>> {
-    const params = {} as SDKRequestConfig
+  createOwnershipXblPlatform_ByProductSku(productSku: string, data: XblEntitlementOwnershipRequest): Promise<Response<PlatformOwnership>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/platforms/xbl/entitlements/{productSku}/ownership'
       .replace('{namespace}', this.namespace)
       .replace('{productSku}', productSku)
@@ -29,15 +29,14 @@ export class PlatformAdmin$ {
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PlatformOwnership, 'PlatformOwnership')
   }
-
   /**
    * Get user psn entitlement ownership by entitlement label.
    */
   createOwnershipPsnPlatform_ByEntitlementLabel(
     entitlementLabel: string,
     data: PsnEntitlementOwnershipRequest
-  ): Promise<IResponse<Ownership>> {
-    const params = {} as SDKRequestConfig
+  ): Promise<Response<Ownership>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/platforms/psn/entitlements/{entitlementLabel}/ownership'
       .replace('{namespace}', this.namespace)
       .replace('{entitlementLabel}', entitlementLabel)

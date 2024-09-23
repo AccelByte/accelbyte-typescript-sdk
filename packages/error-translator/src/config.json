@@ -1,0 +1,5 @@
+{
+  "languageCodes": ["en-US", "fr-FR", "it-IT", "de-DE", "es-ES", "ja-JP", "zh-CN"],
+  "defaultLanguage": "en-US",
+  "fallbackLanguage": "en-US"
+}

@@ -1,0 +1,9 @@
+# Development files.
+src/
+scripts/
+
+# Config files.
+*.config.*
+tsconfig.*
+
+CHANGELOG.md

@@ -8,7 +8,8 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { DlcConfigRewardShortInfo } from '../generated-definitions/DlcConfigRewardShortInfo.js'
 import { EpicGamesDlcSyncRequest } from '../generated-definitions/EpicGamesDlcSyncRequest.js'
 import { PlayStationDlcSyncMultiServiceLabelsRequest } from '../generated-definitions/PlayStationDlcSyncMultiServiceLabelsRequest.js'
@@ -18,109 +19,131 @@ import { SteamDlcSyncRequest } from '../generated-definitions/SteamDlcSyncReques
 import { XblDlcSyncRequest } from '../generated-definitions/XblDlcSyncRequest.js'
 import { Dlc$ } from './endpoints/Dlc$.js'
 
-export function DlcApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function DlcApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * Get user dlc reward contents. If includeAllNamespaces is false, will only return the dlc synced from the current namespace&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user dlc&lt;/li&gt;&lt;/ul&gt;
-   */
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
+  }
+
   async function getUsersMeDlcContent(queryParams: {
     type: 'EPICGAMES' | 'OCULUS' | 'PSN' | 'STEAM' | 'XBOX'
     includeAllNamespaces?: boolean | null
-  }): Promise<SimpleUserDlcRewardContentsResponse> {
-    const $ = new Dlc$(Network.create(requestConfig), namespace, useSchemaValidation)
+  }): Promise<AxiosResponse<SimpleUserDlcRewardContentsResponse>> {
+    const $ = new Dlc$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getUsersMeDlcContent(queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get dlc reward simple map, only return the sku of durable item reward.
-   */
   async function getDlcRewardsDurableMap(queryParams: {
     dlcType: 'EPICGAMES' | 'OCULUS' | 'PSN' | 'STEAM' | 'XBOX'
-  }): Promise<DlcConfigRewardShortInfo> {
-    const $ = new Dlc$(Network.create(requestConfig), namespace, useSchemaValidation)
+  }): Promise<AxiosResponse<DlcConfigRewardShortInfo>> {
+    const $ = new Dlc$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getDlcRewardsDurableMap(queryParams)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Synchronize with dlc entitlements in PSN Store.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: result of synchronization&lt;/li&gt;&lt;/ul&gt;
-   */
-  async function updateDlcPsnSync_ByUserId(userId: string, data: PlayStationDlcSyncRequest): Promise<unknown> {
-    const $ = new Dlc$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateDlcPsnSync_ByUserId(userId: string, data: PlayStationDlcSyncRequest): Promise<AxiosResponse<unknown>> {
+    const $ = new Dlc$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateDlcPsnSync_ByUserId(userId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Sync Xbox inventory&#39;s dlc items
-   */
-  async function updateDlcXblSync_ByUserId(userId: string, data: XblDlcSyncRequest): Promise<unknown> {
-    const $ = new Dlc$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateDlcXblSync_ByUserId(userId: string, data: XblDlcSyncRequest): Promise<AxiosResponse<unknown>> {
+    const $ = new Dlc$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateDlcXblSync_ByUserId(userId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Sync steam dlc
-   */
-  async function updateDlcSteamSync_ByUserId(userId: string, data: SteamDlcSyncRequest): Promise<unknown> {
-    const $ = new Dlc$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateDlcSteamSync_ByUserId(userId: string, data: SteamDlcSyncRequest): Promise<AxiosResponse<unknown>> {
+    const $ = new Dlc$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateDlcSteamSync_ByUserId(userId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Sync oculus dlc
-   */
-  async function updateDlcOculuSync_ByUserId(userId: string): Promise<unknown> {
-    const $ = new Dlc$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateDlcOculuSync_ByUserId(userId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new Dlc$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateDlcOculuSync_ByUserId(userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Sync epic games dlc items
-   */
-  async function updateDlcEpicgameSync_ByUserId(userId: string, data: EpicGamesDlcSyncRequest): Promise<unknown> {
-    const $ = new Dlc$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function updateDlcEpicgameSync_ByUserId(userId: string, data: EpicGamesDlcSyncRequest): Promise<AxiosResponse<unknown>> {
+    const $ = new Dlc$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateDlcEpicgameSync_ByUserId(userId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Synchronize with dlc entitlements in PSN Store with multiple service labels.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: result of synchronization&lt;/li&gt;&lt;/ul&gt;
-   */
   async function updateDlcPsnSyncMultiServiceLabel_ByUserId(
     userId: string,
     data: PlayStationDlcSyncMultiServiceLabelsRequest
-  ): Promise<unknown> {
-    const $ = new Dlc$(Network.create(requestConfig), namespace, useSchemaValidation)
+  ): Promise<AxiosResponse<unknown>> {
+    const $ = new Dlc$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateDlcPsnSyncMultiServiceLabel_ByUserId(userId, data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     * Get user dlc reward contents. If includeAllNamespaces is false, will only return the dlc synced from the current namespace&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user dlc&lt;/li&gt;&lt;/ul&gt;
+     */
     getUsersMeDlcContent,
+    /**
+     * Get dlc reward simple map, only return the sku of durable item reward.
+     */
     getDlcRewardsDurableMap,
+    /**
+     * Synchronize with dlc entitlements in PSN Store.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: result of synchronization&lt;/li&gt;&lt;/ul&gt;
+     */
     updateDlcPsnSync_ByUserId,
+    /**
+     * Sync Xbox inventory&#39;s dlc items
+     */
     updateDlcXblSync_ByUserId,
+    /**
+     * Sync steam dlc
+     */
     updateDlcSteamSync_ByUserId,
+    /**
+     * Sync oculus dlc
+     */
     updateDlcOculuSync_ByUserId,
+    /**
+     * Sync epic games dlc items
+     */
     updateDlcEpicgameSync_ByUserId,
+    /**
+     * Synchronize with dlc entitlements in PSN Store with multiple service labels.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: result of synchronization&lt;/li&gt;&lt;/ul&gt;
+     */
     updateDlcPsnSyncMultiServiceLabel_ByUserId
   }
 }

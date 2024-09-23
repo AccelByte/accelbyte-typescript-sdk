@@ -5,6 +5,10 @@
  */
 import { z } from 'zod'
 
-export const EnabledFactorsResponseV4 = z.object({ default: z.string(), enabled: z.array(z.string()) })
+export const EnabledFactorsResponseV4 = z.object({
+  default: z.string(),
+  enabled: z.array(z.string()),
+  remainingBackupCodeCount: z.number().int().nullish()
+})
 
 export interface EnabledFactorsResponseV4 extends z.TypeOf<typeof EnabledFactorsResponseV4> {}

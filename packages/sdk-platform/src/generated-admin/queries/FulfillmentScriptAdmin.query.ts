@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { FulfillmentScriptAdminApi } from '../FulfillmentScriptAdminApi.js'
 
 import { FulfillmentScriptCreate } from '../../generated-definitions/FulfillmentScriptCreate.js'
@@ -19,21 +19,34 @@ import { FulfillmentScriptInfoArray } from '../../generated-definitions/Fulfillm
 import { FulfillmentScriptUpdate } from '../../generated-definitions/FulfillmentScriptUpdate.js'
 
 export enum Key_FulfillmentScriptAdmin {
-  FulfillmentScripts = 'FulfillmentScriptAdmin.FulfillmentScripts',
-  FulfillmentScript_ById = 'FulfillmentScriptAdmin.FulfillmentScript_ById'
+  FulfillmentScripts = 'Platform.FulfillmentScriptAdmin.FulfillmentScripts',
+  FulfillmentScript_ById = 'Platform.FulfillmentScriptAdmin.FulfillmentScript_ById'
 }
 
-export const useAdmFulfillmentScripts = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt;List all fulfillment scripts.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_FulfillmentScriptAdmin.FulfillmentScripts, input]
+ * }
+ * ```
+ */
+export const useFulfillmentScriptAdminApi_GetFulfillmentScripts = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<FulfillmentScriptInfoArray, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: FulfillmentScriptInfoArray) => void
+  callback?: (data: AxiosResponse<FulfillmentScriptInfoArray>) => void
 ): UseQueryResult<FulfillmentScriptInfoArray, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmFulfillmentScripts>[1]) => async () => {
-    const data = await FulfillmentScriptAdminApi(sdk, { namespace: input.namespace }).getFulfillmentScripts()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useFulfillmentScriptAdminApi_GetFulfillmentScripts>[1]) => async () => {
+    const response = await FulfillmentScriptAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getFulfillmentScripts()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<FulfillmentScriptInfoArray, AxiosError<ApiError>>({
@@ -43,18 +56,29 @@ export const useAdmFulfillmentScripts = (
   })
 }
 
-export const useAdmDeleteFulfillmentScript_ByIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { id: string }>, 'mutationKey'>,
+/**
+ * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt;Delete fulfillment script.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_FulfillmentScriptAdmin.FulfillmentScript_ById, input]
+ * }
+ * ```
+ */
+export const useFulfillmentScriptAdminApi_DeleteFulfillmentScript_ByIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { id: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { id: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { id: string }) => {
-    const data = await FulfillmentScriptAdminApi(sdk, { namespace: input.namespace, config: input.config }).deleteFulfillmentScript_ById(
-      input.id
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { id: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { id: string }) => {
+    const response = await FulfillmentScriptAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteFulfillmentScript_ById(input.id)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -64,17 +88,30 @@ export const useAdmDeleteFulfillmentScript_ByIdMutation = (
   })
 }
 
-export const useAdmFulfillmentScript_ById = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & { id: string },
+/**
+ * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt;Get fulfillment script by id.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: get fulfillment script&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_FulfillmentScriptAdmin.FulfillmentScript_ById, input]
+ * }
+ * ```
+ */
+export const useFulfillmentScriptAdminApi_GetFulfillmentScript_ById = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { id: string },
   options?: Omit<UseQueryOptions<FulfillmentScriptInfo, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: FulfillmentScriptInfo) => void
+  callback?: (data: AxiosResponse<FulfillmentScriptInfo>) => void
 ): UseQueryResult<FulfillmentScriptInfo, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmFulfillmentScript_ById>[1]) => async () => {
-    const data = await FulfillmentScriptAdminApi(sdk, { namespace: input.namespace }).getFulfillmentScript_ById(input.id)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useFulfillmentScriptAdminApi_GetFulfillmentScript_ById>[1]) => async () => {
+    const response = await FulfillmentScriptAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getFulfillmentScript_ById(input.id)
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<FulfillmentScriptInfo, AxiosError<ApiError>>({
@@ -84,22 +121,32 @@ export const useAdmFulfillmentScript_ById = (
   })
 }
 
-export const useAdmPatchFulfillmentScript_ByIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt;Update fulfillment script.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_FulfillmentScriptAdmin.FulfillmentScript_ById, input]
+ * }
+ * ```
+ */
+export const useFulfillmentScriptAdminApi_PatchFulfillmentScript_ByIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<FulfillmentScriptInfo, AxiosError<ApiError>, ApiArgs & { id: string; data: FulfillmentScriptUpdate }>,
+    UseMutationOptions<FulfillmentScriptInfo, AxiosError<ApiError>, SdkSetConfigParam & { id: string; data: FulfillmentScriptUpdate }>,
     'mutationKey'
   >,
   callback?: (data: FulfillmentScriptInfo) => void
-): UseMutationResult<FulfillmentScriptInfo, AxiosError<ApiError>, ApiArgs & { id: string; data: FulfillmentScriptUpdate }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { id: string; data: FulfillmentScriptUpdate }) => {
-    const data = await FulfillmentScriptAdminApi(sdk, { namespace: input.namespace, config: input.config }).patchFulfillmentScript_ById(
-      input.id,
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<FulfillmentScriptInfo, AxiosError<ApiError>, SdkSetConfigParam & { id: string; data: FulfillmentScriptUpdate }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { id: string; data: FulfillmentScriptUpdate }) => {
+    const response = await FulfillmentScriptAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).patchFulfillmentScript_ById(input.id, input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({
@@ -109,22 +156,32 @@ export const useAdmPatchFulfillmentScript_ByIdMutation = (
   })
 }
 
-export const useAdmCreateFulfillmentScript_ByIdMutation = (
-  sdk: AccelbyteSDK,
+/**
+ * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt;Create fulfillment script.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/ul&gt;Fulfillment scripts are used for adding custom fulfillment logic based on &lt;b&gt;ITEM_TYPE&lt;/b&gt;: [MEDIA,INGAMEITEM] for now, and the custom scripts only cover grantDays.&lt;br&gt;Example for grantDays: &lt;br&gt;&lt;code&gt;order &amp;&amp; ((order.currency &amp;&amp; order.currency.currencyCode) == &#39;LP&#39; || order.isFree) ? 30 : -1&lt;/code&gt;&lt;br&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_FulfillmentScriptAdmin.FulfillmentScript_ById, input]
+ * }
+ * ```
+ */
+export const useFulfillmentScriptAdminApi_CreateFulfillmentScript_ByIdMutation = (
+  sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<FulfillmentScriptInfo, AxiosError<ApiError>, ApiArgs & { id: string; data: FulfillmentScriptCreate }>,
+    UseMutationOptions<FulfillmentScriptInfo, AxiosError<ApiError>, SdkSetConfigParam & { id: string; data: FulfillmentScriptCreate }>,
     'mutationKey'
   >,
   callback?: (data: FulfillmentScriptInfo) => void
-): UseMutationResult<FulfillmentScriptInfo, AxiosError<ApiError>, ApiArgs & { id: string; data: FulfillmentScriptCreate }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { id: string; data: FulfillmentScriptCreate }) => {
-    const data = await FulfillmentScriptAdminApi(sdk, { namespace: input.namespace, config: input.config }).createFulfillmentScript_ById(
-      input.id,
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<FulfillmentScriptInfo, AxiosError<ApiError>, SdkSetConfigParam & { id: string; data: FulfillmentScriptCreate }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { id: string; data: FulfillmentScriptCreate }) => {
+    const response = await FulfillmentScriptAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).createFulfillmentScript_ById(input.id, input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

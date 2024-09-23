@@ -6,42 +6,40 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { DefaultProvider } from '../../generated-definitions/DefaultProvider.js'
 
 export class Public$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * This endpoints returns list of supported providers. Armada is the default provider.
    */
-  getProviders(): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  getProviders(): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/public/providers'
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * This endpoints returns the default provider.
    */
-  getProviderDefault(): Promise<IResponse<DefaultProvider>> {
-    const params = {} as SDKRequestConfig
+  getProviderDefault(): Promise<Response<DefaultProvider>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/public/provider/default'
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DefaultProvider, 'DefaultProvider')
   }
-
   /**
    * This endpoint returns the providers by region.
    */
-  getProviderRegion_ByRegion(region: string): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  getProviderRegion_ByRegion(region: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/dsmcontroller/public/providers/regions/{region}'.replace('{region}', region)
     const resultPromise = this.axiosInstance.get(url, { params })
 

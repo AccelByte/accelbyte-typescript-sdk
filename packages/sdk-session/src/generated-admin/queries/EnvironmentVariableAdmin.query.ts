@@ -7,8 +7,8 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
 import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { EnvironmentVariableAdminApi } from '../EnvironmentVariableAdminApi.js'
@@ -16,20 +16,33 @@ import { EnvironmentVariableAdminApi } from '../EnvironmentVariableAdminApi.js'
 import { EnvironmentVariableListResponse } from '../../generated-definitions/EnvironmentVariableListResponse.js'
 
 export enum Key_EnvironmentVariableAdmin {
-  EnvironmentVariables = 'EnvironmentVariableAdmin.EnvironmentVariables'
+  EnvironmentVariables = 'Session.EnvironmentVariableAdmin.EnvironmentVariables'
 }
 
-export const useAdmEnvironmentVariables = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs,
+/**
+ * List of environment variables.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_EnvironmentVariableAdmin.EnvironmentVariables, input]
+ * }
+ * ```
+ */
+export const useEnvironmentVariableAdminApi_GetEnvironmentVariables = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
   options?: Omit<UseQueryOptions<EnvironmentVariableListResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: EnvironmentVariableListResponse) => void
+  callback?: (data: AxiosResponse<EnvironmentVariableListResponse>) => void
 ): UseQueryResult<EnvironmentVariableListResponse, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmEnvironmentVariables>[1]) => async () => {
-    const data = await EnvironmentVariableAdminApi(sdk, { namespace: input.namespace }).getEnvironmentVariables()
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useEnvironmentVariableAdminApi_GetEnvironmentVariables>[1]) => async () => {
+    const response = await EnvironmentVariableAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getEnvironmentVariables()
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<EnvironmentVariableListResponse, AxiosError<ApiError>>({

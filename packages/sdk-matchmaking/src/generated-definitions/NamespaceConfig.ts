@@ -6,7 +6,9 @@
 import { z } from 'zod'
 
 export const NamespaceConfig = z.object({
+  crossPlatformNoCurrentPlatform: z.boolean().nullish(),
   extraPlatforms: z.array(z.string()).nullish(),
+  matchAnyCommon: z.boolean().nullish(),
   namespace: z.string(),
   platformGroup: z.record(z.array(z.string())).nullish()
 })

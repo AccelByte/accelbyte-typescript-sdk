@@ -6,15 +6,15 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { PublicAchievementResponse } from '../../generated-definitions/PublicAchievementResponse.js'
 import { PublicAchievementsResponse } from '../../generated-definitions/PublicAchievementsResponse.js'
 
 export class Achievements$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
    */
@@ -34,8 +34,8 @@ export class Achievements$ {
       | 'updatedAt:asc'
       | 'updatedAt:desc'
     tags?: string[]
-  }): Promise<IResponse<PublicAchievementsResponse>> {
-    const params = { limit: 10, sortBy: 'listOrder:asc', ...queryParams } as SDKRequestConfig
+  }): Promise<Response<PublicAchievementsResponse>> {
+    const params = { limit: 10, sortBy: 'listOrder:asc', ...queryParams } as AxiosRequestConfig
     const url = '/achievement/v1/public/namespaces/{namespace}/achievements'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -46,15 +46,14 @@ export class Achievements$ {
       'PublicAchievementsResponse'
     )
   }
-
   /**
    * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:ACHIEVEMENT [READ]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
    */
   getAchievement_ByAchievementCode(
     achievementCode: string,
     queryParams: { language: string | null }
-  ): Promise<IResponse<PublicAchievementResponse>> {
-    const params = { ...queryParams } as SDKRequestConfig
+  ): Promise<Response<PublicAchievementResponse>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/achievement/v1/public/namespaces/{namespace}/achievements/{achievementCode}'
       .replace('{namespace}', this.namespace)
       .replace('{achievementCode}', achievementCode)

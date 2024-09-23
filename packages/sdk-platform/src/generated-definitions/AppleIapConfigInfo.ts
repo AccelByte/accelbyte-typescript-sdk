@@ -5,6 +5,15 @@
  */
 import { z } from 'zod'
 
-export const AppleIapConfigInfo = z.object({ bundleId: z.string().nullish(), namespace: z.string(), password: z.string().nullish() })
+export const AppleIapConfigInfo = z.object({
+  appAppleId: z.number().int().nullish(),
+  authKeyFileName: z.string().nullish(),
+  bundleId: z.string().nullish(),
+  issuerId: z.string().nullish(),
+  keyId: z.string().nullish(),
+  namespace: z.string(),
+  password: z.string().nullish(),
+  version: z.enum(['V1', 'V2']).nullish()
+})
 
 export interface AppleIapConfigInfo extends z.TypeOf<typeof AppleIapConfigInfo> {}

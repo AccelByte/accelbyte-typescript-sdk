@@ -8,61 +8,84 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 import { AnonymizationAdmin$ } from './endpoints/AnonymizationAdmin$.js'
 
-export function AnonymizationAdminApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function AnonymizationAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * Delete all user group
-   */
-  async function deleteGroup_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
+  }
+
+  async function deleteGroup_ByUserId(userId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new AnonymizationAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteGroup_ByUserId(userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId} [DELETE]
-   */
-  async function deleteState_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteState_ByUserId(userId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new AnonymizationAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteState_ByUserId(userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Delete all user channel
-   */
-  async function deleteChannel_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteChannel_ByUserId(userId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new AnonymizationAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteChannel_ByUserId(userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
-   */
-  async function deleteContent_ByUserId(userId: string): Promise<unknown> {
-    const $ = new AnonymizationAdmin$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function deleteContent_ByUserId(userId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new AnonymizationAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteContent_ByUserId(userId)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     * Delete all user group
+     */
     deleteGroup_ByUserId,
+    /**
+     * Required permission ADMIN:NAMESPACE:{namespace}:USER:{userId} [DELETE]
+     */
     deleteState_ByUserId,
+    /**
+     * Delete all user channel
+     */
     deleteChannel_ByUserId,
+    /**
+     * Required permission &lt;b&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:CONTENT [DELETE]&lt;/b&gt;.
+     */
     deleteContent_ByUserId
   }
 }

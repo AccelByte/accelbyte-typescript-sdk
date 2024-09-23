@@ -7,10 +7,10 @@ import { z } from 'zod'
 import { Permission } from './Permission.js'
 
 export const ErrorEntity = z.object({
+  devStackTrace: z.string().nullish(),
   errorCode: z.number().int(),
   errorMessage: z.string(),
   messageVariables: z.record(z.string()).nullish(),
-  devStackTrace: z.string().nullish(),
   requiredPermission: Permission.nullish()
 })
 

@@ -6,14 +6,14 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { ListInventoryConfigurationsResp } from '../../generated-definitions/ListInventoryConfigurationsResp.js'
 
 export class PublicInventoryConfigurations$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    *  Listing all inventory configurations in a namespace. The response body will be in the form of standard pagination.
    */
@@ -31,8 +31,8 @@ export class PublicInventoryConfigurations$ {
       | 'updatedAt'
       | 'updatedAt:asc'
       | 'updatedAt:desc'
-  }): Promise<IResponse<ListInventoryConfigurationsResp>> {
-    const params = { limit: 25, sortBy: 'createdAt', ...queryParams } as SDKRequestConfig
+  }): Promise<Response<ListInventoryConfigurationsResp>> {
+    const params = { limit: 25, sortBy: 'createdAt', ...queryParams } as AxiosRequestConfig
     const url = '/inventory/v1/public/namespaces/{namespace}/inventoryConfigurations'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 

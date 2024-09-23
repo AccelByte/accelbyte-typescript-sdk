@@ -7,29 +7,39 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
 import { AxiosError } from 'axios'
 // @ts-ignore
 import { useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
 import { AnonymizationAdminApi } from '../AnonymizationAdminApi.js'
 
 export enum Key_AnonymizationAdmin {
-  AnonymizationLeaderboard_ByUserId = 'AnonymizationAdmin.AnonymizationLeaderboard_ByUserId'
+  AnonymizationLeaderboard_ByUserId = 'Leaderboard.AnonymizationAdmin.AnonymizationLeaderboard_ByUserId'
 }
 
-export const useAdmDeleteAnonymizationLeaderboard_ByUserIdMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }>, 'mutationKey'>,
+/**
+ * &lt;p&gt;This API will delete specified user leaderboard&lt;p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_AnonymizationAdmin.AnonymizationLeaderboard_ByUserId, input]
+ * }
+ * ```
+ */
+export const useAnonymizationAdminApi_DeleteAnonymizationLeaderboard_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }>, 'mutationKey'>,
   callback?: (data: unknown) => void
-): UseMutationResult<unknown, AxiosError<ApiError>, ApiArgs & { userId: string }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { userId: string }) => {
-    const data = await AnonymizationAdminApi(sdk, {
-      namespace: input.namespace,
-      config: input.config
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string }) => {
+    const response = await AnonymizationAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
     }).deleteAnonymizationLeaderboard_ByUserId(input.userId)
-    callback && callback(data)
-    return data
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

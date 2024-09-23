@@ -8,52 +8,75 @@
  */
 /* eslint-disable camelcase */
 // @ts-ignore -> ts-expect-error TS6133
-import { AccelbyteSDK, ApiArgs, ApiUtils, Network } from '@accelbyte/sdk'
+import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { NamespaceConfig } from '../generated-definitions/NamespaceConfig.js'
 import { NamespaceConfigList } from '../generated-definitions/NamespaceConfigList.js'
 import { PatchNamespaceConfigRequest } from '../generated-definitions/PatchNamespaceConfigRequest.js'
 import { Config$ } from './endpoints/Config$.js'
 
-export function ConfigApi(sdk: AccelbyteSDK, args?: ApiArgs) {
+export function ConfigApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   const sdkAssembly = sdk.assembly()
 
-  const namespace = args?.namespace ? args?.namespace : sdkAssembly.namespace
-  const requestConfig = ApiUtils.mergedConfigs(sdkAssembly.config, args)
-  const useSchemaValidation = sdkAssembly.useSchemaValidation
+  const namespace = args?.coreConfig?.namespace ?? sdkAssembly.coreConfig.namespace
+  const useSchemaValidation = args?.coreConfig?.useSchemaValidation ?? sdkAssembly.coreConfig.useSchemaValidation
 
-  /**
-   * Get matchmaking config of all namespaces. Will only return namespace configs than have been updated.
-   */
-  async function getConfig(): Promise<NamespaceConfigList> {
-    const $ = new Config$(Network.create(requestConfig), namespace, useSchemaValidation)
+  let axiosInstance = sdkAssembly.axiosInstance
+  const requestConfigOverrides = args?.axiosConfig?.request
+  const baseURLOverride = args?.coreConfig?.baseURL
+  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+    const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
+      ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
+      ...requestConfigOverrides
+    })
+    axiosInstance = Network.create(requestConfig)
+
+    for (const interceptor of interceptorsOverride) {
+      if (interceptor.type === 'request') {
+        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+      }
+
+      if (interceptor.type === 'response') {
+        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+      }
+    }
+  }
+
+  async function getConfig(): Promise<AxiosResponse<NamespaceConfigList>> {
+    const $ = new Config$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getConfig()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Get matchmaking config of a namespaces.
-   */
-  async function getConfig_ByNamespace(): Promise<NamespaceConfig> {
-    const $ = new Config$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function getConfig_ByNamespace(): Promise<AxiosResponse<NamespaceConfig>> {
+    const $ = new Config$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getConfig_ByNamespace()
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
-  /**
-   * Patch update matchmaking config of a namespaces. Partially update matchmaking config, will only update value that defined on the request.
-   */
-  async function patchConfig_ByNamespace(data: PatchNamespaceConfigRequest): Promise<NamespaceConfig> {
-    const $ = new Config$(Network.create(requestConfig), namespace, useSchemaValidation)
+  async function patchConfig_ByNamespace(data: PatchNamespaceConfigRequest): Promise<AxiosResponse<NamespaceConfig>> {
+    const $ = new Config$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.patchConfig_ByNamespace(data)
     if (resp.error) throw resp.error
-    return resp.response.data
+    return resp.response
   }
 
   return {
+    /**
+     * Get matchmaking config of all namespaces. Will only return namespace configs than have been updated.
+     */
     getConfig,
+    /**
+     * Get matchmaking config of a namespaces.
+     */
     getConfig_ByNamespace,
+    /**
+     * Patch update matchmaking config of a namespaces. Partially update matchmaking config, will only update value that defined on the request.
+     */
     patchConfig_ByNamespace
   }
 }

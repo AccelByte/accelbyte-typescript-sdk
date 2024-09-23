@@ -6,8 +6,8 @@
 /**
  * AUTO GENERATED
  */
-import { IResponse, SDKRequestConfig, Validate } from '@accelbyte/sdk'
-import { AxiosInstance } from 'axios'
+import { Response, Validate } from '@accelbyte/sdk'
+import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
 import { RevocationConfigInfo } from '../../generated-definitions/RevocationConfigInfo.js'
 import { RevocationConfigUpdate } from '../../generated-definitions/RevocationConfigUpdate.js'
@@ -17,41 +17,38 @@ import { RevocationResult } from '../../generated-definitions/RevocationResult.j
 
 export class RevocationAdmin$ {
   // @ts-ignore
+  // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
-
   /**
    * Delete revocation config.
    */
-  deleteRevocationConfig(): Promise<IResponse<unknown>> {
-    const params = {} as SDKRequestConfig
+  deleteRevocationConfig(): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/revocation/config'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
-
   /**
    * Get revocation configuration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Revocation config&lt;/li&gt;&lt;/ul&gt;
    */
-  getRevocationConfig(): Promise<IResponse<RevocationConfigInfo>> {
-    const params = {} as SDKRequestConfig
+  getRevocationConfig(): Promise<Response<RevocationConfigInfo>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/revocation/config'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RevocationConfigInfo, 'RevocationConfigInfo')
   }
-
   /**
    * Update revocation configuration.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Revocation config&lt;/li&gt;&lt;/ul&gt;
    */
-  updateRevocationConfig(data: RevocationConfigUpdate): Promise<IResponse<RevocationConfigInfo>> {
-    const params = {} as SDKRequestConfig
+  updateRevocationConfig(data: RevocationConfigUpdate): Promise<Response<RevocationConfigInfo>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/revocation/config'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, RevocationConfigInfo, 'RevocationConfigInfo')
   }
-
   /**
    * Query revocation histories in a namespace.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: query revocation history&lt;/li&gt;&lt;/ul&gt;
    */
@@ -64,8 +61,8 @@ export class RevocationAdmin$ {
     status?: 'FAIL' | 'SUCCESS'
     transactionId?: string | null
     userId?: string | null
-  }): Promise<IResponse<RevocationHistoryPagingSlicedResult>> {
-    const params = { limit: 20, ...queryParams } as SDKRequestConfig
+  }): Promise<Response<RevocationHistoryPagingSlicedResult>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/revocation/history'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -76,12 +73,11 @@ export class RevocationAdmin$ {
       'RevocationHistoryPagingSlicedResult'
     )
   }
-
   /**
    * Do revocation.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: revocation results&lt;/li&gt;&lt;/ul&gt;
    */
-  updateRevocation_ByUserId(userId: string, data: RevocationRequest): Promise<IResponse<RevocationResult>> {
-    const params = {} as SDKRequestConfig
+  updateRevocation_ByUserId(userId: string, data: RevocationRequest): Promise<Response<RevocationResult>> {
+    const params = {} as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/users/{userId}/revocation'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

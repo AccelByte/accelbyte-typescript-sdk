@@ -7,10 +7,10 @@
  * AUTO GENERATED
  */
 /* eslint-disable camelcase */
-import { AccelbyteSDK, ApiArgs, ApiError } from '@accelbyte/sdk'
-import { AxiosError } from 'axios'
+import { AccelByteSDK, ApiError, SdkSetConfigParam } from '@accelbyte/sdk'
+import { AxiosError, AxiosResponse } from 'axios'
 // @ts-ignore
-import { useQuery, UseQueryOptions, UseQueryResult, useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { ClawbackAdminApi } from '../ClawbackAdminApi.js'
 
 import { ClawbackInfo } from '../../generated-definitions/ClawbackInfo.js'
@@ -18,13 +18,24 @@ import { IapClawbackPagingSlicedResult } from '../../generated-definitions/IapCl
 import { StreamEvent } from '../../generated-definitions/StreamEvent.js'
 
 export enum Key_ClawbackAdmin {
-  IapClawbackHistories = 'ClawbackAdmin.IapClawbackHistories',
-  IapClawbackPlaystationMock = 'ClawbackAdmin.IapClawbackPlaystationMock'
+  IapClawbackHistories = 'Platform.ClawbackAdmin.IapClawbackHistories',
+  IapClawbackPlaystationMock = 'Platform.ClawbackAdmin.IapClawbackPlaystationMock'
 }
 
-export const useAdmIapClawbackHistories = (
-  sdk: AccelbyteSDK,
-  input: ApiArgs & {
+/**
+ * Query clawback history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated clawback history&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ClawbackAdmin.IapClawbackHistories, input]
+ * }
+ * ```
+ */
+export const useClawbackAdminApi_GetIapClawbackHistories = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
     queryParams?: {
       endTime?: string | null
       eventType?: 'CHARGEBACK' | 'CHARGEBACK_REVERSED' | 'OTHER' | 'REFUND'
@@ -37,13 +48,14 @@ export const useAdmIapClawbackHistories = (
     }
   },
   options?: Omit<UseQueryOptions<IapClawbackPagingSlicedResult, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: IapClawbackPagingSlicedResult) => void
+  callback?: (data: AxiosResponse<IapClawbackPagingSlicedResult>) => void
 ): UseQueryResult<IapClawbackPagingSlicedResult, AxiosError<ApiError>> => {
-  //
-  const queryFn = (sdk: AccelbyteSDK, input: Parameters<typeof useAdmIapClawbackHistories>[1]) => async () => {
-    const data = await ClawbackAdminApi(sdk, { namespace: input.namespace }).getIapClawbackHistories(input.queryParams)
-    callback && callback(data)
-    return data
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useClawbackAdminApi_GetIapClawbackHistories>[1]) => async () => {
+    const response = await ClawbackAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getIapClawbackHistories(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
   }
 
   return useQuery<IapClawbackPagingSlicedResult, AxiosError<ApiError>>({
@@ -53,18 +65,29 @@ export const useAdmIapClawbackHistories = (
   })
 }
 
-export const useAdmCreateIapClawbackPlaystationMockMutation = (
-  sdk: AccelbyteSDK,
-  options?: Omit<UseMutationOptions<ClawbackInfo, AxiosError<ApiError>, ApiArgs & { data: StreamEvent }>, 'mutationKey'>,
+/**
+ * Mock Sync PlayStation Clawback event..
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ClawbackAdmin.IapClawbackPlaystationMock, input]
+ * }
+ * ```
+ */
+export const useClawbackAdminApi_CreateIapClawbackPlaystationMockMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<ClawbackInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: StreamEvent }>, 'mutationKey'>,
   callback?: (data: ClawbackInfo) => void
-): UseMutationResult<ClawbackInfo, AxiosError<ApiError>, ApiArgs & { data: StreamEvent }> => {
-  //
-  const mutationFn = async (input: ApiArgs & { data: StreamEvent }) => {
-    const data = await ClawbackAdminApi(sdk, { namespace: input.namespace, config: input.config }).createIapClawbackPlaystationMock(
-      input.data
-    )
-    callback && callback(data)
-    return data
+): UseMutationResult<ClawbackInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: StreamEvent }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: StreamEvent }) => {
+    const response = await ClawbackAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).createIapClawbackPlaystationMock(input.data)
+    callback && callback(response.data)
+    return response.data
   }
 
   return useMutation({

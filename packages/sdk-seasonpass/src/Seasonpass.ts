@@ -7,13 +7,16 @@
  * AUTO GENERATED
  */
 
+import { author, name, version } from '../package.json'
 import { ExportAdminApi } from './generated-admin/ExportAdminApi.js'
-import { SeasonAdminApi } from './generated-admin/SeasonAdminApi.js'
-import { TierAdminApi } from './generated-admin/TierAdminApi.js'
 import { PassAdminApi } from './generated-admin/PassAdminApi.js'
 import { RewardAdminApi } from './generated-admin/RewardAdminApi.js'
-import { SeasonApi } from './generated-public/SeasonApi.js'
+import { SeasonAdminApi } from './generated-admin/SeasonAdminApi.js'
+import { TierAdminApi } from './generated-admin/TierAdminApi.js'
 import { RewardApi } from './generated-public/RewardApi.js'
+import { SeasonApi } from './generated-public/SeasonApi.js'
+
+console.log(`${name}@${version}`)
 
 const apis = {
   ExportAdminApi,
@@ -22,7 +25,13 @@ const apis = {
   PassAdminApi,
   RewardAdminApi,
   SeasonApi,
-  RewardApi
+  RewardApi,
+  version: () =>
+    console.log({
+      version,
+      name,
+      author
+    })
 }
 
 export const Seasonpass = apis
