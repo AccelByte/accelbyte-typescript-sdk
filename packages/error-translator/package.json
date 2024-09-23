@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/error-translator",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/cjs/index.js",
