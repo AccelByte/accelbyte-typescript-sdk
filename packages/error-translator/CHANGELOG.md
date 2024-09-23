@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- 2f84f3f: fix(packages): fix failed publish because of invalid tag
+- da4e505: fix(packages): fix failed publish because of invalid tag
 
 ## 0.3.4
 

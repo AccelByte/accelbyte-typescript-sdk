@@ -13,6 +13,7 @@
     "lint": "eslint . --fix --quiet",
     "prepare": "husky install",
     "changeset:version": "changeset version && yarn install --mode=update-lockfile",
+    "changeset:tag": "changeset tag",
     "sync-examples-versions": "node ./scripts/examples/sync-versions.js"
   },
   "keywords": [],
