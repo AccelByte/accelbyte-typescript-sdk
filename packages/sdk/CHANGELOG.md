@@ -1,5 +1,13 @@
 # @accelbyte/sdk
 
+## 4.0.1
+
+### Patch Changes
+
+- 2f84f3f: fix(packages): fix failed publish because of invalid tag
+- Updated dependencies [2f84f3f]
+  - @accelbyte/validator@0.2.23
+
 ## 4.0.0
 
 ### Major Changes
