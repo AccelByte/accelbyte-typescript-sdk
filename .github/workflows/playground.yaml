@@ -28,7 +28,7 @@ jobs:
       - name: Install dependencies and build
         working-directory: ./examples/sdk-demo-example
         env:
-          BASE_PATH: /accelbyte-web-sdk
+          BASE_PATH: /accelbyte-typescript-sdk
           VITE_MODE: ${{ vars.VITE_MODE }}
           VITE_SDK_BASE_URL: ${{ secrets.VITE_SDK_BASE_URL }}
           VITE_CLIENT_ID: ${{ secrets.VITE_CLIENT_ID }}
