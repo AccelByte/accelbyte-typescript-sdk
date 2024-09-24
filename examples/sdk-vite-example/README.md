@@ -47,8 +47,8 @@ Before accessing other features, you must authenticate by logging in with your d
 
 If you want to use this example folder for other environments, do these steps:
 
-1. Change the [proxy target](https://github.com/AccelByte/accelbyte-web-sdk/blob/main/packages/sdk/examples/vite/vite.config.ts#L16-L22). It is required because otherwise during local development, we will be blocked by [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
-2. Change the [VITE_CLIENT_ID, VITE_NAMESPACE, and VITE_REDIRECT_URI](https://github.com/AccelByte/accelbyte-web-sdk/blob/main/packages/sdk/examples/vite/src/Sdk.ts#L11-L13) on the `.env`. You can get these from Admin Portal's IAM Clients page. As for the redirect URI, ensure that it is a subset of the redirect URIs listed in the IAM Client.
+1. Change the [proxy target](https://github.com/AccelByte/accelbyte-typescript-sdk/blob/main/examples/sdk-vite-example/vite.config.ts#L27). It is required because otherwise during local development, we will be blocked by [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
+2. Change the [VITE_CLIENT_ID, VITE_NAMESPACE, and VITE_REDIRECT_URI](https://github.com/AccelByte/accelbyte-typescript-sdk/blob/main/examples/sdk-vite-example/.env.example) on the `.env`. You can get these from Admin Portal's IAM Clients page. As for the redirect URI, ensure that it is a subset of the redirect URIs listed in the IAM Client.
 
 ## Production Build
 

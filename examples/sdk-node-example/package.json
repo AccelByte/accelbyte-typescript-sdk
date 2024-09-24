@@ -10,12 +10,12 @@
     "start:legal": "node legal.mjs"
   },
   "dependencies": {
-    "@accelbyte/sdk": "0.0.0-dev-20240912075533",
-    "@accelbyte/sdk-basic": "0.0.0-dev-20240912075533",
-    "@accelbyte/sdk-cloudsave": "0.0.0-dev-20240912075533",
-    "@accelbyte/sdk-iam": "0.0.0-dev-20240912075533",
-    "@accelbyte/sdk-legal": "0.0.0-dev-20240912075533",
-    "@accelbyte/sdk-platform": "0.0.0-dev-20240912075533",
+    "@accelbyte/sdk": "4.0.1",
+    "@accelbyte/sdk-basic": "6.0.1",
+    "@accelbyte/sdk-cloudsave": "6.0.1",
+    "@accelbyte/sdk-iam": "6.0.1",
+    "@accelbyte/sdk-legal": "6.0.1",
+    "@accelbyte/sdk-platform": "6.0.1",
     "dotenv": "16.0.3"
   }
 }

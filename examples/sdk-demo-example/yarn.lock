@@ -5,11 +5,11 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
-"@accelbyte/sdk-basic@npm:0.0.0-dev-20240912075533":
-  version: 0.0.0-dev-20240912075533
-  resolution: "@accelbyte/sdk-basic@npm:0.0.0-dev-20240912075533"
+"@accelbyte/sdk-basic@npm:6.0.1":
+  version: 6.0.1
+  resolution: "@accelbyte/sdk-basic@npm:6.0.1"
   dependencies:
-    "@accelbyte/validator": "npm:0.0.0-dev-20240912075533"
+    "@accelbyte/validator": "npm:0.2.23"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
     crypto-js: "npm:4.1.1"
@@ -18,20 +18,20 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": 0.0.0-dev-20240912075533
+    "@accelbyte/sdk": ^4.0.1
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
       optional: true
-  checksum: 10c0/8820a92d5761e641651dc26c7321de5b0edc7a1782a06e1b9168a32254c2ddc96e7e59662dadeb2a280bec4c67b56be6d78dece3bfcc63444e8bf89d8d00c409
+  checksum: 10c0/fa2b64ad52ca10a095b4023c76d0f6829496bef0751f2544affc0dfd7b5f984fe742809f9adafc826deb675e9cf83d93123a830b3bf66c97793de86a2c9ed306
   languageName: node
   linkType: hard
 
-"@accelbyte/sdk-iam@npm:0.0.0-dev-20240912075533":
-  version: 0.0.0-dev-20240912075533
-  resolution: "@accelbyte/sdk-iam@npm:0.0.0-dev-20240912075533"
+"@accelbyte/sdk-iam@npm:6.0.1":
+  version: 6.0.1
+  resolution: "@accelbyte/sdk-iam@npm:6.0.1"
   dependencies:
-    "@accelbyte/validator": "npm:0.0.0-dev-20240912075533"
+    "@accelbyte/validator": "npm:0.2.23"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
     crypto-js: "npm:4.1.1"
@@ -40,21 +40,21 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": 0.0.0-dev-20240912075533
+    "@accelbyte/sdk": ^4.0.1
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
       optional: true
-  checksum: 10c0/9d87c514f28618b8c85f6adda5de3a236c32645c2cff52bea45c151346b507e291b774d065cf78ba134c7148102dca2823b493a63e20c1ef9046c3fc438b8958
+  checksum: 10c0/df80117add653afbacbd31ed8ee14a1bd4079144c618e07a038bbca060390e4b367425c7f3c1a801c2379fa4728d3db52dbf987efbde398e7595958b806dd796
   languageName: node
   linkType: hard
 
-"@accelbyte/sdk-legal@npm:0.0.0-dev-20240912075533":
-  version: 0.0.0-dev-20240912075533
-  resolution: "@accelbyte/sdk-legal@npm:0.0.0-dev-20240912075533"
+"@accelbyte/sdk-legal@npm:6.0.1":
+  version: 6.0.1
+  resolution: "@accelbyte/sdk-legal@npm:6.0.1"
   dependencies:
-    "@accelbyte/sdk-iam": "npm:0.0.0-dev-20240912075533"
-    "@accelbyte/validator": "npm:0.0.0-dev-20240912075533"
+    "@accelbyte/sdk-iam": "npm:6.0.1"
+    "@accelbyte/validator": "npm:0.2.23"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
     crypto-js: "npm:4.1.1"
@@ -64,20 +64,20 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": 0.0.0-dev-20240912075533
+    "@accelbyte/sdk": ^4.0.1
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
       optional: true
-  checksum: 10c0/9f3668eef08598755610962dab5b6e1315f1dd1c383c90153ce0d5f46becc2038bfbddad0d3bc8eb177bb77836856e2cd7263a1c483e83877837b4c3584e98be
+  checksum: 10c0/21798dad45d7fe08f132e7d880f6d9ebe7d7e7036bcc2cf40c1c6207455694a8ed6e43559b212d9850f6c853555b88e777dd5c7e6dffab4b08378d2882b0947f
   languageName: node
   linkType: hard
 
-"@accelbyte/sdk-platform@npm:0.0.0-dev-20240912075533":
-  version: 0.0.0-dev-20240912075533
-  resolution: "@accelbyte/sdk-platform@npm:0.0.0-dev-20240912075533"
+"@accelbyte/sdk-platform@npm:6.0.1":
+  version: 6.0.1
+  resolution: "@accelbyte/sdk-platform@npm:6.0.1"
   dependencies:
-    "@accelbyte/validator": "npm:0.0.0-dev-20240912075533"
+    "@accelbyte/validator": "npm:0.2.23"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
     crypto-js: "npm:4.1.1"
@@ -86,20 +86,20 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": 0.0.0-dev-20240912075533
+    "@accelbyte/sdk": ^4.0.1
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
       optional: true
-  checksum: 10c0/7c642ec597878c86e175abdc0edad73156d2959073e602bfebc92b18c24f3067c9958feef69f72355a4e8e75e517b1180ce1cbcf984fdc43b31a2279353780ce
+  checksum: 10c0/0e814e71d7d45f19c5091dc9e47e3d84d0a5435953853e6ca69b9c8c73a5891fee29c580d16aa061264a6f9511db175135bee54add4162c890cd0271040ac5c0
   languageName: node
   linkType: hard
 
-"@accelbyte/sdk@npm:0.0.0-dev-20240912075533":
-  version: 0.0.0-dev-20240912075533
-  resolution: "@accelbyte/sdk@npm:0.0.0-dev-20240912075533"
+"@accelbyte/sdk@npm:4.0.1":
+  version: 4.0.1
+  resolution: "@accelbyte/sdk@npm:4.0.1"
   dependencies:
-    "@accelbyte/validator": "npm:0.0.0-dev-20240912075533"
+    "@accelbyte/validator": "npm:0.2.23"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
     crypto-js: "npm:4.1.1"
@@ -109,20 +109,20 @@ __metadata:
     uuid: "npm:8.3.2"
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
-  checksum: 10c0/6bd774600261e58cf2664a4f447e983324cf83f5d5a72721bb1686cb4c74c826916d734c47ed0c692e639f180e9abfc7a1978cd8b7e80eb35b2c9a3bff0febf0
+  checksum: 10c0/804bf899a1bdd97a1b4a77c3d729985106aaad70b2711d974c32b5825f8fe3a8a37abf8bc2f1383570297fd280479a40c3579b8086a7d4be0b6a14a8a8ae3211
   languageName: node
   linkType: hard
 
-"@accelbyte/validator@npm:0.0.0-dev-20240912075533":
-  version: 0.0.0-dev-20240912075533
-  resolution: "@accelbyte/validator@npm:0.0.0-dev-20240912075533"
+"@accelbyte/validator@npm:0.2.23":
+  version: 0.2.23
+  resolution: "@accelbyte/validator@npm:0.2.23"
   dependencies:
     naughty-words: "npm:1.2.0"
     xregexp: "npm:5.1.0"
   peerDependencies:
     validator: ^13.7.0
     zod: ^3.17.3
-  checksum: 10c0/03f78986bf95071e10e6ce4760ded714ec495abf110d35b7cbb66e572a15d1b1029424b8c44dfc724891a1fc8a7617543f1063688891b4c11ab3b6cd2b57f3c8
+  checksum: 10c0/c19374dbdf21f95a6405cc0b02aae81385ff32ae5698d61c4833d6e3de799f8c594db7ef933500e42d70d7fe8ff1208c4f5f0e79728a2b5770be0f3f7888cb97
   languageName: node
   linkType: hard
 
@@ -2688,11 +2688,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "sdk-demo-example@workspace:."
   dependencies:
-    "@accelbyte/sdk": "npm:0.0.0-dev-20240912075533"
-    "@accelbyte/sdk-basic": "npm:0.0.0-dev-20240912075533"
-    "@accelbyte/sdk-iam": "npm:0.0.0-dev-20240912075533"
-    "@accelbyte/sdk-legal": "npm:0.0.0-dev-20240912075533"
-    "@accelbyte/sdk-platform": "npm:0.0.0-dev-20240912075533"
+    "@accelbyte/sdk": "npm:4.0.1"
+    "@accelbyte/sdk-basic": "npm:6.0.1"
+    "@accelbyte/sdk-iam": "npm:6.0.1"
+    "@accelbyte/sdk-legal": "npm:6.0.1"
+    "@accelbyte/sdk-platform": "npm:6.0.1"
     "@types/react": "npm:18.0.26"
     "@types/react-dom": "npm:18.0.9"
     "@vitejs/plugin-react": "npm:4.3.1"

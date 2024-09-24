@@ -24,8 +24,8 @@ After running either `yarn test` you should see the responses in your terminal.
 
 If you want to use this example folder for other environments, do these steps:
 
-1. Change the [base URL](https://github.com/AccelByte/accelbyte-web-sdk/blob/main/examples/sdk-node-example/index.js#L14).
-2. Change the [client ID and namespace](https://github.com/AccelByte/accelbyte-web-sdk/blob/main/examples/sdk-node-example/index.js#L15-L16) of the SDK options. You can get these from Admin Portal's IAM Clients page. As for the redirect URI, it shouldn't be used in this case since logging in can't be used in headless mode.
+1. Change the [base URL](https://github.com/AccelByte/accelbyte-typescript-sdk/blob/main/examples/sdk-node-example/.env.example#L5).
+2. Change the [client ID and namespace](https://github.com/AccelByte/accelbyte-typescript-sdk/blob/main/examples/sdk-node-example/.env.example#L2) of the SDK options. You can get these from Admin Portal's IAM Clients page. As for the redirect URI, it shouldn't be used in this case since logging in can't be used in headless mode.
 
 ## Legal Flow
 

@@ -2,7 +2,7 @@
   "name": "justice-typescript-sdk",
   "version": "1.0.0",
   "private": true,
-  "description": "[AccelByte TypeScript SDK](https://development.accelbyte.io/web-sdk-playground/) is a JavaScript library enabling the building of web applications using AccelByte API services. The library is platform-agnostic and can be consumed in a browser or in a server environment.",
+  "description": "[AGS TypeScript SDK](https://accelbyte.github.io/accelbyte-typescript-sdk/) is a platform agnostic JavaScript library enabling the building of web applications using AGS API",
   "scripts": {
     "build:error-translator": "yarn workspace @accelbyte/error-translator build",
     "build:sdk": "yarn build:sdk-core && node ./scripts/generate/sdk-generate.mjs sdk-build-all",
