@@ -1,12 +1,12 @@
-import { AccelByte, AccelByteSDK } from '@accelbyte/sdk'
+import { AccelByte } from '@accelbyte/sdk'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Form, FormItem } from './components/Form'
 import { SectionContent } from './components/Section'
-import { BASE_SDK_CORE_CONFIG, createSdkConfig } from './helpers'
+import { CONFIG_STORAGE_KEY, useGlobal } from './GlobalContext'
+import { createSdkConfig } from './helpers'
 
 interface Props {
-  setSdk: React.Dispatch<React.SetStateAction<AccelByteSDK>>
   tier: 'shared' | 'private'
 }
 
@@ -17,15 +17,20 @@ interface FormValues {
   redirectURI: string
 }
 
-export function DevTools({ setSdk, tier }: Props) {
+export function DevTools({ tier }: Props) {
+  const { setSdk, setSDKCoreConfig, sdkCoreConfig } = useGlobal()
+
   const { handleSubmit, register } = useForm<FormValues>({
-    defaultValues: BASE_SDK_CORE_CONFIG
+    defaultValues: sdkCoreConfig
   })
   const [isPanelShown, setIsPanelShown] = useState(false)
 
   const onSubmit = handleSubmit(data => {
+    setSDKCoreConfig(data)
     setSdk(AccelByte.SDK(createSdkConfig(data)))
     setIsPanelShown(false)
+
+    window.sessionStorage.setItem(CONFIG_STORAGE_KEY, JSON.stringify(data))
   })
 
   return (

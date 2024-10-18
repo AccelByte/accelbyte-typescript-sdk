@@ -23,3 +23,7 @@ a {
 a:hover {
   @apply text-blue-400 underline;
 }
+
+ul {
+  @apply list-disc pl-4;
+}

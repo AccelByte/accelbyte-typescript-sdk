@@ -1280,6 +1280,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cookie@npm:1.0.1":
+  version: 1.0.1
+  resolution: "cookie@npm:1.0.1"
+  checksum: 10c0/80afdcad7fe9cab7a0ea1802629f6f4cf9ff957e9489daa7a813e3ac4ca842b0e5ab3f8e6a6ddc1f3f5c771b81c229afd6f0f3c083025d68c48d214ea8fb1097
+  languageName: node
+  linkType: hard
+
 "core-js-pure@npm:^3.25.1":
   version: 3.30.1
   resolution: "core-js-pure@npm:3.30.1"
@@ -2698,6 +2705,7 @@ __metadata:
     "@vitejs/plugin-react": "npm:4.3.1"
     autoprefixer: "npm:10.4.20"
     axios: "npm:1.7.7"
+    cookie: "npm:1.0.1"
     dotenv: "npm:16.0.3"
     postcss: "npm:8.4.45"
     react: "npm:18.2.0"

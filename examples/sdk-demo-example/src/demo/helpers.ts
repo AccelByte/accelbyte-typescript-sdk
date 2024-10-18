@@ -1,6 +1,8 @@
 import { createAuthInterceptor, DecodeError, SdkConstructorParam } from '@accelbyte/sdk'
 import axios from 'axios'
 
+const SHARED_CLOUD_SUFFIX = '.gamingservices.accelbyte.io'
+
 export const BASE_SDK_CORE_CONFIG = {
   baseURL: import.meta.env.DEV ? import.meta.env.VITE_SDK_BASE_URL : 'https://prod.gamingservices.accelbyte.io',
   clientId: import.meta.env.VITE_CLIENT_ID,
@@ -10,16 +12,23 @@ export const BASE_SDK_CORE_CONFIG = {
 
 export function createSdkConfig(coreConfig: SdkConstructorParam['coreConfig']): SdkConstructorParam {
   const { protocol, host } = new URL(coreConfig.baseURL)
+  let baseURL = coreConfig.baseURL
+
+  if (import.meta.env.DEV) {
+    baseURL = import.meta.env.VITE_SDK_BASE_URL
+  } else if (host.endsWith(SHARED_CLOUD_SUFFIX) && coreConfig.namespace) {
+    baseURL = `${protocol}//${coreConfig.namespace}.${host}`
+  }
 
   return {
     coreConfig: {
       ...coreConfig,
-      baseURL: import.meta.env.DEV ? import.meta.env.VITE_SDK_BASE_URL : `${protocol}//${coreConfig.namespace}.${host}`
+      baseURL
     },
     axiosConfig: {
       interceptors: [
         createAuthInterceptor({
-          clientId: BASE_SDK_CORE_CONFIG.clientId,
+          clientId: coreConfig.clientId,
           getRefreshToken: () => '',
           onSessionExpired: () => {
             console.log('expired')

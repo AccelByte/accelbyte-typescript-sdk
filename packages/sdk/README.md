@@ -1,6 +1,6 @@
 # AccelByte Gaming Services (AGS) TypeScript SDK
 
-> **Note**: The AccelByte Gaming Service (AGS Typescript SDK is still under development. Some Extend SDK features may not be available yet.
+> **Note**: The AccelByte Gaming Service (AGS) Typescript SDK is still under development. Some Extend SDK features may not be available yet.
 
 The AGS TypeScript SDK is a versatile library for building web applications using AccelByte API services. It is platform-agnostic, making it suitable for both browser and server environments. Developed with TypeScript, the SDK emphasizes strict type safety, providing robust runtime type-checking to help you confidently work with AccelByte Gaming Service (AGS) type definitions.
 
