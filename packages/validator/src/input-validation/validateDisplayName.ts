@@ -134,6 +134,10 @@ export const validateDisplayName = (
     }
   }
 
+  if (allowAllSpecialCharacters) {
+    specialCharacters = [...specialCharacters, '_\\W']
+  }
+
   if (!allowAllSpecialCharacters && specialCharacters?.length === 0) {
     const regex = allowUnicode ? REGEX_SPECIAL_CHARACTERS_AND_UNICODE : REGEX_ALL_SPECIAL_CHARACTERS
     if (regex.test(value)) return ValidateDisplayNameErrorType.enum.invalidFormat
