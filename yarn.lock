@@ -37,7 +37,7 @@ __metadata:
   resolution: "@accelbyte/sdk-achievement@workspace:packages/sdk-achievement"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -45,7 +45,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -58,7 +58,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -71,7 +71,7 @@ __metadata:
   resolution: "@accelbyte/sdk-ams@workspace:packages/sdk-ams"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -79,7 +79,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -92,7 +92,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -105,7 +105,7 @@ __metadata:
   resolution: "@accelbyte/sdk-audit@workspace:packages/sdk-audit"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -113,7 +113,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -126,7 +126,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -139,7 +139,7 @@ __metadata:
   resolution: "@accelbyte/sdk-basic@workspace:packages/sdk-basic"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -147,7 +147,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -160,7 +160,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -173,7 +173,7 @@ __metadata:
   resolution: "@accelbyte/sdk-buildinfo@workspace:packages/sdk-buildinfo"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -181,7 +181,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -194,7 +194,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -207,7 +207,7 @@ __metadata:
   resolution: "@accelbyte/sdk-challenge@workspace:packages/sdk-challenge"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -215,7 +215,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -228,7 +228,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -241,7 +241,7 @@ __metadata:
   resolution: "@accelbyte/sdk-chat@workspace:packages/sdk-chat"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -249,7 +249,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -262,7 +262,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -275,7 +275,7 @@ __metadata:
   resolution: "@accelbyte/sdk-cloudsave@workspace:packages/sdk-cloudsave"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -283,7 +283,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -296,7 +296,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -309,7 +309,7 @@ __metadata:
   resolution: "@accelbyte/sdk-config@workspace:packages/sdk-config"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -317,7 +317,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     lodash: "npm:4.17.21"
     platform: "npm:1.3.6"
@@ -331,7 +331,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -344,7 +344,7 @@ __metadata:
   resolution: "@accelbyte/sdk-differ@workspace:packages/sdk-differ"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -352,7 +352,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -365,7 +365,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -378,7 +378,7 @@ __metadata:
   resolution: "@accelbyte/sdk-dsmcontroller@workspace:packages/sdk-dsmcontroller"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -386,7 +386,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -399,7 +399,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -412,7 +412,7 @@ __metadata:
   resolution: "@accelbyte/sdk-event@workspace:packages/sdk-event"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -420,7 +420,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -433,7 +433,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -446,7 +446,7 @@ __metadata:
   resolution: "@accelbyte/sdk-gametelemetry@workspace:packages/sdk-gametelemetry"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -454,7 +454,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -467,7 +467,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -480,7 +480,7 @@ __metadata:
   resolution: "@accelbyte/sdk-gdpr@workspace:packages/sdk-gdpr"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -488,7 +488,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -501,7 +501,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -514,7 +514,7 @@ __metadata:
   resolution: "@accelbyte/sdk-groups@workspace:packages/sdk-groups"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -522,7 +522,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -535,7 +535,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -543,12 +543,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@accelbyte/sdk-iam@npm:6.0.1, @accelbyte/sdk-iam@workspace:packages/sdk-iam":
+"@accelbyte/sdk-iam@npm:6.0.2, @accelbyte/sdk-iam@workspace:packages/sdk-iam":
   version: 0.0.0-use.local
   resolution: "@accelbyte/sdk-iam@workspace:packages/sdk-iam"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -556,7 +556,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -569,7 +569,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -582,7 +582,7 @@ __metadata:
   resolution: "@accelbyte/sdk-inventory@workspace:packages/sdk-inventory"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -590,7 +590,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -603,7 +603,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -616,7 +616,7 @@ __metadata:
   resolution: "@accelbyte/sdk-leaderboard@workspace:packages/sdk-leaderboard"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -624,7 +624,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -637,7 +637,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -650,8 +650,8 @@ __metadata:
   resolution: "@accelbyte/sdk-legal@workspace:packages/sdk-legal"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/sdk-iam": "npm:6.0.1"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/sdk-iam": "npm:6.0.2"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -659,8 +659,8 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
-    dompurify: "npm:3.0.5"
+    crypto-js: "npm:4.2.0"
+    dompurify: "npm:3.1.7"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -673,7 +673,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -686,7 +686,7 @@ __metadata:
   resolution: "@accelbyte/sdk-lobby@workspace:packages/sdk-lobby"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -694,7 +694,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -707,7 +707,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -720,7 +720,7 @@ __metadata:
   resolution: "@accelbyte/sdk-matchmaking-v1@workspace:packages/sdk-matchmaking-v1"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -728,7 +728,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -741,7 +741,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -754,7 +754,7 @@ __metadata:
   resolution: "@accelbyte/sdk-matchmaking@workspace:packages/sdk-matchmaking"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -762,7 +762,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -775,7 +775,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -788,7 +788,7 @@ __metadata:
   resolution: "@accelbyte/sdk-platform@workspace:packages/sdk-platform"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -796,7 +796,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -809,7 +809,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -822,7 +822,7 @@ __metadata:
   resolution: "@accelbyte/sdk-qosmanager@workspace:packages/sdk-qosmanager"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -830,7 +830,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -843,7 +843,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -856,7 +856,7 @@ __metadata:
   resolution: "@accelbyte/sdk-reporting@workspace:packages/sdk-reporting"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -864,7 +864,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -877,7 +877,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -890,7 +890,7 @@ __metadata:
   resolution: "@accelbyte/sdk-seasonpass@workspace:packages/sdk-seasonpass"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -898,7 +898,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -911,7 +911,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -924,7 +924,7 @@ __metadata:
   resolution: "@accelbyte/sdk-session@workspace:packages/sdk-session"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -932,7 +932,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -945,7 +945,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -958,7 +958,7 @@ __metadata:
   resolution: "@accelbyte/sdk-sessionbrowser@workspace:packages/sdk-sessionbrowser"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -966,7 +966,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -979,7 +979,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -992,7 +992,7 @@ __metadata:
   resolution: "@accelbyte/sdk-sessionhistory@workspace:packages/sdk-sessionhistory"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -1000,7 +1000,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -1013,7 +1013,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -1026,7 +1026,7 @@ __metadata:
   resolution: "@accelbyte/sdk-social@workspace:packages/sdk-social"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -1034,7 +1034,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -1047,7 +1047,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -1060,7 +1060,7 @@ __metadata:
   resolution: "@accelbyte/sdk-ugc@workspace:packages/sdk-ugc"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -1068,7 +1068,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     eslint: "npm:8.56.0"
     platform: "npm:1.3.6"
     prettier: "npm:3.3.3"
@@ -1081,7 +1081,7 @@ __metadata:
     validator: "npm:13.7.0"
     zod: "npm:3.23.8"
   peerDependencies:
-    "@accelbyte/sdk": ^4.0.1
+    "@accelbyte/sdk": ^4.0.2
     "@tanstack/react-query": ^4.36.1
   peerDependenciesMeta:
     "@tanstack/react-query":
@@ -1093,7 +1093,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@accelbyte/sdk@workspace:packages/sdk"
   dependencies:
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.2.24"
     "@anatine/zod-mock": "npm:3.13.4"
     "@faker-js/faker": "npm:8.4.1"
     "@playwright/test": "npm:1.28.0"
@@ -1103,7 +1103,7 @@ __metadata:
     "@types/uuid": "npm:8.3.4"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
-    crypto-js: "npm:4.1.1"
+    crypto-js: "npm:4.2.0"
     jsdom: "npm:25.0.0"
     msw: "npm:2.4.1"
     nanoid: "npm:3.1.31"
@@ -1121,7 +1121,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@accelbyte/validator@npm:0.2.23, @accelbyte/validator@workspace:packages/validator":
+"@accelbyte/validator@npm:0.2.24, @accelbyte/validator@workspace:packages/validator":
   version: 0.0.0-use.local
   resolution: "@accelbyte/validator@workspace:packages/validator"
   dependencies:
@@ -1134,7 +1134,7 @@ __metadata:
     validator: "npm:13.7.0"
     vitest: "npm:2.0.5"
     xregexp: "npm:5.1.0"
-    zod: "npm:3.17.3"
+    zod: "npm:3.23.8"
   peerDependencies:
     validator: ^13.7.0
     zod: ^3.17.3
@@ -3646,10 +3646,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"crypto-js@npm:4.1.1":
-  version: 4.1.1
-  resolution: "crypto-js@npm:4.1.1"
-  checksum: 10c0/50cc66a35f2738171d9a6d80c85ba7d00cb6440b756db035ba9ccd03032c0a803029a62969ecd4c844106c980af87687c64b204dd967989379c4f354fb482d37
+"crypto-js@npm:4.2.0":
+  version: 4.2.0
+  resolution: "crypto-js@npm:4.2.0"
+  checksum: 10c0/8fbdf9d56f47aea0794ab87b0eb9833baf80b01a7c5c1b0edc7faf25f662fb69ab18dc2199e2afcac54670ff0cd9607a9045a3f7a80336cccd18d77a55b9fdf0
   languageName: node
   linkType: hard
 
@@ -3831,10 +3831,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dompurify@npm:3.0.5":
-  version: 3.0.5
-  resolution: "dompurify@npm:3.0.5"
-  checksum: 10c0/0653ce02dbf79c921646fb523c41d29d9b00dbe5bbed372bc3a035805bb2a58e5865a807c7bc31288719fae0796d5d1ef0bb02a891102b9d7f4b17cdc96cec9d
+"dompurify@npm:3.1.7":
+  version: 3.1.7
+  resolution: "dompurify@npm:3.1.7"
+  checksum: 10c0/fcceef2e9f824d712a056fa699b0538f3337f5cf00ccb7227bdc7eba5463823e15d9aecc00a2fd81c726b28a71e7b09f0eb8a2fde1021c40e35f12dc67b66394
   languageName: node
   linkType: hard
 
@@ -9183,13 +9183,6 @@ __metadata:
   version: 2.1.2
   resolution: "yoctocolors-cjs@npm:2.1.2"
   checksum: 10c0/a0e36eb88fea2c7981eab22d1ba45e15d8d268626e6c4143305e2c1628fa17ebfaa40cd306161a8ce04c0a60ee0262058eab12567493d5eb1409780853454c6f
-  languageName: node
-  linkType: hard
-
-"zod@npm:3.17.3":
-  version: 3.17.3
-  resolution: "zod@npm:3.17.3"
-  checksum: 10c0/0f3c152dac6f6e81bbeb8eaeb6fdaa003488659de9ffa79614b22570dd201782f059830f208f4b32b1be540767295a2cd556c181b689b0c8b6602364e529e0ef
   languageName: node
   linkType: hard
 

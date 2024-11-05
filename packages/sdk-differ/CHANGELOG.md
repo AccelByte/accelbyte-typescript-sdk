@@ -1,5 +1,13 @@
 # @accelbyte/sdk-differ
 
+## 5.0.2
+
+### Patch Changes
+
+- Updated dependencies [b9aedec]
+  - @accelbyte/validator@0.2.24
+  - @accelbyte/sdk@4.0.2
+
 ## 5.0.1
 
 ### Patch Changes

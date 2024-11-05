@@ -1,5 +1,11 @@
 # @accelbyte/validator
 
+## 0.2.24
+
+### Patch Changes
+
+- b9aedec: fix: CW-4708 handle maxRepeatingSpecialCharacter rule when specialChars empty
+
 ## 0.2.23
 
 ### Patch Changes
