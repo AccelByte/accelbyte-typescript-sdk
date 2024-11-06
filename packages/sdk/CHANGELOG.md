@@ -1,5 +1,13 @@
 # @accelbyte/sdk
 
+## 4.0.3
+
+### Patch Changes
+
+- 2d222aa: fix: update vulnerable dependencies
+- Updated dependencies [2d222aa]
+  - @accelbyte/validator@0.2.25
+
 ## 4.0.2
 
 ### Patch Changes

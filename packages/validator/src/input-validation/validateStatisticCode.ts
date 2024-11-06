@@ -22,7 +22,7 @@ export interface ValidateStatisticCodeOptions {
 }
 
 export const validateStatisticCode = (value: string, { isRequired = true }: ValidateStatisticCodeOptions = {}) => {
-  const REGEX = '^[a-z0-9]+([-]{0,1}[a-z0-9]+)*$'
+  const REGEX = '^[a-z0-9]+(?:-[a-z0-9]+)*$'
   if (isEmpty(value)) {
     if (!isRequired) {
       return null

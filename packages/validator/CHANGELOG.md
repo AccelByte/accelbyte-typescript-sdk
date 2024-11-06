@@ -1,5 +1,11 @@
 # @accelbyte/validator
 
+## 0.2.25
+
+### Patch Changes
+
+- 2d222aa: fix: update vulnerable dependencies
+
 ## 0.2.24
 
 ### Patch Changes
