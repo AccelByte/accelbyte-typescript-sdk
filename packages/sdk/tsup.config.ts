@@ -32,4 +32,14 @@ export default defineConfig([
     splitting: false,
     tsconfig: "./tsconfig.build.json",
   },
+  // Global
+  {
+    entry: {"index": "src/index.global.ts"},
+    format: ["iife"],
+    outDir: "dist/global",
+    platform: "browser",
+    target: "es2020",
+    splitting: false,
+    tsconfig: "./tsconfig.build.json",
+  }
 ]);

@@ -4,7 +4,12 @@
  * and restrictions contact your company contract manager.
  */
 import { webcrypto } from 'crypto'
+import WebSocket from 'ws'
 
 if (!global.crypto) {
   global.crypto = webcrypto as unknown as Crypto
+}
+
+if (!global.WebSocket) {
+  global.WebSocket = WebSocket
 }

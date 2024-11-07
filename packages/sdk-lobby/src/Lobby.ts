@@ -25,6 +25,7 @@ import { NotificationApi } from './generated-public/NotificationApi.js'
 import { PartyApi } from './generated-public/PartyApi.js'
 import { PlayerApi } from './generated-public/PlayerApi.js'
 import { PresenceApi } from './generated-public/PresenceApi.js'
+import { WebSocketClass } from './generated-websocket/WebSocketClass.js'
 
 console.log(`${name}@${version}`)
 
@@ -46,6 +47,7 @@ const apis = {
   PlayerApi,
   PartyApi,
   PresenceApi,
+  WebSocket: WebSocketClass,
   version: () =>
     console.log({
       version,

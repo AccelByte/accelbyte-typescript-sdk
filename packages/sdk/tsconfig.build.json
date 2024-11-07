@@ -14,6 +14,7 @@
     "paths": {
       "@accelbyte/sdk": ["../sdk/src"],
       "@accelbyte/sdk/*": ["..//sdk/src/*"],
+      "@accelbyte/validator": ["../validator/src"],
       "~/iam-definitions/*": ["../sdk-iam/src/generated-definitions/*"]
     }
   },

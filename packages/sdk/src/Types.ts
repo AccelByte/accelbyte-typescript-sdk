@@ -38,6 +38,20 @@ export interface AxiosConfig {
   request?: AxiosRequestConfig
 }
 
+export interface WebSocketConfig {
+  /**
+   * Allow reconnect when upstream is abruptly disconnected. 
+   * @default true 
+   */
+  allowReconnect?: boolean
+  /**
+   * Maximum number of reconnect attempts. Positive value integer.
+   * Set 0 for unlimited attempts.
+   * @default 0
+   */
+  maxReconnectAttempts?: number
+}
+
 export type Interceptor =
   | {
       type: 'request'
@@ -55,11 +69,13 @@ export type Interceptor =
 export interface SdkConstructorParam {
   coreConfig: MakeOptional<CoreConfig, 'useSchemaValidation'>
   axiosConfig?: AxiosConfig
+  webSocketConfig?: WebSocketConfig
 }
 
 export interface SdkSetConfigParam {
   coreConfig?: Partial<CoreConfig>
   axiosConfig?: AxiosConfig
+  webSocketConfig?: WebSocketConfig
 }
 
 export type ApiError = {

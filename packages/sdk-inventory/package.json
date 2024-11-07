@@ -1,12 +1,12 @@
 {
   "name": "@accelbyte/sdk-inventory",
-  "version": "5.0.3",
+  "version": "5.0.4",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./src/index.ts",
   "type": "module",
   "scripts": {
-    "build": "rimraf dist && tsup src/index.ts src/all-query-imports.ts --dts --format esm,cjs",
+    "build": "rimraf dist && tsup --config ../../tsupconfig.base.ts",
     "test": "echo ''",
     "test-and-build": "yarn test && yarn build",
     "clean:src": "rimraf src/generated-*",
@@ -28,7 +28,7 @@
     "typescript": "5.5.4"
   },
   "dependencies": {
-    "@accelbyte/validator": "0.2.25",
+    "@accelbyte/validator": "0.2.26",
     "axios": "1.7.7",
     "buffer": "6.0.3",
     "crypto-js": "4.2.0",
@@ -38,7 +38,7 @@
     "zod": "3.23.8"
   },
   "peerDependencies": {
-    "@accelbyte/sdk": "^4.0.3",
+    "@accelbyte/sdk": "^4.0.4",
     "@tanstack/react-query": "^4.36.1"
   },
   "sideEffects": false,

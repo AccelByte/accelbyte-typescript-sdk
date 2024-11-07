@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/cjs/node/index.cjs",
@@ -48,7 +48,7 @@
     "vitest": "2.0.5"
   },
   "dependencies": {
-    "@accelbyte/validator": "0.2.25",
+    "@accelbyte/validator": "0.2.26",
     "axios": "1.7.7",
     "buffer": "6.0.3",
     "crypto-js": "4.2.0",
@@ -57,6 +57,7 @@
     "query-string": "7.1.1",
     "uuid": "8.3.2",
     "validator": "13.7.0",
+    "ws": "8.18.0",
     "zod": "3.23.8"
   },
   "sideEffects": [

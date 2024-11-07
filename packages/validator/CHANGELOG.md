@@ -1,5 +1,11 @@
 # @accelbyte/validator
 
+## 0.2.26
+
+### Patch Changes
+
+- dd58643: JES-3836 fix validateStatisticCode causing catastrophic backtracking
+
 ## 0.2.25
 
 ### Patch Changes

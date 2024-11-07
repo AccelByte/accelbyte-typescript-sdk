@@ -95,6 +95,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@accelbyte/sdk-lobby@npm:0.0.0-rc-20241029073859":
+  version: 0.0.0-rc-20241029073859
+  resolution: "@accelbyte/sdk-lobby@npm:0.0.0-rc-20241029073859"
+  dependencies:
+    "@accelbyte/validator": "npm:0.0.0-rc-20241029073859"
+    axios: "npm:1.7.7"
+    buffer: "npm:6.0.3"
+    crypto-js: "npm:4.1.1"
+    platform: "npm:1.3.6"
+    uuid: "npm:8.3.2"
+    validator: "npm:13.7.0"
+    zod: "npm:3.23.8"
+  peerDependencies:
+    "@accelbyte/sdk": 0.0.0-rc-20241029073859
+    "@tanstack/react-query": ^4.36.1
+  peerDependenciesMeta:
+    "@tanstack/react-query":
+      optional: true
+  checksum: 10c0/e00267e29b2ac3034cc30ebf9ed6ec5afb5fef5c63d46bcbb4f582ccc09e45357736550fa48b67d66b7273ba9bdb9cb7ee78f4001aa1421167f47aaf0ea58054
+  languageName: node
+  linkType: hard
+
 "@accelbyte/sdk-platform@npm:6.0.1":
   version: 6.0.1
   resolution: "@accelbyte/sdk-platform@npm:6.0.1"
@@ -117,11 +139,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@accelbyte/sdk@npm:4.0.1":
-  version: 4.0.1
-  resolution: "@accelbyte/sdk@npm:4.0.1"
+"@accelbyte/sdk@npm:0.0.0-rc-20241029073859":
+  version: 0.0.0-rc-20241029073859
+  resolution: "@accelbyte/sdk@npm:0.0.0-rc-20241029073859"
   dependencies:
-    "@accelbyte/validator": "npm:0.2.23"
+    "@accelbyte/validator": "npm:0.0.0-rc-20241029073859"
     axios: "npm:1.7.7"
     buffer: "npm:6.0.3"
     crypto-js: "npm:4.1.1"
@@ -130,8 +152,22 @@ __metadata:
     query-string: "npm:7.1.1"
     uuid: "npm:8.3.2"
     validator: "npm:13.7.0"
+    ws: "npm:8.18.0"
     zod: "npm:3.23.8"
-  checksum: 10c0/804bf899a1bdd97a1b4a77c3d729985106aaad70b2711d974c32b5825f8fe3a8a37abf8bc2f1383570297fd280479a40c3579b8086a7d4be0b6a14a8a8ae3211
+  checksum: 10c0/2afc5b89072c65b2fd543b0b3fa07c68ff8363671416b1560e66efd89b17c1f6a3bd24898dd4e7c386883a24f3e4dd77fd40a130d53d85607de150f7ec8bd0c5
+  languageName: node
+  linkType: hard
+
+"@accelbyte/validator@npm:0.0.0-rc-20241029073859":
+  version: 0.0.0-rc-20241029073859
+  resolution: "@accelbyte/validator@npm:0.0.0-rc-20241029073859"
+  dependencies:
+    naughty-words: "npm:1.2.0"
+    xregexp: "npm:5.1.0"
+  peerDependencies:
+    validator: ^13.7.0
+    zod: ^3.17.3
+  checksum: 10c0/3de961796aed55a642c184859d905017fef576e8329b505115ad3d715a589e085b64f415a7b306ff1dc026b076fc1a0d3b0f0c5157fc89858217e58914049f22
   languageName: node
   linkType: hard
 
@@ -149,12 +185,12 @@ __metadata:
   linkType: hard
 
 "@babel/runtime-corejs3@npm:^7.14.9":
-  version: 7.21.0
-  resolution: "@babel/runtime-corejs3@npm:7.21.0"
+  version: 7.25.7
+  resolution: "@babel/runtime-corejs3@npm:7.25.7"
   dependencies:
-    core-js-pure: "npm:^3.25.1"
-    regenerator-runtime: "npm:^0.13.11"
-  checksum: 10c0/b46896f9a774eeb0e8d2597a0a43a87ede27eebec650b3e17719c14a502289ece95029fe5bc8be84798fb1879b69d54efc1f42c3127f1afaf7778d3b8bb692b5
+    core-js-pure: "npm:^3.30.2"
+    regenerator-runtime: "npm:^0.14.0"
+  checksum: 10c0/37217edf5f02c0e7ccb78af380b26b06dadc9b031a1bcec22a9cfb540d85470b61ebe1e5cd7e32689a6c0f786015c2ee1a73a16852574c3a46341105e457a87c
   languageName: node
   linkType: hard
 
@@ -202,10 +238,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js-pure@npm:^3.25.1":
-  version: 3.30.1
-  resolution: "core-js-pure@npm:3.30.1"
-  checksum: 10c0/6d05c823f0b3c71119327d41d5feb195e2e86dcb27ed13754131a155bbe5462f7043a086031092f56a2d8d0477ea8a71ff2eca28ad79726aba08a6ab507d6c33
+"core-js-pure@npm:^3.30.2":
+  version: 3.38.1
+  resolution: "core-js-pure@npm:3.38.1"
+  checksum: 10c0/466adbc0468b8c2a95b9bc49829492dece2cc6584d757c5b38555a26ed3d71f8364ac1ea3128a0a949e004e0e60206cc535ed84320982c3efb9a40c1785ddcc6
   languageName: node
   linkType: hard
 
@@ -337,10 +373,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"regenerator-runtime@npm:^0.13.11":
-  version: 0.13.11
-  resolution: "regenerator-runtime@npm:0.13.11"
-  checksum: 10c0/12b069dc774001fbb0014f6a28f11c09ebfe3c0d984d88c9bced77fdb6fedbacbca434d24da9ae9371bfbf23f754869307fb51a4c98a8b8b18e5ef748677ca24
+"regenerator-runtime@npm:^0.14.0":
+  version: 0.14.1
+  resolution: "regenerator-runtime@npm:0.14.1"
+  checksum: 10c0/1b16eb2c4bceb1665c89de70dcb64126a22bc8eb958feef3cd68fe11ac6d2a4899b5cd1b80b0774c7c03591dc57d16631a7f69d2daa2ec98100e2f29f7ec4cc4
   languageName: node
   linkType: hard
 
@@ -348,13 +384,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "sdk-node-example@workspace:."
   dependencies:
-    "@accelbyte/sdk": "npm:4.0.1"
+    "@accelbyte/sdk": "npm:0.0.0-rc-20241029073859"
     "@accelbyte/sdk-basic": "npm:6.0.1"
     "@accelbyte/sdk-cloudsave": "npm:6.0.1"
     "@accelbyte/sdk-iam": "npm:6.0.1"
     "@accelbyte/sdk-legal": "npm:6.0.1"
+    "@accelbyte/sdk-lobby": "npm:0.0.0-rc-20241029073859"
     "@accelbyte/sdk-platform": "npm:6.0.1"
     dotenv: "npm:16.0.3"
+    ws: "npm:8.18.0"
   languageName: unknown
   linkType: soft
 
@@ -385,6 +423,21 @@ __metadata:
   version: 13.7.0
   resolution: "validator@npm:13.7.0"
   checksum: 10c0/234c9db98001d6f75c04174dd7f67a297728c8cb369db99f21c41ba4a254558bf91427ecdcc9017ddcd44271c9db38e96079cf432a41c92f13d96d6ca0d5c28d
+  languageName: node
+  linkType: hard
+
+"ws@npm:8.18.0":
+  version: 8.18.0
+  resolution: "ws@npm:8.18.0"
+  peerDependencies:
+    bufferutil: ^4.0.1
+    utf-8-validate: ">=5.0.2"
+  peerDependenciesMeta:
+    bufferutil:
+      optional: true
+    utf-8-validate:
+      optional: true
+  checksum: 10c0/25eb33aff17edcb90721ed6b0eb250976328533ad3cd1a28a274bd263682e7296a6591ff1436d6cbc50fa67463158b062f9d1122013b361cec99a05f84680e06
   languageName: node
   linkType: hard
 

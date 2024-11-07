@@ -5,7 +5,7 @@
  */
 
 import { AxiosInstance, AxiosRequestConfig } from 'axios'
-import { AxiosConfig, CoreConfig, Interceptor, SdkConstructorParam, SdkSetConfigParam, TokenConfig } from './Types'
+import { AxiosConfig, CoreConfig, Interceptor, SdkConstructorParam, SdkSetConfigParam, TokenConfig, WebSocketConfig } from './Types'
 import { ApiUtils } from './utils/ApiUtils'
 import { Network } from './utils/Network'
 import { MakeRequired } from './utils/Type'
@@ -20,9 +20,10 @@ export class AccelByteSDK {
   private coreConfig: CoreConfig
   private axiosConfig: AxiosConfig
   private axiosInstance: AxiosInstance
+  private webSocketConfig: WebSocketConfig
   private token: TokenConfig
 
-  constructor({ coreConfig, axiosConfig }: SdkConstructorParam) {
+  constructor({ coreConfig, axiosConfig, webSocketConfig }: SdkConstructorParam) {
     this.coreConfig = {
       ...coreConfig,
       useSchemaValidation: coreConfig.useSchemaValidation ?? true
@@ -46,6 +47,10 @@ export class AccelByteSDK {
       }
     }
     this.axiosInstance = this.createAxiosInstance()
+    this.webSocketConfig = {
+      allowReconnect: webSocketConfig?.allowReconnect ?? true,
+      maxReconnectAttempts: webSocketConfig?.maxReconnectAttempts ?? 0
+    }
     this.token = {}
   }
 
@@ -75,7 +80,8 @@ export class AccelByteSDK {
     return {
       axiosInstance: this.axiosInstance,
       coreConfig: this.coreConfig,
-      axiosConfig: this.axiosConfig as MakeRequired<AxiosConfig, 'request'>
+      axiosConfig: this.axiosConfig as MakeRequired<AxiosConfig, 'request'>,
+      webSocketConfig: this.webSocketConfig
     }
   }
 
@@ -140,7 +146,7 @@ export class AccelByteSDK {
    * Updates the SDK's core and Axios configurations.
    * Merges the provided configurations with the current ones.
    */
-  setConfig({ coreConfig, axiosConfig }: SdkSetConfigParam) {
+  setConfig({ coreConfig, axiosConfig, webSocketConfig }: SdkSetConfigParam) {
     this.coreConfig = {
       ...this.coreConfig,
       ...coreConfig
@@ -149,6 +155,10 @@ export class AccelByteSDK {
       ...this.axiosConfig,
       ...axiosConfig?.interceptors,
       request: ApiUtils.mergeAxiosConfigs(this.axiosConfig.request as AxiosRequestConfig, axiosConfig?.request)
+    }
+    this.webSocketConfig = {
+      ...this.webSocketConfig,
+      ...webSocketConfig
     }
     this.axiosInstance = this.createAxiosInstance()
 

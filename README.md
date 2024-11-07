@@ -14,9 +14,9 @@ We recommend installing the TypeScript SDK via npm using your preferred package 
 npm install @accelbyte/sdk @accelbyte/sdk-iam @accelbyte/sdk-basic # Add more SDK packages as needed
 ```
 
->**Important:** You must specifically install `@accelbyte/sdk` in your project as it has been moved to `peerDependencies` in other `@accelbyte/sdk-*` packages. This ensures that the core SDK is shared across all related modules.
+> **Important:** You must specifically install `@accelbyte/sdk` in your project as it has been moved to `peerDependencies` in other `@accelbyte/sdk-*` packages. This ensures that the core SDK is shared across all related modules.
 
-*Optional*: If you plan to use our generated React Query hooks, you'll also need to install `@tanstack/query`. Note that we currently only support v4.
+_Optional_: If you plan to use our generated React Query hooks, you'll also need to install `@tanstack/query`. Note that we currently only support v4.
 
 ```bash
 npm install @tanstack/react-query@4.36.1
@@ -39,7 +39,7 @@ const sdk = await AccelByte.SDK({
     namespace: "<Your publisher namespace, e.g. 'accelbyte'>"
   },
   axiosConfig: {
-    interceptors: [ 
+    interceptors: [
       {
         type: 'response',
         name: 'disconnected',
@@ -62,9 +62,10 @@ const sdk = await AccelByte.SDK({
 
 ### Configuration breakdown
 
->**Note:** When setting up IAM Clients, ensure that you include an additional Redirect URI with the format `{studio-namespace}.prod.gamingservices.accelbyte.io` (e.g., `accelbyte.prod.gamingservices.accelbyte.io`).
+> **Note:** When setting up IAM Clients, ensure that you include an additional Redirect URI with the format `{studio-namespace}.prod.gamingservices.accelbyte.io` (e.g., `accelbyte.prod.gamingservices.accelbyte.io`).
 
 - **coreConfig**:
+
   - `baseURL`: The base URL for your AGS deployment. This is the starting point for all API requests.
   - `clientId`: The client ID. This is required for authentication with the IAM service. For more information about creating IAM clients, refer to the [AGS Documentation Portal](https://docs.accelbyte.io/gaming-services/services/access/authorization/manage-access-control-for-applications/#create-an-iam-client).
   - `redirectURI`: The URL to which users will be redirected after logging in.
@@ -79,17 +80,17 @@ const sdk = await AccelByte.SDK({
 This is a sample code snippet demonstrating how to use the SDK to interact with AGS:
 
 ```js
-import { IamUserAuthorizationClient } from '@accelbyte/sdk-iam';
-import { UserProfileApi } from '@accelbyte/sdk-basic';
+import { IamUserAuthorizationClient } from '@accelbyte/sdk-iam'
+import { UserProfileApi } from '@accelbyte/sdk-basic'
 // Log in to IAM using an authorization code
-const token = await new IamUserAuthorizationClient(sdk).loginWithAuthorizationCode({ code, codeVerifier });
+const token = await new IamUserAuthorizationClient(sdk).loginWithAuthorizationCode({ code, codeVerifier })
 // Retrieve the current user profile
-const userProfile = await UsersAdminApi(sdk).getUsersMe_v3();
+const userProfile = await UsersAdminApi(sdk).getUsersMe_v3()
 ```
 
 ## Integrating React Query
 
->**Note:** This is a browser-only integration.
+> **Note:** This is a browser-only integration.
 
 If you're using `@tanstack/react-query` to manage server state, the AGS SDK offers seamless integration through generated queries and mutations. This allows you to efficiently fetch, update, and manage data while leveraging React Query's powerful features like caching, automatic retries, and query invalidation.
 
@@ -98,17 +99,17 @@ If you're using `@tanstack/react-query` to manage server state, the AGS SDK offe
 To retrieve data using a generated query, you can use one of the SDK's hooks. The query key used in invalidation can be found within the generated queries.
 
 ```js
-import { useUsersAdminApi_GetUsersMe_v3 } from '@accelbyte/sdk-iam';
+import { useUsersAdminApi_GetUsersMe_v3 } from '@accelbyte/sdk-iam'
 
 const usersQuery = useUsersAdminApi_GetUsersMe_v3(
   sdk,
   { coreConfig: { namespace }, axiosConfig: {} },
   {
-    retry: 2, // Retry the request twice before failing
+    retry: 2 // Retry the request twice before failing
   }
-);
+)
 
-console.log(usersQuery.data);
+console.log(usersQuery.data)
 ```
 
 Each generated query comes with unique query keys that you can use for query invalidation when it's necessary to refresh the data. You can view these keys by hovering over the generated query, as shown below:
@@ -151,11 +152,11 @@ The SDK exposes public endpoints for common operations, but if you need to make 
 ```js
 async function customNetworkCall() {
   try {
-    const url = '/iam/v3/public/users/me';
-    const network = Network.create(sdk.assembly().axiosConfig.request);
-    return await network.get(url);
+    const url = '/iam/v3/public/users/me'
+    const network = Network.create(sdk.assembly().axiosConfig.request)
+    return await network.get(url)
   } catch (err) {
-    console.error(err);
+    console.error(err)
   }
 }
 ```
@@ -172,10 +173,11 @@ When creating an instance of the AGS SDK using `AccelByte.SDK(config)`, you need
 export interface SdkConstructorParam {
   coreConfig: MakeOptional<CoreConfig, 'useSchemaValidation'>
   axiosConfig?: AxiosConfig
+  webSocketConfig?: WebSocketConfig
 }
 ```
 
-This configuration consists of two main sections: `coreConfig` and `axiosConfig`. Here's a detailed breakdown of each section:
+This configuration includes three main sections: `coreConfig`, `axiosConfig`, and `webSocketConfig`. Here's a detailed breakdown of each section:
 
 #### coreConfig
 
@@ -193,14 +195,13 @@ export interface CoreConfig {
 
 The following table describes each parameter's function, type, and default value.
 
-
 | Parameter                 | Type    | Description                                                                                                                                                                                                                                               | Default Value |
-|-----------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
-| `clientId` (required)            | string  | The client ID associated with your SDK. You can obtain this from the AGS Admin Portal under OAuth Clients **Game Setup** > **Games and Apps** > **IAM Clients**.                                                                                                                                                |           |
-| `redirectURI ` (required)        | string  | The URI to redirect to after a successful login. This value is crucial for generating a valid login URL to IAM and should match the redirect URI configured in the Admin Portal.                                                                          |           |
-| `baseURL` (required)             | string  | The URI to redirect to after a successful login. This value is crucial for generating a valid login URL to IAM and should match the redirect URI configured in the Admin Portal.                                                                          |           |
-| `namespace` (required)           | string  | The namespace associated with your AGS deployment.                                                                                                                                                                                                        |           |
-| `useSchemaValidation` | boolean | Determines whether the SDK enforces the Zod schema validation at runtime. Setting this to `false` will bypass validation, which might be useful to prevent throwing errors if there are schema mismatches between the Zod model and the backend response. | true          |
+| ------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `clientId` (required)     | string  | The client ID associated with your SDK. You can obtain this from the AGS Admin Portal under OAuth Clients **Game Setup** > **Games and Apps** > **IAM Clients**.                                                                                          |               |
+| `redirectURI ` (required) | string  | The URI to redirect to after a successful login. This value is crucial for generating a valid login URL to IAM and should match the redirect URI configured in the Admin Portal.                                                                          |               |
+| `baseURL` (required)      | string  | The URI to redirect to after a successful login. This value is crucial for generating a valid login URL to IAM and should match the redirect URI configured in the Admin Portal.                                                                          |               |
+| `namespace` (required)    | string  | The namespace associated with your AGS deployment.                                                                                                                                                                                                        |               |
+| `useSchemaValidation`     | boolean | Determines whether the SDK enforces the Zod schema validation at runtime. Setting this to `false` will bypass validation, which might be useful to prevent throwing errors if there are schema mismatches between the Zod model and the backend response. | true          |
 
 #### axiosConfig (optional)
 
@@ -212,7 +213,7 @@ export interface AxiosConfig {
   request?: AxiosRequestConfig;
 }
 ```
-  
+
 - `interceptors` (`Interceptor[]`, optional): An array of interceptor objects that can modify requests or responses. These interceptors provide hooks for adding custom behavior before a request is sent or after a response is received.
 
   ```js
@@ -233,15 +234,37 @@ export interface AxiosConfig {
 
 The following table describes each parameter's function, type, and default value.
 
-| Parameter                 | Type     | Description                                                                                                                                                                                                                                               | Default Value |
-|-----------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
-| `type` (required)     | `'request' \| 'response'`       | Specifies whether the interceptor should handle requests or responses.                                                                                                       |                                                                                      |
-| `name` (required)     | string     | A unique name for the interceptor. This helps in identifying the interceptor, especially if you have multiple interceptors.                                                  |                                                                                                             |
-| `onRequest` | `(config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig \| Promise<InternalAxiosRequestConfig>`     | A function that processes the request configuration before the request is sent. This can be used to modify the request (e.g., adding headers) or to log the request details. |  |
-| `onError`   | `(error: unknown) => unknown`     | A function that handles errors during the request or response process. This is useful for logging errors or retrying requests under certain conditions.                      |                                                                                |
-| `onSuccess` | `(response: AxiosResponse<unknown>) => AxiosResponse<unknown>`     | A function that processes the response before it’s passed back to the calling code. This can be used to transform the response data or log successful requests.              |                                               |
+| Parameter         | Type                                                                                                        | Description                                                                                                                                                                  | Default Value |
+| ----------------- | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `type` (required) | `'request' \| 'response'`                                                                                   | Specifies whether the interceptor should handle requests or responses.                                                                                                       |               |
+| `name` (required) | string                                                                                                      | A unique name for the interceptor. This helps in identifying the interceptor, especially if you have multiple interceptors.                                                  |               |
+| `onRequest`       | `(config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig \| Promise<InternalAxiosRequestConfig>` | A function that processes the request configuration before the request is sent. This can be used to modify the request (e.g., adding headers) or to log the request details. |               |
+| `onError`         | `(error: unknown) => unknown`                                                                               | A function that handles errors during the request or response process. This is useful for logging errors or retrying requests under certain conditions.                      |               |
+| `onSuccess`       | `(response: AxiosResponse<unknown>) => AxiosResponse<unknown>`                                              | A function that processes the response before it’s passed back to the calling code. This can be used to transform the response data or log successful requests.              |               |
 
 - `request` (`AxiosRequestConfig`, optional): A configuration object that allows you to set default properties for Axios request, such as headers, timeout settings, or credentials handling. For more information, refer to the [Axios documentation](https://axios-http.com/docs/req_config).
+
+Here's how to structure the `webSocketConfig` section using the specified format:
+
+---
+
+#### webSocketConfig (optional)
+
+This configuration allows customization of the WebSocket reconnection behavior when an abnormal disconnection occurs. By default, the WebSocket connection will attempt to reconnect if it closes unexpectedly.
+
+```ts
+export interface WebSocketConfig {
+  allowReconnect?: boolean;
+  maxReconnectAttempts?: number;
+}
+```
+
+The following table describes each parameter's function, type, and default value.
+
+| Parameter               | Type      | Description                                                                                             | Default Value |
+|-------------------------|-----------|---------------------------------------------------------------------------------------------------------|---------------|
+| `allowReconnect`        | `boolean` | Enables automatic reconnection attempts when the WebSocket disconnects unexpectedly.                    | `true`        |
+| `maxReconnectAttempts`  | `number`  | Sets the maximum number of reconnection attempts. Use `0` for unlimited retries. Only accepts integers. | `0`           |
 
 ### API Class
 
@@ -255,10 +278,70 @@ constructor(sdk: AccelByteSDK, args?: SdkSetConfigParam)
 
 The following table describes each parameter's function, type, and default value.
 
-| Parameter | Type  | Description                                                                                                                                             | Default Value     |
-|-----------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|
-| `sdk` (required)      | `AccelByteSDK` | An instance of the AGS SDK                                                                                                                        |       |
-| `args`      | `SdkSetConfigParam`  | An optional parameter that allows you to override or extend the configuration of the SDK. This includes the core configuration and Axios configuration. |  |
+| Parameter        | Type                | Description                                                                                                                                             | Default Value |
+| ---------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `sdk` (required) | `AccelByteSDK`      | An instance of the AGS SDK                                                                                                                              |               |
+| `args`           | `SdkSetConfigParam` | An optional parameter that allows you to override or extend the configuration of the SDK. This includes the core configuration and Axios configuration. |               |
+
+## WebSocket Client
+
+The AGS TypeScript SDK includes support for connecting to the Lobby WebSocket Service, allowing real-time communication and interaction. In addition to connecting, disconnecting, and listening for events, the WebSocket client allows configuration for automatic reconnection on unexpected closures. Here’s an example of how to configure and use the WebSocket client:
+
+```ts
+import { AccelByte } from '@accelbyte/sdk'
+import { Lobby } from '@accelbyte/sdk-lobby'
+
+const sdk = AccelByte.SDK({
+  coreConfig: {
+    baseURL: process.env.AB_BASE_URL || '',
+    clientId: process.env.AB_CLIENT_ID || '',
+    redirectURI: process.env.AB_REDIRECT_URI || '',
+    namespace: process.env.AB_NAMESPACE || ''
+  },
+  webSocketConfig: {
+    // Enable reconnection on abrupt disconnects. Defaults to true.
+    allowReconnect: true,
+    // Maximum number of reconnect attempts. Set to 0 for unlimited attempts.
+    maxReconnectAttempts: 3
+  }
+})
+
+// Ensure login is complete before connecting
+const lobbyWs = Lobby.WebSocket(sdk)
+
+// Connect to WebSocket
+lobbyWs.connect()
+lobbyWs.onOpen(() => console.log("Connected to WebSocket."))
+// Listen for all incoming messages through a single handler
+lobbyWs.onMessage(message => {
+  console.log(message)
+})
+lobbyWs.onClose((ev) => {
+  console.log("Disconnected from WebSocket.", ev)
+  if (sdk.webSocketConfig.allowReconnect) {
+    console.log("Attempting reconnection, max attempts:", sdk.webSocketConfig.maxReconnectAttempts)
+  }
+})
+
+// Disconnect from WebSocket
+await lobbyWs.disconnect()
+```
+
+### WebSocket Methods and Properties
+
+The `WebSocket` class offers several methods and event listeners for managing WebSocket connections and handling messages. The table below provides details on each available method and property.
+
+| Method/Property      | Type                                                                | Description                                                                                                                        |
+|----------------------|---------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| `connect`            | `() => void`                                                       | Initiates a connection to the WebSocket server.                                                                                    |
+| `disconnect`         | `() => void`                                                       | Closes the WebSocket connection, ending communication.                                                                             |
+| `onOpen`             | `(cb: () => void) => void`                                         | Event listener triggered when the WebSocket connection is successfully opened.                                                     |
+| `onMessage`          | `(cb: (message?: object \| string, raw?: boolean) => void) => void` | Event listener for incoming messages. Messages are parsed into typed objects, unless `raw` is set to true.                         |
+| `onError`            | `(cb: (err?: Error) => void) => void`                              | Event listener for errors in the WebSocket connection, such as message send failures.                                              |
+| `onClose`            | `(cb: (ev?: CloseEvent) => void) => void`                          | Event listener for connection closure events, which may occur due to errors or manual disconnection.                               |
+| `send`               | `(message?: object) => void`                                       | Sends a message to the WebSocket server.                                                                                           |
+| `send${methodName}`  | `(message?: object) => void`                                       | Type-specific `send` methods for predefined messages (e.g., `sendPartyInfo(data)`, `sendPartyCreate(data)`, etc.).                 |
+| `instance`           | `WebSocket`                                                        | Provides direct access to the [WebSocket instance](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/WebSocket) for lower-level control.|                                       |
 
 ## AGS APIs
 
@@ -288,7 +371,7 @@ TypeScript SDK supports the following AGS APIs:
   - [Session History](https://docs.accelbyte.io/api-explorer/#Session%20History): `@accelbyte/sdk-history`
 - **Social**
   - [Chat](https://docs.accelbyte.io/api-explorer/#Chat): `@accelbyte/sdk-chat`
-  - [Lobby](https://docs.accelbyte.io/api-explorer/#Lobby%20-%20Friends,%20Presence%20and%20Notifications): `@accelbyte/sdk-lobby`
+  - [Lobby](https://docs.accelbyte.io/api-explorer/#Lobby%20-%20Friends,%20Presence%20and%20Notifications): `@accelbyte/sdk-lobby` with websocket support
   - [Groups](https://docs.accelbyte.io/api-explorer/#Groups): `@accelbyte/sdk-groups`
 - **Storage**
   - [CloudSave](https://docs.accelbyte.io/api-explorer/#CloudSave): `@accelbyte/sdk-cloudsave`
@@ -401,7 +484,7 @@ const sdk = AccelByte.SDK({
           return Promise.reject(error)
         }
       },
-      // Add more interceptors 
+      // Add more interceptors
     ],
     requests: {}
   }
@@ -446,7 +529,7 @@ We now offer custom interceptors to replace certain events or options. Here's a 
 
 - **onUserEligibilityChange**
 
-  >**Note**: Since there's no dependency on the Internal SDK and it's specific to the application level, we have not created a custom wrapper for it.
+  > **Note**: Since there's no dependency on the Internal SDK and it's specific to the application level, we have not created a custom wrapper for it.
 
   ```js
   {
@@ -469,7 +552,7 @@ We now offer custom interceptors to replace certain events or options. Here's a 
 
 - **onTooManyRequest**
 
-  >**Note**: Since there's no dependency on the Internal SDK and it's specific to the application level, we have not created a custom wrapper for it.
+  > **Note**: Since there's no dependency on the Internal SDK and it's specific to the application level, we have not created a custom wrapper for it.
 
   ```js
   {
@@ -511,9 +594,9 @@ The `ApiArgs` (the second `*Api` argument) has been replaced by partial `coreCon
 
 ```js
 // Before
-const data = await UsersAdminApi(sdk, { namespace, config: {} }).getUsersMe_v3();
+const data = await UsersAdminApi(sdk, { namespace, config: {} }).getUsersMe_v3()
 // After
-const { data } = await UsersAdminApi(sdk, { coreConfig: { namespace }, axiosConfig }).getUsersMe_v3();
+const { data } = await UsersAdminApi(sdk, { coreConfig: { namespace }, axiosConfig }).getUsersMe_v3()
 ```
 
 ### Admin Class Endpoints
@@ -521,8 +604,7 @@ const { data } = await UsersAdminApi(sdk, { coreConfig: { namespace }, axiosConf
 Admin endpoints that have the "Admin" tag in Swagger will only generate one "Admin" keyword. The `AdminPlayerRecordAdmin` has been replaced by `PlayerRecordAdmin`.
 
 ```js
-- AdminPlayerRecordAdminApi(sdk).getRecords_ByUserId(userId)
-+ PlayerRecordAdminApi(sdk).getRecords_ByUserId(userId)
+;-AdminPlayerRecordAdminApi(sdk).getRecords_ByUserId(userId) + PlayerRecordAdminApi(sdk).getRecords_ByUserId(userId)
 ```
 
 ### (Extend Functionality) Token Repository
@@ -549,8 +631,7 @@ getToken() {
 The `refreshTokens` method is now replaced by `setToken({ accessToken, refreshToken })` with the same behavior.
 
 ```js
-- sdk.refreshTokens(accessToken, refreshToken)
-+ sdk.refreshTokens({ accessToken, refreshToken })
+;-sdk.refreshTokens(accessToken, refreshToken) + sdk.refreshTokens({ accessToken, refreshToken })
 ```
 
 ## TypeScript SDK Playground

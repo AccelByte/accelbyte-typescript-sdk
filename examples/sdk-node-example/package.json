@@ -6,16 +6,19 @@
   "type": "module",
   "scripts": {
     "start": "node public.mjs --username username@mail.com --password 1234",
+    "start:websocket": "node ws.mjs",
     "start:admin": "node admin.mjs",
     "start:legal": "node legal.mjs"
   },
   "dependencies": {
-    "@accelbyte/sdk": "4.0.1",
+    "@accelbyte/sdk": "0.0.0-rc-20241029073859",
     "@accelbyte/sdk-basic": "6.0.1",
     "@accelbyte/sdk-cloudsave": "6.0.1",
     "@accelbyte/sdk-iam": "6.0.1",
     "@accelbyte/sdk-legal": "6.0.1",
+    "@accelbyte/sdk-lobby": "0.0.0-rc-20241029073859",
     "@accelbyte/sdk-platform": "6.0.1",
-    "dotenv": "16.0.3"
+    "dotenv": "16.0.3",
+    "ws": "8.18.0"
   }
 }

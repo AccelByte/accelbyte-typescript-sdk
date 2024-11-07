@@ -1,5 +1,13 @@
 # @accelbyte/sdk-buildinfo
 
+## 6.0.4
+
+### Patch Changes
+
+- Updated dependencies [dd58643]
+  - @accelbyte/validator@0.2.26
+  - @accelbyte/sdk@4.0.4
+
 ## 6.0.3
 
 ### Patch Changes

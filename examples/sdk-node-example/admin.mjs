@@ -22,7 +22,7 @@ const main = async () => {
           headers: {
             // If you're using Public IAM Client you can leave CLIENT_SECRET as empty string
             // But if you're using Confidential IAM Client you need to provide the CLIENT_SECRET
-            Authorization: `Basic ${Buffer.from(`${process.env.AB_CLIENT_ID}:${process.env.AB_CLIENT_SECRET}`).toString('base64')}`
+            Authorization: `Basic ${Buffer.from(`${process.env.AB_CLIENT_ID}:${process.env.AB_CLIENT_SECRET || ''}`).toString('base64')}`
           }
         }
       }
