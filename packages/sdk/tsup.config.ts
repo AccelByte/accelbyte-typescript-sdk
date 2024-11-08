@@ -39,6 +39,7 @@ export default defineConfig([
     outDir: "dist/global",
     platform: "browser",
     target: "es2020",
+    minify: true,
     splitting: false,
     tsconfig: "./tsconfig.build.json",
   }

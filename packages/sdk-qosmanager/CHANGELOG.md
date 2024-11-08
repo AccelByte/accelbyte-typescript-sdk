@@ -1,5 +1,11 @@
 # @accelbyte/sdk-qosmanager
 
+## 5.1.1
+
+### Patch Changes
+
+- aa13913: fix(naming): fix exposed window variable for UMD builds for better predictability, fix invalid name for reporting SDK
+
 ## 5.1.0
 
 ### Minor Changes
