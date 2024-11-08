@@ -1,5 +1,11 @@
 # @accelbyte/sdk
 
+## 4.1.1
+
+### Patch Changes
+
+- 511d2c1: chore(bundle): minify global bundle
+
 ## 4.1.0
 
 ### Minor Changes

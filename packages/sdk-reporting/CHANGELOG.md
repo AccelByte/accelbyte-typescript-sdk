@@ -1,5 +1,11 @@
 # @accelbyte/sdk-reporting
 
+## 5.1.2
+
+### Patch Changes
+
+- 7528c77: fix(naming): fix exposed window variable for UMD builds for better predictability, fix invalid name for reporting SDK
+
 ## 5.1.1
 
 ### Patch Changes
