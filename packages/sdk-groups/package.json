@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-groups",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./src/index.ts",

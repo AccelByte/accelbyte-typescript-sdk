@@ -1,5 +1,11 @@
 # @accelbyte/sdk-dsmcontroller
 
+## 6.1.2
+
+### Patch Changes
+
+- b5ebf13: fix(naming): fix exposed window variable for UMD builds for better predictability, fix invalid name for reporting SDK
+
 ## 6.1.1
 
 ### Patch Changes
