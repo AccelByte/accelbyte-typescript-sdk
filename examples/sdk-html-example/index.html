@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AGS TypeScript SDK UMD Bundle Demo - WebSocket and Matchmaking</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/@accelbyte/sdk@4.1.0/dist/global/index.global.js"></script>
+    <script src="https://unpkg.com/@accelbyte/sdk-iam@6.1.0/dist/global/index.global.js"></script>
+    <script src="https://unpkg.com/@accelbyte/sdk-lobby@5.1.0/dist/global/index.global.js"></script>
+    <script src="https://unpkg.com/@accelbyte/sdk-matchmaking@5.1.0/dist/global/index.global.js"></script>
+
+    <script>
+      const sdk = AccelByteSDK.AccelByte.SDK({
+        coreConfig: {
+          baseURL: 'https://game-namespace.prod.gamingservices.accelbyte.io', // replace with your actual Game Namespace
+          clientId: 'game-client-id', // replace with your actual Game Client Id
+          namespace: 'game-namespace', // replace with your actual Game Namespace
+          redirectURI: 'http://localhost:3000'
+        }
+      })
+
+      AccelByteSDK_IAM.OAuth20V4Api(sdk, {
+        axiosConfig: {
+          request: {
+            headers: {
+              Authorization: `Basic ${btoa(`${sdk.assembly().coreConfig.clientId}:`)}`
+            }
+          }
+        }
+      })
+        .postTokenOauth_ByPlatformId_v4('device', {
+          device_id: crypto.randomUUID()
+        })
+        .then(tokenResponse => {
+          const { access_token, refresh_token } = tokenResponse.data
+
+          sdk.setToken({ accessToken: access_token, refreshToken: refresh_token })
+
+          const lobbyWs = AccelByteSDK_Lobby.Lobby.WebSocket(sdk)
+
+          lobbyWs.connect()
+
+          lobbyWs.onOpen(() => {
+            console.log('opened')
+          })
+
+          lobbyWs.onClose(err => {
+            console.log('closed')
+            console.log(err)
+          })
+
+          lobbyWs.onMessage(message => {
+            switch (message?.type) {
+              case 'connectNotif': {
+                AccelByteSDK_Matchmaking.MatchTicketsApi(sdk)
+                  .createMatchTicket({
+                    matchPool: 'test-matchpool',
+                    attributes: {}
+                  })
+                  .then(response => {
+                    console.info(response)
+                  })
+                  .catch(err => {
+                    console.error(err)
+                  })
+
+                break
+              }
+              case 'messageNotif': {
+                if(message?.payload) {
+                  console.log(JSON.parse(atob(message.payload)))
+                }
+                alert('Successful create matchmaking')
+                break
+              }
+
+              default: {
+                console.info(message)
+                break
+              }
+            }
+          })
+
+          lobbyWs.onError(err => {
+            console.log('error')
+            console.log(err.message)
+          })
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    </script>
+  </body>
+</html>

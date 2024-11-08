@@ -1,5 +1,13 @@
 # @accelbyte/validator
 
+## 0.2.27
+
+### Patch Changes
+
+- a3ab4f0: fix: update vulnerable dependencies
+- 95453bf: JES-3836 fix validateStatisticCode causing catastrophic backtracking
+- 6a01c4d: fix: CW-4708 handle maxRepeatingSpecialCharacter rule when specialChars empty
+
 ## 0.2.26
 
 ### Patch Changes

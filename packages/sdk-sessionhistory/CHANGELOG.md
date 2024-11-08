@@ -1,5 +1,19 @@
 # @accelbyte/sdk-sessionhistory
 
+## 5.1.0
+
+### Minor Changes
+
+- 6622b29: feat: CWA-4047 global umd bundle
+
+### Patch Changes
+
+- a3ab4f0: fix: update vulnerable dependencies
+- Updated dependencies [a3ab4f0]
+- Updated dependencies [95453bf]
+- Updated dependencies [6a01c4d]
+  - @accelbyte/validator@0.2.27
+
 ## 5.0.4
 
 ### Patch Changes

@@ -3,8 +3,7 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import * as AccelByteSDK_DsmController from './index'
+import * as AccelByteSDK_DSMController from './index'
 
 // @ts-ignore
-window.AccelByteSDK_DsmController = AccelByteSDK_DsmController
-
+window.AccelByteSDK_DSMController = AccelByteSDK_DSMController

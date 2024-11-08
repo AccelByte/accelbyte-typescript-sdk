@@ -3,8 +3,7 @@
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
-import * as AccelByteSDK_Group from './index'
+import * as AccelByteSDK_Groups from './index'
 
 // @ts-ignore
-window.AccelByteSDK_Group = AccelByteSDK_Group
-
+window.AccelByteSDK_Groups = AccelByteSDK_Groups
