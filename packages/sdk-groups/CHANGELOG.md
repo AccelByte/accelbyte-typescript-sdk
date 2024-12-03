@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- 7528c77: fix(naming): fix exposed window variable for UMD builds for better predictability, fix invalid name for reporting SDK
+- b5ebf13: fix(naming): fix exposed window variable for UMD builds for better predictability, fix invalid name for reporting SDK
 
 ## 5.1.1
 
