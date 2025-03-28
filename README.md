@@ -16,10 +16,10 @@ npm install @accelbyte/sdk @accelbyte/sdk-iam @accelbyte/sdk-basic # Add more SD
 
 > **Important:** You must specifically install `@accelbyte/sdk` in your project as it has been moved to `peerDependencies` in other `@accelbyte/sdk-*` packages. This ensures that the core SDK is shared across all related modules.
 
-_Optional_: If you plan to use our generated React Query hooks, you'll also need to install `@tanstack/query`. Note that we currently only support v4.
+_Optional_: If you plan to use our generated React Query hooks, you'll also need to install `@tanstack/react-query`.
 
 ```bash
-npm install @tanstack/react-query@4.36.1
+npm install @tanstack/react-query
 ```
 
 Refer to the [AccelByte APIs](#accelbyte-apis) section to see the full list of services and SDK offered by AccelByte.
@@ -214,6 +214,8 @@ export interface AxiosConfig {
 }
 ```
 
+- `request` (`AxiosRequestConfig`, optional): A configuration object that allows you to set default properties for Axios request, such as headers, timeout settings, or credentials handling. For more information, refer to the [Axios documentation](https://axios-http.com/docs/req_config).
+
 - `interceptors` (`Interceptor[]`, optional): An array of interceptor objects that can modify requests or responses. These interceptors provide hooks for adding custom behavior before a request is sent or after a response is received.
 
   ```js
@@ -241,12 +243,6 @@ The following table describes each parameter's function, type, and default value
 | `onRequest`       | `(config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig \| Promise<InternalAxiosRequestConfig>` | A function that processes the request configuration before the request is sent. This can be used to modify the request (e.g., adding headers) or to log the request details. |               |
 | `onError`         | `(error: unknown) => unknown`                                                                               | A function that handles errors during the request or response process. This is useful for logging errors or retrying requests under certain conditions.                      |               |
 | `onSuccess`       | `(response: AxiosResponse<unknown>) => AxiosResponse<unknown>`                                              | A function that processes the response before it’s passed back to the calling code. This can be used to transform the response data or log successful requests.              |               |
-
-- `request` (`AxiosRequestConfig`, optional): A configuration object that allows you to set default properties for Axios request, such as headers, timeout settings, or credentials handling. For more information, refer to the [Axios documentation](https://axios-http.com/docs/req_config).
-
-Here's how to structure the `webSocketConfig` section using the specified format:
-
----
 
 #### webSocketConfig (optional)
 

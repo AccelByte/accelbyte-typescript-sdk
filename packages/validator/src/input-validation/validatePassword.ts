@@ -6,14 +6,15 @@
 
 import { z } from 'zod'
 import { CommonValidationErrorType } from './constant/errorType'
-import { validateLength, ValidateLengthErrorType } from './validateLength'
-import { validateRegex } from './validateRegex'
 import {
+  REGEX_ALL_SPECIAL_CHARACTER_REPEAT,
   REGEX_ALL_SPECIAL_CHARACTERS,
   REGEX_ALPHA_NUMERIC_CHARACTER_REPEAT,
   REGEX_SPECIAL_CHARACTER_REPEAT,
   REGEX_SPECIAL_CHARACTERS
 } from './constant/regex'
+import { validateLength, ValidateLengthErrorType } from './validateLength'
+import { validateRegex } from './validateRegex'
 
 export const ValidatePasswordErrorType = z.enum([...ValidateLengthErrorType.options, CommonValidationErrorType.enum.invalidFormat])
 export type ValidatePasswordErrorType = z.infer<typeof ValidatePasswordErrorType>
@@ -37,6 +38,13 @@ export interface ValidatePasswordOptions {
   isCustomRegex?: boolean
   allowUnicode?: boolean
   specialCharacters?: string[]
+  // TODO: these 3 fields we haven't used yet.
+  blockedWord?: string[]
+  specialCharacterLocation?: string
+  description?: {
+    language: string
+    message: string[]
+  }
 }
 
 /**
@@ -81,6 +89,12 @@ export const validatePassword = (
     specialCharacters = []
   }: ValidatePasswordOptions = {}
 ) => {
+  const lengthValidationResult = validateLength(value, {
+    max: maxLength,
+    min: minLength
+  })
+  if (lengthValidationResult) return lengthValidationResult
+
   if (isCustomRegex) {
     return validateRegex(value, regex, {
       allowUnicode: allowUnicode || isCustomRegex
@@ -104,10 +118,21 @@ export const validatePassword = (
     if (allowLetter && /[a-z]/.test(value)) charTypeCount++
     if (allowLetter && /[A-Z]/.test(value)) charTypeCount++
     if (allowDigit && /\d/.test(value)) charTypeCount++
-    if (allowAllSpecialCharacters && /[^\w\s]/.test(value)) charTypeCount++
+    if (allowAllSpecialCharacters && /[^\w\s]/.test(value)) {
+      const regex = new RegExp(REGEX_ALL_SPECIAL_CHARACTER_REPEAT(maxRepeatingSpecialCharacter), 'g')
+      if (regex.test(value)) {
+        return ValidatePasswordErrorType.enum.invalidFormat
+      }
+
+      charTypeCount++
+    }
     if (!allowAllSpecialCharacters && specialCharacters.length > 0) {
       const regex = new RegExp(REGEX_SPECIAL_CHARACTER_REPEAT(specialCharacters, maxRepeatingSpecialCharacter), 'g')
-      if (regex.test(value)) charTypeCount++
+      if (regex.test(value)) {
+        return ValidatePasswordErrorType.enum.invalidFormat
+      }
+
+      charTypeCount++
     }
     if (charTypeCount < minCharType) {
       return ValidatePasswordErrorType.enum.invalidFormat
@@ -126,8 +151,5 @@ export const validatePassword = (
     }
   }
 
-  return validateLength(value, {
-    max: maxLength,
-    min: minLength
-  })
+  return null
 }

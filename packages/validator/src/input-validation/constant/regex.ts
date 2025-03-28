@@ -15,8 +15,12 @@ export const REGEX_ALLOW_UNICODE = /[\u007e-\uFFFF$]/
 export const REGEX_START_OR_END_WITH_SPECIAL_CHARACTER = /^\W|\W$/
 export const REGEX_START_OR_END_WITH_SPECIAL_CHARACTER_NOT_UNICODE = /^\W\u007e-\uFFFF$|\W\u007e-\uFFFF$/
 export const REGEX_SPECIAL_CHARACTERS = (specialCharacters: string[]) => `[^a-zA-Z0-9${specialCharacters.join('')}]`
+// Dev's note:
+// So probably, how the RegEx below (for special characters) works is that, let's say max repeating characters is 2.
+// It will result in /(group)capturegroup1{2,}/ -- so, it will only catch values with 3 or more repeating characters.
+
 // eslint-disable-next-line
-export const REGEX_ALL_SPECIAL_CHARACTER_REPEAT = maxRepeatingSpecialCharacter => `([^a-zA-Z\d\s])\\1{${maxRepeatingSpecialCharacter},}`
+export const REGEX_ALL_SPECIAL_CHARACTER_REPEAT = maxRepeatingSpecialCharacter => `([^\\w\\s])\\1{${maxRepeatingSpecialCharacter},}`
 export const REGEX_SPECIAL_CHARACTER_WITH_ALLOW_SPACE = (specialCharacters: string[], allowSpace?: boolean) =>
   `[^a-zA-Z0-9\\${specialCharacters.join('')}${allowSpace ? '\\s' : ''}]`
 export const REGEX_SPECIAL_CHARACTER_REPEAT = (specialCharacters: string[], maxRepeatingSpecialCharacter) =>
