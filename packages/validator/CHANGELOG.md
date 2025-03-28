@@ -1,5 +1,11 @@
 # @accelbyte/validator
 
+## 0.2.28
+
+### Patch Changes
+
+- fe98951: fix(validator): fix validatePassword function bypassing maxRepeatingSpecialCharacter when all special characters are allowed
+
 ## 0.2.27
 
 ### Patch Changes

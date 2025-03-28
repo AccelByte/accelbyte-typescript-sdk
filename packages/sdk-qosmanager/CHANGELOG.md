@@ -1,5 +1,16 @@
 # @accelbyte/sdk-qosmanager
 
+## 5.2.0
+
+### Minor Changes
+
+- fe98951: feat: update peer dependencies to support react query v5
+
+### Patch Changes
+
+- Updated dependencies [fe98951]
+  - @accelbyte/validator@0.2.28
+
 ## 5.1.2
 
 ### Patch Changes
