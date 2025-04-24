@@ -1,5 +1,16 @@
 # @accelbyte/sdk-matchmaking-v1
 
+## 6.2.0
+
+### Minor Changes
+
+- ad310c6: feat: update peer dependencies to support react query v5
+
+### Patch Changes
+
+- Updated dependencies [04a6c28]
+  - @accelbyte/validator@0.2.28
+
 ## 6.1.0
 
 ### Minor Changes

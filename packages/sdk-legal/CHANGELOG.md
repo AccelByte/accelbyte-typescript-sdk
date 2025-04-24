@@ -1,5 +1,18 @@
 # @accelbyte/sdk-legal
 
+## 6.2.0
+
+### Minor Changes
+
+- ad310c6: feat: update peer dependencies to support react query v5
+
+### Patch Changes
+
+- Updated dependencies [04a6c28]
+- Updated dependencies [ad310c6]
+  - @accelbyte/validator@0.2.28
+  - @accelbyte/sdk-iam@6.2.0
+
 ## 6.1.0
 
 ### Minor Changes

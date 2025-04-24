@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/validator",
-  "version": "0.2.27",
+  "version": "0.2.28",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/cjs/index.js",
@@ -23,11 +23,11 @@
   "devDependencies": {
     "@types/validator": "13.7.10",
     "esbuild-plugin-copy": "2.1.1",
-    "rimraf": "4.1.2",
-    "tsup": "8.2.4",
+    "rimraf": "4.4.1",
+    "tsup": "8.3.5",
     "typescript": "5.5.4",
     "validator": "13.7.0",
-    "vitest": "2.0.5",
+    "vitest": "3.1.1",
     "zod": "3.23.8"
   },
   "dependencies": {

@@ -15,7 +15,7 @@
     "@accelbyte/sdk-iam": "6.0.1",
     "@accelbyte/sdk-legal": "6.0.1",
     "@accelbyte/sdk-platform": "6.0.1",
-    "axios": "1.7.7",
+    "axios": "1.8.4",
     "classnames": "2.5.1",
     "dotenv": "16.0.3",
     "react": "18.2.0",

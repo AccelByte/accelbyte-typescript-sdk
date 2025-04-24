@@ -32,10 +32,10 @@
     "flat": "5.0.2",
     "i18next": "22.4.9",
     "i18next-scanner": "4.0.0",
-    "json5": "2.2.1",
+    "json5": "2.2.3",
     "react": "17.0.2",
     "react-i18next": "12.1.4",
-    "rollup": "3.8.1",
+    "rollup": "3.29.5",
     "rollup-plugin-peer-deps-external": "2.2.4",
     "tslib": "2.4.0",
     "typescript": "4.6.4"
