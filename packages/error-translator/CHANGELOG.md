@@ -1,5 +1,11 @@
 # @accelbyte/error-translator
 
+## 0.3.7
+
+### Patch Changes
+
+- 11f03eb: fix: adjust invalid verification code error message
+
 ## 0.3.6
 
 ### Patch Changes
