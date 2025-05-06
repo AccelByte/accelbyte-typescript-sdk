@@ -1,5 +1,13 @@
 # @accelbyte/sdk-buildinfo
 
+## 6.2.1
+
+### Patch Changes
+
+- 4a6110f: fix: update vulnerable dependencies
+- Updated dependencies [4a6110f]
+  - @accelbyte/validator@0.2.29
+
 ## 6.2.0
 
 ### Minor Changes

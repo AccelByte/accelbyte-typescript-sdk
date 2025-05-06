@@ -21,7 +21,7 @@ export const IAMErrorTranslationMap = {
     <Trans i18nKey="serviceError.10136">Sorry, you've entered the codes incorrectly too many times. Please request a new one</Trans>
   ),
   10137: <Trans i18nKey="serviceError.10137">Sorry, the code you entered is expired. Please request a new one.</Trans>,
-  10138: <Trans i18nKey="serviceError.10138">Sorry, the 6-digits verification code you entered is invalid. Please try again.</Trans>,
+  10138: <Trans i18nKey="serviceError.10138">Sorry, the verification code you entered is invalid. Please try again.</Trans>,
 
   10154: <Trans i18nKey="serviceError.10154">Country does not exist</Trans>,
   10171: <Trans i18nKey="serviceError.10171">This email address is not registered</Trans>,

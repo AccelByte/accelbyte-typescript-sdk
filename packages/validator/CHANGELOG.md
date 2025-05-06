@@ -1,5 +1,11 @@
 # @accelbyte/validator
 
+## 0.2.29
+
+### Patch Changes
+
+- 4a6110f: fix: update vulnerable dependencies
+
 ## 0.2.28
 
 ### Patch Changes

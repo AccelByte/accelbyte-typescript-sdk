@@ -1,5 +1,13 @@
 # @accelbyte/sdk
 
+## 4.1.3
+
+### Patch Changes
+
+- 4a6110f: fix: update vulnerable dependencies
+- Updated dependencies [4a6110f]
+  - @accelbyte/validator@0.2.29
+
 ## 4.1.2
 
 ### Patch Changes

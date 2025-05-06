@@ -115,7 +115,7 @@
   "serviceError.10133": "Sorry, you must enter a new email address",
   "serviceError.10136": "Sorry, you've entered the codes incorrectly too many times. Please request a new one",
   "serviceError.10137": "Sorry, the code you entered is expired. Please request a new one.",
-  "serviceError.10138": "Sorry, the 6-digits verification code you entered is invalid. Please try again.",
+  "serviceError.10138": "Sorry, the verification code you entered is invalid. Please try again.",
   "serviceError.10139": "Oops, it seems you haven't played the game yet. Please play the game before you proceed with this action",
   "serviceError.10140": "User is already verified",
   "serviceError.10142": "Sorry, your new password cannot be the same as the old one",
