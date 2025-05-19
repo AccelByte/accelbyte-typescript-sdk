@@ -1,0 +1,8 @@
+{
+  "buildDate": "2025-04-23T01:19:39+00:00",
+  "gitHash": "fc13396cea73854a84d33c24294b4ab523347a87",
+  "name": "justice-login-queue-service",
+  "realm": "dev",
+  "version": "2.0.6",
+  "version-roles-seeding": "1.1.1"
+}
