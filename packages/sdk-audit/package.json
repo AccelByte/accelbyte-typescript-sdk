@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-audit",
-  "version": "5.2.1",
+  "version": "6.0.0",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./src/index.ts",

@@ -1,5 +1,12 @@
 # @accelbyte/sdk-inventory
 
+## 5.3.0
+
+### Minor Changes
+
+- c783105: - Added optional `dateRangeValidation` query parameter to inventory consume endpoint
+  - Added new non-success responses `401`, `403`, and `404` to inventory items creation endpoint
+
 ## 5.2.1
 
 ### Patch Changes

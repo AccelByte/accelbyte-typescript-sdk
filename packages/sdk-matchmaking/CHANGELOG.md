@@ -1,5 +1,12 @@
 # @accelbyte/sdk-matchmaking
 
+## 5.3.0
+
+### Minor Changes
+
+- c783105: - Added new admin endpoints for managing play feature flags (GET, POST, DELETE)
+  - Added new public endpoints for backfill info, match functions retrieval, and posting external failure metrics to match pools
+
 ## 5.2.1
 
 ### Patch Changes

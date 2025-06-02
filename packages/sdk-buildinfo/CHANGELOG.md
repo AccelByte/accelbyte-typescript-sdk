@@ -1,5 +1,11 @@
 # @accelbyte/sdk-buildinfo
 
+## 6.2.2
+
+### Patch Changes
+
+- c783105: chore: sync
+
 ## 6.2.1
 
 ### Patch Changes

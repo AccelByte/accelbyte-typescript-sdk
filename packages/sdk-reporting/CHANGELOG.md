@@ -1,5 +1,11 @@
 # @accelbyte/sdk-reporting
 
+## 5.2.2
+
+### Patch Changes
+
+- c783105: chore: sync
+
 ## 5.2.1
 
 ### Patch Changes
