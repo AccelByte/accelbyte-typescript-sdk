@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -83,7 +83,7 @@ export function DataRetrievalAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigPara
   async function postGenerate_ByUserId_ByRequestDate(
     userId: string,
     requestDate: string,
-    data: { password: string | null }
+    data: { password?: string | null }
   ): Promise<AxiosResponse<UserDataUrl>> {
     const $ = new DataRetrievalAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.postGenerate_ByUserId_ByRequestDate(userId, requestDate, data)
@@ -109,7 +109,7 @@ export function DataRetrievalAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigPara
      */
     deleteRequest_ByUserId_ByRequestDate,
     /**
-     * Generate personal data download url. Scope: account ### Request Header: - **Content-Type: application/x-www-form-urlencoded**
+     * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [READ]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt; &lt;p&gt;If admin request data for themselves, password is need to be set&lt;/p&gt;
      */
     postGenerate_ByUserId_ByRequestDate
   }

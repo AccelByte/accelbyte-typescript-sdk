@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -12,6 +12,7 @@ export const UserUpdateRequestV3 = z.object({
   displayName: z.string().nullish(),
   languageTag: z.string().nullish(),
   skipLoginQueue: z.boolean().nullish(),
+  tags: z.array(z.string()).nullish(),
   uniqueDisplayName: z.string().nullish(),
   userName: z.string().nullish()
 })

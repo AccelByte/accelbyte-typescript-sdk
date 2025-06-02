@@ -1,15 +1,18 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
+import { AsyncProcessDsRequest } from './AsyncProcessDsRequest.js'
 import { ExtendConfiguration } from './ExtendConfiguration.js'
 import { NativeSessionSetting } from './NativeSessionSetting.js'
 
 export const PublicConfiguration = z.object({
   PSNBaseURL: z.string().nullish(),
+  amsClaimTimeoutMinutes: z.number().int().nullish(),
   appName: z.string().nullish(),
+  asyncProcessDSRequest: AsyncProcessDsRequest.nullish(),
   attributes: z.record(z.any()).nullish(),
   autoJoin: z.boolean(),
   clientVersion: z.string(),
@@ -37,7 +40,9 @@ export const PublicConfiguration = z.object({
   preferredClaimKeys: z.array(z.string()).nullish(),
   requestedRegions: z.array(z.string()).nullish(),
   textChat: z.boolean(),
+  textChatMode: z.enum(['GAME', 'NONE', 'TEAM']).nullish(),
   tieTeamsSessionLifetime: z.boolean().nullish(),
+  ttlHours: z.number().int().nullish(),
   type: z.string()
 })
 

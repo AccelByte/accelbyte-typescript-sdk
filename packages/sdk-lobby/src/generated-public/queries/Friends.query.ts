@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -111,7 +111,7 @@ export const useFriendsApi_PatchFriendSyncMeMutation = (
 }
 
 /**
- * Client should provide either friendID or friendPublicID. If both are provided, friendID will be chosen to be used. This endpoint will only send a pending invite that can be either rejected/accepted
+ * Client should provide either friendID or friendPublicID. If both are provided, friendID will be chosen to be used. This endpoint will only send a pending invite that can be either rejected/accepted. Metadata is optional parameter which will be sent over via friend request notification.
  *
  * #### Default Query Options
  * The default options include:

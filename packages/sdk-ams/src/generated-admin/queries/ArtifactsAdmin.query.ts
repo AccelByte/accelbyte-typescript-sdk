@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -97,6 +97,8 @@ export const useArtifactsAdminApi_GetArtifacts = (
       offset?: number
       region?: string | null
       serverId?: string | null
+      sortBy?: string | null
+      sortDirection?: 'asc' | 'desc'
       startDate?: string | null
       status?: string | null
     }

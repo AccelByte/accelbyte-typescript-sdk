@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -38,12 +38,26 @@ export enum Key_ImagesAdmin {
  */
 export const useImagesAdminApi_GetImages = (
   sdk: AccelByteSDK,
-  input: SdkSetConfigParam,
+  input: SdkSetConfigParam & {
+    queryParams?: {
+      count?: number
+      inUse?: string | null
+      isProtected?: boolean | null
+      name?: string | null
+      offset?: number
+      sortBy?: string | null
+      sortDirection?: string | null
+      status?: string | null
+      tag?: string | null
+    }
+  },
   options?: Omit<UseQueryOptions<ImageList, AxiosError<ApiError>>, 'queryKey'>,
   callback?: (data: AxiosResponse<ImageList>) => void
 ): UseQueryResult<ImageList, AxiosError<ApiError>> => {
   const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useImagesAdminApi_GetImages>[1]) => async () => {
-    const response = await ImagesAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getImages()
+    const response = await ImagesAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getImages(
+      input.queryParams
+    )
     callback && callback(response)
     return response.data
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -26,6 +26,7 @@ export const ConfigReq = z.object({
   maxPartyMember: z.number().int().nullish(),
   profanityFilter: z.boolean().nullish(),
   readyConsentTimeout: z.number().int().nullish(),
+  requestMetadataMaxSize: z.number().int().nullish(),
   unregisterDelay: z.number().int().nullish()
 })
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -47,16 +47,23 @@ export function PlayerRewardAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam
     }
   }
 
-  async function createUserRewardClaim(data: ClaimUsersRewardsRequest[]): Promise<AxiosResponse<ClaimUsersRewardsResponseArray>> {
+  async function updateUserRewardClaim(data: ClaimUsersRewardsRequest[]): Promise<AxiosResponse<ClaimUsersRewardsResponseArray>> {
     const $ = new PlayerRewardAdmin$(axiosInstance, namespace, useSchemaValidation)
-    const resp = await $.createUserRewardClaim(data)
+    const resp = await $.updateUserRewardClaim(data)
     if (resp.error) throw resp.error
     return resp.response
   }
 
   async function getRewards_ByUserId(
     userId: string,
-    queryParams?: { limit?: number; offset?: number; sortBy?: string | null; status?: 'CLAIMED' | 'UNCLAIMED' }
+    queryParams?: {
+      challengeCode?: string | null
+      goalProgressionId?: string | null
+      limit?: number
+      offset?: number
+      sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc' | 'updatedAt' | 'updatedAt:asc' | 'updatedAt:desc'
+      status?: 'CLAIMED' | 'UNCLAIMED'
+    }
   ): Promise<AxiosResponse<ListUserRewardsResponse>> {
     const $ = new PlayerRewardAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getRewards_ByUserId(userId, queryParams)
@@ -64,40 +71,40 @@ export function PlayerRewardAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam
     return resp.response
   }
 
-  async function createRewardClaim_ByUserId(userId: string, data: ClaimUserRewardsReq): Promise<AxiosResponse<UserRewardArray>> {
+  async function updateRewardClaim_ByUserId(userId: string, data: ClaimUserRewardsReq): Promise<AxiosResponse<UserRewardArray>> {
     const $ = new PlayerRewardAdmin$(axiosInstance, namespace, useSchemaValidation)
-    const resp = await $.createRewardClaim_ByUserId(userId, data)
+    const resp = await $.updateRewardClaim_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response
   }
 
-  async function createRewardClaim_ByUserId_ByChallengeCode(
+  async function updateRewardClaim_ByUserId_ByChallengeCode(
     userId: string,
     challengeCode: string,
     data: ClaimUserRewardsByGoalCodeRequest
   ): Promise<AxiosResponse<UserRewardArray>> {
     const $ = new PlayerRewardAdmin$(axiosInstance, namespace, useSchemaValidation)
-    const resp = await $.createRewardClaim_ByUserId_ByChallengeCode(userId, challengeCode, data)
+    const resp = await $.updateRewardClaim_ByUserId_ByChallengeCode(userId, challengeCode, data)
     if (resp.error) throw resp.error
     return resp.response
   }
 
   return {
     /**
-     * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+     * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]
      */
-    createUserRewardClaim,
+    updateUserRewardClaim,
     /**
-     * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]&lt;/li&gt;&lt;/ul&gt;
+     * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]
      */
     getRewards_ByUserId,
     /**
-     * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+     * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]
      */
-    createRewardClaim_ByUserId,
+    updateRewardClaim_ByUserId,
     /**
-     * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+     * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]
      */
-    createRewardClaim_ByUserId_ByChallengeCode
+    updateRewardClaim_ByUserId_ByChallengeCode
   }
 }

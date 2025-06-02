@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -30,6 +30,18 @@ export class TtlConfigAdmin$ {
   deleteTtl_ByKey_ByNS(key: string): Promise<Response<unknown>> {
     const params = {} as AxiosRequestConfig
     const url = '/cloudsave/v1/admin/namespaces/{namespace}/binaries/{key}/ttl'.replace('{namespace}', this.namespace).replace('{key}', key)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
+  }
+  /**
+   * ## Description This endpoints will delete the ttl config of the admin game record
+   */
+  deleteTtl_ByKey_ByNS_admin(key: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/cloudsave/v1/admin/namespaces/{namespace}/adminrecords/{key}/ttl'
+      .replace('{namespace}', this.namespace)
+      .replace('{key}', key)
     const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')

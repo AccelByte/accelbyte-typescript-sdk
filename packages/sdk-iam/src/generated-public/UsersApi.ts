@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -17,6 +17,8 @@ import { CreateJusticeUserResponse } from '../generated-definitions/CreateJustic
 import { DisableUserRequest } from '../generated-definitions/DisableUserRequest.js'
 import { DistinctPlatformResponseV3 } from '../generated-definitions/DistinctPlatformResponseV3.js'
 import { ForgotPasswordRequestV3 } from '../generated-definitions/ForgotPasswordRequestV3.js'
+import { ForgotPasswordResponseV3 } from '../generated-definitions/ForgotPasswordResponseV3.js'
+import { ForgotPasswordWithoutNamespaceRequestV3 } from '../generated-definitions/ForgotPasswordWithoutNamespaceRequestV3.js'
 import { GetAdminUsersResponse } from '../generated-definitions/GetAdminUsersResponse.js'
 import { GetLinkHeadlessAccountConflictResponse } from '../generated-definitions/GetLinkHeadlessAccountConflictResponse.js'
 import { GetPublisherUserResponse } from '../generated-definitions/GetPublisherUserResponse.js'
@@ -31,8 +33,10 @@ import { LinkPlatformAccountWithProgressionRequest } from '../generated-definiti
 import { LinkRequest } from '../generated-definitions/LinkRequest.js'
 import { ListBulkUserResponse } from '../generated-definitions/ListBulkUserResponse.js'
 import { LoginHistoriesResponse } from '../generated-definitions/LoginHistoriesResponse.js'
+import { OneTimeCodeLinkRedirectionResponse } from '../generated-definitions/OneTimeCodeLinkRedirectionResponse.js'
 import { Permissions } from '../generated-definitions/Permissions.js'
 import { PlatformUserIdRequest } from '../generated-definitions/PlatformUserIdRequest.js'
+import { PublicOpenIdUserInfoResponse } from '../generated-definitions/PublicOpenIdUserInfoResponse.js'
 import { PublicUserInformationResponseV3 } from '../generated-definitions/PublicUserInformationResponseV3.js'
 import { PublicUserResponse } from '../generated-definitions/PublicUserResponse.js'
 import { PublicUserResponseV3 } from '../generated-definitions/PublicUserResponseV3.js'
@@ -117,6 +121,20 @@ export function UsersApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     return resp.response
   }
 
+  async function createUserForgot_v3(data: ForgotPasswordWithoutNamespaceRequestV3): Promise<AxiosResponse<ForgotPasswordResponseV3>> {
+    const $ = new Users$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.createUserForgot_v3(data)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function getUsersUserinfo_v3(): Promise<AxiosResponse<PublicOpenIdUserInfoResponse>> {
+    const $ = new Users$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getUsersUserinfo_v3()
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   async function createUser(data: UserCreateRequest): Promise<AxiosResponse<UserCreateResponse>> {
     const $ = new Users$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createUser(data)
@@ -153,6 +171,15 @@ export function UsersApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   async function getUsersSearch(queryParams?: { query?: string | null }): Promise<AxiosResponse<SearchUsersResponse>> {
     const $ = new Users$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getUsersSearch(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function getUsersMeLinkRedirection_v3(queryParams: {
+    oneTimeLinkCode: string | null
+  }): Promise<AxiosResponse<OneTimeCodeLinkRedirectionResponse>> {
+    const $ = new Users$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getUsersMeLinkRedirection_v3(queryParams)
     if (resp.error) throw resp.error
     return resp.response
   }
@@ -216,6 +243,13 @@ export function UsersApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   async function createUserMeVerifyLinkRequest_v3(data: SendVerificationLinkRequest): Promise<AxiosResponse<unknown>> {
     const $ = new Users$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createUserMeVerifyLinkRequest_v3(data)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function createUserMeCodeRequestForward_v3(data: SendVerificationCodeRequestV3): Promise<AxiosResponse<unknown>> {
+    const $ = new Users$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.createUserMeCodeRequestForward_v3(data)
     if (resp.error) throw resp.error
     return resp.response
   }
@@ -316,9 +350,9 @@ export function UsersApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     return resp.response
   }
 
-  async function createUserForgot_v3(data: ForgotPasswordRequestV3): Promise<AxiosResponse<unknown>> {
+  async function createUserForgot_ByNS_v3(data: ForgotPasswordRequestV3): Promise<AxiosResponse<unknown>> {
     const $ = new Users$(axiosInstance, namespace, useSchemaValidation)
-    const resp = await $.createUserForgot_v3(data)
+    const resp = await $.createUserForgot_ByNS_v3(data)
     if (resp.error) throw resp.error
     return resp.response
   }
@@ -902,6 +936,14 @@ export function UsersApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      */
     getUsersMe_v3,
     /**
+     * This endpoint does not need a namespace in the path, we will find the namespace based on: - If this is premium environment, the namespace will be the publisher namespace. - If this is shared cloud: - If this is from Admin Portal, we will find the user by the email. - If this is not from Admin Portal, we will find the namespace based on the client id. **Note**: - The param **clientId** is required in Shared Cloud - The namespace in the response is publisher/studio namespace
+     */
+    createUserForgot_v3,
+    /**
+     * This API is created to match openid userinfo standard =&gt; https://openid.net/specs/openid-connect-core-1_0.html#UserInfo
+     */
+    getUsersUserinfo_v3,
+    /**
      * @deprecated
      * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users [POST]_** - **Substitute endpoint: _/iam/v4/public/namespaces/{namespace}/users [POST]_** - **Note:** 1. v3 &amp; v4 introduce optional verification code 2. format difference（Pascal case =&gt; Camel case) Available Authentication Types: 1. **EMAILPASSWD**: an authentication type used for new user registration through email. 2. **PHONEPASSWD**: an authentication type used for new user registration through phone number. Country use ISO3166-1 alpha-2 two letter, e.g. US.
      */
@@ -922,6 +964,10 @@ export function UsersApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/search [GET]_** Search all users that match the query on these fields: all login IDs (email address, phone number, and platform user id), userID, display name, and on the specified namespace. If the query is not defined, then it searches all users on the specified namespace.
      */
     getUsersSearch,
+    /**
+     * Get my redirect uri after link, this endpoint will return NotFound(404) if redirect uri is not found
+     */
+    getUsersMeLinkRedirection_v3,
     /**
      * @deprecated
      * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/information [DELETE]_**
@@ -948,7 +994,7 @@ export function UsersApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      */
     createUser_v2,
     /**
-     * This endpoint search all users on the specified namespace that match the query on these fields: display name, unique display name, username or by 3rd party display name. The query length should between 3-20, otherwise will not query the database. The default limit value is 20. ## Searching by 3rd party platform **Note: searching by 3rd party platform display name will use exact query, not fuzzy query.** Step when searching by 3rd party platform display name: 1. set __by__ to __thirdPartyPlatform__ 2. set __platformId__ to the _supported platform id_ 3. set __platformBy__ to __platformDisplayName__ **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
+     * This endpoint search all users on the specified namespace that match the query on these fields: display name, unique display name, username or by 3rd party display name. The query length must be between 3 and 30 characters. For email address queries (i.e. contains &#39;@&#39;), the allowed length is 3 to 40 characters. Otherwise, the database will not be queried. The default limit value is 20. ## Searching by 3rd party platform **Note: searching by 3rd party platform display name will use exact query, not fuzzy query.** Step when searching by 3rd party platform display name: 1. set __by__ to __thirdPartyPlatform__ 2. set __platformId__ to the _supported platform id_ 3. set __platformBy__ to __platformDisplayName__ **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1 ## IP Rate Limit validation This API have IP Rate Limit validation, which activates when triggered excessively from the same IP address (throw 429 http error). The default rule: 10 max request per 30 seconds (per unique IP address). To mitigate potential unexpected issues in your implementation, consider adhering to these best practices as illustrated in the following examples: * Delay invoking the Search API if the player continues typing in the search box, and only utilize the latest input provided. * Prevent players from double-clicking or making multiple clicks within a short time frame.
      */
     getUsers_v3,
     /**
@@ -959,6 +1005,10 @@ export function UsersApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      * The verification link is sent to email address It will not send request if user email is already verified
      */
     createUserMeVerifyLinkRequest_v3,
+    /**
+     * This API need the upgradeToken in request body. Available contexts for use : 1. **upgradeHeadlessAccount** The context is intended to be used whenever the email address wanted to be automatically verified on upgrading a headless account. If this context used, IAM rejects the request if the email address is already used by others by returning HTTP Status Code 409.
+     */
+    createUserMeCodeRequestForward_v3,
     /**
      * @deprecated
      * ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/admin/namespaces/{namespace}/users/{userId}/bans [POST]_**
@@ -1023,7 +1073,7 @@ export function UsersApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     /**
      * **Special note for publisher-game scenario:** Game Client should provide game namespace path parameter and Publisher Client should provide publisher namespace path parameter. The password reset code will be sent to the publisher account&#39;s email address. action code : 10104
      */
-    createUserForgot_v3,
+    createUserForgot_ByNS_v3,
     /**
      * @deprecated
      *  ## The endpoint is going to be deprecated ### Endpoint migration guide - **Substitute endpoint: _/iam/v3/public/namespaces/{namespace}/users/me/password [PUT]_**
@@ -1056,7 +1106,7 @@ export function UsersApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     patchUser_ByUserId_v2,
     /**
      * @deprecated
-     * This endpoint retrieve user attributes. action code: 10129 **Substitute endpoint:** /v4/public/namespaces/{namespace}/users/{userId} [READ]
+     * This endpoint retrieve user attributes. action code: 10129 **Substitute endpoint:** /v4/public/namespaces/{namespace}/users/{userId} [GET]
      */
     getUser_ByUserId_v3,
     /**
@@ -1083,7 +1133,8 @@ export function UsersApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      */
     updatePermission_ByUserId,
     /**
-     * Notes: - This endpoint bulk get users&#39; basic info by userId, max allowed 100 at a time - If namespace is game, will search by game user Id, other wise will search by publisher namespace - **Result will include displayName(if it exists)**
+     * @deprecated
+     * Notes: - This endpoint bulk get users&#39; basic info by userId, max allowed 100 at a time - If namespace is game, will search by game user Id, other wise will search by publisher namespace - **Result will include displayName(if it exists)** - **Substitute endpoint:** /iam/v3/public/namespaces/{namespace}/users/platforms [POST]
      */
     createUserBulkBasic_v3,
     /**
@@ -1319,7 +1370,8 @@ export function UsersApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      */
     createUserMePlatformJustice_ByTargetNamespace_v3,
     /**
-     * Get User By Platform User ID. This endpoint return user information by given platform ID and platform user ID. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter. **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
+     * @deprecated
+     * Get User By Platform User ID. This endpoint return user information by given platform ID and platform user ID. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter. **Note**: this is deprecated, substitute endpoint: /iam/v4/public/namespaces/{namespace}/platforms/{platformId}/users/{platformUserId} [GET] **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
      */
     getUser_ByPlatformId_ByPlatformUserId_v3,
     /**

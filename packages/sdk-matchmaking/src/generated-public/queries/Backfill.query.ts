@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -20,6 +20,7 @@ import { BackfillCreateResponse } from '../../generated-definitions/BackfillCrea
 import { BackfillGetResponse } from '../../generated-definitions/BackfillGetResponse.js'
 import { BackfillProposalResponse } from '../../generated-definitions/BackfillProposalResponse.js'
 import { GameSession } from '../../generated-definitions/GameSession.js'
+import { ListBackfillQueryResponse } from '../../generated-definitions/ListBackfillQueryResponse.js'
 
 export enum Key_Backfill {
   Backfill = 'Matchmaking.Backfill.Backfill',
@@ -27,6 +28,48 @@ export enum Key_Backfill {
   Backfill_ByBackfillId = 'Matchmaking.Backfill.Backfill_ByBackfillId',
   ProposalAccept_ByBackfillId = 'Matchmaking.Backfill.ProposalAccept_ByBackfillId',
   ProposalReject_ByBackfillId = 'Matchmaking.Backfill.ProposalReject_ByBackfillId'
+}
+
+/**
+ * Admin Query backfill ticket
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_Backfill.Backfill, input]
+ * }
+ * ```
+ */
+export const useBackfillApi_GetBackfill = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
+    queryParams?: {
+      fromTime?: string | null
+      isActive?: boolean | null
+      limit?: number
+      matchPool?: string | null
+      offset?: number
+      playerID?: string | null
+      region?: string | null
+      sessionID?: string | null
+      toTime?: string | null
+    }
+  },
+  options?: Omit<UseQueryOptions<ListBackfillQueryResponse, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<ListBackfillQueryResponse>) => void
+): UseQueryResult<ListBackfillQueryResponse, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useBackfillApi_GetBackfill>[1]) => async () => {
+    const response = await BackfillApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getBackfill(input.queryParams)
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<ListBackfillQueryResponse, AxiosError<ApiError>>({
+    queryKey: [Key_Backfill.Backfill, input],
+    queryFn: queryFn(sdk, input),
+    ...options
+  })
 }
 
 /**
@@ -157,7 +200,7 @@ export const useBackfillApi_GetBackfill_ByBackfillId = (
 }
 
 /**
- *  Accept backfill proposal. Field partialAcceptTicketIDs can be used to accept specific tickets within a backfill proposal. If the ticketIDs are not mentioned in this field, those tickets will be rejected and reactivated for future proposals.
+ *  Accept backfill proposal. Field **acceptedTicketIds** can be used to accept specific tickets within a backfill proposal. If the ticketIDs are not mentioned in this field, those tickets will be rejected and reactivated for future proposals. If **acceptedTicketIds** is nil or not specified, then all tickets in the proposal will be accepted.
  *
  * #### Default Query Options
  * The default options include:

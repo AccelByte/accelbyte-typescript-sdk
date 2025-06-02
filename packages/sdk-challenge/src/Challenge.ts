@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -13,9 +13,12 @@ import { ChallengeProgressionAdminApi } from './generated-admin/ChallengeProgres
 import { GoalConfigurationAdminApi } from './generated-admin/GoalConfigurationAdminApi.js'
 import { PlayerRewardAdminApi } from './generated-admin/PlayerRewardAdminApi.js'
 import { PluginsAdminApi } from './generated-admin/PluginsAdminApi.js'
+import { SchedulesAdminApi } from './generated-admin/SchedulesAdminApi.js'
+import { UtilitiesAdminApi } from './generated-admin/UtilitiesAdminApi.js'
 import { ChallengeListApi } from './generated-public/ChallengeListApi.js'
 import { ChallengeProgressionApi } from './generated-public/ChallengeProgressionApi.js'
 import { PlayerRewardApi } from './generated-public/PlayerRewardApi.js'
+import { SchedulesApi } from './generated-public/SchedulesApi.js'
 
 console.log(`${name}@${version}`)
 
@@ -24,10 +27,13 @@ const apis = {
   ChallengeProgressionAdminApi,
   PluginsAdminApi,
   PlayerRewardAdminApi,
+  UtilitiesAdminApi,
   GoalConfigurationAdminApi,
+  SchedulesAdminApi,
   ChallengeListApi,
   PlayerRewardApi,
   ChallengeProgressionApi,
+  SchedulesApi,
   version: () =>
     console.log({
       version,

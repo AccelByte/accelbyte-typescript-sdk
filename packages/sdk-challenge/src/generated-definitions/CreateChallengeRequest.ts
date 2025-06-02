@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -19,7 +19,8 @@ export const CreateChallengeRequest = z.object({
   repeatAfter: z.number().int().nullish(),
   resetConfig: ResetConfig.nullish(),
   rotation: z.enum(['DAILY', 'MONTHLY', 'NONE', 'WEEKLY']),
-  startDate: z.string()
+  startDate: z.string(),
+  tags: z.array(z.string()).nullish()
 })
 
 export interface CreateChallengeRequest extends z.TypeOf<typeof CreateChallengeRequest> {}

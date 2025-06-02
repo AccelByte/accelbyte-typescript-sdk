@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -170,7 +170,7 @@ export const useDataRetrievalAdminApi_DeleteRequest_ByUserId_ByRequestDateMutati
 }
 
 /**
- * Generate personal data download url. Scope: account ### Request Header: - **Content-Type: application/x-www-form-urlencoded**
+ * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [READ]&lt;/code&gt; and scope &lt;code&gt;account&lt;/code&gt;&lt;/p&gt; &lt;p&gt;If admin request data for themselves, password is need to be set&lt;/p&gt;
  *
  * #### Default Query Options
  * The default options include:
@@ -186,7 +186,7 @@ export const useDataRetrievalAdminApi_PostGenerate_ByUserId_ByRequestDateMutatio
     UseMutationOptions<
       UserDataUrl,
       AxiosError<ApiError>,
-      SdkSetConfigParam & { userId: string; requestDate: string; data: { password: string | null } }
+      SdkSetConfigParam & { userId: string; requestDate: string; data: { password?: string | null } }
     >,
     'mutationKey'
   >,
@@ -194,9 +194,9 @@ export const useDataRetrievalAdminApi_PostGenerate_ByUserId_ByRequestDateMutatio
 ): UseMutationResult<
   UserDataUrl,
   AxiosError<ApiError>,
-  SdkSetConfigParam & { userId: string; requestDate: string; data: { password: string | null } }
+  SdkSetConfigParam & { userId: string; requestDate: string; data: { password?: string | null } }
 > => {
-  const mutationFn = async (input: SdkSetConfigParam & { userId: string; requestDate: string; data: { password: string | null } }) => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; requestDate: string; data: { password?: string | null } }) => {
     const response = await DataRetrievalAdminApi(sdk, {
       coreConfig: input.coreConfig,
       axiosConfig: input.axiosConfig

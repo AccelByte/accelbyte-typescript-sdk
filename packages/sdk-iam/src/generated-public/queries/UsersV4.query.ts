@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -26,6 +26,7 @@ import { PlatformUserIdRequestV4 } from '../../generated-definitions/PlatformUse
 import { PublicInviteUserRequestV4 } from '../../generated-definitions/PublicInviteUserRequestV4.js'
 import { PublicUserUpdateRequestV3 } from '../../generated-definitions/PublicUserUpdateRequestV3.js'
 import { UpgradeHeadlessAccountRequestV4 } from '../../generated-definitions/UpgradeHeadlessAccountRequestV4.js'
+import { UpgradeHeadlessAccountWithVerificationCodeForwardRequestV4 } from '../../generated-definitions/UpgradeHeadlessAccountWithVerificationCodeForwardRequestV4.js'
 import { UpgradeHeadlessAccountWithVerificationCodeRequestV4 } from '../../generated-definitions/UpgradeHeadlessAccountWithVerificationCodeRequestV4.js'
 import { UserMfaStatusResponseV4 } from '../../generated-definitions/UserMfaStatusResponseV4.js'
 import { UserMfaTokenResponseV4 } from '../../generated-definitions/UserMfaTokenResponseV4.js'
@@ -41,6 +42,7 @@ export enum Key_UsersV4 {
   TestUser_v4 = 'Iam.UsersV4.TestUser_v4',
   User_ByUserId_v4 = 'Iam.UsersV4.User_ByUserId_v4',
   UserMeEmail_v4 = 'Iam.UsersV4.UserMeEmail_v4',
+  UserMeHeadlesCodeVerifyForward_v4 = 'Iam.UsersV4.UserMeHeadlesCodeVerifyForward_v4',
   UserMeMfaDevice_v4 = 'Iam.UsersV4.UserMeMfaDevice_v4',
   UsersMeMfaFactor_v4 = 'Iam.UsersV4.UsersMeMfaFactor_v4',
   UserMeMfaFactor_v4 = 'Iam.UsersV4.UserMeMfaFactor_v4',
@@ -64,7 +66,8 @@ export enum Key_UsersV4 {
   UserMeMfaBackupCodeEnable_ByNS_v4 = 'Iam.UsersV4.UserMeMfaBackupCodeEnable_ByNS_v4',
   UsersMeMfaBackupCodeDownload_v4 = 'Iam.UsersV4.UsersMeMfaBackupCodeDownload_v4',
   UserMeMfaAuthenticatorEnable_v4 = 'Iam.UsersV4.UserMeMfaAuthenticatorEnable_v4',
-  UserMeMfaAuthenticatorDisable_v4 = 'Iam.UsersV4.UserMeMfaAuthenticatorDisable_v4'
+  UserMeMfaAuthenticatorDisable_v4 = 'Iam.UsersV4.UserMeMfaAuthenticatorDisable_v4',
+  User_ByPlatformId_ByPlatformUserId_v4 = 'Iam.UsersV4.User_ByPlatformId_ByPlatformUserId_v4'
 }
 
 /**
@@ -253,6 +256,49 @@ export const useUsersV4Api_UpdateUserMeEmailMutation_v4 = (
 
   return useMutation({
     mutationKey: [Key_UsersV4.UserMeEmail_v4],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * This is a forward version for code verify. The endpoint upgrades a headless account by linking the headless account with the email address, username, and password. By upgrading the headless account into a full account, the user could use the email address, username, and password for using Justice IAM. The endpoint is a shortcut for upgrading a headless account and verifying the email address in one call. In order to get a verification code for the endpoint, please check the [send verification code endpoint](#operations-Users-PublicSendCodeForwardV3). This endpoint also have an ability to update user data (if the user data field is specified) right after the upgrade account process is done.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_UsersV4.UserMeHeadlesCodeVerifyForward_v4, input]
+ * }
+ * ```
+ */
+export const useUsersV4Api_CreateUserMeHeadlesCodeVerifyForwardMutation_v4 = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<
+      unknown,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { data: UpgradeHeadlessAccountWithVerificationCodeForwardRequestV4 }
+    >,
+    'mutationKey'
+  >,
+  callback?: (data: unknown) => void
+): UseMutationResult<
+  unknown,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { data: UpgradeHeadlessAccountWithVerificationCodeForwardRequestV4 }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: UpgradeHeadlessAccountWithVerificationCodeForwardRequestV4 }) => {
+    const response = await UsersV4Api(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).createUserMeHeadlesCodeVerifyForward_v4(input.data)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_UsersV4.UserMeHeadlesCodeVerifyForward_v4],
     mutationFn,
     ...options
   })
@@ -714,7 +760,7 @@ export const useUsersV4Api_CreateUserInvite_ByInvitationIdMutation_v4 = (
 }
 
 /**
- * List User ID By Platform User ID This endpoint intended to list game user ID from the given namespace This endpoint return list of user ID by given platform ID and list of platform user ID, the max count is 100. Supported platform: - steam - steamopenid - ps4web - ps4 - ps5 - live - xblweb - oculus - oculusweb - facebook - google - googleplaygames - twitch - discord - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1 &lt;br&gt; If the request body exceed the max limitation, the max count will be in response body&#39;s messageVariables: &#34;messageVariables&#34;: {&#34;maxCount&#34;: &#34;100&#34;}
+ * List User ID By Platform User ID This endpoint intended to list game user ID from the given namespace This endpoint return list of user ID by given platform ID and list of platform user ID, the max count is 100. Supported platform: - steam - steamopenid - ps4web - ps4 - ps5 - live - xblweb - oculus - if query by app user id, please set the param **pidType** to **OCULUS_APP_USER_ID** - oculusweb - facebook - google - googleplaygames - twitch - discord - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1 &lt;br&gt; If the request body exceed the max limitation, the max count will be in response body&#39;s messageVariables: &#34;messageVariables&#34;: {&#34;maxCount&#34;: &#34;100&#34;}
  *
  * #### Default Query Options
  * The default options include:
@@ -1071,6 +1117,39 @@ export const useUsersV4Api_DeleteUserMeMfaAuthenticatorDisableMutation_v4 = (
   return useMutation({
     mutationKey: [Key_UsersV4.UserMeMfaAuthenticatorDisable_v4],
     mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Get User By Platform User ID. This endpoint return user information by given platform ID and platform user ID. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter. If the target platform is not linked to the current user, will only return public information. ---------- **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_UsersV4.User_ByPlatformId_ByPlatformUserId_v4, input]
+ * }
+ * ```
+ */
+export const useUsersV4Api_GetUser_ByPlatformId_ByPlatformUserId_v4 = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { platformId: string; platformUserId: string },
+  options?: Omit<UseQueryOptions<UserResponseV3, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<UserResponseV3>) => void
+): UseQueryResult<UserResponseV3, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useUsersV4Api_GetUser_ByPlatformId_ByPlatformUserId_v4>[1]) => async () => {
+    const response = await UsersV4Api(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getUser_ByPlatformId_ByPlatformUserId_v4(input.platformId, input.platformUserId)
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<UserResponseV3, AxiosError<ApiError>>({
+    queryKey: [Key_UsersV4.User_ByPlatformId_ByPlatformUserId_v4, input],
+    queryFn: queryFn(sdk, input),
     ...options
   })
 }

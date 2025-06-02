@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -10,6 +10,7 @@
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
 import { AxiosRequestConfig, AxiosResponse } from 'axios'
+import { ExternalFailureMetricRecord } from '../generated-definitions/ExternalFailureMetricRecord.js'
 import { ListMatchPoolTicketsResponse } from '../generated-definitions/ListMatchPoolTicketsResponse.js'
 import { ListMatchPoolsResponse } from '../generated-definitions/ListMatchPoolsResponse.js'
 import { MatchPool } from '../generated-definitions/MatchPool.js'
@@ -117,6 +118,13 @@ export function MatchPoolsApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     return resp.response
   }
 
+  async function createMetricExternalFailure_ByPool(pool: string, data: ExternalFailureMetricRecord): Promise<AxiosResponse<unknown>> {
+    const $ = new MatchPools$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.createMetricExternalFailure_ByPool(pool, data)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   return {
     /**
      * List matchmaking pools.
@@ -153,6 +161,10 @@ export function MatchPoolsApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     /**
      * Public get player metric for a specific match pool
      */
-    getMetricsPlayer_ByPool_ByNS
+    getMetricsPlayer_ByPool_ByNS,
+    /**
+     * Post metrics for external flow failure in a specific match pool
+     */
+    createMetricExternalFailure_ByPool
   }
 }

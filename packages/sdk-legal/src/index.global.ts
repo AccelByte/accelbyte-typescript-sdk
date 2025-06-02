@@ -7,4 +7,3 @@ import * as AccelByteSDK_Legal from './index'
 
 // @ts-ignore
 window.AccelByteSDK_Legal = AccelByteSDK_Legal
-

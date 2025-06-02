@@ -1,14 +1,14 @@
 {
   "buildBy": "Gradle 8.5",
-  "buildDate": "2024-09-05T12:29:04+00:00",
-  "buildID": "2.21.1",
-  "buildJDK": "21.0.4 (Amazon.com Inc. 21.0.4+7-LTS)",
-  "buildOS": "Linux amd64 5.10.223-212.873.amzn2.x86_64",
-  "gitBranchName": "upgrade-java",
-  "gitHash": "91e1b823a2",
-  "gitTag": "2.21.1",
+  "buildDate": "2025-05-27T08:07:30+00:00",
+  "buildID": "4.1.0",
+  "buildJDK": "21.0.6 (Amazon.com Inc. 21.0.6+7-LTS)",
+  "buildOS": "Linux amd64 5.10.236-228.935.amzn2.x86_64",
+  "gitBranchName": "master",
+  "gitHash": "d252ad87a4",
+  "gitTag": "4.1.0",
   "name": "justice-basic-service",
   "realm": "dev",
-  "version": "2.21.1",
+  "version": "4.1.0",
   "version-roles-seeding": "0.0.10"
 }

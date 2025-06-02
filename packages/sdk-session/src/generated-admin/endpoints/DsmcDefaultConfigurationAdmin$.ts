@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -15,7 +15,8 @@ export class DsmcDefaultConfigurationAdmin$ {
   // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
   /**
-   * Get dsmc default configuration.
+   * @deprecated
+   * Get the DSMC default configuration from this service
    */
   getDsconfigsDefault(): Promise<Response<DefaultDsmcConfig>> {
     const params = {} as AxiosRequestConfig

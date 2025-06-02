@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -25,11 +25,13 @@ export enum Key_OAuth20Extension {
   Authenticate_v3 = 'Iam.OAuth20Extension.Authenticate_v3',
   HeadlesToken_v3 = 'Iam.OAuth20Extension.HeadlesToken_v3',
   TokenExchange_v3 = 'Iam.OAuth20Extension.TokenExchange_v3',
+  UpgradeForward_v3 = 'Iam.OAuth20Extension.UpgradeForward_v3',
   LocationCountry_v3 = 'Iam.OAuth20Extension.LocationCountry_v3',
   LinkCodeRequest_v3 = 'Iam.OAuth20Extension.LinkCodeRequest_v3',
   LinkCodeValidate_v3 = 'Iam.OAuth20Extension.LinkCodeValidate_v3',
   LinkTokenExchange_v3 = 'Iam.OAuth20Extension.LinkTokenExchange_v3',
   AuthenticateWithLink_v3 = 'Iam.OAuth20Extension.AuthenticateWithLink_v3',
+  AuthenticateWithLinkForward_v3 = 'Iam.OAuth20Extension.AuthenticateWithLinkForward_v3',
   TokenRequest_v3 = 'Iam.OAuth20Extension.TokenRequest_v3',
   Authenticate_ByPlatformId_v3 = 'Iam.OAuth20Extension.Authenticate_ByPlatformId_v3',
   TokenVerify_ByPlatformId_v3 = 'Iam.OAuth20Extension.TokenVerify_ByPlatformId_v3'
@@ -222,6 +224,48 @@ export const useOAuth20ExtensionApi_PostTokenExchangeMutation_v3 = (
 }
 
 /**
+ * In login website based flow, after account upgraded, we need this API to handle the forward
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_OAuth20Extension.UpgradeForward_v3, input]
+ * }
+ * ```
+ */
+export const useOAuth20ExtensionApi_PostUpgradeForwardMutation_v3 = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<
+      unknown,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { data: { client_id: string | null; upgrade_success_token: string | null } }
+    >,
+    'mutationKey'
+  >,
+  callback?: (data: unknown) => void
+): UseMutationResult<
+  unknown,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { data: { client_id: string | null; upgrade_success_token: string | null } }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: { client_id: string | null; upgrade_success_token: string | null } }) => {
+    const response = await OAuth20ExtensionApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).postUpgradeForward_v3(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_OAuth20Extension.UpgradeForward_v3],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
  * This endpoint get country location based on the request.
  *
  * #### Default Query Options
@@ -268,12 +312,22 @@ export const useOAuth20ExtensionApi_GetLocationCountry_v3 = (
 export const useOAuth20ExtensionApi_PostLinkCodeRequestMutation_v3 = (
   sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<OneTimeLinkingCodeResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: { platformId: string | null } }>,
+    UseMutationOptions<
+      OneTimeLinkingCodeResponse,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { data: { platformId: string | null; redirectUri?: string | null; state?: string | null } }
+    >,
     'mutationKey'
   >,
   callback?: (data: OneTimeLinkingCodeResponse) => void
-): UseMutationResult<OneTimeLinkingCodeResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: { platformId: string | null } }> => {
-  const mutationFn = async (input: SdkSetConfigParam & { data: { platformId: string | null } }) => {
+): UseMutationResult<
+  OneTimeLinkingCodeResponse,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { data: { platformId: string | null; redirectUri?: string | null; state?: string | null } }
+> => {
+  const mutationFn = async (
+    input: SdkSetConfigParam & { data: { platformId: string | null; redirectUri?: string | null; state?: string | null } }
+  ) => {
     const response = await OAuth20ExtensionApi(sdk, {
       coreConfig: input.coreConfig,
       axiosConfig: input.axiosConfig
@@ -333,7 +387,7 @@ export const useOAuth20ExtensionApi_PostLinkCodeValidateMutation_v3 = (
 }
 
 /**
- * This endpoint is being used to generate user&#39;s token by one time link code. It require publisher ClientID It required a code which can be generated from &lt;code&gt;/iam/v3/link/code/request&lt;/code&gt;. This endpoint support creating transient token by utilizing **isTransient** param: **isTransient=true** will generate a transient token with a short Time Expiration and without a refresh token **isTransient=false** will consume the one-time code and generate the access token with a refresh token.
+ * This endpoint is being used to generate user&#39;s token by one time link code. It requires a code which can be generated from &lt;code&gt;/iam/v3/link/code/request&lt;/code&gt; or &lt;code&gt;/iam/v3/public/users/me/link/forward&lt;/code&gt;. This endpoint support creating transient token by utilizing **isTransient** param: **isTransient=true** will generate a transient token with a short Time Expiration and without a refresh token **isTransient=false** will consume the one-time code and generate the access token with a refresh token.
  *
  * #### Default Query Options
  * The default options include:
@@ -447,6 +501,75 @@ export const useOAuth20ExtensionApi_PostAuthenticateWithLinkMutation_v3 = (
 
   return useMutation({
     mutationKey: [Key_OAuth20Extension.AuthenticateWithLink_v3],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * This endpoint is being used to authenticate a user account and perform platform link. It validates user&#39;s email / username and password. If user already enable 2FA, then invoke _/mfa/verify_ using **mfa_token** from this endpoint response. ## Device Cookie Validation Device Cookie is used to protect the user account from brute force login attack, [more detail from OWASP](https://owasp.org/www-community/Slow_Down_Online_Guessing_Attacks_with_Device_Cookies). This endpoint will read device cookie from cookie **auth-trust-id**. If device cookie not found, it will generate a new one and set it into cookie when successfully authenticate.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_OAuth20Extension.AuthenticateWithLinkForward_v3, input]
+ * }
+ * ```
+ */
+export const useOAuth20ExtensionApi_PostAuthenticateWithLinkForwardMutation_v3 = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<
+      unknown,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & {
+        data: {
+          client_id: string | null
+          linkingToken: string | null
+          password: string | null
+          username: string | null
+          extend_exp?: boolean | null
+        }
+      }
+    >,
+    'mutationKey'
+  >,
+  callback?: (data: unknown) => void
+): UseMutationResult<
+  unknown,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & {
+    data: {
+      client_id: string | null
+      linkingToken: string | null
+      password: string | null
+      username: string | null
+      extend_exp?: boolean | null
+    }
+  }
+> => {
+  const mutationFn = async (
+    input: SdkSetConfigParam & {
+      data: {
+        client_id: string | null
+        linkingToken: string | null
+        password: string | null
+        username: string | null
+        extend_exp?: boolean | null
+      }
+    }
+  ) => {
+    const response = await OAuth20ExtensionApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).postAuthenticateWithLinkForward_v3(input.data)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_OAuth20Extension.AuthenticateWithLinkForward_v3],
     mutationFn,
     ...options
   })

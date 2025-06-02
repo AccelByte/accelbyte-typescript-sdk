@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -23,8 +23,9 @@ export const IapOrderInfo = z.object({
   region: z.string().nullish(),
   retryCount: z.number().int().nullish(),
   sandbox: z.boolean().nullish(),
-  status: z.enum(['FAILED', 'FULFILLED', 'VERIFIED']),
+  status: z.enum(['FAILED', 'FULFILLED', 'PARTIAL_REVOKED', 'REVOKED', 'REVOKE_FAILED', 'VERIFIED']),
   statusReason: z.string().nullish(),
+  syncMode: z.enum(['INVENTORY', 'TRANSACTION']).nullish(),
   transactionId: z.string().nullish(),
   type: z.enum(['APPLE', 'EPICGAMES', 'GOOGLE', 'OCULUS', 'PLAYSTATION', 'STADIA', 'STEAM', 'TWITCH', 'XBOX']),
   updatedAt: z.string(),

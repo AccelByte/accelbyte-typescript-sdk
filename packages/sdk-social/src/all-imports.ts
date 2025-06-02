@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -38,6 +38,8 @@ export * from './generated-definitions/BulkUserStatItemByStatCodes.js'
 export * from './generated-definitions/BulkUserStatItemInc.js'
 export * from './generated-definitions/BulkUserStatItemReset.js'
 export * from './generated-definitions/BulkUserStatItemUpdate.js'
+export * from './generated-definitions/CycleOverride.js'
+export * from './generated-definitions/CycleOverrideRequest.js'
 export * from './generated-definitions/ErrorEntity.js'
 export * from './generated-definitions/FieldValidationError.js'
 export * from './generated-definitions/GameProfileHeader.js'

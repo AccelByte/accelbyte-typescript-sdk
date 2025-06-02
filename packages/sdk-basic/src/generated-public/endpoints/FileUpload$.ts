@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -15,7 +15,7 @@ export class FileUpload$ {
   // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
   /**
-   * Generate an upload URL for user content. It&#39;s valid for 10 minutes.&lt;br/&gt;There are 2 kinds of storage limitation per user : maximum file count and maximum file size.&lt;br/&gt;The threshold of those limitations is different between upload category that is used.&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11102&lt;/li&gt;&lt;li&gt;&lt;i&gt;Default maximum file count per user&lt;/i&gt;: 10 files&lt;/li&gt;&lt;li&gt;&lt;i&gt;Default maximum file size per user&lt;/i&gt;: 104857600 bytes&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: URL data&lt;/li&gt;&lt;/ul&gt;
+   * Generate an upload URL for user content. It&#39;s valid for 10 minutes.&lt;br/&gt;There are two types of storage limits per user: maximum file count and maximum total file size.&lt;br/&gt;These limits vary depending on the upload category used.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;1. Default category:&lt;/b&gt;&lt;br/&gt;- Maximum file count per user: 10 files&lt;br/&gt;- Maximum total file size per user: 100MB&lt;br/&gt;&lt;b&gt;2. Reporting category:&lt;/b&gt;&lt;br/&gt;- Maximum file count per user: 3 files every 1 hour&lt;br/&gt;- Maximum total file size per user: 30MB every 1 hour&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11102&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: URL data&lt;/li&gt;&lt;/ul&gt;
    */
   createFile_ByUserId(
     userId: string,

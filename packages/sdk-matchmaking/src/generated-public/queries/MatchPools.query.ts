@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -13,6 +13,7 @@ import { AxiosError, AxiosResponse } from 'axios'
 import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { MatchPoolsApi } from '../MatchPoolsApi.js'
 
+import { ExternalFailureMetricRecord } from '../../generated-definitions/ExternalFailureMetricRecord.js'
 import { ListMatchPoolTicketsResponse } from '../../generated-definitions/ListMatchPoolTicketsResponse.js'
 import { ListMatchPoolsResponse } from '../../generated-definitions/ListMatchPoolsResponse.js'
 import { MatchPool } from '../../generated-definitions/MatchPool.js'
@@ -27,7 +28,8 @@ export enum Key_MatchPools {
   Metrics_ByPool = 'Matchmaking.MatchPools.Metrics_ByPool',
   Tickets_ByPool = 'Matchmaking.MatchPools.Tickets_ByPool',
   MetricsPlayer_ByPool = 'Matchmaking.MatchPools.MetricsPlayer_ByPool',
-  MetricsPlayer_ByPool_ByNS = 'Matchmaking.MatchPools.MetricsPlayer_ByPool_ByNS'
+  MetricsPlayer_ByPool_ByNS = 'Matchmaking.MatchPools.MetricsPlayer_ByPool_ByNS',
+  MetricExternalFailure_ByPool = 'Matchmaking.MatchPools.MetricExternalFailure_ByPool'
 }
 
 /**
@@ -315,6 +317,41 @@ export const useMatchPoolsApi_GetMetricsPlayer_ByPool_ByNS = (
   return useQuery<PlayerMetricRecord, AxiosError<ApiError>>({
     queryKey: [Key_MatchPools.MetricsPlayer_ByPool_ByNS, input],
     queryFn: queryFn(sdk, input),
+    ...options
+  })
+}
+
+/**
+ * Post metrics for external flow failure in a specific match pool
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_MatchPools.MetricExternalFailure_ByPool, input]
+ * }
+ * ```
+ */
+export const useMatchPoolsApi_CreateMetricExternalFailure_ByPoolMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { pool: string; data: ExternalFailureMetricRecord }>,
+    'mutationKey'
+  >,
+  callback?: (data: unknown) => void
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { pool: string; data: ExternalFailureMetricRecord }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { pool: string; data: ExternalFailureMetricRecord }) => {
+    const response = await MatchPoolsApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).createMetricExternalFailure_ByPool(input.pool, input.data)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_MatchPools.MetricExternalFailure_ByPool],
+    mutationFn,
     ...options
   })
 }

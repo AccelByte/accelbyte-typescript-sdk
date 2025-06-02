@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -27,6 +27,7 @@ import { EligibilitiesApi } from './generated-public/EligibilitiesApi.js'
 import { LocalizedPolicyVersionsApi } from './generated-public/LocalizedPolicyVersionsApi.js'
 import { LocalizedPolicyVersionsWithNamespaceApi } from './generated-public/LocalizedPolicyVersionsWithNamespaceApi.js'
 import { PoliciesApi } from './generated-public/PoliciesApi.js'
+import { PoliciesWithNamespaceV2Api } from './generated-public/PoliciesWithNamespaceV2Api.js'
 import { UtilityApi } from './generated-public/UtilityApi.js'
 
 console.log(`${name}@${version}`)
@@ -51,6 +52,7 @@ const apis = {
   PoliciesApi,
   EligibilitiesApi,
   LocalizedPolicyVersionsApi,
+  PoliciesWithNamespaceV2Api,
   LocalizedPolicyVersionsWithNamespaceApi,
   version: () =>
     console.log({

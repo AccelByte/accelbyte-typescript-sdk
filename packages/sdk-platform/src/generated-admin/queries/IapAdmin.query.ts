@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -22,15 +22,25 @@ import { GoogleIapConfigRequest } from '../../generated-definitions/GoogleIapCon
 import { IapConsumeHistoryPagingSlicedResult } from '../../generated-definitions/IapConsumeHistoryPagingSlicedResult.js'
 import { IapItemConfigInfo } from '../../generated-definitions/IapItemConfigInfo.js'
 import { IapItemConfigUpdate } from '../../generated-definitions/IapItemConfigUpdate.js'
+import { IapOrderConsumeDetailInfoArray } from '../../generated-definitions/IapOrderConsumeDetailInfoArray.js'
+import { IapOrderInfo } from '../../generated-definitions/IapOrderInfo.js'
+import { IapOrderLineItemInfoArray } from '../../generated-definitions/IapOrderLineItemInfoArray.js'
 import { IapOrderPagingSlicedResult } from '../../generated-definitions/IapOrderPagingSlicedResult.js'
+import { IapOrderShortInfo } from '../../generated-definitions/IapOrderShortInfo.js'
 import { MockIapReceipt } from '../../generated-definitions/MockIapReceipt.js'
 import { OculusIapConfigInfo } from '../../generated-definitions/OculusIapConfigInfo.js'
 import { OculusIapConfigRequest } from '../../generated-definitions/OculusIapConfigRequest.js'
 import { PlayStationIapConfigInfo } from '../../generated-definitions/PlayStationIapConfigInfo.js'
 import { PlaystationIapConfigRequest } from '../../generated-definitions/PlaystationIapConfigRequest.js'
+import { ResetJobRequest } from '../../generated-definitions/ResetJobRequest.js'
+import { SteamAbnormalTransactionPagingSlicedResult } from '../../generated-definitions/SteamAbnormalTransactionPagingSlicedResult.js'
 import { SteamIapConfig } from '../../generated-definitions/SteamIapConfig.js'
 import { SteamIapConfigInfo } from '../../generated-definitions/SteamIapConfigInfo.js'
 import { SteamIapConfigRequest } from '../../generated-definitions/SteamIapConfigRequest.js'
+import { SteamReportInfoPagingSlicedResult } from '../../generated-definitions/SteamReportInfoPagingSlicedResult.js'
+import { SteamReportJobInfo } from '../../generated-definitions/SteamReportJobInfo.js'
+import { SteamReportJobInfoArray } from '../../generated-definitions/SteamReportJobInfoArray.js'
+import { SteamSyncByTransactionRequest } from '../../generated-definitions/SteamSyncByTransactionRequest.js'
 import { TestResult } from '../../generated-definitions/TestResult.js'
 import { TwitchIapConfigInfo } from '../../generated-definitions/TwitchIapConfigInfo.js'
 import { TwitchIapConfigRequest } from '../../generated-definitions/TwitchIapConfigRequest.js'
@@ -38,6 +48,7 @@ import { XblIapConfigInfo } from '../../generated-definitions/XblIapConfigInfo.j
 import { XblIapConfigRequest } from '../../generated-definitions/XblIapConfigRequest.js'
 
 export enum Key_IapAdmin {
+  IapSteamJob = 'Platform.IapAdmin.IapSteamJob',
   IapConfigXbl = 'Platform.IapAdmin.IapConfigXbl',
   IapConfigItem = 'Platform.IapAdmin.IapConfigItem',
   IapConfigApple = 'Platform.IapAdmin.IapConfigApple',
@@ -48,15 +59,53 @@ export enum Key_IapAdmin {
   IapConfigTwitch = 'Platform.IapAdmin.IapConfigTwitch',
   Iap_ByUserId = 'Platform.IapAdmin.Iap_ByUserId',
   IapConfigXblCert = 'Platform.IapAdmin.IapConfigXblCert',
+  IapSteamJobReset = 'Platform.IapAdmin.IapSteamJobReset',
   IapConfigEpicgame = 'Platform.IapAdmin.IapConfigEpicgame',
   IapConfigEpicgames = 'Platform.IapAdmin.IapConfigEpicgames',
   IapConfigAppleCert = 'Platform.IapAdmin.IapConfigAppleCert',
   IapConfigGoogleCert = 'Platform.IapAdmin.IapConfigGoogleCert',
   IapConfigPlaystation = 'Platform.IapAdmin.IapConfigPlaystation',
   IapAll_ByUserId = 'Platform.IapAdmin.IapAll_ByUserId',
+  IapSteamReportHistories = 'Platform.IapAdmin.IapSteamReportHistories',
+  Consumedetails_ByIapOrderNo = 'Platform.IapAdmin.Consumedetails_ByIapOrderNo',
   IapConfigPlaystationValidate = 'Platform.IapAdmin.IapConfigPlaystationValidate',
+  IapSteamAbnormalTransactions = 'Platform.IapAdmin.IapSteamAbnormalTransactions',
   IapMockReceipt_ByUserId = 'Platform.IapAdmin.IapMockReceipt_ByUserId',
-  IapConsumeHistory_ByUserId = 'Platform.IapAdmin.IapConsumeHistory_ByUserId'
+  IapConsumeHistory_ByUserId = 'Platform.IapAdmin.IapConsumeHistory_ByUserId',
+  RefundSteamIap_ByIapOrderNo = 'Platform.IapAdmin.RefundSteamIap_ByIapOrderNo',
+  IapSteamSyncByTransaction_ByUserId = 'Platform.IapAdmin.IapSteamSyncByTransaction_ByUserId',
+  IapSteamSyncAbnormalTransaction_ByUserId = 'Platform.IapAdmin.IapSteamSyncAbnormalTransaction_ByUserId',
+  LineItemsIap_ByUserId_ByIapOrderNo = 'Platform.IapAdmin.LineItemsIap_ByUserId_ByIapOrderNo'
+}
+
+/**
+ * Query steam report info
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.IapSteamJob, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_GetIapSteamJob = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
+  options?: Omit<UseQueryOptions<SteamReportJobInfoArray, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<SteamReportJobInfoArray>) => void
+): UseQueryResult<SteamReportJobInfoArray, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useIapAdminApi_GetIapSteamJob>[1]) => async () => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getIapSteamJob()
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<SteamReportJobInfoArray, AxiosError<ApiError>>({
+    queryKey: [Key_IapAdmin.IapSteamJob, input],
+    queryFn: queryFn(sdk, input),
+    ...options
+  })
 }
 
 /**
@@ -729,7 +778,7 @@ export const useIapAdminApi_GetIap_ByUserId = (
       offset?: number
       productId?: string | null
       startTime?: string | null
-      status?: 'FAILED' | 'FULFILLED' | 'VERIFIED'
+      status?: 'FAILED' | 'FULFILLED' | 'PARTIAL_REVOKED' | 'REVOKED' | 'REVOKE_FAILED' | 'VERIFIED'
       type?: 'APPLE' | 'EPICGAMES' | 'GOOGLE' | 'OCULUS' | 'PLAYSTATION' | 'STADIA' | 'STEAM' | 'TWITCH' | 'XBOX'
     }
   },
@@ -781,6 +830,29 @@ export const useIapAdminApi_UpdateIapConfigXblCertMutation = (
 
   return useMutation({
     mutationKey: [Key_IapAdmin.IapConfigXblCert],
+    mutationFn,
+    ...options
+  })
+}
+
+export const useIapAdminApi_UpdateIapSteamJobResetMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<SteamReportJobInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: ResetJobRequest }>,
+    'mutationKey'
+  >,
+  callback?: (data: SteamReportJobInfo) => void
+): UseMutationResult<SteamReportJobInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: ResetJobRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: ResetJobRequest }) => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateIapSteamJobReset(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_IapAdmin.IapSteamJobReset],
     mutationFn,
     ...options
   })
@@ -1072,6 +1144,68 @@ export const useIapAdminApi_GetIapAll_ByUserId = (
   })
 }
 
+export const useIapAdminApi_GetIapSteamReportHistories = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & {
+    queryParams?: {
+      limit?: number
+      offset?: number
+      orderId?: string | null
+      processStatus?: 'ERROR' | 'IGNORED' | 'PROCESSED'
+      steamId?: string | null
+    }
+  },
+  options?: Omit<UseQueryOptions<SteamReportInfoPagingSlicedResult, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<SteamReportInfoPagingSlicedResult>) => void
+): UseQueryResult<SteamReportInfoPagingSlicedResult, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useIapAdminApi_GetIapSteamReportHistories>[1]) => async () => {
+    const response = await IapAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getIapSteamReportHistories(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<SteamReportInfoPagingSlicedResult, AxiosError<ApiError>>({
+    queryKey: [Key_IapAdmin.IapSteamReportHistories, input],
+    queryFn: queryFn(sdk, input),
+    ...options
+  })
+}
+
+/**
+ * Get IAP Order Consume Details by IAP Order Number.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.Consumedetails_ByIapOrderNo, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_GetConsumedetails_ByIapOrderNo = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { iapOrderNo: string },
+  options?: Omit<UseQueryOptions<IapOrderConsumeDetailInfoArray, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<IapOrderConsumeDetailInfoArray>) => void
+): UseQueryResult<IapOrderConsumeDetailInfoArray, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useIapAdminApi_GetConsumedetails_ByIapOrderNo>[1]) => async () => {
+    const response = await IapAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getConsumedetails_ByIapOrderNo(input.iapOrderNo)
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<IapOrderConsumeDetailInfoArray, AxiosError<ApiError>>({
+    queryKey: [Key_IapAdmin.Consumedetails_ByIapOrderNo, input],
+    queryFn: queryFn(sdk, input),
+    ...options
+  })
+}
+
 /**
  * Validate playstation iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Test Results&lt;/li&gt;&lt;/ul&gt;
  *
@@ -1136,6 +1270,28 @@ export const useIapAdminApi_UpdateIapConfigPlaystationValidateMutation = (
   return useMutation({
     mutationKey: [Key_IapAdmin.IapConfigPlaystationValidate],
     mutationFn,
+    ...options
+  })
+}
+
+export const useIapAdminApi_GetIapSteamAbnormalTransactions = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams?: { limit?: number; offset?: number; orderId?: string | null; steamId?: string | null } },
+  options?: Omit<UseQueryOptions<SteamAbnormalTransactionPagingSlicedResult, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<SteamAbnormalTransactionPagingSlicedResult>) => void
+): UseQueryResult<SteamAbnormalTransactionPagingSlicedResult, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useIapAdminApi_GetIapSteamAbnormalTransactions>[1]) => async () => {
+    const response = await IapAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getIapSteamAbnormalTransactions(input.queryParams)
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<SteamAbnormalTransactionPagingSlicedResult, AxiosError<ApiError>>({
+    queryKey: [Key_IapAdmin.IapSteamAbnormalTransactions, input],
+    queryFn: queryFn(sdk, input),
     ...options
   })
 }
@@ -1213,6 +1369,124 @@ export const useIapAdminApi_GetIapConsumeHistory_ByUserId = (
 
   return useQuery<IapConsumeHistoryPagingSlicedResult, AxiosError<ApiError>>({
     queryKey: [Key_IapAdmin.IapConsumeHistory_ByUserId, input],
+    queryFn: queryFn(sdk, input),
+    ...options
+  })
+}
+
+/**
+ * Only support steam transaction mode
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.RefundSteamIap_ByIapOrderNo, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_UpdateRefundSteamIap_ByIapOrderNoMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<IapOrderInfo, AxiosError<ApiError>, SdkSetConfigParam & { iapOrderNo: string }>, 'mutationKey'>,
+  callback?: (data: IapOrderInfo) => void
+): UseMutationResult<IapOrderInfo, AxiosError<ApiError>, SdkSetConfigParam & { iapOrderNo: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { iapOrderNo: string }) => {
+    const response = await IapAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateRefundSteamIap_ByIapOrderNo(input.iapOrderNo)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_IapAdmin.RefundSteamIap_ByIapOrderNo],
+    mutationFn,
+    ...options
+  })
+}
+
+export const useIapAdminApi_UpdateIapSteamSyncByTransaction_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<
+      IapOrderShortInfo,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { userId: string; data: SteamSyncByTransactionRequest }
+    >,
+    'mutationKey'
+  >,
+  callback?: (data: IapOrderShortInfo) => void
+): UseMutationResult<
+  IapOrderShortInfo,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { userId: string; data: SteamSyncByTransactionRequest }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; data: SteamSyncByTransactionRequest }) => {
+    const response = await IapAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateIapSteamSyncByTransaction_ByUserId(input.userId, input.data)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_IapAdmin.IapSteamSyncByTransaction_ByUserId],
+    mutationFn,
+    ...options
+  })
+}
+
+export const useIapAdminApi_UpdateIapSteamSyncAbnormalTransaction_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<IapOrderShortInfo, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }>, 'mutationKey'>,
+  callback?: (data: IapOrderShortInfo) => void
+): UseMutationResult<IapOrderShortInfo, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string }) => {
+    const response = await IapAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateIapSteamSyncAbnormalTransaction_ByUserId(input.userId)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_IapAdmin.IapSteamSyncAbnormalTransaction_ByUserId],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Query IAP order ine items.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated iap orders&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_IapAdmin.LineItemsIap_ByUserId_ByIapOrderNo, input]
+ * }
+ * ```
+ */
+export const useIapAdminApi_GetLineItemsIap_ByUserId_ByIapOrderNo = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { userId: string; iapOrderNo: string },
+  options?: Omit<UseQueryOptions<IapOrderLineItemInfoArray, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<IapOrderLineItemInfoArray>) => void
+): UseQueryResult<IapOrderLineItemInfoArray, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useIapAdminApi_GetLineItemsIap_ByUserId_ByIapOrderNo>[1]) => async () => {
+    const response = await IapAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getLineItemsIap_ByUserId_ByIapOrderNo(input.userId, input.iapOrderNo)
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<IapOrderLineItemInfoArray, AxiosError<ApiError>>({
+    queryKey: [Key_IapAdmin.LineItemsIap_ByUserId_ByIapOrderNo, input],
     queryFn: queryFn(sdk, input),
     ...options
   })

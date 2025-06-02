@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -44,10 +44,12 @@ export function ChallengeListApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   }
 
   async function getChallenges(queryParams?: {
+    keyword?: string | null
     limit?: number
     offset?: number
-    sortBy?: string | null
+    sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc' | 'updatedAt' | 'updatedAt:asc' | 'updatedAt:desc'
     status?: 'INIT' | 'RETIRED' | 'TIED'
+    tags?: string[]
   }): Promise<AxiosResponse<ListChallengeResponse>> {
     const $ = new ChallengeList$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getChallenges(queryParams)
@@ -57,7 +59,12 @@ export function ChallengeListApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
 
   async function getGoals_ByChallengeCode(
     challengeCode: string,
-    queryParams?: { limit?: number; offset?: number; tags?: string[] }
+    queryParams?: {
+      limit?: number
+      offset?: number
+      sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc' | 'updatedAt' | 'updatedAt:asc' | 'updatedAt:desc'
+      tags?: string[]
+    }
   ): Promise<AxiosResponse<GetGoalsResponse>> {
     const $ = new ChallengeList$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getGoals_ByChallengeCode(challengeCode, queryParams)
@@ -67,11 +74,11 @@ export function ChallengeListApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
 
   return {
     /**
-     * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE [READ]&lt;/li&gt;&lt;/ul&gt;
+     * - Required permission: NAMESPACE:{namespace}:CHALLENGE [READ]
      */
     getChallenges,
     /**
-     * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE [READ]&lt;/li&gt;&lt;/ul&gt;
+     * - Required permission: NAMESPACE:{namespace}:CHALLENGE [READ]
      */
     getGoals_ByChallengeCode
   }

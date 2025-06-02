@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -18,10 +18,12 @@ import { EpicGamesReconcileResultArray } from '../generated-definitions/EpicGame
 import { GoogleIapReceipt } from '../generated-definitions/GoogleIapReceipt.js'
 import { GoogleReceiptResolveResult } from '../generated-definitions/GoogleReceiptResolveResult.js'
 import { IapItemMappingInfo } from '../generated-definitions/IapItemMappingInfo.js'
+import { IapOrderShortInfo } from '../generated-definitions/IapOrderShortInfo.js'
 import { OculusReconcileResultArray } from '../generated-definitions/OculusReconcileResultArray.js'
 import { PlayStationMultiServiceLabelsReconcileRequest } from '../generated-definitions/PlayStationMultiServiceLabelsReconcileRequest.js'
 import { PlayStationReconcileRequest } from '../generated-definitions/PlayStationReconcileRequest.js'
 import { PlayStationReconcileResultArray } from '../generated-definitions/PlayStationReconcileResultArray.js'
+import { SteamSyncByTransactionRequest } from '../generated-definitions/SteamSyncByTransactionRequest.js'
 import { SteamSyncRequest } from '../generated-definitions/SteamSyncRequest.js'
 import { TwitchSyncRequest } from '../generated-definitions/TwitchSyncRequest.js'
 import { TwitchSyncResultArray } from '../generated-definitions/TwitchSyncResultArray.js'
@@ -153,12 +155,29 @@ export function IapApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     return resp.response
   }
 
+  async function updateIapSteamSyncByTransaction_ByUserId(
+    userId: string,
+    data: SteamSyncByTransactionRequest
+  ): Promise<AxiosResponse<IapOrderShortInfo>> {
+    const $ = new Iap$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.updateIapSteamSyncByTransaction_ByUserId(userId, data)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   async function updateIapPsnSyncMultiServiceLabel_ByUserId(
     userId: string,
     data: PlayStationMultiServiceLabelsReconcileRequest
   ): Promise<AxiosResponse<PlayStationReconcileResultArray>> {
     const $ = new Iap$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateIapPsnSyncMultiServiceLabel_ByUserId(userId, data)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function updateIapSteamSyncAbnormalTransaction_ByUserId(userId: string): Promise<AxiosResponse<IapOrderShortInfo>> {
+    const $ = new Iap$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.updateIapSteamSyncAbnormalTransaction_ByUserId(userId)
     if (resp.error) throw resp.error
     return resp.response
   }
@@ -213,8 +232,14 @@ export function IapApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      */
     updateIapAppleReceipt_ByUserId_v2,
     /**
+     * Sync steam in app purchase by transaction.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
+     */
+    updateIapSteamSyncByTransaction_ByUserId,
+    /**
      * Synchronize with entitlements in PSN Store with multiple service labels.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: result of synchronization&lt;/li&gt;&lt;/ul&gt;
      */
-    updateIapPsnSyncMultiServiceLabel_ByUserId
+    updateIapPsnSyncMultiServiceLabel_ByUserId,
+
+    updateIapSteamSyncAbnormalTransaction_ByUserId
   }
 }

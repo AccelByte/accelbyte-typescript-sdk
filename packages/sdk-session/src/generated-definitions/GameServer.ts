@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -11,6 +11,7 @@ export const GameServer = z.object({
   ams_protocol: z.array(PortConfigurationAms).nullish(),
   custom_attribute: z.string(),
   deployment: z.string().nullish(),
+  description: z.string().nullish(),
   extend_region: z.string().nullish(),
   game_version: z.string().nullish(),
   image_version: z.string().nullish(),

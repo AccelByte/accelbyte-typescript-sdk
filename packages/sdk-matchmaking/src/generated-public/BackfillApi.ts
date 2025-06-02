@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -17,6 +17,7 @@ import { BackfillCreateResponse } from '../generated-definitions/BackfillCreateR
 import { BackfillGetResponse } from '../generated-definitions/BackfillGetResponse.js'
 import { BackfillProposalResponse } from '../generated-definitions/BackfillProposalResponse.js'
 import { GameSession } from '../generated-definitions/GameSession.js'
+import { ListBackfillQueryResponse } from '../generated-definitions/ListBackfillQueryResponse.js'
 import { Backfill$ } from './endpoints/Backfill$.js'
 
 export function BackfillApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
@@ -46,6 +47,23 @@ export function BackfillApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
         axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
       }
     }
+  }
+
+  async function getBackfill(queryParams?: {
+    fromTime?: string | null
+    isActive?: boolean | null
+    limit?: number
+    matchPool?: string | null
+    offset?: number
+    playerID?: string | null
+    region?: string | null
+    sessionID?: string | null
+    toTime?: string | null
+  }): Promise<AxiosResponse<ListBackfillQueryResponse>> {
+    const $ = new Backfill$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getBackfill(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response
   }
 
   async function createBackfill(data: BackFillCreateRequest): Promise<AxiosResponse<BackfillCreateResponse>> {
@@ -92,6 +110,10 @@ export function BackfillApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
 
   return {
     /**
+     * Admin Query backfill ticket
+     */
+    getBackfill,
+    /**
      * Create backfill ticket.
      */
     createBackfill,
@@ -108,7 +130,7 @@ export function BackfillApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      */
     getBackfill_ByBackfillId,
     /**
-     *  Accept backfill proposal. Field partialAcceptTicketIDs can be used to accept specific tickets within a backfill proposal. If the ticketIDs are not mentioned in this field, those tickets will be rejected and reactivated for future proposals.
+     *  Accept backfill proposal. Field **acceptedTicketIds** can be used to accept specific tickets within a backfill proposal. If the ticketIDs are not mentioned in this field, those tickets will be rejected and reactivated for future proposals. If **acceptedTicketIds** is nil or not specified, then all tickets in the proposal will be accepted.
      */
     updateProposalAccept_ByBackfillId,
     /**

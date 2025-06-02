@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -33,6 +33,7 @@ export enum Key_OAuth20 {
   OauthRevocationlist_v3 = 'Iam.OAuth20.OauthRevocationlist_v3',
   OauthMfaFactorChange_v3 = 'Iam.OAuth20.OauthMfaFactorChange_v3',
   OauthSimultaneousLogin_v3 = 'Iam.OAuth20.OauthSimultaneousLogin_v3',
+  OauthMfaVerifyForward_v3 = 'Iam.OAuth20.OauthMfaVerifyForward_v3',
   TokenOauth_ByPlatformId_v3 = 'Iam.OAuth20.TokenOauth_ByPlatformId_v3',
   AuthorizeOauth_ByPlatformId_v3 = 'Iam.OAuth20.AuthorizeOauth_ByPlatformId_v3',
   PlatformTokenOauth_ByUserId_ByPlatformId_v3 = 'Iam.OAuth20.PlatformTokenOauth_ByUserId_ByPlatformId_v3'
@@ -103,6 +104,7 @@ export const useOAuth20Api_PostOauthTokenMutation_v3 = (
           password?: string | null
           redirect_uri?: string | null
           refresh_token?: string | null
+          scope?: string | null
           username?: string | null
         }
       }
@@ -131,6 +133,7 @@ export const useOAuth20Api_PostOauthTokenMutation_v3 = (
       password?: string | null
       redirect_uri?: string | null
       refresh_token?: string | null
+      scope?: string | null
       username?: string | null
     }
   }
@@ -154,6 +157,7 @@ export const useOAuth20Api_PostOauthTokenMutation_v3 = (
         password?: string | null
         redirect_uri?: string | null
         refresh_token?: string | null
+        scope?: string | null
         username?: string | null
       }
     }
@@ -290,9 +294,12 @@ export const useOAuth20Api_GetOauthAuthorize_v3 = (
     queryParams: {
       client_id: string | null
       response_type: 'code'
+      blockedPlatformId?: string | null
       code_challenge?: string | null
       code_challenge_method?: 'S256' | 'plain'
       createHeadless?: boolean | null
+      loginWebBased?: boolean | null
+      nonce?: string | null
       oneTimeLinkCode?: string | null
       redirect_uri?: string | null
       scope?: string | null
@@ -523,6 +530,80 @@ export const useOAuth20Api_PostOauthSimultaneousLoginMutation_v3 = (
 
   return useMutation({
     mutationKey: [Key_OAuth20.OauthSimultaneousLogin_v3],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * This is a forward version for &#39;/mfa/verify&#39;. If there is any error, it will redirect to login website with error details. If success, it will forward to auth request redirect url If got error, it will forward to login website Verify 2FA code This endpoint is used for verifying 2FA code. ## 2FA remember device To remember device for 2FA, should provide cookie: device_token or header: Device-Token
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_OAuth20.OauthMfaVerifyForward_v3, input]
+ * }
+ * ```
+ */
+export const useOAuth20Api_PostOauthMfaVerifyForwardMutation_v3 = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<
+      unknown,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & {
+        data: {
+          clientId: string | null
+          code: string | null
+          factor: string | null
+          mfaToken: string | null
+          defaultFactor?: string | null
+          factors?: string | null
+          rememberDevice?: boolean | null
+        }
+      }
+    >,
+    'mutationKey'
+  >,
+  callback?: (data: unknown) => void
+): UseMutationResult<
+  unknown,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & {
+    data: {
+      clientId: string | null
+      code: string | null
+      factor: string | null
+      mfaToken: string | null
+      defaultFactor?: string | null
+      factors?: string | null
+      rememberDevice?: boolean | null
+    }
+  }
+> => {
+  const mutationFn = async (
+    input: SdkSetConfigParam & {
+      data: {
+        clientId: string | null
+        code: string | null
+        factor: string | null
+        mfaToken: string | null
+        defaultFactor?: string | null
+        factors?: string | null
+        rememberDevice?: boolean | null
+      }
+    }
+  ) => {
+    const response = await OAuth20Api(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).postOauthMfaVerifyForward_v3(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_OAuth20.OauthMfaVerifyForward_v3],
     mutationFn,
     ...options
   })

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -14,8 +14,42 @@ import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryO
 import { SessionStorageAdminApi } from '../SessionStorageAdminApi.js'
 
 export enum Key_SessionStorageAdmin {
+  Storage_ByPartyId = 'Session.SessionStorageAdmin.Storage_ByPartyId',
   Storage_BySessionId = 'Session.SessionStorageAdmin.Storage_BySessionId',
   StorageUser_BySessionId_ByUserId = 'Session.SessionStorageAdmin.StorageUser_BySessionId_ByUserId'
+}
+
+/**
+ * Read Party Session Storage by partyID Party Storage example: ``` { &#34;reserved&#34;: { &#34;userID1&#34;: {&#34;key&#34;: &#34;value&#34;}, &#34;userID2&#34;: {&#34;key&#34;: &#34;value&#34;}, ... } } ```
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_SessionStorageAdmin.Storage_ByPartyId, input]
+ * }
+ * ```
+ */
+export const useSessionStorageAdminApi_GetStorage_ByPartyId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { partyId: string },
+  options?: Omit<UseQueryOptions<unknown, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<unknown>) => void
+): UseQueryResult<unknown, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useSessionStorageAdminApi_GetStorage_ByPartyId>[1]) => async () => {
+    const response = await SessionStorageAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getStorage_ByPartyId(input.partyId)
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<unknown, AxiosError<ApiError>>({
+    queryKey: [Key_SessionStorageAdmin.Storage_ByPartyId, input],
+    queryFn: queryFn(sdk, input),
+    ...options
+  })
 }
 
 /**

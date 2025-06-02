@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -17,7 +17,7 @@ export class PluginsAdmin$ {
   // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
   /**
-   * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PLUGIN [DELETE]&lt;/li&gt;&lt;/ul&gt;
+   * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PLUGIN [DELETE]
    */
   deletePluginAssignment(): Promise<Response<unknown>> {
     const params = {} as AxiosRequestConfig
@@ -27,7 +27,7 @@ export class PluginsAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
   /**
-   * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PLUGIN [READ]&lt;/li&gt;&lt;/ul&gt;
+   * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PLUGIN [READ]
    */
   getPluginsAssignment(): Promise<Response<PluginAssignmentResponse>> {
     const params = {} as AxiosRequestConfig
@@ -42,7 +42,7 @@ export class PluginsAdmin$ {
     )
   }
   /**
-   * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PLUGIN [CREATE]&lt;/li&gt;&lt;/ul&gt;
+   * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PLUGIN [CREATE]
    */
   createPluginAssignment(data: PluginAssignmentRequest): Promise<Response<PluginAssignmentResponse>> {
     const params = {} as AxiosRequestConfig
@@ -57,7 +57,7 @@ export class PluginsAdmin$ {
     )
   }
   /**
-   * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PLUGIN [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+   * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PLUGIN [UPDATE]
    */
   updatePluginAssignment(data: PluginAssignmentRequest): Promise<Response<PluginAssignmentResponse>> {
     const params = {} as AxiosRequestConfig

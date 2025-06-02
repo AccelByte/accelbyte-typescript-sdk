@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -19,7 +19,7 @@ export class UserDataV3Admin$ {
    */
   getLeaderboards_ByUserId_v3(
     userId: string,
-    queryParams?: { limit?: number; offset?: number }
+    queryParams?: { limit?: number; offset?: number; previousVersion?: number }
   ): Promise<Response<GetAllUserLeaderboardsRespV3>> {
     const params = { ...queryParams } as AxiosRequestConfig
     const url = '/leaderboard/v3/admin/namespaces/{namespace}/users/{userId}/leaderboards'

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -20,7 +20,8 @@ export enum Key_CertificateAdmin {
 }
 
 /**
- * Upload certificates for xbox. Certificate must be in the valid form of PFX format.
+ * @deprecated
+ * Upload certificates for XBox. Certificate must be in the valid form of PFX format. &#39;certname&#39;&#39; must be specified to &#39;xbl-pfx&#39; for Session Sync to work
  *
  * #### Default Query Options
  * The default options include:

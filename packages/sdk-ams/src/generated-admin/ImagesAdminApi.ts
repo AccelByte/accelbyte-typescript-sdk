@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -45,9 +45,19 @@ export function ImagesAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     }
   }
 
-  async function getImages(): Promise<AxiosResponse<ImageList>> {
+  async function getImages(queryParams?: {
+    count?: number
+    inUse?: string | null
+    isProtected?: boolean | null
+    name?: string | null
+    offset?: number
+    sortBy?: string | null
+    sortDirection?: string | null
+    status?: string | null
+    tag?: string | null
+  }): Promise<AxiosResponse<ImageList>> {
     const $ = new ImagesAdmin$(axiosInstance, namespace, useSchemaValidation)
-    const resp = await $.getImages()
+    const resp = await $.getImages(queryParams)
     if (resp.error) throw resp.error
     return resp.response
   }

@@ -1,14 +1,14 @@
 {
-  "buildBy": "Gradle 6.9.1",
-  "buildDate": "2024-09-19T03:42:39+00:00",
-  "buildID": "1.22.5",
-  "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
-  "buildOS": "Linux amd64 5.10.224-212.876.amzn2.x86_64",
+  "buildBy": "Gradle 8.5",
+  "buildDate": "2025-05-26T04:14:18+00:00",
+  "buildID": "1.26.0",
+  "buildJDK": "21.0.5 (Amazon.com Inc. 21.0.5+11-LTS)",
+  "buildOS": "Linux amd64 5.10.236-228.935.amzn2.x86_64",
   "gitBranchName": "master",
-  "gitHash": "bd2ddd78ad",
-  "gitTag": "1.22.5",
+  "gitHash": "61f5741721",
+  "gitTag": "1.26.0",
   "name": "justice-seasonpass-service",
   "realm": "dev",
-  "version": "1.22.5",
+  "version": "1.26.0",
   "version-roles-seeding": "1.2.37"
 }

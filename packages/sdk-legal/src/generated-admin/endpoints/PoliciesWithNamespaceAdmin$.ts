@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -16,7 +16,19 @@ export class PoliciesWithNamespaceAdmin$ {
   // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
   /**
-   * Update country-specific policy.
+   * Delete policy.Can only be deleted if match these criteria:&lt;br&gt;&lt;ul&gt;&lt;li&gt;Policy is not default policy&lt;/li&gt;&lt;li&gt;Policy version under policy has never been accepted by any user&lt;/li&gt;&lt;/ul&gt;
+   */
+  deletePolicy_ByPolicyId(policyId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/agreement/admin/namespaces/{namespace}/policies/{policyId}'
+      .replace('{namespace}', this.namespace)
+      .replace('{policyId}', policyId)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
+  }
+  /**
+   * Update country-specific and country-group policy.
    */
   patchPolicy_ByPolicyId(policyId: string, data: UpdatePolicyRequest): Promise<Response<unknown>> {
     const params = {} as AxiosRequestConfig

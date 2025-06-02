@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -10,6 +10,7 @@
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
 import { AxiosRequestConfig, AxiosResponse } from 'axios'
+import { DlcItemConfigHistoryResult } from '../generated-definitions/DlcItemConfigHistoryResult.js'
 import { DlcItemConfigInfo } from '../generated-definitions/DlcItemConfigInfo.js'
 import { DlcItemConfigUpdate } from '../generated-definitions/DlcItemConfigUpdate.js'
 import { PlatformDlcConfigInfo } from '../generated-definitions/PlatformDlcConfigInfo.js'
@@ -68,6 +69,13 @@ export function DlcAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     return resp.response
   }
 
+  async function getDlcConfigHistory(queryParams: { dlcId: string | null }): Promise<AxiosResponse<DlcItemConfigHistoryResult>> {
+    const $ = new DlcAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getDlcConfigHistory(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   async function getDlc_ByUserId(
     userId: string,
     queryParams: { type: 'EPICGAMES' | 'OCULUS' | 'PSN' | 'STEAM' | 'XBOX' }
@@ -113,6 +121,13 @@ export function DlcAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     return resp.response
   }
 
+  async function createRestoreConfigDlc_ById(id: string): Promise<AxiosResponse<unknown>> {
+    const $ = new DlcAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.createRestoreConfigDlc_ById(id)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   return {
     /**
      * delete a DLC item config.
@@ -126,6 +141,10 @@ export function DlcAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      * Update DLC item config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated DLC item config&lt;/li&gt;&lt;/ul&gt;
      */
     updateDlcConfigItem,
+    /**
+     * Get DLC item config history.
+     */
+    getDlcConfigHistory,
     /**
      * Get user dlc by platform.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user dlc&lt;/li&gt;&lt;/ul&gt;
      */
@@ -145,6 +164,10 @@ export function DlcAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     /**
      * Get user dlc records.&lt;br&gt;Note: includeAllNamespaces means this endpoint will return user dlcs from all namespace, example scenario isadmin may need to check the user dlcs before unlink a 3rd party account, so the user dlcs should be from all namespaces because unlinking is a platform level action &lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user dlc&lt;/li&gt;&lt;/ul&gt;
      */
-    getDlcRecords_ByUserId
+    getDlcRecords_ByUserId,
+    /**
+     * Restore DLC item config history.
+     */
+    createRestoreConfigDlc_ById
   }
 }

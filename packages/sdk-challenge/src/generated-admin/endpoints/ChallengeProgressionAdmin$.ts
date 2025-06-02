@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -17,9 +17,9 @@ export class ChallengeProgressionAdmin$ {
   // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
   /**
-   * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]&lt;/li&gt;&lt;li&gt;Limited up to 10 users per request&lt;/li&gt;&lt;/ul&gt;
+   * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE] - Limited up to 10 users per request
    */
-  createProgresEvaluate(data: EvaluatePlayerProgressionRequest): Promise<Response<unknown>> {
+  updateProgresEvaluate(data: EvaluatePlayerProgressionRequest): Promise<Response<unknown>> {
     const params = {} as AxiosRequestConfig
     const url = '/challenge/v1/admin/namespaces/{namespace}/progress/evaluate'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
@@ -27,7 +27,7 @@ export class ChallengeProgressionAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
   /**
-   * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]&lt;/li&gt;&lt;/ul&gt;
+   * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]
    */
   getProgres_ByUserId_ByChallengeCode(
     userId: string,

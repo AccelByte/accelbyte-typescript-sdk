@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -40,8 +40,12 @@ export class LeaderboardDataV3$ {
   /**
    * &lt;p&gt;Bulk get users ranking in leaderboard, max allowed 20 userIDs at a time.&lt;/p&gt;
    */
-  createUserBulk_ByLeaderboardCode_v3(leaderboardCode: string, data: BulkUserIDsRequest): Promise<Response<BulkUserRankingResponseV3>> {
-    const params = {} as AxiosRequestConfig
+  createUserBulk_ByLeaderboardCode_v3(
+    leaderboardCode: string,
+    data: BulkUserIDsRequest,
+    queryParams?: { previousVersion?: number }
+  ): Promise<Response<BulkUserRankingResponseV3>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/leaderboard/v3/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/bulk'
       .replace('{namespace}', this.namespace)
       .replace('{leaderboardCode}', leaderboardCode)
@@ -57,8 +61,12 @@ export class LeaderboardDataV3$ {
   /**
    * &lt;p&gt;Get user ranking in leaderboard&lt;/p&gt;
    */
-  getUser_ByLeaderboardCode_ByUserId_v3(leaderboardCode: string, userId: string): Promise<Response<UserRankingResponseV3>> {
-    const params = {} as AxiosRequestConfig
+  getUser_ByLeaderboardCode_ByUserId_v3(
+    leaderboardCode: string,
+    userId: string,
+    queryParams?: { previousVersion?: number }
+  ): Promise<Response<UserRankingResponseV3>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/leaderboard/v3/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/{userId}'
       .replace('{namespace}', this.namespace)
       .replace('{leaderboardCode}', leaderboardCode)
@@ -73,7 +81,7 @@ export class LeaderboardDataV3$ {
   getCycle_ByLeaderboardCode_ByCycleId_v3(
     leaderboardCode: string,
     cycleId: string,
-    queryParams?: { limit?: number; offset?: number }
+    queryParams?: { limit?: number; offset?: number; previousVersion?: number }
   ): Promise<Response<GetLeaderboardRankingResp>> {
     const params = { ...queryParams } as AxiosRequestConfig
     const url = '/leaderboard/v3/public/namespaces/{namespace}/leaderboards/{leaderboardCode}/cycles/{cycleId}'

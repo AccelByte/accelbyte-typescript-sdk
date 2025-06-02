@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -9,7 +9,7 @@ import { UserResponse } from './UserResponse.js'
 
 export const PartySessionResponse = z.object({
   attributes: z.record(z.any()).nullish(),
-  code: z.string().nullish(),
+  code: z.string(),
   configuration: PublicConfiguration,
   createdAt: z.string(),
   createdBy: z.string(),

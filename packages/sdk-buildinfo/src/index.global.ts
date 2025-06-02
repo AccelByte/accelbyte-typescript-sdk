@@ -7,4 +7,3 @@ import * as AccelByteSDK_BuildInfo from './index'
 
 // @ts-ignore
 window.AccelByteSDK_BuildInfo = AccelByteSDK_BuildInfo
-

@@ -54,14 +54,12 @@ export const INTERNAL_SERVICES = {
   '/agreement': 'justice-legal-service', // sdk-legal
   '/lobby': 'justice-lobby-server',
   '/match2': 'justice-matchmaking-v2', // sdk-matchmaking
-  '/matchmaking': 'justice-matchmaking', // sdk-matchmaking-v1
   '/odin-config': 'justice-odin-config-service',
   '/platform': 'justice-platform-service',
   '/qosm': 'justice-qos-manager-service',
   '/reporting': 'justice-reporting-service',
   '/seasonpass': 'justice-seasonpass-service',
   '/session': 'justice-session-service',
-  '/sessionbrowser': 'justice-session-browser-service',
   '/social': 'justice-social-service',
   '/ugc': 'justice-ugc-service',
   '/config': 'justice-config-service'

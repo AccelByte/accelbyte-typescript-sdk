@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -13,6 +13,7 @@ import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ClawbackInfo } from '../generated-definitions/ClawbackInfo.js'
 import { IapClawbackPagingSlicedResult } from '../generated-definitions/IapClawbackPagingSlicedResult.js'
 import { StreamEvent } from '../generated-definitions/StreamEvent.js'
+import { XblClawbackEvent } from '../generated-definitions/XblClawbackEvent.js'
 import { ClawbackAdmin$ } from './endpoints/ClawbackAdmin$.js'
 
 export function ClawbackAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
@@ -44,9 +45,16 @@ export function ClawbackAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     }
   }
 
+  async function createIapClawbackXblMock(data: XblClawbackEvent): Promise<AxiosResponse<ClawbackInfo>> {
+    const $ = new ClawbackAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.createIapClawbackXblMock(data)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   async function getIapClawbackHistories(queryParams?: {
     endTime?: string | null
-    eventType?: 'CHARGEBACK' | 'CHARGEBACK_REVERSED' | 'OTHER' | 'REFUND'
+    eventType?: 'CHARGEBACK' | 'CHARGEBACK_REVERSED' | 'OTHER' | 'REFUND' | 'REVOKED'
     externalOrderId?: string | null
     limit?: number
     offset?: number
@@ -68,6 +76,10 @@ export function ClawbackAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   }
 
   return {
+    /**
+     * Mock Sync XBox Clawback event.
+     */
+    createIapClawbackXblMock,
     /**
      * Query clawback history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated clawback history&lt;/li&gt;&lt;/ul&gt;
      */

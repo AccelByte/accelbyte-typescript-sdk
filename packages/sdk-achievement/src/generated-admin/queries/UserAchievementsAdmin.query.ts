@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -13,10 +13,13 @@ import { AxiosError, AxiosResponse } from 'axios'
 import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { UserAchievementsAdminApi } from '../UserAchievementsAdminApi.js'
 
+import { BulkUnlockAchievementRequest } from '../../generated-definitions/BulkUnlockAchievementRequest.js'
+import { BulkUnlockAchievementResponseArray } from '../../generated-definitions/BulkUnlockAchievementResponseArray.js'
 import { PaginatedUserAchievementResponse } from '../../generated-definitions/PaginatedUserAchievementResponse.js'
 
 export enum Key_UserAchievementsAdmin {
   Achievements_ByUserId = 'Achievement.UserAchievementsAdmin.Achievements_ByUserId',
+  AchievementBulkUnlock_ByUserId = 'Achievement.UserAchievementsAdmin.AchievementBulkUnlock_ByUserId',
   Reset_ByUserId_ByAchievementCode = 'Achievement.UserAchievementsAdmin.Reset_ByUserId_ByAchievementCode',
   Unlock_ByUserId_ByAchievementCode = 'Achievement.UserAchievementsAdmin.Unlock_ByUserId_ByAchievementCode'
 }
@@ -36,7 +39,13 @@ export const useUserAchievementsAdminApi_GetAchievements_ByUserId = (
   sdk: AccelByteSDK,
   input: SdkSetConfigParam & {
     userId: string
-    queryParams?: { limit?: number; offset?: number; preferUnlocked?: boolean | null; sortBy?: string | null; tags?: string[] }
+    queryParams?: {
+      limit?: number
+      offset?: number
+      preferUnlocked?: boolean | null
+      sortBy?: 'achievedAt' | 'achievedAt:asc' | 'achievedAt:desc' | 'createdAt' | 'createdAt:asc' | 'createdAt:desc'
+      tags?: string[]
+    }
   },
   options?: Omit<UseQueryOptions<PaginatedUserAchievementResponse, AxiosError<ApiError>>, 'queryKey'>,
   callback?: (data: AxiosResponse<PaginatedUserAchievementResponse>) => void
@@ -53,6 +62,49 @@ export const useUserAchievementsAdminApi_GetAchievements_ByUserId = (
   return useQuery<PaginatedUserAchievementResponse, AxiosError<ApiError>>({
     queryKey: [Key_UserAchievementsAdmin.Achievements_ByUserId, input],
     queryFn: queryFn(sdk, input),
+    ...options
+  })
+}
+
+/**
+ * &lt;p&gt;Required permission &lt;code&gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [UPDATE]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_UserAchievementsAdmin.AchievementBulkUnlock_ByUserId, input]
+ * }
+ * ```
+ */
+export const useUserAchievementsAdminApi_UpdateAchievementBulkUnlock_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<
+      BulkUnlockAchievementResponseArray,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { userId: string; data: BulkUnlockAchievementRequest }
+    >,
+    'mutationKey'
+  >,
+  callback?: (data: BulkUnlockAchievementResponseArray) => void
+): UseMutationResult<
+  BulkUnlockAchievementResponseArray,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { userId: string; data: BulkUnlockAchievementRequest }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; data: BulkUnlockAchievementRequest }) => {
+    const response = await UserAchievementsAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateAchievementBulkUnlock_ByUserId(input.userId, input.data)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_UserAchievementsAdmin.AchievementBulkUnlock_ByUserId],
+    mutationFn,
     ...options
   })
 }

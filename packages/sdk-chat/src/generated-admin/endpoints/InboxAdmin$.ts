@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -15,6 +15,7 @@ import { GetInboxCategoriesResponseItemArray } from '../../generated-definitions
 import { GetInboxMessagesResponse } from '../../generated-definitions/GetInboxMessagesResponse.js'
 import { GetInboxStatsResponse } from '../../generated-definitions/GetInboxStatsResponse.js'
 import { GetInboxUsersResponse } from '../../generated-definitions/GetInboxUsersResponse.js'
+import { GetListTopicKafkaResponse } from '../../generated-definitions/GetListTopicKafkaResponse.js'
 import { JsonSchemaType } from '../../generated-definitions/JsonSchemaType.js'
 import { SaveInboxMessageRequest } from '../../generated-definitions/SaveInboxMessageRequest.js'
 import { SaveInboxMessageResponse } from '../../generated-definitions/SaveInboxMessageResponse.js'
@@ -108,6 +109,21 @@ export class InboxAdmin$ {
       () => resultPromise,
       AddInboxCategoryResponse,
       'AddInboxCategoryResponse'
+    )
+  }
+  /**
+   * Get list kafka topic. example result chat,sessionNotification
+   */
+  getInboxListTopicKafka(): Promise<Response<GetListTopicKafkaResponse>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/chat/v1/admin/inbox/namespaces/{namespace}/list/topic/kafka'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      GetListTopicKafkaResponse,
+      'GetListTopicKafkaResponse'
     )
   }
   /**

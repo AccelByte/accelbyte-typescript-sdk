@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -56,6 +56,13 @@ export function TtlConfigAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     return resp.response
   }
 
+  async function deleteTtl_ByKey_ByNS_admin(key: string): Promise<AxiosResponse<unknown>> {
+    const $ = new TtlConfigAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.deleteTtl_ByKey_ByNS_admin(key)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   return {
     /**
      * ## Description This endpoints will delete the ttl config of the game record
@@ -64,6 +71,10 @@ export function TtlConfigAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     /**
      * ## Description This endpoints will delete the ttl config of the game binary record
      */
-    deleteTtl_ByKey_ByNS
+    deleteTtl_ByKey_ByNS,
+    /**
+     * ## Description This endpoints will delete the ttl config of the admin game record
+     */
+    deleteTtl_ByKey_ByNS_admin
   }
 }

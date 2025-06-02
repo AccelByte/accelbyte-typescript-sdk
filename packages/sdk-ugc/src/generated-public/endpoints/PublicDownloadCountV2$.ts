@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -22,7 +22,7 @@ export class PublicDownloadCountV2$ {
     contentId: string,
     queryParams?: { limit?: number; offset?: number; sortBy?: string | null; userId?: string | null }
   ): Promise<Response<PaginatedContentDownloaderResponse>> {
-    const params = { limit: 20, sortBy: '*createdTime:desc*', ...queryParams } as AxiosRequestConfig
+    const params = { limit: 20, sortBy: 'createdTime:desc', ...queryParams } as AxiosRequestConfig
     const url = '/ugc/v2/public/namespaces/{namespace}/contents/{contentId}/downloader'
       .replace('{namespace}', this.namespace)
       .replace('{contentId}', contentId)

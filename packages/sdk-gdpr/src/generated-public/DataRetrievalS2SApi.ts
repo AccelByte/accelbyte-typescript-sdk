@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -11,6 +11,7 @@
 import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
 import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ListFinishedDataRequests } from '../generated-definitions/ListFinishedDataRequests.js'
+import { S2SDataRequestSummary } from '../generated-definitions/S2SDataRequestSummary.js'
 import { S2SDataRetrievalResponse } from '../generated-definitions/S2SDataRetrievalResponse.js'
 import { S2SUserDataUrl } from '../generated-definitions/S2SUserDataUrl.js'
 import { DataRetrievalS2S$ } from './endpoints/DataRetrievalS2S$.js'
@@ -54,6 +55,13 @@ export function DataRetrievalS2SApi(sdk: AccelByteSDK, args?: SdkSetConfigParam)
     return resp.response
   }
 
+  async function getS2Request_ByRequestId(requestId: string): Promise<AxiosResponse<S2SDataRequestSummary>> {
+    const $ = new DataRetrievalS2S$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getS2Request_ByRequestId(requestId)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   async function createRequestS2_ByUserId(userId: string): Promise<AxiosResponse<S2SDataRetrievalResponse>> {
     const $ = new DataRetrievalS2S$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createRequestS2_ByUserId(userId)
@@ -73,6 +81,10 @@ export function DataRetrievalS2SApi(sdk: AccelByteSDK, args?: SdkSetConfigParam)
      * Scope: account Get list of finished personal data requests based on the finished time period. Unfinished personal data requests will not appear here, i.e. have Status **Pending**, **In-Progress** or **Canceled**. **Anonymize userId for deleted account:** For user accounts that have been deleted, the **userId** field in this API will be anonymized automatically after **7 days** from the success deletion. This measure is implemented to ensure compliance with GDPR regulations. Please make sure to synchronize the data from this API before it undergoes anonymization. --- ## This API for S2S integration purpose only
      */
     getS2SRequestsFinished,
+    /**
+     * Scope: account Get Personal Data Request by Request Id. If the request has been completed, it will return a download url for the data package. --- ## This API for S2S integration purpose only
+     */
+    getS2Request_ByRequestId,
     /**
      * Scope: account Submit user personal data retrieval request. **Limitation:** This API only accepts requests with a publisher userId and does not support game userId requests at this time. --- ## This API for S2S integration purpose only **Notes:** 1. This API will **not send GDPR email notification** both for player and admin notification.
      */

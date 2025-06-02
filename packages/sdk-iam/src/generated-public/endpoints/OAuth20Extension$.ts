@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -81,6 +81,19 @@ export class OAuth20Extension$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TokenResponseV3, 'TokenResponseV3')
   }
   /**
+   * In login website based flow, after account upgraded, we need this API to handle the forward
+   */
+  postUpgradeForward_v3(data: { client_id: string | null; upgrade_success_token: string | null }): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/iam/v3/upgrade/forward'
+    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
+      ...params,
+      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
+    })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
+  }
+  /**
    * This endpoint get country location based on the request.
    */
   getLocationCountry_v3(): Promise<Response<CountryLocationResponse>> {
@@ -98,7 +111,11 @@ export class OAuth20Extension$ {
   /**
    * This endpoint is being used to request the one time code [8 length] for headless account to link or upgrade to a full account. Should specify the target platform id and current user should already linked to this platform. Current user should be a headless account. ## Supported platforms: - **steam** - **steamopenid** - **facebook** - **google** - **googleplaygames** - **oculus** - **twitch** - **discord** - **android** - **ios** - **apple** - **device** - **justice** - **epicgames** - **ps4** - **ps5** - **nintendo** - **awscognito** - **live** - **xblweb** - **netflix** - **snapchat**
    */
-  postLinkCodeRequest_v3(data: { platformId: string | null }): Promise<Response<OneTimeLinkingCodeResponse>> {
+  postLinkCodeRequest_v3(data: {
+    platformId: string | null
+    redirectUri?: string | null
+    state?: string | null
+  }): Promise<Response<OneTimeLinkingCodeResponse>> {
     const params = {} as AxiosRequestConfig
     const url = '/iam/v3/link/code/request'
     const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
@@ -132,7 +149,7 @@ export class OAuth20Extension$ {
     )
   }
   /**
-   * This endpoint is being used to generate user&#39;s token by one time link code. It require publisher ClientID It required a code which can be generated from &lt;code&gt;/iam/v3/link/code/request&lt;/code&gt;. This endpoint support creating transient token by utilizing **isTransient** param: **isTransient=true** will generate a transient token with a short Time Expiration and without a refresh token **isTransient=false** will consume the one-time code and generate the access token with a refresh token.
+   * This endpoint is being used to generate user&#39;s token by one time link code. It requires a code which can be generated from &lt;code&gt;/iam/v3/link/code/request&lt;/code&gt; or &lt;code&gt;/iam/v3/public/users/me/link/forward&lt;/code&gt;. This endpoint support creating transient token by utilizing **isTransient** param: **isTransient=true** will generate a transient token with a short Time Expiration and without a refresh token **isTransient=false** will consume the one-time code and generate the access token with a refresh token.
    */
   postLinkTokenExchange_v3(data: {
     client_id: string | null
@@ -167,6 +184,25 @@ export class OAuth20Extension$ {
     })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TokenResponseV3, 'TokenResponseV3')
+  }
+  /**
+   * This endpoint is being used to authenticate a user account and perform platform link. It validates user&#39;s email / username and password. If user already enable 2FA, then invoke _/mfa/verify_ using **mfa_token** from this endpoint response. ## Device Cookie Validation Device Cookie is used to protect the user account from brute force login attack, [more detail from OWASP](https://owasp.org/www-community/Slow_Down_Online_Guessing_Attacks_with_Device_Cookies). This endpoint will read device cookie from cookie **auth-trust-id**. If device cookie not found, it will generate a new one and set it into cookie when successfully authenticate.
+   */
+  postAuthenticateWithLinkForward_v3(data: {
+    client_id: string | null
+    linkingToken: string | null
+    password: string | null
+    username: string | null
+    extend_exp?: boolean | null
+  }): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/iam/v3/authenticateWithLink/forward'
+    const resultPromise = this.axiosInstance.post(url, CodeGenUtil.getFormUrlEncodedData(data), {
+      ...params,
+      headers: { ...params.headers, 'content-type': 'application/x-www-form-urlencoded' }
+    })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
   /**
    * This endpoint is being used to request the code to exchange a new token. The target new token&#39;s clientId should NOT be same with current using one. Path namespace should be target namespace. Client ID should match the target namespace. The code in response can be consumed by &lt;code&gt;/iam/v3/token/exchange&lt;/code&gt;

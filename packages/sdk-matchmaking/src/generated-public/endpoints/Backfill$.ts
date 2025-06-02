@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -16,11 +16,37 @@ import { BackfillCreateResponse } from '../../generated-definitions/BackfillCrea
 import { BackfillGetResponse } from '../../generated-definitions/BackfillGetResponse.js'
 import { BackfillProposalResponse } from '../../generated-definitions/BackfillProposalResponse.js'
 import { GameSession } from '../../generated-definitions/GameSession.js'
+import { ListBackfillQueryResponse } from '../../generated-definitions/ListBackfillQueryResponse.js'
 
 export class Backfill$ {
   // @ts-ignore
   // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
+  /**
+   * Admin Query backfill ticket
+   */
+  getBackfill(queryParams?: {
+    fromTime?: string | null
+    isActive?: boolean | null
+    limit?: number
+    matchPool?: string | null
+    offset?: number
+    playerID?: string | null
+    region?: string | null
+    sessionID?: string | null
+    toTime?: string | null
+  }): Promise<Response<ListBackfillQueryResponse>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
+    const url = '/match2/v1/namespaces/{namespace}/backfill'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      ListBackfillQueryResponse,
+      'ListBackfillQueryResponse'
+    )
+  }
   /**
    * Create backfill ticket.
    */
@@ -76,7 +102,7 @@ export class Backfill$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BackfillGetResponse, 'BackfillGetResponse')
   }
   /**
-   *  Accept backfill proposal. Field partialAcceptTicketIDs can be used to accept specific tickets within a backfill proposal. If the ticketIDs are not mentioned in this field, those tickets will be rejected and reactivated for future proposals.
+   *  Accept backfill proposal. Field **acceptedTicketIds** can be used to accept specific tickets within a backfill proposal. If the ticketIDs are not mentioned in this field, those tickets will be rejected and reactivated for future proposals. If **acceptedTicketIds** is nil or not specified, then all tickets in the proposal will be accepted.
    */
   updateProposalAccept_ByBackfillId(backfillID: string, data: BackFillAcceptRequest): Promise<Response<GameSession>> {
     const params = {} as AxiosRequestConfig

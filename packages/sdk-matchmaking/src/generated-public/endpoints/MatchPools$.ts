@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -9,6 +9,7 @@
 import { Response, Validate } from '@accelbyte/sdk'
 import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
+import { ExternalFailureMetricRecord } from '../../generated-definitions/ExternalFailureMetricRecord.js'
 import { ListMatchPoolTicketsResponse } from '../../generated-definitions/ListMatchPoolTicketsResponse.js'
 import { ListMatchPoolsResponse } from '../../generated-definitions/ListMatchPoolsResponse.js'
 import { MatchPool } from '../../generated-definitions/MatchPool.js'
@@ -132,5 +133,17 @@ export class MatchPools$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PlayerMetricRecord, 'PlayerMetricRecord')
+  }
+  /**
+   * Post metrics for external flow failure in a specific match pool
+   */
+  createMetricExternalFailure_ByPool(pool: string, data: ExternalFailureMetricRecord): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/match2/v1/namespaces/{namespace}/match-pools/{pool}/metrics/external-failure'
+      .replace('{namespace}', this.namespace)
+      .replace('{pool}', pool)
+    const resultPromise = this.axiosInstance.post(url, data, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

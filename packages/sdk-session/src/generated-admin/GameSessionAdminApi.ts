@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -15,6 +15,7 @@ import { DeleteBulkGameSessionsApiResponse } from '../generated-definitions/Dele
 import { GameSessionQueryResponse } from '../generated-definitions/GameSessionQueryResponse.js'
 import { SetDsReadyRequest } from '../generated-definitions/SetDsReadyRequest.js'
 import { UpdateGameSessionMemberStatusResponse } from '../generated-definitions/UpdateGameSessionMemberStatusResponse.js'
+import { UpdateGamesessionDsInformationRequest } from '../generated-definitions/UpdateGamesessionDsInformationRequest.js'
 import { GameSessionAdmin$ } from './endpoints/GameSessionAdmin$.js'
 
 export function GameSessionAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
@@ -92,6 +93,16 @@ export function GameSessionAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam)
     return resp.response
   }
 
+  async function updateDsinformation_BySessionId(
+    sessionId: string,
+    data: UpdateGamesessionDsInformationRequest
+  ): Promise<AxiosResponse<unknown>> {
+    const $ = new GameSessionAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.updateDsinformation_BySessionId(sessionId, data)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   async function deleteKick_BySessionId_ByMemberId(sessionId: string, memberId: string): Promise<AxiosResponse<unknown>> {
     const $ = new GameSessionAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteKick_BySessionId_ByMemberId(sessionId, memberId)
@@ -127,6 +138,10 @@ export function GameSessionAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam)
      * When the session template has ds_manual_set_ready as true. Then the DS need to calls this end point in order to notify game client if the DS is ready to accept any game client connection.
      */
     updateD_BySessionId,
+    /**
+     * This API is used for create custom DS asynchronously flow and is expected to be called after the service receives response from the Async RPC.
+     */
+    updateDsinformation_BySessionId,
     /**
      * Kick member from a game session.
      */

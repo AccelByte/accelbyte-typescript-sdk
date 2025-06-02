@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -9,6 +9,7 @@ import { Ticket } from './Ticket.js'
 
 export const MatchTicketRecord = z.object({
   CreatedAt: z.string(),
+  ExpiredAt: z.string(),
   IsActive: z.boolean(),
   PartySessionID: z.string(),
   ProposedProposal: ProposedProposal,

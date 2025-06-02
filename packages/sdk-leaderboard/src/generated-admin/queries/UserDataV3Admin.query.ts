@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -32,7 +32,7 @@ export enum Key_UserDataV3Admin {
  */
 export const useUserDataV3AdminApi_GetLeaderboards_ByUserId_v3 = (
   sdk: AccelByteSDK,
-  input: SdkSetConfigParam & { userId: string; queryParams?: { limit?: number; offset?: number } },
+  input: SdkSetConfigParam & { userId: string; queryParams?: { limit?: number; offset?: number; previousVersion?: number } },
   options?: Omit<UseQueryOptions<GetAllUserLeaderboardsRespV3, AxiosError<ApiError>>, 'queryKey'>,
   callback?: (data: AxiosResponse<GetAllUserLeaderboardsRespV3>) => void
 ): UseQueryResult<GetAllUserLeaderboardsRespV3, AxiosError<ApiError>> => {

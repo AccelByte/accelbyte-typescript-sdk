@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -41,6 +41,7 @@ export class OAuth20V4$ {
       password?: string | null
       redirect_uri?: string | null
       refresh_token?: string | null
+      scope?: string | null
       username?: string | null
     },
     queryParams?: { code_challenge?: string | null; code_challenge_method?: 'S256' | 'plain' }

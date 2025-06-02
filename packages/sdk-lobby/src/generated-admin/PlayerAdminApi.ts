@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -133,10 +133,12 @@ export function PlayerAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      */
     getBlockedPlayer_ByUserId,
     /**
+     * @deprecated
      * Get all player&#39;s session attribute by user id in a namespace.
      */
     getAttributesPlayer_ByUserId,
     /**
+     * @deprecated
      * Set player&#39;s session attribute by user id in a namespace.
      */
     updateAttributePlayer_ByUserId,
@@ -153,6 +155,7 @@ export function PlayerAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      */
     deleteBulkUnblockPlayer_ByUserId,
     /**
+     * @deprecated
      * Get player&#39;s specific session attribute by user id in a namespace.
      */
     getAttributePlayer_ByUserId_ByAttribute

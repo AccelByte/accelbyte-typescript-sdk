@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -23,6 +23,9 @@ export * from './generated-definitions/AchievementUpdateRequest.js'
 export * from './generated-definitions/AdditionalInfo.js'
 export * from './generated-definitions/BulkCreatePsnEventResponse.js'
 export * from './generated-definitions/BulkCreatePsnEvents.js'
+export * from './generated-definitions/BulkUnlockAchievementRequest.js'
+export * from './generated-definitions/BulkUnlockAchievementResponse.js'
+export * from './generated-definitions/BulkUnlockAchievementResponseArray.js'
 export * from './generated-definitions/ContributorResponse.js'
 export * from './generated-definitions/CreatePsnEvent.js'
 export * from './generated-definitions/Error.js'

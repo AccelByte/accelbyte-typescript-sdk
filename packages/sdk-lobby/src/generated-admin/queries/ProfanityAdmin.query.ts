@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -42,6 +42,7 @@ export enum Key_ProfanityAdmin {
 }
 
 /**
+ * @deprecated
  * Get current profanity rule
  *
  * #### Default Query Options
@@ -72,6 +73,7 @@ export const useProfanityAdminApi_GetProfanityRule = (
 }
 
 /**
+ * @deprecated
  * Set current profanity rule
  *
  * #### Default Query Options
@@ -106,6 +108,7 @@ export const useProfanityAdminApi_UpdateProfanityRuleMutation = (
 }
 
 /**
+ * @deprecated
  * Get lists
  *
  * #### Default Query Options
@@ -136,6 +139,7 @@ export const useProfanityAdminApi_GetProfanityLists = (
 }
 
 /**
+ * @deprecated
  * Create a new list
  *
  * #### Default Query Options
@@ -170,6 +174,7 @@ export const useProfanityAdminApi_CreateProfanityListMutation = (
 }
 
 /**
+ * @deprecated
  * Verify a message directly from the UI or other services
  *
  * #### Default Query Options
@@ -202,6 +207,7 @@ export const useProfanityAdminApi_FetchProfanityVerify = (
 }
 
 /**
+ * @deprecated
  * Delete a list include all filters inside of it
  *
  * #### Default Query Options
@@ -234,6 +240,7 @@ export const useProfanityAdminApi_DeleteProfanityList_ByListMutation = (
 }
 
 /**
+ * @deprecated
  * Update the list
  *
  * #### Default Query Options
@@ -269,6 +276,7 @@ export const useProfanityAdminApi_UpdateProfanityList_ByListMutation = (
 }
 
 /**
+ * @deprecated
  * Get the list of filters that would modify the phrase
  *
  * #### Default Query Options
@@ -302,6 +310,7 @@ export const useProfanityAdminApi_FetchProfanityFilterDebug = (
 }
 
 /**
+ * @deprecated
  * Get the list of filters inside the list.
  *
  * #### Default Query Options
@@ -335,6 +344,7 @@ export const useProfanityAdminApi_GetFiltersProfanity_ByList = (
 }
 
 /**
+ * @deprecated
  * Add a single filter into the list
  *
  * #### Default Query Options
@@ -370,6 +380,7 @@ export const useProfanityAdminApi_CreateFilterProfanity_ByListMutation = (
 }
 
 /**
+ * @deprecated
  * Add multiple filters into the list
  *
  * #### Default Query Options
@@ -405,6 +416,7 @@ export const useProfanityAdminApi_CreateFilterBulkProfanity_ByListMutation = (
 }
 
 /**
+ * @deprecated
  * Delete the filter from the list
  *
  * #### Default Query Options
@@ -448,6 +460,7 @@ export const useProfanityAdminApi_CreateFilterDeleteProfanity_ByListMutation = (
 }
 
 /**
+ * @deprecated
  * Import a file with filters
  *
  * #### Default Query Options

@@ -1,12 +1,15 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
+import { CycleOverrideRequest } from './CycleOverrideRequest.js'
 
 export const StatUpdate = z.object({
+  capCycleOverride: z.boolean().nullish(),
   cycleIds: z.array(z.string()).nullish(),
+  cycleOverrides: z.array(CycleOverrideRequest).nullish(),
   defaultValue: z.number().nullish(),
   description: z.string().nullish(),
   globalAggregationMethod: z.enum(['LAST', 'MAX', 'MIN', 'TOTAL']).nullish(),

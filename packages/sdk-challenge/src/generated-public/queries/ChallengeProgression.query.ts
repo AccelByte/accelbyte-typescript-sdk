@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -22,7 +22,7 @@ export enum Key_ChallengeProgression {
 }
 
 /**
- * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+ * - Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]
  *
  * #### Default Query Options
  * The default options include:
@@ -32,7 +32,7 @@ export enum Key_ChallengeProgression {
  * }
  * ```
  */
-export const useChallengeProgressionApi_CreateUserMeProgresEvaluateMutation = (
+export const useChallengeProgressionApi_UpdateUserMeProgresEvaluateMutation = (
   sdk: AccelByteSDK,
   options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam>, 'mutationKey'>,
   callback?: (data: unknown) => void
@@ -41,7 +41,7 @@ export const useChallengeProgressionApi_CreateUserMeProgresEvaluateMutation = (
     const response = await ChallengeProgressionApi(sdk, {
       coreConfig: input.coreConfig,
       axiosConfig: input.axiosConfig
-    }).createUserMeProgresEvaluate()
+    }).updateUserMeProgresEvaluate()
     callback && callback(response.data)
     return response.data
   }
@@ -54,7 +54,7 @@ export const useChallengeProgressionApi_CreateUserMeProgresEvaluateMutation = (
 }
 
 /**
- * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]&lt;/li&gt;&lt;/ul&gt;
+ * - Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]
  *
  * #### Default Query Options
  * The default options include:
@@ -91,7 +91,7 @@ export const useChallengeProgressionApi_GetUserMeProgres_ByChallengeCode = (
 }
 
 /**
- * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]&lt;/li&gt;&lt;/ul&gt;
+ * - Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]
  *
  * #### Default Query Options
  * The default options include:

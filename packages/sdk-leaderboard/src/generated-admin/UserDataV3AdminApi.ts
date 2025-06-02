@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -44,7 +44,7 @@ export function UserDataV3AdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) 
 
   async function getLeaderboards_ByUserId_v3(
     userId: string,
-    queryParams?: { limit?: number; offset?: number }
+    queryParams?: { limit?: number; offset?: number; previousVersion?: number }
   ): Promise<AxiosResponse<GetAllUserLeaderboardsRespV3>> {
     const $ = new UserDataV3Admin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getLeaderboards_ByUserId_v3(userId, queryParams)

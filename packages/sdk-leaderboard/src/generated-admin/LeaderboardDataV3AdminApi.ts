@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -76,10 +76,11 @@ export function LeaderboardDataV3AdminApi(sdk: AccelByteSDK, args?: SdkSetConfig
 
   async function getUser_ByLeaderboardCode_ByUserId_v3(
     leaderboardCode: string,
-    userId: string
+    userId: string,
+    queryParams?: { previousVersion?: number }
   ): Promise<AxiosResponse<UserRankingResponseV3>> {
     const $ = new LeaderboardDataV3Admin$(axiosInstance, namespace, useSchemaValidation)
-    const resp = await $.getUser_ByLeaderboardCode_ByUserId_v3(leaderboardCode, userId)
+    const resp = await $.getUser_ByLeaderboardCode_ByUserId_v3(leaderboardCode, userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response
   }
@@ -87,7 +88,7 @@ export function LeaderboardDataV3AdminApi(sdk: AccelByteSDK, args?: SdkSetConfig
   async function getCycle_ByLeaderboardCode_ByCycleId_v3(
     leaderboardCode: string,
     cycleId: string,
-    queryParams?: { limit?: number; offset?: number }
+    queryParams?: { limit?: number; offset?: number; previousVersion?: number }
   ): Promise<AxiosResponse<GetLeaderboardRankingResp>> {
     const $ = new LeaderboardDataV3Admin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getCycle_ByLeaderboardCode_ByCycleId_v3(leaderboardCode, cycleId, queryParams)

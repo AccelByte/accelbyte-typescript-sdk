@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -25,7 +25,7 @@ export enum Key_PlayerReward {
 }
 
 /**
- * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]&lt;/li&gt;&lt;/ul&gt;
+ * - Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]
  *
  * #### Default Query Options
  * The default options include:
@@ -38,7 +38,14 @@ export enum Key_PlayerReward {
 export const usePlayerRewardApi_GetUsersMeRewards = (
   sdk: AccelByteSDK,
   input: SdkSetConfigParam & {
-    queryParams?: { limit?: number; offset?: number; sortBy?: string | null; status?: 'CLAIMED' | 'UNCLAIMED' }
+    queryParams?: {
+      challengeCode?: string | null
+      goalProgressionId?: string | null
+      limit?: number
+      offset?: number
+      sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc' | 'updatedAt' | 'updatedAt:asc' | 'updatedAt:desc'
+      status?: 'CLAIMED' | 'UNCLAIMED'
+    }
   },
   options?: Omit<UseQueryOptions<ListUserRewardsResponse, AxiosError<ApiError>>, 'queryKey'>,
   callback?: (data: AxiosResponse<ListUserRewardsResponse>) => void
@@ -59,7 +66,7 @@ export const usePlayerRewardApi_GetUsersMeRewards = (
 }
 
 /**
- * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+ * - Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]
  *
  * #### Default Query Options
  * The default options include:
@@ -69,7 +76,7 @@ export const usePlayerRewardApi_GetUsersMeRewards = (
  * }
  * ```
  */
-export const usePlayerRewardApi_CreateUserMeRewardClaimMutation = (
+export const usePlayerRewardApi_UpdateUserMeRewardClaimMutation = (
   sdk: AccelByteSDK,
   options?: Omit<
     UseMutationOptions<UserRewardArray, AxiosError<ApiError>, SdkSetConfigParam & { data: ClaimUserRewardsReq }>,
@@ -78,7 +85,7 @@ export const usePlayerRewardApi_CreateUserMeRewardClaimMutation = (
   callback?: (data: UserRewardArray) => void
 ): UseMutationResult<UserRewardArray, AxiosError<ApiError>, SdkSetConfigParam & { data: ClaimUserRewardsReq }> => {
   const mutationFn = async (input: SdkSetConfigParam & { data: ClaimUserRewardsReq }) => {
-    const response = await PlayerRewardApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createUserMeRewardClaim(
+    const response = await PlayerRewardApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateUserMeRewardClaim(
       input.data
     )
     callback && callback(response.data)
@@ -93,7 +100,7 @@ export const usePlayerRewardApi_CreateUserMeRewardClaimMutation = (
 }
 
 /**
- * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+ * - Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]
  *
  * #### Default Query Options
  * The default options include:
@@ -103,7 +110,7 @@ export const usePlayerRewardApi_CreateUserMeRewardClaimMutation = (
  * }
  * ```
  */
-export const usePlayerRewardApi_CreateRewardClaimMeUser_ByChallengeCodeMutation = (
+export const usePlayerRewardApi_UpdateRewardClaimMeUser_ByChallengeCodeMutation = (
   sdk: AccelByteSDK,
   options?: Omit<
     UseMutationOptions<
@@ -123,7 +130,7 @@ export const usePlayerRewardApi_CreateRewardClaimMeUser_ByChallengeCodeMutation 
     const response = await PlayerRewardApi(sdk, {
       coreConfig: input.coreConfig,
       axiosConfig: input.axiosConfig
-    }).createRewardClaimMeUser_ByChallengeCode(input.challengeCode, input.data)
+    }).updateRewardClaimMeUser_ByChallengeCode(input.challengeCode, input.data)
     callback && callback(response.data)
     return response.data
   }

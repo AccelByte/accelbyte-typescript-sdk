@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -13,6 +13,7 @@ import { AxiosError, AxiosResponse } from 'axios'
 import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { DlcAdminApi } from '../DlcAdminApi.js'
 
+import { DlcItemConfigHistoryResult } from '../../generated-definitions/DlcItemConfigHistoryResult.js'
 import { DlcItemConfigInfo } from '../../generated-definitions/DlcItemConfigInfo.js'
 import { DlcItemConfigUpdate } from '../../generated-definitions/DlcItemConfigUpdate.js'
 import { PlatformDlcConfigInfo } from '../../generated-definitions/PlatformDlcConfigInfo.js'
@@ -22,9 +23,11 @@ import { UserDlcRecordArray } from '../../generated-definitions/UserDlcRecordArr
 
 export enum Key_DlcAdmin {
   DlcConfigItem = 'Platform.DlcAdmin.DlcConfigItem',
+  DlcConfigHistory = 'Platform.DlcAdmin.DlcConfigHistory',
   Dlc_ByUserId = 'Platform.DlcAdmin.Dlc_ByUserId',
   DlcConfigPlatformMap = 'Platform.DlcAdmin.DlcConfigPlatformMap',
-  DlcRecords_ByUserId = 'Platform.DlcAdmin.DlcRecords_ByUserId'
+  DlcRecords_ByUserId = 'Platform.DlcAdmin.DlcRecords_ByUserId',
+  RestoreConfigDlc_ById = 'Platform.DlcAdmin.RestoreConfigDlc_ById'
 }
 
 /**
@@ -116,6 +119,38 @@ export const useDlcAdminApi_UpdateDlcConfigItemMutation = (
   return useMutation({
     mutationKey: [Key_DlcAdmin.DlcConfigItem],
     mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Get DLC item config history.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_DlcAdmin.DlcConfigHistory, input]
+ * }
+ * ```
+ */
+export const useDlcAdminApi_GetDlcConfigHistory = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams: { dlcId: string | null } },
+  options?: Omit<UseQueryOptions<DlcItemConfigHistoryResult, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<DlcItemConfigHistoryResult>) => void
+): UseQueryResult<DlcItemConfigHistoryResult, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useDlcAdminApi_GetDlcConfigHistory>[1]) => async () => {
+    const response = await DlcAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getDlcConfigHistory(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<DlcItemConfigHistoryResult, AxiosError<ApiError>>({
+    queryKey: [Key_DlcAdmin.DlcConfigHistory, input],
+    queryFn: queryFn(sdk, input),
     ...options
   })
 }
@@ -282,6 +317,37 @@ export const useDlcAdminApi_GetDlcRecords_ByUserId = (
   return useQuery<UserDlcRecordArray, AxiosError<ApiError>>({
     queryKey: [Key_DlcAdmin.DlcRecords_ByUserId, input],
     queryFn: queryFn(sdk, input),
+    ...options
+  })
+}
+
+/**
+ * Restore DLC item config history.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_DlcAdmin.RestoreConfigDlc_ById, input]
+ * }
+ * ```
+ */
+export const useDlcAdminApi_CreateRestoreConfigDlc_ByIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { id: string }>, 'mutationKey'>,
+  callback?: (data: unknown) => void
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { id: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { id: string }) => {
+    const response = await DlcAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createRestoreConfigDlc_ById(
+      input.id
+    )
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_DlcAdmin.RestoreConfigDlc_ById],
+    mutationFn,
     ...options
   })
 }

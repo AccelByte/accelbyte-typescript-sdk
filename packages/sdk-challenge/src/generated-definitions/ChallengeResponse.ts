@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -22,6 +22,7 @@ export const ChallengeResponse = z.object({
   rotation: z.enum(['DAILY', 'MONTHLY', 'NONE', 'WEEKLY']),
   startDate: z.string(),
   status: z.enum(['INIT', 'RETIRED', 'TIED']),
+  tags: z.array(z.string()).nullish(),
   updatedAt: z.string()
 })
 

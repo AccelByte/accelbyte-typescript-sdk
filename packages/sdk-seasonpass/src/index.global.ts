@@ -7,4 +7,3 @@ import * as AccelByteSDK_SeasonPass from './index'
 
 // @ts-ignore
 window.AccelByteSDK_SeasonPass = AccelByteSDK_SeasonPass
-

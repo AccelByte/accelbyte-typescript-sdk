@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -517,6 +517,7 @@ export const useNotificationAdminApi_CreateTemplateNotifyNotification_ByUserIdMu
 }
 
 /**
+ * @deprecated
  * Sends notification to a party.
  *
  * #### Default Query Options
@@ -552,6 +553,7 @@ export const useNotificationAdminApi_CreateFreeformNotifyNotification_ByPartyIdM
 }
 
 /**
+ * @deprecated
  * Sends templated notification to a party. &lt;br&gt;In the request body, specify which template slug (template identifier) to use and the template language. &lt;br&gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content. Template need to be published before it can be use to send notifications&lt;br&gt;
  *
  * #### Default Query Options

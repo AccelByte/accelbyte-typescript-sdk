@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -18,12 +18,14 @@ import { DeleteBulkGameSessionsApiResponse } from '../../generated-definitions/D
 import { GameSessionQueryResponse } from '../../generated-definitions/GameSessionQueryResponse.js'
 import { SetDsReadyRequest } from '../../generated-definitions/SetDsReadyRequest.js'
 import { UpdateGameSessionMemberStatusResponse } from '../../generated-definitions/UpdateGameSessionMemberStatusResponse.js'
+import { UpdateGamesessionDsInformationRequest } from '../../generated-definitions/UpdateGamesessionDsInformationRequest.js'
 
 export enum Key_GameSessionAdmin {
   Gamesessions = 'Session.GameSessionAdmin.Gamesessions',
   Gamesession = 'Session.GameSessionAdmin.Gamesession',
   GamesessionBulk = 'Session.GameSessionAdmin.GamesessionBulk',
   D_BySessionId = 'Session.GameSessionAdmin.D_BySessionId',
+  Dsinformation_BySessionId = 'Session.GameSessionAdmin.Dsinformation_BySessionId',
   Kick_BySessionId_ByMemberId = 'Session.GameSessionAdmin.Kick_BySessionId_ByMemberId',
   Statu_BySessionId_ByMemberId_ByStatusType = 'Session.GameSessionAdmin.Statu_BySessionId_ByMemberId_ByStatusType'
 }
@@ -178,6 +180,49 @@ export const useGameSessionAdminApi_UpdateD_BySessionIdMutation = (
 
   return useMutation({
     mutationKey: [Key_GameSessionAdmin.D_BySessionId],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * This API is used for create custom DS asynchronously flow and is expected to be called after the service receives response from the Async RPC.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_GameSessionAdmin.Dsinformation_BySessionId, input]
+ * }
+ * ```
+ */
+export const useGameSessionAdminApi_UpdateDsinformation_BySessionIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<
+      unknown,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { sessionId: string; data: UpdateGamesessionDsInformationRequest }
+    >,
+    'mutationKey'
+  >,
+  callback?: (data: unknown) => void
+): UseMutationResult<
+  unknown,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { sessionId: string; data: UpdateGamesessionDsInformationRequest }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { sessionId: string; data: UpdateGamesessionDsInformationRequest }) => {
+    const response = await GameSessionAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateDsinformation_BySessionId(input.sessionId, input.data)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_GameSessionAdmin.Dsinformation_BySessionId],
     mutationFn,
     ...options
   })

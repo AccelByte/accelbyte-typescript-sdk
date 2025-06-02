@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -26,6 +26,7 @@ export enum Key_LocalizedPolicyVersionsWithNamespaceAdmin {
   LocalizedPolicyVersion_ByLocalizedPolicyVersionId = 'Legal.LocalizedPolicyVersionsWithNamespaceAdmin.LocalizedPolicyVersion_ByLocalizedPolicyVersionId',
   LocalizedPolicyVersionVersion_ByPolicyVersionId = 'Legal.LocalizedPolicyVersionsWithNamespaceAdmin.LocalizedPolicyVersionVersion_ByPolicyVersionId',
   Default_ByLocalizedPolicyVersionId = 'Legal.LocalizedPolicyVersionsWithNamespaceAdmin.Default_ByLocalizedPolicyVersionId',
+  LocalizedPolicyVersionVersion_ByLocalizedPolicyVersionId = 'Legal.LocalizedPolicyVersionsWithNamespaceAdmin.LocalizedPolicyVersionVersion_ByLocalizedPolicyVersionId',
   Attachment_ByLocalizedPolicyVersionId = 'Legal.LocalizedPolicyVersionsWithNamespaceAdmin.Attachment_ByLocalizedPolicyVersionId'
 }
 
@@ -221,6 +222,41 @@ export const useLocalizedPolicyVersionsWithNamespaceAdminApi_PatchDefault_ByLoca
 
   return useMutation({
     mutationKey: [Key_LocalizedPolicyVersionsWithNamespaceAdmin.Default_ByLocalizedPolicyVersionId],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Delete localized version policy.&lt;br&gt;Can only be deleted if match these criteria:&lt;br&gt;&lt;ul&gt;&lt;li&gt;Policy Version that this localized policy version belongs to is not active&lt;/li&gt;&lt;li&gt;Has never been accepted by any user&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_LocalizedPolicyVersionsWithNamespaceAdmin.LocalizedPolicyVersionVersion_ByLocalizedPolicyVersionId, input]
+ * }
+ * ```
+ */
+export const useLocalizedPolicyVersionsWithNamespaceAdminApi_DeleteLocalizedPolicyVersionVersion_ByLocalizedPolicyVersionIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { localizedPolicyVersionId: string }>,
+    'mutationKey'
+  >,
+  callback?: (data: unknown) => void
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { localizedPolicyVersionId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { localizedPolicyVersionId: string }) => {
+    const response = await LocalizedPolicyVersionsWithNamespaceAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deleteLocalizedPolicyVersionVersion_ByLocalizedPolicyVersionId(input.localizedPolicyVersionId)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_LocalizedPolicyVersionsWithNamespaceAdmin.LocalizedPolicyVersionVersion_ByLocalizedPolicyVersionId],
     mutationFn,
     ...options
   })

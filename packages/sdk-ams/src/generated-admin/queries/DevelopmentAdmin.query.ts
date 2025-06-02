@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -17,6 +17,7 @@ import { DevelopmentServerConfigurationCreateRequest } from '../../generated-def
 import { DevelopmentServerConfigurationCreateResponse } from '../../generated-definitions/DevelopmentServerConfigurationCreateResponse.js'
 import { DevelopmentServerConfigurationGetResponse } from '../../generated-definitions/DevelopmentServerConfigurationGetResponse.js'
 import { DevelopmentServerConfigurationListResponse } from '../../generated-definitions/DevelopmentServerConfigurationListResponse.js'
+import { DevelopmentServerConfigurationUpdateRequest } from '../../generated-definitions/DevelopmentServerConfigurationUpdateRequest.js'
 
 export enum Key_DevelopmentAdmin {
   DevelopmentServerConfigurations = 'Ams.DevelopmentAdmin.DevelopmentServerConfigurations',
@@ -170,6 +171,51 @@ export const useDevelopmentAdminApi_GetDevelopmentServerConfiguration_ByDevelopm
   return useQuery<DevelopmentServerConfigurationGetResponse, AxiosError<ApiError>>({
     queryKey: [Key_DevelopmentAdmin.DevelopmentServerConfiguration_ByDevelopmentServerConfigId, input],
     queryFn: queryFn(sdk, input),
+    ...options
+  })
+}
+
+/**
+ * Required Permission: ADMIN:NAMESPACE:{namespace}:ARMADA:FLEET [UPDATE]
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_DevelopmentAdmin.DevelopmentServerConfiguration_ByDevelopmentServerConfigId, input]
+ * }
+ * ```
+ */
+export const useDevelopmentAdminApi_PatchDevelopmentServerConfiguration_ByDevelopmentServerConfigIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<
+      unknown,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { developmentServerConfigID: string; data: DevelopmentServerConfigurationUpdateRequest }
+    >,
+    'mutationKey'
+  >,
+  callback?: (data: unknown) => void
+): UseMutationResult<
+  unknown,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { developmentServerConfigID: string; data: DevelopmentServerConfigurationUpdateRequest }
+> => {
+  const mutationFn = async (
+    input: SdkSetConfigParam & { developmentServerConfigID: string; data: DevelopmentServerConfigurationUpdateRequest }
+  ) => {
+    const response = await DevelopmentAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).patchDevelopmentServerConfiguration_ByDevelopmentServerConfigId(input.developmentServerConfigID, input.data)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_DevelopmentAdmin.DevelopmentServerConfiguration_ByDevelopmentServerConfigId],
+    mutationFn,
     ...options
   })
 }

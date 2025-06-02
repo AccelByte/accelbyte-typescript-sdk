@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -13,6 +13,7 @@ import { DevelopmentServerConfigurationCreateRequest } from '../../generated-def
 import { DevelopmentServerConfigurationCreateResponse } from '../../generated-definitions/DevelopmentServerConfigurationCreateResponse.js'
 import { DevelopmentServerConfigurationGetResponse } from '../../generated-definitions/DevelopmentServerConfigurationGetResponse.js'
 import { DevelopmentServerConfigurationListResponse } from '../../generated-definitions/DevelopmentServerConfigurationListResponse.js'
+import { DevelopmentServerConfigurationUpdateRequest } from '../../generated-definitions/DevelopmentServerConfigurationUpdateRequest.js'
 
 export class DevelopmentAdmin$ {
   // @ts-ignore
@@ -83,5 +84,20 @@ export class DevelopmentAdmin$ {
       DevelopmentServerConfigurationGetResponse,
       'DevelopmentServerConfigurationGetResponse'
     )
+  }
+  /**
+   * Required Permission: ADMIN:NAMESPACE:{namespace}:ARMADA:FLEET [UPDATE]
+   */
+  patchDevelopmentServerConfiguration_ByDevelopmentServerConfigId(
+    developmentServerConfigID: string,
+    data: DevelopmentServerConfigurationUpdateRequest
+  ): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/ams/v1/admin/namespaces/{namespace}/development/server-configurations/{developmentServerConfigID}'
+      .replace('{namespace}', this.namespace)
+      .replace('{developmentServerConfigID}', developmentServerConfigID)
+    const resultPromise = this.axiosInstance.patch(url, data, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

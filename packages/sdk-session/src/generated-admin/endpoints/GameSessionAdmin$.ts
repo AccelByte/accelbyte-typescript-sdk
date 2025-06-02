@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -14,6 +14,7 @@ import { DeleteBulkGameSessionsApiResponse } from '../../generated-definitions/D
 import { GameSessionQueryResponse } from '../../generated-definitions/GameSessionQueryResponse.js'
 import { SetDsReadyRequest } from '../../generated-definitions/SetDsReadyRequest.js'
 import { UpdateGameSessionMemberStatusResponse } from '../../generated-definitions/UpdateGameSessionMemberStatusResponse.js'
+import { UpdateGamesessionDsInformationRequest } from '../../generated-definitions/UpdateGamesessionDsInformationRequest.js'
 
 export class GameSessionAdmin$ {
   // @ts-ignore
@@ -88,6 +89,18 @@ export class GameSessionAdmin$ {
   updateD_BySessionId(sessionId: string, data: SetDsReadyRequest): Promise<Response<unknown>> {
     const params = {} as AxiosRequestConfig
     const url = '/session/v1/admin/namespaces/{namespace}/gamesessions/{sessionId}/ds'
+      .replace('{namespace}', this.namespace)
+      .replace('{sessionId}', sessionId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
+  }
+  /**
+   * This API is used for create custom DS asynchronously flow and is expected to be called after the service receives response from the Async RPC.
+   */
+  updateDsinformation_BySessionId(sessionId: string, data: UpdateGamesessionDsInformationRequest): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/session/v1/admin/namespaces/{namespace}/gamesessions/{sessionId}/dsinformation'
       .replace('{namespace}', this.namespace)
       .replace('{sessionId}', sessionId)
     const resultPromise = this.axiosInstance.put(url, data, { params })

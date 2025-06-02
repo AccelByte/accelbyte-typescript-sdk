@@ -7,4 +7,3 @@ import * as AccelByteSDK_Platform from './index'
 
 // @ts-ignore
 window.AccelByteSDK_Platform = AccelByteSDK_Platform
-

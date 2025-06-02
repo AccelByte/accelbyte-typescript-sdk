@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -48,7 +48,7 @@ export function GlobalAchievementsApi(sdk: AccelByteSDK, args?: SdkSetConfigPara
     achievementCodes?: string | null
     limit?: number
     offset?: number
-    sortBy?: string | null
+    sortBy?: 'achievedAt' | 'achievedAt:asc' | 'achievedAt:desc' | 'createdAt' | 'createdAt:asc' | 'createdAt:desc'
     status?: string | null
     tags?: string[]
   }): Promise<AxiosResponse<PaginatedGlobalAchievementResponse>> {
@@ -60,7 +60,13 @@ export function GlobalAchievementsApi(sdk: AccelByteSDK, args?: SdkSetConfigPara
 
   async function getGlobalAchievements_ByUserId(
     userId: string,
-    queryParams?: { achievementCodes?: string | null; limit?: number; offset?: number; sortBy?: string | null; tags?: string[] }
+    queryParams?: {
+      achievementCodes?: string | null
+      limit?: number
+      offset?: number
+      sortBy?: 'contributedValue' | 'contributedValue:asc' | 'contributedValue:desc'
+      tags?: string[]
+    }
   ): Promise<AxiosResponse<PaginatedUserContributionResponse>> {
     const $ = new GlobalAchievements$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getGlobalAchievements_ByUserId(userId, queryParams)
@@ -70,7 +76,7 @@ export function GlobalAchievementsApi(sdk: AccelByteSDK, args?: SdkSetConfigPara
 
   async function getContributorsGlobal_ByAchievementCode(
     achievementCode: string,
-    queryParams?: { limit?: number; offset?: number; sortBy?: string | null }
+    queryParams?: { limit?: number; offset?: number; sortBy?: 'contributedValue' | 'contributedValue:asc' | 'contributedValue:desc' }
   ): Promise<AxiosResponse<PaginatedContributorResponse>> {
     const $ = new GlobalAchievements$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getContributorsGlobal_ByAchievementCode(achievementCode, queryParams)

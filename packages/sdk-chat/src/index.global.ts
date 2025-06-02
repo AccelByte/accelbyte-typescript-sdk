@@ -7,4 +7,3 @@ import * as AccelByteSDK_Chat from './index'
 
 // @ts-ignore
 window.AccelByteSDK_Chat = AccelByteSDK_Chat
-

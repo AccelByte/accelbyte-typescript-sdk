@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -20,6 +20,8 @@ import { CreateJusticeUserResponse } from '../../generated-definitions/CreateJus
 import { DisableUserRequest } from '../../generated-definitions/DisableUserRequest.js'
 import { DistinctPlatformResponseV3 } from '../../generated-definitions/DistinctPlatformResponseV3.js'
 import { ForgotPasswordRequestV3 } from '../../generated-definitions/ForgotPasswordRequestV3.js'
+import { ForgotPasswordResponseV3 } from '../../generated-definitions/ForgotPasswordResponseV3.js'
+import { ForgotPasswordWithoutNamespaceRequestV3 } from '../../generated-definitions/ForgotPasswordWithoutNamespaceRequestV3.js'
 import { GetAdminUsersResponse } from '../../generated-definitions/GetAdminUsersResponse.js'
 import { GetLinkHeadlessAccountConflictResponse } from '../../generated-definitions/GetLinkHeadlessAccountConflictResponse.js'
 import { GetPublisherUserResponse } from '../../generated-definitions/GetPublisherUserResponse.js'
@@ -34,8 +36,10 @@ import { LinkPlatformAccountWithProgressionRequest } from '../../generated-defin
 import { LinkRequest } from '../../generated-definitions/LinkRequest.js'
 import { ListBulkUserResponse } from '../../generated-definitions/ListBulkUserResponse.js'
 import { LoginHistoriesResponse } from '../../generated-definitions/LoginHistoriesResponse.js'
+import { OneTimeCodeLinkRedirectionResponse } from '../../generated-definitions/OneTimeCodeLinkRedirectionResponse.js'
 import { Permissions } from '../../generated-definitions/Permissions.js'
 import { PlatformUserIdRequest } from '../../generated-definitions/PlatformUserIdRequest.js'
+import { PublicOpenIdUserInfoResponse } from '../../generated-definitions/PublicOpenIdUserInfoResponse.js'
 import { PublicUserInformationResponseV3 } from '../../generated-definitions/PublicUserInformationResponseV3.js'
 import { PublicUserResponse } from '../../generated-definitions/PublicUserResponse.js'
 import { PublicUserResponseV3 } from '../../generated-definitions/PublicUserResponseV3.js'
@@ -85,17 +89,21 @@ import { WebLinkingResponse } from '../../generated-definitions/WebLinkingRespon
 
 export enum Key_Users {
   UsersMe_v3 = 'Iam.Users.UsersMe_v3',
+  UserForgot_v3 = 'Iam.Users.UserForgot_v3',
+  UsersUserinfo_v3 = 'Iam.Users.UsersUserinfo_v3',
   User = 'Iam.Users.User',
   UsersMeProfileStatus_v3 = 'Iam.Users.UsersMeProfileStatus_v3',
   UsersAdmin = 'Iam.Users.UsersAdmin',
   UsersVerifyLinkVerify_v3 = 'Iam.Users.UsersVerifyLinkVerify_v3',
   UsersSearch = 'Iam.Users.UsersSearch',
+  UsersMeLinkRedirection_v3 = 'Iam.Users.UsersMeLinkRedirection_v3',
   User_ByUserId = 'Iam.Users.User_ByUserId',
   UsersByLoginId = 'Iam.Users.UsersByLoginId',
   User_v2 = 'Iam.Users.User_v2',
   Users_v3 = 'Iam.Users.Users_v3',
   User_v3 = 'Iam.Users.User_v3',
   UserMeVerifyLinkRequest_v3 = 'Iam.Users.UserMeVerifyLinkRequest_v3',
+  UserMeCodeRequestForward_v3 = 'Iam.Users.UserMeCodeRequestForward_v3',
   Ban_ByUserId = 'Iam.Users.Ban_ByUserId',
   UserMe_v3 = 'Iam.Users.UserMe_v3',
   UsersMeHeadlessLinkConflict_v3 = 'Iam.Users.UsersMeHeadlessLinkConflict_v3',
@@ -108,7 +116,7 @@ export enum Key_Users {
   UserReset_v3 = 'Iam.Users.UserReset_v3',
   Disable_ByUserId = 'Iam.Users.Disable_ByUserId',
   UsersByPlatformUserId = 'Iam.Users.UsersByPlatformUserId',
-  UserForgot_v3 = 'Iam.Users.UserForgot_v3',
+  UserForgot_ByNS_v3 = 'Iam.Users.UserForgot_ByNS_v3',
   Password_ByUserId = 'Iam.Users.Password_ByUserId',
   Crosslink_ByUserId = 'Iam.Users.Crosslink_ByUserId',
   Platforms_ByUserId = 'Iam.Users.Platforms_ByUserId',
@@ -197,6 +205,76 @@ export const useUsersApi_GetUsersMe_v3 = (
 
   return useQuery<UserResponseV3, AxiosError<ApiError>>({
     queryKey: [Key_Users.UsersMe_v3, input],
+    queryFn: queryFn(sdk, input),
+    ...options
+  })
+}
+
+/**
+ * This endpoint does not need a namespace in the path, we will find the namespace based on: - If this is premium environment, the namespace will be the publisher namespace. - If this is shared cloud: - If this is from Admin Portal, we will find the user by the email. - If this is not from Admin Portal, we will find the namespace based on the client id. **Note**: - The param **clientId** is required in Shared Cloud - The namespace in the response is publisher/studio namespace
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_Users.UserForgot_v3, input]
+ * }
+ * ```
+ */
+export const useUsersApi_CreateUserForgotMutation_v3 = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<
+      ForgotPasswordResponseV3,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { data: ForgotPasswordWithoutNamespaceRequestV3 }
+    >,
+    'mutationKey'
+  >,
+  callback?: (data: ForgotPasswordResponseV3) => void
+): UseMutationResult<
+  ForgotPasswordResponseV3,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { data: ForgotPasswordWithoutNamespaceRequestV3 }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: ForgotPasswordWithoutNamespaceRequestV3 }) => {
+    const response = await UsersApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createUserForgot_v3(input.data)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_Users.UserForgot_v3],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * This API is created to match openid userinfo standard =&gt; https://openid.net/specs/openid-connect-core-1_0.html#UserInfo
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_Users.UsersUserinfo_v3, input]
+ * }
+ * ```
+ */
+export const useUsersApi_GetUsersUserinfo_v3 = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
+  options?: Omit<UseQueryOptions<PublicOpenIdUserInfoResponse, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<PublicOpenIdUserInfoResponse>) => void
+): UseQueryResult<PublicOpenIdUserInfoResponse, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useUsersApi_GetUsersUserinfo_v3>[1]) => async () => {
+    const response = await UsersApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getUsersUserinfo_v3()
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<PublicOpenIdUserInfoResponse, AxiosError<ApiError>>({
+    queryKey: [Key_Users.UsersUserinfo_v3, input],
     queryFn: queryFn(sdk, input),
     ...options
   })
@@ -343,6 +421,38 @@ export const useUsersApi_GetUsersSearch = (
 
   return useQuery<SearchUsersResponse, AxiosError<ApiError>>({
     queryKey: [Key_Users.UsersSearch, input],
+    queryFn: queryFn(sdk, input),
+    ...options
+  })
+}
+
+/**
+ * Get my redirect uri after link, this endpoint will return NotFound(404) if redirect uri is not found
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_Users.UsersMeLinkRedirection_v3, input]
+ * }
+ * ```
+ */
+export const useUsersApi_GetUsersMeLinkRedirection_v3 = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { queryParams: { oneTimeLinkCode: string | null } },
+  options?: Omit<UseQueryOptions<OneTimeCodeLinkRedirectionResponse, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<OneTimeCodeLinkRedirectionResponse>) => void
+): UseQueryResult<OneTimeCodeLinkRedirectionResponse, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useUsersApi_GetUsersMeLinkRedirection_v3>[1]) => async () => {
+    const response = await UsersApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getUsersMeLinkRedirection_v3(
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<OneTimeCodeLinkRedirectionResponse, AxiosError<ApiError>>({
+    queryKey: [Key_Users.UsersMeLinkRedirection_v3, input],
     queryFn: queryFn(sdk, input),
     ...options
   })
@@ -512,7 +622,7 @@ export const useUsersApi_CreateUserMutation_v2 = (
 }
 
 /**
- * This endpoint search all users on the specified namespace that match the query on these fields: display name, unique display name, username or by 3rd party display name. The query length should between 3-20, otherwise will not query the database. The default limit value is 20. ## Searching by 3rd party platform **Note: searching by 3rd party platform display name will use exact query, not fuzzy query.** Step when searching by 3rd party platform display name: 1. set __by__ to __thirdPartyPlatform__ 2. set __platformId__ to the _supported platform id_ 3. set __platformBy__ to __platformDisplayName__ **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
+ * This endpoint search all users on the specified namespace that match the query on these fields: display name, unique display name, username or by 3rd party display name. The query length must be between 3 and 30 characters. For email address queries (i.e. contains &#39;@&#39;), the allowed length is 3 to 40 characters. Otherwise, the database will not be queried. The default limit value is 20. ## Searching by 3rd party platform **Note: searching by 3rd party platform display name will use exact query, not fuzzy query.** Step when searching by 3rd party platform display name: 1. set __by__ to __thirdPartyPlatform__ 2. set __platformId__ to the _supported platform id_ 3. set __platformBy__ to __platformDisplayName__ **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1 ## IP Rate Limit validation This API have IP Rate Limit validation, which activates when triggered excessively from the same IP address (throw 429 http error). The default rule: 10 max request per 30 seconds (per unique IP address). To mitigate potential unexpected issues in your implementation, consider adhering to these best practices as illustrated in the following examples: * Delay invoking the Search API if the player continues typing in the search box, and only utilize the latest input provided. * Prevent players from double-clicking or making multiple clicks within a short time frame.
  *
  * #### Default Query Options
  * The default options include:
@@ -611,6 +721,41 @@ export const useUsersApi_CreateUserMeVerifyLinkRequestMutation_v3 = (
 
   return useMutation({
     mutationKey: [Key_Users.UserMeVerifyLinkRequest_v3],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * This API need the upgradeToken in request body. Available contexts for use : 1. **upgradeHeadlessAccount** The context is intended to be used whenever the email address wanted to be automatically verified on upgrading a headless account. If this context used, IAM rejects the request if the email address is already used by others by returning HTTP Status Code 409.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_Users.UserMeCodeRequestForward_v3, input]
+ * }
+ * ```
+ */
+export const useUsersApi_CreateUserMeCodeRequestForwardMutation_v3 = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: SendVerificationCodeRequestV3 }>,
+    'mutationKey'
+  >,
+  callback?: (data: unknown) => void
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: SendVerificationCodeRequestV3 }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: SendVerificationCodeRequestV3 }) => {
+    const response = await UsersApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).createUserMeCodeRequestForward_v3(input.data)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_Users.UserMeCodeRequestForward_v3],
     mutationFn,
     ...options
   })
@@ -1050,23 +1195,25 @@ export const useUsersApi_GetUsersByPlatformUserId = (
  * The default options include:
  * ```
  * {
- *    queryKey: [Key_Users.UserForgot_v3, input]
+ *    queryKey: [Key_Users.UserForgot_ByNS_v3, input]
  * }
  * ```
  */
-export const useUsersApi_CreateUserForgotMutation_v3 = (
+export const useUsersApi_CreateUserForgot_ByNSMutation_v3 = (
   sdk: AccelByteSDK,
   options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: ForgotPasswordRequestV3 }>, 'mutationKey'>,
   callback?: (data: unknown) => void
 ): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: ForgotPasswordRequestV3 }> => {
   const mutationFn = async (input: SdkSetConfigParam & { data: ForgotPasswordRequestV3 }) => {
-    const response = await UsersApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createUserForgot_v3(input.data)
+    const response = await UsersApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createUserForgot_ByNS_v3(
+      input.data
+    )
     callback && callback(response.data)
     return response.data
   }
 
   return useMutation({
-    mutationKey: [Key_Users.UserForgot_v3],
+    mutationKey: [Key_Users.UserForgot_ByNS_v3],
     mutationFn,
     ...options
   })
@@ -1289,7 +1436,7 @@ export const useUsersApi_PatchUser_ByUserIdMutation_v2 = (
 
 /**
  * @deprecated
- * This endpoint retrieve user attributes. action code: 10129 **Substitute endpoint:** /v4/public/namespaces/{namespace}/users/{userId} [READ]
+ * This endpoint retrieve user attributes. action code: 10129 **Substitute endpoint:** /v4/public/namespaces/{namespace}/users/{userId} [GET]
  *
  * #### Default Query Options
  * The default options include:
@@ -1487,7 +1634,8 @@ export const useUsersApi_UpdatePermission_ByUserIdMutation = (
 }
 
 /**
- * Notes: - This endpoint bulk get users&#39; basic info by userId, max allowed 100 at a time - If namespace is game, will search by game user Id, other wise will search by publisher namespace - **Result will include displayName(if it exists)**
+ * @deprecated
+ * Notes: - This endpoint bulk get users&#39; basic info by userId, max allowed 100 at a time - If namespace is game, will search by game user Id, other wise will search by publisher namespace - **Result will include displayName(if it exists)** - **Substitute endpoint:** /iam/v3/public/namespaces/{namespace}/users/platforms [POST]
  *
  * #### Default Query Options
  * The default options include:
@@ -3421,7 +3569,8 @@ export const useUsersApi_CreateUserMePlatformJustice_ByTargetNamespaceMutation_v
 }
 
 /**
- * Get User By Platform User ID. This endpoint return user information by given platform ID and platform user ID. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter. **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
+ * @deprecated
+ * Get User By Platform User ID. This endpoint return user information by given platform ID and platform user ID. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter. **Note**: this is deprecated, substitute endpoint: /iam/v4/public/namespaces/{namespace}/platforms/{platformId}/users/{platformUserId} [GET] **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
  *
  * #### Default Query Options
  * The default options include:

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -128,6 +128,7 @@ export function EntitlementAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam)
       entitlementName?: string | null
       features?: string[]
       fuzzyMatchName?: boolean | null
+      ignoreActiveDate?: boolean | null
       itemId?: string[]
       limit?: number
       offset?: number
@@ -153,6 +154,16 @@ export function EntitlementAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam)
   async function getEntitlement_ByEntitlementId(entitlementId: string): Promise<AxiosResponse<EntitlementInfo>> {
     const $ = new EntitlementAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getEntitlement_ByEntitlementId(entitlementId)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function getEntitlementsByIds_ByUserId(
+    userId: string,
+    queryParams?: { ids?: string[] }
+  ): Promise<AxiosResponse<EntitlementInfoArray>> {
+    const $ = new EntitlementAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getEntitlementsByIds_ByUserId(userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response
   }
@@ -467,6 +478,10 @@ export function EntitlementAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam)
      * Get entitlement.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: entitlement&lt;/li&gt;&lt;/ul&gt;
      */
     getEntitlement_ByEntitlementId,
+    /**
+     * Get user entitlements by ids. This will return all entitlements regardless of its status&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: entitlement list&lt;/li&gt;&lt;/ul&gt;
+     */
+    getEntitlementsByIds_ByUserId,
     /**
      * Get user entitlement by sku.
      */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -8,6 +8,7 @@
  */
 
 import { author, name, version } from '../package.json'
+import { AccountIdentifierTagAdminApi } from './generated-admin/AccountIdentifierTagAdminApi.js'
 import { BansAdminApi } from './generated-admin/BansAdminApi.js'
 import { ClientsAdminApi } from './generated-admin/ClientsAdminApi.js'
 import { ClientsConfigV3AdminApi } from './generated-admin/ClientsConfigV3AdminApi.js'
@@ -50,6 +51,7 @@ const apis = {
   UsersV4AdminApi,
   InputValidationsAdminApi,
   ClientsConfigV3AdminApi,
+  AccountIdentifierTagAdminApi,
   ClientsAdminApi,
   DevicesV4AdminApi,
   CountryAdminApi,
@@ -67,13 +69,13 @@ const apis = {
   OAuthApi,
   OAuth20Api,
   OAuth20V4Api,
+  ConfigApi,
   UsersApi,
   SsoApi,
   UsersV4Api,
   InputValidationsApi,
   CountryApi,
   SsoSaml20Api,
-  ConfigApi,
   ThirdPartyCredentialApi,
   ProfileUpdateStrategyApi,
   version: () =>

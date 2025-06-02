@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -53,7 +53,7 @@ export class TopicAdmin$ {
     topic?: string[]
     unfiltered?: boolean | null
   }): Promise<Response<ChatMessageWithPaginationResponse>> {
-    const params = { ...queryParams } as AxiosRequestConfig
+    const params = { limit: 100, ...queryParams } as AxiosRequestConfig
     const url = '/chat/admin/namespaces/{namespace}/chats'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -68,7 +68,7 @@ export class TopicAdmin$ {
    * Get chat list of topic in a namespace.
    */
   getTopic(queryParams?: { limit?: number; offset?: number; topicType?: string | null }): Promise<Response<TopicResponseArray>> {
-    const params = { ...queryParams } as AxiosRequestConfig
+    const params = { limit: 100, ...queryParams } as AxiosRequestConfig
     const url = '/chat/admin/namespaces/{namespace}/topic'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -117,7 +117,7 @@ export class TopicAdmin$ {
     topicIds?: string[]
     userId?: string | null
   }): Promise<Response<TopicLogWithPaginationResponse>> {
-    const params = { ...queryParams } as AxiosRequestConfig
+    const params = { limit: 100, ...queryParams } as AxiosRequestConfig
     const url = '/chat/admin/namespaces/{namespace}/topic/log'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -176,7 +176,7 @@ export class TopicAdmin$ {
     offset?: number
     topicName?: string | null
   }): Promise<Response<ChannelTopicWithPaginationResponse>> {
-    const params = { ...queryParams } as AxiosRequestConfig
+    const params = { limit: 100, ...queryParams } as AxiosRequestConfig
     const url = '/chat/admin/namespaces/{namespace}/topic/channel'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -215,7 +215,7 @@ export class TopicAdmin$ {
       unfiltered?: boolean | null
     }
   ): Promise<Response<ChatMessageWithPaginationResponse>> {
-    const params = { ...queryParams } as AxiosRequestConfig
+    const params = { limit: 100, ...queryParams } as AxiosRequestConfig
     const url = '/chat/admin/namespaces/{namespace}/topic/{topic}/chats'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -268,7 +268,7 @@ export class TopicAdmin$ {
     topic: string,
     queryParams?: { isBanned?: boolean | null; isModerator?: boolean | null; limit?: number; offset?: number; shardId?: string | null }
   ): Promise<Response<TopicMemberWithPaginationResponse>> {
-    const params = { ...queryParams } as AxiosRequestConfig
+    const params = { limit: 100, ...queryParams } as AxiosRequestConfig
     const url = '/chat/admin/namespaces/{namespace}/topic/{topic}/members'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.get(url, { params })
 

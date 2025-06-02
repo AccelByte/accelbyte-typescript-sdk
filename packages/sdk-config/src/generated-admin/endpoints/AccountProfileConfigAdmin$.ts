@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -17,7 +17,7 @@ export class AccountProfileConfigAdmin$ {
   // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
   /**
-   * Created account profile related config values. **Supported Config Key:** * uniqueDisplayNameEnabled * usernameDisabled
+   * Created account profile related config values. **Supported Config Key:** * uniqueDisplayNameEnabled * usernameDisabled * displayNameSyncMode * avatarSyncMode
    */
   createConfigAccount(data: CreateConfig): Promise<Response<ConfigInfo>> {
     const params = {} as AxiosRequestConfig
@@ -27,7 +27,7 @@ export class AccountProfileConfigAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ConfigInfo, 'ConfigInfo')
   }
   /**
-   * Get account profile related config values. **Supported Config Key:** * uniqueDisplayNameEnabled * usernameDisabled
+   * Get account profile related config values. **Supported Config Key:** * uniqueDisplayNameEnabled * usernameDisabled * displayNameSyncMode * avatarSyncMode
    */
   getConfigAccount_ByConfigKey(configKey: string): Promise<Response<ConfigInfo>> {
     const params = {} as AxiosRequestConfig
@@ -39,7 +39,7 @@ export class AccountProfileConfigAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ConfigInfo, 'ConfigInfo')
   }
   /**
-   * Update account profile related config values. **Supported Config Key:** * uniqueDisplayNameEnabled * usernameDisabled
+   * Update account profile related config values. **Supported Config Key:** * uniqueDisplayNameEnabled * usernameDisabled * displayNameSyncMode * avatarSyncMode
    */
   updateConfigAccount_ByConfigKey(configKey: string, data: UpdateConfig): Promise<Response<ConfigInfo>> {
     const params = {} as AxiosRequestConfig

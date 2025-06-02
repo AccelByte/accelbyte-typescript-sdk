@@ -1,10 +1,11 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
 import { NamespaceRole } from './NamespaceRole.js'
+import { TagDetail } from './TagDetail.js'
 import { UserActiveBanResponseV3 } from './UserActiveBanResponseV3.js'
 import { UserPermissionsResponseV3 } from './UserPermissionsResponseV3.js'
 import { UserPlatformInfo } from './UserPlatformInfo.js'
@@ -38,6 +39,7 @@ export const UserResponseV3 = z.object({
   platformUserId: z.string().nullish(),
   roles: z.array(z.string()),
   skipLoginQueue: z.boolean().nullish(),
+  tags: z.array(TagDetail).nullish(),
   testAccount: z.boolean().nullish(),
   uniqueDisplayName: z.string().nullish(),
   userId: z.string(),

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -22,7 +22,7 @@ export enum Key_PluginsAdmin {
 }
 
 /**
- * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PLUGIN [DELETE]&lt;/li&gt;&lt;/ul&gt;
+ * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PLUGIN [DELETE]
  *
  * #### Default Query Options
  * The default options include:
@@ -51,7 +51,7 @@ export const usePluginsAdminApi_DeletePluginAssignmentMutation = (
 }
 
 /**
- * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PLUGIN [READ]&lt;/li&gt;&lt;/ul&gt;
+ * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PLUGIN [READ]
  *
  * #### Default Query Options
  * The default options include:
@@ -81,7 +81,7 @@ export const usePluginsAdminApi_GetPluginsAssignment = (
 }
 
 /**
- * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PLUGIN [CREATE]&lt;/li&gt;&lt;/ul&gt;
+ * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PLUGIN [CREATE]
  *
  * #### Default Query Options
  * The default options include:
@@ -115,7 +115,7 @@ export const usePluginsAdminApi_CreatePluginAssignmentMutation = (
 }
 
 /**
- * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PLUGIN [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+ * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PLUGIN [UPDATE]
  *
  * #### Default Query Options
  * The default options include:

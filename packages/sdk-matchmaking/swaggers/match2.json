@@ -3,7 +3,7 @@
   "info": {
     "description": "Justice Matchmaking Service",
     "title": "Justice Match Service v2",
-    "version": "2.26.3"
+    "version": "2.34.0"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -115,6 +115,181 @@
         "x-security": [
           {
             "userPermissions": ["ADMIN:CONFIG:LOG [UPDATE]"]
+          }
+        ]
+      }
+    },
+    "/match2/v1/admin/namespaces/{namespace}/playfeatureflag": {
+      "delete": {
+        "consumes": ["application/json"],
+        "description": "\n\t\t\t\tDelete matchmaking Play Feature Flag.\n\t\t\t\tDeleting the current namespace\u0026#39;s custom config only removes it from the database, the system will then use the environment variable defined in the ConfigMap instead.\n\t\t\t\t",
+        "operationId": "adminDeletePlayFeatureFlag",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "admin Delete Play Feature Flag",
+        "tags": ["PlayFeatureFlag", "admin"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:PLAYFEATUREFLAG [DELETE]"]
+          }
+        ]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get matchmaking Play Feature Flag.",
+        "operationId": "adminGetPlayFeatureFlag",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.PlayFeatureFlag"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "admin Play Feature Flag",
+        "tags": ["PlayFeatureFlag", "admin"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:PLAYFEATUREFLAG [READ]"]
+          }
+        ]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Upsert matchmaking Play Feature Flag.",
+        "operationId": "adminUpsertPlayFeatureFlag",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.PlayFeatureFlag"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.PlayFeatureFlag"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "admin Upsert Play Feature Flag",
+        "tags": ["PlayFeatureFlag", "admin"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:PLAYFEATUREFLAG [UPDATE]"]
           }
         ]
       }
@@ -279,7 +454,7 @@
         "x-errorCodes": {},
         "x-security": [
           {
-            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CONFIG [READ]"]
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:CONFIG [UPDATE]"]
           }
         ]
       }
@@ -326,6 +501,132 @@
       }
     },
     "/match2/v1/namespaces/{namespace}/backfill": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Admin Query backfill ticket\n",
+        "operationId": "AdminQueryBackfill",
+        "parameters": [
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "beginning of backfill ticket creation time range in RFC 3339 format e.g. 2022-10-21T07:20:50Z",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromTime",
+            "type": "string",
+            "x-nullable": true
+          },
+          {
+            "description": "backfill isActive flag",
+            "in": "query",
+            "name": "isActive",
+            "type": "boolean",
+            "x-omitempty": false
+          },
+          {
+            "default": 20,
+            "description": "limit of the returned data",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "ticket match pool",
+            "in": "query",
+            "name": "matchPool",
+            "type": "string"
+          },
+          {
+            "description": "offset of the data",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "description": "player ID of the backfilled session (WARNING: slow)",
+            "in": "query",
+            "name": "playerID",
+            "type": "string"
+          },
+          {
+            "description": "preferred region of the backfilled session (WARNING: slow)",
+            "in": "query",
+            "name": "region",
+            "type": "string"
+          },
+          {
+            "description": "backfill Session ID",
+            "in": "query",
+            "name": "sessionID",
+            "type": "string"
+          },
+          {
+            "description": "end of backfill ticket creation time range in RFC 3339 format e.g. 2022-10-21T07:20:50Z",
+            "format": "date-time",
+            "in": "query",
+            "name": "toTime",
+            "type": "string",
+            "x-nullable": true
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/api.ListBackfillQueryResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Admin Query backfill ticket ",
+        "tags": ["Backfill", "admin"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:MATCHMAKING:BACKFILL [READ]"]
+          }
+        ]
+      },
       "post": {
         "consumes": ["application/json"],
         "description": "Create backfill ticket.\n",
@@ -624,7 +925,7 @@
     "/match2/v1/namespaces/{namespace}/backfill/{backfillID}/proposal/accept": {
       "put": {
         "consumes": ["application/json"],
-        "description": " \tAccept backfill proposal.\nField partialAcceptTicketIDs can be used to accept specific tickets within a backfill proposal. If the ticketIDs are not mentioned in this field, those tickets will be rejected and reactivated for future proposals.  \n",
+        "description": " \tAccept backfill proposal.\nField **acceptedTicketIds** can be used to accept specific tickets within a backfill proposal. If the ticketIDs are not mentioned in this field, those tickets will be rejected and reactivated for future proposals. \nIf **acceptedTicketIds** is nil or not specified, then all tickets in the proposal will be accepted.\n",
         "operationId": "AcceptBackfill",
         "parameters": [
           {
@@ -987,6 +1288,73 @@
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:FUNCTIONS [DELETE]"]
+          }
+        ]
+      },
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get custom match function by name.\n",
+        "operationId": "MatchFunctionGet",
+        "parameters": [
+          {
+            "description": "name of the custom match function",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/api.MatchFunctionConfig"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get custom match function by name",
+        "tags": ["Match-Functions", "admin"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:FUNCTIONS [READ]"]
           }
         ]
       },
@@ -1492,6 +1860,86 @@
         "x-security": [
           {
             "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:POOL:METRICS [READ]"]
+          }
+        ]
+      }
+    },
+    "/match2/v1/namespaces/{namespace}/match-pools/{pool}/metrics/external-failure": {
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Post metrics for external flow failure in a specific match pool\n",
+        "operationId": "PostMatchErrorMetric",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/api.ExternalFailureMetricRecord"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the match pool",
+            "in": "path",
+            "name": "pool",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Post metrics for external flow failure in a specific match pool",
+        "tags": ["Match-Pools", "admin"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:MATCHMAKING:POOL:METRICS [CREATE]"]
           }
         ]
       }
@@ -2387,7 +2835,7 @@
   "definitions": {
     "api.BackFillAcceptRequest": {
       "properties": {
-        "partialAcceptTicketIDs": {
+        "acceptedTicketIds": {
           "items": {
             "type": "string"
           },
@@ -2475,6 +2923,29 @@
           "type": "array"
         }
       }
+    },
+    "api.ExternalFailureMetricRecord": {
+      "properties": {
+        "type": {
+          "enum": ["connectDS", "getExternalDS"],
+          "type": "string"
+        }
+      },
+      "required": ["type"]
+    },
+    "api.ListBackfillQueryResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/api.BackfillGetResponse"
+          },
+          "type": "array"
+        },
+        "pagination": {
+          "$ref": "#/definitions/models.Pagination"
+        }
+      },
+      "required": ["data"]
     },
     "api.ListEnvironmentVariablesResponse": {
       "properties": {
@@ -2952,6 +3423,9 @@
           },
           "type": "array"
         },
+        "teamID": {
+          "type": "string"
+        },
         "userIDs": {
           "items": {
             "type": "string"
@@ -3080,6 +3554,11 @@
           "type": "string",
           "x-nullable": false
         },
+        "ExpiredAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
         "IsActive": {
           "type": "boolean",
           "x-omitempty": false
@@ -3103,7 +3582,17 @@
           "type": "string"
         }
       },
-      "required": ["CreatedAt", "IsActive", "PartySessionID", "ProposedProposal", "SessionID", "Ticket", "TicketID", "UniqueTicketID"]
+      "required": [
+        "CreatedAt",
+        "ExpiredAt",
+        "IsActive",
+        "PartySessionID",
+        "ProposedProposal",
+        "SessionID",
+        "Ticket",
+        "TicketID",
+        "UniqueTicketID"
+      ]
     },
     "matchmaker.Party": {
       "properties": {
@@ -3139,6 +3628,9 @@
             "$ref": "#/definitions/matchmaker.Party"
           },
           "type": "array"
+        },
+        "TeamID": {
+          "type": "string"
         },
         "UserIDs": {
           "items": {
@@ -3406,6 +3898,19 @@
       },
       "required": ["first", "last", "next", "previous"]
     },
+    "models.PlayFeatureFlag": {
+      "properties": {
+        "ENABLE_AUTO_CANCEL_MATCH_USER_DISCONNECT": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "ENABLE_AUTO_CANCEL_MATCH_USER_LEAVE": {
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": ["ENABLE_AUTO_CANCEL_MATCH_USER_DISCONNECT", "ENABLE_AUTO_CANCEL_MATCH_USER_LEAVE"]
+    },
     "models.Server": {
       "properties": {
         "alternate_ips": {
@@ -3556,9 +4061,9 @@
     "path": "/match2/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-09-21T23:24:03+00:00",
-    "gitHash": "2e73a18c52fa5b2dda36b590df4802744753c88c",
-    "version": "2.26.3",
-    "version-roles-seeding": "1.2.36"
+    "buildDate": "2025-05-28T09:12:42+00:00",
+    "gitHash": "c5222192ea5e51a75bdc48fdcf4084c5fd21f7e5",
+    "version": "2.34.0",
+    "version-roles-seeding": "1.2.95"
   }
 }

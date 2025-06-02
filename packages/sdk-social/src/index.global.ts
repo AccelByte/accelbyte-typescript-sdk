@@ -7,4 +7,3 @@ import * as AccelByteSDK_Social from './index'
 
 // @ts-ignore
 window.AccelByteSDK_Social = AccelByteSDK_Social
-

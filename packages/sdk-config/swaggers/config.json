@@ -8,11 +8,12 @@
       "url": "https://accelbyte.io",
       "email": "engineering@accelbyte.io"
     },
-    "version": "1.8.2"
+    "version": "1.11.0"
   },
   "paths": {
     "/config/healthz": {
       "get": {
+        "produces": ["application/json"],
         "operationId": "GetHealthcheckInfoV1",
         "responses": {
           "200": {
@@ -141,7 +142,7 @@
     },
     "/config/v1/admin/namespaces/{namespace}/configs/account": {
       "post": {
-        "description": "Created account profile related config values.\n\n**Supported Config Key:**\n  * uniqueDisplayNameEnabled\n  * usernameDisabled\n      ",
+        "description": "Created account profile related config values.\n\n**Supported Config Key:**\n  * uniqueDisplayNameEnabled\n  * usernameDisabled\n  * displayNameSyncMode\n  * avatarSyncMode\n      ",
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "tags": ["Account Profile Config"],
@@ -206,7 +207,7 @@
     },
     "/config/v1/admin/namespaces/{namespace}/configs/account/{configKey}": {
       "get": {
-        "description": "Get account profile related config values.\n      \n**Supported Config Key:**\n  * uniqueDisplayNameEnabled\n  * usernameDisabled\n      ",
+        "description": "Get account profile related config values.\n      \n**Supported Config Key:**\n  * uniqueDisplayNameEnabled\n  * usernameDisabled\n  * displayNameSyncMode\n  * avatarSyncMode\n      ",
         "produces": ["application/json"],
         "tags": ["Account Profile Config"],
         "summary": "Get Account Profile Related Config",
@@ -266,7 +267,7 @@
         ]
       },
       "put": {
-        "description": "Update account profile related config values.\n      \n**Supported Config Key:**\n  * uniqueDisplayNameEnabled\n  * usernameDisabled\n      ",
+        "description": "Update account profile related config values.\n      \n**Supported Config Key:**\n  * uniqueDisplayNameEnabled\n  * usernameDisabled\n  * displayNameSyncMode\n  * avatarSyncMode\n      ",
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "tags": ["Account Profile Config"],
@@ -1448,6 +1449,7 @@
     },
     "/healthz": {
       "get": {
+        "produces": ["application/json"],
         "operationId": "GetHealthcheckInfo",
         "responses": {
           "200": {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -94,6 +94,15 @@ export function LocalizedPolicyVersionsWithNamespaceAdminApi(sdk: AccelByteSDK, 
     return resp.response
   }
 
+  async function deleteLocalizedPolicyVersionVersion_ByLocalizedPolicyVersionId(
+    localizedPolicyVersionId: string
+  ): Promise<AxiosResponse<unknown>> {
+    const $ = new LocalizedPolicyVersionsWithNamespaceAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.deleteLocalizedPolicyVersionVersion_ByLocalizedPolicyVersionId(localizedPolicyVersionId)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   async function createAttachment_ByLocalizedPolicyVersionId(
     localizedPolicyVersionId: string,
     data: UploadPolicyVersionAttachmentRequest
@@ -125,6 +134,10 @@ export function LocalizedPolicyVersionsWithNamespaceAdminApi(sdk: AccelByteSDK, 
      * Update a localized version policy to be the default.
      */
     patchDefault_ByLocalizedPolicyVersionId,
+    /**
+     * Delete localized version policy.&lt;br&gt;Can only be deleted if match these criteria:&lt;br&gt;&lt;ul&gt;&lt;li&gt;Policy Version that this localized policy version belongs to is not active&lt;/li&gt;&lt;li&gt;Has never been accepted by any user&lt;/li&gt;&lt;/ul&gt;
+     */
+    deleteLocalizedPolicyVersionVersion_ByLocalizedPolicyVersionId,
     /**
      * Request presigned URL for upload attachment for a particular localized version of base policy.
      */

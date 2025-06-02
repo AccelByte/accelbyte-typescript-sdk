@@ -7,4 +7,3 @@ import * as AccelByteSDK_UGC from './index'
 
 // @ts-ignore
 window.AccelByteSDK_UGC = AccelByteSDK_UGC
-

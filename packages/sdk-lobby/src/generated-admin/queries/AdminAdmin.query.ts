@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -22,6 +22,7 @@ export enum Key_AdminAdmin {
 }
 
 /**
+ * @deprecated
  * Delete of global configuration data.
  *
  * #### Default Query Options
@@ -51,6 +52,7 @@ export const useAdminAdminApi_DeleteGlobalConfigurationMutation = (
 }
 
 /**
+ * @deprecated
  * Get dsmc global configuration.
  *
  * #### Default Query Options
@@ -81,6 +83,7 @@ export const useAdminAdminApi_GetGlobalConfigurations = (
 }
 
 /**
+ * @deprecated
  * Upsert global configuration data.
  *
  * #### Default Query Options

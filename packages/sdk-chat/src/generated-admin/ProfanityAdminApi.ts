@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -85,7 +85,7 @@ export function ProfanityAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     return resp.response
   }
 
-  async function createProfanityDictionaryBulk(data: DictionaryInsertBulkRequest): Promise<AxiosResponse<Dictionary>> {
+  async function createProfanityDictionaryBulk(data: DictionaryInsertBulkRequest): Promise<AxiosResponse<unknown>> {
     const $ = new ProfanityAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createProfanityDictionaryBulk(data)
     if (resp.error) throw resp.error

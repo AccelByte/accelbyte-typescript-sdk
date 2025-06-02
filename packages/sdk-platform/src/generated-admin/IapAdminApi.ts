@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -19,15 +19,25 @@ import { GoogleIapConfigRequest } from '../generated-definitions/GoogleIapConfig
 import { IapConsumeHistoryPagingSlicedResult } from '../generated-definitions/IapConsumeHistoryPagingSlicedResult.js'
 import { IapItemConfigInfo } from '../generated-definitions/IapItemConfigInfo.js'
 import { IapItemConfigUpdate } from '../generated-definitions/IapItemConfigUpdate.js'
+import { IapOrderConsumeDetailInfoArray } from '../generated-definitions/IapOrderConsumeDetailInfoArray.js'
+import { IapOrderInfo } from '../generated-definitions/IapOrderInfo.js'
+import { IapOrderLineItemInfoArray } from '../generated-definitions/IapOrderLineItemInfoArray.js'
 import { IapOrderPagingSlicedResult } from '../generated-definitions/IapOrderPagingSlicedResult.js'
+import { IapOrderShortInfo } from '../generated-definitions/IapOrderShortInfo.js'
 import { MockIapReceipt } from '../generated-definitions/MockIapReceipt.js'
 import { OculusIapConfigInfo } from '../generated-definitions/OculusIapConfigInfo.js'
 import { OculusIapConfigRequest } from '../generated-definitions/OculusIapConfigRequest.js'
 import { PlayStationIapConfigInfo } from '../generated-definitions/PlayStationIapConfigInfo.js'
 import { PlaystationIapConfigRequest } from '../generated-definitions/PlaystationIapConfigRequest.js'
+import { ResetJobRequest } from '../generated-definitions/ResetJobRequest.js'
+import { SteamAbnormalTransactionPagingSlicedResult } from '../generated-definitions/SteamAbnormalTransactionPagingSlicedResult.js'
 import { SteamIapConfig } from '../generated-definitions/SteamIapConfig.js'
 import { SteamIapConfigInfo } from '../generated-definitions/SteamIapConfigInfo.js'
 import { SteamIapConfigRequest } from '../generated-definitions/SteamIapConfigRequest.js'
+import { SteamReportInfoPagingSlicedResult } from '../generated-definitions/SteamReportInfoPagingSlicedResult.js'
+import { SteamReportJobInfo } from '../generated-definitions/SteamReportJobInfo.js'
+import { SteamReportJobInfoArray } from '../generated-definitions/SteamReportJobInfoArray.js'
+import { SteamSyncByTransactionRequest } from '../generated-definitions/SteamSyncByTransactionRequest.js'
 import { TestResult } from '../generated-definitions/TestResult.js'
 import { TwitchIapConfigInfo } from '../generated-definitions/TwitchIapConfigInfo.js'
 import { TwitchIapConfigRequest } from '../generated-definitions/TwitchIapConfigRequest.js'
@@ -62,6 +72,13 @@ export function IapAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
         axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
       }
     }
+  }
+
+  async function getIapSteamJob(): Promise<AxiosResponse<SteamReportJobInfoArray>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getIapSteamJob()
+    if (resp.error) throw resp.error
+    return resp.response
   }
 
   async function deleteIapConfigXbl(): Promise<AxiosResponse<unknown>> {
@@ -219,7 +236,7 @@ export function IapAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
       offset?: number
       productId?: string | null
       startTime?: string | null
-      status?: 'FAILED' | 'FULFILLED' | 'VERIFIED'
+      status?: 'FAILED' | 'FULFILLED' | 'PARTIAL_REVOKED' | 'REVOKED' | 'REVOKE_FAILED' | 'VERIFIED'
       type?: 'APPLE' | 'EPICGAMES' | 'GOOGLE' | 'OCULUS' | 'PLAYSTATION' | 'STADIA' | 'STEAM' | 'TWITCH' | 'XBOX'
     }
   ): Promise<AxiosResponse<IapOrderPagingSlicedResult>> {
@@ -232,6 +249,13 @@ export function IapAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   async function updateIapConfigXblCert(data: { file?: File; password?: string | null }): Promise<AxiosResponse<XblIapConfigInfo>> {
     const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateIapConfigXblCert(data)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function updateIapSteamJobReset(data: ResetJobRequest): Promise<AxiosResponse<SteamReportJobInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.updateIapSteamJobReset(data)
     if (resp.error) throw resp.error
     return resp.response
   }
@@ -299,6 +323,26 @@ export function IapAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     return resp.response
   }
 
+  async function getIapSteamReportHistories(queryParams?: {
+    limit?: number
+    offset?: number
+    orderId?: string | null
+    processStatus?: 'ERROR' | 'IGNORED' | 'PROCESSED'
+    steamId?: string | null
+  }): Promise<AxiosResponse<SteamReportInfoPagingSlicedResult>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getIapSteamReportHistories(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function getConsumedetails_ByIapOrderNo(iapOrderNo: string): Promise<AxiosResponse<IapOrderConsumeDetailInfoArray>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getConsumedetails_ByIapOrderNo(iapOrderNo)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   async function getIapConfigPlaystationValidate(): Promise<AxiosResponse<TestResult>> {
     const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getIapConfigPlaystationValidate()
@@ -309,6 +353,18 @@ export function IapAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   async function updateIapConfigPlaystationValidate(data: PlaystationIapConfigRequest): Promise<AxiosResponse<TestResult>> {
     const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateIapConfigPlaystationValidate(data)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function getIapSteamAbnormalTransactions(queryParams?: {
+    limit?: number
+    offset?: number
+    orderId?: string | null
+    steamId?: string | null
+  }): Promise<AxiosResponse<SteamAbnormalTransactionPagingSlicedResult>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getIapSteamAbnormalTransactions(queryParams)
     if (resp.error) throw resp.error
     return resp.response
   }
@@ -337,7 +393,45 @@ export function IapAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     return resp.response
   }
 
+  async function updateRefundSteamIap_ByIapOrderNo(iapOrderNo: string): Promise<AxiosResponse<IapOrderInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.updateRefundSteamIap_ByIapOrderNo(iapOrderNo)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function updateIapSteamSyncByTransaction_ByUserId(
+    userId: string,
+    data: SteamSyncByTransactionRequest
+  ): Promise<AxiosResponse<IapOrderShortInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.updateIapSteamSyncByTransaction_ByUserId(userId, data)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function updateIapSteamSyncAbnormalTransaction_ByUserId(userId: string): Promise<AxiosResponse<IapOrderShortInfo>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.updateIapSteamSyncAbnormalTransaction_ByUserId(userId)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function getLineItemsIap_ByUserId_ByIapOrderNo(
+    userId: string,
+    iapOrderNo: string
+  ): Promise<AxiosResponse<IapOrderLineItemInfoArray>> {
+    const $ = new IapAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getLineItemsIap_ByUserId_ByIapOrderNo(userId, iapOrderNo)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   return {
+    /**
+     * Query steam report info
+     */
+    getIapSteamJob,
     /**
      * Delete xbl iap config.
      */
@@ -430,6 +524,8 @@ export function IapAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      * Upload xbl business partner cert file.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated xbl iap config&lt;/li&gt;&lt;/ul&gt;
      */
     updateIapConfigXblCert,
+
+    updateIapSteamJobReset,
     /**
      * Delete epic games iap config.
      */
@@ -466,6 +562,12 @@ export function IapAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      * Query all user IAP orders.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: list of iap orders&lt;/li&gt;&lt;/ul&gt;
      */
     getIapAll_ByUserId,
+
+    getIapSteamReportHistories,
+    /**
+     * Get IAP Order Consume Details by IAP Order Number.
+     */
+    getConsumedetails_ByIapOrderNo,
     /**
      * Validate playstation iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Test Results&lt;/li&gt;&lt;/ul&gt;
      */
@@ -474,6 +576,8 @@ export function IapAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      * Validate playstation iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Test Results&lt;/li&gt;&lt;/ul&gt;
      */
     updateIapConfigPlaystationValidate,
+
+    getIapSteamAbnormalTransactions,
     /**
      * &lt;b&gt;[TEST FACILITY ONLY] Forbidden in live environment. &lt;/b&gt; Mock fulfill iap item without validate receipt.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
      */
@@ -481,6 +585,18 @@ export function IapAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     /**
      * Query IAP consume history.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated iap consume history&lt;/li&gt;&lt;/ul&gt;
      */
-    getIapConsumeHistory_ByUserId
+    getIapConsumeHistory_ByUserId,
+    /**
+     * Only support steam transaction mode
+     */
+    updateRefundSteamIap_ByIapOrderNo,
+
+    updateIapSteamSyncByTransaction_ByUserId,
+
+    updateIapSteamSyncAbnormalTransaction_ByUserId,
+    /**
+     * Query IAP order ine items.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated iap orders&lt;/li&gt;&lt;/ul&gt;
+     */
+    getLineItemsIap_ByUserId_ByIapOrderNo
   }
 }

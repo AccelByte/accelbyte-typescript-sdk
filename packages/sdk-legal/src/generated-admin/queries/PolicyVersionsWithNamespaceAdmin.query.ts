@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -23,7 +23,8 @@ export enum Key_PolicyVersionsWithNamespaceAdmin {
   Versions_ByPolicyId = 'Legal.PolicyVersionsWithNamespaceAdmin.Versions_ByPolicyId',
   Version_ByPolicyId = 'Legal.PolicyVersionsWithNamespaceAdmin.Version_ByPolicyId',
   PolicyVersion_ByPolicyVersionId = 'Legal.PolicyVersionsWithNamespaceAdmin.PolicyVersion_ByPolicyVersionId',
-  LatestPolicy_ByPolicyVersionId = 'Legal.PolicyVersionsWithNamespaceAdmin.LatestPolicy_ByPolicyVersionId'
+  LatestPolicy_ByPolicyVersionId = 'Legal.PolicyVersionsWithNamespaceAdmin.LatestPolicy_ByPolicyVersionId',
+  UnpublishPolicy_ByPolicyVersionId = 'Legal.PolicyVersionsWithNamespaceAdmin.UnpublishPolicy_ByPolicyVersionId'
 }
 
 /**
@@ -98,6 +99,38 @@ export const usePolicyVersionsWithNamespaceAdminApi_CreateVersion_ByPolicyIdMuta
 
   return useMutation({
     mutationKey: [Key_PolicyVersionsWithNamespaceAdmin.Version_ByPolicyId],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Delete a policy version from policy.Can only be deleted if match these criteria:&lt;br&gt;&lt;ul&gt;&lt;li&gt;Policy version is not published&lt;/li&gt;&lt;li&gt;Policy version has never been accepted by any user&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PolicyVersionsWithNamespaceAdmin.PolicyVersion_ByPolicyVersionId, input]
+ * }
+ * ```
+ */
+export const usePolicyVersionsWithNamespaceAdminApi_DeletePolicyVersion_ByPolicyVersionIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { policyVersionId: string }>, 'mutationKey'>,
+  callback?: (data: unknown) => void
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { policyVersionId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { policyVersionId: string }) => {
+    const response = await PolicyVersionsWithNamespaceAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deletePolicyVersion_ByPolicyVersionId(input.policyVersionId)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_PolicyVersionsWithNamespaceAdmin.PolicyVersion_ByPolicyVersionId],
     mutationFn,
     ...options
   })
@@ -184,6 +217,38 @@ export const usePolicyVersionsWithNamespaceAdminApi_PatchLatestPolicy_ByPolicyVe
 
   return useMutation({
     mutationKey: [Key_PolicyVersionsWithNamespaceAdmin.LatestPolicy_ByPolicyVersionId],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Un-publish a policy version from policy.Can only be un-publish if match these criteria:&lt;br&gt;&lt;ul&gt;&lt;li&gt;Policy version has never been accepted by any user&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PolicyVersionsWithNamespaceAdmin.UnpublishPolicy_ByPolicyVersionId, input]
+ * }
+ * ```
+ */
+export const usePolicyVersionsWithNamespaceAdminApi_PatchUnpublishPolicy_ByPolicyVersionIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { policyVersionId: string }>, 'mutationKey'>,
+  callback?: (data: unknown) => void
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { policyVersionId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { policyVersionId: string }) => {
+    const response = await PolicyVersionsWithNamespaceAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).patchUnpublishPolicy_ByPolicyVersionId(input.policyVersionId)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_PolicyVersionsWithNamespaceAdmin.UnpublishPolicy_ByPolicyVersionId],
     mutationFn,
     ...options
   })

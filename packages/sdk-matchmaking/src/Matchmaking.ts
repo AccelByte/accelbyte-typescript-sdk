@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -9,6 +9,7 @@
 
 import { author, name, version } from '../package.json'
 import { ConfigAdminApi } from './generated-admin/ConfigAdminApi.js'
+import { PlayFeatureFlagAdminApi } from './generated-admin/PlayFeatureFlagAdminApi.js'
 import { BackfillApi } from './generated-public/BackfillApi.js'
 import { ConfigApi } from './generated-public/ConfigApi.js'
 import { EnvironmentVariablesApi } from './generated-public/EnvironmentVariablesApi.js'
@@ -21,6 +22,7 @@ console.log(`${name}@${version}`)
 
 const apis = {
   ConfigAdminApi,
+  PlayFeatureFlagAdminApi,
   ConfigApi,
   EnvironmentVariablesApi,
   BackfillApi,

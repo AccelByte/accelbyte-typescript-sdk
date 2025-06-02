@@ -7,4 +7,3 @@ import * as AccelByteSDK_AMS from './index'
 
 // @ts-ignore
 window.AccelByteSDK_AMS = AccelByteSDK_AMS
-

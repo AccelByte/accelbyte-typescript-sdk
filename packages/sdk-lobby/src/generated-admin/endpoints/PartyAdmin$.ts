@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -15,6 +15,7 @@ export class PartyAdmin$ {
   // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
   /**
+   * @deprecated
    * Get party data in a namespace.
    */
   getPartyParty_ByPartyId(partyId: string): Promise<Response<PartyData>> {
@@ -27,6 +28,7 @@ export class PartyAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, PartyData, 'PartyData')
   }
   /**
+   * @deprecated
    * Get party data in a namespace.
    */
   getParty_ByUserId(userId: string): Promise<Response<PartyData>> {

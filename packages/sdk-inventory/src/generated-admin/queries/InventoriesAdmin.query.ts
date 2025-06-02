@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -223,7 +223,7 @@ export const useInventoriesAdminApi_UpdateInventory_ByInventoryIdMutation = (
  * }
  * ```
  */
-export const useInventoriesAdminApi_CreatePurchaseable_ByUserIdMutation = (
+export const useInventoriesAdminApi_UpdatePurchaseable_ByUserIdMutation = (
   sdk: AccelByteSDK,
   options?: Omit<
     UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: PurchaseValidationReq }>,
@@ -235,7 +235,7 @@ export const useInventoriesAdminApi_CreatePurchaseable_ByUserIdMutation = (
     const response = await InventoriesAdminApi(sdk, {
       coreConfig: input.coreConfig,
       axiosConfig: input.axiosConfig
-    }).createPurchaseable_ByUserId(input.userId, input.data)
+    }).updatePurchaseable_ByUserId(input.userId, input.data)
     callback && callback(response.data)
     return response.data
   }

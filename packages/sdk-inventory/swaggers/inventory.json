@@ -1,9 +1,14 @@
 {
   "host": "demo.accelbyte.io",
   "info": {
-    "description": "justice-inventory-service",
+    "contact": {
+      "email": "engineering@accelbyte.io",
+      "name": "Engineering Team at AccelByte",
+      "url": "https://accelbyte.io"
+    },
+    "description": "Justice Inventory Service",
     "title": "justice-inventory-service",
-    "version": "0.2.2"
+    "version": "0.2.15"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -87,7 +92,12 @@
         ],
         "summary": "To Create Chaining Operation",
         "tags": ["Admin Chaining Operations"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/integrationConfigurations": {
@@ -151,7 +161,12 @@
         ],
         "summary": "To list integration configurations",
         "tags": ["Admin Integration Configurations"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
@@ -208,7 +223,12 @@
         ],
         "summary": "To create integration configuration",
         "tags": ["Admin Integration Configurations"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [CREATE]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/integrationConfigurations/{integrationConfigurationId}": {
@@ -280,7 +300,12 @@
         ],
         "summary": "To update integration configuration",
         "tags": ["Admin Integration Configurations"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [UPDATE]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/integrationConfigurations/{integrationConfigurationId}/status": {
@@ -352,7 +377,12 @@
         ],
         "summary": "To update status integration configuration to be active / not active ",
         "tags": ["Admin Integration Configurations"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:INTEGRATIONCONFIGURATION [UPDATE]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/inventories": {
@@ -438,7 +468,12 @@
         ],
         "summary": "To list all inventories",
         "tags": ["Admin Inventories"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
@@ -489,7 +524,12 @@
         ],
         "summary": "To create inventory",
         "tags": ["Admin Inventories"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [CREATE]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/inventories/{inventoryId}": {
@@ -552,7 +592,12 @@
         ],
         "summary": "To delete inventory",
         "tags": ["Admin Inventories"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [DELETE]"]
+          }
+        ]
       },
       "get": {
         "description": "\n\t\t\tGetting an inventory info.\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [READ]\n\t\t",
@@ -607,7 +652,12 @@
         ],
         "summary": "To get an inventory",
         "tags": ["Admin Inventories"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [READ]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
@@ -671,7 +721,12 @@
         ],
         "summary": "To update inventory",
         "tags": ["Admin Inventories"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/inventories/{inventoryId}/items": {
@@ -754,7 +809,12 @@
         ],
         "summary": "To list all items",
         "tags": ["Admin Items"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [READ]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/inventories/{inventoryId}/slots/{slotId}/sourceItems/{sourceItemId}": {
@@ -825,7 +885,12 @@
         ],
         "summary": "To get an item",
         "tags": ["Admin Items"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [READ]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/inventoryConfigurations": {
@@ -905,7 +970,12 @@
         ],
         "summary": "To list inventory configurations",
         "tags": ["Admin Inventory Configurations"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
@@ -962,7 +1032,12 @@
         ],
         "summary": "To create inventory configuration",
         "tags": ["Admin Inventory Configurations"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [CREATE]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/inventoryConfigurations/{inventoryConfigurationId}": {
@@ -1016,7 +1091,12 @@
         ],
         "summary": "To delete inventory configuration",
         "tags": ["Admin Inventory Configurations"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [DELETE]"]
+          }
+        ]
       },
       "get": {
         "description": "\n\t\t\tGetting an inventory configuration info.\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [READ]\n\t\t",
@@ -1071,7 +1151,12 @@
         ],
         "summary": "To get inventory configuration",
         "tags": ["Admin Inventory Configurations"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [READ]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
@@ -1141,7 +1226,12 @@
         ],
         "summary": "To update inventory configuration",
         "tags": ["Admin Inventory Configurations"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:CONFIGURATION [UPDATE]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/itemtypes": {
@@ -1205,7 +1295,12 @@
         ],
         "summary": "To list itemtypes",
         "tags": ["Admin Item Types"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
@@ -1262,7 +1357,12 @@
         ],
         "summary": "To create an itemtype",
         "tags": ["Admin Item Types"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [CREATE]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/itemtypes/{itemTypeName}": {
@@ -1310,7 +1410,12 @@
         ],
         "summary": "To delete an item type",
         "tags": ["Admin Item Types"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:ITEMTYPE [DELETE]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/tags": {
@@ -1380,7 +1485,12 @@
         ],
         "summary": "To list tags",
         "tags": ["Admin Tags"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [READ]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
@@ -1437,7 +1547,12 @@
         ],
         "summary": "To create a tag",
         "tags": ["Admin Tags"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [CREATE]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/tags/{tagName}": {
@@ -1485,13 +1600,18 @@
         ],
         "summary": "To delete a tag",
         "tags": ["Admin Tags"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:INVENTORY:TAG [DELETE]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/inventories/{inventoryId}/consume": {
       "post": {
         "consumes": ["application/json"],
-        "description": "\n\t\t\tConsume user\u0026#39;s own item\n\t\t\t\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]\n\t\t",
+        "description": "\n\t\t\tConsume user\u0026#39;s own item\n\t\t\tClient should pass item ID in options if item type is OPTIONBOX\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]\n\t\t",
         "operationId": "AdminConsumeUserItem",
         "parameters": [
           {
@@ -1521,6 +1641,12 @@
             "in": "path",
             "name": "userId",
             "required": true,
+            "type": "string"
+          },
+          {
+            "description": "default is false",
+            "in": "query",
+            "name": "dateRangeValidation",
             "type": "string"
           }
         ],
@@ -1558,7 +1684,12 @@
         ],
         "summary": "To consume item",
         "tags": ["Admin Items"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/inventories/{inventoryId}/items": {
@@ -1637,11 +1768,16 @@
         ],
         "summary": "To bulk remove items",
         "tags": ["Admin Items"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [DELETE]"]
+          }
+        ]
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "\n\t\t\tSaving an item to specific inventory.\n\t\t\tThe item will be saved in specific user\u0026#39;s inventory,\n\t\t\t\n\t\t\tIf the item already exists, its qty will be increased,\n\t\t\tso no new item with same sourceItemId will be created\n\n\t\t\tTags will be auto-created.\n\t\t\tItemType will be auto-created.\n\n\t\t\tFor Ecommerce item, this fields will be override by ecommerce configuration \n\t\t\t(slotUsed, serverCustomAttributes, customAttributes, type)\n\n\t\t\tFor Ecommerce items, the quantity saved is dynamically adjusted based on an item\u0026#39;s useCount configured in Store. \n\t\t\tWhen saving items, the quantity specified for each item will be multiplied by the useCount.\n\t\t\ti.e. If the store item is configured with a useCount of 5 \n\t\t\tand the quantity of a particular item is set to 2 during saving, it will be stored as 10.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]\n\t\t",
+        "description": "**This endpoint is used to save purchased items to a specific inventory of the player, with the following conditions for E-commerce items:**\n- Attributes such as slotUsed, serverCustomAttributes, customAttributes, and type will be overridden by the attributes configured in the AccelByte Gaming Services (AGS) Store.\n- Storing E-commerce items in a particular slot will follow its entitlement and item configuration, such as durable, consumable, stackable and non-stackable.\n- The quantity is dynamically set based on an item’s useCount configured in Store. When saving an item, the specified quantity will be multiplied by configured useCount for that particular item. For example, if an Item is configured with a useCount of 5 in  the AGS Store and it is saved with a qty of 2, the item’s quantity will be stored as 10 in the player’s inventory.\n\n**When configuring your request, note the following:**\n- The source field is mandatory for determining the source of the item. The supported values are OTHER (for items coming from other sources) and E-commerce for items coming from the E-commerce integration.\n- For other-sourced items, the type can be manually defined when saving the item.\nYou must have this permission to access this endpoint:\n\n**Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]**",
         "operationId": "AdminSaveItemToInventory",
         "parameters": [
           {
@@ -1688,6 +1824,24 @@
               "$ref": "#/definitions/apimodels.ErrorResponse"
             }
           },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/apimodels.ErrorResponse"
+            }
+          },
           "500": {
             "description": "Internal Server Error",
             "schema": {
@@ -1702,7 +1856,12 @@
         ],
         "summary": "To save item to specific inventory",
         "tags": ["Admin Items"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]"]
+          }
+        ]
       },
       "put": {
         "consumes": ["application/json"],
@@ -1779,13 +1938,18 @@
         ],
         "summary": "To bulk update items",
         "tags": ["Admin Items"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/inventories/{inventoryId}/items/bulk": {
       "post": {
         "consumes": ["application/json"],
-        "description": "\n\t\t\tThis endpoint will be used by client to save the purchased item to user\u0026#39;s inventory, \n\t\t\tsince want to integrate the inventory service to e-commerce, source field will be mandatory to determine the item, \n\t\t\tsupported field “OTHER” and “ECOMMERCE”\n\n\t\t\tNotes :\n\t\t\tsource ECOMMERCE, the quantity of ecommerce items saved is dynamically adjusted based on an item\u0026#39;s useCount configured in Store. \n\t\t\tWhen saving items, the quantity specified for each item will be multiplied by the useCount \n\t\t\ti.e. If the store item is configured with a useCount of 5 and the quantity of a particular item is set to 2 during saving, it will be stored as 10\n\n\t\t\tType:\n\t\t\t- ingame\n\t\t\t- app\n\t\t\t- coin\n\t\t\tetc..\n\n\t\t\tMax length of the payload is 10 items\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]\n\t\t",
+        "description": "**This endpoint is used for bulk saving purchased items to a specific inventory of the player, with the following conditions for E-commerce items:**\n- Attributes such as slotUsed, serverCustomAttributes, customAttributes, and type will be overridden by the attributes configured in the AccelByte Gaming Services (AGS) Store.\n- Storing E-commerce items in a particular slot will follow its entitlement and item configuration, such as durable, consumable, stackable and non-stackable.\n- The quantity is dynamically set based on an item’s useCount configured in Store. When saving an item, the specified quantity will be multiplied by configured useCount for that particular item. For example, if an Item is configured with a useCount of 5 in  the AGS Store and it is saved with a qty of 2, the item’s quantity will be stored as 10 in the player’s inventory.\n\n**When configuring your request, note the following:**\n- The source field is mandatory for determining the source of the item. The supported values are OTHER (for items coming from other sources) and E-commerce for items coming from the E-commerce integration.\n- For other-sourced items, the type can be manually defined when saving the item.\n- A maximum of 10 items can be saved in a single bulk call.\n\nYou must have this permission to access this endpoint: \n**Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM[CREATE]**",
         "operationId": "AdminBulkSaveItemToInventory",
         "parameters": [
           {
@@ -1876,7 +2040,12 @@
         ],
         "summary": "Bulk save items to specific inventory",
         "tags": ["Admin Items"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/inventoryConfigurations/{inventoryConfigurationCode}/inventories": {
@@ -1964,13 +2133,18 @@
         ],
         "summary": "To update user inventories by inventory code",
         "tags": ["Admin Inventories"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/items": {
       "post": {
         "consumes": ["application/json"],
-        "description": "\n\t\t\tSaving an item.\n\t\t\tThe item will be saved in user\u0026#39;s inventory,\n\t\t\tIf it doesn\u0026#39;t exist it\u0026#39;ll be created.\n\t\t\t\n\t\t\tIf the item already exists, its qty will be increased,\n\t\t\tso no new item with same sourceItemId will be created\n\n\t\t\tTags will be auto-created.\n\t\t\tItemType will be auto-created.\n\n\t\t\tFor Ecommerce item, this fields will be override by ecommerce configuration \n\t\t\t(slotUsed, serverCustomAttributes, customAttributes, type)\n\n\t\t\tFor Ecommerce items, the quantity saved is dynamically adjusted based on an item\u0026#39;s useCount configured in Store. \n\t\t\tWhen saving items, the quantity specified for each item will be multiplied by the useCount.\n\t\t\ti.e. If the store item is configured with a useCount of 5 \n\t\t\tand the quantity of a particular item is set to 2 during saving, it will be stored as 10.\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]\n\t\t",
+        "description": "**This endpoint is used to save items to the player’s inventory based on the inventoryConfigurationCode with the following conditions:**\n- If the player doesn\u0026#39;t have the inventory for the specified inventoryConfigurationCode, a new inventory will be created.\n- If the user already has one, it will be added to the existing inventory.\n- If the same item exists within the inventory, the quantity (qty) will be increased.\n- If the inventory is full, the item cannot be added and the request will return the “Failed” response.\n- If a player has more than one inventory and the initial inventory is full, the service will check the available slot in the other inventory following the order of their creation date and time (createdAt).\n- For Ecommerce items:\n\u0026gt;- Attributes such as slotUsed, serverCustomAttributes, customAttributes, and type will be overridden by the attributes configured in the AccelByte Gaming Services (AGS) Store.\n\u0026gt;- Storing E-commerce items in a particular slot will follow its entitlement and item configuration, such as durable, consumable, stackable and non-stackable.\n\u0026gt;- The quantity is dynamically set based on an item’s useCount configured in Store. When saving an item, the specified quantity will be multiplied by configured useCount for that particular item. For example, if an Item is configured with a useCount of 5 in  the AGS Store and it is saved with a qty of 2, the item’s quantity will be stored as 10 in the player’s inventory.\n\nYou must have this permission to access this endpoint: \n**Permission:ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]**",
         "operationId": "AdminSaveItem",
         "parameters": [
           {
@@ -2024,13 +2198,18 @@
         ],
         "summary": "To save item",
         "tags": ["Admin Items"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/items/bulk": {
       "post": {
         "consumes": ["application/json"],
-        "description": "\n\t\t\tThis endpoint will be used by client to save the purchased item to user\u0026#39;s inventory, \n\t\t\tsince want to integrate the inventory service to e-commerce, source field will be mandatory to determine the item, \n\t\t\tsupported field “OTHER” and “ECOMMERCE”\n\n\t\t\tNotes :\n\t\t\tsource ECOMMERCE, the quantity of ecommerce items saved is dynamically adjusted based on an item\u0026#39;s useCount configured in Store. \n\t\t\tWhen saving items, the quantity specified for each item will be multiplied by the useCount \n\t\t\ti.e. If the store item is configured with a useCount of 5 and the quantity of a particular item is set to 2 during saving, it will be stored as 10\n\n\t\t\tTarget inventory will be based on the specified inventoryConfigurationCode. If the inventory exist then will put to the existing one, \n\t\t\tif not exist at all then will create at least one inventory, if full then will return failed at the response. \n\t\t\tWe implement the logic as proportional to store the item to inventory, will loop from createdAt until find the available slots at inventory.\n\n\t\t\tType:\n\t\t\t- ingame\n\t\t\t- app\n\t\t\t- coin\n\t\t\tetc..\n\n\t\t\tMax length of the payload is 10 items\n\n\t\t\tPermission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]\n\t\t",
+        "description": "**This endpoint is used used for bulk saving purchased items to the player’s inventory based on the inventoryConfigurationCode with the following conditions:**\n- If the player doesn\u0026#39;t have the inventory for the specified inventoryConfigurationCode, a new inventory will be created for the player.\n- If the player already has one, it will be added to the existing inventory.\n\u0026gt;- If the same item exists within the inventory, the quantity (qty) will be increased.\n\u0026gt;- If the inventory is full, the item cannot be added and the request will return the “Failed” response.\n\u0026gt;- If a player has more than one inventory and the initial inventory is full, the service will check the available slot in the other inventory following the order of their creation date and time (createdAt).\n\n- For E-commerce items:\n\u0026gt;- Attributes such as slotUsed, serverCustomAttributes, customAttributes, and type will be overridden by the attributes configured in the  AccelByte Gaming Services (AGS) Store.\n\u0026gt;- Storing E-commerce items in a particular slot will follow its entitlement and item configuration, such as durable, consumable, stackable and non-stackable.\n\u0026gt;- The quantity is dynamically set based on an item’s useCount configured in Store. When saving an item, the specified quantity will be multiplied by configured useCount for that particular item. For example, if an Item is configured with a useCount of 5 in  the AGS Store and it is saved with a qty of 2, the item’s quantity will be stored as 10 in the player’s inventory.\n\n**When configuring your request, note the following:**\n- The source field is mandatory for determining the source of the item. The supported values are OTHER (for items coming from other sources) and E-commerce for items coming from the E-commerce integration.\n- For other-sourced items, the type can be manually defined when saving the item.\n- A maximum of 10 items can be saved in a single bulk call.\n\nYou must have this permission to access this endpoint:\n**Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]**",
         "operationId": "AdminBulkSaveItem",
         "parameters": [
           {
@@ -2114,7 +2293,12 @@
         ],
         "summary": "Bulk save items to inventory",
         "tags": ["Admin Items"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [CREATE]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/items/entitlements/sync": {
@@ -2180,7 +2364,12 @@
         ],
         "summary": "To sync user's entitlements to e-commerce",
         "tags": ["Admin Items"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY:ITEM [UPDATE]"]
+          }
+        ]
       }
     },
     "/inventory/v1/admin/namespaces/{namespace}/users/{userId}/purchaseable": {
@@ -2249,7 +2438,12 @@
         ],
         "summary": "To validate user inventory capacity when purchase ecommerce item",
         "tags": ["Admin Inventories"],
-        "x-errorCodes": {}
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]"]
+          }
+        ]
       }
     },
     "/inventory/v1/public/namespaces/{namespace}/inventoryConfigurations": {
@@ -2537,7 +2731,7 @@
     "/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/consume": {
       "post": {
         "consumes": ["application/json"],
-        "description": "\n\t\t\tConsume user\u0026#39;s own item.\n\t\t",
+        "description": "\n\t\t\tConsume user\u0026#39;s own item.\n\t\t\tClient should pass item ID in options if item type is OPTIONBOX\t\t\n\t\t",
         "operationId": "PublicConsumeMyItem",
         "parameters": [
           {
@@ -2827,7 +3021,7 @@
     "/inventory/v1/public/namespaces/{namespace}/users/me/inventories/{inventoryId}/items/movement": {
       "post": {
         "consumes": ["application/json"],
-        "description": "\n\t\t\tMove items between inventories that is owned by the same user.\n\t\t",
+        "description": "Move items between inventories that is owned by the same user.\n\nFor Ecommerce items, the *qty* is *useCount*. For example, moving 2 of an item\u0026#39;s *qty* will move 2 of the entitlement\u0026#39;s *useCount*.\n",
         "operationId": "PublicMoveMyItems",
         "parameters": [
           {
@@ -2982,7 +3176,7 @@
           "type": "string"
         }
       },
-      "required": ["customAttributes", "serverCustomAttributes", "slotId", "sourceItemId", "tags", "type"]
+      "required": ["customAttributes", "serverCustomAttributes", "slotId", "sourceItemId", "tags"]
     },
     "apimodels.BulkSaveItemError": {
       "properties": {
@@ -3054,8 +3248,18 @@
     },
     "apimodels.ConsumeItem": {
       "properties": {
+        "dateRangeValidation": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "inventoryId": {
           "type": "string"
+        },
+        "options": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "qty": {
           "format": "int32",
@@ -3072,6 +3276,13 @@
     },
     "apimodels.ConsumeItemReq": {
       "properties": {
+        "options": {
+          "description": "options, it is only available when item type is OPTIONBOX and value should be item id.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "qty": {
           "format": "int32",
           "type": "integer"
@@ -4033,11 +4244,11 @@
     "path": "/inventory/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-09-05T02:23:54+00:00",
-    "gitHash": "298d4b60266fa74573e4339ff65d1f4b62feaeda",
+    "buildDate": "2025-05-26T04:11:50+00:00",
+    "gitHash": "b9789cae4417f476492c4e6a666ff727b14ba457",
     "name": "justice-inventory-service",
     "realm": "DEV",
-    "version": "0.2.2",
+    "version": "0.2.15",
     "version-roles-seeding": "1.2.34"
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -29,7 +29,10 @@ export * from './generated-definitions/Pagination.js'
 export * from './generated-definitions/PersonalData.js'
 export * from './generated-definitions/PlatformAccountClosureClientRequest.js'
 export * from './generated-definitions/PlatformAccountClosureClientResponse.js'
+export * from './generated-definitions/PlatformAccountClosureClientsResponse.js'
+export * from './generated-definitions/PlatformAccountClosureMockRequest.js'
 export * from './generated-definitions/RequestDeleteResponse.js'
+export * from './generated-definitions/S2SDataRequestSummary.js'
 export * from './generated-definitions/S2SDataRetrievalResponse.js'
 export * from './generated-definitions/S2SRequestDeleteResponse.js'
 export * from './generated-definitions/S2SUserDataUrl.js'
@@ -42,6 +45,8 @@ export * from './generated-definitions/UserPersonalData.js'
 export * from './generated-definitions/UserPersonalDataResponse.js'
 export * from './generated-definitions/UserPlatformAccountClosureHistoriesResponse.js'
 export * from './generated-definitions/UserPlatformAccountClosureHistory.js'
+export * from './generated-definitions/XboxBpCertValidationRequest.js'
+export * from './generated-definitions/XboxBpCertValidationResponse.js'
 export * from './generated-public/DataDeletionApi.js'
 export * from './generated-public/DataDeletionS2SApi.js'
 export * from './generated-public/DataRetrievalApi.js'

@@ -363,8 +363,6 @@ TypeScript SDK supports the following AGS APIs:
 - **Play**
   - [Session](https://docs.accelbyte.io/api-explorer/#Session): `@accelbyte/sdk-session`
   - [Matchmaking](https://docs.accelbyte.io/api-explorer/#Matchmaking):`@accelbyte/sdk-matchmaking`
-  - [Session Browser Play](https://docs.accelbyte.io/api-explorer/#Session%20Browser%20Play): `@accelbyte/sdk-sessionbrowser`
-  - [Session History](https://docs.accelbyte.io/api-explorer/#Session%20History): `@accelbyte/sdk-history`
 - **Social**
   - [Chat](https://docs.accelbyte.io/api-explorer/#Chat): `@accelbyte/sdk-chat`
   - [Lobby](https://docs.accelbyte.io/api-explorer/#Lobby%20-%20Friends,%20Presence%20and%20Notifications): `@accelbyte/sdk-lobby` with websocket support
@@ -641,7 +639,7 @@ You can live test the TypeScript SDK on the [AccelByte TypeScript SDK Playground
 Yes, you can install all the AGS SDK packages in one command using the following `npm` command:
 
 ```bash
-npm install @accelbyte/sdk @accelbyte/sdk-ams @accelbyte/sdk-achievement @accelbyte/sdk-basic @accelbyte/sdk-audit @accelbyte/sdk-buildinfo @accelbyte/sdk-challenge @accelbyte/sdk-chat @accelbyte/sdk-cloudsave @accelbyte/sdk-differ @accelbyte/sdk-dsmcontroller @accelbyte/sdk-event @accelbyte/sdk-gametelemetry @accelbyte/sdk-gdpr @accelbyte/sdk-groups @accelbyte/sdk-iam @accelbyte/sdk-inventory @accelbyte/sdk-leaderboard @accelbyte/sdk-legal @accelbyte/sdk-lobby @accelbyte/sdk-matchmaking-v1 @accelbyte/sdk-matchmaking @accelbyte/sdk-qosmanager @accelbyte/sdk-reporting @accelbyte/sdk-seasonpass @accelbyte/sdk-session @accelbyte/sdk-sessionbrowser @accelbyte/sdk-sessionhistory @accelbyte/sdk-social @accelbyte/sdk-ugc @accelbyte/sdk-platform
+npm install @accelbyte/sdk @accelbyte/sdk-ams @accelbyte/sdk-achievement @accelbyte/sdk-basic @accelbyte/sdk-audit @accelbyte/sdk-buildinfo @accelbyte/sdk-challenge @accelbyte/sdk-chat @accelbyte/sdk-cloudsave @accelbyte/sdk-differ @accelbyte/sdk-dsmcontroller @accelbyte/sdk-event @accelbyte/sdk-gametelemetry @accelbyte/sdk-gdpr @accelbyte/sdk-groups @accelbyte/sdk-iam @accelbyte/sdk-inventory @accelbyte/sdk-leaderboard @accelbyte/sdk-legal @accelbyte/sdk-lobby @accelbyte/sdk-matchmaking @accelbyte/sdk-qosmanager @accelbyte/sdk-reporting @accelbyte/sdk-seasonpass @accelbyte/sdk-session  @accelbyte/sdk-social @accelbyte/sdk-ugc @accelbyte/sdk-platform
 ```
 
 ## Contributions

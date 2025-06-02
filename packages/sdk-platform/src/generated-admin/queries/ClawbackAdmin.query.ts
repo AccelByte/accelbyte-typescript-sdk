@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -16,10 +16,43 @@ import { ClawbackAdminApi } from '../ClawbackAdminApi.js'
 import { ClawbackInfo } from '../../generated-definitions/ClawbackInfo.js'
 import { IapClawbackPagingSlicedResult } from '../../generated-definitions/IapClawbackPagingSlicedResult.js'
 import { StreamEvent } from '../../generated-definitions/StreamEvent.js'
+import { XblClawbackEvent } from '../../generated-definitions/XblClawbackEvent.js'
 
 export enum Key_ClawbackAdmin {
+  IapClawbackXblMock = 'Platform.ClawbackAdmin.IapClawbackXblMock',
   IapClawbackHistories = 'Platform.ClawbackAdmin.IapClawbackHistories',
   IapClawbackPlaystationMock = 'Platform.ClawbackAdmin.IapClawbackPlaystationMock'
+}
+
+/**
+ * Mock Sync XBox Clawback event.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ClawbackAdmin.IapClawbackXblMock, input]
+ * }
+ * ```
+ */
+export const useClawbackAdminApi_CreateIapClawbackXblMockMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<ClawbackInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: XblClawbackEvent }>, 'mutationKey'>,
+  callback?: (data: ClawbackInfo) => void
+): UseMutationResult<ClawbackInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: XblClawbackEvent }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: XblClawbackEvent }) => {
+    const response = await ClawbackAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createIapClawbackXblMock(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_ClawbackAdmin.IapClawbackXblMock],
+    mutationFn,
+    ...options
+  })
 }
 
 /**
@@ -38,7 +71,7 @@ export const useClawbackAdminApi_GetIapClawbackHistories = (
   input: SdkSetConfigParam & {
     queryParams?: {
       endTime?: string | null
-      eventType?: 'CHARGEBACK' | 'CHARGEBACK_REVERSED' | 'OTHER' | 'REFUND'
+      eventType?: 'CHARGEBACK' | 'CHARGEBACK_REVERSED' | 'OTHER' | 'REFUND' | 'REVOKED'
       externalOrderId?: string | null
       limit?: number
       offset?: number

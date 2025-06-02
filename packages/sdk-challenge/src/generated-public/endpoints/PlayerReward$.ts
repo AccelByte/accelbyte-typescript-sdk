@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -18,12 +18,14 @@ export class PlayerReward$ {
   // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
   /**
-   * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]&lt;/li&gt;&lt;/ul&gt;
+   * - Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]
    */
   getUsersMeRewards(queryParams?: {
+    challengeCode?: string | null
+    goalProgressionId?: string | null
     limit?: number
     offset?: number
-    sortBy?: string | null
+    sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc' | 'updatedAt' | 'updatedAt:asc' | 'updatedAt:desc'
     status?: 'CLAIMED' | 'UNCLAIMED'
   }): Promise<Response<ListUserRewardsResponse>> {
     const params = { limit: 20, ...queryParams } as AxiosRequestConfig
@@ -38,9 +40,9 @@ export class PlayerReward$ {
     )
   }
   /**
-   * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+   * - Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]
    */
-  createUserMeRewardClaim(data: ClaimUserRewardsReq): Promise<Response<UserRewardArray>> {
+  updateUserMeRewardClaim(data: ClaimUserRewardsReq): Promise<Response<UserRewardArray>> {
     const params = {} as AxiosRequestConfig
     const url = '/challenge/v1/public/namespaces/{namespace}/users/me/rewards/claim'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
@@ -48,9 +50,9 @@ export class PlayerReward$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserRewardArray, 'UserRewardArray')
   }
   /**
-   * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+   * - Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]
    */
-  createRewardClaimMeUser_ByChallengeCode(
+  updateRewardClaimMeUser_ByChallengeCode(
     challengeCode: string,
     data: ClaimUserRewardsByGoalCodeRequest
   ): Promise<Response<UserRewardArray>> {

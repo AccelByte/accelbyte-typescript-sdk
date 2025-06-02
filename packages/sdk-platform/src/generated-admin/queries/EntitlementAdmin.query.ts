@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -50,6 +50,7 @@ export enum Key_EntitlementAdmin {
   Entitlements_ByUserId = 'Platform.EntitlementAdmin.Entitlements_ByUserId',
   Entitlement_ByUserId = 'Platform.EntitlementAdmin.Entitlement_ByUserId',
   Entitlement_ByEntitlementId = 'Platform.EntitlementAdmin.Entitlement_ByEntitlementId',
+  EntitlementsByIds_ByUserId = 'Platform.EntitlementAdmin.EntitlementsByIds_ByUserId',
   EntitlementsBySku_ByUserId = 'Platform.EntitlementAdmin.EntitlementsBySku_ByUserId',
   EntitlementRevoke_ByUserId = 'Platform.EntitlementAdmin.EntitlementRevoke_ByUserId',
   EntitlementsByAppId_ByUserId = 'Platform.EntitlementAdmin.EntitlementsByAppId_ByUserId',
@@ -279,6 +280,7 @@ export const useEntitlementAdminApi_GetEntitlements_ByUserId = (
       entitlementName?: string | null
       features?: string[]
       fuzzyMatchName?: boolean | null
+      ignoreActiveDate?: boolean | null
       itemId?: string[]
       limit?: number
       offset?: number
@@ -375,6 +377,39 @@ export const useEntitlementAdminApi_GetEntitlement_ByEntitlementId = (
 
   return useQuery<EntitlementInfo, AxiosError<ApiError>>({
     queryKey: [Key_EntitlementAdmin.Entitlement_ByEntitlementId, input],
+    queryFn: queryFn(sdk, input),
+    ...options
+  })
+}
+
+/**
+ * Get user entitlements by ids. This will return all entitlements regardless of its status&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: entitlement list&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_EntitlementAdmin.EntitlementsByIds_ByUserId, input]
+ * }
+ * ```
+ */
+export const useEntitlementAdminApi_GetEntitlementsByIds_ByUserId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { userId: string; queryParams?: { ids?: string[] } },
+  options?: Omit<UseQueryOptions<EntitlementInfoArray, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<EntitlementInfoArray>) => void
+): UseQueryResult<EntitlementInfoArray, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useEntitlementAdminApi_GetEntitlementsByIds_ByUserId>[1]) => async () => {
+    const response = await EntitlementAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getEntitlementsByIds_ByUserId(input.userId, input.queryParams)
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<EntitlementInfoArray, AxiosError<ApiError>>({
+    queryKey: [Key_EntitlementAdmin.EntitlementsByIds_ByUserId, input],
     queryFn: queryFn(sdk, input),
     ...options
   })

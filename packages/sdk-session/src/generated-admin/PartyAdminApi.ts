@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -10,6 +10,8 @@
 // @ts-ignore -> ts-expect-error TS6133
 import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
 import { AxiosRequestConfig, AxiosResponse } from 'axios'
+import { DeleteBulkPartySessionRequest } from '../generated-definitions/DeleteBulkPartySessionRequest.js'
+import { DeleteBulkPartySessionsApiResponse } from '../generated-definitions/DeleteBulkPartySessionsApiResponse.js'
 import { PartyQueryResponse } from '../generated-definitions/PartyQueryResponse.js'
 import { PartyAdmin$ } from './endpoints/PartyAdmin$.js'
 
@@ -43,6 +45,7 @@ export function PartyAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   }
 
   async function getParties(queryParams?: {
+    fromTime?: string | null
     isSoftDeleted?: string | null
     joinability?: string | null
     key?: string | null
@@ -54,10 +57,18 @@ export function PartyAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     order?: string | null
     orderBy?: string | null
     partyID?: string | null
+    toTime?: string | null
     value?: string | null
   }): Promise<AxiosResponse<PartyQueryResponse>> {
     const $ = new PartyAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getParties(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function deletePartyBulk(data: DeleteBulkPartySessionRequest): Promise<AxiosResponse<DeleteBulkPartySessionsApiResponse>> {
+    const $ = new PartyAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.deletePartyBulk(data)
     if (resp.error) throw resp.error
     return resp.response
   }
@@ -74,6 +85,10 @@ export function PartyAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      * Query parties.
      */
     getParties,
+    /**
+     * Delete bulk parties.
+     */
+    deletePartyBulk,
     /**
      * Trigger user&#39;s active party session to native platform.
      */

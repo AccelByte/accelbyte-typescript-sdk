@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -9,11 +9,12 @@ export const UserReward = z.object({
   challengeCode: z.string(),
   createdAt: z.string(),
   goalCode: z.string(),
+  goalProgressionId: z.string(),
   id: z.string(),
   itemId: z.string(),
   itemName: z.string(),
   qty: z.number(),
-  status: z.enum(['CLAIM', 'UNCLAIMED']),
+  status: z.enum(['CLAIMED', 'UNCLAIMED']),
   type: z.enum(['ENTITLEMENT', 'STATISTIC']),
   updatedAt: z.string(),
   userId: z.string()

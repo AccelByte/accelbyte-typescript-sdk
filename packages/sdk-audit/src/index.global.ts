@@ -7,4 +7,3 @@ import * as AccelByteSDK_Audit from './index'
 
 // @ts-ignore
 window.AccelByteSDK_Audit = AccelByteSDK_Audit
-

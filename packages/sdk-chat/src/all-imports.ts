@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -61,6 +61,7 @@ export * from './generated-definitions/GetInboxMessagesResponse.js'
 export * from './generated-definitions/GetInboxMessagesResponseData.js'
 export * from './generated-definitions/GetInboxStatsResponse.js'
 export * from './generated-definitions/GetInboxUsersResponse.js'
+export * from './generated-definitions/GetListTopicKafkaResponse.js'
 export * from './generated-definitions/ImportConfigResponse.js'
 export * from './generated-definitions/InfoMember.js'
 export * from './generated-definitions/JsonSchemaType.js'

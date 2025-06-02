@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -65,6 +65,13 @@ export function MatchFunctionsApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     return resp.response
   }
 
+  async function getMatchFunction_ByName(name: string): Promise<AxiosResponse<MatchFunctionConfig>> {
+    const $ = new MatchFunctions$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getMatchFunction_ByName(name)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   async function updateMatchFunction_ByName(name: string, data: MatchFunctionRequest): Promise<AxiosResponse<MatchFunctionConfig>> {
     const $ = new MatchFunctions$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateMatchFunction_ByName(name, data)
@@ -85,6 +92,10 @@ export function MatchFunctionsApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      * Deletes an existing match function.
      */
     deleteMatchFunction_ByName,
+    /**
+     * Get custom match function by name.
+     */
+    getMatchFunction_ByName,
     /**
      * Update existing matchmaking function.
      */

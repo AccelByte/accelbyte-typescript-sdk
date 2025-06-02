@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -34,8 +34,11 @@ export enum Key_FulfillmentAdmin {
   FulfillmentPreCheck_ByUserId = 'Platform.FulfillmentAdmin.FulfillmentPreCheck_ByUserId',
   FulfillmentReward_ByUserId_v2 = 'Platform.FulfillmentAdmin.FulfillmentReward_ByUserId_v2',
   Fulfillment_ByUserId_ByTransactionId_v2 = 'Platform.FulfillmentAdmin.Fulfillment_ByUserId_ByTransactionId_v2',
+  Fulfillment_ByUserId_ByTransactionId_v3 = 'Platform.FulfillmentAdmin.Fulfillment_ByUserId_ByTransactionId_v3',
   Retry_ByUserId_ByTransactionId_v2 = 'Platform.FulfillmentAdmin.Retry_ByUserId_ByTransactionId_v2',
-  Revoke_ByUserId_ByTransactionId_v2 = 'Platform.FulfillmentAdmin.Revoke_ByUserId_ByTransactionId_v2'
+  Retry_ByUserId_ByTransactionId_v3 = 'Platform.FulfillmentAdmin.Retry_ByUserId_ByTransactionId_v3',
+  Revoke_ByUserId_ByTransactionId_v2 = 'Platform.FulfillmentAdmin.Revoke_ByUserId_ByTransactionId_v2',
+  Revoke_ByUserId_ByTransactionId_v3 = 'Platform.FulfillmentAdmin.Revoke_ByUserId_ByTransactionId_v3'
 }
 
 /**
@@ -296,7 +299,8 @@ export const useFulfillmentAdminApi_CreateFulfillmentReward_ByUserIdMutation_v2 
 }
 
 /**
- * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Fulfill items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Request body&lt;/i&gt;: storeId, region, language, and entitlementCollectionId can be ignored.&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
+ * @deprecated
+ * &lt;h3&gt;The endpoint is going to be deprecated &lt;/h3&gt;Description: this endpoint is &lt;b&gt;Not supported yet in AGS Shared Cloud&lt;/b&gt; and it&#39;s used to fulfill items by transaction id.&lt;ul&gt;&lt;li&gt;&lt;i&gt;Request body&lt;/i&gt;: storeId, region, language, and entitlementCollectionId can be ignored.&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Endpoint migration guide&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Substitute endpoint: &lt;em&gt;/v3/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId} [PUT]&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;&lt;ul&gt;
  *
  * #### Default Query Options
  * The default options include:
@@ -339,7 +343,51 @@ export const useFulfillmentAdminApi_UpdateFulfillment_ByUserId_ByTransactionIdMu
 }
 
 /**
- * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Retry fulfill items by transactionId without sending the original payload.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
+ * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Fulfill items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Request body&lt;/i&gt;: storeId, region, language, and entitlementCollectionId can be ignored.&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_FulfillmentAdmin.Fulfillment_ByUserId_ByTransactionId_v3, input]
+ * }
+ * ```
+ */
+export const useFulfillmentAdminApi_UpdateFulfillment_ByUserId_ByTransactionIdMutation_v3 = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<
+      FulfillmentV2Result,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { userId: string; transactionId: string; data: FulfillmentV2Request }
+    >,
+    'mutationKey'
+  >,
+  callback?: (data: FulfillmentV2Result) => void
+): UseMutationResult<
+  FulfillmentV2Result,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { userId: string; transactionId: string; data: FulfillmentV2Request }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; transactionId: string; data: FulfillmentV2Request }) => {
+    const response = await FulfillmentAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateFulfillment_ByUserId_ByTransactionId_v3(input.userId, input.transactionId, input.data)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_FulfillmentAdmin.Fulfillment_ByUserId_ByTransactionId_v3],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * @deprecated
+ * &lt;h3&gt;The endpoint is going to be deprecated &lt;/h3&gt;&lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Retry fulfill items by transactionId without sending the original payload.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Endpoint migration guide&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Substitute endpoint: &lt;em&gt;/v3/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId}/retry [PUT]&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;&lt;ul&gt;
  *
  * #### Default Query Options
  * The default options include:
@@ -374,7 +422,43 @@ export const useFulfillmentAdminApi_UpdateRetry_ByUserId_ByTransactionIdMutation
 }
 
 /**
- * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Revoke items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: revoke fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
+ * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Retry fulfill items by transactionId without sending the original payload.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_FulfillmentAdmin.Retry_ByUserId_ByTransactionId_v3, input]
+ * }
+ * ```
+ */
+export const useFulfillmentAdminApi_UpdateRetry_ByUserId_ByTransactionIdMutation_v3 = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<FulfillmentV2Result, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; transactionId: string }>,
+    'mutationKey'
+  >,
+  callback?: (data: FulfillmentV2Result) => void
+): UseMutationResult<FulfillmentV2Result, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; transactionId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; transactionId: string }) => {
+    const response = await FulfillmentAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateRetry_ByUserId_ByTransactionId_v3(input.userId, input.transactionId)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_FulfillmentAdmin.Retry_ByUserId_ByTransactionId_v3],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * @deprecated
+ * &lt;h3&gt;The endpoint is going to be deprecated &lt;/h3&gt;&lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Revoke items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: revoke fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Endpoint migration guide&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Substitute endpoint: &lt;em&gt;/v3/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId}/revoke [PUT]&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;&lt;ul&gt;
  *
  * #### Default Query Options
  * The default options include:
@@ -403,6 +487,41 @@ export const useFulfillmentAdminApi_UpdateRevoke_ByUserId_ByTransactionIdMutatio
 
   return useMutation({
     mutationKey: [Key_FulfillmentAdmin.Revoke_ByUserId_ByTransactionId_v2],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Revoke items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: revoke fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_FulfillmentAdmin.Revoke_ByUserId_ByTransactionId_v3, input]
+ * }
+ * ```
+ */
+export const useFulfillmentAdminApi_UpdateRevoke_ByUserId_ByTransactionIdMutation_v3 = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<RevokeFulfillmentV2Result, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; transactionId: string }>,
+    'mutationKey'
+  >,
+  callback?: (data: RevokeFulfillmentV2Result) => void
+): UseMutationResult<RevokeFulfillmentV2Result, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; transactionId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; transactionId: string }) => {
+    const response = await FulfillmentAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateRevoke_ByUserId_ByTransactionId_v3(input.userId, input.transactionId)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_FulfillmentAdmin.Revoke_ByUserId_ByTransactionId_v3],
     mutationFn,
     ...options
   })

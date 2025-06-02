@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -28,6 +28,7 @@ export class ProfanityAdmin$ {
   // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
   /**
+   * @deprecated
    * Get current profanity rule
    */
   getProfanityRule(): Promise<Response<ProfanityRule>> {
@@ -38,6 +39,7 @@ export class ProfanityAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ProfanityRule, 'ProfanityRule')
   }
   /**
+   * @deprecated
    * Set current profanity rule
    */
   updateProfanityRule(data: AdminSetProfanityRuleForNamespaceRequest): Promise<Response<unknown>> {
@@ -48,6 +50,7 @@ export class ProfanityAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
   /**
+   * @deprecated
    * Get lists
    */
   getProfanityLists(): Promise<Response<AdminGetProfanityListsListResponseArray>> {
@@ -63,6 +66,7 @@ export class ProfanityAdmin$ {
     )
   }
   /**
+   * @deprecated
    * Create a new list
    */
   createProfanityList(data: AdminCreateProfanityListRequest): Promise<Response<unknown>> {
@@ -73,6 +77,7 @@ export class ProfanityAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
   /**
+   * @deprecated
    * Verify a message directly from the UI or other services
    */
   fetchProfanityVerify(data: AdminVerifyMessageProfanityRequest): Promise<Response<AdminVerifyMessageProfanityResponse>> {
@@ -88,6 +93,7 @@ export class ProfanityAdmin$ {
     )
   }
   /**
+   * @deprecated
    * Delete a list include all filters inside of it
    */
   deleteProfanityList_ByList(list: string): Promise<Response<unknown>> {
@@ -100,6 +106,7 @@ export class ProfanityAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
   /**
+   * @deprecated
    * Update the list
    */
   updateProfanityList_ByList(list: string, data: AdminUpdateProfanityList): Promise<Response<unknown>> {
@@ -112,6 +119,7 @@ export class ProfanityAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
   /**
+   * @deprecated
    * Get the list of filters that would modify the phrase
    */
   fetchProfanityFilterDebug(data: DebugProfanityFilterRequest): Promise<Response<ProfanityFilterArray>> {
@@ -122,6 +130,7 @@ export class ProfanityAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ProfanityFilterArray, 'ProfanityFilterArray')
   }
   /**
+   * @deprecated
    * Get the list of filters inside the list.
    */
   getFiltersProfanity_ByList(list: string): Promise<Response<AdminGetProfanityListFiltersV1Response>> {
@@ -139,6 +148,7 @@ export class ProfanityAdmin$ {
     )
   }
   /**
+   * @deprecated
    * Add a single filter into the list
    */
   createFilterProfanity_ByList(list: string, data: AdminAddProfanityFilterIntoListRequest): Promise<Response<unknown>> {
@@ -151,6 +161,7 @@ export class ProfanityAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
   /**
+   * @deprecated
    * Add multiple filters into the list
    */
   createFilterBulkProfanity_ByList(list: string, data: AdminAddProfanityFiltersRequest): Promise<Response<unknown>> {
@@ -163,6 +174,7 @@ export class ProfanityAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
   /**
+   * @deprecated
    * Delete the filter from the list
    */
   createFilterDeleteProfanity_ByList(list: string, data: AdminDeleteProfanityFilterRequest): Promise<Response<ProfanityFilterArray>> {
@@ -175,6 +187,7 @@ export class ProfanityAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ProfanityFilterArray, 'ProfanityFilterArray')
   }
   /**
+   * @deprecated
    * Import a file with filters
    */
   createFilterBulkFileProfanity_ByList(list: string, data: number[]): Promise<Response<unknown>> {

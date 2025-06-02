@@ -7,4 +7,3 @@ import * as AccelByteSDK_Leaderboard from './index'
 
 // @ts-ignore
 window.AccelByteSDK_Leaderboard = AccelByteSDK_Leaderboard
-

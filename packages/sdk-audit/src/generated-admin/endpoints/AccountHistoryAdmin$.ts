@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -25,7 +25,7 @@ export class AccountHistoryAdmin$ {
     property?: string | null
     startDate?: number
   }): Promise<Response<PaginatedAccountHistoryResponse>> {
-    const params = { ...queryParams } as AxiosRequestConfig
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/audit/v1/admin/users/me/account/histories'
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -63,7 +63,7 @@ export class AccountHistoryAdmin$ {
       startDate?: number
     }
   ): Promise<Response<PaginatedAccountHistoryResponse>> {
-    const params = { ...queryParams } as AxiosRequestConfig
+    const params = { limit: 20, order: '1', ...queryParams } as AxiosRequestConfig
     const url = '/audit/v1/admin/namespace/{namespace}/users/{userId}/account/histories'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)

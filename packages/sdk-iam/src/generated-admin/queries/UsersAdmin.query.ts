@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -13,6 +13,7 @@ import { AxiosError, AxiosResponse } from 'axios'
 import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import { UsersAdminApi } from '../UsersAdminApi.js'
 
+import { AdminBulkUserRequest } from '../../generated-definitions/AdminBulkUserRequest.js'
 import { AgeRestrictionRequest } from '../../generated-definitions/AgeRestrictionRequest.js'
 import { AgeRestrictionRequestV3 } from '../../generated-definitions/AgeRestrictionRequestV3.js'
 import { AgeRestrictionResponse } from '../../generated-definitions/AgeRestrictionResponse.js'
@@ -26,6 +27,8 @@ import { CountryAgeRestrictionV3Request } from '../../generated-definitions/Coun
 import { CountryV3Response } from '../../generated-definitions/CountryV3Response.js'
 import { CountryV3ResponseArray } from '../../generated-definitions/CountryV3ResponseArray.js'
 import { CreateJusticeUserResponse } from '../../generated-definitions/CreateJusticeUserResponse.js'
+import { CursorGetUserRequest } from '../../generated-definitions/CursorGetUserRequest.js'
+import { CursorGetUserResponse } from '../../generated-definitions/CursorGetUserResponse.js'
 import { DisableUserRequest } from '../../generated-definitions/DisableUserRequest.js'
 import { DistinctPlatformResponseV3 } from '../../generated-definitions/DistinctPlatformResponseV3.js'
 import { GetBulkUserBansRequest } from '../../generated-definitions/GetBulkUserBansRequest.js'
@@ -70,6 +73,7 @@ import { UserPlatformMetadata } from '../../generated-definitions/UserPlatformMe
 import { UserPlatforms } from '../../generated-definitions/UserPlatforms.js'
 import { UserResponse } from '../../generated-definitions/UserResponse.js'
 import { UserResponseV3 } from '../../generated-definitions/UserResponseV3.js'
+import { UserStateResponseV3 } from '../../generated-definitions/UserStateResponseV3.js'
 import { UserUpdateRequest } from '../../generated-definitions/UserUpdateRequest.js'
 import { UserUpdateRequestV3 } from '../../generated-definitions/UserUpdateRequestV3.js'
 import { UserVerificationRequest } from '../../generated-definitions/UserVerificationRequest.js'
@@ -84,6 +88,7 @@ export enum Key_UsersAdmin {
   Admins_v3 = 'Iam.UsersAdmin.Admins_v3',
   UserBan_v3 = 'Iam.UsersAdmin.UserBan_v3',
   UserBulk_v3 = 'Iam.UsersAdmin.UserBulk_v3',
+  UserCursor_v3 = 'Iam.UsersAdmin.UserCursor_v3',
   UserInvite_v3 = 'Iam.UsersAdmin.UserInvite_v3',
   UsersSearch_v3 = 'Iam.UsersAdmin.UsersSearch_v3',
   User_ByUserId_v2 = 'Iam.UsersAdmin.User_ByUserId_v2',
@@ -103,6 +108,7 @@ export enum Key_UsersAdmin {
   Users_ByRoleId_v3 = 'Iam.UsersAdmin.Users_ByRoleId_v3',
   Codes_ByUserId_v3 = 'Iam.UsersAdmin.Codes_ByUserId_v3',
   Role_ByUserId_v3 = 'Iam.UsersAdmin.Role_ByUserId_v3',
+  State_ByUserId_v3 = 'Iam.UsersAdmin.State_ByUserId_v3',
   UserBulkPlatform_v3 = 'Iam.UsersAdmin.UserBulkPlatform_v3',
   Enable_ByUserId_v2 = 'Iam.UsersAdmin.Enable_ByUserId_v2',
   Status_ByUserId_v3 = 'Iam.UsersAdmin.Status_ByUserId_v3',
@@ -371,12 +377,12 @@ export const useUsersAdminApi_FetchUserBan_v3 = (
 export const useUsersAdminApi_CreateUserBulkMutation_v3 = (
   sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<ListUserInformationResult, AxiosError<ApiError>, SdkSetConfigParam & { data: UserIDsRequest }>,
+    UseMutationOptions<ListUserInformationResult, AxiosError<ApiError>, SdkSetConfigParam & { data: AdminBulkUserRequest }>,
     'mutationKey'
   >,
   callback?: (data: ListUserInformationResult) => void
-): UseMutationResult<ListUserInformationResult, AxiosError<ApiError>, SdkSetConfigParam & { data: UserIDsRequest }> => {
-  const mutationFn = async (input: SdkSetConfigParam & { data: UserIDsRequest }) => {
+): UseMutationResult<ListUserInformationResult, AxiosError<ApiError>, SdkSetConfigParam & { data: AdminBulkUserRequest }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: AdminBulkUserRequest }) => {
     const response = await UsersAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).createUserBulk_v3(
       input.data
     )
@@ -387,6 +393,38 @@ export const useUsersAdminApi_CreateUserBulkMutation_v3 = (
   return useMutation({
     mutationKey: [Key_UsersAdmin.UserBulk_v3],
     mutationFn,
+    ...options
+  })
+}
+
+/**
+ * 1. **Cursor-Based User Retrieval** This API fetches user records ordered by created_at ASC, user_id ASC to ensure a stable pagination order. Pagination is handled using a cursor, which consists of created_at and user_id. 2. **GraphQL-Like Querying** By default, the API only returns the user ID. To include additional fields in the response, specify them in the request body under the fields parameter. ***Supported fields***: [&#39;created_at&#39;, &#39;email_address&#39;] ***Note***: If a value is not in the allowed list, the API will ignore it. 3. **Cursor Mechanics** The cursor consists of created_at and user_id from the last retrieved record. The next query fetches records strictly after the provided cursor. ***The query applies the following ordering logic***: Records with a later created_at timestamp are included. If multiple records have the same created_at, only records with a higher user_id are included. This ensures that records with the exact same created_at as the cursor are excluded from the next page to prevent duplication. 4. **Usage** For the first-time query, the request body does not require a cursor. If the data array is empty, it indicates that the cursor has reached the end of the available records.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_UsersAdmin.UserCursor_v3, input]
+ * }
+ * ```
+ */
+export const useUsersAdminApi_FetchUserCursor_v3 = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { data: CursorGetUserRequest },
+  options?: Omit<UseQueryOptions<CursorGetUserResponse, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<CursorGetUserResponse>) => void
+): UseQueryResult<CursorGetUserResponse, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useUsersAdminApi_FetchUserCursor_v3>[1]) => async () => {
+    const response = await UsersAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).fetchUserCursor_v3(
+      input.data
+    )
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<CursorGetUserResponse, AxiosError<ApiError>>({
+    queryKey: [Key_UsersAdmin.UserCursor_v3, input],
+    queryFn: queryFn(sdk, input),
     ...options
   })
 }
@@ -426,7 +464,7 @@ export const useUsersAdminApi_CreateUserInviteMutation_v3 = (
 }
 
 /**
- * Endpoint behavior : - by default this endpoint searches all users on the specified namespace - if query parameter is defined, endpoint will search users whose email address, display name, username, or third party partially match with the query - if startDate and endDate parameters is defined, endpoint will search users which created on the certain date range - if query, startDate and endDate parameters are defined, endpoint will search users whose email address and display name match and created on the certain date range - if startDate parameter is defined, endpoint will search users that created start from the defined date - if endDate parameter is defined, endpoint will search users that created until the defined date - if platformId parameter is defined and by parameter is using thirdparty, endpoint will search users based on the platformId they have linked to - if platformBy parameter is defined and by parameter is using thirdparty, endpoint will search users based on the platformUserId or platformDisplayName they have linked to, example value: platformUserId or platformDisplayName - if limit is not defined, The default limit is 100 In multi tenant mode : - if super admin search in super admin namespace, the result will be all game admin user - if super admin search in game studio namespace, the result will be all game admin user and players under the game studio namespace - if super admin search in game namespace, the result will be all game admin users and players under the game namespace - if game admin search in their game studio namespace, the result will be all game admin user in the studio namespace - if game admin search in their game namespace, the result will be all player in the game namespace action code : 10133
+ * Endpoint behavior : - By default this endpoint searches all users on the specified namespace. - If query parameter is defined, endpoint will search users whose email address, display name, username, or third party partially match with the query. - The query parameter length must be between 3 and 30 characters. For email address queries (i.e., contains &#39;@&#39;), the allowed length is 3 to 40 characters. Otherwise, the database will not be queried. - If startDate and endDate parameters is defined, endpoint will search users which created on the certain date range. - If query, startDate and endDate parameters are defined, endpoint will search users whose email address and display name match and created on the certain date range. - If startDate parameter is defined, endpoint will search users that created start from the defined date. - If endDate parameter is defined, endpoint will search users that created until the defined date. - If platformId parameter is defined and by parameter is using thirdparty, endpoint will search users based on the platformId they have linked to. - If platformBy parameter is defined and by parameter is using thirdparty, endpoint will search users based on the platformUserId or platformDisplayName they have linked to, example value: platformUserId or platformDisplayName. - If limit is not defined, The default limit is 100. GraphQL-Like Querying: - By default, the API only returns the minimum fields -&gt; [displayName, authType, createdAt, uniqueDisplayName, deletionStatus, enabled, emailAddress, skipLoginQueue, testAccount] - To include additional fields in the response, specify them in the request params. - Supported fields: [country, emailVerified, avatarUrl, enabled] - Note: If a value is not in the allowed list, the API will ignore it. In Multi Tenant mode : - If super admin search in super admin namespace, the result will be all game admin user - If super admin search in game studio namespace, the result will be all game admin user and players under the game studio namespace - If super admin search in game namespace, the result will be all game admin users and players under the game namespace - If game admin search in their game studio namespace, the result will be all game admin user in the studio namespace - If game admin search in their game namespace, the result will be all player in the game namespace action code : 10133
  *
  * #### Default Query Options
  * The default options include:
@@ -449,8 +487,10 @@ export const useUsersAdminApi_GetUsersSearch_v3 = (
       platformId?: string | null
       query?: string | null
       roleIds?: string | null
+      selectedFields?: string | null
       skipLoginQueue?: boolean | null
       startDate?: string | null
+      tagIds?: string | null
       testAccount?: boolean | null
     }
   },
@@ -574,7 +614,7 @@ export const useUsersAdminApi_GetUser_ByUserId_v3 = (
 }
 
 /**
- * This Endpoint support update user based on given data. **Single request can update single field or multi fields.** Supported field {country, displayName, languageTag, dateOfBirth, avatarUrl, userName} Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. **Response body logic when user updating email address:** - User want to update email address of which have been verified, NewEmailAddress response field will be filled with new email address. - User want to update email address of which have not been verified, {LoginId, OldEmailAddress, EmailAddress} response field will be filled with new email address. - User want to update email address of which have been verified and updated before, {LoginId, OldEmailAddress, EmailAddress} response field will be filled with verified email before. NewEmailAddress response field will be filled with newest email address. action code : 10103
+ * This Endpoint support update user based on given data. **Single request can update single field or multi fields.** Supported field {country, displayName, languageTag, dateOfBirth, avatarUrl, userName, tags} Country use ISO3166-1 alpha-2 two letter, e.g. US. Date of Birth format : YYYY-MM-DD, e.g. 2019-04-29. Admin can set Tags with array string data e.g. [&#34;10e9a46ef6164b7e86d08e86605bd8cf&#34;]. Admin also can reset user tags by sending empty array string e.g. [ ]. Users can have at most 5 tags. No duplicate tags allowed. **Response body logic when user updating email address:** - User want to update email address of which have been verified, NewEmailAddress response field will be filled with new email address. - User want to update email address of which have not been verified, {LoginId, OldEmailAddress, EmailAddress} response field will be filled with new email address. - User want to update email address of which have been verified and updated before, {LoginId, OldEmailAddress, EmailAddress} response field will be filled with verified email before. NewEmailAddress response field will be filled with newest email address. action code : 10103
  *
  * #### Default Query Options
  * The default options include:
@@ -1139,6 +1179,38 @@ export const useUsersAdminApi_PatchRole_ByUserIdMutation_v3 = (
   return useMutation({
     mutationKey: [Key_UsersAdmin.Role_ByUserId_v3],
     mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Admin Get User State By User Id
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_UsersAdmin.State_ByUserId_v3, input]
+ * }
+ * ```
+ */
+export const useUsersAdminApi_GetState_ByUserId_v3 = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { userId: string },
+  options?: Omit<UseQueryOptions<UserStateResponseV3, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<UserStateResponseV3>) => void
+): UseQueryResult<UserStateResponseV3, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useUsersAdminApi_GetState_ByUserId_v3>[1]) => async () => {
+    const response = await UsersAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getState_ByUserId_v3(
+      input.userId
+    )
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<UserStateResponseV3, AxiosError<ApiError>>({
+    queryKey: [Key_UsersAdmin.State_ByUserId_v3, input],
+    queryFn: queryFn(sdk, input),
     ...options
   })
 }
@@ -2509,7 +2581,7 @@ export const useUsersAdminApi_PostLink_ByUserId_ByPlatformIdMutation_v3 = (
 }
 
 /**
- * Get User By Platform User ID This endpoint return user information by given platform ID and platform user ID. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter. **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
+ * Get User By Platform User ID This endpoint return user information by given platform ID and platform user ID. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter. **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1 - **oculus**: if query by app user id, please set the query param **pidType** to **OCULUS_APP_USER_ID** (support game namespace only)
  *
  * #### Default Query Options
  * The default options include:
@@ -2521,7 +2593,7 @@ export const useUsersAdminApi_PostLink_ByUserId_ByPlatformIdMutation_v3 = (
  */
 export const useUsersAdminApi_GetUser_ByPlatformId_ByPlatformUserId_v3 = (
   sdk: AccelByteSDK,
-  input: SdkSetConfigParam & { platformId: string; platformUserId: string },
+  input: SdkSetConfigParam & { platformId: string; platformUserId: string; queryParams?: { pidType?: string | null } },
   options?: Omit<UseQueryOptions<UserResponseV3, AxiosError<ApiError>>, 'queryKey'>,
   callback?: (data: AxiosResponse<UserResponseV3>) => void
 ): UseQueryResult<UserResponseV3, AxiosError<ApiError>> => {
@@ -2530,7 +2602,7 @@ export const useUsersAdminApi_GetUser_ByPlatformId_ByPlatformUserId_v3 = (
       const response = await UsersAdminApi(sdk, {
         coreConfig: input.coreConfig,
         axiosConfig: input.axiosConfig
-      }).getUser_ByPlatformId_ByPlatformUserId_v3(input.platformId, input.platformUserId)
+      }).getUser_ByPlatformId_ByPlatformUserId_v3(input.platformId, input.platformUserId, input.queryParams)
       callback && callback(response)
       return response.data
     }

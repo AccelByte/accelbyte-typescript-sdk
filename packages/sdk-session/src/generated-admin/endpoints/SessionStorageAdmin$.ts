@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -14,6 +14,18 @@ export class SessionStorageAdmin$ {
   // @ts-ignore
   // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
+  /**
+   * Read Party Session Storage by partyID Party Storage example: ``` { &#34;reserved&#34;: { &#34;userID1&#34;: {&#34;key&#34;: &#34;value&#34;}, &#34;userID2&#34;: {&#34;key&#34;: &#34;value&#34;}, ... } } ```
+   */
+  getStorage_ByPartyId(partyId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/session/v1/admin/namespaces/{namespace}/parties/{partyId}/storage'
+      .replace('{namespace}', this.namespace)
+      .replace('{partyId}', partyId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
+  }
   /**
    *  Delete Session Storage By sessionID Session Storage feature only available for Gamesession
    */

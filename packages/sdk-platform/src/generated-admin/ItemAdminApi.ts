@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -14,6 +14,7 @@ import { AppUpdate } from '../generated-definitions/AppUpdate.js'
 import { AvailablePredicateArray } from '../generated-definitions/AvailablePredicateArray.js'
 import { BasicItemArray } from '../generated-definitions/BasicItemArray.js'
 import { BulkRegionDataChangeRequest } from '../generated-definitions/BulkRegionDataChangeRequest.js'
+import { ChangeStatusItemRequest } from '../generated-definitions/ChangeStatusItemRequest.js'
 import { EstimatedPriceInfo } from '../generated-definitions/EstimatedPriceInfo.js'
 import { FullAppInfo } from '../generated-definitions/FullAppInfo.js'
 import { FullItemInfo } from '../generated-definitions/FullItemInfo.js'
@@ -24,6 +25,7 @@ import { InGameItemSync } from '../generated-definitions/InGameItemSync.js'
 import { ItemAcquireRequest } from '../generated-definitions/ItemAcquireRequest.js'
 import { ItemAcquireResult } from '../generated-definitions/ItemAcquireResult.js'
 import { ItemCreate } from '../generated-definitions/ItemCreate.js'
+import { ItemDependency } from '../generated-definitions/ItemDependency.js'
 import { ItemDynamicDataInfo } from '../generated-definitions/ItemDynamicDataInfo.js'
 import { ItemId } from '../generated-definitions/ItemId.js'
 import { ItemIdArray } from '../generated-definitions/ItemIdArray.js'
@@ -201,7 +203,7 @@ export function ItemAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
 
   async function deleteItem_ByItemId(
     itemId: string,
-    queryParams?: { force?: boolean | null; storeId?: string | null }
+    queryParams?: { featuresToCheck?: string[]; force?: boolean | null; storeId?: string | null }
   ): Promise<AxiosResponse<unknown>> {
     const $ = new ItemAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteItem_ByItemId(itemId, queryParams)
@@ -436,9 +438,13 @@ export function ItemAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     return resp.response
   }
 
-  async function updateDisable_ByItemId(itemId: string, queryParams: { storeId: string | null }): Promise<AxiosResponse<FullItemInfo>> {
+  async function updateDisable_ByItemId(
+    itemId: string,
+    data: ChangeStatusItemRequest,
+    queryParams: { storeId: string | null }
+  ): Promise<AxiosResponse<FullItemInfo>> {
     const $ = new ItemAdmin$(axiosInstance, namespace, useSchemaValidation)
-    const resp = await $.updateDisable_ByItemId(itemId, queryParams)
+    const resp = await $.updateDisable_ByItemId(itemId, data, queryParams)
     if (resp.error) throw resp.error
     return resp.response
   }
@@ -456,6 +462,16 @@ export function ItemAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   }): Promise<AxiosResponse<BasicItemArray>> {
     const $ = new ItemAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getItemsByFeaturesBasic(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function getReferences_ByItemId(
+    itemId: string,
+    queryParams?: { featuresToCheck?: string[]; storeId?: string | null }
+  ): Promise<AxiosResponse<ItemDependency>> {
+    const $ = new ItemAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getReferences_ByItemId(itemId, queryParams)
     if (resp.error) throw resp.error
     return resp.response
   }
@@ -640,6 +656,10 @@ export function ItemAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      * &lt;b&gt;[SERVICE COMMUNICATION ONLY]&lt;/b&gt; This API is used to list basic items by features.&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: the list of basic items&lt;/li&gt;&lt;/ul&gt;
      */
     getItemsByFeaturesBasic,
+    /**
+     * This API is used to get references for an item
+     */
+    getReferences_ByItemId,
     /**
      * Remove a feature from an item.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated item&lt;/li&gt;&lt;/ul&gt;
      */

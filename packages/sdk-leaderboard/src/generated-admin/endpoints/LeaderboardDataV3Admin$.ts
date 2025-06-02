@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -76,8 +76,12 @@ export class LeaderboardDataV3Admin$ {
   /**
    * &lt;p&gt;Get user ranking in leaderboard&lt;/p&gt;
    */
-  getUser_ByLeaderboardCode_ByUserId_v3(leaderboardCode: string, userId: string): Promise<Response<UserRankingResponseV3>> {
-    const params = {} as AxiosRequestConfig
+  getUser_ByLeaderboardCode_ByUserId_v3(
+    leaderboardCode: string,
+    userId: string,
+    queryParams?: { previousVersion?: number }
+  ): Promise<Response<UserRankingResponseV3>> {
+    const params = { ...queryParams } as AxiosRequestConfig
     const url = '/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/users/{userId}'
       .replace('{namespace}', this.namespace)
       .replace('{leaderboardCode}', leaderboardCode)
@@ -92,7 +96,7 @@ export class LeaderboardDataV3Admin$ {
   getCycle_ByLeaderboardCode_ByCycleId_v3(
     leaderboardCode: string,
     cycleId: string,
-    queryParams?: { limit?: number; offset?: number }
+    queryParams?: { limit?: number; offset?: number; previousVersion?: number }
   ): Promise<Response<GetLeaderboardRankingResp>> {
     const params = { ...queryParams } as AxiosRequestConfig
     const url = '/leaderboard/v3/admin/namespaces/{namespace}/leaderboards/{leaderboardCode}/cycles/{cycleId}'

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -9,6 +9,7 @@
 import { Response, Validate } from '@accelbyte/sdk'
 import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { ListFinishedDataRequests } from '../../generated-definitions/ListFinishedDataRequests.js'
+import { S2SDataRequestSummary } from '../../generated-definitions/S2SDataRequestSummary.js'
 import { S2SDataRetrievalResponse } from '../../generated-definitions/S2SDataRetrievalResponse.js'
 import { S2SUserDataUrl } from '../../generated-definitions/S2SUserDataUrl.js'
 
@@ -30,6 +31,18 @@ export class DataRetrievalS2S$ {
       ListFinishedDataRequests,
       'ListFinishedDataRequests'
     )
+  }
+  /**
+   * Scope: account Get Personal Data Request by Request Id. If the request has been completed, it will return a download url for the data package. --- ## This API for S2S integration purpose only
+   */
+  getS2Request_ByRequestId(requestId: string): Promise<Response<S2SDataRequestSummary>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/gdpr/s2s/namespaces/{namespace}/requests/{requestId}'
+      .replace('{namespace}', this.namespace)
+      .replace('{requestId}', requestId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, S2SDataRequestSummary, 'S2SDataRequestSummary')
   }
   /**
    * Scope: account Submit user personal data retrieval request. **Limitation:** This API only accepts requests with a publisher userId and does not support game userId requests at this time. --- ## This API for S2S integration purpose only **Notes:** 1. This API will **not send GDPR email notification** both for player and admin notification.

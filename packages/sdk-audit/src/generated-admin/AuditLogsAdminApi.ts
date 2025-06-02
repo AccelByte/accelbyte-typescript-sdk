@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -50,17 +50,38 @@ export function AuditLogsAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     actor?: string | null
     actorType?: 'CLIENT' | 'USER'
     category?: string | null
+    clientId?: string | null
     endDate?: number
+    hasCommentOnly?: boolean | null
     limit?: number
     namespace?: string | null
     objectId?: string | null
     objectType?: string | null
     offset?: number
-    order?: -1 | 1
+    sort?: 'actionName:-1' | 'actionName:1' | 'category:-1' | 'category:1' | 'namespace:-1' | 'namespace:1' | 'timestamp:-1' | 'timestamp:1'
     startDate?: number
   }): Promise<AxiosResponse<PaginatedAuditLogsResponse>> {
     const $ = new AuditLogsAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getLogs(queryParams)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function getLogsExport(queryParams?: {
+    action?: string | null
+    actor?: string | null
+    actorType?: 'CLIENT' | 'USER'
+    category?: string | null
+    clientId?: string | null
+    endDate?: number
+    namespace?: string | null
+    objectId?: string | null
+    objectType?: string | null
+    sort?: 'actionName:-1' | 'actionName:1' | 'category:-1' | 'category:1' | 'namespace:-1' | 'namespace:1' | 'timestamp:-1' | 'timestamp:1'
+    startDate?: number
+  }): Promise<AxiosResponse<unknown>> {
+    const $ = new AuditLogsAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getLogsExport(queryParams)
     if (resp.error) throw resp.error
     return resp.response
   }
@@ -95,6 +116,10 @@ export function AuditLogsAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      * This API is used to query audit logs. The **{namespace}** permission value will be pointed to &#34;namespace&#34; query param. **1. If &#34;namespace&#34; query param exist:** The permission validation will validate that single namespace value. **2. If &#34;namespace&#34; query param not exist:** The permission validation will automatically check the users audit permissions (ADMIN:NAMESPACE:{namespace}:AUDIT). The query result can only returns data that matched with the namespace from the users AUDIT permissions e.g: If current user was assign permission with namespaces [game1, game2], then API will query by game1 &amp; game2
      */
     getLogs,
+    /**
+     * This API is used to export audit logs to CSV format. It supports export up to 50000 log entries at a time. The **{namespace}** permission value will be pointed to &#34;namespace&#34; query param. **1. If &#34;namespace&#34; query param exist:** The permission validation will validate that single namespace value. **2. If &#34;namespace&#34; query param not exist:** The permission validation will automatically check the users audit permissions (ADMIN:NAMESPACE:{namespace}:AUDIT). The query result can only returns data that matched with the namespace from the users AUDIT permissions e.g: If current user was assign permission with namespaces [game1, game2], then API will query by game1 &amp; game2
+     */
+    getLogsExport,
     /**
      * This API is used to query category and related action names.
      */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -66,12 +66,9 @@ export const useLoginAllowlistAdminApi_GetLoginAllowlist_v3 = (
  */
 export const useLoginAllowlistAdminApi_UpdateLoginAllowlistMutation_v3 = (
   sdk: AccelByteSDK,
-  options?: Omit<
-    UseMutationOptions<LoginAllowlistResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: LoginAllowlistRequest }>,
-    'mutationKey'
-  >,
-  callback?: (data: LoginAllowlistResponse) => void
-): UseMutationResult<LoginAllowlistResponse, AxiosError<ApiError>, SdkSetConfigParam & { data: LoginAllowlistRequest }> => {
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: LoginAllowlistRequest }>, 'mutationKey'>,
+  callback?: (data: unknown) => void
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: LoginAllowlistRequest }> => {
   const mutationFn = async (input: SdkSetConfigParam & { data: LoginAllowlistRequest }) => {
     const response = await LoginAllowlistAdminApi(sdk, {
       coreConfig: input.coreConfig,

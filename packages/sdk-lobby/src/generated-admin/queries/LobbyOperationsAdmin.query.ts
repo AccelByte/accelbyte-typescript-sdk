@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -22,6 +22,7 @@ export enum Key_LobbyOperationsAdmin {
 }
 
 /**
+ * @deprecated
  * Update party attributes in a namespace.
  *
  * #### Default Query Options
@@ -57,6 +58,7 @@ export const useLobbyOperationsAdminApi_UpdateAttributeParty_ByPartyIdMutation =
 }
 
 /**
+ * @deprecated
  * Admin join a player into a party.
  *
  * #### Default Query Options

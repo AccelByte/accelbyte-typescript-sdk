@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -13,6 +13,7 @@ import { AppUpdate } from '../../generated-definitions/AppUpdate.js'
 import { AvailablePredicateArray } from '../../generated-definitions/AvailablePredicateArray.js'
 import { BasicItemArray } from '../../generated-definitions/BasicItemArray.js'
 import { BulkRegionDataChangeRequest } from '../../generated-definitions/BulkRegionDataChangeRequest.js'
+import { ChangeStatusItemRequest } from '../../generated-definitions/ChangeStatusItemRequest.js'
 import { EstimatedPriceInfo } from '../../generated-definitions/EstimatedPriceInfo.js'
 import { FullAppInfo } from '../../generated-definitions/FullAppInfo.js'
 import { FullItemInfo } from '../../generated-definitions/FullItemInfo.js'
@@ -23,6 +24,7 @@ import { InGameItemSync } from '../../generated-definitions/InGameItemSync.js'
 import { ItemAcquireRequest } from '../../generated-definitions/ItemAcquireRequest.js'
 import { ItemAcquireResult } from '../../generated-definitions/ItemAcquireResult.js'
 import { ItemCreate } from '../../generated-definitions/ItemCreate.js'
+import { ItemDependency } from '../../generated-definitions/ItemDependency.js'
 import { ItemDynamicDataInfo } from '../../generated-definitions/ItemDynamicDataInfo.js'
 import { ItemId } from '../../generated-definitions/ItemId.js'
 import { ItemIdArray } from '../../generated-definitions/ItemIdArray.js'
@@ -221,7 +223,10 @@ export class ItemAdmin$ {
   /**
    * This API is used to delete an item permanently.&lt;p&gt;force: the default value should be: false. When the value is: &lt;li&gt;&lt;i&gt;false:&lt;i&gt;only the items in the draft store that have never been published yet can be removed.&lt;/li&gt;&lt;li&gt;&lt;i&gt;true:&lt;i&gt;the item in the draft store(even been published before) can be removed.&lt;/li&gt;
    */
-  deleteItem_ByItemId(itemId: string, queryParams?: { force?: boolean | null; storeId?: string | null }): Promise<Response<unknown>> {
+  deleteItem_ByItemId(
+    itemId: string,
+    queryParams?: { featuresToCheck?: string[]; force?: boolean | null; storeId?: string | null }
+  ): Promise<Response<unknown>> {
     const params = { ...queryParams } as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/items/{itemId}'.replace('{namespace}', this.namespace).replace('{itemId}', itemId)
     const resultPromise = this.axiosInstance.delete(url, { params })
@@ -525,12 +530,16 @@ export class ItemAdmin$ {
   /**
    * Disable an item.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated item&lt;/li&gt;&lt;/ul&gt;
    */
-  updateDisable_ByItemId(itemId: string, queryParams: { storeId: string | null }): Promise<Response<FullItemInfo>> {
+  updateDisable_ByItemId(
+    itemId: string,
+    data: ChangeStatusItemRequest,
+    queryParams: { storeId: string | null }
+  ): Promise<Response<FullItemInfo>> {
     const params = { ...queryParams } as AxiosRequestConfig
     const url = '/platform/admin/namespaces/{namespace}/items/{itemId}/disable'
       .replace('{namespace}', this.namespace)
       .replace('{itemId}', itemId)
-    const resultPromise = this.axiosInstance.put(url, null, { params })
+    const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FullItemInfo, 'FullItemInfo')
   }
@@ -555,6 +564,21 @@ export class ItemAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, BasicItemArray, 'BasicItemArray')
+  }
+  /**
+   * This API is used to get references for an item
+   */
+  getReferences_ByItemId(
+    itemId: string,
+    queryParams?: { featuresToCheck?: string[]; storeId?: string | null }
+  ): Promise<Response<ItemDependency>> {
+    const params = { ...queryParams } as AxiosRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/items/{itemId}/references'
+      .replace('{namespace}', this.namespace)
+      .replace('{itemId}', itemId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, ItemDependency, 'ItemDependency')
   }
   /**
    * Remove a feature from an item.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated item&lt;/li&gt;&lt;/ul&gt;

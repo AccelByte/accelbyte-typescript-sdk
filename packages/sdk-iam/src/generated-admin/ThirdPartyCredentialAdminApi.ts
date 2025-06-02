@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -12,6 +12,7 @@ import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/s
 import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { CheckAvailabilityResponse } from '../generated-definitions/CheckAvailabilityResponse.js'
 import { PlatformDomainDeleteRequest } from '../generated-definitions/PlatformDomainDeleteRequest.js'
+import { PlatformDomainPatchRequest } from '../generated-definitions/PlatformDomainPatchRequest.js'
 import { PlatformDomainResponse } from '../generated-definitions/PlatformDomainResponse.js'
 import { PlatformDomainUpdateRequest } from '../generated-definitions/PlatformDomainUpdateRequest.js'
 import { ThirdPartyLoginPlatformCredentialRequest } from '../generated-definitions/ThirdPartyLoginPlatformCredentialRequest.js'
@@ -113,6 +114,16 @@ export function ThirdPartyCredentialAdminApi(sdk: AccelByteSDK, args?: SdkSetCon
     return resp.response
   }
 
+  async function patchClientDomain_ByPlatformId_v3(
+    platformId: string,
+    data: PlatformDomainPatchRequest
+  ): Promise<AxiosResponse<PlatformDomainResponse>> {
+    const $ = new ThirdPartyCredentialAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.patchClientDomain_ByPlatformId_v3(platformId, data)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   async function updateClientDomain_ByPlatformId_v3(
     platformId: string,
     data: PlatformDomainUpdateRequest
@@ -153,11 +164,15 @@ export function ThirdPartyCredentialAdminApi(sdk: AccelByteSDK, args?: SdkSetCon
      */
     createClient_ByPlatformId_v3,
     /**
-     * This is the API to unregister 3rd Platform domain.
+     * This is the API to unregister 3rd Platform domain. If there is a ssoGroups in request body, then this request wil only delete the sso group from the target domain, it will not delete domain.
      */
     deleteClientDomain_ByPlatformId_v3,
     /**
-     * This is the API to set 3rd Platform domain.
+     * This is the API to patch update 3rd Platform domain. This API is a create or partial-update behavior. If it is update, it is a partial update behavior.
+     */
+    patchClientDomain_ByPlatformId_v3,
+    /**
+     * This is the API to set 3rd Platform domain. This API is a create-or-update behavior. If it is update, it is a replacement behavior.
      */
     updateClientDomain_ByPlatformId_v3
   }

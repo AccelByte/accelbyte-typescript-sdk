@@ -1,10 +1,10 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
-import { GoalSchedule } from './GoalSchedule.js'
+import { GoalScheduleRequest } from './GoalScheduleRequest.js'
 import { Requirement } from './Requirement.js'
 import { Reward } from './Reward.js'
 
@@ -14,7 +14,7 @@ export const UpdateGoalRequest = z.object({
   name: z.string(),
   requirementGroups: z.array(Requirement).nullish(),
   rewards: z.array(Reward).nullish(),
-  schedule: GoalSchedule.nullish(),
+  schedule: GoalScheduleRequest.nullish(),
   tags: z.array(z.string()).nullish()
 })
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -43,9 +43,9 @@ export function ChallengeProgressionAdminApi(sdk: AccelByteSDK, args?: SdkSetCon
     }
   }
 
-  async function createProgresEvaluate(data: EvaluatePlayerProgressionRequest): Promise<AxiosResponse<unknown>> {
+  async function updateProgresEvaluate(data: EvaluatePlayerProgressionRequest): Promise<AxiosResponse<unknown>> {
     const $ = new ChallengeProgressionAdmin$(axiosInstance, namespace, useSchemaValidation)
-    const resp = await $.createProgresEvaluate(data)
+    const resp = await $.updateProgresEvaluate(data)
     if (resp.error) throw resp.error
     return resp.response
   }
@@ -63,11 +63,11 @@ export function ChallengeProgressionAdminApi(sdk: AccelByteSDK, args?: SdkSetCon
 
   return {
     /**
-     * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]&lt;/li&gt;&lt;li&gt;Limited up to 10 users per request&lt;/li&gt;&lt;/ul&gt;
+     * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE] - Limited up to 10 users per request
      */
-    createProgresEvaluate,
+    updateProgresEvaluate,
     /**
-     * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]&lt;/li&gt;&lt;/ul&gt;
+     * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]
      */
     getProgres_ByUserId_ByChallengeCode
   }

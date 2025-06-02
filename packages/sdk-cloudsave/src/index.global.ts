@@ -7,4 +7,3 @@ import * as AccelByteSDK_CloudSave from './index'
 
 // @ts-ignore
 window.AccelByteSDK_CloudSave = AccelByteSDK_CloudSave
-

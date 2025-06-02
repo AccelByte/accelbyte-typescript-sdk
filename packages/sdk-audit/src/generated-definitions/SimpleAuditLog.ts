@@ -1,9 +1,10 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 import { z } from 'zod'
+import { SimpleCommentInfo } from './SimpleCommentInfo.js'
 
 export const SimpleAuditLog = z.object({
   actionDisplayName: z.string(),
@@ -14,6 +15,7 @@ export const SimpleAuditLog = z.object({
   category: z.string(),
   categoryDisplayName: z.string(),
   clientId: z.string(),
+  commentInfo: SimpleCommentInfo.nullish(),
   deviceId: z.string(),
   id: z.string(),
   ip: z.string(),

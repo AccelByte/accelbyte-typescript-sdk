@@ -8,7 +8,7 @@
     },
     "description": "Justice Audit Log Service",
     "title": "justice-audit-log-service",
-    "version": "1.3.0"
+    "version": "1.7.0"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -27,6 +27,7 @@
     "/audit/healthz": {
       "get": {
         "operationId": "GetHealthcheckInfoV1",
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -166,12 +167,27 @@
             "type": "string"
           },
           {
+            "description": "clientId",
+            "in": "query",
+            "name": "clientId",
+            "type": "string"
+          },
+          {
             "description": "End date of logs in unix timestamp format. Range between startDate should not exceed 30 day. Default: Current time in UTC.",
             "in": "query",
             "name": "endDate",
             "type": "number"
           },
           {
+            "default": false,
+            "description": "default false, will show only audit logs that have comments if true",
+            "in": "query",
+            "name": "hasCommentOnly",
+            "type": "boolean",
+            "x-omitempty": false
+          },
+          {
+            "default": 20,
             "description": "Limit of query. Default: 20. Max: 500",
             "in": "query",
             "name": "limit",
@@ -196,17 +212,28 @@
             "type": "string"
           },
           {
+            "default": 0,
             "description": "Offset of query. Default : 0. ",
             "in": "query",
             "name": "offset",
             "type": "integer"
           },
           {
-            "description": "Sort of order by timestamp, default is -1. note: 1 is asc, -1 is desc.",
-            "enum": ["-1", "1"],
+            "default": "timestamp:-1",
+            "description": "Column and order pair, for example: timestamp:1, default is timestamp:-1. note: 1 is asc, -1 is desc.",
+            "enum": [
+              "actionName:-1",
+              "actionName:1",
+              "category:-1",
+              "category:1",
+              "namespace:-1",
+              "namespace:1",
+              "timestamp:-1",
+              "timestamp:1"
+            ],
             "in": "query",
-            "name": "order",
-            "type": "integer"
+            "name": "sort",
+            "type": "string"
           },
           {
             "description": "Start date of logs in unix timestamp format. Range between endDate should not exceed 30 day. Default: Current time in UTC minus 15 minutes.",
@@ -254,6 +281,138 @@
           }
         ],
         "summary": "Query audit logs",
+        "tags": ["Audit Logs"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:AUDIT [READ]"]
+          }
+        ]
+      }
+    },
+    "/audit/v1/admin/logs/export": {
+      "get": {
+        "description": "This API is used to export audit logs to CSV format. It supports export up to 50000 log entries at a time.\n\nThe **{namespace}** permission value will be pointed to \u0026#34;namespace\u0026#34; query param.\n\n**1. If \u0026#34;namespace\u0026#34; query param exist:**\nThe permission validation will validate that single namespace value.\n\n**2. If \u0026#34;namespace\u0026#34; query param not exist:**\nThe permission validation will automatically check the users audit permissions (ADMIN:NAMESPACE:{namespace}:AUDIT).\nThe query result can only returns data that matched with the namespace from the users AUDIT permissions\ne.g: If current user was assign permission with namespaces [game1, game2], then API will query by game1 \u0026amp; game2\n",
+        "operationId": "AdminExportAuditLogV1",
+        "parameters": [
+          {
+            "description": "action",
+            "in": "query",
+            "name": "action",
+            "type": "string"
+          },
+          {
+            "description": "actor id, user id for user token, client id for app client token",
+            "in": "query",
+            "name": "actor",
+            "type": "string"
+          },
+          {
+            "description": "actor type, allow: [USER, CLIENT]",
+            "enum": ["CLIENT", "USER"],
+            "in": "query",
+            "name": "actorType",
+            "type": "string"
+          },
+          {
+            "description": "category",
+            "in": "query",
+            "name": "category",
+            "type": "string"
+          },
+          {
+            "description": "clientId",
+            "in": "query",
+            "name": "clientId",
+            "type": "string"
+          },
+          {
+            "description": "End date of logs in unix timestamp format. Range between startDate should not exceed 30 day. Default: Current time in UTC.",
+            "in": "query",
+            "name": "endDate",
+            "type": "number"
+          },
+          {
+            "description": "object namespace, the namespace of this audit happened, not actor's token namespace",
+            "in": "query",
+            "name": "namespace",
+            "type": "string"
+          },
+          {
+            "description": "object id",
+            "in": "query",
+            "name": "objectId",
+            "type": "string"
+          },
+          {
+            "description": "object type",
+            "in": "query",
+            "name": "objectType",
+            "type": "string"
+          },
+          {
+            "default": "timestamp:-1",
+            "description": "Column and order pair, for example: timestamp:1, default is timestamp:-1. note: 1 is asc, -1 is desc.",
+            "enum": [
+              "actionName:-1",
+              "actionName:1",
+              "category:-1",
+              "category:1",
+              "namespace:-1",
+              "namespace:1",
+              "timestamp:-1",
+              "timestamp:1"
+            ],
+            "in": "query",
+            "name": "sort",
+            "type": "string"
+          },
+          {
+            "description": "Start date of logs in unix timestamp format. Range between endDate should not exceed 30 day. Default: Current time in UTC minus 15 minutes.",
+            "in": "query",
+            "name": "startDate",
+            "type": "number"
+          }
+        ],
+        "produces": ["text/csv"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Export audit logs",
         "tags": ["Audit Logs"],
         "x-errorCodes": {},
         "x-security": [
@@ -416,18 +575,21 @@
             "type": "number"
           },
           {
+            "default": 20,
             "description": "Limit of query. Default: 20. Max: 500",
             "in": "query",
             "name": "limit",
             "type": "integer"
           },
           {
+            "default": 0,
             "description": "Offset of query. Default : 0. ",
             "in": "query",
             "name": "offset",
             "type": "integer"
           },
           {
+            "default": "1",
             "description": "sort by timestamp, default: 1, asc: 1, desc: -1",
             "in": "query",
             "name": "order",
@@ -494,6 +656,535 @@
         ]
       }
     },
+    "/audit/v1/admin/namespace/{namespace}/users/{userId}/events/critical": {
+      "get": {
+        "description": "This API is used to query user account critical events. \n**Note**:\n- If the namespace is publisher namespace, the result will contain events from all namespaces\n- If the namespace is game namespace:\n\t- The result will contain the events from current game namespace\n\t- If the current admin has permission in publisher namespace, then the result will also contain events from publisher namespace\n-------\t\nCritical events include:\n- Personal data request \u0026amp; account deletion in GDPR\n- Suspicious login\n- 2FA activation/deactivation\n",
+        "operationId": "AdminQueryAccountEventsV1",
+        "parameters": [
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user id",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Action of the events",
+            "in": "query",
+            "name": "action",
+            "type": "string"
+          },
+          {
+            "description": "Category of the events",
+            "in": "query",
+            "name": "category",
+            "type": "string"
+          },
+          {
+            "description": "End date of logs in unix timestamp format. Range between startDate should not exceed 30 day. Default: Current time in UTC.",
+            "in": "query",
+            "name": "endDate",
+            "type": "number"
+          },
+          {
+            "description": "Limit of query. Default: 20. Max: 500",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "Offset of query. Default : 0. ",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "description": "sort by timestamp, default: 1, asc: 1, desc: -1",
+            "in": "query",
+            "name": "order",
+            "type": "string"
+          },
+          {
+            "description": "property of the events",
+            "in": "query",
+            "name": "property",
+            "type": "string"
+          },
+          {
+            "description": "Start date of logs in unix timestamp format. Range between endDate should not exceed 30 day. Default: Current time in UTC minus 15 minutes.",
+            "in": "query",
+            "name": "startDate",
+            "type": "number"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.PaginatedAccountEventResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Query User Account Critical Events",
+        "tags": ["Account Events"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:EVENT [READ]"]
+          }
+        ]
+      }
+    },
+    "/audit/v1/admin/namespace/{namespace}/users/{userId}/events/critical/categories": {
+      "get": {
+        "description": "This API is used to query user account critical event categories of the target user. \n**Note**:\n- If the namespace is publisher namespace, the result will contain categories from all namespaces\n- If the namespace is game namespace:\n\t- The result will contain the categories from current game namespace\n\t- If the current admin has permission in publisher namespace, then the result will also contain categories from publisher namespace\n-------\t\nCritical events include:\n- Personal data request \u0026amp; account deletion in GDPR\n- Suspicious login\n- 2FA activation/deactivation\n",
+        "operationId": "AdminQueryAccountEventCategoriesV1",
+        "parameters": [
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user id",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "End date of logs in unix timestamp format. Range between startDate should not exceed 30 day. Default: Current time in UTC.",
+            "in": "query",
+            "name": "endDate",
+            "type": "number"
+          },
+          {
+            "description": "Start date of logs in unix timestamp format. Range between endDate should not exceed 30 day. Default: Current time in UTC minus 15 minutes.",
+            "in": "query",
+            "name": "startDate",
+            "type": "number"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.CategoryResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Query User Account Critical Events Categories",
+        "tags": ["Account Events"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:EVENT [READ]"]
+          }
+        ]
+      }
+    },
+    "/audit/v1/admin/namespaces/{namespace}/comments": {
+      "get": {
+        "description": "This API is used to query audit comments. Only support user access token.\nBackend will automatically populate displayName information from IAM, fail attempt will return empty display name on actorDisplayName response.\nactorDisplayName will refer to user uniqueDisplayName if set, then fallback to displayName if not set.\n",
+        "operationId": "AdminQueryAuditCommentsV1",
+        "parameters": [
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "log id",
+            "in": "query",
+            "name": "logId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 20,
+            "description": "Limit of query. Default: 20. Max: 500",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "default": 0,
+            "description": "Offset of query. Default : 0. ",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          },
+          {
+            "default": 1,
+            "description": "Sort of order by timestamp, default is 1 (ASC). note: 1 is asc, -1 is desc.",
+            "enum": ["-1", "1"],
+            "in": "query",
+            "name": "order",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.PaginatedAuditLogCommentsResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Query Audit Log Comments",
+        "tags": ["Audit Log Comment"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:AUDIT:COMMENT [READ]"]
+          }
+        ]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "This API is used to create audit comment. Only support user access token.\nactorDisplayName will refer to user displayName not a uniqueDisplayName.\n",
+        "operationId": "AdminCreateAuditCommentV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.AuditCommentCreateRequest"
+            }
+          },
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.AuditLogCommentInfo"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Create Audit Log Comment",
+        "tags": ["Audit Log Comment"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:AUDIT:COMMENT [CREATE]"]
+          }
+        ]
+      }
+    },
+    "/audit/v1/admin/namespaces/{namespace}/comments/{commentId}": {
+      "delete": {
+        "description": "This API is used to delete audit comment by Id. Only support user access token.\nThis action will remove comment permanently from database.\n",
+        "operationId": "AdminDeleteAuditCommentV1",
+        "parameters": [
+          {
+            "description": "comment ID",
+            "in": "path",
+            "name": "commentId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Delete Audit Log Comment By Id",
+        "tags": ["Audit Log Comment"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:AUDIT:COMMENT [DELETE]"]
+          }
+        ]
+      },
+      "patch": {
+        "consumes": ["application/json"],
+        "description": "This API is used to update audit comment. Only support user access token.\nThe path namespace should align with audit log objectNamespace.\nactorDisplayName will refer to user displayName not a uniqueDisplayName.\n",
+        "operationId": "AdminUpdateAuditCommentV1",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.AuditCommentUpdateRequest"
+            }
+          },
+          {
+            "description": "comment ID",
+            "in": "path",
+            "name": "commentId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.AuditLogCommentInfo"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Update Audit Log Comment By Id",
+        "tags": ["Audit Log Comment"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:AUDIT:COMMENT [UPDATE]"]
+          }
+        ]
+      }
+    },
+    "/audit/v1/admin/namespaces/{namespace}/users/{userId}/comments": {
+      "delete": {
+        "description": "This API is used to mask audit comments related to specific userId. For example: for GDPR account deletion.\nComment.actorUserId will be set to \u0026#34;Anonymous\u0026#34; and Comment.isActorActive to false.\nThis process is asynchronous and return http status code 202.\n",
+        "operationId": "AdminMaskAuditCommentsByUserIdV1",
+        "parameters": [
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Masks all comments made by a specific user identified by their user ID.",
+        "tags": ["Audit Log Comment"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId} [DELETE]"]
+          }
+        ]
+      }
+    },
     "/audit/v1/admin/users/me/account/histories": {
       "get": {
         "description": "This API is used to query admin own account histories.\n-------\nSupported **property**:\n- display_name\n- unique_display_name\n- username\n- country\n- date_of_birth\n- email\n- password\n",
@@ -506,6 +1197,7 @@
             "type": "number"
           },
           {
+            "default": 20,
             "description": "Limit of query. Default: 20. Max: 500",
             "in": "query",
             "name": "limit",
@@ -580,12 +1272,14 @@
             "type": "number"
           },
           {
+            "default": 20,
             "description": "Limit of query. Default: 20. Max: 500",
             "in": "query",
             "name": "limit",
             "type": "integer"
           },
           {
+            "default": 0,
             "description": "Offset of query. Default : 0. ",
             "in": "query",
             "name": "offset",
@@ -662,6 +1356,7 @@
     "/healthz": {
       "get": {
         "operationId": "GetHealthcheckInfo",
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -690,6 +1385,133 @@
       },
       "required": ["actionDisplayName", "actionName"]
     },
+    "models.AuditCommentCreateRequest": {
+      "properties": {
+        "comment": {
+          "type": "string"
+        },
+        "logId": {
+          "type": "string"
+        }
+      },
+      "required": ["comment", "logId"]
+    },
+    "models.AuditCommentUpdateRequest": {
+      "properties": {
+        "comment": {
+          "type": "string"
+        }
+      },
+      "required": ["comment"]
+    },
+    "models.AuditLogComment": {
+      "properties": {
+        "actorDisplayName": {
+          "type": "string"
+        },
+        "actorNamespace": {
+          "type": "string"
+        },
+        "actorUserId": {
+          "type": "string"
+        },
+        "auditId": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "id": {
+          "type": "string"
+        },
+        "isActorActive": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "isResourceOwner": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "objectNamespace": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "actorDisplayName",
+        "actorNamespace",
+        "actorUserId",
+        "auditId",
+        "content",
+        "createdAt",
+        "id",
+        "isActorActive",
+        "isResourceOwner"
+      ]
+    },
+    "models.AuditLogCommentInfo": {
+      "properties": {
+        "actorDisplayName": {
+          "type": "string"
+        },
+        "actorNamespace": {
+          "type": "string"
+        },
+        "actorUserId": {
+          "type": "string"
+        },
+        "auditId": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "id": {
+          "type": "string"
+        },
+        "isActorActive": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "isResourceOwner": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "objectNamespace": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "actorDisplayName",
+        "actorNamespace",
+        "actorUserId",
+        "auditId",
+        "content",
+        "createdAt",
+        "id",
+        "isActorActive",
+        "isResourceOwner"
+      ]
+    },
     "models.AuditLogInfo": {
       "properties": {
         "actionDisplayName": {
@@ -715,6 +1537,9 @@
         },
         "clientId": {
           "type": "string"
+        },
+        "commentInfo": {
+          "$ref": "#/definitions/models.SimpleCommentInfo"
         },
         "content": {
           "type": "object"
@@ -810,6 +1635,19 @@
       },
       "required": ["categories"]
     },
+    "models.Meta": {
+      "properties": {
+        "exportLogLimit": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "totalData": {
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "required": ["exportLogLimit", "totalData"]
+    },
     "models.ObjectType": {
       "properties": {
         "objectType": {
@@ -823,11 +1661,39 @@
       },
       "required": ["objectType", "objectTypeDisplayName"]
     },
+    "models.PaginatedAccountEventResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.UserAccountEvent"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/models.Paging"
+        }
+      },
+      "required": ["data", "paging"]
+    },
     "models.PaginatedAccountHistoryResponse": {
       "properties": {
         "data": {
           "items": {
             "$ref": "#/definitions/models.UserAccountHistory"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/models.Paging"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "models.PaginatedAuditLogCommentsResponse": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/models.AuditLogComment"
           },
           "type": "array"
         },
@@ -845,11 +1711,14 @@
           },
           "type": "array"
         },
+        "meta": {
+          "$ref": "#/definitions/models.Meta"
+        },
         "paging": {
           "$ref": "#/definitions/models.Paging"
         }
       },
-      "required": ["data", "paging"]
+      "required": ["data", "meta", "paging"]
     },
     "models.Paging": {
       "properties": {
@@ -886,6 +1755,9 @@
         },
         "clientId": {
           "type": "string"
+        },
+        "commentInfo": {
+          "$ref": "#/definitions/models.SimpleCommentInfo"
         },
         "deviceId": {
           "type": "string"
@@ -937,6 +1809,19 @@
         "timestamp"
       ]
     },
+    "models.SimpleCommentInfo": {
+      "properties": {
+        "hasComment": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "totalComment": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": ["hasComment", "totalComment"]
+    },
     "models.TimeRangeConfigResponse": {
       "properties": {
         "day": {
@@ -947,7 +1832,7 @@
       },
       "required": ["day"]
     },
-    "models.UserAccountHistory": {
+    "models.UserAccountEvent": {
       "properties": {
         "actionName": {
           "type": "string"
@@ -959,6 +1844,9 @@
           "type": "string"
         },
         "actorType": {
+          "type": "string"
+        },
+        "category": {
           "type": "string"
         },
         "createdAt": {
@@ -975,7 +1863,40 @@
           "type": "string"
         }
       },
-      "required": ["actionName", "actor", "actorNamespace", "actorType", "createdAt", "namespace", "payload", "userId"]
+      "required": ["actionName", "actor", "actorNamespace", "actorType", "category", "createdAt", "namespace", "payload", "userId"]
+    },
+    "models.UserAccountHistory": {
+      "properties": {
+        "actionName": {
+          "type": "string"
+        },
+        "actor": {
+          "type": "string"
+        },
+        "actorNamespace": {
+          "type": "string"
+        },
+        "actorType": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "createdAt": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "payload": {
+          "type": "object"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "required": ["actionName", "actor", "actorNamespace", "actorType", "category", "createdAt", "namespace", "payload", "userId"]
     },
     "response.ErrorResponse": {
       "properties": {
@@ -996,11 +1917,11 @@
     "path": "/audit/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-09-13T08:58:09+00:00",
-    "gitHash": "b9cadf99e66a6282efd9a8f9c01243bcf14202a3",
+    "buildDate": "2025-05-27T08:06:14+00:00",
+    "gitHash": "908562faefad939fbf22ecb783f2836576e0a112",
     "name": "justice-audit-log-service",
     "realm": "dev",
-    "version": "1.3.0",
-    "version-roles-seeding": "0.0.15"
+    "version": "1.7.0",
+    "version-roles-seeding": "1.2.88"
   }
 }

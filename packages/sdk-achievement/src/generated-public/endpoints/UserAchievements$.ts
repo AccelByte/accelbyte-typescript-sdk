@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -9,6 +9,8 @@
 import { Response, Validate } from '@accelbyte/sdk'
 import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
+import { BulkUnlockAchievementRequest } from '../../generated-definitions/BulkUnlockAchievementRequest.js'
+import { BulkUnlockAchievementResponseArray } from '../../generated-definitions/BulkUnlockAchievementResponseArray.js'
 import { PaginatedUserAchievementResponse } from '../../generated-definitions/PaginatedUserAchievementResponse.js'
 
 export class UserAchievements$ {
@@ -20,7 +22,13 @@ export class UserAchievements$ {
    */
   getAchievements_ByUserId(
     userId: string,
-    queryParams?: { limit?: number; offset?: number; preferUnlocked?: boolean | null; sortBy?: string | null; tags?: string[] }
+    queryParams?: {
+      limit?: number
+      offset?: number
+      preferUnlocked?: boolean | null
+      sortBy?: 'achievedAt' | 'achievedAt:asc' | 'achievedAt:desc' | 'createdAt' | 'createdAt:asc' | 'createdAt:desc'
+      tags?: string[]
+    }
   ): Promise<Response<PaginatedUserAchievementResponse>> {
     const params = { limit: 10, ...queryParams } as AxiosRequestConfig
     const url = '/achievement/v1/public/namespaces/{namespace}/users/{userId}/achievements'
@@ -33,6 +41,26 @@ export class UserAchievements$ {
       () => resultPromise,
       PaginatedUserAchievementResponse,
       'PaginatedUserAchievementResponse'
+    )
+  }
+  /**
+   * &lt;p&gt;Required permission &lt;code&gt;NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [UPDATE]&lt;/code&gt; and scope &lt;code&gt;social&lt;/code&gt;&lt;/p&gt;
+   */
+  updateAchievementBulkUnlock_ByUserId(
+    userId: string,
+    data: BulkUnlockAchievementRequest
+  ): Promise<Response<BulkUnlockAchievementResponseArray>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/achievement/v1/public/namespaces/{namespace}/users/{userId}/achievements/bulkUnlock'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      BulkUnlockAchievementResponseArray,
+      'BulkUnlockAchievementResponseArray'
     )
   }
   /**

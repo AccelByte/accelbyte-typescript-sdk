@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -76,18 +76,22 @@ export function ThirdPartyAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) 
 
   return {
     /**
+     * @deprecated
      * Required permission : &lt;code&gt;ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;delete third party config in a namespace.
      */
     deleteThirdpartyConfigSteam,
     /**
+     * @deprecated
      * Get third party config for specified namespace.
      */
     getThirdpartyConfigSteam,
     /**
+     * @deprecated
      * Create third party config in a namespace.
      */
     createThirdpartyConfigSteam,
     /**
+     * @deprecated
      * Update third party config in a namespace.
      */
     updateThirdpartyConfigSteam

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -25,6 +25,7 @@ export const Config = z.object({
   SpamMuteDuration: z.number().int(),
   defaultDictionaryLoaded: z.boolean().nullish(),
   enableClanChat: z.boolean().nullish(),
+  enablePmSendPlatformId: z.boolean().nullish(),
   maxChatMessageLength: z.number().int().nullish(),
   useDefaultDictionary: z.boolean().nullish()
 })

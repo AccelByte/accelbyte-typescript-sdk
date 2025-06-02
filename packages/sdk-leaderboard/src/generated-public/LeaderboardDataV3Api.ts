@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -57,20 +57,22 @@ export function LeaderboardDataV3Api(sdk: AccelByteSDK, args?: SdkSetConfigParam
 
   async function createUserBulk_ByLeaderboardCode_v3(
     leaderboardCode: string,
-    data: BulkUserIDsRequest
+    data: BulkUserIDsRequest,
+    queryParams?: { previousVersion?: number }
   ): Promise<AxiosResponse<BulkUserRankingResponseV3>> {
     const $ = new LeaderboardDataV3$(axiosInstance, namespace, useSchemaValidation)
-    const resp = await $.createUserBulk_ByLeaderboardCode_v3(leaderboardCode, data)
+    const resp = await $.createUserBulk_ByLeaderboardCode_v3(leaderboardCode, data, queryParams)
     if (resp.error) throw resp.error
     return resp.response
   }
 
   async function getUser_ByLeaderboardCode_ByUserId_v3(
     leaderboardCode: string,
-    userId: string
+    userId: string,
+    queryParams?: { previousVersion?: number }
   ): Promise<AxiosResponse<UserRankingResponseV3>> {
     const $ = new LeaderboardDataV3$(axiosInstance, namespace, useSchemaValidation)
-    const resp = await $.getUser_ByLeaderboardCode_ByUserId_v3(leaderboardCode, userId)
+    const resp = await $.getUser_ByLeaderboardCode_ByUserId_v3(leaderboardCode, userId, queryParams)
     if (resp.error) throw resp.error
     return resp.response
   }
@@ -78,7 +80,7 @@ export function LeaderboardDataV3Api(sdk: AccelByteSDK, args?: SdkSetConfigParam
   async function getCycle_ByLeaderboardCode_ByCycleId_v3(
     leaderboardCode: string,
     cycleId: string,
-    queryParams?: { limit?: number; offset?: number }
+    queryParams?: { limit?: number; offset?: number; previousVersion?: number }
   ): Promise<AxiosResponse<GetLeaderboardRankingResp>> {
     const $ = new LeaderboardDataV3$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getCycle_ByLeaderboardCode_ByCycleId_v3(leaderboardCode, cycleId, queryParams)

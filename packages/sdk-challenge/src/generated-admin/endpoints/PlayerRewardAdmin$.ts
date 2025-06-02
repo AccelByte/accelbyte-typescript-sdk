@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -20,9 +20,9 @@ export class PlayerRewardAdmin$ {
   // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
   /**
-   * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+   * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]
    */
-  createUserRewardClaim(data: ClaimUsersRewardsRequest[]): Promise<Response<ClaimUsersRewardsResponseArray>> {
+  updateUserRewardClaim(data: ClaimUsersRewardsRequest[]): Promise<Response<ClaimUsersRewardsResponseArray>> {
     const params = {} as AxiosRequestConfig
     const url = '/challenge/v1/admin/namespaces/{namespace}/users/rewards/claim'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
@@ -35,11 +35,18 @@ export class PlayerRewardAdmin$ {
     )
   }
   /**
-   * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]&lt;/li&gt;&lt;/ul&gt;
+   * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]
    */
   getRewards_ByUserId(
     userId: string,
-    queryParams?: { limit?: number; offset?: number; sortBy?: string | null; status?: 'CLAIMED' | 'UNCLAIMED' }
+    queryParams?: {
+      challengeCode?: string | null
+      goalProgressionId?: string | null
+      limit?: number
+      offset?: number
+      sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc' | 'updatedAt' | 'updatedAt:asc' | 'updatedAt:desc'
+      status?: 'CLAIMED' | 'UNCLAIMED'
+    }
   ): Promise<Response<ListUserRewardsResponse>> {
     const params = { limit: 20, ...queryParams } as AxiosRequestConfig
     const url = '/challenge/v1/admin/namespaces/{namespace}/users/{userId}/rewards'
@@ -55,9 +62,9 @@ export class PlayerRewardAdmin$ {
     )
   }
   /**
-   * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+   * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]
    */
-  createRewardClaim_ByUserId(userId: string, data: ClaimUserRewardsReq): Promise<Response<UserRewardArray>> {
+  updateRewardClaim_ByUserId(userId: string, data: ClaimUserRewardsReq): Promise<Response<UserRewardArray>> {
     const params = {} as AxiosRequestConfig
     const url = '/challenge/v1/admin/namespaces/{namespace}/users/{userId}/rewards/claim'
       .replace('{namespace}', this.namespace)
@@ -67,9 +74,9 @@ export class PlayerRewardAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserRewardArray, 'UserRewardArray')
   }
   /**
-   * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+   * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]
    */
-  createRewardClaim_ByUserId_ByChallengeCode(
+  updateRewardClaim_ByUserId_ByChallengeCode(
     userId: string,
     challengeCode: string,
     data: ClaimUserRewardsByGoalCodeRequest

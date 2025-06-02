@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -23,6 +23,8 @@ import { PaymentRequest } from '../../generated-definitions/PaymentRequest.js'
 import { PlatformWallet } from '../../generated-definitions/PlatformWallet.js'
 import { PlatformWalletConfigInfo } from '../../generated-definitions/PlatformWalletConfigInfo.js'
 import { PlatformWalletConfigUpdate } from '../../generated-definitions/PlatformWalletConfigUpdate.js'
+import { WalletConfigInfo } from '../../generated-definitions/WalletConfigInfo.js'
+import { WalletConfigUpdate } from '../../generated-definitions/WalletConfigUpdate.js'
 import { WalletInfo } from '../../generated-definitions/WalletInfo.js'
 import { WalletPagingSlicedResult } from '../../generated-definitions/WalletPagingSlicedResult.js'
 import { WalletTransactionPagingSlicedResult } from '../../generated-definitions/WalletTransactionPagingSlicedResult.js'
@@ -52,6 +54,26 @@ export class WalletAdmin$ {
       WalletPagingSlicedResult,
       'WalletPagingSlicedResult'
     )
+  }
+  /**
+   * get wallet config
+   */
+  getWalletConfig(): Promise<Response<WalletConfigInfo>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/wallet/config'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, WalletConfigInfo, 'WalletConfigInfo')
+  }
+  /**
+   * Update wallet config of a namespace
+   */
+  updateWalletConfig(data: WalletConfigUpdate): Promise<Response<WalletConfigInfo>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/wallet/config'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, WalletConfigInfo, 'WalletConfigInfo')
   }
   /**
    * Debit different users&#39; wallets.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: bulk credit result&lt;/li&gt;&lt;/ul&gt;
@@ -309,7 +331,7 @@ export class WalletAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, WalletInfo, 'WalletInfo')
   }
   /**
-   * Pay with user wallet by currency code and client platform.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/ul&gt;&lt;h2&gt;Restrictions for metadata&lt;/h2&gt; 1. Cannot use &lt;b&gt;&#34;.&#34;&lt;/b&gt; as the key name - &lt;pre&gt;{ &#34;data.2&#34;: &#34;value&#34; }&lt;/pre&gt; 2. Cannot use &lt;b&gt;&#34;$&#34;&lt;/b&gt; as the prefix in key names - &lt;pre&gt;{ &#34;$data&#34;: &#34;value&#34; }&lt;/pre&gt;
+   * Debit user wallet by currency code and client platform.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/ul&gt;&lt;h2&gt;Restrictions for metadata&lt;/h2&gt; 1. Cannot use &lt;b&gt;&#34;.&#34;&lt;/b&gt; as the key name - &lt;pre&gt;{ &#34;data.2&#34;: &#34;value&#34; }&lt;/pre&gt; 2. Cannot use &lt;b&gt;&#34;$&#34;&lt;/b&gt; as the prefix in key names - &lt;pre&gt;{ &#34;$data&#34;: &#34;value&#34; }&lt;/pre&gt;
    */
   updateDebitByWalletPlatform_ByUserId_ByCurrencyCode(
     userId: string,

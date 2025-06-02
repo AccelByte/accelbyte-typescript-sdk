@@ -7,4 +7,3 @@ import * as AccelByteSDK_GDPR from './index'
 
 // @ts-ignore
 window.AccelByteSDK_GDPR = AccelByteSDK_GDPR
-

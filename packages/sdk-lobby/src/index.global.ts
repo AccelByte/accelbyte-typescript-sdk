@@ -7,4 +7,3 @@ import * as AccelByteSDK_Lobby from './index'
 
 // @ts-ignore
 window.AccelByteSDK_Lobby = AccelByteSDK_Lobby
-

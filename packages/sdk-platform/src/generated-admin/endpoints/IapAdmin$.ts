@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -18,15 +18,25 @@ import { GoogleIapConfigRequest } from '../../generated-definitions/GoogleIapCon
 import { IapConsumeHistoryPagingSlicedResult } from '../../generated-definitions/IapConsumeHistoryPagingSlicedResult.js'
 import { IapItemConfigInfo } from '../../generated-definitions/IapItemConfigInfo.js'
 import { IapItemConfigUpdate } from '../../generated-definitions/IapItemConfigUpdate.js'
+import { IapOrderConsumeDetailInfoArray } from '../../generated-definitions/IapOrderConsumeDetailInfoArray.js'
+import { IapOrderInfo } from '../../generated-definitions/IapOrderInfo.js'
+import { IapOrderLineItemInfoArray } from '../../generated-definitions/IapOrderLineItemInfoArray.js'
 import { IapOrderPagingSlicedResult } from '../../generated-definitions/IapOrderPagingSlicedResult.js'
+import { IapOrderShortInfo } from '../../generated-definitions/IapOrderShortInfo.js'
 import { MockIapReceipt } from '../../generated-definitions/MockIapReceipt.js'
 import { OculusIapConfigInfo } from '../../generated-definitions/OculusIapConfigInfo.js'
 import { OculusIapConfigRequest } from '../../generated-definitions/OculusIapConfigRequest.js'
 import { PlayStationIapConfigInfo } from '../../generated-definitions/PlayStationIapConfigInfo.js'
 import { PlaystationIapConfigRequest } from '../../generated-definitions/PlaystationIapConfigRequest.js'
+import { ResetJobRequest } from '../../generated-definitions/ResetJobRequest.js'
+import { SteamAbnormalTransactionPagingSlicedResult } from '../../generated-definitions/SteamAbnormalTransactionPagingSlicedResult.js'
 import { SteamIapConfig } from '../../generated-definitions/SteamIapConfig.js'
 import { SteamIapConfigInfo } from '../../generated-definitions/SteamIapConfigInfo.js'
 import { SteamIapConfigRequest } from '../../generated-definitions/SteamIapConfigRequest.js'
+import { SteamReportInfoPagingSlicedResult } from '../../generated-definitions/SteamReportInfoPagingSlicedResult.js'
+import { SteamReportJobInfo } from '../../generated-definitions/SteamReportJobInfo.js'
+import { SteamReportJobInfoArray } from '../../generated-definitions/SteamReportJobInfoArray.js'
+import { SteamSyncByTransactionRequest } from '../../generated-definitions/SteamSyncByTransactionRequest.js'
 import { TestResult } from '../../generated-definitions/TestResult.js'
 import { TwitchIapConfigInfo } from '../../generated-definitions/TwitchIapConfigInfo.js'
 import { TwitchIapConfigRequest } from '../../generated-definitions/TwitchIapConfigRequest.js'
@@ -37,6 +47,21 @@ export class IapAdmin$ {
   // @ts-ignore
   // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
+  /**
+   * Query steam report info
+   */
+  getIapSteamJob(): Promise<Response<SteamReportJobInfoArray>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/iap/steam/job'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      SteamReportJobInfoArray,
+      'SteamReportJobInfoArray'
+    )
+  }
   /**
    * Delete xbl iap config.
    */
@@ -258,7 +283,7 @@ export class IapAdmin$ {
       offset?: number
       productId?: string | null
       startTime?: string | null
-      status?: 'FAILED' | 'FULFILLED' | 'VERIFIED'
+      status?: 'FAILED' | 'FULFILLED' | 'PARTIAL_REVOKED' | 'REVOKED' | 'REVOKE_FAILED' | 'VERIFIED'
       type?: 'APPLE' | 'EPICGAMES' | 'GOOGLE' | 'OCULUS' | 'PLAYSTATION' | 'STADIA' | 'STEAM' | 'TWITCH' | 'XBOX'
     }
   ): Promise<Response<IapOrderPagingSlicedResult>> {
@@ -285,6 +310,14 @@ export class IapAdmin$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, XblIapConfigInfo, 'XblIapConfigInfo')
+  }
+
+  updateIapSteamJobReset(data: ResetJobRequest): Promise<Response<SteamReportJobInfo>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/iap/steam/job/reset'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, SteamReportJobInfo, 'SteamReportJobInfo')
   }
   /**
    * Delete epic games iap config.
@@ -405,6 +438,42 @@ export class IapAdmin$ {
       'IapOrderPagingSlicedResult'
     )
   }
+
+  getIapSteamReportHistories(queryParams?: {
+    limit?: number
+    offset?: number
+    orderId?: string | null
+    processStatus?: 'ERROR' | 'IGNORED' | 'PROCESSED'
+    steamId?: string | null
+  }): Promise<Response<SteamReportInfoPagingSlicedResult>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/iap/steam/report/histories'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      SteamReportInfoPagingSlicedResult,
+      'SteamReportInfoPagingSlicedResult'
+    )
+  }
+  /**
+   * Get IAP Order Consume Details by IAP Order Number.
+   */
+  getConsumedetails_ByIapOrderNo(iapOrderNo: string): Promise<Response<IapOrderConsumeDetailInfoArray>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/iap/{iapOrderNo}/consumedetails'
+      .replace('{namespace}', this.namespace)
+      .replace('{iapOrderNo}', iapOrderNo)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      IapOrderConsumeDetailInfoArray,
+      'IapOrderConsumeDetailInfoArray'
+    )
+  }
   /**
    * Validate playstation iap config. Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: Test Results&lt;/li&gt;&lt;/ul&gt;
    */
@@ -424,6 +493,24 @@ export class IapAdmin$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, TestResult, 'TestResult')
+  }
+
+  getIapSteamAbnormalTransactions(queryParams?: {
+    limit?: number
+    offset?: number
+    orderId?: string | null
+    steamId?: string | null
+  }): Promise<Response<SteamAbnormalTransactionPagingSlicedResult>> {
+    const params = { limit: 20, ...queryParams } as AxiosRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/iap/steam/abnormal_transactions'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      SteamAbnormalTransactionPagingSlicedResult,
+      'SteamAbnormalTransactionPagingSlicedResult'
+    )
   }
   /**
    * &lt;b&gt;[TEST FACILITY ONLY] Forbidden in live environment. &lt;/b&gt; Mock fulfill iap item without validate receipt.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
@@ -462,6 +549,56 @@ export class IapAdmin$ {
       () => resultPromise,
       IapConsumeHistoryPagingSlicedResult,
       'IapConsumeHistoryPagingSlicedResult'
+    )
+  }
+  /**
+   * Only support steam transaction mode
+   */
+  updateRefundSteamIap_ByIapOrderNo(iapOrderNo: string): Promise<Response<IapOrderInfo>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/iap/steam/orders/{iapOrderNo}/refund'
+      .replace('{namespace}', this.namespace)
+      .replace('{iapOrderNo}', iapOrderNo)
+    const resultPromise = this.axiosInstance.put(url, null, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, IapOrderInfo, 'IapOrderInfo')
+  }
+
+  updateIapSteamSyncByTransaction_ByUserId(userId: string, data: SteamSyncByTransactionRequest): Promise<Response<IapOrderShortInfo>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/users/{userId}/iap/steam/syncByTransaction'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, IapOrderShortInfo, 'IapOrderShortInfo')
+  }
+
+  updateIapSteamSyncAbnormalTransaction_ByUserId(userId: string): Promise<Response<IapOrderShortInfo>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/users/{userId}/iap/steam/syncAbnormalTransaction'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.put(url, null, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, IapOrderShortInfo, 'IapOrderShortInfo')
+  }
+  /**
+   * Query IAP order ine items.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: paginated iap orders&lt;/li&gt;&lt;/ul&gt;
+   */
+  getLineItemsIap_ByUserId_ByIapOrderNo(userId: string, iapOrderNo: string): Promise<Response<IapOrderLineItemInfoArray>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/users/{userId}/iap/orders/{iapOrderNo}/line_items'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{iapOrderNo}', iapOrderNo)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      IapOrderLineItemInfoArray,
+      'IapOrderLineItemInfoArray'
     )
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -22,8 +22,16 @@ export class FleetsAdmin$ {
   /**
    * Required Permission: ADMIN:NAMESPACE:{namespace}:ARMADA:FLEET [READ]
    */
-  getFleets(): Promise<Response<FleetListResponse>> {
-    const params = {} as AxiosRequestConfig
+  getFleets(queryParams?: {
+    active?: boolean | null
+    count?: number
+    name?: string | null
+    offset?: number
+    region?: string | null
+    sortBy?: 'active' | 'name'
+    sortDirection?: 'asc' | 'desc'
+  }): Promise<Response<FleetListResponse>> {
+    const params = { count: 100, ...queryParams } as AxiosRequestConfig
     const url = '/ams/v1/admin/namespaces/{namespace}/fleets'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -98,9 +98,9 @@ export function InventoriesAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam)
     return resp.response
   }
 
-  async function createPurchaseable_ByUserId(userId: string, data: PurchaseValidationReq): Promise<AxiosResponse<unknown>> {
+  async function updatePurchaseable_ByUserId(userId: string, data: PurchaseValidationReq): Promise<AxiosResponse<unknown>> {
     const $ = new InventoriesAdmin$(axiosInstance, namespace, useSchemaValidation)
-    const resp = await $.createPurchaseable_ByUserId(userId, data)
+    const resp = await $.updatePurchaseable_ByUserId(userId, data)
     if (resp.error) throw resp.error
     return resp.response
   }
@@ -140,7 +140,7 @@ export function InventoriesAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam)
     /**
      *  Validate purchase ecommerce item. Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]
      */
-    createPurchaseable_ByUserId,
+    updatePurchaseable_ByUserId,
     /**
      *  Updating user inventories. Positive value will increase MaxSlots from existing value Negative value will decrease MaxSlots from existing value Limited slots can not be changed to unlimited, vice versa Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]
      */

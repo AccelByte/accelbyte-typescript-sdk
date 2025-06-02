@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -17,6 +17,7 @@ import { AppUpdate } from '../../generated-definitions/AppUpdate.js'
 import { AvailablePredicateArray } from '../../generated-definitions/AvailablePredicateArray.js'
 import { BasicItemArray } from '../../generated-definitions/BasicItemArray.js'
 import { BulkRegionDataChangeRequest } from '../../generated-definitions/BulkRegionDataChangeRequest.js'
+import { ChangeStatusItemRequest } from '../../generated-definitions/ChangeStatusItemRequest.js'
 import { EstimatedPriceInfo } from '../../generated-definitions/EstimatedPriceInfo.js'
 import { FullAppInfo } from '../../generated-definitions/FullAppInfo.js'
 import { FullItemInfo } from '../../generated-definitions/FullItemInfo.js'
@@ -27,6 +28,7 @@ import { InGameItemSync } from '../../generated-definitions/InGameItemSync.js'
 import { ItemAcquireRequest } from '../../generated-definitions/ItemAcquireRequest.js'
 import { ItemAcquireResult } from '../../generated-definitions/ItemAcquireResult.js'
 import { ItemCreate } from '../../generated-definitions/ItemCreate.js'
+import { ItemDependency } from '../../generated-definitions/ItemDependency.js'
 import { ItemDynamicDataInfo } from '../../generated-definitions/ItemDynamicDataInfo.js'
 import { ItemId } from '../../generated-definitions/ItemId.js'
 import { ItemIdArray } from '../../generated-definitions/ItemIdArray.js'
@@ -71,6 +73,7 @@ export enum Key_ItemAdmin {
   Disable_ByItemId = 'Platform.ItemAdmin.Disable_ByItemId',
   Dynamic_ByItemId = 'Platform.ItemAdmin.Dynamic_ByItemId',
   ItemsByFeaturesBasic = 'Platform.ItemAdmin.ItemsByFeaturesBasic',
+  References_ByItemId = 'Platform.ItemAdmin.References_ByItemId',
   Feature_ByItemId_ByFeature = 'Platform.ItemAdmin.Feature_ByItemId_ByFeature',
   PurchaseCondition_ByItemId = 'Platform.ItemAdmin.PurchaseCondition_ByItemId',
   ItemPurchaseConditionValidate = 'Platform.ItemAdmin.ItemPurchaseConditionValidate'
@@ -532,7 +535,7 @@ export const useItemAdminApi_DeleteItem_ByItemIdMutation = (
     UseMutationOptions<
       unknown,
       AxiosError<ApiError>,
-      SdkSetConfigParam & { itemId: string; queryParams?: { force?: boolean | null; storeId?: string | null } }
+      SdkSetConfigParam & { itemId: string; queryParams?: { featuresToCheck?: string[]; force?: boolean | null; storeId?: string | null } }
     >,
     'mutationKey'
   >,
@@ -540,10 +543,13 @@ export const useItemAdminApi_DeleteItem_ByItemIdMutation = (
 ): UseMutationResult<
   unknown,
   AxiosError<ApiError>,
-  SdkSetConfigParam & { itemId: string; queryParams?: { force?: boolean | null; storeId?: string | null } }
+  SdkSetConfigParam & { itemId: string; queryParams?: { featuresToCheck?: string[]; force?: boolean | null; storeId?: string | null } }
 > => {
   const mutationFn = async (
-    input: SdkSetConfigParam & { itemId: string; queryParams?: { force?: boolean | null; storeId?: string | null } }
+    input: SdkSetConfigParam & {
+      itemId: string
+      queryParams?: { featuresToCheck?: string[]; force?: boolean | null; storeId?: string | null }
+    }
   ) => {
     const response = await ItemAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).deleteItem_ByItemId(
       input.itemId,
@@ -1285,18 +1291,25 @@ export const useItemAdminApi_UpdateAcquire_ByItemIdMutation = (
 export const useItemAdminApi_UpdateDisable_ByItemIdMutation = (
   sdk: AccelByteSDK,
   options?: Omit<
-    UseMutationOptions<FullItemInfo, AxiosError<ApiError>, SdkSetConfigParam & { itemId: string; queryParams: { storeId: string | null } }>,
+    UseMutationOptions<
+      FullItemInfo,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { itemId: string; data: ChangeStatusItemRequest; queryParams: { storeId: string | null } }
+    >,
     'mutationKey'
   >,
   callback?: (data: FullItemInfo) => void
 ): UseMutationResult<
   FullItemInfo,
   AxiosError<ApiError>,
-  SdkSetConfigParam & { itemId: string; queryParams: { storeId: string | null } }
+  SdkSetConfigParam & { itemId: string; data: ChangeStatusItemRequest; queryParams: { storeId: string | null } }
 > => {
-  const mutationFn = async (input: SdkSetConfigParam & { itemId: string; queryParams: { storeId: string | null } }) => {
+  const mutationFn = async (
+    input: SdkSetConfigParam & { itemId: string; data: ChangeStatusItemRequest; queryParams: { storeId: string | null } }
+  ) => {
     const response = await ItemAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateDisable_ByItemId(
       input.itemId,
+      input.data,
       input.queryParams
     )
     callback && callback(response.data)
@@ -1369,6 +1382,39 @@ export const useItemAdminApi_GetItemsByFeaturesBasic = (
 
   return useQuery<BasicItemArray, AxiosError<ApiError>>({
     queryKey: [Key_ItemAdmin.ItemsByFeaturesBasic, input],
+    queryFn: queryFn(sdk, input),
+    ...options
+  })
+}
+
+/**
+ * This API is used to get references for an item
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ItemAdmin.References_ByItemId, input]
+ * }
+ * ```
+ */
+export const useItemAdminApi_GetReferences_ByItemId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { itemId: string; queryParams?: { featuresToCheck?: string[]; storeId?: string | null } },
+  options?: Omit<UseQueryOptions<ItemDependency, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<ItemDependency>) => void
+): UseQueryResult<ItemDependency, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useItemAdminApi_GetReferences_ByItemId>[1]) => async () => {
+    const response = await ItemAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getReferences_ByItemId(
+      input.itemId,
+      input.queryParams
+    )
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<ItemDependency, AxiosError<ApiError>>({
+    queryKey: [Key_ItemAdmin.References_ByItemId, input],
     queryFn: queryFn(sdk, input),
     ...options
   })

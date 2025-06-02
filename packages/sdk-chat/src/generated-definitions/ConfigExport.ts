@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -11,6 +11,7 @@ export const ConfigExport = z.object({
   concurrentUsersLimit: z.number().int(),
   enableClanChat: z.boolean().nullish(),
   enableManualTopicCreation: z.boolean().nullish(),
+  enablePmSendPlatformId: z.boolean().nullish(),
   enableProfanityFilter: z.boolean().nullish(),
   filterAppName: z.string().nullish(),
   filterParam: z.string().nullish(),

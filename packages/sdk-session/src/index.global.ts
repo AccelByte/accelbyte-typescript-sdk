@@ -7,4 +7,3 @@ import * as AccelByteSDK_Session from './index'
 
 // @ts-ignore
 window.AccelByteSDK_Session = AccelByteSDK_Session
-

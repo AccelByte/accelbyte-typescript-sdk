@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -46,10 +46,12 @@ export class ArtifactsAdmin$ {
     offset?: number
     region?: string | null
     serverId?: string | null
+    sortBy?: string | null
+    sortDirection?: 'asc' | 'desc'
     startDate?: string | null
     status?: string | null
   }): Promise<Response<ArtifactListResponse>> {
-    const params = { count: 100, ...queryParams } as AxiosRequestConfig
+    const params = { count: 100, sortBy: 'created_on', sortDirection: 'desc', ...queryParams } as AxiosRequestConfig
     const url = '/ams/v1/admin/namespaces/{namespace}/artifacts'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 

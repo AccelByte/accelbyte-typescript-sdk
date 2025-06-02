@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -50,7 +50,7 @@ export function LoginAllowlistAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigPar
     return resp.response
   }
 
-  async function updateLoginAllowlist_v3(data: LoginAllowlistRequest): Promise<AxiosResponse<LoginAllowlistResponse>> {
+  async function updateLoginAllowlist_v3(data: LoginAllowlistRequest): Promise<AxiosResponse<unknown>> {
     const $ = new LoginAllowlistAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateLoginAllowlist_v3(data)
     if (resp.error) throw resp.error

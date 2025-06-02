@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -21,10 +21,12 @@ import { EpicGamesReconcileResultArray } from '../../generated-definitions/EpicG
 import { GoogleIapReceipt } from '../../generated-definitions/GoogleIapReceipt.js'
 import { GoogleReceiptResolveResult } from '../../generated-definitions/GoogleReceiptResolveResult.js'
 import { IapItemMappingInfo } from '../../generated-definitions/IapItemMappingInfo.js'
+import { IapOrderShortInfo } from '../../generated-definitions/IapOrderShortInfo.js'
 import { OculusReconcileResultArray } from '../../generated-definitions/OculusReconcileResultArray.js'
 import { PlayStationMultiServiceLabelsReconcileRequest } from '../../generated-definitions/PlayStationMultiServiceLabelsReconcileRequest.js'
 import { PlayStationReconcileRequest } from '../../generated-definitions/PlayStationReconcileRequest.js'
 import { PlayStationReconcileResultArray } from '../../generated-definitions/PlayStationReconcileResultArray.js'
+import { SteamSyncByTransactionRequest } from '../../generated-definitions/SteamSyncByTransactionRequest.js'
 import { SteamSyncRequest } from '../../generated-definitions/SteamSyncRequest.js'
 import { TwitchSyncRequest } from '../../generated-definitions/TwitchSyncRequest.js'
 import { TwitchSyncResultArray } from '../../generated-definitions/TwitchSyncResultArray.js'
@@ -44,7 +46,9 @@ export enum Key_Iap {
   IapEpicgameSync_ByUserId = 'Platform.Iap.IapEpicgameSync_ByUserId',
   IapGoogleReceipt_ByUserId = 'Platform.Iap.IapGoogleReceipt_ByUserId',
   IapAppleReceipt_ByUserId_v2 = 'Platform.Iap.IapAppleReceipt_ByUserId_v2',
-  IapPsnSyncMultiServiceLabel_ByUserId = 'Platform.Iap.IapPsnSyncMultiServiceLabel_ByUserId'
+  IapSteamSyncByTransaction_ByUserId = 'Platform.Iap.IapSteamSyncByTransaction_ByUserId',
+  IapPsnSyncMultiServiceLabel_ByUserId = 'Platform.Iap.IapPsnSyncMultiServiceLabel_ByUserId',
+  IapSteamSyncAbnormalTransaction_ByUserId = 'Platform.Iap.IapSteamSyncAbnormalTransaction_ByUserId'
 }
 
 /**
@@ -476,6 +480,49 @@ export const useIapApi_UpdateIapAppleReceipt_ByUserIdMutation_v2 = (
 }
 
 /**
+ * Sync steam in app purchase by transaction.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_Iap.IapSteamSyncByTransaction_ByUserId, input]
+ * }
+ * ```
+ */
+export const useIapApi_UpdateIapSteamSyncByTransaction_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<
+      IapOrderShortInfo,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { userId: string; data: SteamSyncByTransactionRequest }
+    >,
+    'mutationKey'
+  >,
+  callback?: (data: IapOrderShortInfo) => void
+): UseMutationResult<
+  IapOrderShortInfo,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { userId: string; data: SteamSyncByTransactionRequest }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string; data: SteamSyncByTransactionRequest }) => {
+    const response = await IapApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateIapSteamSyncByTransaction_ByUserId(input.userId, input.data)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_Iap.IapSteamSyncByTransaction_ByUserId],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
  * Synchronize with entitlements in PSN Store with multiple service labels.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: result of synchronization&lt;/li&gt;&lt;/ul&gt;
  *
  * #### Default Query Options
@@ -513,6 +560,27 @@ export const useIapApi_UpdateIapPsnSyncMultiServiceLabel_ByUserIdMutation = (
 
   return useMutation({
     mutationKey: [Key_Iap.IapPsnSyncMultiServiceLabel_ByUserId],
+    mutationFn,
+    ...options
+  })
+}
+
+export const useIapApi_UpdateIapSteamSyncAbnormalTransaction_ByUserIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<IapOrderShortInfo, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }>, 'mutationKey'>,
+  callback?: (data: IapOrderShortInfo) => void
+): UseMutationResult<IapOrderShortInfo, AxiosError<ApiError>, SdkSetConfigParam & { userId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { userId: string }) => {
+    const response = await IapApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).updateIapSteamSyncAbnormalTransaction_ByUserId(input.userId)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_Iap.IapSteamSyncAbnormalTransaction_ByUserId],
     mutationFn,
     ...options
   })

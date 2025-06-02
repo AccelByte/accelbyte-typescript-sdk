@@ -3,7 +3,7 @@
   "info": {
     "description": "Justice Lobby Server",
     "title": "justice-lobby-server",
-    "version": "3.36.0"
+    "version": "3.38.3"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -499,7 +499,7 @@
     "/friends/namespaces/{namespace}/me/request": {
       "post": {
         "consumes": ["application/json"],
-        "description": "Client should provide either friendID or friendPublicID. If both are provided, friendID will be chosen to be used.\nThis endpoint will only send a pending invite that can be either rejected/accepted\n",
+        "description": "Client should provide either friendID or friendPublicID. If both are provided, friendID will be chosen to be used.\nThis endpoint will only send a pending invite that can be either rejected/accepted.\nMetadata is optional parameter which will be sent over via friend request notification.\n",
         "operationId": "userRequestFriend",
         "parameters": [
           {
@@ -1491,7 +1491,7 @@
     },
     "/lobby/v1/admin/config/namespaces/{namespace}/export": {
       "get": {
-        "description": "\n\t\t\t\tExport lobby configuration to a json file. The file can then be imported from the /import endpoint. \n\t\t\t\t\nJSON Schema of the exported file:\n{\n \u0026#34;required\u0026#34;: [\n  \u0026#34;namespace\u0026#34;,\n  \u0026#34;entitlementItemID\u0026#34;,\n  \u0026#34;chatRateLimitDuration\u0026#34;,\n  \u0026#34;unregisterDelay\u0026#34;,\n  \u0026#34;generalRateLimitDuration\u0026#34;,\n  \u0026#34;autoKickOnDisconnectDelay\u0026#34;,\n  \u0026#34;chatRateLimitBurst\u0026#34;,\n  \u0026#34;generalRateLimitBurst\u0026#34;,\n  \u0026#34;maxPartyMember\u0026#34;,\n  \u0026#34;autoKickOnDisconnect\u0026#34;,\n  \u0026#34;profanityFilter\u0026#34;,\n  \u0026#34;enableChat\u0026#34;,\n  \u0026#34;entitlementCheck\u0026#34;,\n  \u0026#34;cancelTicketOnDisconnect\u0026#34;,\n  \u0026#34;concurrentUsersLimit\u0026#34;,\n  \u0026#34;readyConsentTimeout\u0026#34;,\n  \u0026#34;disableInvitationOnJoinParty\u0026#34;,\n  \u0026#34;allowJoinPartyDuringMatchmaking\u0026#34;,\n  \u0026#34;allowInviteNonConnectedUser\u0026#34;,\n  \u0026#34;keepPresenceActivityOnDisconnect\u0026#34;,\n  \u0026#34;maxDSWaitTime\u0026#34;,\n  \u0026#34;maxFriendsLimit\u0026#34;\n ],\n \u0026#34;properties\u0026#34;: {\n  \u0026#34;allowInviteNonConnectedUser\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;allowJoinPartyDuringMatchmaking\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;autoKickOnDisconnect\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;autoKickOnDisconnectDelay\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int64\u0026#34;\n  },\n  \u0026#34;cancelTicketOnDisconnect\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;chatRateLimitBurst\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int32\u0026#34;\n  },\n  \u0026#34;chatRateLimitDuration\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int64\u0026#34;\n  },\n  \u0026#34;concurrentUsersLimit\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int32\u0026#34;\n  },\n  \u0026#34;disableInvitationOnJoinParty\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;enableChat\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;entitlementCheck\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;entitlementItemID\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;string\u0026#34;\n  },\n  \u0026#34;generalRateLimitBurst\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int32\u0026#34;\n  },\n  \u0026#34;generalRateLimitDuration\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int64\u0026#34;\n  },\n  \u0026#34;keepPresenceActivityOnDisconnect\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;maxDSWaitTime\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int64\u0026#34;\n  },\n  \u0026#34;maxFriendsLimit\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int32\u0026#34;\n  },\n  \u0026#34;maxPartyMember\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int32\u0026#34;\n  },\n  \u0026#34;namespace\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;string\u0026#34;\n  },\n  \u0026#34;profanityFilter\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;readyConsentTimeout\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int64\u0026#34;\n  },\n  \u0026#34;unregisterDelay\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int64\u0026#34;\n  }\n }\n}",
+        "description": "\n\t\t\t\tExport lobby configuration to a json file. The file can then be imported from the /import endpoint. \n\t\t\t\t\nJSON Schema of the exported file:\n{\n \u0026#34;required\u0026#34;: [\n  \u0026#34;namespace\u0026#34;,\n  \u0026#34;entitlementItemID\u0026#34;,\n  \u0026#34;chatRateLimitDuration\u0026#34;,\n  \u0026#34;unregisterDelay\u0026#34;,\n  \u0026#34;generalRateLimitDuration\u0026#34;,\n  \u0026#34;autoKickOnDisconnectDelay\u0026#34;,\n  \u0026#34;chatRateLimitBurst\u0026#34;,\n  \u0026#34;generalRateLimitBurst\u0026#34;,\n  \u0026#34;maxPartyMember\u0026#34;,\n  \u0026#34;autoKickOnDisconnect\u0026#34;,\n  \u0026#34;profanityFilter\u0026#34;,\n  \u0026#34;enableChat\u0026#34;,\n  \u0026#34;entitlementCheck\u0026#34;,\n  \u0026#34;cancelTicketOnDisconnect\u0026#34;,\n  \u0026#34;concurrentUsersLimit\u0026#34;,\n  \u0026#34;readyConsentTimeout\u0026#34;,\n  \u0026#34;disableInvitationOnJoinParty\u0026#34;,\n  \u0026#34;allowJoinPartyDuringMatchmaking\u0026#34;,\n  \u0026#34;allowInviteNonConnectedUser\u0026#34;,\n  \u0026#34;keepPresenceActivityOnDisconnect\u0026#34;,\n  \u0026#34;maxDSWaitTime\u0026#34;,\n  \u0026#34;maxFriendsLimit\u0026#34;,\n  \u0026#34;requestMetadataMaxSize\u0026#34;\n ],\n \u0026#34;properties\u0026#34;: {\n  \u0026#34;allowInviteNonConnectedUser\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;allowJoinPartyDuringMatchmaking\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;autoKickOnDisconnect\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;autoKickOnDisconnectDelay\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int64\u0026#34;\n  },\n  \u0026#34;cancelTicketOnDisconnect\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;chatRateLimitBurst\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int32\u0026#34;\n  },\n  \u0026#34;chatRateLimitDuration\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int64\u0026#34;\n  },\n  \u0026#34;concurrentUsersLimit\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int32\u0026#34;\n  },\n  \u0026#34;disableInvitationOnJoinParty\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;enableChat\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;entitlementCheck\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;entitlementItemID\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;string\u0026#34;\n  },\n  \u0026#34;generalRateLimitBurst\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int32\u0026#34;\n  },\n  \u0026#34;generalRateLimitDuration\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int64\u0026#34;\n  },\n  \u0026#34;keepPresenceActivityOnDisconnect\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;maxDSWaitTime\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int64\u0026#34;\n  },\n  \u0026#34;maxFriendsLimit\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int32\u0026#34;\n  },\n  \u0026#34;maxPartyMember\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int32\u0026#34;\n  },\n  \u0026#34;namespace\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;string\u0026#34;\n  },\n  \u0026#34;profanityFilter\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;boolean\u0026#34;\n  },\n  \u0026#34;readyConsentTimeout\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int64\u0026#34;\n  },\n  \u0026#34;requestMetadataMaxSize\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int32\u0026#34;\n  },\n  \u0026#34;unregisterDelay\u0026#34;: {\n   \u0026#34;type\u0026#34;: \u0026#34;integer\u0026#34;,\n   \u0026#34;format\u0026#34;: \u0026#34;int64\u0026#34;\n  }\n }\n}",
         "operationId": "adminExportConfigV1",
         "parameters": [
           {
@@ -1505,7 +1505,7 @@
         "produces": ["application/json"],
         "responses": {
           "200": {
-            "description": "OK\nJSON Schema of the exported file:\n{\n \"required\": [\n  \"namespace\",\n  \"entitlementItemID\",\n  \"chatRateLimitDuration\",\n  \"unregisterDelay\",\n  \"generalRateLimitDuration\",\n  \"autoKickOnDisconnectDelay\",\n  \"chatRateLimitBurst\",\n  \"generalRateLimitBurst\",\n  \"maxPartyMember\",\n  \"autoKickOnDisconnect\",\n  \"profanityFilter\",\n  \"enableChat\",\n  \"entitlementCheck\",\n  \"cancelTicketOnDisconnect\",\n  \"concurrentUsersLimit\",\n  \"readyConsentTimeout\",\n  \"disableInvitationOnJoinParty\",\n  \"allowJoinPartyDuringMatchmaking\",\n  \"allowInviteNonConnectedUser\",\n  \"keepPresenceActivityOnDisconnect\",\n  \"maxDSWaitTime\",\n  \"maxFriendsLimit\"\n ],\n \"properties\": {\n  \"allowInviteNonConnectedUser\": {\n   \"type\": \"boolean\"\n  },\n  \"allowJoinPartyDuringMatchmaking\": {\n   \"type\": \"boolean\"\n  },\n  \"autoKickOnDisconnect\": {\n   \"type\": \"boolean\"\n  },\n  \"autoKickOnDisconnectDelay\": {\n   \"type\": \"integer\",\n   \"format\": \"int64\"\n  },\n  \"cancelTicketOnDisconnect\": {\n   \"type\": \"boolean\"\n  },\n  \"chatRateLimitBurst\": {\n   \"type\": \"integer\",\n   \"format\": \"int32\"\n  },\n  \"chatRateLimitDuration\": {\n   \"type\": \"integer\",\n   \"format\": \"int64\"\n  },\n  \"concurrentUsersLimit\": {\n   \"type\": \"integer\",\n   \"format\": \"int32\"\n  },\n  \"disableInvitationOnJoinParty\": {\n   \"type\": \"boolean\"\n  },\n  \"enableChat\": {\n   \"type\": \"boolean\"\n  },\n  \"entitlementCheck\": {\n   \"type\": \"boolean\"\n  },\n  \"entitlementItemID\": {\n   \"type\": \"string\"\n  },\n  \"generalRateLimitBurst\": {\n   \"type\": \"integer\",\n   \"format\": \"int32\"\n  },\n  \"generalRateLimitDuration\": {\n   \"type\": \"integer\",\n   \"format\": \"int64\"\n  },\n  \"keepPresenceActivityOnDisconnect\": {\n   \"type\": \"boolean\"\n  },\n  \"maxDSWaitTime\": {\n   \"type\": \"integer\",\n   \"format\": \"int64\"\n  },\n  \"maxFriendsLimit\": {\n   \"type\": \"integer\",\n   \"format\": \"int32\"\n  },\n  \"maxPartyMember\": {\n   \"type\": \"integer\",\n   \"format\": \"int32\"\n  },\n  \"namespace\": {\n   \"type\": \"string\"\n  },\n  \"profanityFilter\": {\n   \"type\": \"boolean\"\n  },\n  \"readyConsentTimeout\": {\n   \"type\": \"integer\",\n   \"format\": \"int64\"\n  },\n  \"unregisterDelay\": {\n   \"type\": \"integer\",\n   \"format\": \"int64\"\n  }\n }\n}",
+            "description": "OK\nJSON Schema of the exported file:\n{\n \"required\": [\n  \"namespace\",\n  \"entitlementItemID\",\n  \"chatRateLimitDuration\",\n  \"unregisterDelay\",\n  \"generalRateLimitDuration\",\n  \"autoKickOnDisconnectDelay\",\n  \"chatRateLimitBurst\",\n  \"generalRateLimitBurst\",\n  \"maxPartyMember\",\n  \"autoKickOnDisconnect\",\n  \"profanityFilter\",\n  \"enableChat\",\n  \"entitlementCheck\",\n  \"cancelTicketOnDisconnect\",\n  \"concurrentUsersLimit\",\n  \"readyConsentTimeout\",\n  \"disableInvitationOnJoinParty\",\n  \"allowJoinPartyDuringMatchmaking\",\n  \"allowInviteNonConnectedUser\",\n  \"keepPresenceActivityOnDisconnect\",\n  \"maxDSWaitTime\",\n  \"maxFriendsLimit\",\n  \"requestMetadataMaxSize\"\n ],\n \"properties\": {\n  \"allowInviteNonConnectedUser\": {\n   \"type\": \"boolean\"\n  },\n  \"allowJoinPartyDuringMatchmaking\": {\n   \"type\": \"boolean\"\n  },\n  \"autoKickOnDisconnect\": {\n   \"type\": \"boolean\"\n  },\n  \"autoKickOnDisconnectDelay\": {\n   \"type\": \"integer\",\n   \"format\": \"int64\"\n  },\n  \"cancelTicketOnDisconnect\": {\n   \"type\": \"boolean\"\n  },\n  \"chatRateLimitBurst\": {\n   \"type\": \"integer\",\n   \"format\": \"int32\"\n  },\n  \"chatRateLimitDuration\": {\n   \"type\": \"integer\",\n   \"format\": \"int64\"\n  },\n  \"concurrentUsersLimit\": {\n   \"type\": \"integer\",\n   \"format\": \"int32\"\n  },\n  \"disableInvitationOnJoinParty\": {\n   \"type\": \"boolean\"\n  },\n  \"enableChat\": {\n   \"type\": \"boolean\"\n  },\n  \"entitlementCheck\": {\n   \"type\": \"boolean\"\n  },\n  \"entitlementItemID\": {\n   \"type\": \"string\"\n  },\n  \"generalRateLimitBurst\": {\n   \"type\": \"integer\",\n   \"format\": \"int32\"\n  },\n  \"generalRateLimitDuration\": {\n   \"type\": \"integer\",\n   \"format\": \"int64\"\n  },\n  \"keepPresenceActivityOnDisconnect\": {\n   \"type\": \"boolean\"\n  },\n  \"maxDSWaitTime\": {\n   \"type\": \"integer\",\n   \"format\": \"int64\"\n  },\n  \"maxFriendsLimit\": {\n   \"type\": \"integer\",\n   \"format\": \"int32\"\n  },\n  \"maxPartyMember\": {\n   \"type\": \"integer\",\n   \"format\": \"int32\"\n  },\n  \"namespace\": {\n   \"type\": \"string\"\n  },\n  \"profanityFilter\": {\n   \"type\": \"boolean\"\n  },\n  \"readyConsentTimeout\": {\n   \"type\": \"integer\",\n   \"format\": \"int64\"\n  },\n  \"requestMetadataMaxSize\": {\n   \"type\": \"integer\",\n   \"format\": \"int32\"\n  },\n  \"unregisterDelay\": {\n   \"type\": \"integer\",\n   \"format\": \"int64\"\n  }\n }\n}",
             "schema": {
               "type": "file"
             }
@@ -1977,6 +1977,7 @@
     "/lobby/v1/admin/global-configurations": {
       "delete": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Delete of global configuration data.",
         "operationId": "adminDeleteGlobalConfig",
         "produces": ["application/json"],
@@ -2016,6 +2017,7 @@
       },
       "get": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Get dsmc global configuration.",
         "operationId": "adminGetGlobalConfig",
         "produces": ["application/json"],
@@ -2073,6 +2075,7 @@
       },
       "put": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Upsert global configuration data.",
         "operationId": "adminUpdateGlobalConfig",
         "parameters": [
@@ -2255,6 +2258,7 @@
     "/lobby/v1/admin/notification/namespaces/{namespace}/parties/{partyId}/freeform/notify": {
       "post": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Sends notification to a party.",
         "operationId": "sendPartyFreeformNotificationV1Admin",
         "parameters": [
@@ -2330,6 +2334,7 @@
     "/lobby/v1/admin/notification/namespaces/{namespace}/parties/{partyId}/templates/notify": {
       "post": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Sends templated notification to a party.\n\t\t\t\u0026lt;br\u0026gt;In the request body, specify which template slug (template identifier) to use and the template language.\n\t\t\t\u0026lt;br\u0026gt;NotificationTemplate context is the key-value pair defining the value of each handlebar specified in the template content.\n\t\t\tTemplate need to be published before it can be use to send notifications\u0026lt;br\u0026gt;",
         "operationId": "sendPartyTemplatedNotificationV1Admin",
         "parameters": [
@@ -3574,6 +3579,7 @@
     "/lobby/v1/admin/party/namespaces/{namespace}/parties/{partyId}": {
       "get": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Get party data in a namespace.",
         "operationId": "adminGetPartyDataV1",
         "parameters": [
@@ -3649,6 +3655,7 @@
     "/lobby/v1/admin/party/namespaces/{namespace}/parties/{partyId}/attributes": {
       "put": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Update party attributes in a namespace.",
         "operationId": "adminUpdatePartyAttributesV1",
         "parameters": [
@@ -3738,6 +3745,7 @@
     },
     "/lobby/v1/admin/party/namespaces/{namespace}/parties/{partyId}/join/{userId}": {
       "post": {
+        "deprecated": true,
         "description": "Admin join a player into a party.",
         "operationId": "adminJoinPartyV1",
         "parameters": [
@@ -3823,6 +3831,7 @@
     "/lobby/v1/admin/party/namespaces/{namespace}/users/{userId}/party": {
       "get": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Get party data in a namespace.",
         "operationId": "adminGetUserPartyV1",
         "parameters": [
@@ -4043,6 +4052,7 @@
     "/lobby/v1/admin/player/namespaces/{namespace}/users/{userId}/attributes": {
       "get": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Get all player\u0026#39;s session attribute by user id in a namespace.",
         "operationId": "adminGetAllPlayerSessionAttribute",
         "parameters": [
@@ -4104,6 +4114,7 @@
       },
       "put": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Set player\u0026#39;s session attribute by user id in a namespace.",
         "operationId": "adminSetPlayerSessionAttribute",
         "parameters": [
@@ -4185,6 +4196,7 @@
     "/lobby/v1/admin/player/namespaces/{namespace}/users/{userId}/attributes/{attribute}": {
       "get": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Get player\u0026#39;s specific session attribute by user id in a namespace.",
         "operationId": "adminGetPlayerSessionAttribute",
         "parameters": [
@@ -4567,6 +4579,7 @@
     "/lobby/v1/admin/profanity/namespaces/{namespace}/filters/debug": {
       "post": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Get the list of filters that would modify the phrase",
         "operationId": "adminDebugProfanityFilters",
         "parameters": [
@@ -4647,6 +4660,7 @@
     "/lobby/v1/admin/profanity/namespaces/{namespace}/list/{list}/filters": {
       "get": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Get the list of filters inside the list.",
         "operationId": "adminGetProfanityListFiltersV1",
         "parameters": [
@@ -4720,6 +4734,7 @@
       },
       "post": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Add a single filter into the list",
         "operationId": "adminAddProfanityFilterIntoList",
         "parameters": [
@@ -4801,6 +4816,7 @@
     "/lobby/v1/admin/profanity/namespaces/{namespace}/list/{list}/filters/bulk": {
       "post": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Add multiple filters into the list",
         "operationId": "adminAddProfanityFilters",
         "parameters": [
@@ -4882,6 +4898,7 @@
     "/lobby/v1/admin/profanity/namespaces/{namespace}/list/{list}/filters/bulk-file": {
       "post": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Import a file with filters",
         "operationId": "adminImportProfanityFiltersFromFile",
         "parameters": [
@@ -4966,6 +4983,7 @@
     "/lobby/v1/admin/profanity/namespaces/{namespace}/list/{list}/filters/delete": {
       "post": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Delete the filter from the list",
         "operationId": "adminDeleteProfanityFilter",
         "parameters": [
@@ -5053,6 +5071,7 @@
     "/lobby/v1/admin/profanity/namespaces/{namespace}/lists": {
       "get": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Get lists",
         "operationId": "adminGetProfanityLists",
         "parameters": [
@@ -5122,6 +5141,7 @@
       },
       "post": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Create a new list",
         "operationId": "adminCreateProfanityList",
         "parameters": [
@@ -5196,6 +5216,7 @@
     "/lobby/v1/admin/profanity/namespaces/{namespace}/lists/{list}": {
       "delete": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Delete a list include all filters inside of it",
         "operationId": "adminDeleteProfanityList",
         "parameters": [
@@ -5266,6 +5287,7 @@
       },
       "post": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Update the list",
         "operationId": "adminUpdateProfanityList",
         "parameters": [
@@ -5347,6 +5369,7 @@
     "/lobby/v1/admin/profanity/namespaces/{namespace}/rule": {
       "get": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Get current profanity rule",
         "operationId": "adminGetProfanityRule",
         "parameters": [
@@ -5413,6 +5436,7 @@
       },
       "post": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Set current profanity rule",
         "operationId": "adminSetProfanityRuleForNamespace",
         "parameters": [
@@ -5487,6 +5511,7 @@
     "/lobby/v1/admin/profanity/namespaces/{namespace}/verify": {
       "post": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Verify a message directly from the UI or other services",
         "operationId": "adminVerifyMessageProfanityResponse",
         "parameters": [
@@ -5563,6 +5588,7 @@
     },
     "/lobby/v1/admin/thirdparty/namespaces/{namespace}/config/steam": {
       "delete": {
+        "deprecated": true,
         "description": "Required permission : \u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [DELETE]\u0026lt;/code\u0026gt; with scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\n\t\t\t\u0026lt;br\u0026gt;delete third party config in a namespace.",
         "operationId": "adminDeleteThirdPartyConfig",
         "parameters": [
@@ -5622,6 +5648,7 @@
         ]
       },
       "get": {
+        "deprecated": true,
         "description": "Get third party config for specified namespace.",
         "operationId": "adminGetThirdPartyConfig",
         "parameters": [
@@ -5682,6 +5709,7 @@
       },
       "post": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Create third party config in a namespace.",
         "operationId": "adminCreateThirdPartyConfig",
         "parameters": [
@@ -5757,6 +5785,7 @@
       },
       "put": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Update third party config in a namespace.",
         "operationId": "adminUpdateThirdPartyConfig",
         "parameters": [
@@ -5861,6 +5890,7 @@
     "/lobby/v1/public/party/namespaces/{namespace}/parties/{partyId}": {
       "get": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Required valid user authorization \u0026lt;br/\u0026gt;\n\t\t\t\t\u0026lt;br\u0026gt;load personal party data in a namespace based on Party ID \u0026lt;br/\u0026gt;\n\t\t\t\tAction Code: 50101",
         "operationId": "publicGetPartyDataV1",
         "parameters": [
@@ -5932,6 +5962,7 @@
     "/lobby/v1/public/party/namespaces/{namespace}/parties/{partyId}/attributes": {
       "put": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Required valid user authorization \u0026lt;br/\u0026gt;\n\t\t\t\t\u0026lt;br\u0026gt;update party attributes in a namespace.",
         "operationId": "publicUpdatePartyAttributesV1",
         "parameters": [
@@ -6018,6 +6049,7 @@
     "/lobby/v1/public/party/namespaces/{namespace}/parties/{partyId}/limit": {
       "put": {
         "consumes": ["application/json"],
+        "deprecated": true,
         "description": "Required valid user authorization \u0026lt;br/\u0026gt;\n\t\t\t\t\u0026lt;br\u0026gt;Set party limit, only party leader can call this endpoint.",
         "operationId": "publicSetPartyLimitV1",
         "parameters": [
@@ -8700,6 +8732,12 @@
         },
         "friendPublicId": {
           "type": "string"
+        },
+        "metadata": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
         }
       }
     },
@@ -8987,6 +9025,10 @@
           "format": "int64",
           "type": "integer"
         },
+        "requestMetadataMaxSize": {
+          "format": "int32",
+          "type": "integer"
+        },
         "unregisterDelay": {
           "format": "int64",
           "type": "integer"
@@ -9084,6 +9126,10 @@
         },
         "readyConsentTimeout": {
           "format": "int64",
+          "type": "integer"
+        },
+        "requestMetadataMaxSize": {
+          "format": "int32",
           "type": "integer"
         },
         "unregisterDelay": {
@@ -12439,6 +12485,14 @@
       "Text": "can not request friend, incoming request already exist from friendId: {{friendID}}"
     },
     {
+      "Attributes": [],
+      "Code": "11975",
+      "CodeName": "UserRequestFriendMetadataLimitReached",
+      "Section": "user request friend",
+      "Service": "lobby",
+      "Text": "can not request friend, metadata limit reached"
+    },
+    {
       "Attributes": ["friendID", "userID"],
       "Code": "11980",
       "CodeName": "UserAcceptFriendAcceptItSelf",
@@ -13840,12 +13894,12 @@
     }
   ],
   "x-version": {
-    "buildDate": "2024-09-19T09:47:30+00:00",
-    "gitHash": "2dfee1cfa59ef38b6c3be30983e16bdaa792a14f",
+    "buildDate": "2025-05-26T05:00:55+00:00",
+    "gitHash": "6f67fdfe87926fe94c2a414fda5dd00606a7fa94",
     "name": "justice-lobby-server",
-    "revisionID": "3.36.0",
-    "version": "3.36.0",
-    "version-justice": "3.45.0",
-    "version-roles-seeding": "1.2.52"
+    "revisionID": "3.38.3",
+    "version": "3.38.3",
+    "version-justice": "2024.2/3.79",
+    "version-roles-seeding": "1.2.77"
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -129,7 +129,8 @@ export class FulfillmentAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentResult, 'FulfillmentResult')
   }
   /**
-   * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Fulfill items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Request body&lt;/i&gt;: storeId, region, language, and entitlementCollectionId can be ignored.&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
+   * @deprecated
+   * &lt;h3&gt;The endpoint is going to be deprecated &lt;/h3&gt;Description: this endpoint is &lt;b&gt;Not supported yet in AGS Shared Cloud&lt;/b&gt; and it&#39;s used to fulfill items by transaction id.&lt;ul&gt;&lt;li&gt;&lt;i&gt;Request body&lt;/i&gt;: storeId, region, language, and entitlementCollectionId can be ignored.&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Endpoint migration guide&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Substitute endpoint: &lt;em&gt;/v3/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId} [PUT]&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;&lt;ul&gt;
    */
   updateFulfillment_ByUserId_ByTransactionId_v2(
     userId: string,
@@ -146,7 +147,25 @@ export class FulfillmentAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentV2Result, 'FulfillmentV2Result')
   }
   /**
-   * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Retry fulfill items by transactionId without sending the original payload.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
+   * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Fulfill items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Request body&lt;/i&gt;: storeId, region, language, and entitlementCollectionId can be ignored.&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
+   */
+  updateFulfillment_ByUserId_ByTransactionId_v3(
+    userId: string,
+    transactionId: string,
+    data: FulfillmentV2Request
+  ): Promise<Response<FulfillmentV2Result>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/platform/v3/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId}'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{transactionId}', transactionId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentV2Result, 'FulfillmentV2Result')
+  }
+  /**
+   * @deprecated
+   * &lt;h3&gt;The endpoint is going to be deprecated &lt;/h3&gt;&lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Retry fulfill items by transactionId without sending the original payload.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Endpoint migration guide&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Substitute endpoint: &lt;em&gt;/v3/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId}/retry [PUT]&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;&lt;ul&gt;
    */
   updateRetry_ByUserId_ByTransactionId_v2(userId: string, transactionId: string): Promise<Response<FulfillmentV2Result>> {
     const params = {} as AxiosRequestConfig
@@ -159,11 +178,43 @@ export class FulfillmentAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentV2Result, 'FulfillmentV2Result')
   }
   /**
-   * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Revoke items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: revoke fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
+   * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Retry fulfill items by transactionId without sending the original payload.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
+   */
+  updateRetry_ByUserId_ByTransactionId_v3(userId: string, transactionId: string): Promise<Response<FulfillmentV2Result>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/platform/v3/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId}/retry'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{transactionId}', transactionId)
+    const resultPromise = this.axiosInstance.put(url, null, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, FulfillmentV2Result, 'FulfillmentV2Result')
+  }
+  /**
+   * @deprecated
+   * &lt;h3&gt;The endpoint is going to be deprecated &lt;/h3&gt;&lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Revoke items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: revoke fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Endpoint migration guide&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Substitute endpoint: &lt;em&gt;/v3/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId}/revoke [PUT]&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;&lt;ul&gt;
    */
   updateRevoke_ByUserId_ByTransactionId_v2(userId: string, transactionId: string): Promise<Response<RevokeFulfillmentV2Result>> {
     const params = {} as AxiosRequestConfig
     const url = '/platform/v2/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId}/revoke'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+      .replace('{transactionId}', transactionId)
+    const resultPromise = this.axiosInstance.put(url, null, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      RevokeFulfillmentV2Result,
+      'RevokeFulfillmentV2Result'
+    )
+  }
+  /**
+   * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Revoke items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: revoke fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
+   */
+  updateRevoke_ByUserId_ByTransactionId_v3(userId: string, transactionId: string): Promise<Response<RevokeFulfillmentV2Result>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/platform/v3/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId}/revoke'
       .replace('{namespace}', this.namespace)
       .replace('{userId}', userId)
       .replace('{transactionId}', transactionId)

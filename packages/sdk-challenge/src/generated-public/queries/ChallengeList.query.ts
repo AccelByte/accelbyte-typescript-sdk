@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -22,7 +22,7 @@ export enum Key_ChallengeList {
 }
 
 /**
- * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE [READ]&lt;/li&gt;&lt;/ul&gt;
+ * - Required permission: NAMESPACE:{namespace}:CHALLENGE [READ]
  *
  * #### Default Query Options
  * The default options include:
@@ -35,7 +35,14 @@ export enum Key_ChallengeList {
 export const useChallengeListApi_GetChallenges = (
   sdk: AccelByteSDK,
   input: SdkSetConfigParam & {
-    queryParams?: { limit?: number; offset?: number; sortBy?: string | null; status?: 'INIT' | 'RETIRED' | 'TIED' }
+    queryParams?: {
+      keyword?: string | null
+      limit?: number
+      offset?: number
+      sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc' | 'updatedAt' | 'updatedAt:asc' | 'updatedAt:desc'
+      status?: 'INIT' | 'RETIRED' | 'TIED'
+      tags?: string[]
+    }
   },
   options?: Omit<UseQueryOptions<ListChallengeResponse, AxiosError<ApiError>>, 'queryKey'>,
   callback?: (data: AxiosResponse<ListChallengeResponse>) => void
@@ -56,7 +63,7 @@ export const useChallengeListApi_GetChallenges = (
 }
 
 /**
- * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE [READ]&lt;/li&gt;&lt;/ul&gt;
+ * - Required permission: NAMESPACE:{namespace}:CHALLENGE [READ]
  *
  * #### Default Query Options
  * The default options include:
@@ -68,7 +75,15 @@ export const useChallengeListApi_GetChallenges = (
  */
 export const useChallengeListApi_GetGoals_ByChallengeCode = (
   sdk: AccelByteSDK,
-  input: SdkSetConfigParam & { challengeCode: string; queryParams?: { limit?: number; offset?: number; tags?: string[] } },
+  input: SdkSetConfigParam & {
+    challengeCode: string
+    queryParams?: {
+      limit?: number
+      offset?: number
+      sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc' | 'updatedAt' | 'updatedAt:asc' | 'updatedAt:desc'
+      tags?: string[]
+    }
+  },
   options?: Omit<UseQueryOptions<GetGoalsResponse, AxiosError<ApiError>>, 'queryKey'>,
   callback?: (data: AxiosResponse<GetGoalsResponse>) => void
 ): UseQueryResult<GetGoalsResponse, AxiosError<ApiError>> => {

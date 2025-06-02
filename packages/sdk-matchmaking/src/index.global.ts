@@ -7,4 +7,3 @@ import * as AccelByteSDK_Matchmaking from './index'
 
 // @ts-ignore
 window.AccelByteSDK_Matchmaking = AccelByteSDK_Matchmaking
-

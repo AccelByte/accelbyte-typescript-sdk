@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -21,8 +21,18 @@ export class ImagesAdmin$ {
   /**
    * Returns images which exist (uploaded, uploading, or building) in the linked account. This route fails if no account is linked Required Permission: ADMIN:NAMESPACE:{namespace}:AMS:IMAGE [READ]
    */
-  getImages(): Promise<Response<ImageList>> {
-    const params = {} as AxiosRequestConfig
+  getImages(queryParams?: {
+    count?: number
+    inUse?: string | null
+    isProtected?: boolean | null
+    name?: string | null
+    offset?: number
+    sortBy?: string | null
+    sortDirection?: string | null
+    status?: string | null
+    tag?: string | null
+  }): Promise<Response<ImageList>> {
+    const params = { count: 100, sortBy: 'uploadedAt', sortDirection: 'desc', ...queryParams } as AxiosRequestConfig
     const url = '/ams/v1/admin/namespaces/{namespace}/images'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 

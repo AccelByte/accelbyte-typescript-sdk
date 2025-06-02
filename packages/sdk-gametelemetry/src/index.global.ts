@@ -7,4 +7,3 @@ import * as AccelByteSDK_GameTelemetry from './index'
 
 // @ts-ignore
 window.AccelByteSDK_GameTelemetry = AccelByteSDK_GameTelemetry
-

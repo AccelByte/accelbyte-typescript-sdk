@@ -8,7 +8,7 @@
     },
     "description": "Justice Achievement Service",
     "title": "justice-achievement-service",
-    "version": "2.23.0"
+    "version": "2.26.0"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -682,6 +682,7 @@
           },
           {
             "description": "sort by, allow values: [achievedAt, achievedAt:asc, achievedAt:desc, createdAt, createdAt:asc, createdAt:desc]",
+            "enum": ["achievedAt", "achievedAt:asc", "achievedAt:desc", "createdAt", "createdAt:asc", "createdAt:desc"],
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -785,6 +786,7 @@
           {
             "default": "contributedValue:desc",
             "description": "sort by, default is 'contributedValue:desc', allow values: [contributedValue, contributedValue:asc, contributedValue:desc]",
+            "enum": ["contributedValue", "contributedValue:asc", "contributedValue:desc"],
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -1001,6 +1003,7 @@
           {
             "default": "name:asc",
             "description": "sort by, default is 'name:asc', allow values: [name, name:asc, name:desc, createdAt, createdAt:asc, createdAt:desc]",
+            "enum": ["createdAt", "createdAt:asc", "createdAt:desc", "name", "name:asc", "name:desc"],
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -1101,6 +1104,7 @@
           },
           {
             "description": "sort by, allow values: [achievedAt, achievedAt:asc, achievedAt:desc, createdAt, createdAt:asc, createdAt:desc]",
+            "enum": ["achievedAt", "achievedAt:asc", "achievedAt:desc", "createdAt", "createdAt:asc", "createdAt:desc"],
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -1163,6 +1167,95 @@
           },
           {
             "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [READ]"]
+          }
+        ]
+      }
+    },
+    "/achievement/v1/admin/namespaces/{namespace}/users/{userId}/achievements/bulkUnlock": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;p\u0026gt;Required permission\n\t\t\t\u0026lt;code\u0026gt;ADMIN:NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [UPDATE]\u0026lt;/code\u0026gt; and scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/p\u0026gt;",
+        "operationId": "AdminBulkUnlockAchievement",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.BulkUnlockAchievementRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user id",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/models.BulkUnlockAchievementResponse"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Bulk unlock achievements",
+        "tags": ["User Achievements"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [UPDATE]"]
           }
         ]
       }
@@ -1284,6 +1377,12 @@
           },
           "401": {
             "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
             "schema": {
               "$ref": "#/definitions/response.Error"
             }
@@ -1416,6 +1515,7 @@
           {
             "default": "contributedValue:desc",
             "description": "sort by, default is 'contributedValue:desc', allow values: [contributedValue, contributedValue:asc, contributedValue:desc]",
+            "enum": ["contributedValue", "contributedValue:asc", "contributedValue:desc"],
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -1711,6 +1811,7 @@
           },
           {
             "description": "sort by, allow values: [achievedAt, achievedAt:asc, achievedAt:desc, createdAt, createdAt:asc, createdAt:desc]",
+            "enum": ["achievedAt", "achievedAt:asc", "achievedAt:desc", "createdAt", "createdAt:asc", "createdAt:desc"],
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -1814,6 +1915,7 @@
           {
             "default": "contributedValue:desc",
             "description": "sort by, default is 'contributedValue:desc', allow values: [contributedValue, contributedValue:asc, contributedValue:desc]",
+            "enum": ["contributedValue", "contributedValue:asc", "contributedValue:desc"],
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -1900,6 +2002,7 @@
           {
             "default": "name:asc",
             "description": "sort by, default is 'name:asc', allow values: [name, name:asc, name:desc, createdAt, createdAt:asc, createdAt:desc]",
+            "enum": ["createdAt", "createdAt:asc", "createdAt:desc", "name", "name:asc", "name:desc"],
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -2000,6 +2103,7 @@
           },
           {
             "description": "sort by, allow values: [achievedAt, achievedAt:asc, achievedAt:desc, createdAt, createdAt:asc, createdAt:desc]",
+            "enum": ["achievedAt", "achievedAt:asc", "achievedAt:desc", "createdAt", "createdAt:asc", "createdAt:desc"],
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -2066,6 +2170,95 @@
         ]
       }
     },
+    "/achievement/v1/public/namespaces/{namespace}/users/{userId}/achievements/bulkUnlock": {
+      "put": {
+        "consumes": ["application/json"],
+        "description": "\u0026lt;p\u0026gt;Required permission\n\t\t\t\u0026lt;code\u0026gt;NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [UPDATE]\u0026lt;/code\u0026gt; and scope \u0026lt;code\u0026gt;social\u0026lt;/code\u0026gt;\u0026lt;/p\u0026gt;",
+        "operationId": "PublicBulkUnlockAchievement",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/models.BulkUnlockAchievementRequest"
+            }
+          },
+          {
+            "description": "namespace of the game",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "user id",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/models.BulkUnlockAchievementResponse"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Bulk Unlock achievements",
+        "tags": ["User Achievements"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "iamClientScopes": ["social"]
+          },
+          {
+            "userPermissions": ["NAMESPACE:{namespace}:USER:{userId}:ACHIEVEMENT [UPDATE]"]
+          }
+        ]
+      }
+    },
     "/achievement/v1/public/namespaces/{namespace}/users/{userId}/achievements/{achievementCode}/unlock": {
       "put": {
         "consumes": ["application/json"],
@@ -2107,6 +2300,12 @@
           },
           "401": {
             "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.Error"
+            }
+          },
+          "404": {
+            "description": "Not Found",
             "schema": {
               "$ref": "#/definitions/response.Error"
             }
@@ -2185,6 +2384,7 @@
           {
             "default": "contributedValue:desc",
             "description": "sort by, default is 'contributedValue:desc', allow values: [contributedValue, contributedValue:asc, contributedValue:desc]",
+            "enum": ["contributedValue", "contributedValue:asc", "contributedValue:desc"],
             "in": "query",
             "name": "sortBy",
             "type": "string"
@@ -2609,6 +2809,32 @@
         }
       },
       "required": ["data"]
+    },
+    "models.BulkUnlockAchievementRequest": {
+      "properties": {
+        "achievementCodes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["achievementCodes"]
+    },
+    "models.BulkUnlockAchievementResponse": {
+      "properties": {
+        "achievementCode": {
+          "type": "string"
+        },
+        "errorDetail": {
+          "$ref": "#/definitions/models.ErrorDetails"
+        },
+        "success": {
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": ["achievementCode", "success"]
     },
     "models.ContributorResponse": {
       "properties": {
@@ -3098,11 +3324,11 @@
     "path": "/achievement/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-09-13T01:20:10+00:00",
-    "gitHash": "257bfb94d290b210cf2602d59866a91e6ba3476e",
+    "buildDate": "2025-05-26T04:10:44+00:00",
+    "gitHash": "2122515a45289529bb131fe0ba6d5d23fa72ffd8",
     "name": "justice-achievement-service",
     "realm": "dev",
-    "version": "2.23.0",
+    "version": "2.26.0",
     "version-roles-seeding": "1.0.7"
   }
 }

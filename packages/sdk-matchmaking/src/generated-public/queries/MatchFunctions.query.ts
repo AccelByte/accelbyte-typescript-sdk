@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -114,6 +114,38 @@ export const useMatchFunctionsApi_DeleteMatchFunction_ByNameMutation = (
   return useMutation({
     mutationKey: [Key_MatchFunctions.MatchFunction_ByName],
     mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Get custom match function by name.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_MatchFunctions.MatchFunction_ByName, input]
+ * }
+ * ```
+ */
+export const useMatchFunctionsApi_GetMatchFunction_ByName = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { name: string },
+  options?: Omit<UseQueryOptions<MatchFunctionConfig, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<MatchFunctionConfig>) => void
+): UseQueryResult<MatchFunctionConfig, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useMatchFunctionsApi_GetMatchFunction_ByName>[1]) => async () => {
+    const response = await MatchFunctionsApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getMatchFunction_ByName(
+      input.name
+    )
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<MatchFunctionConfig, AxiosError<ApiError>>({
+    queryKey: [Key_MatchFunctions.MatchFunction_ByName, input],
+    queryFn: queryFn(sdk, input),
     ...options
   })
 }

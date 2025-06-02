@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -27,12 +27,15 @@ import { PaymentRequest } from '../../generated-definitions/PaymentRequest.js'
 import { PlatformWallet } from '../../generated-definitions/PlatformWallet.js'
 import { PlatformWalletConfigInfo } from '../../generated-definitions/PlatformWalletConfigInfo.js'
 import { PlatformWalletConfigUpdate } from '../../generated-definitions/PlatformWalletConfigUpdate.js'
+import { WalletConfigInfo } from '../../generated-definitions/WalletConfigInfo.js'
+import { WalletConfigUpdate } from '../../generated-definitions/WalletConfigUpdate.js'
 import { WalletInfo } from '../../generated-definitions/WalletInfo.js'
 import { WalletPagingSlicedResult } from '../../generated-definitions/WalletPagingSlicedResult.js'
 import { WalletTransactionPagingSlicedResult } from '../../generated-definitions/WalletTransactionPagingSlicedResult.js'
 
 export enum Key_WalletAdmin {
   Wallets = 'Platform.WalletAdmin.Wallets',
+  WalletConfig = 'Platform.WalletAdmin.WalletConfig',
   WalletDebit = 'Platform.WalletAdmin.WalletDebit',
   WalletCredit = 'Platform.WalletAdmin.WalletCredit',
   Wallet_ByWalletId = 'Platform.WalletAdmin.Wallet_ByWalletId',
@@ -90,6 +93,70 @@ export const useWalletAdminApi_GetWallets = (
   return useQuery<WalletPagingSlicedResult, AxiosError<ApiError>>({
     queryKey: [Key_WalletAdmin.Wallets, input],
     queryFn: queryFn(sdk, input),
+    ...options
+  })
+}
+
+/**
+ * get wallet config
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_WalletAdmin.WalletConfig, input]
+ * }
+ * ```
+ */
+export const useWalletAdminApi_GetWalletConfig = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
+  options?: Omit<UseQueryOptions<WalletConfigInfo, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<WalletConfigInfo>) => void
+): UseQueryResult<WalletConfigInfo, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useWalletAdminApi_GetWalletConfig>[1]) => async () => {
+    const response = await WalletAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getWalletConfig()
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<WalletConfigInfo, AxiosError<ApiError>>({
+    queryKey: [Key_WalletAdmin.WalletConfig, input],
+    queryFn: queryFn(sdk, input),
+    ...options
+  })
+}
+
+/**
+ * Update wallet config of a namespace
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_WalletAdmin.WalletConfig, input]
+ * }
+ * ```
+ */
+export const useWalletAdminApi_UpdateWalletConfigMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<WalletConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: WalletConfigUpdate }>,
+    'mutationKey'
+  >,
+  callback?: (data: WalletConfigInfo) => void
+): UseMutationResult<WalletConfigInfo, AxiosError<ApiError>, SdkSetConfigParam & { data: WalletConfigUpdate }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { data: WalletConfigUpdate }) => {
+    const response = await WalletAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).updateWalletConfig(
+      input.data
+    )
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_WalletAdmin.WalletConfig],
+    mutationFn,
     ...options
   })
 }
@@ -723,7 +790,7 @@ export const useWalletAdminApi_UpdateDebitWallet_ByUserId_ByCurrencyCodeMutation
 }
 
 /**
- * Pay with user wallet by currency code and client platform.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/ul&gt;&lt;h2&gt;Restrictions for metadata&lt;/h2&gt; 1. Cannot use &lt;b&gt;&#34;.&#34;&lt;/b&gt; as the key name - &lt;pre&gt;{ &#34;data.2&#34;: &#34;value&#34; }&lt;/pre&gt; 2. Cannot use &lt;b&gt;&#34;$&#34;&lt;/b&gt; as the prefix in key names - &lt;pre&gt;{ &#34;$data&#34;: &#34;value&#34; }&lt;/pre&gt;
+ * Debit user wallet by currency code and client platform.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;/ul&gt;&lt;h2&gt;Restrictions for metadata&lt;/h2&gt; 1. Cannot use &lt;b&gt;&#34;.&#34;&lt;/b&gt; as the key name - &lt;pre&gt;{ &#34;data.2&#34;: &#34;value&#34; }&lt;/pre&gt; 2. Cannot use &lt;b&gt;&#34;$&#34;&lt;/b&gt; as the prefix in key names - &lt;pre&gt;{ &#34;$data&#34;: &#34;value&#34; }&lt;/pre&gt;
  *
  * #### Default Query Options
  * The default options include:

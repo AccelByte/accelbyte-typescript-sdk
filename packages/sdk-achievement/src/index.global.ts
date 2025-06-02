@@ -7,4 +7,3 @@ import * as AccelByteSDK_Achievement from './index'
 
 // @ts-ignore
 window.AccelByteSDK_Achievement = AccelByteSDK_Achievement
-

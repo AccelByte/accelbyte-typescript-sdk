@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -46,9 +46,17 @@ export function FleetsAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     }
   }
 
-  async function getFleets(): Promise<AxiosResponse<FleetListResponse>> {
+  async function getFleets(queryParams?: {
+    active?: boolean | null
+    count?: number
+    name?: string | null
+    offset?: number
+    region?: string | null
+    sortBy?: 'active' | 'name'
+    sortDirection?: 'asc' | 'desc'
+  }): Promise<AxiosResponse<FleetListResponse>> {
     const $ = new FleetsAdmin$(axiosInstance, namespace, useSchemaValidation)
-    const resp = await $.getFleets()
+    const resp = await $.getFleets(queryParams)
     if (resp.error) throw resp.error
     return resp.response
   }

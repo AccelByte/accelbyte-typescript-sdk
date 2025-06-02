@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -46,7 +46,7 @@ export function TagsApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     limit?: number
     name?: string | null
     offset?: number
-    sortBy?: string | null
+    sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc' | 'name' | 'name:asc' | 'name:desc'
   }): Promise<AxiosResponse<PaginatedTagResponse>> {
     const $ = new Tags$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getTags(queryParams)

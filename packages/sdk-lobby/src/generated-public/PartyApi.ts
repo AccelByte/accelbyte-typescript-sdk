@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -67,14 +67,17 @@ export function PartyApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
 
   return {
     /**
+     * @deprecated
      * Required valid user authorization &lt;br/&gt; &lt;br&gt;load personal party data in a namespace based on Party ID &lt;br/&gt; Action Code: 50101
      */
     getPartyParty_ByPartyId,
     /**
+     * @deprecated
      * Required valid user authorization &lt;br/&gt; &lt;br&gt;Set party limit, only party leader can call this endpoint.
      */
     updateLimitParty_ByPartyId,
     /**
+     * @deprecated
      * Required valid user authorization &lt;br/&gt; &lt;br&gt;update party attributes in a namespace.
      */
     updateAttributeParty_ByPartyId

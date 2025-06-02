@@ -7,4 +7,3 @@ import * as AccelByteSDK_Challenge from './index'
 
 // @ts-ignore
 window.AccelByteSDK_Challenge = AccelByteSDK_Challenge
-

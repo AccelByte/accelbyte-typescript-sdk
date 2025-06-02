@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -28,7 +28,7 @@ export enum Key_PlayerRewardAdmin {
 }
 
 /**
- * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+ * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]
  *
  * #### Default Query Options
  * The default options include:
@@ -38,7 +38,7 @@ export enum Key_PlayerRewardAdmin {
  * }
  * ```
  */
-export const usePlayerRewardAdminApi_CreateUserRewardClaimMutation = (
+export const usePlayerRewardAdminApi_UpdateUserRewardClaimMutation = (
   sdk: AccelByteSDK,
   options?: Omit<
     UseMutationOptions<ClaimUsersRewardsResponseArray, AxiosError<ApiError>, SdkSetConfigParam & { data: ClaimUsersRewardsRequest[] }>,
@@ -50,7 +50,7 @@ export const usePlayerRewardAdminApi_CreateUserRewardClaimMutation = (
     const response = await PlayerRewardAdminApi(sdk, {
       coreConfig: input.coreConfig,
       axiosConfig: input.axiosConfig
-    }).createUserRewardClaim(input.data)
+    }).updateUserRewardClaim(input.data)
     callback && callback(response.data)
     return response.data
   }
@@ -63,7 +63,7 @@ export const usePlayerRewardAdminApi_CreateUserRewardClaimMutation = (
 }
 
 /**
- * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]&lt;/li&gt;&lt;/ul&gt;
+ * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]
  *
  * #### Default Query Options
  * The default options include:
@@ -77,7 +77,14 @@ export const usePlayerRewardAdminApi_GetRewards_ByUserId = (
   sdk: AccelByteSDK,
   input: SdkSetConfigParam & {
     userId: string
-    queryParams?: { limit?: number; offset?: number; sortBy?: string | null; status?: 'CLAIMED' | 'UNCLAIMED' }
+    queryParams?: {
+      challengeCode?: string | null
+      goalProgressionId?: string | null
+      limit?: number
+      offset?: number
+      sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc' | 'updatedAt' | 'updatedAt:asc' | 'updatedAt:desc'
+      status?: 'CLAIMED' | 'UNCLAIMED'
+    }
   },
   options?: Omit<UseQueryOptions<ListUserRewardsResponse, AxiosError<ApiError>>, 'queryKey'>,
   callback?: (data: AxiosResponse<ListUserRewardsResponse>) => void
@@ -99,7 +106,7 @@ export const usePlayerRewardAdminApi_GetRewards_ByUserId = (
 }
 
 /**
- * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+ * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]
  *
  * #### Default Query Options
  * The default options include:
@@ -109,7 +116,7 @@ export const usePlayerRewardAdminApi_GetRewards_ByUserId = (
  * }
  * ```
  */
-export const usePlayerRewardAdminApi_CreateRewardClaim_ByUserIdMutation = (
+export const usePlayerRewardAdminApi_UpdateRewardClaim_ByUserIdMutation = (
   sdk: AccelByteSDK,
   options?: Omit<
     UseMutationOptions<UserRewardArray, AxiosError<ApiError>, SdkSetConfigParam & { userId: string; data: ClaimUserRewardsReq }>,
@@ -121,7 +128,7 @@ export const usePlayerRewardAdminApi_CreateRewardClaim_ByUserIdMutation = (
     const response = await PlayerRewardAdminApi(sdk, {
       coreConfig: input.coreConfig,
       axiosConfig: input.axiosConfig
-    }).createRewardClaim_ByUserId(input.userId, input.data)
+    }).updateRewardClaim_ByUserId(input.userId, input.data)
     callback && callback(response.data)
     return response.data
   }
@@ -134,7 +141,7 @@ export const usePlayerRewardAdminApi_CreateRewardClaim_ByUserIdMutation = (
 }
 
 /**
- * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+ * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]
  *
  * #### Default Query Options
  * The default options include:
@@ -144,7 +151,7 @@ export const usePlayerRewardAdminApi_CreateRewardClaim_ByUserIdMutation = (
  * }
  * ```
  */
-export const usePlayerRewardAdminApi_CreateRewardClaim_ByUserId_ByChallengeCodeMutation = (
+export const usePlayerRewardAdminApi_UpdateRewardClaim_ByUserId_ByChallengeCodeMutation = (
   sdk: AccelByteSDK,
   options?: Omit<
     UseMutationOptions<
@@ -166,7 +173,7 @@ export const usePlayerRewardAdminApi_CreateRewardClaim_ByUserId_ByChallengeCodeM
     const response = await PlayerRewardAdminApi(sdk, {
       coreConfig: input.coreConfig,
       axiosConfig: input.axiosConfig
-    }).createRewardClaim_ByUserId_ByChallengeCode(input.userId, input.challengeCode, input.data)
+    }).updateRewardClaim_ByUserId_ByChallengeCode(input.userId, input.challengeCode, input.data)
     callback && callback(response.data)
     return response.data
   }

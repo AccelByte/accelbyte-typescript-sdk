@@ -1,10 +1,12 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
 export * from './generated-admin/ConfigAdminApi.js'
 export * from './generated-admin/endpoints/ConfigAdmin$.js'
+export * from './generated-admin/endpoints/PlayFeatureFlagAdmin$.js'
+export * from './generated-admin/PlayFeatureFlagAdminApi.js'
 export * from './generated-definitions/BackFillAcceptRequest.js'
 export * from './generated-definitions/BackFillCreateRequest.js'
 export * from './generated-definitions/BackfillCreateResponse.js'
@@ -15,7 +17,9 @@ export * from './generated-definitions/Configuration.js'
 export * from './generated-definitions/DsInformation.js'
 export * from './generated-definitions/EnvironmentVariable.js'
 export * from './generated-definitions/Error.js'
+export * from './generated-definitions/ExternalFailureMetricRecord.js'
 export * from './generated-definitions/GameSession.js'
+export * from './generated-definitions/ListBackfillQueryResponse.js'
 export * from './generated-definitions/ListEnvironmentVariablesResponse.js'
 export * from './generated-definitions/ListMatchFunctionsResponse.js'
 export * from './generated-definitions/ListMatchPoolsResponse.js'
@@ -40,6 +44,7 @@ export * from './generated-definitions/Party.js'
 export * from './generated-definitions/PatchNamespaceConfigRequest.js'
 export * from './generated-definitions/PlayerData.js'
 export * from './generated-definitions/PlayerMetricRecord.js'
+export * from './generated-definitions/PlayFeatureFlag.js'
 export * from './generated-definitions/ProposedProposal.js'
 export * from './generated-definitions/RuleSetPayload.js'
 export * from './generated-definitions/RuleSetPayloadData.js'

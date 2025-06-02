@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -39,12 +39,24 @@ export enum Key_FleetsAdmin {
  */
 export const useFleetsAdminApi_GetFleets = (
   sdk: AccelByteSDK,
-  input: SdkSetConfigParam,
+  input: SdkSetConfigParam & {
+    queryParams?: {
+      active?: boolean | null
+      count?: number
+      name?: string | null
+      offset?: number
+      region?: string | null
+      sortBy?: 'active' | 'name'
+      sortDirection?: 'asc' | 'desc'
+    }
+  },
   options?: Omit<UseQueryOptions<FleetListResponse, AxiosError<ApiError>>, 'queryKey'>,
   callback?: (data: AxiosResponse<FleetListResponse>) => void
 ): UseQueryResult<FleetListResponse, AxiosError<ApiError>> => {
   const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useFleetsAdminApi_GetFleets>[1]) => async () => {
-    const response = await FleetsAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getFleets()
+    const response = await FleetsAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getFleets(
+      input.queryParams
+    )
     callback && callback(response)
     return response.data
   }

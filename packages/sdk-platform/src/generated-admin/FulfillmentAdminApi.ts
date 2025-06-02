@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -128,6 +128,17 @@ export function FulfillmentAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam)
     return resp.response
   }
 
+  async function updateFulfillment_ByUserId_ByTransactionId_v3(
+    userId: string,
+    transactionId: string,
+    data: FulfillmentV2Request
+  ): Promise<AxiosResponse<FulfillmentV2Result>> {
+    const $ = new FulfillmentAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.updateFulfillment_ByUserId_ByTransactionId_v3(userId, transactionId, data)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   async function updateRetry_ByUserId_ByTransactionId_v2(
     userId: string,
     transactionId: string
@@ -138,12 +149,32 @@ export function FulfillmentAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam)
     return resp.response
   }
 
+  async function updateRetry_ByUserId_ByTransactionId_v3(
+    userId: string,
+    transactionId: string
+  ): Promise<AxiosResponse<FulfillmentV2Result>> {
+    const $ = new FulfillmentAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.updateRetry_ByUserId_ByTransactionId_v3(userId, transactionId)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   async function updateRevoke_ByUserId_ByTransactionId_v2(
     userId: string,
     transactionId: string
   ): Promise<AxiosResponse<RevokeFulfillmentV2Result>> {
     const $ = new FulfillmentAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateRevoke_ByUserId_ByTransactionId_v2(userId, transactionId)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function updateRevoke_ByUserId_ByTransactionId_v3(
+    userId: string,
+    transactionId: string
+  ): Promise<AxiosResponse<RevokeFulfillmentV2Result>> {
+    const $ = new FulfillmentAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.updateRevoke_ByUserId_ByTransactionId_v3(userId, transactionId)
     if (resp.error) throw resp.error
     return resp.response
   }
@@ -178,16 +209,31 @@ export function FulfillmentAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam)
      */
     createFulfillmentReward_ByUserId_v2,
     /**
-     * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Fulfill items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Request body&lt;/i&gt;: storeId, region, language, and entitlementCollectionId can be ignored.&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
+     * @deprecated
+     * &lt;h3&gt;The endpoint is going to be deprecated &lt;/h3&gt;Description: this endpoint is &lt;b&gt;Not supported yet in AGS Shared Cloud&lt;/b&gt; and it&#39;s used to fulfill items by transaction id.&lt;ul&gt;&lt;li&gt;&lt;i&gt;Request body&lt;/i&gt;: storeId, region, language, and entitlementCollectionId can be ignored.&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Endpoint migration guide&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Substitute endpoint: &lt;em&gt;/v3/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId} [PUT]&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;&lt;ul&gt;
      */
     updateFulfillment_ByUserId_ByTransactionId_v2,
     /**
-     * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Retry fulfill items by transactionId without sending the original payload.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
+     * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Fulfill items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Request body&lt;/i&gt;: storeId, region, language, and entitlementCollectionId can be ignored.&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
+     */
+    updateFulfillment_ByUserId_ByTransactionId_v3,
+    /**
+     * @deprecated
+     * &lt;h3&gt;The endpoint is going to be deprecated &lt;/h3&gt;&lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Retry fulfill items by transactionId without sending the original payload.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Endpoint migration guide&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Substitute endpoint: &lt;em&gt;/v3/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId}/retry [PUT]&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;&lt;ul&gt;
      */
     updateRetry_ByUserId_ByTransactionId_v2,
     /**
+     * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Retry fulfill items by transactionId without sending the original payload.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
+     */
+    updateRetry_ByUserId_ByTransactionId_v3,
+    /**
+     * @deprecated
+     * &lt;h3&gt;The endpoint is going to be deprecated &lt;/h3&gt;&lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Revoke items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: revoke fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;&lt;h3&gt;Endpoint migration guide&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Substitute endpoint: &lt;em&gt;/v3/admin/namespaces/{namespace}/users/{userId}/fulfillments/{transactionId}/revoke [PUT]&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;&lt;ul&gt;
+     */
+    updateRevoke_ByUserId_ByTransactionId_v2,
+    /**
      * &lt;b&gt;[Not supported yet in AGS Shared Cloud]&lt;/b&gt; Revoke items by transactionId.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: revoke fulfillment v2 result, storeId field can be ignored.&lt;/li&gt;&lt;/ul&gt;
      */
-    updateRevoke_ByUserId_ByTransactionId_v2
+    updateRevoke_ByUserId_ByTransactionId_v3
   }
 }

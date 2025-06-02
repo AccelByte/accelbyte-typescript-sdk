@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -19,6 +19,7 @@ import { GetInboxCategoriesResponseItemArray } from '../../generated-definitions
 import { GetInboxMessagesResponse } from '../../generated-definitions/GetInboxMessagesResponse.js'
 import { GetInboxStatsResponse } from '../../generated-definitions/GetInboxStatsResponse.js'
 import { GetInboxUsersResponse } from '../../generated-definitions/GetInboxUsersResponse.js'
+import { GetListTopicKafkaResponse } from '../../generated-definitions/GetListTopicKafkaResponse.js'
 import { JsonSchemaType } from '../../generated-definitions/JsonSchemaType.js'
 import { SaveInboxMessageRequest } from '../../generated-definitions/SaveInboxMessageRequest.js'
 import { SaveInboxMessageResponse } from '../../generated-definitions/SaveInboxMessageResponse.js'
@@ -35,6 +36,7 @@ export enum Key_InboxAdmin {
   InboxMessage = 'Chat.InboxAdmin.InboxMessage',
   InboxCategories = 'Chat.InboxAdmin.InboxCategories',
   InboxCategory = 'Chat.InboxAdmin.InboxCategory',
+  InboxListTopicKafka = 'Chat.InboxAdmin.InboxListTopicKafka',
   InboxMessage_ByMessageId = 'Chat.InboxAdmin.InboxMessage_ByMessageId',
   InboxCategory_ByCategory = 'Chat.InboxAdmin.InboxCategory_ByCategory',
   UsersInbox_ByInbox = 'Chat.InboxAdmin.UsersInbox_ByInbox',
@@ -214,6 +216,36 @@ export const useInboxAdminApi_CreateInboxCategoryMutation = (
   return useMutation({
     mutationKey: [Key_InboxAdmin.InboxCategory],
     mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Get list kafka topic. example result chat,sessionNotification
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_InboxAdmin.InboxListTopicKafka, input]
+ * }
+ * ```
+ */
+export const useInboxAdminApi_GetInboxListTopicKafka = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam,
+  options?: Omit<UseQueryOptions<GetListTopicKafkaResponse, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<GetListTopicKafkaResponse>) => void
+): UseQueryResult<GetListTopicKafkaResponse, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useInboxAdminApi_GetInboxListTopicKafka>[1]) => async () => {
+    const response = await InboxAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getInboxListTopicKafka()
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<GetListTopicKafkaResponse, AxiosError<ApiError>>({
+    queryKey: [Key_InboxAdmin.InboxListTopicKafka, input],
+    queryFn: queryFn(sdk, input),
     ...options
   })
 }

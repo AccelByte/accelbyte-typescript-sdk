@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -41,7 +41,7 @@ export class Topic$ {
    * get chat list of topic in a namespace.
    */
   getTopic(queryParams?: { limit?: number; offset?: number; topicType?: string | null }): Promise<Response<ChatMessageResponseArray>> {
-    const params = { ...queryParams } as AxiosRequestConfig
+    const params = { limit: 100, ...queryParams } as AxiosRequestConfig
     const url = '/chat/public/namespaces/{namespace}/topic'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -69,7 +69,7 @@ export class Topic$ {
     topic: string,
     queryParams?: { limit?: number; order?: string | null; startCreatedAt?: number }
   ): Promise<Response<ChatMessageResponseArray>> {
-    const params = { ...queryParams } as AxiosRequestConfig
+    const params = { limit: 100, ...queryParams } as AxiosRequestConfig
     const url = '/chat/public/namespaces/{namespace}/topic/{topic}/chats'.replace('{namespace}', this.namespace).replace('{topic}', topic)
     const resultPromise = this.axiosInstance.get(url, { params })
 

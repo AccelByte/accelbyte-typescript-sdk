@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -131,6 +131,7 @@ export const usePlayerAdminApi_GetBlockedPlayer_ByUserId = (
 }
 
 /**
+ * @deprecated
  * Get all player&#39;s session attribute by user id in a namespace.
  *
  * #### Default Query Options
@@ -164,6 +165,7 @@ export const usePlayerAdminApi_GetAttributesPlayer_ByUserId = (
 }
 
 /**
+ * @deprecated
  * Set player&#39;s session attribute by user id in a namespace.
  *
  * #### Default Query Options
@@ -302,6 +304,7 @@ export const usePlayerAdminApi_DeleteBulkUnblockPlayer_ByUserIdMutation = (
 }
 
 /**
+ * @deprecated
  * Get player&#39;s specific session attribute by user id in a namespace.
  *
  * #### Default Query Options

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -8,6 +8,7 @@
  */
 import { Response, Validate } from '@accelbyte/sdk'
 import { AxiosInstance, AxiosRequestConfig } from 'axios'
+import { z } from 'zod'
 import { AuditLogInfo } from '../../generated-definitions/AuditLogInfo.js'
 import { CategoryResponse } from '../../generated-definitions/CategoryResponse.js'
 import { PaginatedAuditLogsResponse } from '../../generated-definitions/PaginatedAuditLogsResponse.js'
@@ -25,16 +26,18 @@ export class AuditLogsAdmin$ {
     actor?: string | null
     actorType?: 'CLIENT' | 'USER'
     category?: string | null
+    clientId?: string | null
     endDate?: number
+    hasCommentOnly?: boolean | null
     limit?: number
     namespace?: string | null
     objectId?: string | null
     objectType?: string | null
     offset?: number
-    order?: -1 | 1
+    sort?: 'actionName:-1' | 'actionName:1' | 'category:-1' | 'category:1' | 'namespace:-1' | 'namespace:1' | 'timestamp:-1' | 'timestamp:1'
     startDate?: number
   }): Promise<Response<PaginatedAuditLogsResponse>> {
-    const params = { ...queryParams } as AxiosRequestConfig
+    const params = { limit: 20, sort: 'timestamp:-1', ...queryParams } as AxiosRequestConfig
     const url = '/audit/v1/admin/logs'
     const resultPromise = this.axiosInstance.get(url, { params })
 
@@ -44,6 +47,28 @@ export class AuditLogsAdmin$ {
       PaginatedAuditLogsResponse,
       'PaginatedAuditLogsResponse'
     )
+  }
+  /**
+   * This API is used to export audit logs to CSV format. It supports export up to 50000 log entries at a time. The **{namespace}** permission value will be pointed to &#34;namespace&#34; query param. **1. If &#34;namespace&#34; query param exist:** The permission validation will validate that single namespace value. **2. If &#34;namespace&#34; query param not exist:** The permission validation will automatically check the users audit permissions (ADMIN:NAMESPACE:{namespace}:AUDIT). The query result can only returns data that matched with the namespace from the users AUDIT permissions e.g: If current user was assign permission with namespaces [game1, game2], then API will query by game1 &amp; game2
+   */
+  getLogsExport(queryParams?: {
+    action?: string | null
+    actor?: string | null
+    actorType?: 'CLIENT' | 'USER'
+    category?: string | null
+    clientId?: string | null
+    endDate?: number
+    namespace?: string | null
+    objectId?: string | null
+    objectType?: string | null
+    sort?: 'actionName:-1' | 'actionName:1' | 'category:-1' | 'category:1' | 'namespace:-1' | 'namespace:1' | 'timestamp:-1' | 'timestamp:1'
+    startDate?: number
+  }): Promise<Response<unknown>> {
+    const params = { sort: 'timestamp:-1', ...queryParams } as AxiosRequestConfig
+    const url = '/audit/v1/admin/logs/export'
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
   /**
    * This API is used to query category and related action names.

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -14,7 +14,7 @@ import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query
 import { AmsInfoAdminApi } from '../AmsInfoAdminApi.js'
 
 import { AmsRegionsResponse } from '../../generated-definitions/AmsRegionsResponse.js'
-import { AvailableInstanceTypesResponse } from '../../generated-definitions/AvailableInstanceTypesResponse.js'
+import { InstanceTypesResponse } from '../../generated-definitions/InstanceTypesResponse.js'
 
 export enum Key_AmsInfoAdmin {
   Regions = 'Ams.AmsInfoAdmin.Regions',
@@ -65,16 +65,16 @@ export const useAmsInfoAdminApi_GetRegions = (
 export const useAmsInfoAdminApi_GetSupportedInstances = (
   sdk: AccelByteSDK,
   input: SdkSetConfigParam,
-  options?: Omit<UseQueryOptions<AvailableInstanceTypesResponse, AxiosError<ApiError>>, 'queryKey'>,
-  callback?: (data: AxiosResponse<AvailableInstanceTypesResponse>) => void
-): UseQueryResult<AvailableInstanceTypesResponse, AxiosError<ApiError>> => {
+  options?: Omit<UseQueryOptions<InstanceTypesResponse, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<InstanceTypesResponse>) => void
+): UseQueryResult<InstanceTypesResponse, AxiosError<ApiError>> => {
   const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useAmsInfoAdminApi_GetSupportedInstances>[1]) => async () => {
     const response = await AmsInfoAdminApi(sdk, { coreConfig: input.coreConfig, axiosConfig: input.axiosConfig }).getSupportedInstances()
     callback && callback(response)
     return response.data
   }
 
-  return useQuery<AvailableInstanceTypesResponse, AxiosError<ApiError>>({
+  return useQuery<InstanceTypesResponse, AxiosError<ApiError>>({
     queryKey: [Key_AmsInfoAdmin.SupportedInstances, input],
     queryFn: queryFn(sdk, input),
     ...options

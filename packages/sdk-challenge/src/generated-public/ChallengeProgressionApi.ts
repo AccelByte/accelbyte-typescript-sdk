@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -42,9 +42,9 @@ export function ChallengeProgressionApi(sdk: AccelByteSDK, args?: SdkSetConfigPa
     }
   }
 
-  async function createUserMeProgresEvaluate(): Promise<AxiosResponse<unknown>> {
+  async function updateUserMeProgresEvaluate(): Promise<AxiosResponse<unknown>> {
     const $ = new ChallengeProgression$(axiosInstance, namespace, useSchemaValidation)
-    const resp = await $.createUserMeProgresEvaluate()
+    const resp = await $.updateUserMeProgresEvaluate()
     if (resp.error) throw resp.error
     return resp.response
   }
@@ -72,15 +72,15 @@ export function ChallengeProgressionApi(sdk: AccelByteSDK, args?: SdkSetConfigPa
 
   return {
     /**
-     * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+     * - Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]
      */
-    createUserMeProgresEvaluate,
+    updateUserMeProgresEvaluate,
     /**
-     * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]&lt;/li&gt;&lt;/ul&gt;
+     * - Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]
      */
     getUserMeProgres_ByChallengeCode,
     /**
-     * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]&lt;/li&gt;&lt;/ul&gt;
+     * - Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]
      */
     getIndexMeUser_ByChallengeCode_ByIndex
   }

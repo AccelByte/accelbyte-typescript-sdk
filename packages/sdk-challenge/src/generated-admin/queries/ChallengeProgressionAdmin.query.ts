@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -22,7 +22,7 @@ export enum Key_ChallengeProgressionAdmin {
 }
 
 /**
- * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]&lt;/li&gt;&lt;li&gt;Limited up to 10 users per request&lt;/li&gt;&lt;/ul&gt;
+ * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE] - Limited up to 10 users per request
  *
  * #### Default Query Options
  * The default options include:
@@ -32,7 +32,7 @@ export enum Key_ChallengeProgressionAdmin {
  * }
  * ```
  */
-export const useChallengeProgressionAdminApi_CreateProgresEvaluateMutation = (
+export const useChallengeProgressionAdminApi_UpdateProgresEvaluateMutation = (
   sdk: AccelByteSDK,
   options?: Omit<
     UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { data: EvaluatePlayerProgressionRequest }>,
@@ -44,7 +44,7 @@ export const useChallengeProgressionAdminApi_CreateProgresEvaluateMutation = (
     const response = await ChallengeProgressionAdminApi(sdk, {
       coreConfig: input.coreConfig,
       axiosConfig: input.axiosConfig
-    }).createProgresEvaluate(input.data)
+    }).updateProgresEvaluate(input.data)
     callback && callback(response.data)
     return response.data
   }
@@ -57,7 +57,7 @@ export const useChallengeProgressionAdminApi_CreateProgresEvaluateMutation = (
 }
 
 /**
- * &lt;ul&gt;&lt;li&gt;Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]&lt;/li&gt;&lt;/ul&gt;
+ * - Required permission: ADMIN:NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]
  *
  * #### Default Query Options
  * The default options include:

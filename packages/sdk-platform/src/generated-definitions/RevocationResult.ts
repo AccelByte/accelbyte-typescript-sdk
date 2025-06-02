@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -12,7 +12,9 @@ export const RevocationResult = z.object({
   creditRevocations: z.array(CreditRevocation).nullish(),
   entitlementRevocations: z.array(EntitlementRevocation).nullish(),
   id: z.string(),
+  isReplayed: z.boolean().nullish(),
   itemRevocations: z.array(ItemRevocation).nullish(),
+  requestId: z.string().nullish(),
   status: z.enum(['FAIL', 'SUCCESS'])
 })
 

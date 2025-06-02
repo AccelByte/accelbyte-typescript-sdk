@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -14,11 +14,13 @@ import { useMutation, UseMutationOptions, UseMutationResult, useQuery, UseQueryO
 import { DataRetrievalS2SApi } from '../DataRetrievalS2SApi.js'
 
 import { ListFinishedDataRequests } from '../../generated-definitions/ListFinishedDataRequests.js'
+import { S2SDataRequestSummary } from '../../generated-definitions/S2SDataRequestSummary.js'
 import { S2SDataRetrievalResponse } from '../../generated-definitions/S2SDataRetrievalResponse.js'
 import { S2SUserDataUrl } from '../../generated-definitions/S2SUserDataUrl.js'
 
 export enum Key_DataRetrievalS2S {
   S2SRequestsFinished = 'Gdpr.DataRetrievalS2S.S2SRequestsFinished',
+  S2Request_ByRequestId = 'Gdpr.DataRetrievalS2S.S2Request_ByRequestId',
   RequestS2_ByUserId = 'Gdpr.DataRetrievalS2S.RequestS2_ByUserId',
   GenerateS2_ByUserId_ByRequestDate = 'Gdpr.DataRetrievalS2S.GenerateS2_ByUserId_ByRequestDate'
 }
@@ -51,6 +53,39 @@ export const useDataRetrievalS2SApi_GetS2SRequestsFinished = (
 
   return useQuery<ListFinishedDataRequests, AxiosError<ApiError>>({
     queryKey: [Key_DataRetrievalS2S.S2SRequestsFinished, input],
+    queryFn: queryFn(sdk, input),
+    ...options
+  })
+}
+
+/**
+ * Scope: account Get Personal Data Request by Request Id. If the request has been completed, it will return a download url for the data package. --- ## This API for S2S integration purpose only
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_DataRetrievalS2S.S2Request_ByRequestId, input]
+ * }
+ * ```
+ */
+export const useDataRetrievalS2SApi_GetS2Request_ByRequestId = (
+  sdk: AccelByteSDK,
+  input: SdkSetConfigParam & { requestId: string },
+  options?: Omit<UseQueryOptions<S2SDataRequestSummary, AxiosError<ApiError>>, 'queryKey'>,
+  callback?: (data: AxiosResponse<S2SDataRequestSummary>) => void
+): UseQueryResult<S2SDataRequestSummary, AxiosError<ApiError>> => {
+  const queryFn = (sdk: AccelByteSDK, input: Parameters<typeof useDataRetrievalS2SApi_GetS2Request_ByRequestId>[1]) => async () => {
+    const response = await DataRetrievalS2SApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).getS2Request_ByRequestId(input.requestId)
+    callback && callback(response)
+    return response.data
+  }
+
+  return useQuery<S2SDataRequestSummary, AxiosError<ApiError>>({
+    queryKey: [Key_DataRetrievalS2S.S2Request_ByRequestId, input],
     queryFn: queryFn(sdk, input),
     ...options
   })

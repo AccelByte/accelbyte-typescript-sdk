@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -24,7 +24,7 @@ export class GlobalAchievementsAdmin$ {
     achievementCodes?: string | null
     limit?: number
     offset?: number
-    sortBy?: string | null
+    sortBy?: 'achievedAt' | 'achievedAt:asc' | 'achievedAt:desc' | 'createdAt' | 'createdAt:asc' | 'createdAt:desc'
     status?: string | null
     tags?: string[]
   }): Promise<Response<PaginatedGlobalAchievementResponse>> {
@@ -44,7 +44,13 @@ export class GlobalAchievementsAdmin$ {
    */
   getGlobalAchievements_ByUserId(
     userId: string,
-    queryParams?: { achievementCodes?: string | null; limit?: number; offset?: number; sortBy?: string | null; tags?: string[] }
+    queryParams?: {
+      achievementCodes?: string | null
+      limit?: number
+      offset?: number
+      sortBy?: 'contributedValue' | 'contributedValue:asc' | 'contributedValue:desc'
+      tags?: string[]
+    }
   ): Promise<Response<PaginatedUserContributionResponse>> {
     const params = { limit: 10, sortBy: 'contributedValue:desc', ...queryParams } as AxiosRequestConfig
     const url = '/achievement/v1/admin/namespaces/{namespace}/users/{userId}/global/achievements'
@@ -76,7 +82,7 @@ export class GlobalAchievementsAdmin$ {
    */
   getContributorsGlobal_ByAchievementCode(
     achievementCode: string,
-    queryParams?: { limit?: number; offset?: number; sortBy?: string | null }
+    queryParams?: { limit?: number; offset?: number; sortBy?: 'contributedValue' | 'contributedValue:asc' | 'contributedValue:desc' }
   ): Promise<Response<PaginatedContributorResponse>> {
     const params = { limit: 10, sortBy: 'contributedValue:desc', ...queryParams } as AxiosRequestConfig
     const url = '/achievement/v1/admin/namespaces/{namespace}/global/achievements/{achievementCode}/contributors'

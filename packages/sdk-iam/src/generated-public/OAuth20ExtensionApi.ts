@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -89,6 +89,16 @@ export function OAuth20ExtensionApi(sdk: AccelByteSDK, args?: SdkSetConfigParam)
     return resp.response
   }
 
+  async function postUpgradeForward_v3(data: {
+    client_id: string | null
+    upgrade_success_token: string | null
+  }): Promise<AxiosResponse<unknown>> {
+    const $ = new OAuth20Extension$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.postUpgradeForward_v3(data)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   async function getLocationCountry_v3(): Promise<AxiosResponse<CountryLocationResponse>> {
     const $ = new OAuth20Extension$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getLocationCountry_v3()
@@ -96,7 +106,11 @@ export function OAuth20ExtensionApi(sdk: AccelByteSDK, args?: SdkSetConfigParam)
     return resp.response
   }
 
-  async function postLinkCodeRequest_v3(data: { platformId: string | null }): Promise<AxiosResponse<OneTimeLinkingCodeResponse>> {
+  async function postLinkCodeRequest_v3(data: {
+    platformId: string | null
+    redirectUri?: string | null
+    state?: string | null
+  }): Promise<AxiosResponse<OneTimeLinkingCodeResponse>> {
     const $ = new OAuth20Extension$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.postLinkCodeRequest_v3(data)
     if (resp.error) throw resp.error
@@ -133,6 +147,19 @@ export function OAuth20ExtensionApi(sdk: AccelByteSDK, args?: SdkSetConfigParam)
   }): Promise<AxiosResponse<TokenResponseV3>> {
     const $ = new OAuth20Extension$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.postAuthenticateWithLink_v3(data)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function postAuthenticateWithLinkForward_v3(data: {
+    client_id: string | null
+    linkingToken: string | null
+    password: string | null
+    username: string | null
+    extend_exp?: boolean | null
+  }): Promise<AxiosResponse<unknown>> {
+    const $ = new OAuth20Extension$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.postAuthenticateWithLinkForward_v3(data)
     if (resp.error) throw resp.error
     return resp.response
   }
@@ -199,6 +226,10 @@ export function OAuth20ExtensionApi(sdk: AccelByteSDK, args?: SdkSetConfigParam)
      */
     postTokenExchange_v3,
     /**
+     * In login website based flow, after account upgraded, we need this API to handle the forward
+     */
+    postUpgradeForward_v3,
+    /**
      * This endpoint get country location based on the request.
      */
     getLocationCountry_v3,
@@ -211,13 +242,17 @@ export function OAuth20ExtensionApi(sdk: AccelByteSDK, args?: SdkSetConfigParam)
      */
     postLinkCodeValidate_v3,
     /**
-     * This endpoint is being used to generate user&#39;s token by one time link code. It require publisher ClientID It required a code which can be generated from &lt;code&gt;/iam/v3/link/code/request&lt;/code&gt;. This endpoint support creating transient token by utilizing **isTransient** param: **isTransient=true** will generate a transient token with a short Time Expiration and without a refresh token **isTransient=false** will consume the one-time code and generate the access token with a refresh token.
+     * This endpoint is being used to generate user&#39;s token by one time link code. It requires a code which can be generated from &lt;code&gt;/iam/v3/link/code/request&lt;/code&gt; or &lt;code&gt;/iam/v3/public/users/me/link/forward&lt;/code&gt;. This endpoint support creating transient token by utilizing **isTransient** param: **isTransient=true** will generate a transient token with a short Time Expiration and without a refresh token **isTransient=false** will consume the one-time code and generate the access token with a refresh token.
      */
     postLinkTokenExchange_v3,
     /**
      * This endpoint is being used to authenticate a user account and perform platform link. It validates user&#39;s email / username and password. If user already enable 2FA, then invoke _/mfa/verify_ using **mfa_token** from this endpoint response. ## Device Cookie Validation Device Cookie is used to protect the user account from brute force login attack, [more detail from OWASP](https://owasp.org/www-community/Slow_Down_Online_Guessing_Attacks_with_Device_Cookies). This endpoint will read device cookie from cookie **auth-trust-id**. If device cookie not found, it will generate a new one and set it into cookie when successfully authenticate.
      */
     postAuthenticateWithLink_v3,
+    /**
+     * This endpoint is being used to authenticate a user account and perform platform link. It validates user&#39;s email / username and password. If user already enable 2FA, then invoke _/mfa/verify_ using **mfa_token** from this endpoint response. ## Device Cookie Validation Device Cookie is used to protect the user account from brute force login attack, [more detail from OWASP](https://owasp.org/www-community/Slow_Down_Online_Guessing_Attacks_with_Device_Cookies). This endpoint will read device cookie from cookie **auth-trust-id**. If device cookie not found, it will generate a new one and set it into cookie when successfully authenticate.
+     */
+    postAuthenticateWithLinkForward_v3,
     /**
      * This endpoint is being used to request the code to exchange a new token. The target new token&#39;s clientId should NOT be same with current using one. Path namespace should be target namespace. Client ID should match the target namespace. The code in response can be consumed by &lt;code&gt;/iam/v3/token/exchange&lt;/code&gt;
      */

@@ -1,7 +1,7 @@
 {
-  "buildDate": "2024-09-18T15:17:42+00:00",
-  "gitHash": "6457a81754720bdd87f6bf6c531022234e0181d4",
+  "buildDate": "2025-05-23T21:30:57+00:00",
+  "gitHash": "588e0f0502bc46d576e6b1341dcd26aef2678748",
   "name": "fleet-commander",
-  "version": "1.24.2-dev",
+  "version": "1.36.2-dev",
   "version-roles-seeding": "1.2.70"
 }

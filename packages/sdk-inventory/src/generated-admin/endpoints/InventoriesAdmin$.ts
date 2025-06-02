@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -95,7 +95,7 @@ export class InventoriesAdmin$ {
   /**
    *  Validate purchase ecommerce item. Permission: ADMIN:NAMESPACE:{namespace}:USER:{userId}:INVENTORY [UPDATE]
    */
-  createPurchaseable_ByUserId(userId: string, data: PurchaseValidationReq): Promise<Response<unknown>> {
+  updatePurchaseable_ByUserId(userId: string, data: PurchaseValidationReq): Promise<Response<unknown>> {
     const params = {} as AxiosRequestConfig
     const url = '/inventory/v1/admin/namespaces/{namespace}/users/{userId}/purchaseable'
       .replace('{namespace}', this.namespace)

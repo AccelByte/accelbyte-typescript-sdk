@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -15,7 +15,7 @@ export class PlatformAccountClosureHistoryAdmin$ {
   // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
   /**
-   * Get user&#39;s platform account closure histories. Scope: account ------ Supported platforms: * psn
+   * Get user&#39;s platform account closure histories. Scope: account ------ Supported platforms: - psn - steamnetwork - xbox
    */
   getUsersPlatformsClosureHistories(queryParams?: {
     limit?: number

@@ -132,6 +132,7 @@
             "type": "string"
           },
           {
+            "default": 100,
             "description": "limit",
             "in": "query",
             "name": "limit",
@@ -293,6 +294,7 @@
             "type": "string"
           },
           {
+            "default": 100,
             "description": "limit",
             "in": "query",
             "name": "limit",
@@ -420,6 +422,7 @@
             "type": "string"
           },
           {
+            "default": 100,
             "description": "limit",
             "in": "query",
             "name": "limit",
@@ -568,7 +571,8 @@
             "type": "integer"
           },
           {
-            "description": "default: 1000",
+            "default": 100,
+            "description": "limit",
             "in": "query",
             "name": "limit",
             "type": "integer"
@@ -944,6 +948,7 @@
             "type": "string"
           },
           {
+            "default": 100,
             "description": "limit",
             "in": "query",
             "name": "limit",
@@ -1221,6 +1226,7 @@
             "x-omitempty": false
           },
           {
+            "default": 100,
             "description": "limit",
             "in": "query",
             "name": "limit",
@@ -1851,6 +1857,7 @@
             "type": "string"
           },
           {
+            "default": 100,
             "description": "limit",
             "in": "query",
             "name": "limit",
@@ -2014,6 +2021,7 @@
             "type": "string"
           },
           {
+            "default": 100,
             "description": "limit",
             "in": "query",
             "name": "limit",
@@ -2440,7 +2448,7 @@
     },
     "/chat/v1/admin/config/log": {
       "get": {
-        "description": "\n\t\t\tGet Log Configuration\n\t\t\tlogLevel use for logging in service, the value can use is trace|debug|info|warning|error|fatal|panic\n\t\t\tsocketLogEnabled is use for enable socket log\n\t\t\tlogLevelDB use for logging in DB, the value can use is trace|debug|info|warning|error|fatal|panic\n\t\t\tslowQueryThreshold use for logging slow threshold in time measure is nano second\n\t\t\t",
+        "description": "\n\t\t\tGet Log Configuration\n\t\t\tlogLevel use for logging in service, the value can use is trace|debug|info|warning|error|fatal|panic\n\t\t\tsocketLogEnabled is use for enable socket log\n\t\t\tinternalAccessLogEnabled is for enabling access log for internal endpoint\n\t\t\tlogLevelDB use for logging in DB, the value can use is trace|debug|info|warning|error|fatal|panic\n\t\t\tslowQueryThreshold use for logging slow threshold in time measure is nano second\n\t\t\t",
         "operationId": "adminGetLogConfig",
         "produces": ["application/json"],
         "responses": {
@@ -2467,7 +2475,7 @@
       },
       "patch": {
         "consumes": ["application/json"],
-        "description": "\n\t\t\t\tUpdate Log Configuration\n\t\t\t\tlogLevel use for logging in service, the value can use is trace|debug|info|warning|error|fatal|panic\n\t\t\t\tsocketLogEnabled is use for enable socket log\n\t\t\t\tlogLevelDB use for logging in DB, the value can use is trace|debug|info|warning|error|fatal|panic\n\t\t\t\tslowQueryThreshold use for logging slow threshold in time measure is nano second\n\t\t\t",
+        "description": "\n\t\t\t\tUpdate Log Configuration\n\t\t\t\tlogLevel use for logging in service, the value can use is trace|debug|info|warning|error|fatal|panic\n\t\t\t\tsocketLogEnabled is use for enable socket log\n\t\t\t\tinternalAccessLogEnabled is for enabling access log for internal endpoint\n\t\t\t\tlogLevelDB use for logging in DB, the value can use is trace|debug|info|warning|error|fatal|panic\n\t\t\t\tslowQueryThreshold use for logging slow threshold in time measure is nano second\n\t\t\t",
         "operationId": "adminPatchUpdateLogConfig",
         "parameters": [
           {
@@ -3111,6 +3119,62 @@
           }
         ],
         "summary": "admin get category schema",
+        "tags": ["inbox"],
+        "x-errorCodes": {},
+        "x-security": [
+          {
+            "userPermissions": ["ADMIN:NAMESPACE:{namespace}:CHAT:CATEGORY [READ]"]
+          }
+        ]
+      }
+    },
+    "/chat/v1/admin/inbox/namespaces/{namespace}/list/topic/kafka": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Get list kafka topic. example result chat,sessionNotification",
+        "operationId": "adminListKafkaTopic",
+        "parameters": [
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetListTopicKafkaResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseBody"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseBody"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/restapi.ErrorResponseBody"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "admin get list kafka topic",
         "tags": ["inbox"],
         "x-errorCodes": {},
         "x-security": [
@@ -4142,10 +4206,7 @@
         "produces": ["application/json"],
         "responses": {
           "204": {
-            "description": "No Content",
-            "schema": {
-              "$ref": "#/definitions/models.Dictionary"
-            }
+            "description": "No Content"
           },
           "400": {
             "description": "Bad Request",
@@ -4934,6 +4995,10 @@
     },
     "logconfig.Configuration": {
       "properties": {
+        "internalAccessLogEnabled": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "logLevel": {
           "enum": ["debug", "error", "fatal", "info", "panic", "trace", "warning"],
           "type": "string"
@@ -5329,6 +5394,10 @@
           "type": "boolean",
           "x-omitempty": false
         },
+        "enablePmSendPlatformId": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
         "maxChatMessageLength": {
           "format": "int32",
           "type": "integer"
@@ -5376,6 +5445,10 @@
           "x-omitempty": false
         },
         "enableManualTopicCreation": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "enablePmSendPlatformId": {
           "type": "boolean",
           "x-omitempty": false
         },
@@ -5467,6 +5540,10 @@
           "x-omitempty": false
         },
         "enableManualTopicCreation": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "enablePmSendPlatformId": {
           "type": "boolean",
           "x-omitempty": false
         },
@@ -5862,6 +5939,17 @@
       },
       "required": ["data", "next", "previous"]
     },
+    "models.GetListTopicKafkaResponse": {
+      "properties": {
+        "topicName": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["topicName"]
+    },
     "models.ImportConfigResponse": {
       "properties": {
         "failedConfigs": {
@@ -6014,6 +6102,10 @@
         "chatRateLimitDuration": {
           "format": "int64",
           "type": "integer"
+        },
+        "enablePmSendPlatformId": {
+          "type": "boolean",
+          "x-omitempty": false
         },
         "generalRateLimitBurst": {
           "format": "int32",
@@ -7642,6 +7734,14 @@
     },
     {
       "Attributes": [],
+      "Code": "511218",
+      "CodeName": "RemoveUserFromTopicCannotRemoveUserFromTeamTopic",
+      "Section": "topic member remove",
+      "Service": "chat",
+      "Text": ""
+    },
+    {
+      "Attributes": [],
       "Code": "511220",
       "CodeName": "QuitTopicSuccess",
       "Section": "topic member remove",
@@ -7655,6 +7755,14 @@
       "Section": "topic member remove",
       "Service": "chat",
       "Text": ""
+    },
+    {
+      "Attributes": ["subType"],
+      "Code": "511222",
+      "CodeName": "QuitTopicCannotManuallyFromUser",
+      "Section": "topic member remove",
+      "Service": "chat",
+      "Text": "cannot manually quit {{subType}} topic"
     },
     {
       "Attributes": [],
@@ -9082,11 +9190,11 @@
     }
   ],
   "x-version": {
-    "buildDate": "2024-09-17T09:01:13+00:00",
-    "gitHash": "0f3ade65858e4e1fa247591a66c73ea2eff36987",
+    "buildDate": "2025-05-26T05:00:22+00:00",
+    "gitHash": "8b33aba291345747717d3e10af07d7ca44341276",
     "name": "justice-chat-service",
-    "revisionID": "0.4.33",
-    "version": "0.4.33",
+    "revisionID": "0.4.46",
+    "version": "0.4.46",
     "version-roles-seeding": "1.2.15"
   }
 }

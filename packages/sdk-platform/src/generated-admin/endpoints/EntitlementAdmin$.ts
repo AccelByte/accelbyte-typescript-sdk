@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -138,6 +138,7 @@ export class EntitlementAdmin$ {
       entitlementName?: string | null
       features?: string[]
       fuzzyMatchName?: boolean | null
+      ignoreActiveDate?: boolean | null
       itemId?: string[]
       limit?: number
       offset?: number
@@ -185,6 +186,18 @@ export class EntitlementAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EntitlementInfo, 'EntitlementInfo')
+  }
+  /**
+   * Get user entitlements by ids. This will return all entitlements regardless of its status&lt;p&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: entitlement list&lt;/li&gt;&lt;/ul&gt;
+   */
+  getEntitlementsByIds_ByUserId(userId: string, queryParams?: { ids?: string[] }): Promise<Response<EntitlementInfoArray>> {
+    const params = { ...queryParams } as AxiosRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/users/{userId}/entitlements/byIds'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, EntitlementInfoArray, 'EntitlementInfoArray')
   }
   /**
    * Get user entitlement by sku.

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -42,6 +42,13 @@ export function SessionStorageApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     }
   }
 
+  async function getStorage_ByPartyId(partyId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new SessionStorage$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getStorage_ByPartyId(partyId)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   async function patchStorageLeader_BySessionId(sessionId: string): Promise<AxiosResponse<unknown>> {
     const $ = new SessionStorage$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.patchStorageLeader_BySessionId(sessionId)
@@ -56,7 +63,18 @@ export function SessionStorageApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     return resp.response
   }
 
+  async function patchReservedStorage_ByPartyId_ByUserId(partyId: string, userId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new SessionStorage$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.patchReservedStorage_ByPartyId_ByUserId(partyId, userId)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   return {
+    /**
+     * Read Party Session Storage by partyID Party Storage example: ``` { &#34;reserved&#34;: { &#34;userID1&#34;: {&#34;key&#34;: &#34;value&#34;}, &#34;userID2&#34;: {&#34;key&#34;: &#34;value&#34;}, ... } } ```
+     */
+    getStorage_ByPartyId,
     /**
      *  Update Insert Session Storage Leader. only Leader can update or insert user session storage data Leader. can store generic json example json can store : { &#34;leader&#34;: { &#34;leader&#34;: 1 }, &#34;data&#34;: 123 } game Admin can update or insert session storage Session Storage feature only available for Gamesession
      */
@@ -64,6 +82,10 @@ export function SessionStorageApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     /**
      *  Update Insert Session Storage User. user can only update or insert user session storage data itself. can store generic json example json can store : { &#34;storage&#34;: { &#34;storage&#34;: 1 }, &#34;data&#34;: 123 } game Admin can update or insert session storage Session Storage feature only available for Gamesession
      */
-    patchStorageUser_BySessionId_ByUserId
+    patchStorageUser_BySessionId_ByUserId,
+    /**
+     * **For Internal Use Only** Update Insert Party Session Reserved Storage User. User can only update or insert user party session storage data itself. can store generic json example json can store : ``` { &#34;key&#34;: &#34;value&#34;, &#34;number&#34;: 123, } ``` The data will be stored on the &#34;reserved&#34; storage field example stored data : ``` { &#34;reserved&#34;: { &#34;userID1&#34;: {&#34;key&#34;: &#34;value&#34;}, &#34;userID2&#34;: {&#34;key&#34;: &#34;value&#34;}, ... } } ```
+     */
+    patchReservedStorage_ByPartyId_ByUserId
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -66,6 +66,13 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelByteSDK, args?: Sd
     return resp.response
   }
 
+  async function deletePolicyVersion_ByPolicyVersionId(policyVersionId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new PolicyVersionsWithNamespaceAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.deletePolicyVersion_ByPolicyVersionId(policyVersionId)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   async function patchPolicyVersion_ByPolicyVersionId(
     policyVersionId: string,
     data: UpdatePolicyVersionRequest
@@ -86,6 +93,13 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelByteSDK, args?: Sd
     return resp.response
   }
 
+  async function patchUnpublishPolicy_ByPolicyVersionId(policyVersionId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new PolicyVersionsWithNamespaceAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.patchUnpublishPolicy_ByPolicyVersionId(policyVersionId)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   return {
     /**
      * Retrieve a version of a particular country specific policy. If version is not provided, the Legal Service will assume caller requesting all versions from country-specific policy.
@@ -96,12 +110,20 @@ export function PolicyVersionsWithNamespaceAdminApi(sdk: AccelByteSDK, args?: Sd
      */
     createVersion_ByPolicyId,
     /**
+     * Delete a policy version from policy.Can only be deleted if match these criteria:&lt;br&gt;&lt;ul&gt;&lt;li&gt;Policy version is not published&lt;/li&gt;&lt;li&gt;Policy version has never been accepted by any user&lt;/li&gt;&lt;/ul&gt;
+     */
+    deletePolicyVersion_ByPolicyVersionId,
+    /**
      * Update a particular policy version.
      */
     patchPolicyVersion_ByPolicyVersionId,
     /**
      * Manually publish a version of a particular country-specific policy.
      */
-    patchLatestPolicy_ByPolicyVersionId
+    patchLatestPolicy_ByPolicyVersionId,
+    /**
+     * Un-publish a policy version from policy.Can only be un-publish if match these criteria:&lt;br&gt;&lt;ul&gt;&lt;li&gt;Policy version has never been accepted by any user&lt;/li&gt;&lt;/ul&gt;
+     */
+    patchUnpublishPolicy_ByPolicyVersionId
   }
 }

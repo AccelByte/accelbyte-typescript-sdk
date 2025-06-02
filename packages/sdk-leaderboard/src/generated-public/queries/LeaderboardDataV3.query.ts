@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -75,7 +75,7 @@ export const useLeaderboardDataV3Api_CreateUserBulk_ByLeaderboardCodeMutation_v3
     UseMutationOptions<
       BulkUserRankingResponseV3,
       AxiosError<ApiError>,
-      SdkSetConfigParam & { leaderboardCode: string; data: BulkUserIDsRequest }
+      SdkSetConfigParam & { leaderboardCode: string; data: BulkUserIDsRequest; queryParams?: { previousVersion?: number } }
     >,
     'mutationKey'
   >,
@@ -83,13 +83,15 @@ export const useLeaderboardDataV3Api_CreateUserBulk_ByLeaderboardCodeMutation_v3
 ): UseMutationResult<
   BulkUserRankingResponseV3,
   AxiosError<ApiError>,
-  SdkSetConfigParam & { leaderboardCode: string; data: BulkUserIDsRequest }
+  SdkSetConfigParam & { leaderboardCode: string; data: BulkUserIDsRequest; queryParams?: { previousVersion?: number } }
 > => {
-  const mutationFn = async (input: SdkSetConfigParam & { leaderboardCode: string; data: BulkUserIDsRequest }) => {
+  const mutationFn = async (
+    input: SdkSetConfigParam & { leaderboardCode: string; data: BulkUserIDsRequest; queryParams?: { previousVersion?: number } }
+  ) => {
     const response = await LeaderboardDataV3Api(sdk, {
       coreConfig: input.coreConfig,
       axiosConfig: input.axiosConfig
-    }).createUserBulk_ByLeaderboardCode_v3(input.leaderboardCode, input.data)
+    }).createUserBulk_ByLeaderboardCode_v3(input.leaderboardCode, input.data, input.queryParams)
     callback && callback(response.data)
     return response.data
   }
@@ -114,7 +116,7 @@ export const useLeaderboardDataV3Api_CreateUserBulk_ByLeaderboardCodeMutation_v3
  */
 export const useLeaderboardDataV3Api_GetUser_ByLeaderboardCode_ByUserId_v3 = (
   sdk: AccelByteSDK,
-  input: SdkSetConfigParam & { leaderboardCode: string; userId: string },
+  input: SdkSetConfigParam & { leaderboardCode: string; userId: string; queryParams?: { previousVersion?: number } },
   options?: Omit<UseQueryOptions<UserRankingResponseV3, AxiosError<ApiError>>, 'queryKey'>,
   callback?: (data: AxiosResponse<UserRankingResponseV3>) => void
 ): UseQueryResult<UserRankingResponseV3, AxiosError<ApiError>> => {
@@ -123,7 +125,7 @@ export const useLeaderboardDataV3Api_GetUser_ByLeaderboardCode_ByUserId_v3 = (
       const response = await LeaderboardDataV3Api(sdk, {
         coreConfig: input.coreConfig,
         axiosConfig: input.axiosConfig
-      }).getUser_ByLeaderboardCode_ByUserId_v3(input.leaderboardCode, input.userId)
+      }).getUser_ByLeaderboardCode_ByUserId_v3(input.leaderboardCode, input.userId, input.queryParams)
       callback && callback(response)
       return response.data
     }
@@ -148,7 +150,11 @@ export const useLeaderboardDataV3Api_GetUser_ByLeaderboardCode_ByUserId_v3 = (
  */
 export const useLeaderboardDataV3Api_GetCycle_ByLeaderboardCode_ByCycleId_v3 = (
   sdk: AccelByteSDK,
-  input: SdkSetConfigParam & { leaderboardCode: string; cycleId: string; queryParams?: { limit?: number; offset?: number } },
+  input: SdkSetConfigParam & {
+    leaderboardCode: string
+    cycleId: string
+    queryParams?: { limit?: number; offset?: number; previousVersion?: number }
+  },
   options?: Omit<UseQueryOptions<GetLeaderboardRankingResp, AxiosError<ApiError>>, 'queryKey'>,
   callback?: (data: AxiosResponse<GetLeaderboardRankingResp>) => void
 ): UseQueryResult<GetLeaderboardRankingResp, AxiosError<ApiError>> => {

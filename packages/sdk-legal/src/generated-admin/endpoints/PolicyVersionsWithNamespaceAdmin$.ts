@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -57,6 +57,18 @@ export class PolicyVersionsWithNamespaceAdmin$ {
     )
   }
   /**
+   * Delete a policy version from policy.Can only be deleted if match these criteria:&lt;br&gt;&lt;ul&gt;&lt;li&gt;Policy version is not published&lt;/li&gt;&lt;li&gt;Policy version has never been accepted by any user&lt;/li&gt;&lt;/ul&gt;
+   */
+  deletePolicyVersion_ByPolicyVersionId(policyVersionId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/agreement/admin/namespaces/{namespace}/policies/versions/{policyVersionId}'
+      .replace('{namespace}', this.namespace)
+      .replace('{policyVersionId}', policyVersionId)
+    const resultPromise = this.axiosInstance.delete(url, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
+  }
+  /**
    * Update a particular policy version.
    */
   patchPolicyVersion_ByPolicyVersionId(
@@ -85,6 +97,18 @@ export class PolicyVersionsWithNamespaceAdmin$ {
   ): Promise<Response<unknown>> {
     const params = { shouldNotify: true, ...queryParams } as AxiosRequestConfig
     const url = '/agreement/admin/namespaces/{namespace}/policies/versions/{policyVersionId}/latest'
+      .replace('{namespace}', this.namespace)
+      .replace('{policyVersionId}', policyVersionId)
+    const resultPromise = this.axiosInstance.patch(url, null, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
+  }
+  /**
+   * Un-publish a policy version from policy.Can only be un-publish if match these criteria:&lt;br&gt;&lt;ul&gt;&lt;li&gt;Policy version has never been accepted by any user&lt;/li&gt;&lt;/ul&gt;
+   */
+  patchUnpublishPolicy_ByPolicyVersionId(policyVersionId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/agreement/admin/namespaces/{namespace}/policies/versions/{policyVersionId}/unpublish'
       .replace('{namespace}', this.namespace)
       .replace('{policyVersionId}', policyVersionId)
     const resultPromise = this.axiosInstance.patch(url, null, { params })

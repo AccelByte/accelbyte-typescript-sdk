@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -11,7 +11,7 @@
 import { AccelByteSDK, ApiUtils, Network, SdkSetConfigParam } from '@accelbyte/sdk'
 import { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { AmsRegionsResponse } from '../generated-definitions/AmsRegionsResponse.js'
-import { AvailableInstanceTypesResponse } from '../generated-definitions/AvailableInstanceTypesResponse.js'
+import { InstanceTypesResponse } from '../generated-definitions/InstanceTypesResponse.js'
 import { AmsInfoAdmin$ } from './endpoints/AmsInfoAdmin$.js'
 
 export function AmsInfoAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
@@ -50,7 +50,7 @@ export function AmsInfoAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     return resp.response
   }
 
-  async function getSupportedInstances(): Promise<AxiosResponse<AvailableInstanceTypesResponse>> {
+  async function getSupportedInstances(): Promise<AxiosResponse<InstanceTypesResponse>> {
     const $ = new AmsInfoAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.getSupportedInstances()
     if (resp.error) throw resp.error

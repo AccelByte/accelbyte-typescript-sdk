@@ -7,4 +7,3 @@ import * as AccelByteSDK_Event from './index'
 
 // @ts-ignore
 window.AccelByteSDK_Event = AccelByteSDK_Event
-

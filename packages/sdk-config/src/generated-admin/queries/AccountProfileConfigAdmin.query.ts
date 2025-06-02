@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -23,7 +23,7 @@ export enum Key_AccountProfileConfigAdmin {
 }
 
 /**
- * Created account profile related config values. **Supported Config Key:** * uniqueDisplayNameEnabled * usernameDisabled
+ * Created account profile related config values. **Supported Config Key:** * uniqueDisplayNameEnabled * usernameDisabled * displayNameSyncMode * avatarSyncMode
  *
  * #### Default Query Options
  * The default options include:
@@ -55,7 +55,7 @@ export const useAccountProfileConfigAdminApi_CreateConfigAccountMutation = (
 }
 
 /**
- * Get account profile related config values. **Supported Config Key:** * uniqueDisplayNameEnabled * usernameDisabled
+ * Get account profile related config values. **Supported Config Key:** * uniqueDisplayNameEnabled * usernameDisabled * displayNameSyncMode * avatarSyncMode
  *
  * #### Default Query Options
  * The default options include:
@@ -89,7 +89,7 @@ export const useAccountProfileConfigAdminApi_GetConfigAccount_ByConfigKey = (
 }
 
 /**
- * Update account profile related config values. **Supported Config Key:** * uniqueDisplayNameEnabled * usernameDisabled
+ * Update account profile related config values. **Supported Config Key:** * uniqueDisplayNameEnabled * usernameDisabled * displayNameSyncMode * avatarSyncMode
  *
  * #### Default Query Options
  * The default options include:

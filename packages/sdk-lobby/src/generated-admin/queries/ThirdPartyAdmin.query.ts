@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -24,6 +24,7 @@ export enum Key_ThirdPartyAdmin {
 }
 
 /**
+ * @deprecated
  * Required permission : &lt;code&gt;ADMIN:NAMESPACE:{namespace}:THIRDPARTY:CONFIG [DELETE]&lt;/code&gt; with scope &lt;code&gt;social&lt;/code&gt; &lt;br&gt;delete third party config in a namespace.
  *
  * #### Default Query Options
@@ -56,6 +57,7 @@ export const useThirdPartyAdminApi_DeleteThirdpartyConfigSteamMutation = (
 }
 
 /**
+ * @deprecated
  * Get third party config for specified namespace.
  *
  * #### Default Query Options
@@ -89,6 +91,7 @@ export const useThirdPartyAdminApi_GetThirdpartyConfigSteam = (
 }
 
 /**
+ * @deprecated
  * Create third party config in a namespace.
  *
  * #### Default Query Options
@@ -124,6 +127,7 @@ export const useThirdPartyAdminApi_CreateThirdpartyConfigSteamMutation = (
 }
 
 /**
+ * @deprecated
  * Update third party config in a namespace.
  *
  * #### Default Query Options

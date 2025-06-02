@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -73,12 +73,12 @@ export class ProfanityAdmin$ {
   /**
    * Bulk insert new word for profanity censor
    */
-  createProfanityDictionaryBulk(data: DictionaryInsertBulkRequest): Promise<Response<Dictionary>> {
+  createProfanityDictionaryBulk(data: DictionaryInsertBulkRequest): Promise<Response<unknown>> {
     const params = {} as AxiosRequestConfig
     const url = '/chat/v1/admin/profanity/namespaces/{namespace}/dictionary/bulk'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, data, { params })
 
-    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, Dictionary, 'Dictionary')
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
   /**
    * Get profanity words group.

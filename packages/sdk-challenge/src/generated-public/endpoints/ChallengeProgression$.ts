@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -16,9 +16,9 @@ export class ChallengeProgression$ {
   // prettier-ignore
   constructor(private axiosInstance: AxiosInstance, private namespace: string, private useSchemaValidation = true) {}
   /**
-   * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+   * - Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [UPDATE]
    */
-  createUserMeProgresEvaluate(): Promise<Response<unknown>> {
+  updateUserMeProgresEvaluate(): Promise<Response<unknown>> {
     const params = {} as AxiosRequestConfig
     const url = '/challenge/v1/public/namespaces/{namespace}/users/me/progress/evaluate'.replace('{namespace}', this.namespace)
     const resultPromise = this.axiosInstance.post(url, null, { params })
@@ -26,7 +26,7 @@ export class ChallengeProgression$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
   /**
-   * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]&lt;/li&gt;&lt;/ul&gt;
+   * - Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]
    */
   getUserMeProgres_ByChallengeCode(
     challengeCode: string,
@@ -46,7 +46,7 @@ export class ChallengeProgression$ {
     )
   }
   /**
-   * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]&lt;/li&gt;&lt;/ul&gt;
+   * - Required permission: NAMESPACE:{namespace}:CHALLENGE:PROGRESSION [READ]
    */
   getIndexMeUser_ByChallengeCode_ByIndex(
     challengeCode: string,

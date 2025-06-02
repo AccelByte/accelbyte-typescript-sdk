@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -46,9 +46,11 @@ export function PlayerRewardApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   }
 
   async function getUsersMeRewards(queryParams?: {
+    challengeCode?: string | null
+    goalProgressionId?: string | null
     limit?: number
     offset?: number
-    sortBy?: string | null
+    sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc' | 'updatedAt' | 'updatedAt:asc' | 'updatedAt:desc'
     status?: 'CLAIMED' | 'UNCLAIMED'
   }): Promise<AxiosResponse<ListUserRewardsResponse>> {
     const $ = new PlayerReward$(axiosInstance, namespace, useSchemaValidation)
@@ -57,35 +59,35 @@ export function PlayerRewardApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     return resp.response
   }
 
-  async function createUserMeRewardClaim(data: ClaimUserRewardsReq): Promise<AxiosResponse<UserRewardArray>> {
+  async function updateUserMeRewardClaim(data: ClaimUserRewardsReq): Promise<AxiosResponse<UserRewardArray>> {
     const $ = new PlayerReward$(axiosInstance, namespace, useSchemaValidation)
-    const resp = await $.createUserMeRewardClaim(data)
+    const resp = await $.updateUserMeRewardClaim(data)
     if (resp.error) throw resp.error
     return resp.response
   }
 
-  async function createRewardClaimMeUser_ByChallengeCode(
+  async function updateRewardClaimMeUser_ByChallengeCode(
     challengeCode: string,
     data: ClaimUserRewardsByGoalCodeRequest
   ): Promise<AxiosResponse<UserRewardArray>> {
     const $ = new PlayerReward$(axiosInstance, namespace, useSchemaValidation)
-    const resp = await $.createRewardClaimMeUser_ByChallengeCode(challengeCode, data)
+    const resp = await $.updateRewardClaimMeUser_ByChallengeCode(challengeCode, data)
     if (resp.error) throw resp.error
     return resp.response
   }
 
   return {
     /**
-     * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]&lt;/li&gt;&lt;/ul&gt;
+     * - Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [READ]
      */
     getUsersMeRewards,
     /**
-     * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+     * - Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]
      */
-    createUserMeRewardClaim,
+    updateUserMeRewardClaim,
     /**
-     * &lt;ul&gt;&lt;li&gt;Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]&lt;/li&gt;&lt;/ul&gt;
+     * - Required permission: NAMESPACE:{namespace}:CHALLENGE:REWARD [UPDATE]
      */
-    createRewardClaimMeUser_ByChallengeCode
+    updateRewardClaimMeUser_ByChallengeCode
   }
 }

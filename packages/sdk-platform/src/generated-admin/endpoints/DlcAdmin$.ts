@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -9,6 +9,7 @@
 import { Response, Validate } from '@accelbyte/sdk'
 import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { z } from 'zod'
+import { DlcItemConfigHistoryResult } from '../../generated-definitions/DlcItemConfigHistoryResult.js'
 import { DlcItemConfigInfo } from '../../generated-definitions/DlcItemConfigInfo.js'
 import { DlcItemConfigUpdate } from '../../generated-definitions/DlcItemConfigUpdate.js'
 import { PlatformDlcConfigInfo } from '../../generated-definitions/PlatformDlcConfigInfo.js'
@@ -49,6 +50,21 @@ export class DlcAdmin$ {
     const resultPromise = this.axiosInstance.put(url, data, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, DlcItemConfigInfo, 'DlcItemConfigInfo')
+  }
+  /**
+   * Get DLC item config history.
+   */
+  getDlcConfigHistory(queryParams: { dlcId: string | null }): Promise<Response<DlcItemConfigHistoryResult>> {
+    const params = { ...queryParams } as AxiosRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/dlc/config/history'.replace('{namespace}', this.namespace)
+    const resultPromise = this.axiosInstance.get(url, { params })
+
+    return Validate.validateOrReturnResponse(
+      this.useSchemaValidation,
+      () => resultPromise,
+      DlcItemConfigHistoryResult,
+      'DlcItemConfigHistoryResult'
+    )
   }
   /**
    * Get user dlc by platform.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: user dlc&lt;/li&gt;&lt;/ul&gt;
@@ -110,5 +126,17 @@ export class DlcAdmin$ {
     const resultPromise = this.axiosInstance.get(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, UserDlcRecordArray, 'UserDlcRecordArray')
+  }
+  /**
+   * Restore DLC item config history.
+   */
+  createRestoreConfigDlc_ById(id: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/platform/admin/namespaces/{namespace}/dlc/config/history/{id}/restore'
+      .replace('{namespace}', this.namespace)
+      .replace('{id}', id)
+    const resultPromise = this.axiosInstance.post(url, null, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
 }

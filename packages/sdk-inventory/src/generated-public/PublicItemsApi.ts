@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -121,11 +121,11 @@ export function PublicItemsApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      */
     updateItemMeUser_ByInventoryId,
     /**
-     *  Consume user&#39;s own item.
+     *  Consume user&#39;s own item. Client should pass item ID in options if item type is OPTIONBOX
      */
     createConsumeUser_ByInventoryId,
     /**
-     *  Move items between inventories that is owned by the same user.
+     * Move items between inventories that is owned by the same user. For Ecommerce items, the *qty* is *useCount*. For example, moving 2 of an item&#39;s *qty* will move 2 of the entitlement&#39;s *useCount*.
      */
     createItemMovementUser_ByInventoryId,
     /**

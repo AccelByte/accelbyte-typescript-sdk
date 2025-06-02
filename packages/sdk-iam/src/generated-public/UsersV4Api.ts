@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -23,6 +23,7 @@ import { PlatformUserIdRequestV4 } from '../generated-definitions/PlatformUserId
 import { PublicInviteUserRequestV4 } from '../generated-definitions/PublicInviteUserRequestV4.js'
 import { PublicUserUpdateRequestV3 } from '../generated-definitions/PublicUserUpdateRequestV3.js'
 import { UpgradeHeadlessAccountRequestV4 } from '../generated-definitions/UpgradeHeadlessAccountRequestV4.js'
+import { UpgradeHeadlessAccountWithVerificationCodeForwardRequestV4 } from '../generated-definitions/UpgradeHeadlessAccountWithVerificationCodeForwardRequestV4.js'
 import { UpgradeHeadlessAccountWithVerificationCodeRequestV4 } from '../generated-definitions/UpgradeHeadlessAccountWithVerificationCodeRequestV4.js'
 import { UserMfaStatusResponseV4 } from '../generated-definitions/UserMfaStatusResponseV4.js'
 import { UserMfaTokenResponseV4 } from '../generated-definitions/UserMfaTokenResponseV4.js'
@@ -99,6 +100,15 @@ export function UsersV4Api(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   async function updateUserMeEmail_v4(data: EmailUpdateRequestV4): Promise<AxiosResponse<unknown>> {
     const $ = new UsersV4$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.updateUserMeEmail_v4(data)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function createUserMeHeadlesCodeVerifyForward_v4(
+    data: UpgradeHeadlessAccountWithVerificationCodeForwardRequestV4
+  ): Promise<AxiosResponse<unknown>> {
+    const $ = new UsersV4$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.createUserMeHeadlesCodeVerifyForward_v4(data)
     if (resp.error) throw resp.error
     return resp.response
   }
@@ -283,6 +293,16 @@ export function UsersV4Api(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     return resp.response
   }
 
+  async function getUser_ByPlatformId_ByPlatformUserId_v4(
+    platformId: string,
+    platformUserId: string
+  ): Promise<AxiosResponse<UserResponseV3>> {
+    const $ = new UsersV4$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getUser_ByPlatformId_ByPlatformUserId_v4(platformId, platformUserId)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   return {
     /**
      * This endpoint is used to invite a game studio admin user with new namespace in multi tenant mode. It will return error if the service multi tenant mode is set to false. Request body details: - emailAddress: email address of the user to be invited - namespace: new namespace of the user to be created - namespaceDisplayName: display name of the new namespace - additionalData(optional): for utm parameter data The invited users will also be assigned with &#34;User&#34; role by default.
@@ -308,6 +328,10 @@ export function UsersV4Api(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      * The endpoint to update my email address. It requires a verification code from &lt;code&gt;/users/me/code/request&lt;/code&gt; with **UpdateEmailAddress** context.
      */
     updateUserMeEmail_v4,
+    /**
+     * This is a forward version for code verify. The endpoint upgrades a headless account by linking the headless account with the email address, username, and password. By upgrading the headless account into a full account, the user could use the email address, username, and password for using Justice IAM. The endpoint is a shortcut for upgrading a headless account and verifying the email address in one call. In order to get a verification code for the endpoint, please check the [send verification code endpoint](#operations-Users-PublicSendCodeForwardV3). This endpoint also have an ability to update user data (if the user data field is specified) right after the upgrade account process is done.
+     */
+    createUserMeHeadlesCodeVerifyForward_v4,
     /**
      * (Only for test)This endpoint is used to remove trusted device. This endpoint Requires device_token in cookie
      */
@@ -368,7 +392,7 @@ export function UsersV4Api(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      */
     createUserInvite_ByInvitationId_v4,
     /**
-     * List User ID By Platform User ID This endpoint intended to list game user ID from the given namespace This endpoint return list of user ID by given platform ID and list of platform user ID, the max count is 100. Supported platform: - steam - steamopenid - ps4web - ps4 - ps5 - live - xblweb - oculus - oculusweb - facebook - google - googleplaygames - twitch - discord - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1 &lt;br&gt; If the request body exceed the max limitation, the max count will be in response body&#39;s messageVariables: &#34;messageVariables&#34;: {&#34;maxCount&#34;: &#34;100&#34;}
+     * List User ID By Platform User ID This endpoint intended to list game user ID from the given namespace This endpoint return list of user ID by given platform ID and list of platform user ID, the max count is 100. Supported platform: - steam - steamopenid - ps4web - ps4 - ps5 - live - xblweb - oculus - if query by app user id, please set the param **pidType** to **OCULUS_APP_USER_ID** - oculusweb - facebook - google - googleplaygames - twitch - discord - apple - device - justice - epicgames - nintendo - awscognito - netflix - snapchat - oidc platform id Note: **nintendo platform user ID**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1 &lt;br&gt; If the request body exceed the max limitation, the max count will be in response body&#39;s messageVariables: &#34;messageVariables&#34;: {&#34;maxCount&#34;: &#34;100&#34;}
      */
     createUser_ByPlatformId_v4,
     /**
@@ -408,6 +432,10 @@ export function UsersV4Api(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
     /**
      * This endpoint is used to disable 2FA authenticator. ------ **Note**: **mfaToken** is required when all the following are enabled: - The environment variable **SENSITIVE_MFA_AUTH_ENABLED** is true - The **Two-Factor Authentication** is enabled in the IAM client where user logs in - Users already enabled the MFA
      */
-    deleteUserMeMfaAuthenticatorDisable_v4
+    deleteUserMeMfaAuthenticatorDisable_v4,
+    /**
+     * Get User By Platform User ID. This endpoint return user information by given platform ID and platform user ID. Several platforms are grouped under account groups, you can use either platform ID or platform group as platformId path parameter. example: for steam network platform, you can use steamnetwork / steam / steamopenid as platformId path parameter. If the target platform is not linked to the current user, will only return public information. ---------- **Supported Platforms:** - Steam group (steamnetwork): - steam - steamopenid - PSN group (psn): - ps4web - ps4 - ps5 - XBOX group(xbox): - live - xblweb - Oculus group (oculusgroup): - oculus - oculusweb - Google group (google): - google - googleplaygames: - epicgames - facebook - twitch - discord - android - ios - apple - device - nintendo - awscognito - amazon - netflix - snapchat - _oidc platform id_ Note: - You can use either platform id or platform group as **platformId** parameter. - **Nintendo platform user id**: NSA ID need to be appended with Environment ID using colon as separator. e.g kmzwa8awaa:dd1
+     */
+    getUser_ByPlatformId_ByPlatformUserId_v4
   }
 }

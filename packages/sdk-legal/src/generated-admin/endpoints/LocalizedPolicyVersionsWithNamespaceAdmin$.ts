@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -109,6 +109,18 @@ export class LocalizedPolicyVersionsWithNamespaceAdmin$ {
       .replace('{namespace}', this.namespace)
       .replace('{localizedPolicyVersionId}', localizedPolicyVersionId)
     const resultPromise = this.axiosInstance.patch(url, null, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
+  }
+  /**
+   * Delete localized version policy.&lt;br&gt;Can only be deleted if match these criteria:&lt;br&gt;&lt;ul&gt;&lt;li&gt;Policy Version that this localized policy version belongs to is not active&lt;/li&gt;&lt;li&gt;Has never been accepted by any user&lt;/li&gt;&lt;/ul&gt;
+   */
+  deleteLocalizedPolicyVersionVersion_ByLocalizedPolicyVersionId(localizedPolicyVersionId: string): Promise<Response<unknown>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/agreement/admin/namespaces/{namespace}/localized-policy-versions/versions/{localizedPolicyVersionId}'
+      .replace('{namespace}', this.namespace)
+      .replace('{localizedPolicyVersionId}', localizedPolicyVersionId)
+    const resultPromise = this.axiosInstance.delete(url, { params })
 
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -42,6 +42,13 @@ export function SessionStorageAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigPar
     }
   }
 
+  async function getStorage_ByPartyId(partyId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new SessionStorageAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getStorage_ByPartyId(partyId)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   async function deleteStorage_BySessionId(sessionId: string): Promise<AxiosResponse<unknown>> {
     const $ = new SessionStorageAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.deleteStorage_BySessionId(sessionId)
@@ -64,6 +71,10 @@ export function SessionStorageAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigPar
   }
 
   return {
+    /**
+     * Read Party Session Storage by partyID Party Storage example: ``` { &#34;reserved&#34;: { &#34;userID1&#34;: {&#34;key&#34;: &#34;value&#34;}, &#34;userID2&#34;: {&#34;key&#34;: &#34;value&#34;}, ... } } ```
+     */
+    getStorage_ByPartyId,
     /**
      *  Delete Session Storage By sessionID Session Storage feature only available for Gamesession
      */

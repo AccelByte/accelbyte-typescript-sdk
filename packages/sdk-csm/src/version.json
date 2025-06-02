@@ -1,0 +1,8 @@
+{
+  "buildDate": "Wed May 28 09:04:52 UTC 2025",
+  "gitHash": "ea7d0c0b",
+  "name": "custom-service-manager",
+  "version": "1.24.0",
+  "version-justice": "3.39.0",
+  "version-roles-seeding": "1.2.64"
+}

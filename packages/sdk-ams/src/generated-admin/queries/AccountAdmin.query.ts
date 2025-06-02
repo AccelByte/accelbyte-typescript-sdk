@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -118,7 +118,7 @@ export const useAccountAdminApi_GetAccountLink = (
 }
 
 /**
- * This route will attempt to register the account to namespace linkage in AMS and requires a valid account link token. This route fails if an account is already linked AdminAccountLink Required Permission: ADMIN:NAMESPACE:{namespace}:ARMADA:ACCOUNT [CREATE]
+ * This route will attempt to register the account to namespace linkage in AMS and requires a valid account link token. This route fails if an account is already linked Required Permission: ADMIN:NAMESPACE:{namespace}:ARMADA:ACCOUNT [CREATE]
  *
  * #### Default Query Options
  * The default options include:

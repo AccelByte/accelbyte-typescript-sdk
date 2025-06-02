@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -15,6 +15,7 @@ import { ThirdPartyCredentialAdminApi } from '../ThirdPartyCredentialAdminApi.js
 
 import { CheckAvailabilityResponse } from '../../generated-definitions/CheckAvailabilityResponse.js'
 import { PlatformDomainDeleteRequest } from '../../generated-definitions/PlatformDomainDeleteRequest.js'
+import { PlatformDomainPatchRequest } from '../../generated-definitions/PlatformDomainPatchRequest.js'
 import { PlatformDomainResponse } from '../../generated-definitions/PlatformDomainResponse.js'
 import { PlatformDomainUpdateRequest } from '../../generated-definitions/PlatformDomainUpdateRequest.js'
 import { ThirdPartyLoginPlatformCredentialRequest } from '../../generated-definitions/ThirdPartyLoginPlatformCredentialRequest.js'
@@ -285,7 +286,7 @@ export const useThirdPartyCredentialAdminApi_CreateClient_ByPlatformIdMutation_v
 }
 
 /**
- * This is the API to unregister 3rd Platform domain.
+ * This is the API to unregister 3rd Platform domain. If there is a ssoGroups in request body, then this request wil only delete the sso group from the target domain, it will not delete domain.
  *
  * #### Default Query Options
  * The default options include:
@@ -320,7 +321,50 @@ export const useThirdPartyCredentialAdminApi_DeleteClientDomain_ByPlatformIdMuta
 }
 
 /**
- * This is the API to set 3rd Platform domain.
+ * This is the API to patch update 3rd Platform domain. This API is a create or partial-update behavior. If it is update, it is a partial update behavior.
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_ThirdPartyCredentialAdmin.ClientDomain_ByPlatformId_v3, input]
+ * }
+ * ```
+ */
+export const useThirdPartyCredentialAdminApi_PatchClientDomain_ByPlatformIdMutation_v3 = (
+  sdk: AccelByteSDK,
+  options?: Omit<
+    UseMutationOptions<
+      PlatformDomainResponse,
+      AxiosError<ApiError>,
+      SdkSetConfigParam & { platformId: string; data: PlatformDomainPatchRequest }
+    >,
+    'mutationKey'
+  >,
+  callback?: (data: PlatformDomainResponse) => void
+): UseMutationResult<
+  PlatformDomainResponse,
+  AxiosError<ApiError>,
+  SdkSetConfigParam & { platformId: string; data: PlatformDomainPatchRequest }
+> => {
+  const mutationFn = async (input: SdkSetConfigParam & { platformId: string; data: PlatformDomainPatchRequest }) => {
+    const response = await ThirdPartyCredentialAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).patchClientDomain_ByPlatformId_v3(input.platformId, input.data)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_ThirdPartyCredentialAdmin.ClientDomain_ByPlatformId_v3],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * This is the API to set 3rd Platform domain. This API is a create-or-update behavior. If it is update, it is a replacement behavior.
  *
  * #### Default Query Options
  * The default options include:

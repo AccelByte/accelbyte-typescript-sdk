@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -8,11 +8,13 @@ export * from './generated-admin/endpoints/PassAdmin$.js'
 export * from './generated-admin/endpoints/RewardAdmin$.js'
 export * from './generated-admin/endpoints/SeasonAdmin$.js'
 export * from './generated-admin/endpoints/TierAdmin$.js'
+export * from './generated-admin/endpoints/UtilitiesAdmin$.js'
 export * from './generated-admin/ExportAdminApi.js'
 export * from './generated-admin/PassAdminApi.js'
 export * from './generated-admin/RewardAdminApi.js'
 export * from './generated-admin/SeasonAdminApi.js'
 export * from './generated-admin/TierAdminApi.js'
+export * from './generated-admin/UtilitiesAdminApi.js'
 export * from './generated-definitions/BulkUserProgressionRequest.js'
 export * from './generated-definitions/ClaimableRewards.js'
 export * from './generated-definitions/ClaimableUserSeasonInfo.js'
@@ -23,6 +25,8 @@ export * from './generated-definitions/ExpGrantHistoryPagingSlicedResult.js'
 export * from './generated-definitions/FieldValidationError.js'
 export * from './generated-definitions/FullSeasonInfo.js'
 export * from './generated-definitions/Image.js'
+export * from './generated-definitions/ItemReference.js'
+export * from './generated-definitions/ItemReferenceInfo.js'
 export * from './generated-definitions/ListSeasonInfo.js'
 export * from './generated-definitions/ListSeasonInfoPagingSlicedResult.js'
 export * from './generated-definitions/ListUserSeasonInfo.js'

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -16,6 +16,7 @@ import { GetInboxCategoriesResponseItemArray } from '../generated-definitions/Ge
 import { GetInboxMessagesResponse } from '../generated-definitions/GetInboxMessagesResponse.js'
 import { GetInboxStatsResponse } from '../generated-definitions/GetInboxStatsResponse.js'
 import { GetInboxUsersResponse } from '../generated-definitions/GetInboxUsersResponse.js'
+import { GetListTopicKafkaResponse } from '../generated-definitions/GetListTopicKafkaResponse.js'
 import { JsonSchemaType } from '../generated-definitions/JsonSchemaType.js'
 import { SaveInboxMessageRequest } from '../generated-definitions/SaveInboxMessageRequest.js'
 import { SaveInboxMessageResponse } from '../generated-definitions/SaveInboxMessageResponse.js'
@@ -98,6 +99,13 @@ export function InboxAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
   async function createInboxCategory(data: AddInboxCategoryRequest): Promise<AxiosResponse<AddInboxCategoryResponse>> {
     const $ = new InboxAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.createInboxCategory(data)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
+  async function getInboxListTopicKafka(): Promise<AxiosResponse<GetListTopicKafkaResponse>> {
+    const $ = new InboxAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.getInboxListTopicKafka()
     if (resp.error) throw resp.error
     return resp.response
   }
@@ -191,6 +199,10 @@ export function InboxAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
      * Add inbox category.
      */
     createInboxCategory,
+    /**
+     * Get list kafka topic. example result chat,sessionNotification
+     */
+    getInboxListTopicKafka,
     /**
      * Delete inbox message
      */

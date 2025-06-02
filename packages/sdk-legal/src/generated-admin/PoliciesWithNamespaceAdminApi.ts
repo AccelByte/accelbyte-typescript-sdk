@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -42,6 +42,13 @@ export function PoliciesWithNamespaceAdminApi(sdk: AccelByteSDK, args?: SdkSetCo
     }
   }
 
+  async function deletePolicy_ByPolicyId(policyId: string): Promise<AxiosResponse<unknown>> {
+    const $ = new PoliciesWithNamespaceAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.deletePolicy_ByPolicyId(policyId)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   async function patchPolicy_ByPolicyId(policyId: string, data: UpdatePolicyRequest): Promise<AxiosResponse<unknown>> {
     const $ = new PoliciesWithNamespaceAdmin$(axiosInstance, namespace, useSchemaValidation)
     const resp = await $.patchPolicy_ByPolicyId(policyId, data)
@@ -58,7 +65,11 @@ export function PoliciesWithNamespaceAdminApi(sdk: AccelByteSDK, args?: SdkSetCo
 
   return {
     /**
-     * Update country-specific policy.
+     * Delete policy.Can only be deleted if match these criteria:&lt;br&gt;&lt;ul&gt;&lt;li&gt;Policy is not default policy&lt;/li&gt;&lt;li&gt;Policy version under policy has never been accepted by any user&lt;/li&gt;&lt;/ul&gt;
+     */
+    deletePolicy_ByPolicyId,
+    /**
+     * Update country-specific and country-group policy.
      */
     patchPolicy_ByPolicyId,
     /**

@@ -1,0 +1,258 @@
+{
+  "host": "demo.accelbyte.io",
+  "info": {
+    "contact": {
+      "email": "engineering@accelbyte.io",
+      "name": "Extend Team at AccelByte",
+      "url": "https://accelbyte.io"
+    },
+    "description": "Extend Helper Service",
+    "title": "extend-helper-service",
+    "version": "1.5.0"
+  },
+  "schemes": ["https"],
+  "externalDocs": {
+    "description": "API Docs",
+    "url": "https://development.accelbyte.io/ehs/apidocs"
+  },
+  "securityDefinitions": {
+    "authorization": {
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey"
+    }
+  },
+  "swagger": "2.0",
+  "paths": {
+    "/ehs/v1/admin/namespaces/{namespace}/reflection": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required permission: `ADMIN:NAMESPACE:{namespace}:EXTEND:GRPCREFLECTION` (READ)\n\nDo gRPC reflection to get list of services info served by a server. Please use one of these parameter `host` or `appName`.\nUse query parameter `host` to get reflection for custom host/port address, or \nUse query parameter `appName` to get reflection for accelbyte hosted extend app",
+        "operationId": "GetGRPCReflectionInfo",
+        "parameters": [
+          {
+            "description": "AccelByte game namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "extend app name on which reflection will be done",
+            "in": "query",
+            "name": "appName",
+            "type": "string"
+          },
+          {
+            "description": "host and port of grpc server on which reflection will be done (e.g. mygrpc.tcp.ap.ngrok.io:19241)",
+            "in": "query",
+            "name": "host",
+            "type": "string"
+          },
+          {
+            "description": "security type for grpc client connection, values: `plaintext` | `tls` (optional, default to plaintext)",
+            "in": "query",
+            "name": "securityType",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetGRPCReflectionInfo"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get gRPC services list using reflection",
+        "tags": ["Utility"],
+        "x-errorCodes": {}
+      }
+    },
+    "/ehs/v1/namespaces/{namespace}/apps/{app}/token": {
+      "get": {
+        "consumes": ["application/json"],
+        "description": "Required permission: `ADMIN:NAMESPACE:{namespace}:EXTEND:REPOCREDENTIALS` (READ)\n\nGet docker login credentials for storing container images on a specified repository",
+        "operationId": "GetUploadTokenV1",
+        "parameters": [
+          {
+            "description": "Application name",
+            "in": "path",
+            "name": "app",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "AccelByte game namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/models.GetUploadTokenV1Response"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/response.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get a token for pushing container images in a publisher game app.",
+        "tags": ["Access"],
+        "x-errorCodes": {}
+      }
+    },
+    "/ehs/version": {
+      "get": {
+        "consumes": ["application/json"],
+        "operationId": "VersionCheckerHandler",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "x-errorCodes": {}
+      }
+    }
+  },
+  "definitions": {
+    "models.GetGRPCReflectionInfo": {
+      "properties": {
+        "services": {
+          "items": {
+            "$ref": "#/definitions/utilityservice.GRPCService"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["services"]
+    },
+    "models.GetUploadTokenV1Response": {
+      "properties": {
+        "repositoryBaseUrl": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "required": ["repositoryBaseUrl", "token", "username"]
+    },
+    "response.ErrorResponse": {
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "errorCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        }
+      },
+      "required": ["error", "errorCode", "errorMessage", "reason"]
+    },
+    "utilityservice.GRPCMethod": {
+      "properties": {
+        "clientStreaming": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "name": {
+          "type": "string"
+        },
+        "serverStreaming": {
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": ["clientStreaming", "name", "serverStreaming"]
+    },
+    "utilityservice.GRPCService": {
+      "properties": {
+        "methods": {
+          "items": {
+            "$ref": "#/definitions/utilityservice.GRPCMethod"
+          },
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": ["methods", "name"]
+    }
+  },
+  "x-docs": {
+    "alias": "ehs",
+    "host": "https://development.accelbyte.io",
+    "path": "/ehs/apidocs/api.json"
+  },
+  "x-version": {
+    "buildDate": "2025-05-26T07:32:07+00:00",
+    "gitHash": "b866287d4bf8bc351c1657e6d84c0b4cf0cd5f7d",
+    "version": "1.5.0"
+  }
+}

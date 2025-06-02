@@ -8,7 +8,7 @@
     },
     "description": "Justice SeasonPass Service",
     "title": "justice-seasonpass-service",
-    "version": "1.22.5"
+    "version": "1.26.0"
   },
   "schemes": ["https"],
   "tags": [
@@ -26,6 +26,9 @@
     },
     {
       "name": "Tier"
+    },
+    {
+      "name": "Utilities"
     }
   ],
   "externalDocs": {
@@ -329,6 +332,57 @@
         "x-errorCodes": {
           "20026": "publisher namespace not allowed",
           "49147": "Published season does not exist"
+        },
+        "x-security": {
+          "userPermissions": "ADMIN:NAMESPACE:{namespace}:SEASONPASS [READ]"
+        }
+      }
+    },
+    "/seasonpass/admin/namespaces/{namespace}/seasons/item/references": {
+      "get": {
+        "description": "This API is used to get season pass ecommerce item references.\u0026lt;p\u0026gt;Other detail info: \u0026lt;ul\u0026gt;\u0026lt;li\u0026gt;\u0026lt;i\u0026gt;Returns\u0026lt;/i\u0026gt;: item references data\u0026lt;/li\u0026gt;\u0026lt;/ul\u0026gt;",
+        "operationId": "getItemReferences",
+        "parameters": [
+          {
+            "description": "namespace",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "the id of the ecommerce item",
+            "in": "query",
+            "name": "itemId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ItemReferenceInfo"
+            }
+          },
+          "400": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003ctd\u003eErrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20026\u003c/td\u003e\u003ctd\u003epublisher namespace not allowed\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20002\u003c/td\u003e\u003ctd\u003evalidation error\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/ErrorEntity"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get season pass ecommerce item references",
+        "tags": ["Utilities"],
+        "x-errorCodes": {
+          "20002": "validation error",
+          "20026": "publisher namespace not allowed"
         },
         "x-security": {
           "userPermissions": "ADMIN:NAMESPACE:{namespace}:SEASONPASS [READ]"
@@ -2723,6 +2777,12 @@
               "$ref": "#/definitions/ErrorEntity"
             }
           },
+          "401": {
+            "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003ctd\u003eErrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e20001\u003c/td\u003e\u003ctd\u003eUnauthorized\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
+            "schema": {
+              "$ref": "#/definitions/ErrorEntity"
+            }
+          },
           "404": {
             "description": "\u003ctable\u003e\u003ctr\u003e\u003ctd\u003eErrorCode\u003c/td\u003e\u003ctd\u003eErrorMessage\u003c/td\u003e\u003c/tr\u003e\u003ctr\u003e\u003ctd\u003e49147\u003c/td\u003e\u003ctd\u003ePublished season does not exist\u003c/td\u003e\u003c/tr\u003e\u003c/table\u003e",
             "schema": {
@@ -2730,9 +2790,15 @@
             }
           }
         },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
         "summary": "Get current published season",
         "tags": ["Season"],
         "x-errorCodes": {
+          "20001": "Unauthorized",
           "20026": "publisher namespace not allowed",
           "49147": "Published season does not exist"
         }
@@ -3394,6 +3460,39 @@
         }
       },
       "required": ["height", "imageUrl", "width"],
+      "type": "object"
+    },
+    "ItemReference": {
+      "description": "A DTO object for item references.",
+      "properties": {
+        "module": {
+          "description": "module",
+          "type": "string"
+        },
+        "references": {
+          "description": "references",
+          "items": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ItemReferenceInfo": {
+      "description": "A DTO object for item references info.",
+      "properties": {
+        "references": {
+          "description": "item references",
+          "items": {
+            "$ref": "#/definitions/ItemReference"
+          },
+          "type": "array"
+        }
+      },
       "type": "object"
     },
     "ListSeasonInfo": {
@@ -4721,17 +4820,17 @@
     "path": "/seasonpass/swagger.json"
   },
   "x-version": {
-    "buildBy": "Gradle 6.9.1",
-    "buildDate": "2024-09-19T03:42:39+00:00",
-    "buildID": "1.22.5",
-    "buildJDK": "1.8.0_232 (Eclipse OpenJ9 openj9-0.17.0)",
-    "buildOS": "Linux amd64 5.10.224-212.876.amzn2.x86_64",
+    "buildBy": "Gradle 8.5",
+    "buildDate": "2025-05-26T04:14:18+00:00",
+    "buildID": "1.26.0",
+    "buildJDK": "21.0.5 (Amazon.com Inc. 21.0.5+11-LTS)",
+    "buildOS": "Linux amd64 5.10.236-228.935.amzn2.x86_64",
     "gitBranchName": "master",
-    "gitHash": "bd2ddd78ad",
-    "gitTag": "1.22.5",
+    "gitHash": "61f5741721",
+    "gitTag": "1.26.0",
     "name": "justice-seasonpass-service",
     "realm": "dev",
-    "version": "1.22.5",
+    "version": "1.26.0",
     "version-roles-seeding": "1.2.37"
   }
 }

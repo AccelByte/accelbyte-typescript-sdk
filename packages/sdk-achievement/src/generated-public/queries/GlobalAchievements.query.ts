@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -42,7 +42,7 @@ export const useGlobalAchievementsApi_GetGlobalAchievements = (
       achievementCodes?: string | null
       limit?: number
       offset?: number
-      sortBy?: string | null
+      sortBy?: 'achievedAt' | 'achievedAt:asc' | 'achievedAt:desc' | 'createdAt' | 'createdAt:asc' | 'createdAt:desc'
       status?: string | null
       tags?: string[]
     }
@@ -81,7 +81,13 @@ export const useGlobalAchievementsApi_GetGlobalAchievements_ByUserId = (
   sdk: AccelByteSDK,
   input: SdkSetConfigParam & {
     userId: string
-    queryParams?: { achievementCodes?: string | null; limit?: number; offset?: number; sortBy?: string | null; tags?: string[] }
+    queryParams?: {
+      achievementCodes?: string | null
+      limit?: number
+      offset?: number
+      sortBy?: 'contributedValue' | 'contributedValue:asc' | 'contributedValue:desc'
+      tags?: string[]
+    }
   },
   options?: Omit<UseQueryOptions<PaginatedUserContributionResponse, AxiosError<ApiError>>, 'queryKey'>,
   callback?: (data: AxiosResponse<PaginatedUserContributionResponse>) => void
@@ -115,7 +121,10 @@ export const useGlobalAchievementsApi_GetGlobalAchievements_ByUserId = (
  */
 export const useGlobalAchievementsApi_GetContributorsGlobal_ByAchievementCode = (
   sdk: AccelByteSDK,
-  input: SdkSetConfigParam & { achievementCode: string; queryParams?: { limit?: number; offset?: number; sortBy?: string | null } },
+  input: SdkSetConfigParam & {
+    achievementCode: string
+    queryParams?: { limit?: number; offset?: number; sortBy?: 'contributedValue' | 'contributedValue:asc' | 'contributedValue:desc' }
+  },
   options?: Omit<UseQueryOptions<PaginatedContributorResponse, AxiosError<ApiError>>, 'queryKey'>,
   callback?: (data: AxiosResponse<PaginatedContributorResponse>) => void
 ): UseQueryResult<PaginatedContributorResponse, AxiosError<ApiError>> => {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -21,7 +21,39 @@ export enum Key_PoliciesWithNamespaceAdmin {
 }
 
 /**
- * Update country-specific policy.
+ * Delete policy.Can only be deleted if match these criteria:&lt;br&gt;&lt;ul&gt;&lt;li&gt;Policy is not default policy&lt;/li&gt;&lt;li&gt;Policy version under policy has never been accepted by any user&lt;/li&gt;&lt;/ul&gt;
+ *
+ * #### Default Query Options
+ * The default options include:
+ * ```
+ * {
+ *    queryKey: [Key_PoliciesWithNamespaceAdmin.Policy_ByPolicyId, input]
+ * }
+ * ```
+ */
+export const usePoliciesWithNamespaceAdminApi_DeletePolicy_ByPolicyIdMutation = (
+  sdk: AccelByteSDK,
+  options?: Omit<UseMutationOptions<unknown, AxiosError<ApiError>, SdkSetConfigParam & { policyId: string }>, 'mutationKey'>,
+  callback?: (data: unknown) => void
+): UseMutationResult<unknown, AxiosError<ApiError>, SdkSetConfigParam & { policyId: string }> => {
+  const mutationFn = async (input: SdkSetConfigParam & { policyId: string }) => {
+    const response = await PoliciesWithNamespaceAdminApi(sdk, {
+      coreConfig: input.coreConfig,
+      axiosConfig: input.axiosConfig
+    }).deletePolicy_ByPolicyId(input.policyId)
+    callback && callback(response.data)
+    return response.data
+  }
+
+  return useMutation({
+    mutationKey: [Key_PoliciesWithNamespaceAdmin.Policy_ByPolicyId],
+    mutationFn,
+    ...options
+  })
+}
+
+/**
+ * Update country-specific and country-group policy.
  *
  * #### Default Query Options
  * The default options include:

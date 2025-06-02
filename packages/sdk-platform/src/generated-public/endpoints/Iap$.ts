@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -17,10 +17,12 @@ import { EpicGamesReconcileResultArray } from '../../generated-definitions/EpicG
 import { GoogleIapReceipt } from '../../generated-definitions/GoogleIapReceipt.js'
 import { GoogleReceiptResolveResult } from '../../generated-definitions/GoogleReceiptResolveResult.js'
 import { IapItemMappingInfo } from '../../generated-definitions/IapItemMappingInfo.js'
+import { IapOrderShortInfo } from '../../generated-definitions/IapOrderShortInfo.js'
 import { OculusReconcileResultArray } from '../../generated-definitions/OculusReconcileResultArray.js'
 import { PlayStationMultiServiceLabelsReconcileRequest } from '../../generated-definitions/PlayStationMultiServiceLabelsReconcileRequest.js'
 import { PlayStationReconcileRequest } from '../../generated-definitions/PlayStationReconcileRequest.js'
 import { PlayStationReconcileResultArray } from '../../generated-definitions/PlayStationReconcileResultArray.js'
+import { SteamSyncByTransactionRequest } from '../../generated-definitions/SteamSyncByTransactionRequest.js'
 import { SteamSyncRequest } from '../../generated-definitions/SteamSyncRequest.js'
 import { TwitchSyncRequest } from '../../generated-definitions/TwitchSyncRequest.js'
 import { TwitchSyncResultArray } from '../../generated-definitions/TwitchSyncResultArray.js'
@@ -202,6 +204,18 @@ export class Iap$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, z.unknown(), 'z.unknown()')
   }
   /**
+   * Sync steam in app purchase by transaction.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: &lt;/li&gt;&lt;/ul&gt;
+   */
+  updateIapSteamSyncByTransaction_ByUserId(userId: string, data: SteamSyncByTransactionRequest): Promise<Response<IapOrderShortInfo>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/steam/syncByTransaction'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.put(url, data, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, IapOrderShortInfo, 'IapOrderShortInfo')
+  }
+  /**
    * Synchronize with entitlements in PSN Store with multiple service labels.Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: result of synchronization&lt;/li&gt;&lt;/ul&gt;
    */
   updateIapPsnSyncMultiServiceLabel_ByUserId(
@@ -220,5 +234,15 @@ export class Iap$ {
       PlayStationReconcileResultArray,
       'PlayStationReconcileResultArray'
     )
+  }
+
+  updateIapSteamSyncAbnormalTransaction_ByUserId(userId: string): Promise<Response<IapOrderShortInfo>> {
+    const params = {} as AxiosRequestConfig
+    const url = '/platform/public/namespaces/{namespace}/users/{userId}/iap/steam/syncAbnormalTransaction'
+      .replace('{namespace}', this.namespace)
+      .replace('{userId}', userId)
+    const resultPromise = this.axiosInstance.put(url, null, { params })
+
+    return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, IapOrderShortInfo, 'IapOrderShortInfo')
   }
 }

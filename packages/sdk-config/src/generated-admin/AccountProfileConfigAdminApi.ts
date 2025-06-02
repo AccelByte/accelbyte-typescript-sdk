@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -67,15 +67,15 @@ export function AccountProfileConfigAdminApi(sdk: AccelByteSDK, args?: SdkSetCon
 
   return {
     /**
-     * Created account profile related config values. **Supported Config Key:** * uniqueDisplayNameEnabled * usernameDisabled
+     * Created account profile related config values. **Supported Config Key:** * uniqueDisplayNameEnabled * usernameDisabled * displayNameSyncMode * avatarSyncMode
      */
     createConfigAccount,
     /**
-     * Get account profile related config values. **Supported Config Key:** * uniqueDisplayNameEnabled * usernameDisabled
+     * Get account profile related config values. **Supported Config Key:** * uniqueDisplayNameEnabled * usernameDisabled * displayNameSyncMode * avatarSyncMode
      */
     getConfigAccount_ByConfigKey,
     /**
-     * Update account profile related config values. **Supported Config Key:** * uniqueDisplayNameEnabled * usernameDisabled
+     * Update account profile related config values. **Supported Config Key:** * uniqueDisplayNameEnabled * usernameDisabled * displayNameSyncMode * avatarSyncMode
      */
     updateConfigAccount_ByConfigKey
   }

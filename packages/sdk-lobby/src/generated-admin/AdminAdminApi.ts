@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -66,14 +66,17 @@ export function AdminAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
 
   return {
     /**
+     * @deprecated
      * Delete of global configuration data.
      */
     deleteGlobalConfiguration,
     /**
+     * @deprecated
      * Get dsmc global configuration.
      */
     getGlobalConfigurations,
     /**
+     * @deprecated
      * Upsert global configuration data.
      */
     updateGlobalConfiguration

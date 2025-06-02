@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -31,7 +31,7 @@ export class NamespaceAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, NamespaceInfoArray, 'NamespaceInfoArray')
   }
   /**
-   * Create a namespace.&lt;br&gt;By default the namespace is enabled.&lt;br&gt;In multi tenant mode, parentNamespace will be automatically filled with requester namespace if the requester is using studio or publisher token, and it will be filled with studio namespace if the requester uses game token. An oauth client will also be created and the id will be returned. &lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11301&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created namespace&lt;/li&gt;&lt;/ul&gt;
+   * Create a namespace.&lt;br&gt;By default the namespace is enabled.&lt;br&gt;In multi tenant mode, parentNamespace will be automatically filled with requester namespace if the requester is using studio or publisher token, and it will be filled with studio namespace if the requester uses game token. An oauth client will also be created and the id will be returned. &lt;br&gt;displayName rule: &lt;br/&gt;&lt;ul&gt;&lt;li&gt;Alphanumeric lowercase and uppercase are allowed&lt;/li&gt;&lt;li&gt;Allowed Special Character: &#39;,. -&lt;/li&gt;&lt;li&gt;Must start and end with alphanumeric&lt;/li&gt;&lt;li&gt;Spaces and special character are allowed but cannot appear twice in a row&lt;/li&gt;&lt;/ul&gt;&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11301&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: created namespace&lt;/li&gt;&lt;/ul&gt;
    */
   createNamespace(data: NamespaceCreate): Promise<Response<NamespaceInfo>> {
     const params = {} as AxiosRequestConfig
@@ -71,7 +71,7 @@ export class NamespaceAdmin$ {
     return Validate.validateOrReturnResponse(this.useSchemaValidation, () => resultPromise, NamespaceInfoArray, 'NamespaceInfoArray')
   }
   /**
-   * Update namespace basic info.&lt;br&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11302&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated namespace&lt;/li&gt;&lt;/ul&gt;
+   * Update namespace basic info.&lt;br&gt;displayName rule: &lt;br/&gt;&lt;ul&gt;&lt;li&gt;Alphanumeric lowercase and uppercase are allowed&lt;/li&gt;&lt;li&gt;Allowed Special Character: &#39;,. -&lt;/li&gt;&lt;li&gt;Must start and end with alphanumeric&lt;/li&gt;&lt;li&gt;Spaces and special character are allowed but cannot appear twice in a row&lt;/li&gt;&lt;/ul&gt;&lt;br/&gt;Other detail info: &lt;ul&gt;&lt;li&gt;&lt;i&gt;Action code&lt;/i&gt;: 11302&lt;/li&gt;&lt;li&gt;&lt;i&gt;Returns&lt;/i&gt;: updated namespace&lt;/li&gt;&lt;/ul&gt;
    */
   patchBasic(data: NamespaceUpdate): Promise<Response<NamespaceInfo>> {
     const params = {} as AxiosRequestConfig

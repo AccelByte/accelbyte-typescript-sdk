@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -14,6 +14,7 @@ import { DevelopmentServerConfigurationCreateRequest } from '../generated-defini
 import { DevelopmentServerConfigurationCreateResponse } from '../generated-definitions/DevelopmentServerConfigurationCreateResponse.js'
 import { DevelopmentServerConfigurationGetResponse } from '../generated-definitions/DevelopmentServerConfigurationGetResponse.js'
 import { DevelopmentServerConfigurationListResponse } from '../generated-definitions/DevelopmentServerConfigurationListResponse.js'
+import { DevelopmentServerConfigurationUpdateRequest } from '../generated-definitions/DevelopmentServerConfigurationUpdateRequest.js'
 import { DevelopmentAdmin$ } from './endpoints/DevelopmentAdmin$.js'
 
 export function DevelopmentAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam) {
@@ -82,6 +83,16 @@ export function DevelopmentAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam)
     return resp.response
   }
 
+  async function patchDevelopmentServerConfiguration_ByDevelopmentServerConfigId(
+    developmentServerConfigID: string,
+    data: DevelopmentServerConfigurationUpdateRequest
+  ): Promise<AxiosResponse<unknown>> {
+    const $ = new DevelopmentAdmin$(axiosInstance, namespace, useSchemaValidation)
+    const resp = await $.patchDevelopmentServerConfiguration_ByDevelopmentServerConfigId(developmentServerConfigID, data)
+    if (resp.error) throw resp.error
+    return resp.response
+  }
+
   return {
     /**
      * Required Permission: ADMIN:NAMESPACE:{namespace}:ARMADA:FLEET [READ]
@@ -98,6 +109,10 @@ export function DevelopmentAdminApi(sdk: AccelByteSDK, args?: SdkSetConfigParam)
     /**
      * Required Permission: ADMIN:NAMESPACE:{namespace}:ARMADA:FLEET [READ]
      */
-    getDevelopmentServerConfiguration_ByDevelopmentServerConfigId
+    getDevelopmentServerConfiguration_ByDevelopmentServerConfigId,
+    /**
+     * Required Permission: ADMIN:NAMESPACE:{namespace}:ARMADA:FLEET [UPDATE]
+     */
+    patchDevelopmentServerConfiguration_ByDevelopmentServerConfigId
   }
 }

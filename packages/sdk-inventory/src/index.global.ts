@@ -7,4 +7,3 @@ import * as AccelByteSDK_Inventory from './index'
 
 // @ts-ignore
 window.AccelByteSDK_Inventory = AccelByteSDK_Inventory
-

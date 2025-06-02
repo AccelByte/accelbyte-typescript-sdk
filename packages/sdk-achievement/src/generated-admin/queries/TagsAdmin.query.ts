@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2024 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -32,7 +32,14 @@ export enum Key_TagsAdmin {
  */
 export const useTagsAdminApi_GetTags = (
   sdk: AccelByteSDK,
-  input: SdkSetConfigParam & { queryParams?: { limit?: number; name?: string | null; offset?: number; sortBy?: string | null } },
+  input: SdkSetConfigParam & {
+    queryParams?: {
+      limit?: number
+      name?: string | null
+      offset?: number
+      sortBy?: 'createdAt' | 'createdAt:asc' | 'createdAt:desc' | 'name' | 'name:asc' | 'name:desc'
+    }
+  },
   options?: Omit<UseQueryOptions<PaginatedTagResponse, AxiosError<ApiError>>, 'queryKey'>,
   callback?: (data: AxiosResponse<PaginatedTagResponse>) => void
 ): UseQueryResult<PaginatedTagResponse, AxiosError<ApiError>> => {

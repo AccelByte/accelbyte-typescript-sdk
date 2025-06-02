@@ -8,7 +8,7 @@
     },
     "description": "Justice Group Service",
     "title": "justice-group-service",
-    "version": "2.20.2"
+    "version": "2.22.0"
   },
   "schemes": ["https"],
   "externalDocs": {
@@ -1653,7 +1653,7 @@
       },
       "post": {
         "consumes": ["application/json"],
-        "description": "Required valid user authentication\n\nThis endpoint is used to create new group\n\nThere are some fields that needs to be fulfilled\n\n*   **groupDescription**: the description of the group (optional)\n*   **groupIcon**: group icon URL link (optional)\n*   **groupName**: name of the group\n*   **groupRegion**: region of the group\n*   **groupRules**: rules for specific group. It consists of groupCustomRule that can be used to save custom rule, and groupPredefinedRules that has similar usage with configuration, but this rule only works in specific group\n*   **allowedAction**: available action in group service. It consist of joinGroup and inviteGroup\n*   **ruleAttribute**: attribute of the player that needs to be checked\n*   **ruleCriteria**: criteria of the value. The value will be in enum of EQUAL, MINIMUM, MAXIMUM\n*   **ruleValue**: value that needs to be checked\n*   **customAttributes**: additional custom group attributes (optional)\n\nAction Code: 73304\n\t\t",
+        "description": "Required valid user authentication\n\nThis endpoint is used to create new group\n\nThere are some fields that needs to be fulfilled\n\n*   **groupDescription**: the description of the group (optional)\n*   **groupIcon**: group icon URL link (optional)\n*   **groupName**: name of the group\n*   **groupRegion**: region of the group\n*   **groupRules**: rules for specific group. It consists of groupCustomRule that can be used to save custom rule, and groupPredefinedRules that has similar usage with configuration, but this rule only works in specific group\n*   **allowedAction**: available action in group service. It consist of joinGroup and createGroup\n*   **ruleAttribute**: attribute of the player that needs to be checked\n*   **ruleCriteria**: criteria of the value. The value will be in enum of EQUAL, MINIMUM, MAXIMUM\n*   **ruleValue**: value that needs to be checked\n*   **customAttributes**: additional custom group attributes (optional)\n\nAction Code: 73304\n\t\t",
         "operationId": "createNewGroupPublicV1",
         "parameters": [
           {
@@ -6981,6 +6981,7 @@
     "models.Rule": {
       "properties": {
         "allowedAction": {
+          "enum": ["createGroup", "joinGroup"],
           "type": "string"
         },
         "ruleDetail": {
@@ -7011,6 +7012,7 @@
     "models.RuleResponseV1": {
       "properties": {
         "allowedAction": {
+          "enum": ["createGroup", "joinGroup"],
           "type": "string"
         },
         "ruleDetail": {
@@ -7194,11 +7196,11 @@
     "path": "/group/apidocs/api.json"
   },
   "x-version": {
-    "buildDate": "2024-07-23T06:43:06+00:00",
-    "gitHash": "fc1b50125380852fa7b4e1cf762f40aa9cbeead7",
+    "buildDate": "2025-05-26T04:11:30+00:00",
+    "gitHash": "ae5ada845661ed726cdfada38404ec100af13a9b",
     "name": "justice-group-service",
     "realm": "dev",
-    "version": "2.20.2",
+    "version": "2.22.0",
     "version-roles-seeding": "0.0.3"
   }
 }
