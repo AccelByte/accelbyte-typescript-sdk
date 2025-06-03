@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-platform",
-  "version": "6.2.1",
+  "version": "6.3.0",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./src/index.ts",

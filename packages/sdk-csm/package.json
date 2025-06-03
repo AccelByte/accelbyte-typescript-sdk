@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-csm",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./src/index.ts",

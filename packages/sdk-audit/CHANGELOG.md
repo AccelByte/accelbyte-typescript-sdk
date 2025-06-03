@@ -1,5 +1,13 @@
 # @accelbyte/sdk-audit
 
+## 6.0.0
+
+### Major Changes
+
+- c783105: - Removed `order` query parameter from `GET /audit/v1/admin/logs` (breaking change)
+  - Added new optional query params `clientId`, `hasCommentOnly`, and `sort` to `GET /audit/v1/admin/logs`
+  - Added new endpoints for audit logs export, critical user events, and comments management (GET, POST, DELETE, PATCH) under admin namespaces
+
 ## 5.2.1
 
 ### Patch Changes

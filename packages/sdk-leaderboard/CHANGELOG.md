@@ -1,5 +1,12 @@
 # @accelbyte/sdk-leaderboard
 
+## 5.3.0
+
+### Minor Changes
+
+- c783105: - Added optional `previousVersion` query parameter to multiple leaderboard endpoints (admin and public)
+  - Added non-success `400` responses to several user and leaderboard endpoints in admin and public APIs
+
 ## 5.2.1
 
 ### Patch Changes

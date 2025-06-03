@@ -1,5 +1,11 @@
 # @accelbyte/sdk-cloudsave
 
+## 6.3.0
+
+### Minor Changes
+
+- c783105: Added new admin endpoint to delete TTL on admin records in Cloudsave
+
 ## 6.2.1
 
 ### Patch Changes

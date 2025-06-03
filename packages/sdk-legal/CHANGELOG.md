@@ -1,5 +1,17 @@
 # @accelbyte/sdk-legal
 
+## 6.3.0
+
+### Minor Changes
+
+- c783105: - Added new admin endpoints for managing base policies and policy versions (DELETE, GET, POST, PATCH)
+  - Added new public endpoint to get policies by country code within a namespace
+
+### Patch Changes
+
+- Updated dependencies [c783105]
+  - @accelbyte/sdk-iam@6.3.0
+
 ## 6.2.1
 
 ### Patch Changes

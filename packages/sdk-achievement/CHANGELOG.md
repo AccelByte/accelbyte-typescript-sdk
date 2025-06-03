@@ -1,5 +1,11 @@
 # @accelbyte/sdk-achievement
 
+## 5.3.0
+
+### Minor Changes
+
+- c783105: Added bulkUnlock endpoints and 404 error handling to achievement unlock APIs for both admin and public namespaces.
+
 ## 5.2.1
 
 ### Patch Changes

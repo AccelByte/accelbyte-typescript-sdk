@@ -1,5 +1,12 @@
 # @accelbyte/sdk-seasonpass
 
+## 5.3.0
+
+### Minor Changes
+
+- c783105: - Added new admin endpoint for seasons item references
+  - Added authorization security and `401` non-success response to public current season endpoint
+
 ## 5.2.1
 
 ### Patch Changes

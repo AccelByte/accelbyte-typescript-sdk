@@ -1,5 +1,12 @@
 # @accelbyte/sdk
 
+## 4.1.4
+
+### Patch Changes
+
+- c783105: fix(sdk): remove mmv1 and sessionbrowser internal path
+- c783105: chore: sync
+
 ## 4.1.3
 
 ### Patch Changes

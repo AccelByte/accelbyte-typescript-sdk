@@ -1,5 +1,15 @@
 # @accelbyte/sdk-chat
 
+## 6.3.0
+
+### Minor Changes
+
+- c783105: Added new admin endpoint for listing Kafka topics in chat inbox namespace
+
+### Patch Changes
+
+- c783105: chore: sync
+
 ## 6.2.1
 
 ### Patch Changes

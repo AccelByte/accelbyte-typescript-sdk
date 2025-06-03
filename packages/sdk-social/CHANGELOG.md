@@ -1,5 +1,13 @@
 # @accelbyte/sdk-social
 
+## 6.3.0
+
+### Minor Changes
+
+- c783105: - All affected endpoints now require the `body` param (was optional before) — across v1 and v2, admin and public routes.
+  - Added `422` response to one admin stat update endpoint
+  - Two operation ID renames on public statitem GET endpoints
+
 ## 6.2.1
 
 ### Patch Changes
