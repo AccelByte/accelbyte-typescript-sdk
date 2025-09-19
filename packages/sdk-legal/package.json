@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-legal",
-  "version": "6.3.0",
+  "version": "6.3.1",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./src/index.ts",
@@ -28,8 +28,8 @@
     "typescript": "5.5.4"
   },
   "dependencies": {
-    "@accelbyte/sdk-iam": "6.3.0",
-    "@accelbyte/validator": "0.2.29",
+    "@accelbyte/sdk-iam": "6.3.1",
+    "@accelbyte/validator": "0.2.30",
     "axios": "1.8.4",
     "buffer": "6.0.3",
     "crypto-js": "4.2.0",

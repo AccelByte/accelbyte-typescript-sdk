@@ -1,5 +1,13 @@
 # @accelbyte/sdk-legal
 
+## 6.3.1
+
+### Patch Changes
+
+- Updated dependencies [738e4b0]
+  - @accelbyte/validator@0.2.30
+  - @accelbyte/sdk-iam@6.3.1
+
 ## 6.3.0
 
 ### Minor Changes

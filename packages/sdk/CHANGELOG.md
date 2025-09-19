@@ -1,5 +1,12 @@
 # @accelbyte/sdk
 
+## 4.1.5
+
+### Patch Changes
+
+- Updated dependencies [738e4b0]
+  - @accelbyte/validator@0.2.30
+
 ## 4.1.4
 
 ### Patch Changes

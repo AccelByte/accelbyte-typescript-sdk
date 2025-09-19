@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-gametelemetry",
-  "version": "5.2.2",
+  "version": "5.2.3",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./src/index.ts",
@@ -28,7 +28,7 @@
     "typescript": "5.5.4"
   },
   "dependencies": {
-    "@accelbyte/validator": "0.2.29",
+    "@accelbyte/validator": "0.2.30",
     "axios": "1.8.4",
     "buffer": "6.0.3",
     "crypto-js": "4.2.0",
