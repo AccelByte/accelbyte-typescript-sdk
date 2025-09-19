@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- c783105: - Added optional `previousVersion` query parameter to multiple leaderboard endpoints (admin and public)
+- d38fb2d: - Added optional `previousVersion` query parameter to multiple leaderboard endpoints (admin and public)
   - Added non-success `400` responses to several user and leaderboard endpoints in admin and public APIs
 
 ## 5.2.1

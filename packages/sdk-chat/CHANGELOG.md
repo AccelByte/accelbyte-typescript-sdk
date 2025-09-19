@@ -4,11 +4,11 @@
 
 ### Minor Changes
 
-- c783105: Added new admin endpoint for listing Kafka topics in chat inbox namespace
+- d38fb2d: Added new admin endpoint for listing Kafka topics in chat inbox namespace
 
 ### Patch Changes
 
-- c783105: chore: sync
+- d38fb2d: chore: sync
 
 ## 6.2.1
 

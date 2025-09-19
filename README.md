@@ -250,17 +250,17 @@ This configuration allows customization of the WebSocket reconnection behavior w
 
 ```ts
 export interface WebSocketConfig {
-  allowReconnect?: boolean;
-  maxReconnectAttempts?: number;
+  allowReconnect?: boolean
+  maxReconnectAttempts?: number
 }
 ```
 
 The following table describes each parameter's function, type, and default value.
 
-| Parameter               | Type      | Description                                                                                             | Default Value |
-|-------------------------|-----------|---------------------------------------------------------------------------------------------------------|---------------|
-| `allowReconnect`        | `boolean` | Enables automatic reconnection attempts when the WebSocket disconnects unexpectedly.                    | `true`        |
-| `maxReconnectAttempts`  | `number`  | Sets the maximum number of reconnection attempts. Use `0` for unlimited retries. Only accepts integers. | `0`           |
+| Parameter              | Type      | Description                                                                                             | Default Value |
+| ---------------------- | --------- | ------------------------------------------------------------------------------------------------------- | ------------- |
+| `allowReconnect`       | `boolean` | Enables automatic reconnection attempts when the WebSocket disconnects unexpectedly.                    | `true`        |
+| `maxReconnectAttempts` | `number`  | Sets the maximum number of reconnection attempts. Use `0` for unlimited retries. Only accepts integers. | `0`           |
 
 ### API Class
 
@@ -307,15 +307,15 @@ const lobbyWs = Lobby.WebSocket(sdk)
 
 // Connect to WebSocket
 lobbyWs.connect()
-lobbyWs.onOpen(() => console.log("Connected to WebSocket."))
+lobbyWs.onOpen(() => console.log('Connected to WebSocket.'))
 // Listen for all incoming messages through a single handler
 lobbyWs.onMessage(message => {
   console.log(message)
 })
-lobbyWs.onClose((ev) => {
-  console.log("Disconnected from WebSocket.", ev)
+lobbyWs.onClose(ev => {
+  console.log('Disconnected from WebSocket.', ev)
   if (sdk.webSocketConfig.allowReconnect) {
-    console.log("Attempting reconnection, max attempts:", sdk.webSocketConfig.maxReconnectAttempts)
+    console.log('Attempting reconnection, max attempts:', sdk.webSocketConfig.maxReconnectAttempts)
   }
 })
 
@@ -327,54 +327,47 @@ await lobbyWs.disconnect()
 
 The `WebSocket` class offers several methods and event listeners for managing WebSocket connections and handling messages. The table below provides details on each available method and property.
 
-| Method/Property      | Type                                                                | Description                                                                                                                        |
-|----------------------|---------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| `connect`            | `() => void`                                                       | Initiates a connection to the WebSocket server.                                                                                    |
-| `disconnect`         | `() => void`                                                       | Closes the WebSocket connection, ending communication.                                                                             |
-| `onOpen`             | `(cb: () => void) => void`                                         | Event listener triggered when the WebSocket connection is successfully opened.                                                     |
-| `onMessage`          | `(cb: (message?: object \| string, raw?: boolean) => void) => void` | Event listener for incoming messages. Messages are parsed into typed objects, unless `raw` is set to true.                         |
-| `onError`            | `(cb: (err?: Error) => void) => void`                              | Event listener for errors in the WebSocket connection, such as message send failures.                                              |
-| `onClose`            | `(cb: (ev?: CloseEvent) => void) => void`                          | Event listener for connection closure events, which may occur due to errors or manual disconnection.                               |
-| `send`               | `(message?: object) => void`                                       | Sends a message to the WebSocket server.                                                                                           |
-| `send${methodName}`  | `(message?: object) => void`                                       | Type-specific `send` methods for predefined messages (e.g., `sendPartyInfo(data)`, `sendPartyCreate(data)`, etc.).                 |
-| `instance`           | `WebSocket`                                                        | Provides direct access to the [WebSocket instance](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/WebSocket) for lower-level control.|                                       |
+| Method/Property     | Type                                                                | Description                                                                                                                                       |
+| ------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `connect`           | `() => void`                                                        | Initiates a connection to the WebSocket server.                                                                                                   |
+| `disconnect`        | `() => void`                                                        | Closes the WebSocket connection, ending communication.                                                                                            |
+| `onOpen`            | `(cb: () => void) => void`                                          | Event listener triggered when the WebSocket connection is successfully opened.                                                                    |
+| `onMessage`         | `(cb: (message?: object \| string, raw?: boolean) => void) => void` | Event listener for incoming messages. Messages are parsed into typed objects, unless `raw` is set to true.                                        |
+| `onError`           | `(cb: (err?: Error) => void) => void`                               | Event listener for errors in the WebSocket connection, such as message send failures.                                                             |
+| `onClose`           | `(cb: (ev?: CloseEvent) => void) => void`                           | Event listener for connection closure events, which may occur due to errors or manual disconnection.                                              |
+| `send`              | `(message?: object) => void`                                        | Sends a message to the WebSocket server.                                                                                                          |
+| `send${methodName}` | `(message?: object) => void`                                        | Type-specific `send` methods for predefined messages (e.g., `sendPartyInfo(data)`, `sendPartyCreate(data)`, etc.).                                |
+| `instance`          | `WebSocket`                                                         | Provides direct access to the [WebSocket instance](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/WebSocket) for lower-level control. |
 
 ## AGS APIs
 
 TypeScript SDK supports the following AGS APIs:
 
-- **Access**
-  - [IAM](https://docs.accelbyte.io/api-explorer/#IAM): `@accelbyte/sdk-iam`
-  - [GDPR](https://docs.accelbyte.io/api-explorer/#GDPR): `@accelbyte/sdk-event`
-  - [Event Log](https://docs.accelbyte.io/api-explorer/#Event%20Log): `@accelbyte/sdk-event`
-  - [Legal](https://docs.accelbyte.io/api-explorer/#Legal): `@accelbyte/sdk-legal`
-- **Analytics**
-  - [Game Telemetry](https://docs.accelbyte.io/api-explorer/#Telemetry): `@accelbyte/sdk-gametelemetry`
-- **[Basic](https://docs.accelbyte.io/api-explorer/#Basic)**: `@accelbyte/sdk-basic`
-- **Engagement**
-  - [Achievement](https://docs.accelbyte.io/api-explorer/#Achievement): `@accelbyte/sdk-achievement`
-  - [Challenge](https://docs.accelbyte.io/api-explorer/#Challenge): `@accelbyte/sdk-challenge`
-  - [Leaderboard](https://docs.accelbyte.io/api-explorer/#Leaderboard): `@accelbyte/sdk-leaderboard`
-  - [User-generated Content (UGC)](https://docs.accelbyte.io/api-explorer/#User%20Generated%20Content): `@accelbyte/sdk-ugc`
-  - [SeasonPass](https://docs.accelbyte.io/api-explorer/#SeasonPass): `@accelbyte/sdk-seasonpass`
-  - [Reporting](https://docs.accelbyte.io/api-explorer/#Reporting): `@accelbyte/sdk-reporting`
-- **Monetization**
-  - [Platform Store](hhttps://docs.accelbyte.io/api-explorer/?api=Platform%20Store#Platform%20Store): `@accelbyte/sdk-platform`
-- **Play**
-  - [Session](https://docs.accelbyte.io/api-explorer/#Session): `@accelbyte/sdk-session`
-  - [Matchmaking](https://docs.accelbyte.io/api-explorer/#Matchmaking):`@accelbyte/sdk-matchmaking`
-  - [Session Browser Play](https://docs.accelbyte.io/api-explorer/#Session%20Browser%20Play): `@accelbyte/sdk-sessionbrowser`
-  - [Session History](https://docs.accelbyte.io/api-explorer/#Session%20History): `@accelbyte/sdk-history`
-- **Social**
-  - [Chat](https://docs.accelbyte.io/api-explorer/#Chat): `@accelbyte/sdk-chat`
-  - [Lobby](https://docs.accelbyte.io/api-explorer/#Lobby%20-%20Friends,%20Presence%20and%20Notifications): `@accelbyte/sdk-lobby` with websocket support
-  - [Groups](https://docs.accelbyte.io/api-explorer/#Groups): `@accelbyte/sdk-groups`
-- **Storage**
-  - [CloudSave](https://docs.accelbyte.io/api-explorer/#CloudSave): `@accelbyte/sdk-cloudsave`
-  - [Inventory](https://docs.accelbyte.io/api-explorer/#Inventory): `@accelbyte/sdk-inventory`
-  - [Statistics](https://docs.accelbyte.io/api-explorer/#Statistics): `@accelbyte/sdk-social`
-- `Add-ons`
-  - [AMS](https://docs.accelbyte.io/api-explorer/#AMS): `@accelbyte/sdk-ams`
+| AGS API          | Documentation                                                                                          | Package                                       | Global variable (UMD)        | URL                                                                                 |
+| ---------------- | ------------------------------------------------------------------------------------------------------ | --------------------------------------------- | ---------------------------- | ----------------------------------------------------------------------------------- |
+| **Core**         | -                                                                                                      | `@accelbyte/sdk`                              | `AccelByteSDK`               | [unpkg](https://unpkg.com/@accelbyte/sdk/dist/global/index.global.js)               |
+| **Access**       | [IAM](https://docs.accelbyte.io/api-explorer/#IAM)                                                     | `@accelbyte/sdk-iam`                          | `AccelByteSDK_IAM`           | [unpkg](https://unpkg.com/@accelbyte/sdk-iam/dist/global/index.global.js)           |
+|                  | [GDPR](https://docs.accelbyte.io/api-explorer/#GDPR)                                                   | `@accelbyte/sdk-gdpr`                         | `AccelByteSDK_GDPR`          | [unpkg](https://unpkg.com/@accelbyte/sdk-gdpr/dist/global/index.global.js)          |
+|                  | [Event Log](https://docs.accelbyte.io/api-explorer/#Event%20Log)                                       | `@accelbyte/sdk-event`                        | `AccelByteSDK_Event`         | [unpkg](https://unpkg.com/@accelbyte/sdk-event/dist/global/index.global.js)         |
+|                  | [Legal](https://docs.accelbyte.io/api-explorer/#Legal)                                                 | `@accelbyte/sdk-legal`                        | `AccelByteSDK_Legal`         | [unpkg](https://unpkg.com/@accelbyte/sdk-legal/dist/global/index.global.js)         |
+| **Analytics**    | [Game Telemetry](https://docs.accelbyte.io/api-explorer/#Telemetry)                                    | `@accelbyte/sdk-gametelemetry`                | `AccelByteSDK_GameTelemetry` | [unpkg](https://unpkg.com/@accelbyte/sdk-gametelemetry/dist/global/index.global.js) |
+| **Basic**        | [Basic](https://docs.accelbyte.io/api-explorer/#Basic)                                                 | `@accelbyte/sdk-basic`                        | `AccelByteSDK_Basic`         | [unpkg](https://unpkg.com/@accelbyte/sdk-basic/dist/global/index.global.js)         |
+| **Engagement**   | [Achievement](https://docs.accelbyte.io/api-explorer/#Achievement)                                     | `@accelbyte/sdk-achievement`                  | `AccelByteSDK_Achievement`   | [unpkg](https://unpkg.com/@accelbyte/sdk-achievement/dist/global/index.global.js)   |
+|                  | [Challenge](https://docs.accelbyte.io/api-explorer/#Challenge)                                         | `@accelbyte/sdk-challenge`                    | `AccelByteSDK_Challenge`     | [unpkg](https://unpkg.com/@accelbyte/sdk-challenge/dist/global/index.global.js)     |
+|                  | [Leaderboard](https://docs.accelbyte.io/api-explorer/#Leaderboard)                                     | `@accelbyte/sdk-leaderboard`                  | `AccelByteSDK_Leaderboard`   | [unpkg](https://unpkg.com/@accelbyte/sdk-leaderboard/dist/global/index.global.js)   |
+|                  | [User-generated Content (UGC)](https://docs.accelbyte.io/api-explorer/#User%20Generated%20Content)     | `@accelbyte/sdk-ugc`                          | `AccelByteSDK_UGC`           | [unpkg](https://unpkg.com/@accelbyte/sdk-ugc/dist/global/index.global.js)           |
+|                  | [SeasonPass](https://docs.accelbyte.io/api-explorer/#SeasonPass)                                       | `@accelbyte/sdk-seasonpass`                   | `AccelByteSDK_SeasonPass`    | [unpkg](https://unpkg.com/@accelbyte/sdk-seasonpass/dist/global/index.global.js)    |
+|                  | [Reporting](https://docs.accelbyte.io/api-explorer/#Reporting)                                         | `@accelbyte/sdk-reporting`                    | `AccelByteSDK_Reporting`     | [unpkg](https://unpkg.com/@accelbyte/sdk-reporting/dist/global/index.global.js)     |
+| **Monetization** | [Platform Store](hhttps://docs.accelbyte.io/api-explorer/?api=Platform%20Store#Platform%20Store)       | `@accelbyte/sdk-platform`                     | `AccelByteSDK_Platform`      | [unpkg](https://unpkg.com/@accelbyte/sdk-platform/dist/global/index.global.js)      |
+| **Play**         | [Session](https://docs.accelbyte.io/api-explorer/#Session)                                             | `@accelbyte/sdk-session`                      | `AccelByteSDK_Session`       | [unpkg](https://unpkg.com/@accelbyte/sdk-session/dist/global/index.global.js)       |
+|                  | [Matchmaking](https://docs.accelbyte.io/api-explorer/#Matchmaking)                                     | `@accelbyte/sdk-matchmaking`                  | `AccelByteSDK_Matchmaking`   | [unpkg](https://unpkg.com/@accelbyte/sdk-matchmaking/dist/global/index.global.js)   |
+| **Social**       | [Chat](https://docs.accelbyte.io/api-explorer/#Chat)                                                   | `@accelbyte/sdk-chat`                         | `AccelByteSDK_Chat`          | [unpkg](https://unpkg.com/@accelbyte/sdk-chat/dist/global/index.global.js)          |
+|                  | [Lobby](https://docs.accelbyte.io/api-explorer/#Lobby%20-%20Friends,%20Presence%20and%20Notifications) | `@accelbyte/sdk-lobby` with websocket support | `AccelByteSDK_Lobby`         | [unpkg](https://unpkg.com/@accelbyte/sdk-lobby/dist/global/index.global.js)         |
+|                  | [Groups](https://docs.accelbyte.io/api-explorer/#Groups)                                               | `@accelbyte/sdk-groups`                       | `AccelByteSDK_Groups`        | [unpkg](https://unpkg.com/@accelbyte/sdk-groups/dist/global/index.global.js)        |
+| **Storage**      | [CloudSave](https://docs.accelbyte.io/api-explorer/#CloudSave)                                         | `@accelbyte/sdk-cloudsave`                    | `AccelByteSDK_CloudSave`     | [unpkg](https://unpkg.com/@accelbyte/sdk-cloudsave/dist/global/index.global.js)     |
+|                  | [Inventory](https://docs.accelbyte.io/api-explorer/#Inventory)                                         | `@accelbyte/sdk-inventory`                    | `AccelByteSDK_Inventory`     | [unpkg](https://unpkg.com/@accelbyte/sdk-inventory/dist/global/index.global.js)     |
+|                  | [Statistics](https://docs.accelbyte.io/api-explorer/#Statistics)                                       | `@accelbyte/sdk-social`                       | `AccelByteSDK_Social`        | [unpkg](https://unpkg.com/@accelbyte/sdk-social/dist/global/index.global.js)        |
+| **Add Ons**      | [AMS](https://docs.accelbyte.io/api-explorer/#AMS)                                                     | `@accelbyte/sdk-ams`                          | `AccelByteSDK_AMS`           | [unpkg](https://unpkg.com/@accelbyte/sdk-ams/dist/global/index.global.js)           |
 
 Check out the [AGS Documentation Portal](https://docs.accelbyte.io/gaming-services/services/) to learn more about the functions of these AGS services and how to integrate them into your game.
 
@@ -626,8 +619,9 @@ getToken() {
 
 The `refreshTokens` method is now replaced by `setToken({ accessToken, refreshToken })` with the same behavior.
 
-```js
-;-sdk.refreshTokens(accessToken, refreshToken) + sdk.refreshTokens({ accessToken, refreshToken })
+```
+- sdk.refreshTokens(accessToken, refreshToken);
++ sdk.refreshTokens({ accessToken, refreshToken });
 ```
 
 ## TypeScript SDK Playground
@@ -641,7 +635,7 @@ You can live test the TypeScript SDK on the [AccelByte TypeScript SDK Playground
 Yes, you can install all the AGS SDK packages in one command using the following `npm` command:
 
 ```bash
-npm install @accelbyte/sdk @accelbyte/sdk-ams @accelbyte/sdk-achievement @accelbyte/sdk-basic @accelbyte/sdk-audit @accelbyte/sdk-buildinfo @accelbyte/sdk-challenge @accelbyte/sdk-chat @accelbyte/sdk-cloudsave @accelbyte/sdk-differ @accelbyte/sdk-dsmcontroller @accelbyte/sdk-event @accelbyte/sdk-gametelemetry @accelbyte/sdk-gdpr @accelbyte/sdk-groups @accelbyte/sdk-iam @accelbyte/sdk-inventory @accelbyte/sdk-leaderboard @accelbyte/sdk-legal @accelbyte/sdk-lobby @accelbyte/sdk-matchmaking-v1 @accelbyte/sdk-matchmaking @accelbyte/sdk-qosmanager @accelbyte/sdk-reporting @accelbyte/sdk-seasonpass @accelbyte/sdk-session @accelbyte/sdk-sessionbrowser @accelbyte/sdk-sessionhistory @accelbyte/sdk-social @accelbyte/sdk-ugc @accelbyte/sdk-platform
+npm install @accelbyte/sdk @accelbyte/sdk-ams @accelbyte/sdk-achievement @accelbyte/sdk-basic @accelbyte/sdk-buildinfo @accelbyte/sdk-challenge @accelbyte/sdk-chat @accelbyte/sdk-cloudsave @accelbyte/sdk-differ @accelbyte/sdk-event @accelbyte/sdk-gametelemetry @accelbyte/sdk-gdpr @accelbyte/sdk-groups @accelbyte/sdk-iam @accelbyte/sdk-inventory @accelbyte/sdk-leaderboard @accelbyte/sdk-legal @accelbyte/sdk-lobby  @accelbyte/sdk-matchmaking @accelbyte/sdk-reporting @accelbyte/sdk-seasonpass @accelbyte/sdk-session @accelbyte/sdk-social @accelbyte/sdk-ugc @accelbyte/sdk-platform
 ```
 
 ## Contributions

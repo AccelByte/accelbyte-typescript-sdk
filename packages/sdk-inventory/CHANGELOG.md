@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- c783105: - Added optional `dateRangeValidation` query parameter to inventory consume endpoint
+- d38fb2d: - Added optional `dateRangeValidation` query parameter to inventory consume endpoint
   - Added new non-success responses `401`, `403`, and `404` to inventory items creation endpoint
 
 ## 5.2.1

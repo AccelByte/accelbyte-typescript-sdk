@@ -24,10 +24,8 @@ export class AccelByteSDK {
   private token: TokenConfig
 
   constructor({ coreConfig, axiosConfig, webSocketConfig }: SdkConstructorParam) {
-    this.coreConfig = {
-      ...coreConfig,
-      useSchemaValidation: coreConfig.useSchemaValidation ?? true
-    }
+    this.coreConfig = CoreConfig.parse(coreConfig)
+
     this.axiosConfig = {
       /**
        * when user create a variable to store intercepters and passed into sdk

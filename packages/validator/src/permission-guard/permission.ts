@@ -29,7 +29,7 @@ export class PermissionGuard {
       const userPermissionExist = Array.isArray(currentUser.permissions) && currentUser.permissions.length > 0
       if (!userPermissionExist) {
         this.permissionCheck = {}
-        return this.permissionCheck[key]
+        return false
       }
 
       this.permissionCheck[key] = this.checkHasPermission(currentUser.permissions, permission)
@@ -87,11 +87,33 @@ export class PermissionGuard {
     Array.from(this.subscriber).forEach(a => a())
   }
 
-  private checkHasPermission = (userPermissions: RolePermission[], { resource, action }: CrudRolePermission): boolean => {
+  private checkHasPermission = (userPermissions: RolePermission[], requiredPermission: CrudRolePermission): boolean => {
+    const replacedUserPermissions = userPermissions.map(perm => ({
+      resource: this.replaceResourceVal(perm.resource, {
+        namespace: this.user?.namespace ?? '',
+        userId: this.user?.userId ?? '',
+        clientId: this.clientId
+      }),
+      action: perm.action
+    }))
+
+    const actualRequiredPermission = {
+      resource: this.replaceResourceVal(requiredPermission.resource, {
+        namespace: this.currentNamespace,
+        userId: this.user?.userId ?? '',
+        clientId: this.clientId
+      }),
+      action: requiredPermission.action
+    }
+
     return (
-      Array.isArray(userPermissions) &&
-      userPermissions.some((permission: RolePermission) => {
-        return !!permission && this.isResourceIncluded(permission, resource) && this.isActionIncluded(permission, action)
+      Array.isArray(replacedUserPermissions) &&
+      replacedUserPermissions.some((permission: RolePermission) => {
+        return (
+          !!permission &&
+          this.isResourceIncluded(permission, actualRequiredPermission.resource) &&
+          this.isActionIncluded(permission, actualRequiredPermission.action)
+        )
       })
     )
   }
@@ -118,7 +140,7 @@ export class PermissionGuard {
 
     const isDifferentSection = requiredResourceArr
       .slice(0, maxSectionLength)
-      .some((_: string, index: number) => !this.isVariableCovered(testResourceArr[index], requiredResourceArr[index]))
+      .some((_: string, index: number) => !this.isVariableCovered(testResourceArr[index], requiredResourceArr[index], index))
 
     if (isDifferentSection) {
       return false
@@ -140,35 +162,26 @@ export class PermissionGuard {
       .some((item, index) => item === '1' && modeType[index] === action)
   }
 
-  private isVariableCovered = (access: string, required: string): boolean => {
-    if (access === WILDCARD_SIGN) {
-      return true
+  private isVariableCovered = (access: string, required: string, index: number): boolean => {
+    // Reference: https://github.com/AccelByte/iam-go-sdk/blob/master/permission.go#L85-L115.
+    if (access != required && access != WILDCARD_SIGN) {
+      if (access.endsWith('-') && index > 0) {
+        // Dev's note: we skipped the namespace resource check, as well as game namespace resource check.
+        if (required.includes('-') && required.split('-').length == 2) {
+          if (required.startsWith(access)) {
+            return true
+          }
+          return false
+        }
+
+        if (access == required + '-') {
+          return true
+        }
+      }
+      return false
     }
-    const insideBracketRegexp = /^{[A-z]*}$/
-    const accessIsInsideBracket = insideBracketRegexp.test(access)
-    const requiredIsInsideBracket = insideBracketRegexp.test(required)
 
-    if ((!accessIsInsideBracket && !requiredIsInsideBracket) || !this.user) {
-      return access === required
-    }
-
-    const actualAccessVal = !accessIsInsideBracket
-      ? access
-      : this.replaceResourceVal(access, {
-          namespace: this.user.namespace,
-          userId: this.user.userId,
-          clientId: this.clientId
-        })
-
-    const actualRequiredVal = !requiredIsInsideBracket
-      ? required
-      : this.replaceResourceVal(required, {
-          namespace: this.currentNamespace,
-          userId: this.user.userId,
-          clientId: this.clientId
-        })
-
-    return actualAccessVal === actualRequiredVal
+    return true
   }
 
   private replaceResourceVal = (value: string, replacement: { [key: string]: string }) => {

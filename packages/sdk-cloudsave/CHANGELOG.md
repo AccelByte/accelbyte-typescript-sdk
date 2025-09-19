@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- c783105: Added new admin endpoint to delete TTL on admin records in Cloudsave
+- d38fb2d: Added new admin endpoint to delete TTL on admin records in Cloudsave
 
 ## 6.2.1
 

@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- c783105: Added bulkUnlock endpoints and 404 error handling to achievement unlock APIs for both admin and public namespaces.
+- d38fb2d: Added bulkUnlock endpoints and 404 error handling to achievement unlock APIs for both admin and public namespaces.
 
 ## 5.2.1
 

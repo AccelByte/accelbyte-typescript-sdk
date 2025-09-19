@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- c783105: - Added new admin endpoint for seasons item references
+- d38fb2d: - Added new admin endpoint for seasons item references
   - Added authorization security and `401` non-success response to public current season endpoint
 
 ## 5.2.1

@@ -5,33 +5,35 @@
  */
 
 import { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
+import { z } from 'zod'
 import { MakeOptional } from './utils/Type'
 
-export interface CoreConfig {
+export const CoreConfig = z.object({
   /**
    * The client ID for the SDK. This value is retrieved from Admin Portal, OAuth Clients.
    */
-  clientId: string
+  clientId: z.string().min(1),
   /**
    * The redirect URI after logging in. This is used to generate the valid login URL to IAM.
    * This value is retrieved from Admin Portal, OAuth Clients.
    */
-  redirectURI: string
+  redirectURI: z.string().url(),
   /**
    * The base URL of your AGS deployment.
    */
-  baseURL: string
+  baseURL: z.string().url(),
   /**
    * The namespace of your AGS deployment.
    */
-  namespace: string
-
+  namespace: z.string().min(1),
   /**
    * When "false" is provided, the SDK bypasses Zod Schema Validation.
    * Default is "true".
    */
-  useSchemaValidation: boolean
-}
+  useSchemaValidation: z.boolean().default(true)
+})
+
+export type CoreConfig = z.infer<typeof CoreConfig>
 
 export interface AxiosConfig {
   interceptors?: Interceptor[]
@@ -40,8 +42,8 @@ export interface AxiosConfig {
 
 export interface WebSocketConfig {
   /**
-   * Allow reconnect when upstream is abruptly disconnected. 
-   * @default true 
+   * Allow reconnect when upstream is abruptly disconnected.
+   * @default true
    */
   allowReconnect?: boolean
   /**

@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- c783105: chore: sync
+- d38fb2d: chore: sync
 
 ## 5.2.1
 

@@ -4,8 +4,8 @@
 
 ### Patch Changes
 
-- c783105: fix(sdk): remove mmv1 and sessionbrowser internal path
-- c783105: chore: sync
+- d38fb2d: fix(sdk): remove mmv1 and sessionbrowser internal path
+- d38fb2d: chore: sync
 
 ## 4.1.3
 
