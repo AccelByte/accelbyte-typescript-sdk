@@ -62,9 +62,13 @@ async function wrapNetworkCallSafely<D>(networkCallFunction: () => Promise<Axios
 }
 
 export class DecodeError extends Error {
+  zodError: ZodError
+
   constructor({ error, response, modelName }: { error: ZodError; response: AxiosResponse; modelName: string }) {
     const msg = `response from url "${response.config.url}" doesn't match model "${modelName}"`
     super(msg)
     console.error(msg, error)
+
+    this.zodError = error
   }
 }

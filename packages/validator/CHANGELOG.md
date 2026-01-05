@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- 738e4b0: fix(validator): fix PermissionGuard not considering new format of game namespace in AGS Shared Cloud
+- bbaf676: fix(validator): fix PermissionGuard not considering new format of game namespace in AGS Shared Cloud
 
 ## 0.2.29
 

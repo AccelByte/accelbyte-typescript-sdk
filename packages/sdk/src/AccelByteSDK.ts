@@ -115,6 +115,7 @@ export class AccelByteSDK {
     }
 
     this.axiosConfig.interceptors.push(...interceptors)
+    this.axiosInstance = this.createAxiosInstance()
 
     return this
   }

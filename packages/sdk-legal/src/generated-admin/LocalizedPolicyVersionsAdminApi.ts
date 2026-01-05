@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2025 AccelByte Inc. All Rights Reserved
+ * Copyright (c) 2022-2026 AccelByte Inc. All Rights Reserved
  * This is licensed software from AccelByte Inc, for limitations
  * and restrictions contact your company contract manager.
  */
@@ -29,23 +29,27 @@ export function LocalizedPolicyVersionsAdminApi(sdk: AccelByteSDK, args?: SdkSet
   let axiosInstance = sdkAssembly.axiosInstance
   const requestConfigOverrides = args?.axiosConfig?.request
   const baseURLOverride = args?.coreConfig?.baseURL
-  const interceptorsOverride = args?.axiosConfig?.interceptors ?? []
+  const interceptorsOverride = args?.axiosConfig?.interceptors
 
-  if (requestConfigOverrides || baseURLOverride || interceptorsOverride.length > 0) {
+  if (requestConfigOverrides || baseURLOverride || interceptorsOverride) {
     const requestConfig = ApiUtils.mergeAxiosConfigs(sdkAssembly.axiosInstance.defaults as AxiosRequestConfig, {
       ...(baseURLOverride ? { baseURL: baseURLOverride } : {}),
       ...requestConfigOverrides
     })
     axiosInstance = Network.create(requestConfig)
 
-    for (const interceptor of interceptorsOverride) {
-      if (interceptor.type === 'request') {
-        axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
-      }
+    if (interceptorsOverride) {
+      for (const interceptor of interceptorsOverride) {
+        if (interceptor.type === 'request') {
+          axiosInstance.interceptors.request.use(interceptor.onRequest, interceptor.onError)
+        }
 
-      if (interceptor.type === 'response') {
-        axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+        if (interceptor.type === 'response') {
+          axiosInstance.interceptors.response.use(interceptor.onSuccess, interceptor.onError)
+        }
       }
+    } else {
+      axiosInstance.interceptors = sdkAssembly.axiosInstance.interceptors
     }
   }
 

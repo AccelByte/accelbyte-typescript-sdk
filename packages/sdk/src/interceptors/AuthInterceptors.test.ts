@@ -38,16 +38,6 @@ describe('AuthInterceptor', () => {
     const sdk = AccelByte.SDK({
       coreConfig,
       axiosConfig: {
-        request: {
-          /**
-           * Use fetch implmentation to avoid
-           * `TypeError: response.body.getReader is not a function`
-           * when run test in jsdom or happy-dom environment
-           *
-           * @see https://github.com/axios/axios/pull/6371
-           */
-          adapter: 'fetch'
-        },
         interceptors: [
           createAuthInterceptor({
             clientId: coreConfig.clientId,
@@ -85,16 +75,6 @@ describe('AuthInterceptor', () => {
     const sdk = AccelByte.SDK({
       coreConfig,
       axiosConfig: {
-        request: {
-          /**
-           * Use fetch implmentation to avoid
-           * `TypeError: response.body.getReader is not a function`
-           * when run test in jsdom or happy-dom environment
-           *
-           * @see https://github.com/axios/axios/pull/6371
-           */
-          adapter: 'fetch'
-        },
         interceptors: [
           createAuthInterceptor({
             clientId: coreConfig.clientId,
@@ -127,16 +107,6 @@ describe('AuthInterceptor', () => {
     const sdk = AccelByte.SDK({
       coreConfig,
       axiosConfig: {
-        request: {
-          /**
-           * Use fetch implmentation to avoid
-           * `TypeError: response.body.getReader is not a function`
-           * when run test in jsdom or happy-dom environment
-           *
-           * @see https://github.com/axios/axios/pull/6371
-           */
-          adapter: 'fetch'
-        },
         interceptors: [
           createAuthInterceptor({
             clientId: coreConfig.clientId,

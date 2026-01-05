@@ -65,6 +65,26 @@ describe('AccelByteSDK', () => {
     expect(sdk.axiosConfig.interceptors).toStrictEqual([responseInterceptor, tooManyRequestInterceptor])
   })
 
+  test('should recreate axios instance when addInterceptors', () => {
+    const sdkInstance = AccelByte.SDK({
+      coreConfig,
+      axiosConfig: {
+        interceptors: [responseInterceptor]
+      }
+    })
+    const sdk = sdkInstance.assembly()
+    const previousAxiosInstance = sdk.axiosInstance
+
+    expect(sdk.axiosInstance).toBeDefined()
+    expect(sdk.coreConfig).toStrictEqual(coreConfigWithDefault)
+    expect(sdk.axiosConfig.interceptors).toStrictEqual([responseInterceptor])
+    expect(sdk.axiosConfig.request).toStrictEqual(defaultAxiosConfig)
+
+    sdkInstance.addInterceptors([tooManyRequestInterceptor])
+
+    expect(previousAxiosInstance.interceptors).not.toBe(sdkInstance.assembly().axiosInstance.interceptors)
+  })
+
   test('should remove interceptor from sdk when removeInterceptor', () => {
     const sdkInstance = AccelByte.SDK({
       coreConfig,
