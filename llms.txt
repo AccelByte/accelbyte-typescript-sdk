@@ -1,0 +1,68 @@
+---
+title: How to use AccelByte TypeScript SDK
+description: Learn how to use every AGS endpoint using AccelByte TypeScript SDK
+---
+
+# AccelByte TypeScript SDK
+
+In the documents below, there will be snippets of inserting Bearer token manually. Keep in mind that these are only required for server-to-server calls. In case of browsers, usually you will use cookies (which are processed automatically by IAM), so the `axiosConfig` argument that comes after the `sdk` argument is not required to be passed.
+
+## Usage with ESM
+
+- [AMS](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-ams.md)
+- [Achievements](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-achievement.md)
+- [Basic](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-basic.md)
+- [Audit](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-audit.md)
+- [Build Info](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-buildinfo.md)
+- [Challenge](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-challenge.md)
+- [Chat](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-chat.md)
+- [Cloud Save](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-cloudsave.md)
+- [Event Log](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-event.md)
+- [GDPR](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-gdpr.md)
+- [Groups](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-groups.md)
+- [IAM](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-iam.md)
+- [Inventory](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-inventory.md)
+- [Leaderboard](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-leaderboard.md)
+- [Legal](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-legal.md)
+- [Lobby](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-lobby.md)
+- [Login Queue](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-login-queue.md)
+- [Matchmaking](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-matchmaking.md)
+- [QOS Manager](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-qosmanager.md)
+- [Reporting](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-reporting.md)
+- [Season Pass](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-seasonpass.md)
+- [Session](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-session.md)
+- [Statistics](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-social.md)
+- [UGC](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-ugc.md)
+- [Platform](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-platform.md)
+- [Custom Service Manager](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-csm.md)
+- [Extend Helper Service](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/esm/sdk-ehs.md)
+
+## Usage with UMD
+
+- [AMS](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-ams.md)
+- [Achievements](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-achievement.md)
+- [Basic](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-basic.md)
+- [Audit](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-audit.md)
+- [Build Info](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-buildinfo.md)
+- [Challenge](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-challenge.md)
+- [Chat](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-chat.md)
+- [Cloud Save](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-cloudsave.md)
+- [Event Log](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-event.md)
+- [GDPR](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-gdpr.md)
+- [Groups](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-groups.md)
+- [IAM](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-iam.md)
+- [Inventory](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-inventory.md)
+- [Leaderboard](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-leaderboard.md)
+- [Legal](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-legal.md)
+- [Lobby](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-lobby.md)
+- [Login Queue](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-login-queue.md)
+- [Matchmaking](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-matchmaking.md)
+- [QOS Manager](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-qosmanager.md)
+- [Reporting](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-reporting.md)
+- [Season Pass](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-seasonpass.md)
+- [Session](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-session.md)
+- [Statistics](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-social.md)
+- [UGC](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-ugc.md)
+- [Platform](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-platform.md)
+- [Custom Service Manager](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-csm.md)
+- [Extend Helper Service](https://accelbyte.github.io/accelbyte-typescript-sdk/usage/umd/sdk-ehs.md)
