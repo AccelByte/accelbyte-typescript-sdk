@@ -1,5 +1,11 @@
 # @accelbyte/sdk-login-queue
 
+## 1.0.2
+
+### Patch Changes
+
+- 6835a55: fix(sdk): regenerate sdk from codegen to prevent always overriding interceptor even when interceptors are not being passed
+
 ## 1.0.1
 
 ### Patch Changes

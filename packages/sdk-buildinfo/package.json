@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-buildinfo",
-  "version": "6.2.3",
+  "version": "6.2.4",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./src/index.ts",
