@@ -1,5 +1,11 @@
 # @accelbyte/sdk-iam
 
+## 6.3.2
+
+### Patch Changes
+
+- 6835a55: fix(sdk): regenerate sdk from codegen to prevent always overriding interceptor even when interceptors are not being passed
+
 ## 6.3.1
 
 ### Patch Changes

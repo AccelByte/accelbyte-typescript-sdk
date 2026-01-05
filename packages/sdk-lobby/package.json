@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-lobby",
-  "version": "5.2.3",
+  "version": "5.2.4",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./src/index.ts",

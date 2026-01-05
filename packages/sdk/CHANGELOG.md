@@ -1,5 +1,15 @@
 # @accelbyte/sdk
 
+## 4.2.0
+
+### Minor Changes
+
+- 6835a55: feat(sdk): add zodError field to store zod error inside DecodeError
+
+### Patch Changes
+
+- 6835a55: fix(sdk): fix addInterceptors not recreating the AxiosInstance
+
 ## 4.1.5
 
 ### Patch Changes
