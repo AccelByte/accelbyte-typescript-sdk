@@ -4,11 +4,11 @@
 
 ### Minor Changes
 
-- 6835a55: feat(sdk): add zodError field to store zod error inside DecodeError
+- 6dfbb8c: feat(sdk): add zodError field to store zod error inside DecodeError
 
 ### Patch Changes
 
-- 6835a55: fix(sdk): fix addInterceptors not recreating the AxiosInstance
+- 6dfbb8c: fix(sdk): fix addInterceptors not recreating the AxiosInstance
 
 ## 4.1.5
 

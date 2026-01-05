@@ -4,8 +4,8 @@
 
 ### Patch Changes
 
-- 6835a55: fix(sdk): regenerate sdk from codegen to prevent always overriding interceptor even when interceptors are not being passed
-- Updated dependencies [6835a55]
+- a953bff: fix(sdk): regenerate sdk from codegen to prevent always overriding interceptor even when interceptors are not being passed
+- Updated dependencies [a953bff]
   - @accelbyte/sdk-iam@6.3.2
 
 ## 6.3.1
