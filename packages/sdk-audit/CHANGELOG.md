@@ -1,5 +1,12 @@
 # @accelbyte/sdk-audit
 
+## 6.0.3
+
+### Patch Changes
+
+- Updated dependencies [6d6b1de]
+  - @accelbyte/validator@0.3.0
+
 ## 6.0.2
 
 ### Patch Changes
