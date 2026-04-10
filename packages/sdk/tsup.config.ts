@@ -1,4 +1,7 @@
 import { defineConfig } from "tsup";
+import pkg from "./package.json";
+
+const sdkVersionDefine = { '__SDK_VERSION__': JSON.stringify(pkg.version) }
 
 export default defineConfig([
   // Node CJS build
@@ -11,6 +14,7 @@ export default defineConfig([
     splitting: false,
     clean: true,
     tsconfig: "./tsconfig.build.json",
+    define: sdkVersionDefine,
   },
   // ES build for Node
   {
@@ -21,6 +25,7 @@ export default defineConfig([
     sourcemap: true,
     splitting: false,
     tsconfig: "./tsconfig.build.json",
+    define: sdkVersionDefine,
   },
   // ES build for Browser
   {
@@ -31,6 +36,7 @@ export default defineConfig([
     sourcemap: true,
     splitting: false,
     tsconfig: "./tsconfig.build.json",
+    define: sdkVersionDefine,
   },
   // Global
   {
@@ -42,5 +48,6 @@ export default defineConfig([
     minify: true,
     splitting: false,
     tsconfig: "./tsconfig.build.json",
+    define: sdkVersionDefine,
   }
 ]);

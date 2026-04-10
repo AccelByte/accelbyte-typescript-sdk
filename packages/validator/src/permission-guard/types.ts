@@ -14,12 +14,10 @@ export enum CrudType {
 }
 
 export enum CrudBitType {
-  // tslint:disable:no-bitwise
   Create = 1 << 0,
   Read = 1 << 1,
   Update = 1 << 2,
   Delete = 1 << 3
-  // tslint:enable:no-bitwise
 }
 
 export interface CrudRolePermission {

@@ -83,10 +83,13 @@ function getOldTranslationsMap(languages, directory) {
 }
 
 function getUnusedKeysFromOldTranslations(oldTranslation, currentTranslation) {
-  const keys = Object.keys(currentTranslation).reduce((keys, translationKey) => {
-    keys.delete(translationKey)
-    return keys
-  }, new Set(Object.keys(oldTranslation)))
+  const keys = Object.keys(currentTranslation).reduce(
+    (keys, translationKey) => {
+      keys.delete(translationKey)
+      return keys
+    },
+    new Set(Object.keys(oldTranslation))
+  )
   keys.delete('_unused')
   return Array.from(keys)
 }

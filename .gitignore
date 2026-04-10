@@ -82,3 +82,6 @@ metafile-*.json
 .yalc
 yalc.lock
 **/yalc.lock
+
+.claude/plans
+.claude/settings.local.json

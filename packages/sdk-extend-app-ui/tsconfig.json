@@ -1,0 +1,16 @@
+{
+  "extends": "../../base.tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "baseUrl": ".",
+    "paths": {
+      "@accelbyte/sdk": ["../../packages/sdk/src/index.ts"],
+      "@accelbyte/sdk-iam": ["../../packages/sdk-iam/src/index.ts"],
+      "@accelbyte/sdk-iam/react-query": ["../../packages/sdk-iam/src/all-query-imports.ts"],
+      "@accelbyte/validator": ["../../packages/validator/src/index.ts"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["dist", "node_modules"]
+}

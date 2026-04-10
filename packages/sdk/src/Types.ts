@@ -6,7 +6,6 @@
 
 import { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 import { z } from 'zod'
-import { MakeOptional } from './utils/Type'
 
 export const CoreConfig = z.object({
   /**
@@ -69,7 +68,7 @@ export type Interceptor =
     }
 
 export interface SdkConstructorParam {
-  coreConfig: MakeOptional<CoreConfig, 'useSchemaValidation'>
+  coreConfig: z.input<typeof CoreConfig>
   axiosConfig?: AxiosConfig
   webSocketConfig?: WebSocketConfig
 }

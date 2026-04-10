@@ -1,0 +1,1282 @@
+{
+  "host": "demo.accelbyte.io",
+  "info": {
+    "contact": {
+      "email": "engineering@accelbyte.io",
+      "name": "Engineering Team at AccelByte",
+      "url": "https://accelbyte.io"
+    },
+    "description": "Justice IAM Service",
+    "title": "justice-iam-service",
+    "version": "6.0.1"
+  },
+  "schemes": ["https"],
+  "externalDocs": {
+    "description": "API Docs",
+    "url": "https://demo.accelbyte.io/iam/apidocs"
+  },
+  "securityDefinitions": {
+    "HasPermission": {
+      "authorizationUrl": "https://dummy.oauth.net/auth",
+      "flow": "accessCode",
+      "scopes": {
+        "ADMIN:BAN [READ]": "ADMIN:BAN [READ]",
+        "ADMIN:CONFIGURATION [DELETE]": "ADMIN:CONFIGURATION [DELETE]",
+        "ADMIN:CONFIGURATION [READ]": "ADMIN:CONFIGURATION [READ]",
+        "ADMIN:CONFIGURATION [UPDATE]": "ADMIN:CONFIGURATION [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:AGERESTRICTION [READ]": "ADMIN:NAMESPACE:{namespace}:AGERESTRICTION [READ]",
+        "ADMIN:NAMESPACE:{namespace}:AGERESTRICTION [UPDATE]": "ADMIN:NAMESPACE:{namespace}:AGERESTRICTION [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:BAN [CREATE]": "ADMIN:NAMESPACE:{namespace}:BAN [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:BAN [UPDATE]": "ADMIN:NAMESPACE:{namespace}:BAN [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:BAN:USER:{userId} [CREATE]": "ADMIN:NAMESPACE:{namespace}:BAN:USER:{userId} [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:BAN:USER:{userId} [READ]": "ADMIN:NAMESPACE:{namespace}:BAN:USER:{userId} [READ]",
+        "ADMIN:NAMESPACE:{namespace}:BAN:USER:{userId} [UPDATE]": "ADMIN:NAMESPACE:{namespace}:BAN:USER:{userId} [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:CLIENT [CREATE]": "ADMIN:NAMESPACE:{namespace}:CLIENT [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:CLIENT [DELETE]": "ADMIN:NAMESPACE:{namespace}:CLIENT [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:CLIENT [READ]": "ADMIN:NAMESPACE:{namespace}:CLIENT [READ]",
+        "ADMIN:NAMESPACE:{namespace}:CLIENT [UPDATE]": "ADMIN:NAMESPACE:{namespace}:CLIENT [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:CLIENT:{clientId} [DELETE]": "ADMIN:NAMESPACE:{namespace}:CLIENT:{clientId} [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:CLIENTDOMAIN [DELETE]": "ADMIN:NAMESPACE:{namespace}:CLIENTDOMAIN [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:CLIENTDOMAIN [UPDATE]": "ADMIN:NAMESPACE:{namespace}:CLIENTDOMAIN [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:DELETIONSTATUS:USER:{userId} [READ]": "ADMIN:NAMESPACE:{namespace}:DELETIONSTATUS:USER:{userId} [READ]",
+        "ADMIN:NAMESPACE:{namespace}:DELETIONSTATUS:USER:{userId} [UPDATE]": "ADMIN:NAMESPACE:{namespace}:DELETIONSTATUS:USER:{userId} [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:DEVICE [CREATE]": "ADMIN:NAMESPACE:{namespace}:DEVICE [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:DEVICE [READ]": "ADMIN:NAMESPACE:{namespace}:DEVICE [READ]",
+        "ADMIN:NAMESPACE:{namespace}:DEVICE [UPDATE]": "ADMIN:NAMESPACE:{namespace}:DEVICE [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:HISTORY:LOGIN:USER:{userId} [READ]": "ADMIN:NAMESPACE:{namespace}:HISTORY:LOGIN:USER:{userId} [READ]",
+        "ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [DELETE]": "ADMIN:NAMESPACE:{namespace}:INFORMATION:USER:{userId} [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:JUSTICE:USER:{userId} [READ]": "ADMIN:NAMESPACE:{namespace}:JUSTICE:USER:{userId} [READ]",
+        "ADMIN:NAMESPACE:{namespace}:JUSTICE:USER:{userId} [UPDATE]": "ADMIN:NAMESPACE:{namespace}:JUSTICE:USER:{userId} [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:PASSWORD:USER [UPDATE]": "ADMIN:NAMESPACE:{namespace}:PASSWORD:USER [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:PASSWORD:USER:{userId} [UPDATE]": "ADMIN:NAMESPACE:{namespace}:PASSWORD:USER:{userId} [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:PERMISSION:USER:{userId} [CREATE]": "ADMIN:NAMESPACE:{namespace}:PERMISSION:USER:{userId} [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:PERMISSION:USER:{userId} [DELETE]": "ADMIN:NAMESPACE:{namespace}:PERMISSION:USER:{userId} [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:PERMISSION:USER:{userId} [UPDATE]": "ADMIN:NAMESPACE:{namespace}:PERMISSION:USER:{userId} [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:PLATFORM:*:CLIENT [READ]": "ADMIN:NAMESPACE:{namespace}:PLATFORM:*:CLIENT [READ]",
+        "ADMIN:NAMESPACE:{namespace}:PLATFORM:*:SSO [READ]": "ADMIN:NAMESPACE:{namespace}:PLATFORM:*:SSO [READ]",
+        "ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:CLIENT [CREATE]": "ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:CLIENT [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:CLIENT [DELETE]": "ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:CLIENT [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:CLIENT [READ]": "ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:CLIENT [READ]",
+        "ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:SSO [CREATE]": "ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:SSO [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:SSO [DELETE]": "ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:SSO [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:SSO [READ]": "ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:SSO [READ]",
+        "ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:SSO [UPDATE]": "ADMIN:NAMESPACE:{namespace}:PLATFORM:{platformId}:SSO [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:ROLE:USER:* [Delete]": "ADMIN:NAMESPACE:{namespace}:ROLE:USER:* [Delete]",
+        "ADMIN:NAMESPACE:{namespace}:ROLE:USER:* [READ]": "ADMIN:NAMESPACE:{namespace}:ROLE:USER:* [READ]",
+        "ADMIN:NAMESPACE:{namespace}:ROLE:USER:* [UPDATE]": "ADMIN:NAMESPACE:{namespace}:ROLE:USER:* [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:ROLE:USER:{userId} [DELETE]": "ADMIN:NAMESPACE:{namespace}:ROLE:USER:{userId} [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:ROLE:USER:{userId} [UPDATE]": "ADMIN:NAMESPACE:{namespace}:ROLE:USER:{userId} [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:USER [READ]": "ADMIN:NAMESPACE:{namespace}:USER [READ]",
+        "ADMIN:NAMESPACE:{namespace}:USER []": "ADMIN:NAMESPACE:{namespace}:USER []",
+        "ADMIN:NAMESPACE:{namespace}:USER:* [READ]": "ADMIN:NAMESPACE:{namespace}:USER:* [READ]",
+        "ADMIN:NAMESPACE:{namespace}:USER:INVITE [CREATE]": "ADMIN:NAMESPACE:{namespace}:USER:INVITE [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId} [CREATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId} [CREATE]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId} [DELETE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId} [DELETE]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId} [READ]": "ADMIN:NAMESPACE:{namespace}:USER:{userId} [READ]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId} [UPDATE]": "ADMIN:NAMESPACE:{namespace}:USER:{userId} [UPDATE]",
+        "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CODE [READ]": "ADMIN:NAMESPACE:{namespace}:USER:{userId}:CODE [READ]",
+        "ADMIN:NAMESPACE:{namespace}:USERSTATUS:USER:{userId} [UPDATE]": "ADMIN:NAMESPACE:{namespace}:USERSTATUS:USER:{userId} [UPDATE]",
+        "ADMIN:ROLE [CREATE]": "ADMIN:ROLE [CREATE]",
+        "ADMIN:ROLE [DELETE]": "ADMIN:ROLE [DELETE]",
+        "ADMIN:ROLE [READ]": "ADMIN:ROLE [READ]",
+        "ADMIN:ROLE [UPDATE]": "ADMIN:ROLE [UPDATE]",
+        "ADMIN:USER:INVITE [CREATE]": "ADMIN:USER:INVITE [CREATE]",
+        "BAN:ADMIN [READ]": "BAN:ADMIN [READ]",
+        "CLIENT [READ]": "CLIENT [READ]",
+        "CLIENT:ADMIN [CREATE]": "CLIENT:ADMIN [CREATE]",
+        "CLIENT:ADMIN [DELETE]": "CLIENT:ADMIN [DELETE]",
+        "CLIENT:ADMIN [UPDATE]": "CLIENT:ADMIN [UPDATE]",
+        "NAMESPACE:{namespace}:CLIENT [READ]": "NAMESPACE:{namespace}:CLIENT [READ]",
+        "NAMESPACE:{namespace}:HISTORY:LOGIN:USER:{userId} [READ]": "NAMESPACE:{namespace}:HISTORY:LOGIN:USER:{userId} [READ]",
+        "NAMESPACE:{namespace}:INFORMATION:USER:{userId} [READ]": "NAMESPACE:{namespace}:INFORMATION:USER:{userId} [READ]",
+        "NAMESPACE:{namespace}:JUSTICE:USER:{userId} [UPDATE]": "NAMESPACE:{namespace}:JUSTICE:USER:{userId} [UPDATE]",
+        "NAMESPACE:{namespace}:PASSWORD:USER:{userId} [UPDATE]": "NAMESPACE:{namespace}:PASSWORD:USER:{userId} [UPDATE]",
+        "NAMESPACE:{namespace}:PUBLISHER:USER:{userId} [READ]": "NAMESPACE:{namespace}:PUBLISHER:USER:{userId} [READ]",
+        "NAMESPACE:{namespace}:USER [CREATE]": "NAMESPACE:{namespace}:USER [CREATE]",
+        "NAMESPACE:{namespace}:USER [READ]": "NAMESPACE:{namespace}:USER [READ]",
+        "NAMESPACE:{namespace}:USER:{userID}:ADMIN [UPDATE]": "NAMESPACE:{namespace}:USER:{userID}:ADMIN [UPDATE]",
+        "NAMESPACE:{namespace}:USER:{userId} [DELETE]": "NAMESPACE:{namespace}:USER:{userId} [DELETE]",
+        "NAMESPACE:{namespace}:USER:{userId} [READ]": "NAMESPACE:{namespace}:USER:{userId} [READ]",
+        "NAMESPACE:{namespace}:USER:{userId} [UPDATE]": "NAMESPACE:{namespace}:USER:{userId} [UPDATE]",
+        "NAMESPACE:{namespace}:USER:{userId}:PUBLISHER [READ]": "NAMESPACE:{namespace}:USER:{userId}:PUBLISHER [READ]",
+        "ROLE [READ]": "ROLE [READ]",
+        "ROLE:ADMIN [CREATE]": "ROLE:ADMIN [CREATE]",
+        "ROLE:ADMIN [DELETE]": "ROLE:ADMIN [DELETE]",
+        "ROLE:ADMIN [UPDATE]": "ROLE:ADMIN [UPDATE]"
+      },
+      "tokenUrl": "https://dumy.oauth.net/token",
+      "type": "oauth2"
+    },
+    "HasScope": {
+      "authorizationUrl": "https://dummy.oauth.net/auth",
+      "flow": "accessCode",
+      "scopes": {},
+      "tokenUrl": "https://dumy.oauth.net/token",
+      "type": "oauth2"
+    },
+    "authorization": {
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey"
+    },
+    "basic": {
+      "type": "basic"
+    }
+  },
+  "security": [
+    {
+      "basic": []
+    }
+  ],
+  "swagger": "2.0",
+  "paths": {
+    "/iam/bans": {
+      "get": {
+        "deprecated": true,
+        "description": "&lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt; &lt;/br&gt;\n\t\t\t&lt;p&gt;Required permission &#39;BAN:ADMIN [READ]&#39; or &#39;ADMIN:BAN [READ]&#39;&lt;/p&gt;\n\t\t\t&lt;strong&gt;Endpoint migration guide&lt;/strong&gt;\n\t\t\t&lt;ul&gt;\n\t\t\t\t&lt;li&gt;&lt;b&gt;Substitute endpoint: &lt;i&gt;/iam/v3/admin/bans [GET]&lt;/i&gt;&lt;/b&gt;&lt;/li&gt;\n\t\t\t&lt;/ul&gt;&lt;/p&gt;",
+        "operationId": "GetBansType",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/accountcommon.Bans"
+            }
+          },
+          "401": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20001</td><td>unauthorized access</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20013</td><td>insufficient permissions</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:BAN [READ]", "BAN:ADMIN [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get list of ban types",
+        "tags": ["Bans"]
+      }
+    },
+    "/iam/roles": {
+      "get": {
+        "consumes": ["application/json"],
+        "deprecated": true,
+        "description": "&lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt; &lt;/br&gt;\n                Required permission &#39;ROLE [READ]&#39; &lt;/br&gt;\n                &lt;strong&gt;Endpoint migration guide&lt;/strong&gt;\n                &lt;ul&gt;\n                        &lt;li&gt;&lt;b&gt;Substitute endpoint: &lt;i&gt;/iam/v3/admin/roles  [GET]&lt;/i&gt;&lt;/b&gt;&lt;/li&gt;\n                &lt;/ul&gt;",
+        "operationId": "GetRoles",
+        "parameters": [
+          {
+            "description": "- true if the expected result should only returns records with wildcard = true\n- false if the expected result should only returns records with wildcard = false\n- empty (omitted) if the expected result should returns records with no wildcard filter at all\n",
+            "in": "query",
+            "name": "isWildcard",
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/model.RoleResponseWithManagers"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20001</td><td>unauthorized access</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20013</td><td>insufficient permissions</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ROLE [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get Roles",
+        "tags": ["Roles"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "deprecated": true,
+        "description": "&lt;h2&gt;The endpoint is going to be deprecated&lt;/h2&gt; &lt;/br&gt;\n                Required permission &#39;ROLE:ADMIN [CREATE]&#39; or &#39;ADMIN:ROLE [CREATE]&#39; &lt;/br&gt;\n\t\t\t\t&lt;p&gt;Role can only be assigned to other users by the role&#39;s manager.&lt;/p&gt;\n\t\t\t\t&lt;p&gt;If role is an administrator role (i.e. AdminRole == true), it will list out the role&#39;s members.&lt;/p&gt;\n\t\t\t\t&lt;p&gt;Administrator role can be created only when at least 1 manager is specified.&lt;/p&gt;\n                &lt;strong&gt;Endpoint migration guide&lt;/strong&gt;\n                &lt;ul&gt;\n                        &lt;li&gt;&lt;b&gt;Substitute endpoint: &lt;i&gt;/iam/v3/admin/roles [POST]&lt;/i&gt;&lt;/b&gt;&lt;/li&gt;\n                &lt;/ul&gt;",
+        "operationId": "CreateRole",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/model.RoleCreateRequest"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/accountcommon.Role"
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20001</td><td>unauthorized access</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20013</td><td>insufficient permissions</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:ROLE [CREATE]", "ROLE:ADMIN [CREATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create Role",
+        "tags": ["Roles"]
+      }
+    },
+    "/iam/v3/admin/bans": {
+      "get": {
+        "description": "Required permission &#39;ADMIN:BAN [READ]&#39; &lt;br&gt;Ban type is the code\n\t\t\tavailable for ban assignment. It is applicable globally for any namespace.  &lt;br&gt;action code : 10201",
+        "operationId": "AdminGetBansTypeV3",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/accountcommon.BansV3"
+            }
+          },
+          "401": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20001</td><td>unauthorized access</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20013</td><td>insufficient permissions</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20000</td><td>internal server error</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:BAN [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get list of ban types",
+        "tags": ["Bans"]
+      }
+    },
+    "/iam/v3/admin/namespaces/{namespace}/clients/{clientId}/permissions/{resource}/{action}": {
+      "delete": {
+        "description": "Required permission &#39;ADMIN:NAMESPACE:{namespace}:CLIENT [UPDATE]&#39;&lt;br&gt;action code : 10304",
+        "operationId": "AdminDeleteClientPermissionV3",
+        "parameters": [
+          {
+            "description": "Action, value must be in range 1-15",
+            "in": "path",
+            "name": "action",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "Client ID, should follow UUID version 4 without hyphen",
+            "in": "path",
+            "name": "clientId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Namespace, only accept alphabet and numeric",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Resource Name",
+            "in": "path",
+            "name": "resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "204": {
+            "description": "Operation succeeded"
+          },
+          "400": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20002</td><td>validation error</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20001</td><td>unauthorized access</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20013</td><td>insufficient permissions</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>10365</td><td>client not found</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:NAMESPACE:{namespace}:CLIENT [UPDATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Delete Client Permission",
+        "tags": ["Clients"]
+      }
+    },
+    "/iam/v3/admin/namespaces/{namespace}/users/{userId}/platforms/justice": {
+      "get": {
+        "description": "This endpoint gets list justice platform account by providing publisher namespace and publisher userID.",
+        "operationId": "AdminGetListJusticePlatformAccounts",
+        "parameters": [
+          {
+            "description": "Namespace, only accept alphabet and numeric",
+            "in": "path",
+            "name": "namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": " Publisher User ID",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/model.GetUserMapping"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20001</td><td>unauthorized access</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20013</td><td>insufficient permissions</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "404": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20008</td><td>user not found</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20000</td><td>internal server error</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get User Justice Platform Accounts",
+        "tags": ["Users"]
+      }
+    },
+    "/iam/v3/admin/roles": {
+      "get": {
+        "description": "Required permission &#39;ADMIN:ROLE [READ]&#39;&lt;br&gt; &lt;p&gt;action code: 10414&lt;/p&gt;",
+        "operationId": "AdminGetRolesV3",
+        "parameters": [
+          {
+            "description": "The cursor that points to query data for the next page",
+            "in": "query",
+            "name": "after",
+            "type": "string"
+          },
+          {
+            "description": "The cursor that points to query data for the previous page",
+            "in": "query",
+            "name": "before",
+            "type": "string"
+          },
+          {
+            "description": "- true if the expected result should only returns records with wildcard = true\n            - false if the expected result should only returns records with wildcard = false\n            - empty (omitted) if the expected result should returns records with no wildcard filter at all",
+            "in": "query",
+            "name": "isWildcard",
+            "type": "boolean",
+            "x-omitempty": false
+          },
+          {
+            "description": "the maximum number of data that may be returned (1...100)",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/model.RoleResponseWithManagersAndPaginationV3"
+            }
+          },
+          "400": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20002</td><td>validation error</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20001</td><td>unauthorized access</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20013</td><td>insufficient permissions</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20000</td><td>internal server error</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:ROLE [READ]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Get Roles",
+        "tags": ["Roles"]
+      },
+      "post": {
+        "consumes": ["application/json"],
+        "description": "Required permission &#39;ADMIN:ROLE [CREATE]&#39;\n\nCreate role request body:\n\t- roleName: specify role name, alphanumeric, cannot have special character (required)\n\t- permissions: specify the permission that this role have\n\t- managers: specify list of user that will act as the managers of this role\n\t- members: specify list of user that will act as the members of this role\n\t- adminRole: specify if role is for admin user (default false)\n\t- isWildcard: specify if role can be assigned to wildcard (*) namespace (default false)\n\t- deletable: specify if role can be deleted or not (default true)\n\n&lt;br&gt;action code: 10401",
+        "operationId": "AdminCreateRoleV3",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/model.RoleCreateV3Request"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/accountcommon.RoleV3"
+            }
+          },
+          "400": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20002</td><td>validation error</td></tr><tr><td>20019</td><td>unable to parse request body</td></tr><tr><td>10466</td><td>invalid role members</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20001</td><td>unauthorized access</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "403": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20013</td><td>insufficient permissions</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20000</td><td>internal server error</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "HasPermission": ["ADMIN:ROLE [CREATE]"],
+            "authorization": []
+          }
+        ],
+        "summary": "Create Role",
+        "tags": ["Roles"]
+      }
+    },
+    "/iam/v3/admin/users/me": {
+      "get": {
+        "description": "&lt;p&gt;Require valid user authorization&lt;br&gt;Get my user data&lt;br&gt;action code : 10147 &lt;/p&gt;",
+        "operationId": "AdminGetMyUserV3",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/model.UserResponseV3"
+            }
+          },
+          "401": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20001</td><td>unauthorized access</td></tr><tr><td>20022</td><td>token is not user token</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20000</td><td>internal server error</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get My User",
+        "tags": ["Users"]
+      }
+    },
+    "/iam/v3/public/users/me": {
+      "get": {
+        "description": "&lt;p&gt;Require valid user authorization&lt;br&gt;Get my user data&lt;br&gt;action code : 10147 &lt;/p&gt;",
+        "operationId": "PublicGetMyUserV3",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/model.UserResponseV3"
+            }
+          },
+          "401": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20001</td><td>unauthorized access</td></tr><tr><td>20022</td><td>token is not user token</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "<table><tr><td>errorCode</td><td>errorMessage</td></tr><tr><td>20000</td><td>internal server error</td></tr></table>",
+            "schema": {
+              "$ref": "#/definitions/rest.ErrorResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "authorization": []
+          }
+        ],
+        "summary": "Get My User",
+        "tags": ["Users"]
+      }
+    }
+  },
+  "definitions": {
+    "accountcommon.Bans": {
+      "properties": {
+        "Bans": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.Ban"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["Bans"]
+    },
+    "accountcommon.Ban": {
+      "properties": {
+        "Ban": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        }
+      },
+      "required": ["Ban", "Description"]
+    },
+    "rest.ErrorResponse": {
+      "properties": {
+        "errorCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "messageVariables": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        }
+      },
+      "required": ["errorCode", "errorMessage"]
+    },
+    "model.RoleResponseWithManagers": {
+      "properties": {
+        "IsWildcard": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "Managers": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.RoleManager"
+          },
+          "type": "array"
+        },
+        "Permissions": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.Permission"
+          },
+          "type": "array"
+        },
+        "RoleId": {
+          "type": "string"
+        },
+        "RoleName": {
+          "type": "string"
+        }
+      },
+      "required": ["IsWildcard", "Managers", "Permissions", "RoleId", "RoleName"]
+    },
+    "accountcommon.RoleManager": {
+      "properties": {
+        "DisplayName": {
+          "type": "string"
+        },
+        "Namespace": {
+          "type": "string"
+        },
+        "UserId": {
+          "type": "string"
+        }
+      },
+      "required": ["DisplayName", "Namespace", "UserId"]
+    },
+    "accountcommon.Permission": {
+      "properties": {
+        "Action": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Resource": {
+          "type": "string"
+        },
+        "SchedAction": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "SchedCron": {
+          "type": "string"
+        },
+        "SchedRange": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["Action", "Resource"]
+    },
+    "model.RoleCreateRequest": {
+      "properties": {
+        "AdminRole": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "Managers": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.RoleManager"
+          },
+          "type": "array"
+        },
+        "Members": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.RoleMember"
+          },
+          "type": "array"
+        },
+        "Permissions": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.Permission"
+          },
+          "type": "array"
+        },
+        "RoleName": {
+          "type": "string"
+        }
+      },
+      "required": ["AdminRole", "Managers", "Members", "Permissions", "RoleName"]
+    },
+    "accountcommon.RoleMember": {
+      "properties": {
+        "DisplayName": {
+          "type": "string"
+        },
+        "Namespace": {
+          "type": "string"
+        },
+        "UserId": {
+          "type": "string"
+        }
+      },
+      "required": ["DisplayName", "Namespace", "UserId"]
+    },
+    "accountcommon.Role": {
+      "properties": {
+        "AdminRole": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "Deletable": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "IsWildcard": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "Managers": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.RoleManager"
+          },
+          "type": "array"
+        },
+        "Members": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.RoleMember"
+          },
+          "type": "array"
+        },
+        "Permissions": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.Permission"
+          },
+          "type": "array"
+        },
+        "RoleId": {
+          "type": "string"
+        },
+        "RoleName": {
+          "type": "string"
+        }
+      },
+      "required": ["AdminRole", "Deletable", "IsWildcard", "Managers", "Members", "Permissions", "RoleId", "RoleName"]
+    },
+    "accountcommon.BansV3": {
+      "properties": {
+        "bans": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.BanV3"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["bans"]
+    },
+    "accountcommon.BanV3": {
+      "properties": {
+        "ban": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "descriptions": {
+          "$ref": "#/definitions/accountcommon.Description"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": ["ban", "type"]
+    },
+    "accountcommon.Description": {
+      "properties": {
+        "en-US": {
+          "type": "string"
+        },
+        "zh-CN": {
+          "type": "string"
+        }
+      },
+      "required": ["en-US", "zh-CN"]
+    },
+    "model.GetUserMapping": {
+      "properties": {
+        "Namespace": {
+          "type": "string"
+        },
+        "UserId": {
+          "type": "string"
+        }
+      },
+      "required": ["Namespace", "UserId"]
+    },
+    "model.RoleResponseWithManagersAndPaginationV3": {
+      "properties": {
+        "data": {
+          "items": {
+            "$ref": "#/definitions/model.RoleResponseWithManagersV3"
+          },
+          "type": "array"
+        },
+        "paging": {
+          "$ref": "#/definitions/accountcommon.PaginationV3"
+        }
+      },
+      "required": ["data", "paging"]
+    },
+    "model.RoleResponseWithManagersV3": {
+      "properties": {
+        "adminRole": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "isWildcard": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "managers": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.RoleManagerV3"
+          },
+          "type": "array"
+        },
+        "permissions": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.PermissionV3"
+          },
+          "type": "array"
+        },
+        "roleId": {
+          "type": "string"
+        },
+        "roleName": {
+          "type": "string"
+        }
+      },
+      "required": ["adminRole", "isWildcard", "managers", "permissions", "roleId", "roleName"]
+    },
+    "accountcommon.RoleManagerV3": {
+      "properties": {
+        "displayName": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "required": ["displayName", "namespace", "userId"]
+    },
+    "accountcommon.PermissionV3": {
+      "properties": {
+        "action": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "schedAction": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "schedCron": {
+          "type": "string"
+        },
+        "schedRange": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["action", "resource"]
+    },
+    "accountcommon.PaginationV3": {
+      "properties": {
+        "first": {
+          "type": "string"
+        },
+        "last": {
+          "type": "string"
+        },
+        "next": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        }
+      },
+      "required": ["first", "last", "next", "previous"]
+    },
+    "model.RoleCreateV3Request": {
+      "properties": {
+        "adminRole": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "deletable": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "isWildcard": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "managers": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.RoleManagerV3"
+          },
+          "type": "array"
+        },
+        "members": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.RoleMemberV3"
+          },
+          "type": "array"
+        },
+        "permissions": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.PermissionV3"
+          },
+          "type": "array"
+        },
+        "roleName": {
+          "type": "string"
+        }
+      },
+      "required": ["adminRole", "isWildcard", "managers", "members", "permissions", "roleName"]
+    },
+    "accountcommon.RoleMemberV3": {
+      "properties": {
+        "displayName": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      },
+      "required": ["displayName", "namespace", "userId"]
+    },
+    "accountcommon.RoleV3": {
+      "properties": {
+        "adminRole": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "isWildcard": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "managers": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.RoleManagerV3"
+          },
+          "type": "array"
+        },
+        "members": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.RoleMemberV3"
+          },
+          "type": "array"
+        },
+        "permissions": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.PermissionV3"
+          },
+          "type": "array"
+        },
+        "roleId": {
+          "type": "string"
+        },
+        "roleName": {
+          "type": "string"
+        }
+      },
+      "required": ["adminRole", "isWildcard", "managers", "members", "permissions", "roleId", "roleName"]
+    },
+    "model.UserResponseV3": {
+      "properties": {
+        "authType": {
+          "type": "string"
+        },
+        "avatarUrl": {
+          "type": "string"
+        },
+        "bans": {
+          "items": {
+            "$ref": "#/definitions/model.UserActiveBanResponseV3"
+          },
+          "type": "array"
+        },
+        "country": {
+          "type": "string"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "dateOfBirth": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "deletionDate": {
+          "type": "string"
+        },
+        "deletionStatus": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "emailAddress": {
+          "type": "string"
+        },
+        "emailVerified": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "enabled": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "lastDateOfBirthChangedTime": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "lastEnabledChangedTime": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "namespaceRoles": {
+          "items": {
+            "$ref": "#/definitions/accountcommon.NamespaceRole"
+          },
+          "type": "array"
+        },
+        "newEmailAddress": {
+          "type": "string"
+        },
+        "oldEmailAddress": {
+          "type": "string"
+        },
+        "permissions": {
+          "items": {
+            "$ref": "#/definitions/model.UserPermissionsResponseV3"
+          },
+          "type": "array"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "phoneVerified": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "platformAvatarUrl": {
+          "type": "string"
+        },
+        "platformDisplayName": {
+          "type": "string"
+        },
+        "platformId": {
+          "type": "string"
+        },
+        "platformUserId": {
+          "type": "string"
+        },
+        "roles": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "authType",
+        "bans",
+        "country",
+        "createdAt",
+        "deletionStatus",
+        "displayName",
+        "emailAddress",
+        "emailVerified",
+        "enabled",
+        "lastDateOfBirthChangedTime",
+        "lastEnabledChangedTime",
+        "namespace",
+        "namespaceRoles",
+        "permissions",
+        "phoneVerified",
+        "roles",
+        "userId"
+      ]
+    },
+    "model.UserActiveBanResponseV3": {
+      "properties": {
+        "ban": {
+          "type": "string"
+        },
+        "banId": {
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": false
+        }
+      },
+      "required": ["ban", "banId", "endDate"]
+    },
+    "accountcommon.NamespaceRole": {
+      "properties": {
+        "namespace": {
+          "type": "string"
+        },
+        "roleId": {
+          "type": "string"
+        }
+      },
+      "required": ["namespace", "roleId"]
+    },
+    "model.UserPermissionsResponseV3": {
+      "properties": {
+        "action": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "schedAction": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "schedCron": {
+          "type": "string"
+        },
+        "schedRange": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": ["action", "resource"]
+    }
+  },
+  "x-docs": {
+    "alias": "iam",
+    "host": "https://demo.accelbyte.io",
+    "path": "/iam/apidocs/api.json"
+  },
+  "x-version": {
+    "buildDate": "2023-06-05T01:07:35+00:00",
+    "gitHash": "d15259f9457d9a5b5188428f1f172ed8ba1f9366",
+    "name": "justice-iam-service",
+    "realm": "demo",
+    "version": "6.0.1",
+    "version-roles-seeding": "0.0.3"
+  }
+}

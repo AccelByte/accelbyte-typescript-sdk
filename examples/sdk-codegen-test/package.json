@@ -1,0 +1,33 @@
+{
+  "name": "sdk-codegen-test",
+  "version": "1.0.0",
+  "private": true,
+  "author": "AccelByte Inc",
+  "license": "SEE LICENSE IN LICENSE",
+  "type": "module",
+  "scripts": {
+    "codegen": "tsx ../../packages/codegen/src/cli.ts generate-code --config swaggers.json --swaggersOutput swaggers --output src",
+    "lint": "eslint src/",
+    "format": "prettier --write src/",
+    "format:check": "prettier --check src/",
+    "build": "tsc --noEmit",
+    "test": "yarn codegen && yarn format && yarn lint && yarn build"
+  },
+  "dependencies": {
+    "@accelbyte/codegen": "workspace:*",
+    "@accelbyte/sdk": "workspace:*",
+    "@tanstack/react-query": "5.62.16",
+    "axios": "1.13.5",
+    "react": "19.0.0",
+    "zod": "3.23.8"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.26.0",
+    "@types/react": "19.0.1",
+    "eslint": "9.26.0",
+    "prettier": "3.5.3",
+    "tsx": "4.19.2",
+    "typescript": "5.8.3",
+    "typescript-eslint": "8.32.0"
+  }
+}

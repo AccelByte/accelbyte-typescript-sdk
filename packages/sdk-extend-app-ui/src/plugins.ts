@@ -1,0 +1,1 @@
+export { devProxyPlugin } from './vite-dev-proxy'

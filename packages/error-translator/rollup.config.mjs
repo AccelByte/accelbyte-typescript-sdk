@@ -10,9 +10,9 @@ import path from 'path'
 import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
 import resolve from '@rollup/plugin-node-resolve'
-import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import typescript from '@rollup/plugin-typescript'
-import { writeFileSync, readFileSync } from 'fs'
+import { readFileSync } from 'fs'
+import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 
 const CONFIG = JSON.parse(readFileSync('./tsconfig.build.json', 'utf-8'))
 

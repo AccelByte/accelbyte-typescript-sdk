@@ -7,12 +7,21 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import qs from 'query-string'
 import { SdkDevice } from './SdkDevice'
 
+declare const __SDK_VERSION__: string
+
 export class Network {
   static create(...configs: AxiosRequestConfig[]): AxiosInstance {
+    const defaultHeaders: Record<string, string> = {}
+
+    if (typeof window === 'undefined') {
+      defaultHeaders['User-Agent'] = `ags-typescript-sdk/${__SDK_VERSION__}`
+    }
+
     const axiosInstance = axios.create(
       Object.assign(
         {
-          paramsSerializer: qs.stringify
+          paramsSerializer: qs.stringify,
+          headers: defaultHeaders
         },
         ...configs
       )

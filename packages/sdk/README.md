@@ -96,10 +96,10 @@ If you're using `@tanstack/react-query` to manage server state, the AGS SDK offe
 
 ### Query example
 
-To retrieve data using a generated query, you can use one of the SDK's hooks. The query key used in invalidation can be found within the generated queries.
+To retrieve data using a generated query, you can use one of the SDK's hooks. The query key used in invalidation can be found within the generated queries. To use the query, you need to append the import path with `/react-query`.
 
 ```js
-import { useUsersAdminApi_GetUsersMe_v3 } from '@accelbyte/sdk-iam'
+import { useUsersAdminApi_GetUsersMe_v3 } from '@accelbyte/sdk-iam/react-query'
 
 const usersQuery = useUsersAdminApi_GetUsersMe_v3(
   sdk,
@@ -121,7 +121,7 @@ Each generated query comes with unique query keys that you can use for query inv
 To perform data mutations (e.g., creating, updating, or deleting resources), use one of the generated mutation hooks:
 
 ```js
-import { useUsersAdminApi_UpdateUser_v3 } from '@accelbyte/sdk-iam';
+import { useUsersAdminApi_UpdateUser_v3 } from '@accelbyte/sdk-iam/react-query';
 import { useQueryClient } from '@tanstack/react-query';
 
 const queryClient = useQueryClient();
