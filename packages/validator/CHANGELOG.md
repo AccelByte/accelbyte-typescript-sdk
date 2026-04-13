@@ -1,5 +1,11 @@
 # @accelbyte/validator
 
+## 0.3.0
+
+### Minor Changes
+
+- 6d6b1de: feat(sdk-extend-app-ui): implement mvp version for sdk-extend-app-ui
+
 ## 0.2.30
 
 ### Patch Changes

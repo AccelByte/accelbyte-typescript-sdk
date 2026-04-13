@@ -1,5 +1,12 @@
 # @accelbyte/sdk-login-queue
 
+## 1.0.3
+
+### Patch Changes
+
+- Updated dependencies [6d6b1de]
+  - @accelbyte/validator@0.3.0
+
 ## 1.0.2
 
 ### Patch Changes

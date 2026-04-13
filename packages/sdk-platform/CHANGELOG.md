@@ -1,5 +1,12 @@
 # @accelbyte/sdk-platform
 
+## 6.3.3
+
+### Patch Changes
+
+- Updated dependencies [6d6b1de]
+  - @accelbyte/validator@0.3.0
+
 ## 6.3.2
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @accelbyte/sdk-groups
 
+## 5.2.5
+
+### Patch Changes
+
+- Updated dependencies [6d6b1de]
+  - @accelbyte/validator@0.3.0
+
 ## 5.2.4
 
 ### Patch Changes
