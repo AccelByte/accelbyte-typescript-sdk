@@ -4,13 +4,13 @@
 
 ### Minor Changes
 
-- 6d6b1de: feat(sdk-extend-app-ui): implement mvp version for sdk-extend-app-ui
+- ac1af64: feat(sdk-extend-app-ui): implement mvp version for sdk-extend-app-ui
 
 ### Patch Changes
 
-- 6d6b1de: fix(docs): fix import path for React Query in README.md
-- 6d6b1de: feat: add user agent header
-- Updated dependencies [6d6b1de]
+- a2a5d5e: fix(docs): fix import path for React Query in README.md
+- 39c8045: feat: add user agent header
+- Updated dependencies [ac1af64]
   - @accelbyte/validator@0.3.0
 
 ## 4.2.0

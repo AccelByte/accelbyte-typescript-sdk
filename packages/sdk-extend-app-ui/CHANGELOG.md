@@ -4,9 +4,9 @@
 
 ### Minor Changes
 
-- 6d6b1de: feat(sdk-extend-app-ui): implement mvp version for sdk-extend-app-ui
+- ac1af64: feat(sdk-extend-app-ui): implement mvp version for sdk-extend-app-ui
 
 ### Patch Changes
 
-- Updated dependencies [6d6b1de]
+- Updated dependencies [ac1af64]
   - @accelbyte/validator@0.3.0

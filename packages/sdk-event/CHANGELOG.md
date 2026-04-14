@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- Updated dependencies [6d6b1de]
+- Updated dependencies [ac1af64]
   - @accelbyte/validator@0.3.0
 
 ## 6.2.4

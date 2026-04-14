@@ -196,7 +196,7 @@ describe('CodegenConfig', () => {
   })
 
   test('splitOutputByServiceName: true via config — files generated in service subfolder with correct barrel paths', async () => {
-    CodegenConfig.setConfig({ unstable_splitOutputByServiceName: true })
+    CodegenConfig.setConfig({ splitOutputByServiceName: true })
 
     // sdk-iam has serviceName 'iam', so all generated files should land in srcDir/iam/
     await createTmpMock('sdk-iam', async srcDir => {

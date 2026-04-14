@@ -144,11 +144,11 @@ export default {
 
   // Output each swagger set into a subfolder named after its service name.
   // Default: false
-  unstable_splitOutputByServiceName: true
+  splitOutputByServiceName: true
 } satisfies CodegenConfigOptions
 ```
 
-### `unstable_splitOutputByServiceName`
+### `splitOutputByServiceName`
 
 By default, all swagger sets in `swaggers.json` are generated into the same `--output` directory. When this option is enabled, each set is placed in a subfolder named after its service name (the first element of each inner array).
 
@@ -183,7 +183,7 @@ Enable via `abcodegen.config.ts`:
 
 ```typescript
 export default {
-  unstable_splitOutputByServiceName: true
+  splitOutputByServiceName: true
 } satisfies CodegenConfigOptions
 ```
 

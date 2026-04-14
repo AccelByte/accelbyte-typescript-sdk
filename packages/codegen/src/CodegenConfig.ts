@@ -35,7 +35,7 @@ export interface CodegenConfigOptions {
    *
    * @default false
    */
-  unstable_splitOutputByServiceName?: boolean
+  splitOutputByServiceName?: boolean
 }
 
 export class CodegenConfig {
@@ -66,7 +66,7 @@ export class CodegenConfig {
   }
 
   static splitOutputByServiceName(): boolean {
-    return CodegenConfig.config.unstable_splitOutputByServiceName ?? false
+    return CodegenConfig.config.splitOutputByServiceName ?? false
   }
 
   /** Reset to defaults — used for testing */

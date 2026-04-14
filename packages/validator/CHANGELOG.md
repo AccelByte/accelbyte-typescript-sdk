@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- 6d6b1de: feat(sdk-extend-app-ui): implement mvp version for sdk-extend-app-ui
+- ac1af64: feat(sdk-extend-app-ui): implement mvp version for sdk-extend-app-ui
 
 ## 0.2.30
 

@@ -4,14 +4,14 @@
 
 ### Minor Changes
 
-- 6d6b1de: feat(codegen): add abcodegen.config.ts and fix various type, lint, and format issue
-- 6d6b1de: feat(codegen): allow splitting service name when there are multiple items in swaggers.json
+- d81f292: feat(codegen): add abcodegen.config.ts and fix various type, lint, and format issue
+- 5fea798: feat(codegen): allow splitting service name when there are multiple items in swaggers.json
 
 ### Patch Changes
 
-- 6d6b1de: fix(codegen): create parent dir before writing version.json to prevent ENOENT
-- 6d6b1de: fix(codegen): generate Record<string, any> for map[string]interface{} and map[string]any response/body types
-- 6d6b1de: fix(codegen): resolve method conflict properly when both has the same last word
+- a2a5d5e: fix(codegen): create parent dir before writing version.json to prevent ENOENT
+- 240ab4a: fix(codegen): generate Record<string, any> for map[string]interface{} and map[string]any response/body types
+- 2affb6f: fix(codegen): resolve method conflict properly when both has the same last word
 
 ## 4.1.6
 

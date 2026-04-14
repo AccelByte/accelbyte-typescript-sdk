@@ -4,13 +4,13 @@
 
 ### Patch Changes
 
-- Updated dependencies [6d6b1de]
-- Updated dependencies [6d6b1de]
-- Updated dependencies [6d6b1de]
-- Updated dependencies [6d6b1de]
-- Updated dependencies [6d6b1de]
-- Updated dependencies [6d6b1de]
-- Updated dependencies [6d6b1de]
-- Updated dependencies [6d6b1de]
+- Updated dependencies [a2a5d5e]
+- Updated dependencies [ac1af64]
+- Updated dependencies [d81f292]
+- Updated dependencies [a2a5d5e]
+- Updated dependencies [39c8045]
+- Updated dependencies [5fea798]
+- Updated dependencies [240ab4a]
+- Updated dependencies [2affb6f]
   - @accelbyte/codegen@4.2.0
   - @accelbyte/sdk@4.3.0
