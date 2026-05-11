@@ -53,7 +53,7 @@ export class AccelByteSDK {
   }
 
   private createAxiosInstance() {
-    const axiosInstance = Network.create({ baseURL: this.coreConfig.baseURL, ...this.axiosConfig.request })
+    const axiosInstance = Network.create({ ...this.axiosConfig.request, baseURL: this.coreConfig.baseURL })
     const interceptors = this.axiosConfig.interceptors
 
     if (interceptors) {
@@ -153,7 +153,10 @@ export class AccelByteSDK {
     this.axiosConfig = {
       ...this.axiosConfig,
       ...axiosConfig?.interceptors,
-      request: ApiUtils.mergeAxiosConfigs(this.axiosConfig.request as AxiosRequestConfig, axiosConfig?.request)
+      request: ApiUtils.mergeAxiosConfigs(this.axiosConfig.request as AxiosRequestConfig, {
+        ...axiosConfig?.request,
+        baseURL: this.coreConfig.baseURL
+      })
     }
     this.webSocketConfig = {
       ...this.webSocketConfig,

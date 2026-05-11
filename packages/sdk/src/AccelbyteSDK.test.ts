@@ -203,6 +203,23 @@ describe('AccelByteSDK', () => {
     expect(axiosConfig.request.headers?.Authorization).toStrictEqual(`Bearer ${TOKEN_CONFIG.accessToken}`)
   })
 
+  test('setConfig should prioritize the new coreConfig base URL before the previous axios request config after setToken', () => {
+    // After setToken, axiosConfig is "merged" with axios defaults, causing the axios config to be a bit polluted.
+    // We have to ensure that coreConfig.baseURL keeps being the source of truth.
+    const sdkInstance = AccelByte.SDK({ coreConfig })
+
+    sdkInstance.setToken(TOKEN_CONFIG)
+
+    let axiosConfig = sdkInstance.assembly().axiosConfig
+    expect(axiosConfig.request.baseURL).toStrictEqual(coreConfig.baseURL)
+
+    const newCoreConfig: typeof coreConfig = { ...coreConfig, baseURL: 'https://hello.world' }
+    sdkInstance.setConfig({ coreConfig: newCoreConfig })
+
+    axiosConfig = sdkInstance.assembly().axiosConfig
+    expect(axiosConfig.request.baseURL).toStrictEqual(newCoreConfig.baseURL)
+  })
+
   test('SDK clone should clone the token config if token is present', () => {
     const sdkInstance = AccelByte.SDK({ coreConfig })
 

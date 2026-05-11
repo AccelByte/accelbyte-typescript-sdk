@@ -31,7 +31,7 @@ To begin using the AGS TypeScript SDK, you'll need to instantiate it with some b
 ```js
 import { AccelByte } from '@accelbyte/sdk';
 
-const sdk = await AccelByte.SDK({
+const sdk = AccelByte.SDK({
   coreConfig: {
     baseURL: "<Your publisher base URL, e.g. <https://prod.gamingservices.accelbyte.io>>",
     clientId: "<Your publisher Client ID, e.g. 32_char_guid>",

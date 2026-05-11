@@ -25,6 +25,7 @@ export interface ExtensionModule {
   isEnabled: boolean
   subModules: ExtensionSubModule[]
   permission?: RolePermission
+  allowedNamespaces?: string[]
 }
 
 export interface ExtensionManifest {

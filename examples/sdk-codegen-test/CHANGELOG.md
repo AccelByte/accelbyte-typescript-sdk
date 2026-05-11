@@ -1,5 +1,12 @@
 # sdk-codegen-test
 
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies [67b09d8]
+  - @accelbyte/codegen@4.2.1
+
 ## 1.0.1
 
 ### Patch Changes

@@ -4,8 +4,8 @@
  * and restrictions contact your company contract manager.
  */
 import * as fs from 'fs'
-import * as https from 'https'
 import * as path from 'path'
+import axios from 'axios'
 import { CliParser } from './CliParser'
 
 /**
@@ -53,29 +53,15 @@ export class SwaggerDownloader {
 
   static downloadFile = async (targetFileName: string, url: string) => {
     const destFile = SwaggerDownloader.getDestFile(targetFileName)
-    let data = ''
 
-    return new Promise(resolve => {
-      const request = https.get(url, function (response) {
-        response.on('data', chunk => {
-          data += chunk
-        })
-        response.on('end', () => {
-          if (response.statusCode !== 200) {
-            console.log(`SwaggerDownload error with status code: ${response.statusCode}`)
-          } else {
-            fs.writeFileSync(destFile, JSON.stringify(JSON.parse(data), null, 2), 'utf-8')
-            SwaggerDownloader.postSanitizeDownloadedFile(destFile)
-            console.log(`SwaggerDownload ${url} completed with status code: ${response.statusCode}`)
-          }
-
-          resolve(undefined)
-        })
-      })
-      request.on('error', (err: Error) => {
-        console.log(`SwaggerDownloader failed for "${targetFileName}" and "${url}"`, err)
-      })
-    })
+    try {
+      const response = await axios.get(url)
+      fs.writeFileSync(destFile, JSON.stringify(response.data, null, 2), 'utf-8')
+      SwaggerDownloader.postSanitizeDownloadedFile(destFile)
+      console.log(`SwaggerDownload ${url} completed with status code: ${response.status}`)
+    } catch (err) {
+      console.log(`SwaggerDownloader failed for "${targetFileName}" and "${url}"`, err)
+    }
   }
 
   static main = async () => {

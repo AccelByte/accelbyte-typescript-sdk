@@ -1,5 +1,11 @@
 # @accelbyte/codegen
 
+## 4.2.1
+
+### Patch Changes
+
+- 67b09d8: fix(codegen): remove unstable from splitOutputByServiceName
+
 ## 4.2.0
 
 ### Minor Changes
