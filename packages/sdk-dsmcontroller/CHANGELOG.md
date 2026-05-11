@@ -1,5 +1,12 @@
 # @accelbyte/sdk-dsmcontroller
 
+## 6.2.6
+
+### Patch Changes
+
+- Updated dependencies [3c414a9]
+  - @accelbyte/validator@0.3.1
+
 ## 6.2.5
 
 ### Patch Changes

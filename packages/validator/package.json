@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/validator",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/cjs/index.js",

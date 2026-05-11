@@ -63,7 +63,7 @@ __metadata:
   resolution: "@accelbyte/sdk-achievement@workspace:packages/sdk-achievement"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -97,7 +97,7 @@ __metadata:
   resolution: "@accelbyte/sdk-ams@workspace:packages/sdk-ams"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -131,7 +131,7 @@ __metadata:
   resolution: "@accelbyte/sdk-audit@workspace:packages/sdk-audit"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -165,7 +165,7 @@ __metadata:
   resolution: "@accelbyte/sdk-basic@workspace:packages/sdk-basic"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -199,7 +199,7 @@ __metadata:
   resolution: "@accelbyte/sdk-buildinfo@workspace:packages/sdk-buildinfo"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -233,7 +233,7 @@ __metadata:
   resolution: "@accelbyte/sdk-challenge@workspace:packages/sdk-challenge"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -267,7 +267,7 @@ __metadata:
   resolution: "@accelbyte/sdk-chat@workspace:packages/sdk-chat"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -301,7 +301,7 @@ __metadata:
   resolution: "@accelbyte/sdk-cloudsave@workspace:packages/sdk-cloudsave"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -335,7 +335,7 @@ __metadata:
   resolution: "@accelbyte/sdk-config@workspace:packages/sdk-config"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -370,7 +370,7 @@ __metadata:
   resolution: "@accelbyte/sdk-csm@workspace:packages/sdk-csm"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -404,7 +404,7 @@ __metadata:
   resolution: "@accelbyte/sdk-differ@workspace:packages/sdk-differ"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -438,7 +438,7 @@ __metadata:
   resolution: "@accelbyte/sdk-dsmcontroller@workspace:packages/sdk-dsmcontroller"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -472,7 +472,7 @@ __metadata:
   resolution: "@accelbyte/sdk-ehs@workspace:packages/sdk-ehs"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -506,7 +506,7 @@ __metadata:
   resolution: "@accelbyte/sdk-event@workspace:packages/sdk-event"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -541,7 +541,7 @@ __metadata:
   dependencies:
     "@accelbyte/sdk": "workspace:*"
     "@accelbyte/sdk-iam": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@testing-library/dom": "npm:10.4.1"
     "@testing-library/jest-dom": "npm:6.9.1"
@@ -575,7 +575,7 @@ __metadata:
   resolution: "@accelbyte/sdk-gametelemetry@workspace:packages/sdk-gametelemetry"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -609,7 +609,7 @@ __metadata:
   resolution: "@accelbyte/sdk-gdpr@workspace:packages/sdk-gdpr"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -643,7 +643,7 @@ __metadata:
   resolution: "@accelbyte/sdk-groups@workspace:packages/sdk-groups"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -672,12 +672,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@accelbyte/sdk-iam@npm:6.3.3, @accelbyte/sdk-iam@workspace:*, @accelbyte/sdk-iam@workspace:packages/sdk-iam":
+"@accelbyte/sdk-iam@npm:6.3.4, @accelbyte/sdk-iam@workspace:*, @accelbyte/sdk-iam@workspace:packages/sdk-iam":
   version: 0.0.0-use.local
   resolution: "@accelbyte/sdk-iam@workspace:packages/sdk-iam"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -711,7 +711,7 @@ __metadata:
   resolution: "@accelbyte/sdk-inventory@workspace:packages/sdk-inventory"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -745,7 +745,7 @@ __metadata:
   resolution: "@accelbyte/sdk-leaderboard@workspace:packages/sdk-leaderboard"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -779,8 +779,8 @@ __metadata:
   resolution: "@accelbyte/sdk-legal@workspace:packages/sdk-legal"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/sdk-iam": "npm:6.3.3"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/sdk-iam": "npm:6.3.4"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -815,7 +815,7 @@ __metadata:
   resolution: "@accelbyte/sdk-lobby@workspace:packages/sdk-lobby"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -849,7 +849,7 @@ __metadata:
   resolution: "@accelbyte/sdk-login-queue@workspace:packages/sdk-login-queue"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -883,7 +883,7 @@ __metadata:
   resolution: "@accelbyte/sdk-matchmaking@workspace:packages/sdk-matchmaking"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -917,7 +917,7 @@ __metadata:
   resolution: "@accelbyte/sdk-platform@workspace:packages/sdk-platform"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -951,7 +951,7 @@ __metadata:
   resolution: "@accelbyte/sdk-qosmanager@workspace:packages/sdk-qosmanager"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -985,7 +985,7 @@ __metadata:
   resolution: "@accelbyte/sdk-reporting@workspace:packages/sdk-reporting"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -1019,7 +1019,7 @@ __metadata:
   resolution: "@accelbyte/sdk-seasonpass@workspace:packages/sdk-seasonpass"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -1053,7 +1053,7 @@ __metadata:
   resolution: "@accelbyte/sdk-session@workspace:packages/sdk-session"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -1087,7 +1087,7 @@ __metadata:
   resolution: "@accelbyte/sdk-social@workspace:packages/sdk-social"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -1121,7 +1121,7 @@ __metadata:
   resolution: "@accelbyte/sdk-ugc@workspace:packages/sdk-ugc"
   dependencies:
     "@accelbyte/sdk": "workspace:*"
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@tanstack/react-query": "npm:4.36.1"
     "@types/crypto-js": "npm:4.1.0"
     "@types/node": "npm:22.3.0"
@@ -1154,7 +1154,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@accelbyte/sdk@workspace:packages/sdk"
   dependencies:
-    "@accelbyte/validator": "npm:0.3.0"
+    "@accelbyte/validator": "npm:0.3.1"
     "@anatine/zod-mock": "npm:3.13.4"
     "@faker-js/faker": "npm:8.4.1"
     "@playwright/test": "npm:1.52.0"
@@ -1183,7 +1183,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@accelbyte/validator@npm:0.3.0, @accelbyte/validator@workspace:packages/validator":
+"@accelbyte/validator@npm:0.3.1, @accelbyte/validator@workspace:packages/validator":
   version: 0.0.0-use.local
   resolution: "@accelbyte/validator@workspace:packages/validator"
   dependencies:

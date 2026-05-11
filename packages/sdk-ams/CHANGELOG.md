@@ -1,5 +1,12 @@
 # @accelbyte/sdk-ams
 
+## 5.3.4
+
+### Patch Changes
+
+- Updated dependencies [3c414a9]
+  - @accelbyte/validator@0.3.1
+
 ## 5.3.3
 
 ### Patch Changes

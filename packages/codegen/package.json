@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/codegen",
-  "version": "4.2.1",
+  "version": "4.2.2",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "dist/accelbyte-codegen.js",

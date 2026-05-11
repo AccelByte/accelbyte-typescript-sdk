@@ -1,5 +1,14 @@
 # @accelbyte/sdk
 
+## 4.3.1
+
+### Patch Changes
+
+- 3c414a9: fix(sdk): remove incorrect `await` from `AccelByte.SDK()` instantiation in README
+- 3c414a9: fix(sdk): fix sdk setConfig not reapplying baseURL to axiosConfig
+- Updated dependencies [3c414a9]
+  - @accelbyte/validator@0.3.1
+
 ## 4.3.0
 
 ### Minor Changes
