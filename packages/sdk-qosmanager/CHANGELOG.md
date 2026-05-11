@@ -1,5 +1,12 @@
 # @accelbyte/sdk-qosmanager
 
+## 5.2.6
+
+### Patch Changes
+
+- Updated dependencies [3c414a9]
+  - @accelbyte/validator@0.3.1
+
 ## 5.2.5
 
 ### Patch Changes
