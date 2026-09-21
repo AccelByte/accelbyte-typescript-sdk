@@ -1,3 +1,8 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json"
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "postUpgradeTasks": {
+    "commands": ["yarn run changeset:renovate"],
+    "fileFilters": [".changeset/*.md"],
+    "executionMode": "branch"
+  }
 }

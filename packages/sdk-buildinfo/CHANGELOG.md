@@ -1,5 +1,11 @@
 # @accelbyte/sdk-buildinfo
 
+## 6.2.8
+
+### Patch Changes
+
+- 4d662af: fix(deps): Update dependencies
+
 ## 6.2.7
 
 ### Patch Changes

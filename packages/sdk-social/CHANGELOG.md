@@ -1,5 +1,11 @@
 # @accelbyte/sdk-social
 
+## 6.3.6
+
+### Patch Changes
+
+- 4d662af: fix(deps): Update dependencies
+
 ## 6.3.5
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @accelbyte/sdk
 
+## 4.3.3
+
+### Patch Changes
+
+- 4d662af: fix(deps): Update dependencies
+
 ## 4.3.2
 
 ### Patch Changes

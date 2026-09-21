@@ -1,5 +1,13 @@
 # @accelbyte/sdk-legal
 
+## 6.3.6
+
+### Patch Changes
+
+- 4d662af: fix(deps): Update dependencies
+- Updated dependencies [4d662af]
+  - @accelbyte/sdk-iam@6.3.6
+
 ## 6.3.5
 
 ### Patch Changes

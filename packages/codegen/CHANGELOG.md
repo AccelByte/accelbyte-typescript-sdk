@@ -1,5 +1,11 @@
 # @accelbyte/codegen
 
+## 4.2.3
+
+### Patch Changes
+
+- 4d662af: fix(deps): Update dependencies
+
 ## 4.2.2
 
 ### Patch Changes

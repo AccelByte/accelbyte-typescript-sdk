@@ -1,5 +1,11 @@
 # @accelbyte/sdk-csm
 
+## 1.0.6
+
+### Patch Changes
+
+- 4d662af: fix(deps): Update dependencies
+
 ## 1.0.5
 
 ### Patch Changes

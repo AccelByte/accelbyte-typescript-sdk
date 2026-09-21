@@ -1,5 +1,11 @@
 # @accelbyte/sdk-audit
 
+## 6.0.6
+
+### Patch Changes
+
+- 4d662af: fix(deps): Update dependencies
+
 ## 6.0.5
 
 ### Patch Changes

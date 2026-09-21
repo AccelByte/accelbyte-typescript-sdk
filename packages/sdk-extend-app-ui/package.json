@@ -1,6 +1,6 @@
 {
   "name": "@accelbyte/sdk-extend-app-ui",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "author": "AccelByte Inc",
   "license": "SEE LICENSE IN LICENSE",
   "main": "./dist/index.cjs",

@@ -1,5 +1,11 @@
 # @accelbyte/sdk-extend-app-ui
 
+## 0.2.3
+
+### Patch Changes
+
+- 4d662af: fix(deps): Update dependencies
+
 ## 0.2.2
 
 ### Patch Changes

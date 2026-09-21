@@ -1,5 +1,11 @@
 # @accelbyte/sdk-groups
 
+## 5.2.8
+
+### Patch Changes
+
+- 4d662af: fix(deps): Update dependencies
+
 ## 5.2.7
 
 ### Patch Changes

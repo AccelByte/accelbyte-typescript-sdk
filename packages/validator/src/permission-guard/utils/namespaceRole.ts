@@ -24,11 +24,29 @@ export function getAdminNamespaceRoles(namespaceRoles: NamespaceRole[], roles: R
   })
 }
 
+// Whether a namespace-role's assigned namespace covers the target namespace. Mirrors
+// PermissionGuard's own `isVariableCovered` (permission.ts) and the IAM service's
+// `IsPermissionResourceStringsMatch`: a value ending in "-" (e.g. "{studio}-") is a
+// studio-level grant that covers the bare "{studio}" namespace and any "{studio}-{game}"
+// namespace beneath it - a bare studio value with no trailing dash only matches itself.
+function namespaceRoleCovers(assignedNamespace: string, targetNamespace: string): boolean {
+  if (assignedNamespace === targetNamespace || assignedNamespace === WILDCARD_SIGN) {
+    return true
+  }
+  if (!assignedNamespace.endsWith('-')) {
+    return false
+  }
+  if (targetNamespace.includes('-') && targetNamespace.split('-').length === 2) {
+    return targetNamespace.startsWith(assignedNamespace)
+  }
+  return assignedNamespace === `${targetNamespace}-`
+}
+
 // Get list of role id based on selected namespace
 export function getRoleIdsByNamespace(namespaceRoles: NamespaceRole[], namespace?: string): string[] {
   return namespaceRoles.reduce((filtered: string[], role: NamespaceRole) => {
     if (namespace) {
-      if (role.namespace === namespace || role.namespace === WILDCARD_SIGN) {
+      if (namespaceRoleCovers(role.namespace, namespace)) {
         filtered.push(role.roleId)
       }
     } else {
