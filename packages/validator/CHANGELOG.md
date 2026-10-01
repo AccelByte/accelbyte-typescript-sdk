@@ -1,5 +1,11 @@
 # @accelbyte/validator
 
+## 0.3.2
+
+### Patch Changes
+
+- 6f9ab54: fix(validator): `getRoleIdsByNamespace` now recognizes a studio-level namespace role assignment (`"{studio}-"`) as covering its child `"{studio}-{game}"` namespaces and the bare `"{studio}"` namespace, matching the studio-prefix convention already implemented in `PermissionGuard`'s own `isVariableCovered`. Previously a role assigned only at the studio level (e.g. `tora-`) was silently excluded when checking permissions against a game namespace (e.g. `tora-spaceshooter`), even though the same role would correctly grant access when checked through `PermissionGuard.hasPermission` directly - this made `@accelbyte/sdk-extend-app-ui`'s local dev auth simulation (`DevProvider`) report "no permission" for studio admins who have a fully valid studio-level role assignment.
+
 ## 0.3.1
 
 ### Patch Changes

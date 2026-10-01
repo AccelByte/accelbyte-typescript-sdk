@@ -1,5 +1,14 @@
 # @accelbyte/sdk-lobby
 
+## 5.2.9
+
+### Patch Changes
+
+- 0659864: fix(deps): Update dependencies
+- 5c28750: fix(deps): Update dependencies
+- Updated dependencies [6f9ab54]
+  - @accelbyte/validator@0.3.2
+
 ## 5.2.8
 
 ### Patch Changes

@@ -18,7 +18,10 @@ describe('validateUrl', () => {
       ['https://demo.accelbyte.io#overview', null],
       ['https://demo.accelbyte.io?test=123#overview', null],
       ['https://demo.accelbyte.io/hello/world?test=123#overview', null],
-      ['https://demo.accelbyte.io/hello/world/?test=123#overview', null]
+      ['https://demo.accelbyte.io/hello/world/?test=123#overview', null],
+      ['https://demo.accelbyte.io/hello%20world', null],
+      // U+00A0, not a space. Indistinguishable from the 'hello world' invalid case below, but Go accepts it.
+      ['https://demo.accelbyte.io/hello\u00a0world', null]
     ] as const
 
     for (const assertion of assertions) {
@@ -39,6 +42,11 @@ describe('validateUrl', () => {
       ['javascript:alert(1)', ValidateUrlErrorType.enum.invalidFormat],
       ['vbscript:alert(1)', ValidateUrlErrorType.enum.invalidFormat],
       ['https://demo .accelbyte.io', ValidateUrlErrorType.enum.invalidFormat],
+      [' https://demo.accelbyte.io', ValidateUrlErrorType.enum.invalidFormat],
+      ['https://demo.accelbyte.io ', ValidateUrlErrorType.enum.invalidFormat],
+      ['https://demo.accelbyte.io/hello world', ValidateUrlErrorType.enum.invalidFormat],
+      ['https://demo.accelbyte.io/hello\tworld', ValidateUrlErrorType.enum.invalidFormat],
+      ['https://demo.accelbyte.io/hello\nworld', ValidateUrlErrorType.enum.invalidFormat],
       ['https://demo{}.accelbyte.io', ValidateUrlErrorType.enum.invalidFormat],
       ['https://demo~.accelbyte.io', ValidateUrlErrorType.enum.invalidFormat],
       ['https://demo|.accelbyte.io', ValidateUrlErrorType.enum.invalidFormat],

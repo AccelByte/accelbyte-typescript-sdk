@@ -1,0 +1,32 @@
+:root {
+  --sr-stage: #0d1220;
+  --sr-stage-raised: #141b2e;
+  --sr-rule: #26304a;
+  --sr-plate: #f4f5f7;
+  --sr-plate-rule: #d5d9e1;
+  --sr-ink: #0d1220;
+  --sr-ink-soft: #3b4460;
+  --sr-text: #f4f5f7;
+  --sr-text-soft: #a3acc2;
+  --sr-red: #ff3b5c;
+  --sr-red-deep: #d91f45;
+  --sr-red-press: #b8173a;
+  --sr-gold: #f2c14e;
+  --sr-silver: #c9ced6;
+  --sr-bronze: #d9925f;
+
+  --sr-font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --sr-font-body: 'Barlow', ui-sans-serif, system-ui, sans-serif;
+
+  --sr-cut: 18px;
+  --sr-space-1: 0.25rem;
+  --sr-space-2: 0.5rem;
+  --sr-space-3: 0.75rem;
+  --sr-space-4: 1rem;
+  --sr-space-5: 1.5rem;
+  --sr-space-6: 2rem;
+  --sr-space-7: 3rem;
+  --sr-space-8: 4.5rem;
+
+  --sr-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}

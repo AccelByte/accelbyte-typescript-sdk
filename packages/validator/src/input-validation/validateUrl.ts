@@ -31,6 +31,8 @@ export interface ValidateUrlOptions {
 const DEFAULT_MAX_URL_LENGTH = 2000
 const INVALID_PROTOCOL_REGEX = /(javascript|vbscript):/
 const INVALID_PUNCTUATION_REGEX = /[{}|`~,]/
+// eslint-disable-next-line no-control-regex
+const INVALID_WHITESPACE_REGEX = /[\u0000-\u0020\u007F]/
 
 export const validateUrl = (value: string, { isRequired = true, allowCustomProtocol = false }: ValidateUrlOptions = {}) => {
   if (isEmpty(value)) {
@@ -42,6 +44,8 @@ export const validateUrl = (value: string, { isRequired = true, allowCustomProto
 
   const validateLengthResult = validateLength(value, { max: DEFAULT_MAX_URL_LENGTH })
   if (validateLengthResult) return validateLengthResult
+
+  if (INVALID_WHITESPACE_REGEX.test(value)) return ValidateUrlErrorType.enum.invalidFormat
 
   try {
     const url = new URL(value)

@@ -1,0 +1,7 @@
+.env
+.env.local
+.env.*.local
+.yarn/
+node_modules/
+dist/
+.impeccable/review/
